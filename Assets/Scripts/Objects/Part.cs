@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Part : MonoBehaviour {
 
-	public float m_fHealth;
-	public bool m_bAttackAvailable;
-	public float m_fAttackDmg;
-	public bool m_bFriendly;
-	public Color m_colorLine;
+	public float m_fHealth; // Health
+	public bool m_bAttackAvailable; //Can hit enemy?
+	public float m_fAttackDmg; //Damage
+	public bool m_bFriendly; //아군?
+	public Color m_colorLine; //공격 이펙트 줄 색
+
+	public int m_iMove; //턴 당 몇번 움직일 수 있는지
+
+	public DIRECTION m_headingDirection;
 
 	void Attack()
 	{
@@ -23,9 +27,11 @@ public class Part : MonoBehaviour {
 				GridMgr grid = GridMgr.getInstance;
 
 				if (grid.GetGridIdx (transform.position) % grid.m_iXcount == grid.GetGridIdx (tmpPart.transform.position) % grid.m_iXcount) { //세로 일치
-					StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
+					if(tmpPart.GetComponent<Part>() != null)
+						StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
 				}else if(grid.GetGridIdx (transform.position) / grid.m_iXcount == grid.GetGridIdx (tmpPart.transform.position) / grid.m_iXcount){ //가로 일치
-					StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
+					if(tmpPart.GetComponent<Part>() != null)
+						StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
 				}
 			}
 
@@ -45,9 +51,11 @@ public class Part : MonoBehaviour {
 				GridMgr grid = GridMgr.getInstance;
 
 				if (grid.GetGridIdx (transform.position) % grid.m_iXcount == grid.GetGridIdx (tmpPart.transform.position) % grid.m_iXcount) { //세로 일치
-					StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
+					if(tmpPart.GetComponent<Part>() != null)
+						StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
 				}else if(grid.GetGridIdx (transform.position) / grid.m_iXcount == grid.GetGridIdx (tmpPart.transform.position) / grid.m_iXcount){ //가로 일치
-					StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
+					if(tmpPart.GetComponent<Part>() != null)
+						StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
 				}
 			}
 

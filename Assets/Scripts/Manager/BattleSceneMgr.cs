@@ -53,7 +53,7 @@ public class BattleSceneMgr : MonoBehaviour {
 		GameObject.Find ("EndTurnButton").GetComponent<UIButton> ().enabled = false;
 		GameObject.Find ("EndTurnButton").GetComponent<UIButtonScale> ().enabled = false;
 
-		GameObject.Find ("Core").BroadcastMessage ("Attack");
+		GameObject.Find ("Core").BroadcastMessage ("Attack", null ,SendMessageOptions.DontRequireReceiver);
 		StartCoroutine (EnemyMoveTurn ());
 	}
 
@@ -72,7 +72,7 @@ public class BattleSceneMgr : MonoBehaviour {
 	{
 		GameMgr.getInstance.m_turnState = TURN_STATE.ENEMY_ATTACK;
 
-		GameObject.Find ("Enemies").BroadcastMessage ("Attack");
+		GameObject.Find ("Enemies").BroadcastMessage ("Attack", null ,SendMessageOptions.DontRequireReceiver);
 
 		yield return new WaitForSeconds (1.5f);
 
