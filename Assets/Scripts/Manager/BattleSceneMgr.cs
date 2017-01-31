@@ -62,6 +62,7 @@ public class BattleSceneMgr : MonoBehaviour {
 		yield return new WaitForSeconds (1.5f);
 
 		GameMgr.getInstance.m_turnState = TURN_STATE.ENEMY_MOVE;
+		GameObject.Find ("Enemies").BroadcastMessage ("FindNewSeat", null ,SendMessageOptions.DontRequireReceiver);
 
 		yield return new WaitForSeconds (1.5f);
 

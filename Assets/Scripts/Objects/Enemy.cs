@@ -31,13 +31,14 @@ public class Enemy : Part {
 			else
 				tmpPart = Core.GetChild (i).gameObject;
 			
-			if(m_headingDirection.Equals(DIRECTION.LEFT) || m_headingDirection.Equals(DIRECTION.RIGHT))
+			if(m_headingDirection.Equals(DIRECTION.LEFT) || m_headingDirection.Equals(DIRECTION.RIGHT) || m_headingDirection.Equals(DIRECTION.EVERYWHERE))
 			{
 				if(grid.GetGridIdx (transform.position) / grid.m_iXcount == grid.GetGridIdx (tmpPart.transform.position) / grid.m_iXcount){ //가로 일치
 					m_bFindedSeat = true;
 					break;
 				}
-			}else if(m_headingDirection.Equals(DIRECTION.UP) || m_headingDirection.Equals(DIRECTION.DOWN))
+			}
+			if(m_headingDirection.Equals(DIRECTION.UP) || m_headingDirection.Equals(DIRECTION.DOWN) || m_headingDirection.Equals(DIRECTION.EVERYWHERE))
 			{
 				if (grid.GetGridIdx (transform.position) % grid.m_iXcount == grid.GetGridIdx (tmpPart.transform.position) % grid.m_iXcount) { //세로 일치
 					m_bFindedSeat = true;
@@ -47,28 +48,54 @@ public class Enemy : Part {
 		}
 
 		//내 라인에 상대 파츠 없음
-		while(!m_bFindedSeat)
+
+		float fTime = 0f;
+
+		while(!m_bFindedSeat && fTime < 1f)
 		{
 			int iCoreGrid = grid.GetGridIdx(Core.position);
 			int iThisGrid = grid.GetGridIdx(transform.position);
+			fTime += Time.deltaTime;
 
-			if(iCoreGrid%grid.m_iXcount > iThisGrid) // core is my right side
+			if(m_headingDirection.Equals(DIRECTION.DOWN) || m_headingDirection.Equals(DIRECTION.UP) || m_headingDirection.Equals(DIRECTION.EVERYWHERE))
 			{
-				if(isSeatOccupied(iThisGrid + 1)) // Occupied
+				if(iCoreGrid%grid.m_iXcount > iThisGrid%grid.m_iXcount) // core is my right side
 				{
-
-				}else{ // empty
-					transform.Translate(new Vector3(GridMgr.getInstance.m_fXsize, 0));
-					m_bFindedSeat = true;
+					if(isSeatOccupied(iThisGrid + 1)) // Occupied
+					{
+					}else{ // empty
+						transform.Translate(new Vector3(GridMgr.getInstance.m_fXsize, 0));
+						m_bFindedSeat = true;
+					}
+				}else if(iCoreGrid%grid.m_iXcount < iThisGrid%grid.m_iXcount) // core is my left side
+				{
+					if(isSeatOccupied(iThisGrid - 1)) // Occupied
+					{
+					}else{ // empty
+						transform.Translate(new Vector3(-GridMgr.getInstance.m_fXsize, 0));
+						m_bFindedSeat = true;
+					}
 				}
-			}else if(iCoreGrid%grid.m_iXcount < iThisGrid) // core is my left side
+			}
+
+			if(m_headingDirection.Equals(DIRECTION.LEFT) || m_headingDirection.Equals(DIRECTION.RIGHT) || m_headingDirection.Equals(DIRECTION.EVERYWHERE))
 			{
-				if(isSeatOccupied(iThisGrid - 1)) // Occupied
+				if(iCoreGrid/grid.m_iXcount > iThisGrid/grid.m_iXcount) // core is my right side
 				{
-					
-				}else{ // empty
-					transform.Translate(new Vector3(-GridMgr.getInstance.m_fXsize, 0));
-					m_bFindedSeat = true;
+					if(isSeatOccupied(iThisGrid + 1)) // Occupied
+					{
+					}else{ // empty
+						transform.Translate(new Vector3(0, -GridMgr.getInstance.m_fYsize));
+						m_bFindedSeat = true;
+					}
+				}else if(iCoreGrid/grid.m_iXcount < iThisGrid/grid.m_iXcount) // core is my left side
+				{
+					if(isSeatOccupied(iThisGrid - 1)) // Occupied
+					{
+					}else{ // empty
+						transform.Translate(new Vector3(0, GridMgr.getInstance.m_fYsize));
+						m_bFindedSeat = true;
+					}
 				}
 			}
 
