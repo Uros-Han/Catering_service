@@ -12,6 +12,7 @@ public class Core : Part {
 
 		m_bAttackAvailable = true;
 		m_bFriendly = true;
+		m_StickAvailableSeat = new List<int> ();
 	}
 
 	void OnDestroy()
@@ -21,6 +22,8 @@ public class Core : Part {
 
 	TURN_STATE m_beforeState;
 	int m_iCoreIdx;
+	public List<int> m_StickAvailableSeat;
+
 	IEnumerator UserControl()
 	{
 		GameMgr gMgr = GameMgr.getInstance;
@@ -82,5 +85,39 @@ public class Core : Part {
 		return iDistance;
 	}
 
+	public void CalculateStickableSeat()
+	{
+		m_StickAvailableSeat.Clear ();
+		List<int> TakenSeat = new List<int> ();
+		
+		int iPartGrid = 0;
+		GridMgr grid = GridMgr.getInstance;
+		TakenSeat.Add (grid.GetGridIdx(transform.position));
+		
+		for (int i = 0; i < transform.childCount + 1; ++i) {
+			
+			if(i == transform.childCount)
+				iPartGrid = grid.GetGridIdx(transform.position);
+			else
+				iPartGrid = grid.GetGridIdx(transform.GetChild(i).position);
 
+			TakenSeat.Add(iPartGrid);
+
+			if(!m_StickAvailableSeat.Contains(iPartGrid-1))
+				m_StickAvailableSeat.Add(iPartGrid-1);
+			if(!m_StickAvailableSeat.Contains(iPartGrid+1))
+				m_StickAvailableSeat.Add(iPartGrid+1);
+			if(!m_StickAvailableSeat.Contains(iPartGrid-GridMgr.getInstance.m_iXcount))
+				m_StickAvailableSeat.Add(iPartGrid-GridMgr.getInstance.m_iXcount);
+			if(!m_StickAvailableSeat.Contains(iPartGrid+GridMgr.getInstance.m_iXcount))
+				m_StickAvailableSeat.Add(iPartGrid+GridMgr.getInstance.m_iXcount);
+			
+			for(int j = 0; j< TakenSeat.Count; ++j)
+			{
+				m_StickAvailableSeat.Remove(TakenSeat[j]);
+			}
+
+			
+		}
+	}
 }

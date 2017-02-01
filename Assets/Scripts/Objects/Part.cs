@@ -9,6 +9,7 @@ public class Part : MonoBehaviour {
 	public float m_fAttackDmg; //Damage
 	public bool m_bFriendly; //아군?
 	public Color m_colorLine; //공격 이펙트 줄 색
+	public bool m_bDestroied;
 
 	public int m_iMove; //턴 당 몇번 움직일 수 있는지
 
@@ -16,7 +17,7 @@ public class Part : MonoBehaviour {
 
 	void Attack()
 	{
-		if (!m_bAttackAvailable)
+		if (!m_bAttackAvailable || m_bDestroied)
 			return;
 
 		if (m_bFriendly) {
@@ -65,6 +66,9 @@ public class Part : MonoBehaviour {
 
 	public IEnumerator Damaged(float fDamage, GameObject Attakcer)
 	{
+		if (m_bDestroied)
+			yield break;
+
 		yield return new WaitForSeconds (Random.Range(0f, 0.75f));
 
 		GetComponent<SpriteRenderer> ().color = Color.red;
@@ -78,7 +82,7 @@ public class Part : MonoBehaviour {
 
 		if (m_fHealth <= 0f) {
 			GetComponent<SpriteRenderer> ().color = new Color (218/255f, 118/255f, 118/255f);
-			Destroy (GetComponent<Part> ());
+			m_bDestroied = true;
 		}
 	}
 

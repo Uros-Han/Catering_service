@@ -11,6 +11,9 @@ public class Enemy : Part {
 
 	public void FindNewSeat()
 	{
+		if (m_bDestroied)
+			return;
+
 		StartCoroutine (Finding ());
 	}
 
@@ -116,4 +119,67 @@ public class Enemy : Part {
 
 		return false;
 	}
+
+	IEnumerator Assemble()
+	{
+		Vector2 mousePosition = Vector2.zero;
+		BoxCollider2D collider2D = GetComponent<BoxCollider2D> ();
+		Vector3 OriginPos = transform.position;
+
+		Core core = GameObject.Find ("Core").GetComponent<Core> ();
+		core.CalculateStickableSeat ();
+		bool bFollowCursor = false;
+
+		GridMgr grid = GridMgr.getInstance;
+
+		do{
+			mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			if(Input.GetMouseButtonDown(0) && collider2D.OverlapPoint(mousePosition))
+			{
+				bFollowCursor = true;
+			}
+
+			if(bFollowCursor && Input.GetMouseButton(0)) //클릭시 따라다니게
+			{
+				transform.position = mousePosition;
+
+				for(int i = 0 ; i < core.m_StickAvailableSeat.Count; ++i)
+				{
+					if(core.m_StickAvailableSeat[i].Equals(grid.GetGridIdx(transform.position)))
+					{
+						transform.position = grid.GetPosOfIdx(core.m_StickAvailableSeat[i]);
+					}
+				}
+			}
+
+			if(bFollowCursor && Input.GetMouseButtonUp(0))//클릭 뗏을때
+			{
+				bool bToOrigin = true;
+
+				for(int i = 0 ; i < core.m_StickAvailableSeat.Count; ++i)
+				{
+					if(core.m_StickAvailableSeat[i].Equals(grid.GetGridIdx(transform.position))) // Stick!!!!!
+					{
+						transform.position = grid.GetPosOfIdx(core.m_StickAvailableSeat[i]);
+						bToOrigin = false;
+						transform.parent = GameObject.Find("Core").transform;
+						GetComponent<SpriteRenderer>().color = transform.parent.GetComponent<Core>().m_colorLine;
+						Destroy(GetComponent<Enemy>());
+					}
+				}
+
+				if(bToOrigin)
+				{
+					transform.position = OriginPos;
+				}
+
+				core.CalculateStickableSeat ();
+
+				bFollowCursor = false;
+			}
+
+			yield return null;
+		}while(true);
+	}
+	
 }

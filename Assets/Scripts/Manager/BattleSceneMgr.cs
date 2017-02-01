@@ -61,12 +61,18 @@ public class BattleSceneMgr : MonoBehaviour {
 	{
 		yield return new WaitForSeconds (1.5f);
 
-		GameMgr.getInstance.m_turnState = TURN_STATE.ENEMY_MOVE;
-		GameObject.Find ("Enemies").BroadcastMessage ("FindNewSeat", null ,SendMessageOptions.DontRequireReceiver);
+		if (EnemyEliminatedCheck ()) {
+			GameMgr.getInstance.m_turnState = TURN_STATE.ASSEMBLE;
+			GameObject.Find ("Enemies").BroadcastMessage ("Assemble", null, SendMessageOptions.DontRequireReceiver);
+		} else {
 
-		yield return new WaitForSeconds (1.5f);
+			GameMgr.getInstance.m_turnState = TURN_STATE.ENEMY_MOVE;
+			GameObject.Find ("Enemies").BroadcastMessage ("FindNewSeat", null, SendMessageOptions.DontRequireReceiver);
 
-		StartCoroutine(EnemyAttackTurn ());
+			yield return new WaitForSeconds (1.5f);
+
+			StartCoroutine (EnemyAttackTurn ());
+		}
 	}
 
 	IEnumerator EnemyAttackTurn()
@@ -78,8 +84,17 @@ public class BattleSceneMgr : MonoBehaviour {
 		yield return new WaitForSeconds (1.5f);
 
 		StartCoroutine (UserMove ());
-
-		//
 	}
 
+	bool EnemyEliminatedCheck()
+	{
+		Transform EnemyParent = GameObject.Find ("Enemies").transform;
+
+		for (int i = 0; i < EnemyParent.childCount; ++i) {
+			if(!EnemyParent.GetChild(i).GetComponent<Enemy>().m_bDestroied)
+				return false;
+		}
+
+		return true;
+	}
 }
