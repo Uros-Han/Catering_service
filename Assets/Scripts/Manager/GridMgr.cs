@@ -28,7 +28,7 @@ public class GridMgr : MonoBehaviour
 	public int m_iGridIdx;
 
 	public int m_iXcount; //  Recommand NOT Even!
-	public int m_iYcount; //  Recommand NOT Even!
+	public int m_iYcount; //  Recommand NOT Even! && 정사각형이 되도록 X와Y 수가 같을것
 
 	public Vector2 m_fStartPos;
 

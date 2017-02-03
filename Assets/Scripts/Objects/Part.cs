@@ -71,12 +71,14 @@ public class Part : MonoBehaviour {
 
 		yield return new WaitForSeconds (Random.Range(0f, 0.75f));
 
+		Color originColor = GetComponent<SpriteRenderer> ().color;
+
 		GetComponent<SpriteRenderer> ().color = Color.red;
-		iTween.ShakePosition (gameObject, iTween.Hash ("x", 0.05f, "y", 0.05f, "time", 0.5f, "islocal", true));
+		iTween.ShakePosition (gameObject, iTween.Hash ("x", 0.05f, "y", 0.05f, "time", 0.5f));
 		DrawLine (Attakcer.transform.position, transform.position, Attakcer.GetComponent<Part>().m_colorLine, 0.5f);
 		yield return new WaitForSeconds (0.5f);
 
-		GetComponent<SpriteRenderer> ().color = Color.white;
+		GetComponent<SpriteRenderer> ().color = originColor;
 
 		m_fHealth -= fDamage;
 
@@ -86,6 +88,76 @@ public class Part : MonoBehaviour {
 		}
 	}
 
+	IEnumerator Assemble()
+	{
+		Vector2 mousePosition = Vector2.zero;
+		BoxCollider2D collider2D = GetComponent<BoxCollider2D> ();
+		Vector3 OriginPos = transform.position;
+		
+		Core core = GameObject.Find ("Core").GetComponent<Core> ();
+		core.CalculateStickableSeat ();
+		bool bFollowCursor = false;
+		
+		GridMgr grid = GridMgr.getInstance;
+		
+		do{
+			mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			if(Input.GetMouseButtonDown(0) && collider2D.OverlapPoint(mousePosition))
+			{
+				bFollowCursor = true;
+			}
+			
+			if(bFollowCursor && Input.GetMouseButton(0)) //클릭시 따라다니게
+			{
+				transform.position = mousePosition;
+				
+				for(int i = 0 ; i < core.m_StickAvailableSeat.Count; ++i)
+				{
+					if(core.m_StickAvailableSeat[i].Equals(grid.GetGridIdx(transform.position)))
+					{
+						transform.position = grid.GetPosOfIdx(core.m_StickAvailableSeat[i]);
+					}
+				}
+			}
+			
+			if(bFollowCursor && Input.GetMouseButtonUp(0))//클릭 뗏을때
+			{
+				bool bToOrigin = true;
+				
+				for(int i = 0 ; i < core.m_StickAvailableSeat.Count; ++i)
+				{
+					if(core.m_StickAvailableSeat[i].Equals(grid.GetGridIdx(transform.position))) // Stick!!!!!
+					{
+						transform.position = grid.GetPosOfIdx(core.m_StickAvailableSeat[i]);
+						bToOrigin = false;
+						transform.parent = GameObject.Find("Core").transform;
+						GetComponent<SpriteRenderer>().color = transform.parent.GetComponent<Core>().m_colorLine;
+
+						Part part = gameObject.AddComponent<Part>();
+						part.m_fHealth = 10;
+						part.m_fAttackDmg = 1;
+						part.m_bFriendly = true;
+						part.m_bAttackAvailable = true;
+						part.m_colorLine = transform.parent.GetComponent<Core>().m_colorLine;
+						part.m_headingDirection = DIRECTION.EVERYWHERE;
+
+						Destroy(GetComponent<Enemy>());
+					}
+				}
+				
+				if(bToOrigin)
+				{
+					transform.position = OriginPos;
+				}
+				
+				core.CalculateStickableSeat ();
+				
+				bFollowCursor = false;
+			}
+			
+			yield return null;
+		}while(true);
+	}
 
 	void DrawLine(Vector3 start, Vector3 end, Color color, float duration = 0.2f)
 	{

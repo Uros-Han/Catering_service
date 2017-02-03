@@ -29,6 +29,11 @@ public class BattleSceneMgr : MonoBehaviour {
 	void Start () {
 		StartCoroutine (UserMove (true));
 	}
+
+	void EnemyGenerate()
+	{
+		LevelGenerator.getInstance.Encount (AREA_STATE.FARM, 4);
+	}
 	
 	IEnumerator UserMove(bool isBattleFirst = false)
 	{
@@ -64,6 +69,8 @@ public class BattleSceneMgr : MonoBehaviour {
 		if (EnemyEliminatedCheck ()) {
 			GameMgr.getInstance.m_turnState = TURN_STATE.ASSEMBLE;
 			GameObject.Find ("Enemies").BroadcastMessage ("Assemble", null, SendMessageOptions.DontRequireReceiver);
+
+			StartCoroutine(CheckAssembleIsDone());
 		} else {
 
 			GameMgr.getInstance.m_turnState = TURN_STATE.ENEMY_MOVE;
@@ -96,5 +103,23 @@ public class BattleSceneMgr : MonoBehaviour {
 		}
 
 		return true;
+	}
+
+	IEnumerator CheckAssembleIsDone()
+	{
+		bool bAssembleIsDone = false;
+		Transform EnemyTrans = GameObject.Find ("Enemies").transform;
+
+		do {
+			if(EnemyTrans.childCount.Equals(0))
+				bAssembleIsDone = true;
+
+			yield return null;
+		} while(!bAssembleIsDone);
+
+		yield return new WaitForSeconds (1.5f);
+
+		EnemyGenerate ();
+		StartCoroutine (UserMove (true));
 	}
 }

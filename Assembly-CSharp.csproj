@@ -192,6 +192,8 @@
      <Compile Include="Assets\Scripts\Manager\DebugLine.cs" />
      <Compile Include="Assets\Scripts\Manager\GameMgr.cs" />
      <Compile Include="Assets\Scripts\Manager\GridMgr.cs" />
+     <Compile Include="Assets\Scripts\Manager\LevelGenerator.cs" />
+     <Compile Include="Assets\Scripts\Manager\ObjectFactory.cs" />
      <Compile Include="Assets\Scripts\Objects\Core.cs" />
      <Compile Include="Assets\Scripts\Objects\Enemy.cs" />
      <Compile Include="Assets\Scripts\Objects\Part.cs" />

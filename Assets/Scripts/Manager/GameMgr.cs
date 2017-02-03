@@ -36,6 +36,8 @@ public class GameMgr : MonoBehaviour {
 			Destroy(gameObject);
 
 		DontDestroyOnLoad(gameObject);
+
+		ObjectFactory.getInstance.ResourcesLoad ();
 	}
 
 	void OnDestroy()
