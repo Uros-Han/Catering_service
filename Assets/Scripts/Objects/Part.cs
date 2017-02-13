@@ -76,9 +76,10 @@ public class Part : MonoBehaviour {
 		GetComponent<SpriteRenderer> ().color = Color.red;
 		iTween.ShakePosition (gameObject, iTween.Hash ("x", 0.05f, "y", 0.05f, "time", 0.5f));
 		DrawLine (Attakcer.transform.position, transform.position, Attakcer.GetComponent<Part>().m_colorLine, 0.5f);
-		yield return new WaitForSeconds (0.5f);
+		yield return new WaitForSeconds (0.51f);
 
 		GetComponent<SpriteRenderer> ().color = originColor;
+		transform.position = GridMgr.getInstance.GetPosOfIdx(GridMgr.getInstance.GetGridIdx(transform.position));
 
 		m_fHealth -= fDamage;
 
@@ -140,6 +141,8 @@ public class Part : MonoBehaviour {
 						part.m_bAttackAvailable = true;
 						part.m_colorLine = transform.parent.GetComponent<Core>().m_colorLine;
 						part.m_headingDirection = DIRECTION.EVERYWHERE;
+
+						GetComponent<SpriteSheet>().CheckAround(false);
 
 						Destroy(GetComponent<Enemy>());
 					}

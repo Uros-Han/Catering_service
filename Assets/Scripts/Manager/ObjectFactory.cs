@@ -37,9 +37,13 @@ public class ObjectFactory : MonoBehaviour {
 
 	GameObject m_objPig;
 
+	public Sprite[] m_sheet_pig;
+
 	// Use this for initialization
 	public void ResourcesLoad () {
 		m_objPig = Resources.Load ("Prefabs/Objects/Parts/Pig") as GameObject;
+
+		m_sheet_pig = Resources.LoadAll<Sprite>("Sprites/Sheets/sheet_pig");
 	}
 
 	public GameObject Create_Pig(DIRECTION dir)
