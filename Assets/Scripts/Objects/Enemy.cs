@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class Enemy : Part {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-
 	public void FindNewSeat()
 	{
 		if (m_bDestroied)
@@ -67,7 +62,7 @@ public class Enemy : Part {
 					if(isSeatOccupied(iThisGrid + 1)) // Occupied
 					{
 					}else{ // empty
-						transform.Translate(new Vector3(GridMgr.getInstance.m_fXsize, 0));
+						transform.position = new Vector2(transform.position.x + GridMgr.getInstance.m_fYsize , transform.position.y);
 						m_bFindedSeat = true;
 					}
 				}else if(iCoreGrid%grid.m_iXcount < iThisGrid%grid.m_iXcount) // core is my left side
@@ -75,7 +70,7 @@ public class Enemy : Part {
 					if(isSeatOccupied(iThisGrid - 1)) // Occupied
 					{
 					}else{ // empty
-						transform.Translate(new Vector3(-GridMgr.getInstance.m_fXsize, 0));
+						transform.position = new Vector2(transform.position.x - GridMgr.getInstance.m_fYsize , transform.position.y);
 						m_bFindedSeat = true;
 					}
 				}
@@ -88,7 +83,7 @@ public class Enemy : Part {
 					if(isSeatOccupied(iThisGrid + grid.m_iXcount)) // Occupied
 					{
 					}else{ // empty
-						transform.Translate(new Vector3(0, -GridMgr.getInstance.m_fYsize));
+						transform.position = new Vector2(transform.position.x, transform.position.y -GridMgr.getInstance.m_fYsize );
 						m_bFindedSeat = true;
 					}
 				}else if(iCoreGrid/grid.m_iXcount < iThisGrid/grid.m_iXcount) // core is my up side
@@ -96,7 +91,7 @@ public class Enemy : Part {
 					if(isSeatOccupied(iThisGrid - grid.m_iXcount)) // Occupied
 					{
 					}else{ // empty
-						transform.Translate(new Vector3(0, GridMgr.getInstance.m_fYsize));
+						transform.position = new Vector2(transform.position.x, transform.position.y + GridMgr.getInstance.m_fYsize );
 						m_bFindedSeat = true;
 					}
 				}

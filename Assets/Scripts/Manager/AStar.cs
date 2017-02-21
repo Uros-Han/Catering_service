@@ -382,7 +382,6 @@ public class AStar : MonoBehaviour
 		return objNode;
 	}
 
-
 	public class Node
 	{
 		public float fPCost;
@@ -390,5 +389,180 @@ public class AStar : MonoBehaviour
 		public float fTCost;
 		public Node ParentNode;
 		public int iIndex;
+	}
+
+	//////////////////////////////// 여기부턴 Core 위치 찾기위해 만든 A*
+	List<int> m_listPartIdx;
+	void InitPartList()
+	{
+		if(m_listPartIdx == null)
+			m_listPartIdx = new List<int> ();
+
+		m_listPartIdx.Clear ();
+
+		Transform CoreTrans = GameObject.Find ("Core").transform;
+		GridMgr grid = GridMgr.getInstance;
+
+
+		for (int i = 0; i < CoreTrans.childCount + 1; ++i) {
+			if(i == CoreTrans.childCount)
+			{
+				m_listPartIdx.Add(grid.GetGridIdx(CoreTrans.transform.position));
+			}else{
+				m_listPartIdx.Add(grid.GetGridIdx(CoreTrans.GetChild(i).transform.position));
+			}
+		}
+	}
+
+	bool IdxIsEmpty(int iIdx)
+	{
+		for (int i = 0; i < m_listPartIdx.Count; ++i) {
+			if(m_listPartIdx[i] == iIdx)
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	void MakeBestList_FindCore()
+	{
+		
+		Node ParentNode = null;
+		
+		ParentNode = MakeParent();
+		
+		fStartGCost = ParentNode.fGCost + 0.3f;
+		
+		Node objNode = null;
+		
+		fClosestNodeInDest_GCost = ParentNode.fGCost;
+		iClosestNodeInDest_Idx = m_iStartIndex;
+		InitPartList ();
+
+		while (true)
+		{
+			
+			// 위
+			if (ParentNode.iIndex >= m_iTileCountX
+			    && !IdxIsEmpty(ParentNode.iIndex - m_iTileCountX)
+			    && CheckList(ParentNode.iIndex - m_iTileCountX))
+			{
+				objNode = CreateNode(ParentNode, ParentNode.iIndex - m_iTileCountX, (int)DIR.SEQU);
+				if (objNode.fGCost < fStartGCost)
+					m_OpenList.Add(objNode);
+				
+			}
+			
+			// 오
+			if ((ParentNode.iIndex + 1) % m_iTileCountX != 0
+			    && !IdxIsEmpty(ParentNode.iIndex + 1)
+			    && CheckList(ParentNode.iIndex + 1))
+			{
+				objNode = CreateNode(ParentNode, ParentNode.iIndex + 1, (int)DIR.SEQU);
+				if (objNode.fGCost < fStartGCost)
+					m_OpenList.Add(objNode);
+				
+			}
+			
+			// 아
+			if (ParentNode.iIndex < m_iTileCountX * m_iTileCountY - m_iTileCountX
+			    && !IdxIsEmpty(ParentNode.iIndex + m_iTileCountX)
+			    && CheckList(ParentNode.iIndex + m_iTileCountX))
+			{
+				objNode = CreateNode(ParentNode, ParentNode.iIndex + m_iTileCountX, (int)DIR.SEQU);
+				if (objNode.fGCost < fStartGCost)
+					m_OpenList.Add(objNode);
+				
+			}
+			
+			// 왼
+			if (ParentNode.iIndex % m_iTileCountX != 0
+			    && !IdxIsEmpty(ParentNode.iIndex - 1)
+			    && CheckList(ParentNode.iIndex - 1))
+			{
+				objNode = CreateNode(ParentNode, ParentNode.iIndex - 1, (int)DIR.SEQU);
+				if (objNode.fGCost < fStartGCost)
+					m_OpenList.Add(objNode);
+				
+			}
+			
+			if (m_OpenList.Count == 0)
+				break;
+			
+			m_OpenList.Sort(Compare);
+			
+			ParentNode = m_OpenList[0];
+			
+			m_CloseList.Add(ParentNode);
+			
+			if (fClosestNodeInDest_GCost == m_CloseList[m_CloseList.Count - 1].fGCost)
+			{
+				if (GetDisCost(m_CloseList[m_CloseList.Count - 1].iIndex, m_iStartIndex) < GetDisCost(iClosestNodeInDest_Idx, m_iStartIndex))
+				{
+					fClosestNodeInDest_GCost = m_CloseList[m_CloseList.Count - 1].fGCost;
+					iClosestNodeInDest_Idx = m_CloseList[m_CloseList.Count - 1].iIndex;
+				}
+			}else if (fClosestNodeInDest_GCost > m_CloseList[m_CloseList.Count - 1].fGCost)
+			{
+				fClosestNodeInDest_GCost = m_CloseList[m_CloseList.Count - 1].fGCost;
+				iClosestNodeInDest_Idx = m_CloseList[m_CloseList.Count - 1].iIndex;
+			}
+			
+			m_OpenList.Remove(m_OpenList[0]);
+			
+			
+			if (ParentNode.iIndex == m_iEndIndex)
+			{
+				while (true)
+				{
+					if (ParentNode.ParentNode == null)
+						break;
+					m_BestList.Insert(0, ParentNode.iIndex);
+					ParentNode = ParentNode.ParentNode;
+				}
+				break;
+			}
+		}
+	}
+
+	public bool AStarStart_CoreFind(int iStart, int iEnd)
+	{
+		
+		if (iStart == iEnd)
+		{
+			if (m_BestList == null)
+				m_BestList = new List<int>();
+			
+			m_BestList.Clear();
+			m_BestList.Add(iEnd);
+			return true;
+		}
+		
+		
+		if (m_OpenList == null)
+			m_OpenList = new List<Node>();
+		if (m_CloseList == null)
+			m_CloseList = new List<Node>();
+		if (m_BestList == null)
+			m_BestList = new List<int>();
+		
+		ClearNode();
+		
+		m_iStartIndex = iStart;
+		m_iEndIndex = iEnd;
+		
+		m_iTileCountX = GridMgr.getInstance.m_iXcount;
+		m_iTileCountY = GridMgr.getInstance.m_iYcount;
+		
+		MakeBestList_FindCore();
+		
+		if (m_BestList.Count == 0) // 길막힘
+		{
+			return false;
+		}
+
+		return true;
 	}
 }

@@ -4,4 +4,4 @@ public enum DIRECTION { LEFT, UP, DOWN, RIGHT, EVERYWHERE };
 
 public enum AREA_STATE { FOREST, FARM, VILLAGE, CASTLE };
 
-public enum VICTIM { PIG, KNIGHT, NONE };
+public enum VICTIM { PIG, KNIGHT, WOLF, NONE };

@@ -27,7 +27,7 @@ public class LevelGenerator : MonoBehaviour {
 
 	VictimCrowd[] farmCrowdPool;
 
-	void Start()
+	void Awake()
 	{
 		LevelPool ();
 	}
@@ -36,7 +36,10 @@ public class LevelGenerator : MonoBehaviour {
 	{
 		farmCrowdPool = new VictimCrowd[]{ 
 			new VictimCrowd (AREA_STATE.FARM, 1, new VICTIM[] { VICTIM.PIG }),
-			new VictimCrowd (AREA_STATE.FARM, 1, new VICTIM[] { VICTIM.PIG, VICTIM.PIG })
+			new VictimCrowd (AREA_STATE.FARM, 1, new VICTIM[] { VICTIM.PIG, VICTIM.PIG }),
+			new VictimCrowd (AREA_STATE.FARM, 1, new VICTIM[] { VICTIM.WOLF }),
+			new VictimCrowd (AREA_STATE.FARM, 1, new VICTIM[] { VICTIM.WOLF, VICTIM.PIG }),
+			new VictimCrowd (AREA_STATE.FARM, 1, new VICTIM[] { VICTIM.WOLF, VICTIM.WOLF })
 		};
 		
 	}
@@ -48,7 +51,7 @@ public class LevelGenerator : MonoBehaviour {
 
 		for(int i=0; i < 4; ++i) //코스트에 맞춰서 동서남북 희생자들 풀에서 뽑기
 		{
-			VictimCrowd randomCrowd = farmCrowdPool[Random.Range(0,2)]; // should be fixed
+			VictimCrowd randomCrowd = farmCrowdPool[Random.Range(0,5)]; // should be fixed
 
 			EncountCrowd[i] = randomCrowd;
 			iCost -= randomCrowd.m_iCost;
@@ -116,6 +119,10 @@ public class LevelGenerator : MonoBehaviour {
 			{
 			case VICTIM.PIG:
 				objVictim = ObjectFactory.getInstance.Create_Pig(headingDir);
+				break;
+
+			case VICTIM.WOLF:
+				objVictim = ObjectFactory.getInstance.Create_Wolf(headingDir);
 				break;
 				
 			case VICTIM.KNIGHT:

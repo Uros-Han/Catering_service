@@ -15,6 +15,28 @@ public class Part : MonoBehaviour {
 
 	public DIRECTION m_headingDirection;
 
+	public void Start()
+	{
+		switch (m_headingDirection) {
+		case DIRECTION.UP:
+			transform.localRotation = Quaternion.AngleAxis(180f, Vector3.forward);
+			break;
+
+		case DIRECTION.LEFT:
+			transform.localRotation = Quaternion.AngleAxis(270f, Vector3.forward);
+			break;
+
+		case DIRECTION.RIGHT:
+			transform.localRotation = Quaternion.AngleAxis(90f, Vector3.forward);
+			break;
+		}
+	}
+
+	public void StopAssemble()
+	{
+		bStopAssemble = true;
+	}
+
 	void Attack()
 	{
 		if (!m_bAttackAvailable || m_bDestroied)
@@ -63,7 +85,6 @@ public class Part : MonoBehaviour {
 		}
 	}
 
-
 	public IEnumerator Damaged(float fDamage, GameObject Attakcer)
 	{
 		if (m_bDestroied)
@@ -89,8 +110,14 @@ public class Part : MonoBehaviour {
 		}
 	}
 
-	IEnumerator Assemble()
+	bool bStopAssemble = false;
+	public IEnumerator Assemble()
 	{
+		Debug.Log (gameObject.name);
+
+		if (gameObject.name.Equals ("Core"))
+			yield break;
+
 		Vector2 mousePosition = Vector2.zero;
 		BoxCollider2D collider2D = GetComponent<BoxCollider2D> ();
 		Vector3 OriginPos = transform.position;
@@ -98,6 +125,9 @@ public class Part : MonoBehaviour {
 		Core core = GameObject.Find ("Core").GetComponent<Core> ();
 		core.CalculateStickableSeat ();
 		bool bFollowCursor = false;
+		bool bParentWasCore = false;
+		int iBeforeSeatIdx = -1;
+		bStopAssemble = false;
 		
 		GridMgr grid = GridMgr.getInstance;
 		
@@ -111,14 +141,30 @@ public class Part : MonoBehaviour {
 			if(bFollowCursor && Input.GetMouseButton(0)) //클릭시 따라다니게
 			{
 				transform.position = mousePosition;
-				
+
+				if(transform.parent.name.Equals("Core"))
+				{
+					transform.parent = GameObject.Find("Temp").transform;
+					iBeforeSeatIdx = grid.GetGridIdx(transform.position);
+					bParentWasCore = true;
+				}
+				core.CalculateStickableSeat ();
+
 				for(int i = 0 ; i < core.m_StickAvailableSeat.Count; ++i)
 				{
 					if(core.m_StickAvailableSeat[i].Equals(grid.GetGridIdx(transform.position)))
 					{
 						transform.position = grid.GetPosOfIdx(core.m_StickAvailableSeat[i]);
+
+						if(bParentWasCore)
+						{
+							GetComponent<SpriteSheet>().CheckAround(false, iBeforeSeatIdx);
+						}
 					}
 				}
+
+				if(m_objAleart != null)
+					Destroy(m_objAleart);
 			}
 			
 			if(bFollowCursor && Input.GetMouseButtonUp(0))//클릭 뗏을때
@@ -132,25 +178,51 @@ public class Part : MonoBehaviour {
 						transform.position = grid.GetPosOfIdx(core.m_StickAvailableSeat[i]);
 						bToOrigin = false;
 						transform.parent = GameObject.Find("Core").transform;
-						GetComponent<SpriteRenderer>().color = transform.parent.GetComponent<Core>().m_colorLine;
+						transform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
+						GetComponent<SpriteRenderer>().color = new Color(180/255f, 200/255f, 180/255f);
+						OriginPos = transform.position;
 
-						Part part = gameObject.AddComponent<Part>();
-						part.m_fHealth = 10;
-						part.m_fAttackDmg = 1;
-						part.m_bFriendly = true;
-						part.m_bAttackAvailable = true;
-						part.m_colorLine = transform.parent.GetComponent<Core>().m_colorLine;
-						part.m_headingDirection = DIRECTION.EVERYWHERE;
+						if(GetComponent<Enemy>() != null)
+						{
+							Destroy(GetComponent<Enemy>());
+
+							Part part = gameObject.AddComponent<Part>();
+							part.m_fHealth = 10;
+							part.m_fAttackDmg = 1;
+							part.m_bFriendly = true;
+							part.m_bAttackAvailable = true;
+							part.m_colorLine = transform.parent.GetComponent<Core>().m_colorLine;
+							part.m_headingDirection = DIRECTION.EVERYWHERE;
+
+							BattleSceneMgr.getInstance.StartAssembleAfter(gameObject);
+						}
+						if(bParentWasCore)
+						{
+							GetComponent<SpriteSheet>().CheckAround(false, iBeforeSeatIdx);
+							iBeforeSeatIdx = -1;
+							bParentWasCore = false;
+
+							transform.parent.BroadcastMessage("AmI_InCoreSide");
+						}
 
 						GetComponent<SpriteSheet>().CheckAround(false);
 
-						Destroy(GetComponent<Enemy>());
 					}
 				}
 				
 				if(bToOrigin)
 				{
 					transform.position = OriginPos;
+
+					if(bParentWasCore)
+					{
+						transform.parent = GameObject.Find("Core").transform;
+
+						transform.parent.BroadcastMessage("AmI_InCoreSide");
+					}
+					
+					GetComponent<SpriteSheet>().CheckAround(false);
+
 				}
 				
 				core.CalculateStickableSeat ();
@@ -159,7 +231,24 @@ public class Part : MonoBehaviour {
 			}
 			
 			yield return null;
-		}while(true);
+		}while(!bStopAssemble);
+	}
+
+	GameObject m_objAleart;
+	void AmI_InCoreSide()
+	{
+		int iStart = GridMgr.getInstance.GetGridIdx (transform.position);
+		int iEnd = GridMgr.getInstance.GetGridIdx (GameObject.Find("Core").transform.position);
+
+		if (!AStar.getInstance.AStarStart_CoreFind (iStart, iEnd)) {
+			if(m_objAleart == null)
+				m_objAleart = ObjectFactory.getInstance.Create_Aleart (iStart);
+			else
+				m_objAleart.transform.position = transform.position;
+		} else {
+			if(m_objAleart != null)
+				Destroy(m_objAleart);
+		}
 	}
 
 	void DrawLine(Vector3 start, Vector3 end, Color color, float duration = 0.2f)

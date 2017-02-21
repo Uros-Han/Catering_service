@@ -9,13 +9,18 @@ public class SpriteSheet : MonoBehaviour {
 
 		m_bOpenedDir = new bool[4]{false, false, false, false};
 
-		m_sheet_sprite = ObjectFactory.getInstance.m_sheet_pig;
+		if(gameObject.name.Contains("Core"))
+			m_sheet_sprite = ObjectFactory.getInstance.m_sheet_core;
+		else if(gameObject.name.Contains("Pig"))
+			m_sheet_sprite = ObjectFactory.getInstance.m_sheet_pig;
+		else if(gameObject.name.Contains("Wolf"))
+			m_sheet_sprite = ObjectFactory.getInstance.m_sheet_wolf;
 	}
 
 	public bool[] m_bOpenedDir; // Direction (0-Left, 1-Up, 2-Right, 3-Down) 해당 인접 방향에 물체가 존재하면 참, 없으면 거짓
 	Sprite[] m_sheet_sprite;
 
-	public void CheckAround(bool bReceiveOnly)
+	public void CheckAround(bool bReceiveOnly, int iIdx = -1)
 	{
 		Transform CoreTrans = GameObject.Find ("Core").transform;
 
@@ -24,7 +29,13 @@ public class SpriteSheet : MonoBehaviour {
 		for (int i= 0; i < CoreTrans.childCount+1; ++i) {
 			GridMgr grid = GridMgr.getInstance;
 			int iTargetIdx = 0;
-			int iThisIdx = grid.GetGridIdx(transform.position);
+			int iThisIdx = 0;
+
+			if(iIdx == -1)
+				iThisIdx = grid.GetGridIdx(transform.position);
+			else
+				iThisIdx = iIdx;
+
 			GameObject target = null;
 
 			if(i==CoreTrans.childCount)
@@ -42,7 +53,7 @@ public class SpriteSheet : MonoBehaviour {
 				m_bOpenedDir[0]  = true;
 
 				if(!bReceiveOnly)
-					target.SendMessage("CheckAround", true, SendMessageOptions.DontRequireReceiver);
+					target.GetComponent<SpriteSheet>().CheckAround(true);
 			}
 
 			//check right
@@ -51,7 +62,7 @@ public class SpriteSheet : MonoBehaviour {
 				m_bOpenedDir[2]  = true;
 
 				if(!bReceiveOnly)
-					target.SendMessage("CheckAround", true, SendMessageOptions.DontRequireReceiver);
+					target.GetComponent<SpriteSheet>().CheckAround(true);
 			}
 
 			//check upward
@@ -60,7 +71,7 @@ public class SpriteSheet : MonoBehaviour {
 				m_bOpenedDir[1]  = true;
 
 				if(!bReceiveOnly)
-					target.SendMessage("CheckAround", true, SendMessageOptions.DontRequireReceiver);
+					target.GetComponent<SpriteSheet>().CheckAround(true);
 			}
 
 			//check downward
@@ -69,14 +80,17 @@ public class SpriteSheet : MonoBehaviour {
 				m_bOpenedDir[3]  = true;
 
 				if(!bReceiveOnly)
-					target.SendMessage("CheckAround", true, SendMessageOptions.DontRequireReceiver);
+					target.GetComponent<SpriteSheet>().CheckAround(true);
 			}
 		}
 
-		SetSprite ();
+		if(iIdx != -1)
+			SetSprite ();
+		else
+			SetSprite (0);
 	}
 
-	void SetSprite()
+	void SetSprite(int iIdx = -1)
 	{
 		SpriteRenderer sp = GetComponent<SpriteRenderer> ();
 
@@ -113,5 +127,8 @@ public class SpriteSheet : MonoBehaviour {
 		}else if(m_bOpenedDir[0] && m_bOpenedDir[1] && m_bOpenedDir[2] && m_bOpenedDir[3]){
 			sp.sprite = m_sheet_sprite[10];
 		}
+
+		if(iIdx == -1)
+			sp.sprite = m_sheet_sprite[0];
 	}
 }
