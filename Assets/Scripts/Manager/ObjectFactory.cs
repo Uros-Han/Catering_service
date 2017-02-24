@@ -35,6 +35,7 @@ public class ObjectFactory : MonoBehaviour {
 		DontDestroyOnLoad(gameObject);
 	}
 	GameObject m_objAleart;
+	GameObject m_objStickableDot;
 	GameObject m_objPig;
 	GameObject m_objWolf;
 
@@ -45,6 +46,7 @@ public class ObjectFactory : MonoBehaviour {
 	// Use this for initialization
 	public void ResourcesLoad () {
 		m_objAleart = Resources.Load ("Prefabs/Objects/Aleart") as GameObject;
+		m_objStickableDot = Resources.Load ("Prefabs/Objects/StickableDot") as GameObject;
 		m_objPig = Resources.Load ("Prefabs/Objects/Parts/Pig") as GameObject;
 		m_objWolf = Resources.Load ("Prefabs/Objects/Parts/Wolf") as GameObject;
 
@@ -62,13 +64,25 @@ public class ObjectFactory : MonoBehaviour {
 		return obj;
 	}
 
+	public GameObject Create_StickableDot(int iIdx, Color color = default(Color))
+	{
+		GameObject obj = Instantiate (m_objStickableDot) as GameObject;
+		obj.transform.parent = GameObject.Find("StickableDots").transform;
+		obj.transform.position = GridMgr.getInstance.GetPosOfIdx (iIdx);
+
+		if (color != default(Color))
+			obj.GetComponent<SpriteRenderer> ().color = color;
+
+		return obj;
+	}
+
 	public GameObject Create_Pig(DIRECTION dir)
 	{
 		GameObject obj = Instantiate (m_objPig) as GameObject;
 		obj.transform.parent = GameObject.Find("Enemies").transform;
 
 		obj.GetComponent<Enemy> ().m_headingDirection = dir;
-
+		obj.GetComponent<Part> ().SetDirection ();
 		return obj;
 	}
 
@@ -78,7 +92,7 @@ public class ObjectFactory : MonoBehaviour {
 		obj.transform.parent = GameObject.Find("Enemies").transform;
 		
 		obj.GetComponent<Enemy> ().m_headingDirection = dir;
-		
+		obj.GetComponent<Part> ().SetDirection ();
 		return obj;
 	}
 }

@@ -143,8 +143,9 @@ public class BattleSceneMgr : MonoBehaviour {
 
 	IEnumerator StartWhosAssemble(GameObject obj)
 	{
-		yield return null;
+		yield return new WaitForSeconds(0.1f);
 
-		StartCoroutine (obj.GetComponent<Part> ().Assemble ());
+		if(obj.GetComponent<Part> ().AssembleRoutine == null)
+			obj.GetComponent<Part> ().AssembleRoutine = StartCoroutine (obj.GetComponent<Part> ().Assemble ());
 	}
 }

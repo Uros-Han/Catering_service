@@ -392,13 +392,13 @@ public class AStar : MonoBehaviour
 	}
 
 	//////////////////////////////// 여기부턴 Core 위치 찾기위해 만든 A*
-	List<int> m_listPartIdx;
+	public List<Part> m_listPart;
 	void InitPartList()
 	{
-		if(m_listPartIdx == null)
-			m_listPartIdx = new List<int> ();
+		if(m_listPart == null)
+			m_listPart = new List<Part> ();
 
-		m_listPartIdx.Clear ();
+		m_listPart.Clear ();
 
 		Transform CoreTrans = GameObject.Find ("Core").transform;
 		GridMgr grid = GridMgr.getInstance;
@@ -407,19 +407,38 @@ public class AStar : MonoBehaviour
 		for (int i = 0; i < CoreTrans.childCount + 1; ++i) {
 			if(i == CoreTrans.childCount)
 			{
-				m_listPartIdx.Add(grid.GetGridIdx(CoreTrans.transform.position));
+				m_listPart.Add(CoreTrans.GetComponent<Part>());
 			}else{
-				m_listPartIdx.Add(grid.GetGridIdx(CoreTrans.GetChild(i).transform.position));
+				m_listPart.Add(CoreTrans.GetChild(i).GetComponent<Part>());
 			}
 		}
 	}
 
 	bool IdxIsEmpty(int iIdx)
 	{
-		for (int i = 0; i < m_listPartIdx.Count; ++i) {
-			if(m_listPartIdx[i] == iIdx)
+		for (int i = 0; i < m_listPart.Count; ++i) {
+			if(!m_listPart[i].m_bEdgePart && m_listPart[i].m_iGridIdx == iIdx)
 			{
 				return false;
+			}
+		}
+
+		return true;
+	}
+
+	bool EdgeDirCheck(int iIdx, DIRECTION dir)
+	{
+		for (int i = 0; i < m_listPart.Count; ++i) {
+			if(m_listPart[i].m_iGridIdx == iIdx)
+			{
+				if(m_listPart[i].m_bEdgePart)
+				{
+					if( 3 - (int)m_listPart[i].m_headingDirection == (int)dir )
+					{
+						return true;
+					}else
+						return false;
+				}
 			}
 		}
 
@@ -447,6 +466,7 @@ public class AStar : MonoBehaviour
 			// 위
 			if (ParentNode.iIndex >= m_iTileCountX
 			    && !IdxIsEmpty(ParentNode.iIndex - m_iTileCountX)
+			    && EdgeDirCheck(ParentNode.iIndex, DIRECTION.UP)
 			    && CheckList(ParentNode.iIndex - m_iTileCountX))
 			{
 				objNode = CreateNode(ParentNode, ParentNode.iIndex - m_iTileCountX, (int)DIR.SEQU);
@@ -458,6 +478,7 @@ public class AStar : MonoBehaviour
 			// 오
 			if ((ParentNode.iIndex + 1) % m_iTileCountX != 0
 			    && !IdxIsEmpty(ParentNode.iIndex + 1)
+			    && EdgeDirCheck(ParentNode.iIndex, DIRECTION.RIGHT)
 			    && CheckList(ParentNode.iIndex + 1))
 			{
 				objNode = CreateNode(ParentNode, ParentNode.iIndex + 1, (int)DIR.SEQU);
@@ -469,6 +490,7 @@ public class AStar : MonoBehaviour
 			// 아
 			if (ParentNode.iIndex < m_iTileCountX * m_iTileCountY - m_iTileCountX
 			    && !IdxIsEmpty(ParentNode.iIndex + m_iTileCountX)
+			    && EdgeDirCheck(ParentNode.iIndex, DIRECTION.DOWN)
 			    && CheckList(ParentNode.iIndex + m_iTileCountX))
 			{
 				objNode = CreateNode(ParentNode, ParentNode.iIndex + m_iTileCountX, (int)DIR.SEQU);
@@ -480,6 +502,7 @@ public class AStar : MonoBehaviour
 			// 왼
 			if (ParentNode.iIndex % m_iTileCountX != 0
 			    && !IdxIsEmpty(ParentNode.iIndex - 1)
+			    && EdgeDirCheck(ParentNode.iIndex, DIRECTION.LEFT)
 			    && CheckList(ParentNode.iIndex - 1))
 			{
 				objNode = CreateNode(ParentNode, ParentNode.iIndex - 1, (int)DIR.SEQU);

@@ -10,27 +10,31 @@ public class Part : MonoBehaviour {
 	public bool m_bFriendly; //아군?
 	public Color m_colorLine; //공격 이펙트 줄 색
 	public bool m_bDestroied;
+	public bool m_bEdgePart;
+	public int m_iGridIdx;
 
 	public int m_iMove; //턴 당 몇번 움직일 수 있는지
 
 	public DIRECTION m_headingDirection;
 
-	public void Start()
+	public void SetDirection()
 	{
 		switch (m_headingDirection) {
 		case DIRECTION.UP:
 			transform.localRotation = Quaternion.AngleAxis(180f, Vector3.forward);
 			break;
-
+			
 		case DIRECTION.LEFT:
 			transform.localRotation = Quaternion.AngleAxis(270f, Vector3.forward);
 			break;
-
+			
 		case DIRECTION.RIGHT:
 			transform.localRotation = Quaternion.AngleAxis(90f, Vector3.forward);
 			break;
 		}
 	}
+
+	public Coroutine AssembleRoutine;
 
 	public void StopAssemble()
 	{
@@ -111,10 +115,9 @@ public class Part : MonoBehaviour {
 	}
 
 	bool bStopAssemble = false;
+	GameObject m_StickedPart = null;
 	public IEnumerator Assemble()
 	{
-		Debug.Log (gameObject.name);
-
 		if (gameObject.name.Equals ("Core"))
 			yield break;
 
@@ -123,24 +126,19 @@ public class Part : MonoBehaviour {
 		Vector3 OriginPos = transform.position;
 		
 		Core core = GameObject.Find ("Core").GetComponent<Core> ();
-		core.CalculateStickableSeat ();
+		core.CalculateStickableSeat (false);
 		bool bFollowCursor = false;
 		bool bParentWasCore = false;
 		int iBeforeSeatIdx = -1;
 		bStopAssemble = false;
 		
 		GridMgr grid = GridMgr.getInstance;
-		
+		DIRECTION m_BeforeheadingDirection = DIRECTION.EVERYWHERE;
 		do{
 			mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			if(Input.GetMouseButtonDown(0) && collider2D.OverlapPoint(mousePosition))
 			{
 				bFollowCursor = true;
-			}
-			
-			if(bFollowCursor && Input.GetMouseButton(0)) //클릭시 따라다니게
-			{
-				transform.position = mousePosition;
 
 				if(transform.parent.name.Equals("Core"))
 				{
@@ -148,17 +146,65 @@ public class Part : MonoBehaviour {
 					iBeforeSeatIdx = grid.GetGridIdx(transform.position);
 					bParentWasCore = true;
 				}
-				core.CalculateStickableSeat ();
+
+				if(bParentWasCore)
+				{
+					m_BeforeheadingDirection = m_headingDirection;
+					GetComponent<SpriteSheet>().CheckAround(false, iBeforeSeatIdx);
+				}
+
+				GetComponent<SpriteRenderer>().sortingLayerName = "FrontObject";
+
+				core.CalculateStickableSeat (true);
+			}
+			
+			if(bFollowCursor && Input.GetMouseButton(0)) //클릭시 따라다니게
+			{
+				transform.position = mousePosition;
+			
 
 				for(int i = 0 ; i < core.m_StickAvailableSeat.Count; ++i)
 				{
-					if(core.m_StickAvailableSeat[i].Equals(grid.GetGridIdx(transform.position)))
+					if(core.m_StickAvailableSeat[i].Equals(grid.GetGridIdx(transform.position))) //드래그 중 붙을 수 있는 지역안에 들어옴
 					{
 						transform.position = grid.GetPosOfIdx(core.m_StickAvailableSeat[i]);
 
-						if(bParentWasCore)
+						//붙는방향으로 파츠 회전하도록
+						Transform CoreTrans = GameObject.Find("Core").transform;
+						GameObject ClosestPart = null;
+
+						for(int j=0 ; j < CoreTrans.childCount + 1; ++j)
 						{
-							GetComponent<SpriteSheet>().CheckAround(false, iBeforeSeatIdx);
+							GameObject target;
+							if(j == CoreTrans.childCount)
+								target = CoreTrans.gameObject;
+							else
+								target = CoreTrans.GetChild(j).gameObject;
+
+							if(ClosestPart == null)
+								ClosestPart = target;
+
+							if(!target.GetComponent<Part>().m_bEdgePart && Vector3.Distance(mousePosition , ClosestPart.transform.position) > Vector3.Distance(mousePosition, target.transform.position))
+							{
+								ClosestPart = target;
+							}
+						}
+
+						int iIdx = grid.GetGridIdx(transform.position);
+						int iTargetIdx = grid.GetGridIdx(ClosestPart.transform.position);
+
+						if(iIdx + 1 == iTargetIdx){
+							m_headingDirection = DIRECTION.LEFT;
+							iTween.RotateTo(gameObject, iTween.Hash ("z", 270f, "time", 0.2f));
+						}else if(iIdx - 1 == iTargetIdx){
+							m_headingDirection = DIRECTION.RIGHT;
+							iTween.RotateTo(gameObject, iTween.Hash ("z", 90f, "time", 0.2f));
+						}else if(iIdx - grid.m_iXcount == iTargetIdx){
+							m_headingDirection = DIRECTION.DOWN;
+							iTween.RotateTo(gameObject, iTween.Hash ("z", 0f, "time", 0.2f));
+						}else if(iIdx + grid.m_iXcount == iTargetIdx){
+							m_headingDirection = DIRECTION.UP;
+							iTween.RotateTo(gameObject, iTween.Hash ("z", 180f, "time", 0.2f));
 						}
 					}
 				}
@@ -170,7 +216,10 @@ public class Part : MonoBehaviour {
 			if(bFollowCursor && Input.GetMouseButtonUp(0))//클릭 뗏을때
 			{
 				bool bToOrigin = true;
-				
+
+				iTween.Stop();
+				transform.localRotation = Quaternion.AngleAxis (0f, Vector3.forward);
+
 				for(int i = 0 ; i < core.m_StickAvailableSeat.Count; ++i)
 				{
 					if(core.m_StickAvailableSeat[i].Equals(grid.GetGridIdx(transform.position))) // Stick!!!!!
@@ -178,26 +227,39 @@ public class Part : MonoBehaviour {
 						transform.position = grid.GetPosOfIdx(core.m_StickAvailableSeat[i]);
 						bToOrigin = false;
 						transform.parent = GameObject.Find("Core").transform;
-						transform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
+//						StartCoroutine(ResetRotation());
 						GetComponent<SpriteRenderer>().color = new Color(180/255f, 200/255f, 180/255f);
 						OriginPos = transform.position;
 
 						if(GetComponent<Enemy>() != null)
 						{
-							Destroy(GetComponent<Enemy>());
-
 							Part part = gameObject.AddComponent<Part>();
 							part.m_fHealth = 10;
 							part.m_fAttackDmg = 1;
 							part.m_bFriendly = true;
 							part.m_bAttackAvailable = true;
 							part.m_colorLine = transform.parent.GetComponent<Core>().m_colorLine;
-							part.m_headingDirection = DIRECTION.EVERYWHERE;
+							part.m_iGridIdx = core.m_StickAvailableSeat[i];
 
-							BattleSceneMgr.getInstance.StartAssembleAfter(gameObject);
+							if(m_bEdgePart)
+								part.m_headingDirection = m_headingDirection;
+							else
+								part.m_headingDirection = DIRECTION.EVERYWHERE;
+
+							part.m_bEdgePart = GetComponent<Enemy>().m_bEdgePart;
+
+							BattleSceneMgr.getInstance.StartAssembleAfter(gameObject); // part's assemble coroutine start
+							
+							Destroy(GetComponent<Enemy>());
 						}
+
 						if(bParentWasCore)
 						{
+							m_iGridIdx = core.m_StickAvailableSeat[i];
+
+							if(!m_bEdgePart)
+								m_headingDirection = DIRECTION.EVERYWHERE;
+
 							GetComponent<SpriteSheet>().CheckAround(false, iBeforeSeatIdx);
 							iBeforeSeatIdx = -1;
 							bParentWasCore = false;
@@ -220,25 +282,49 @@ public class Part : MonoBehaviour {
 
 						transform.parent.BroadcastMessage("AmI_InCoreSide");
 					}
-					
-					GetComponent<SpriteSheet>().CheckAround(false);
 
+					m_headingDirection = m_BeforeheadingDirection;
+					GetComponent<SpriteSheet>().CheckAround(false);
 				}
 				
-				core.CalculateStickableSeat ();
+				core.CalculateStickableSeat (false);
 				
 				bFollowCursor = false;
+
+				GetComponent<SpriteRenderer>().sortingLayerName = "Objects";
 			}
 			
 			yield return null;
 		}while(!bStopAssemble);
 	}
 
-	GameObject m_objAleart;
+	IEnumerator ResetRotation()
+	{
+		yield return null;
+		yield return null;
+		yield return null;
+
+		transform.localRotation = Quaternion.AngleAxis (0f, Vector3.forward);
+	}
+
+	public GameObject m_objAleart;
 	void AmI_InCoreSide()
 	{
 		int iStart = GridMgr.getInstance.GetGridIdx (transform.position);
 		int iEnd = GridMgr.getInstance.GetGridIdx (GameObject.Find("Core").transform.position);
+
+		///전부 닫혔는지 체크, 닫혔으면 느낌표
+//		bool bAllClosed = true;
+//		bool[] m_bOpenedDir = GetComponent<SpriteSheet> ().m_bOpenedDir;
+//		
+//		for(int i = 0; i < 4; ++i)
+//		{
+//			if(m_bOpenedDir[i])
+//			{
+//				bAllClosed = false;
+//				break;
+//			}
+//		}
 
 		if (!AStar.getInstance.AStarStart_CoreFind (iStart, iEnd)) {
 			if(m_objAleart == null)
@@ -249,8 +335,9 @@ public class Part : MonoBehaviour {
 			if(m_objAleart != null)
 				Destroy(m_objAleart);
 		}
-	}
 
+	}
+	
 	void DrawLine(Vector3 start, Vector3 end, Color color, float duration = 0.2f)
 	{
 		GameObject myLine = new GameObject();

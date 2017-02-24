@@ -30,11 +30,15 @@ public class SpriteSheet : MonoBehaviour {
 			GridMgr grid = GridMgr.getInstance;
 			int iTargetIdx = 0;
 			int iThisIdx = 0;
+			bool bSeatIsEmpty = false;
 
-			if(iIdx == -1)
+			if(iIdx == -1){
 				iThisIdx = grid.GetGridIdx(transform.position);
-			else
+				bSeatIsEmpty = false;
+			}else{
 				iThisIdx = iIdx;
+				bSeatIsEmpty = true;
+			}
 
 			GameObject target = null;
 
@@ -47,40 +51,71 @@ public class SpriteSheet : MonoBehaviour {
 				target = CoreTrans.GetChild(i).gameObject;
 			}
 
+			if(target == gameObject)
+				continue;
+
+			bool bEdgePart = GetComponent<Part>().m_bEdgePart;
+			DIRECTION headingDir = GetComponent<Part>().m_headingDirection;
+			Part TargetPart = target.GetComponent<Part>();
+
 			//check left
 			if(iTargetIdx == iThisIdx - 1)
 			{
-				m_bOpenedDir[0]  = true;
+				if(TargetPart.m_bEdgePart)
+					StickToMeEdgePart(target, bSeatIsEmpty, DIRECTION.LEFT);
 
-				if(!bReceiveOnly)
-					target.GetComponent<SpriteSheet>().CheckAround(true);
+				if(!(bEdgePart && !headingDir.Equals(DIRECTION.RIGHT)) && !(TargetPart.m_bEdgePart && !TargetPart.m_headingDirection.Equals(DIRECTION.LEFT)))
+				{
+					m_bOpenedDir[0]  = true;
+
+					if(!bReceiveOnly)
+						target.GetComponent<SpriteSheet>().CheckAround(true);
+				}
 			}
 
 			//check right
 			if(iTargetIdx == iThisIdx + 1)
 			{
-				m_bOpenedDir[2]  = true;
+				if(TargetPart.m_bEdgePart)
+					StickToMeEdgePart(target, bSeatIsEmpty, DIRECTION.RIGHT);
 
-				if(!bReceiveOnly)
-					target.GetComponent<SpriteSheet>().CheckAround(true);
+				if(!(bEdgePart && !headingDir.Equals(DIRECTION.LEFT)) && !(TargetPart.m_bEdgePart && !TargetPart.m_headingDirection.Equals(DIRECTION.RIGHT)))
+				{
+					m_bOpenedDir[2]  = true;
+
+					if(!bReceiveOnly)
+						target.GetComponent<SpriteSheet>().CheckAround(true);
+				}
 			}
 
 			//check upward
 			if(iTargetIdx == iThisIdx - grid.m_iXcount)
 			{
-				m_bOpenedDir[1]  = true;
+				if(TargetPart.m_bEdgePart)
+					StickToMeEdgePart(target, bSeatIsEmpty, DIRECTION.UP);
 
-				if(!bReceiveOnly)
-					target.GetComponent<SpriteSheet>().CheckAround(true);
+				if(!(bEdgePart && !headingDir.Equals(DIRECTION.DOWN)) && !(TargetPart.m_bEdgePart && !TargetPart.m_headingDirection.Equals(DIRECTION.UP)))
+				{
+					m_bOpenedDir[1]  = true;
+
+					if(!bReceiveOnly)
+						target.GetComponent<SpriteSheet>().CheckAround(true);
+				}
 			}
 
 			//check downward
 			if(iTargetIdx == iThisIdx + grid.m_iXcount)
 			{
-				m_bOpenedDir[3]  = true;
+				if(TargetPart.m_bEdgePart)
+					StickToMeEdgePart(target, bSeatIsEmpty, DIRECTION.DOWN);
 
-				if(!bReceiveOnly)
-					target.GetComponent<SpriteSheet>().CheckAround(true);
+				if(!(bEdgePart && !headingDir.Equals(DIRECTION.UP)) && !(TargetPart.m_bEdgePart && !TargetPart.m_headingDirection.Equals(DIRECTION.DOWN)))
+				{
+					m_bOpenedDir[3]  = true;
+
+					if(!bReceiveOnly)
+						target.GetComponent<SpriteSheet>().CheckAround(true);
+				}
 			}
 		}
 
@@ -88,6 +123,77 @@ public class SpriteSheet : MonoBehaviour {
 			SetSprite ();
 		else
 			SetSprite (0);
+
+	}
+
+	/// <summary>
+	/// 만약 홀로 덩그라니 떨어진 엣지 파트라면 자기에게 붙도록 하는 함수
+	/// </summary>
+	void StickToMeEdgePart(GameObject target, bool StickToSomeOneElse ,DIRECTION dir)
+	{
+		if (Input.GetMouseButtonDown (0))
+			return;
+
+		Part TargetPart = target.GetComponent<Part>();
+
+		bool bAllClosed = true;
+		for(int j = 0 ; j < 4; ++j)
+		{
+			if(target.GetComponent<SpriteSheet>().m_bOpenedDir[j])
+			{
+				bAllClosed = false;
+				break;
+			}
+		}
+		if(bAllClosed)
+		{
+			if(!StickToSomeOneElse)
+				TargetPart.m_headingDirection = dir;
+			else{
+				TargetPart.m_headingDirection = FindNewStickerDirection(target, TargetPart.m_headingDirection);
+				target.GetComponent<SpriteSheet>().CheckAround(false);
+			}
+		}
+	}
+
+	DIRECTION FindNewStickerDirection(GameObject target, DIRECTION beforDir)
+	{
+		Transform CoreTrans = GameObject.Find ("Core").transform;
+		int iTargetIdx = -1;
+		GridMgr grid = GridMgr.getInstance;
+		int iThisIdx = grid.GetGridIdx(target.transform.position);
+
+		for (int i = 0; i < CoreTrans.childCount + 1; ++i) {
+
+			if(i==CoreTrans.childCount)
+			{
+				iTargetIdx = grid.GetGridIdx(CoreTrans.position);
+			}else{
+				iTargetIdx = grid.GetGridIdx(CoreTrans.GetChild(i).position);
+			}
+
+			if(iTargetIdx == iThisIdx - 1)
+			{
+				return DIRECTION.RIGHT;
+			}
+
+			if(iTargetIdx == iThisIdx - grid.m_iXcount)
+			{
+				return DIRECTION.DOWN;
+			}
+
+			if(iTargetIdx == iThisIdx + 1)
+			{
+				return DIRECTION.LEFT;
+			}
+
+			if(iTargetIdx == iThisIdx + grid.m_iXcount)
+			{
+				return DIRECTION.UP;
+			}
+		}
+
+		return beforDir;
 	}
 
 	void SetSprite(int iIdx = -1)
