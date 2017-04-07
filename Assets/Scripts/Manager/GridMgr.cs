@@ -1,29 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GridMgr : MonoBehaviour
+public class GridMgr : Singleton<GridMgr>
 {
 
-	private static GridMgr instance;
-
-	public static GridMgr getInstance
-	{
-		get
-		{
-			if (instance == null)
-			{
-				instance = FindObjectOfType(typeof(GridMgr)) as GridMgr;
-			}
-
-			if (instance == null)
-			{
-				GameObject obj = new GameObject("GridMgr");
-				instance = obj.AddComponent(typeof(GridMgr)) as GridMgr;
-			}
-
-			return instance;
-		}
-	}
 
 	public int m_iGridIdx;
 

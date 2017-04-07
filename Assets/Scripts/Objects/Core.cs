@@ -42,29 +42,45 @@ public class Core : Part {
 					GameObject.Find ("CanMove").GetComponent<UILabel> ().text = "MOVE : " + m_MoveCount;
 				}
 
-				if (Input.GetKeyDown (KeyCode.W)) {
+				if (Input.GetKey (KeyCode.W)) {
 					if (GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position + new Vector3 (0, GridMgr.getInstance.m_fYsize))) <= m_MoveCount) {
-						transform.Translate (new Vector3 (0, GridMgr.getInstance.m_fYsize));
-						GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position), true);
-						m_iGridIdx = GridMgr.getInstance.GetGridIdx (transform.position);
+						MoveEnemies(DIRECTION.RIGHT, "y", -GridMgr.getInstance.m_fYsize);
+						MoveEnemies(DIRECTION.LEFT, "y", -GridMgr.getInstance.m_fYsize);
+						iTween.MoveTo (GameObject.Find ("glass"), iTween.Hash ("y" , GameObject.Find("glass").transform.position.y - GridMgr.getInstance.m_fYsize, "islocal", false, "time", 0.25f, "easetype", "easeOutBack"));
+//						transform.Translate (new Vector3 (0, GridMgr.getInstance.m_fYsize));
+//						GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position), true);
+//						MoveGridIdx();
+						yield return new WaitForSeconds(0.25f);
 					}
-				}else if (Input.GetKeyDown (KeyCode.S)) {
+				}else if (Input.GetKey (KeyCode.S)) {
 					if (GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position - new Vector3 (0, GridMgr.getInstance.m_fYsize))) <= m_MoveCount) {
-						transform.Translate (new Vector3 (0, -GridMgr.getInstance.m_fYsize));
-						GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position), true);
-						m_iGridIdx = GridMgr.getInstance.GetGridIdx (transform.position);
+						MoveEnemies(DIRECTION.RIGHT, "y", GridMgr.getInstance.m_fYsize);
+						MoveEnemies(DIRECTION.LEFT, "y", GridMgr.getInstance.m_fYsize);
+						iTween.MoveTo (GameObject.Find ("glass"), iTween.Hash ("y" , GameObject.Find("glass").transform.position.y + GridMgr.getInstance.m_fYsize, "islocal", false, "time", 0.25f, "easetype", "easeOutBack"));
+//						transform.Translate (new Vector3 (0, -GridMgr.getInstance.m_fYsize));
+//						GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position), true);
+//						MoveGridIdx();
+						yield return new WaitForSeconds(0.25f);
 					}
-				}else if (Input.GetKeyDown (KeyCode.A)) {
+				}else if (Input.GetKey(KeyCode.A)) {
 					if (GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position - new Vector3 (GridMgr.getInstance.m_fXsize, 0))) <= m_MoveCount) {
-						transform.Translate (new Vector3 (-GridMgr.getInstance.m_fXsize, 0));
-						GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position), true);
-						m_iGridIdx = GridMgr.getInstance.GetGridIdx (transform.position);
+						MoveEnemies(DIRECTION.UP, "x", GridMgr.getInstance.m_fXsize);
+						MoveEnemies(DIRECTION.DOWN, "x", GridMgr.getInstance.m_fXsize);
+						iTween.MoveTo (GameObject.Find ("glass"), iTween.Hash ("x" , GameObject.Find("glass").transform.position.x + GridMgr.getInstance.m_fYsize, "islocal", false, "time", 0.25f, "easetype", "easeOutBack"));
+//						transform.Translate (new Vector3 (-GridMgr.getInstance.m_fXsize, 0));easeOutBack
+//						GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position), true);
+//						MoveGridIdx();
+						yield return new WaitForSeconds(0.25f);
 					}
-				}else if (Input.GetKeyDown (KeyCode.D)) {
+				}else if (Input.GetKey(KeyCode.D)) {
 					if (GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position + new Vector3 (GridMgr.getInstance.m_fXsize, 0))) <= m_MoveCount) {
-						transform.Translate (new Vector3 (GridMgr.getInstance.m_fXsize, 0));
-						GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position), true);
-						m_iGridIdx = GridMgr.getInstance.GetGridIdx (transform.position);
+						MoveEnemies(DIRECTION.UP, "x", -GridMgr.getInstance.m_fXsize);
+						MoveEnemies(DIRECTION.DOWN, "x", -GridMgr.getInstance.m_fXsize);
+						iTween.MoveTo (GameObject.Find ("glass"), iTween.Hash ("x" , GameObject.Find("glass").transform.position.x - GridMgr.getInstance.m_fYsize, "islocal", false, "time", 0.25f, "easetype", "easeOutBack"));
+//						transform.Translate (new Vector3 (GridMgr.getInstance.m_fXsize, 0));
+//						GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position), true);
+//						MoveGridIdx();
+						yield return new WaitForSeconds(0.25f);
 					}
 				}
 			}
@@ -73,6 +89,34 @@ public class Core : Part {
 
 			yield return null;
 		};
+	}
+
+	void MoveEnemies(DIRECTION dir1, string strDir, float fDistance)
+	{
+		Transform EnemyTrans = GameObject.Find ("Enemies").transform;
+
+		for (int i = 0; i < EnemyTrans.childCount; ++i) {
+			if(3-(int)dir1 == (int)EnemyTrans.GetChild(i).GetComponent<Part>().m_headingDirection)
+			{
+//				EnemyTrans.GetChild(i).Translate(translateVal);
+				if(strDir.Equals("x"))
+					iTween.MoveTo(EnemyTrans.GetChild(i).gameObject, iTween.Hash(strDir , EnemyTrans.GetChild(i).position.x +fDistance, "islocal", false, "time", 0.25f, "easetype", "easeOutBack"));
+				else
+					iTween.MoveTo(EnemyTrans.GetChild(i).gameObject, iTween.Hash(strDir , EnemyTrans.GetChild(i).position.y +fDistance, "islocal", false, "time", 0.25f, "easetype", "easeOutBack"));
+			}
+		}
+
+	}
+
+	void MoveGridIdx()
+	{
+		GridMgr grid = GridMgr.getInstance;
+
+		for (int i = 0; i < transform.childCount; ++i) {
+			transform.GetChild(i).GetComponent<Part>().m_iGridIdx = grid.GetGridIdx(transform.GetChild(i).position);
+		}
+
+		m_iGridIdx = GridMgr.getInstance.GetGridIdx (transform.position);
 	}
 
 	int GetShortestDistance(int iStart, int iEnd, bool bWithLabel = false)

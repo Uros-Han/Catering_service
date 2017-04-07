@@ -126,6 +126,72 @@ public class SpriteSheet : MonoBehaviour {
 
 	}
 
+	public void DestroyThis()
+	{
+		Transform CoreTrans = GameObject.Find ("Core").transform;
+
+		for (int i= 0; i < CoreTrans.childCount+1; ++i) {
+			GridMgr grid = GridMgr.getInstance;
+			int iTargetIdx = 0;
+			int iThisIdx = grid.GetGridIdx(transform.position);
+			bool bSeatIsEmpty = true;
+			
+			GameObject target = null;
+			
+			if(i==CoreTrans.childCount)
+			{
+				iTargetIdx = grid.GetGridIdx(CoreTrans.position);
+				target = CoreTrans.gameObject;
+			}else{
+				iTargetIdx = grid.GetGridIdx(CoreTrans.GetChild(i).position);
+				target = CoreTrans.GetChild(i).gameObject;
+			}
+			
+			if(target == gameObject)
+				continue;
+			
+			bool bEdgePart = GetComponent<Part>().m_bEdgePart;
+			DIRECTION headingDir = GetComponent<Part>().m_headingDirection;
+			Part TargetPart = target.GetComponent<Part>();
+			
+			//check left
+			if(iTargetIdx == iThisIdx - 1)
+			{
+				
+				target.GetComponent<SpriteSheet>().m_bOpenedDir[2]  = false;
+				
+				target.GetComponent<SpriteSheet>().SetSprite(0);
+			}
+			
+			//check right
+			if(iTargetIdx == iThisIdx + 1)
+			{
+				
+				target.GetComponent<SpriteSheet>().m_bOpenedDir[0]  = false;
+				
+				target.GetComponent<SpriteSheet>().SetSprite(0);
+			}
+			
+			//check upward
+			if(iTargetIdx == iThisIdx - grid.m_iXcount)
+			{
+				
+				target.GetComponent<SpriteSheet>().m_bOpenedDir[3]  = false;
+				
+				target.GetComponent<SpriteSheet>().SetSprite(0);
+			}
+			
+			//check downward
+			if(iTargetIdx == iThisIdx + grid.m_iXcount)
+			{
+				
+				target.GetComponent<SpriteSheet>().m_bOpenedDir[1]  = false;
+				
+				target.GetComponent<SpriteSheet>().SetSprite(0);
+			}
+		}
+	}
+
 	/// <summary>
 	/// 만약 홀로 덩그라니 떨어진 엣지 파트라면 자기에게 붙도록 하는 함수
 	/// </summary>
@@ -196,7 +262,7 @@ public class SpriteSheet : MonoBehaviour {
 		return beforDir;
 	}
 
-	void SetSprite(int iIdx = -1)
+	public void SetSprite(int iIdx = -1)
 	{
 		SpriteRenderer sp = GetComponent<SpriteRenderer> ();
 

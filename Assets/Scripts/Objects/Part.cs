@@ -34,6 +34,13 @@ public class Part : MonoBehaviour {
 		}
 	}
 
+	void OnDestroy()
+	{
+		if (transform.parent.name.Equals ("Core")) {
+
+		}
+	}
+
 	public Coroutine AssembleRoutine;
 
 	public void StopAssemble()
@@ -46,26 +53,44 @@ public class Part : MonoBehaviour {
 		if (!m_bAttackAvailable || m_bDestroied)
 			return;
 
+		int iClosestIdx = -1;
+		GameObject ClosestTarget = null;
+
+		GridMgr grid = GridMgr.getInstance;
+		int iThisIdx = grid.GetGridIdx (transform.position);
+		Transform Core = GameObject.Find ("Core").transform;
+
 		if (m_bFriendly) {
 			Transform EnemyParent = GameObject.Find ("Enemies").transform;
 
 			for (int i = 0; i < EnemyParent.childCount; ++i) {
 				GameObject tmpPart = EnemyParent.GetChild (i).gameObject;
-				GridMgr grid = GridMgr.getInstance;
+				int iTargetIdx = grid.GetGridIdx (tmpPart.transform.position);
 
-				if (grid.GetGridIdx (transform.position) % grid.m_iXcount == grid.GetGridIdx (tmpPart.transform.position) % grid.m_iXcount) { //세로 일치
+				if (iThisIdx % grid.m_iXcount == iTargetIdx % grid.m_iXcount) { //세로 일치
 					if(tmpPart.GetComponent<Part>() != null)
-						StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
-				}else if(grid.GetGridIdx (transform.position) / grid.m_iXcount == grid.GetGridIdx (tmpPart.transform.position) / grid.m_iXcount){ //가로 일치
+					{
+						if(m_headingDirection == DIRECTION.UP && iThisIdx > iTargetIdx)
+							StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
+						else if(m_headingDirection == DIRECTION.DOWN && iThisIdx < iTargetIdx)
+							StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
+						else if(m_headingDirection == DIRECTION.EVERYWHERE)
+							StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
+					}
+				}else if(iThisIdx / grid.m_iXcount == iTargetIdx / grid.m_iXcount){ //가로 일치
 					if(tmpPart.GetComponent<Part>() != null)
-						StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
+					{
+						if(m_headingDirection == DIRECTION.LEFT && iThisIdx > iTargetIdx)
+							StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
+						else if(m_headingDirection == DIRECTION.RIGHT && iThisIdx < iTargetIdx)
+							StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
+						else if(m_headingDirection == DIRECTION.EVERYWHERE)
+							StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
+					}
 				}
 			}
 
 		} else {
-
-			Transform Core = GameObject.Find ("Core").transform;
-
 			for (int i = 0; i < Core.childCount + 1; ++i) {
 				
 				GameObject tmpPart;
@@ -75,17 +100,51 @@ public class Part : MonoBehaviour {
 				else
 					tmpPart = Core.GetChild (i).gameObject;
 
-				GridMgr grid = GridMgr.getInstance;
+				int iTargetIdx = grid.GetGridIdx (tmpPart.transform.position);
 
-				if (grid.GetGridIdx (transform.position) % grid.m_iXcount == grid.GetGridIdx (tmpPart.transform.position) % grid.m_iXcount) { //세로 일치
+				if (iThisIdx % grid.m_iXcount == iTargetIdx % grid.m_iXcount) { //세로 일치
 					if(tmpPart.GetComponent<Part>() != null)
-						StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
-				}else if(grid.GetGridIdx (transform.position) / grid.m_iXcount == grid.GetGridIdx (tmpPart.transform.position) / grid.m_iXcount){ //가로 일치
+					{
+						if(m_headingDirection == DIRECTION.UP)
+						{
+							if(iClosestIdx == -1 || iTargetIdx > iClosestIdx)
+							{
+								iClosestIdx = iTargetIdx;
+								ClosestTarget = tmpPart;
+							}
+						}else if(m_headingDirection == DIRECTION.DOWN)
+						{
+							if(iClosestIdx == -1 || iTargetIdx < iClosestIdx)
+							{
+								iClosestIdx = iTargetIdx;
+								ClosestTarget = tmpPart;
+							}
+						}
+					}
+				}else if(iThisIdx / grid.m_iXcount == iTargetIdx / grid.m_iXcount){ //가로 일치
 					if(tmpPart.GetComponent<Part>() != null)
-						StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
+					{
+						if(m_headingDirection == DIRECTION.LEFT)
+						{
+							if(iClosestIdx == -1 || iTargetIdx > iClosestIdx)
+							{
+								iClosestIdx = iTargetIdx;
+								ClosestTarget = tmpPart;
+							}
+						}else if(m_headingDirection == DIRECTION.RIGHT)
+						{
+							if(iClosestIdx == -1 || iTargetIdx < iClosestIdx)
+							{
+								iClosestIdx = iTargetIdx;
+								ClosestTarget = tmpPart;
+							}
+						}
+					}
 				}
 			}
 
+			if(ClosestTarget != null)
+				StartCoroutine(ClosestTarget.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
 		}
 	}
 
@@ -108,9 +167,18 @@ public class Part : MonoBehaviour {
 
 		m_fHealth -= fDamage;
 
-		if (m_fHealth <= 0f) {
-			GetComponent<SpriteRenderer> ().color = new Color (218/255f, 118/255f, 118/255f);
+		if (m_fHealth <= 0f) { //DIE
+//			GetComponent<SpriteRenderer> ().color = new Color (218/255f, 118/255f, 118/255f);
 			m_bDestroied = true;
+
+			if(transform.parent.name.Equals("Core"))
+			{
+				BattleSceneMgr.getInstance.PartDestroied();
+				Destroy(gameObject);
+				GetComponent<SpriteSheet>().DestroyThis();
+			}else{
+				Morgue.getInstance.AddBody(false, gameObject);
+			}
 		}
 	}
 
@@ -131,6 +199,8 @@ public class Part : MonoBehaviour {
 		bool bParentWasCore = false;
 		int iBeforeSeatIdx = -1;
 		bStopAssemble = false;
+		int[] morgueIdxArr = Morgue.getInstance.m_iMorgueIdxArr;
+		int curGridIdx = 0;
 		
 		GridMgr grid = GridMgr.getInstance;
 		DIRECTION m_BeforeheadingDirection = DIRECTION.EVERYWHERE;
@@ -161,11 +231,11 @@ public class Part : MonoBehaviour {
 			if(bFollowCursor && Input.GetMouseButton(0)) //클릭시 따라다니게
 			{
 				transform.position = mousePosition;
-			
+				curGridIdx = grid.GetGridIdx(transform.position);
 
 				for(int i = 0 ; i < core.m_StickAvailableSeat.Count; ++i)
 				{
-					if(core.m_StickAvailableSeat[i].Equals(grid.GetGridIdx(transform.position))) //드래그 중 붙을 수 있는 지역안에 들어옴
+					if(core.m_StickAvailableSeat[i].Equals(curGridIdx)) //드래그 중 붙을 수 있는 지역안에 들어옴
 					{
 						transform.position = grid.GetPosOfIdx(core.m_StickAvailableSeat[i]);
 
@@ -209,6 +279,14 @@ public class Part : MonoBehaviour {
 					}
 				}
 
+				for(int i = 0; i < morgueIdxArr.Length; ++i)
+				{
+					if(morgueIdxArr[i].Equals(curGridIdx) && (!Morgue.getInstance.m_bBodyArr[i] || curGridIdx.Equals(grid.GetGridIdx(OriginPos)))){ //드래그중 비어있는 시체창고 안에 들어옴
+						transform.position = grid.GetPosOfIdx(morgueIdxArr[i]);
+						iTween.RotateTo(gameObject, iTween.Hash ("z", 0f, "time", 0.2f));
+					}
+				}
+
 				if(m_objAleart != null)
 					Destroy(m_objAleart);
 			}
@@ -218,26 +296,25 @@ public class Part : MonoBehaviour {
 				bool bToOrigin = true;
 
 				iTween.Stop();
-				transform.localRotation = Quaternion.AngleAxis (0f, Vector3.forward);
 
 				for(int i = 0 ; i < core.m_StickAvailableSeat.Count; ++i)
 				{
-					if(core.m_StickAvailableSeat[i].Equals(grid.GetGridIdx(transform.position))) // Stick!!!!!
+					if(core.m_StickAvailableSeat[i].Equals(curGridIdx)) // Stick!!!!!
 					{
 						transform.position = grid.GetPosOfIdx(core.m_StickAvailableSeat[i]);
 						bToOrigin = false;
 						transform.parent = GameObject.Find("Core").transform;
 //						StartCoroutine(ResetRotation());
 						GetComponent<SpriteRenderer>().color = new Color(180/255f, 200/255f, 180/255f);
-						OriginPos = transform.position;
+						transform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
 
 						if(GetComponent<Enemy>() != null)
 						{
 							Part part = gameObject.AddComponent<Part>();
-							part.m_fHealth = 10;
-							part.m_fAttackDmg = 1;
+							part.m_fHealth = 1;
+							part.m_fAttackDmg = 0;
 							part.m_bFriendly = true;
-							part.m_bAttackAvailable = true;
+							part.m_bAttackAvailable = m_bAttackAvailable;
 							part.m_colorLine = transform.parent.GetComponent<Core>().m_colorLine;
 							part.m_iGridIdx = core.m_StickAvailableSeat[i];
 
@@ -265,23 +342,56 @@ public class Part : MonoBehaviour {
 							bParentWasCore = false;
 
 							transform.parent.BroadcastMessage("AmI_InCoreSide");
+						}else{
+							Morgue.getInstance.RemoveBody(grid.GetGridIdx(OriginPos));
 						}
 
 						GetComponent<SpriteSheet>().CheckAround(false);
+						GetComponent<SpriteRenderer>().sortingLayerName = "Objects";
 
+						OriginPos = transform.position;
+					}
+				}
+
+				for(int i = 0; i < morgueIdxArr.Length; ++i)
+				{
+					if(morgueIdxArr[i].Equals(curGridIdx) && (!Morgue.getInstance.m_bBodyArr[i] || curGridIdx.Equals(grid.GetGridIdx(OriginPos)))){ 
+						transform.position = grid.GetPosOfIdx(morgueIdxArr[i]);
+						bToOrigin = false;
+						transform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
+
+						if(!bParentWasCore)
+							Morgue.getInstance.RemoveBody(grid.GetGridIdx(OriginPos));
+						else{
+							GetComponent<SpriteSheet>().CheckAround(false, iBeforeSeatIdx);
+							iBeforeSeatIdx = -1;
+							bParentWasCore = false;
+
+							GameObject.Find("Core").BroadcastMessage("AmI_InCoreSide");
+						}
+
+						Morgue.getInstance.AddBody(true, gameObject, curGridIdx);
+
+						GetComponent<SpriteRenderer>().sortingLayerName = "DeadBodies";
+						OriginPos = transform.position;
+						transform.parent = GameObject.Find("Morgue").transform;
 					}
 				}
 				
 				if(bToOrigin)
 				{
-					transform.position = OriginPos;
+					iTween.MoveTo (gameObject, iTween.Hash ("x", OriginPos.x, "y", OriginPos.y, "islocal", false, "time", 0.05f, "easetype", "easeInSine"));
+					if(!bParentWasCore) iTween.RotateTo(gameObject, iTween.Hash ("z", 0f, "time", 0.1f));
+					yield return new WaitForSeconds(0.12f);
 
 					if(bParentWasCore)
 					{
 						transform.parent = GameObject.Find("Core").transform;
 
 						transform.parent.BroadcastMessage("AmI_InCoreSide");
-					}
+						GetComponent<SpriteRenderer>().sortingLayerName = "Objects";
+					}else
+						GetComponent<SpriteRenderer>().sortingLayerName = "DeadBodies";
 
 					m_headingDirection = m_BeforeheadingDirection;
 					GetComponent<SpriteSheet>().CheckAround(false);
@@ -291,7 +401,6 @@ public class Part : MonoBehaviour {
 				
 				bFollowCursor = false;
 
-				GetComponent<SpriteRenderer>().sortingLayerName = "Objects";
 			}
 			
 			yield return null;
@@ -305,6 +414,7 @@ public class Part : MonoBehaviour {
 		yield return null;
 
 		transform.localRotation = Quaternion.AngleAxis (0f, Vector3.forward);
+
 	}
 
 	public GameObject m_objAleart;
@@ -334,6 +444,22 @@ public class Part : MonoBehaviour {
 		} else {
 			if(m_objAleart != null)
 				Destroy(m_objAleart);
+		}
+
+	}
+
+	void DestroyPart_WhenPathBreaked()
+	{
+		int iStart = GridMgr.getInstance.GetGridIdx (transform.position);
+		int iEnd = GridMgr.getInstance.GetGridIdx (GameObject.Find("Core").transform.position);
+
+		if (!AStar.getInstance.AStarStart_CoreFind (iStart, iEnd)) {//Breaked Path
+			if(m_objAleart == null)
+				m_objAleart = ObjectFactory.getInstance.Create_Aleart (iStart);
+			else
+				m_objAleart.transform.position = transform.position;
+		} else {//CoreSide
+
 		}
 
 	}

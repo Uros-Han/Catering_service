@@ -2,28 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelGenerator : MonoBehaviour {
-
-	private static LevelGenerator instance;
-	
-	public static LevelGenerator getInstance
-	{
-		get
-		{
-			if (instance == null)
-			{
-				instance = FindObjectOfType(typeof(LevelGenerator)) as LevelGenerator;
-			}
-			
-			if (instance == null)
-			{
-				GameObject obj = new GameObject("LevelGenerator");
-				instance = obj.AddComponent(typeof(LevelGenerator)) as LevelGenerator;
-			}
-			
-			return instance;
-		}
-	}
+public class LevelGenerator : Singleton<LevelGenerator> {
 
 	VictimCrowd[] farmCrowdPool;
 

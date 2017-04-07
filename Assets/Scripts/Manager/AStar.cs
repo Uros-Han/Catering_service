@@ -4,28 +4,8 @@ using System.Collections.Generic;
 
 public enum DIR {SEQU, DAEGAK};
 
-public class AStar : MonoBehaviour
+public class AStar : Singleton<AStar>
 {
-	private static AStar instance;
-
-	public static AStar getInstance
-	{
-		get
-		{
-			if (instance == null)
-			{
-				instance = FindObjectOfType(typeof(AStar)) as AStar;
-			}
-
-			if (instance == null)
-			{
-				GameObject obj = new GameObject("AStar");
-				instance = obj.AddComponent(typeof(AStar)) as AStar;
-			}
-
-			return instance;
-		}
-	}
 
 	private int m_iStartIndex = 0;
 	private int m_iEndIndex = 0;
@@ -38,14 +18,14 @@ public class AStar : MonoBehaviour
 	private int m_iTileCountX;
 	private int m_iTileCountY;
 
-	float fClosestNodeInDest_GCost;
-	int iClosestNodeInDest_Idx;
+//	float fClosestNodeInDest_GCost;
+//	int iClosestNodeInDest_Idx;
 
-	float fStartGCost;
+//	float fStartGCost;
 
 	public int Compare(Node pDest, Node pSour)
 	{
-		return pDest.fTCost.CompareTo(pSour.fTCost);
+		return pDest.fFCost.CompareTo(pSour.fFCost);
 
 	}
 
@@ -140,7 +120,7 @@ public class AStar : MonoBehaviour
 			//    }
 			//}
 
-			m_iEndIndex = iClosestNodeInDest_Idx;
+//			m_iEndIndex = iClosestNodeInDest_Idx;
 
 			if (m_iEndIndex == m_iStartIndex)
 			{
@@ -189,12 +169,12 @@ public class AStar : MonoBehaviour
 
 		ParentNode = MakeParent();
 
-		fStartGCost = ParentNode.fGCost + 0.3f;
+//		fStartGCost = ParentNode.fGCost + 0.3f;
 
 		Node objNode = null;
 
-		fClosestNodeInDest_GCost = ParentNode.fGCost;
-		iClosestNodeInDest_Idx = m_iStartIndex;
+//		fClosestNodeInDest_GCost = ParentNode.fGCost;
+//		iClosestNodeInDest_Idx = m_iStartIndex;
 
 		while (true)
 		{
@@ -206,7 +186,7 @@ public class AStar : MonoBehaviour
 				&& CheckList(ParentNode.iIndex - m_iTileCountX))
 			{
 				objNode = CreateNode(ParentNode, ParentNode.iIndex - m_iTileCountX, (int)DIR.SEQU);
-				if (objNode.fGCost < fStartGCost)
+//				if (objNode.fGCost < fStartGCost)
 					m_OpenList.Add(objNode);
 
 			}
@@ -230,7 +210,7 @@ public class AStar : MonoBehaviour
 				&& CheckList(ParentNode.iIndex + 1))
 			{
 				objNode = CreateNode(ParentNode, ParentNode.iIndex + 1, (int)DIR.SEQU);
-				if (objNode.fGCost < fStartGCost)
+//				if (objNode.fGCost < fStartGCost)
 					m_OpenList.Add(objNode);
 
 			}
@@ -255,7 +235,7 @@ public class AStar : MonoBehaviour
 				&& CheckList(ParentNode.iIndex + m_iTileCountX))
 			{
 				objNode = CreateNode(ParentNode, ParentNode.iIndex + m_iTileCountX, (int)DIR.SEQU);
-				if (objNode.fGCost < fStartGCost)
+//				if (objNode.fGCost < fStartGCost)
 					m_OpenList.Add(objNode);
 
 			}
@@ -280,7 +260,7 @@ public class AStar : MonoBehaviour
 				&& CheckList(ParentNode.iIndex - 1))
 			{
 				objNode = CreateNode(ParentNode, ParentNode.iIndex - 1, (int)DIR.SEQU);
-				if (objNode.fGCost < fStartGCost)
+//				if (objNode.fGCost < fStartGCost)
 					m_OpenList.Add(objNode);
 
 			}
@@ -307,18 +287,18 @@ public class AStar : MonoBehaviour
 
 			m_CloseList.Add(ParentNode);
 
-			if (fClosestNodeInDest_GCost == m_CloseList[m_CloseList.Count - 1].fGCost)
-			{
-				if (GetDisCost(m_CloseList[m_CloseList.Count - 1].iIndex, m_iStartIndex) < GetDisCost(iClosestNodeInDest_Idx, m_iStartIndex))
-				{
-					fClosestNodeInDest_GCost = m_CloseList[m_CloseList.Count - 1].fGCost;
-					iClosestNodeInDest_Idx = m_CloseList[m_CloseList.Count - 1].iIndex;
-				}
-			}else if (fClosestNodeInDest_GCost > m_CloseList[m_CloseList.Count - 1].fGCost)
-			{
-				fClosestNodeInDest_GCost = m_CloseList[m_CloseList.Count - 1].fGCost;
-				iClosestNodeInDest_Idx = m_CloseList[m_CloseList.Count - 1].iIndex;
-			}
+//			if (fClosestNodeInDest_GCost == m_CloseList[m_CloseList.Count - 1].fGCost)
+//			{
+//				if (GetDisCost(m_CloseList[m_CloseList.Count - 1].iIndex, m_iStartIndex) < GetDisCost(iClosestNodeInDest_Idx, m_iStartIndex))
+//				{
+//					fClosestNodeInDest_GCost = m_CloseList[m_CloseList.Count - 1].fGCost;
+//					iClosestNodeInDest_Idx = m_CloseList[m_CloseList.Count - 1].iIndex;
+//				}
+//			}else if (fClosestNodeInDest_GCost > m_CloseList[m_CloseList.Count - 1].fGCost)
+//			{
+//				fClosestNodeInDest_GCost = m_CloseList[m_CloseList.Count - 1].fGCost;
+//				iClosestNodeInDest_Idx = m_CloseList[m_CloseList.Count - 1].iIndex;
+//			}
 
 			m_OpenList.Remove(m_OpenList[0]);
 
@@ -350,9 +330,9 @@ public class AStar : MonoBehaviour
 		else
 			fCost = 0.14f;
 
-		pNode.fPCost = fCost;
-		pNode.fGCost = GetDisCost(m_iEndIndex, iIndex);
-		pNode.fTCost = pNode.fPCost + pNode.fGCost;
+		pNode.fGCost = fCost;
+		pNode.fHCost = GetDisCost(m_iEndIndex, iIndex);
+		pNode.fFCost = pNode.fGCost + pNode.fHCost;
 
 		return pNode;
 	}
@@ -372,9 +352,9 @@ public class AStar : MonoBehaviour
 
 		objNode.iIndex = m_iStartIndex;
 		objNode.ParentNode = null;
-		objNode.fPCost = 0;
-		objNode.fGCost = GetDisCost(m_iEndIndex, m_iStartIndex);
-		objNode.fTCost = objNode.fPCost + objNode.fGCost;
+		objNode.fGCost = 0;
+		objNode.fHCost = GetDisCost(m_iEndIndex, m_iStartIndex);
+		objNode.fFCost = objNode.fGCost + objNode.fHCost;
 
 
 		m_CloseList.Add(objNode);
@@ -384,9 +364,9 @@ public class AStar : MonoBehaviour
 
 	public class Node
 	{
-		public float fPCost;
 		public float fGCost;
-		public float fTCost;
+		public float fHCost;
+		public float fFCost;
 		public Node ParentNode;
 		public int iIndex;
 	}
@@ -452,12 +432,12 @@ public class AStar : MonoBehaviour
 		
 		ParentNode = MakeParent();
 		
-		fStartGCost = ParentNode.fGCost + 0.3f;
+//		fStartGCost = ParentNode.fGCost + 0.3f;
 		
 		Node objNode = null;
 		
-		fClosestNodeInDest_GCost = ParentNode.fGCost;
-		iClosestNodeInDest_Idx = m_iStartIndex;
+//		fClosestNodeInDest_GCost = ParentNode.fGCost;
+//		iClosestNodeInDest_Idx = m_iStartIndex;
 		InitPartList ();
 
 		while (true)
@@ -470,7 +450,7 @@ public class AStar : MonoBehaviour
 			    && CheckList(ParentNode.iIndex - m_iTileCountX))
 			{
 				objNode = CreateNode(ParentNode, ParentNode.iIndex - m_iTileCountX, (int)DIR.SEQU);
-				if (objNode.fGCost < fStartGCost)
+//				if (objNode.fGCost < fStartGCost)
 					m_OpenList.Add(objNode);
 				
 			}
@@ -482,7 +462,7 @@ public class AStar : MonoBehaviour
 			    && CheckList(ParentNode.iIndex + 1))
 			{
 				objNode = CreateNode(ParentNode, ParentNode.iIndex + 1, (int)DIR.SEQU);
-				if (objNode.fGCost < fStartGCost)
+//				if (objNode.fGCost < fStartGCost)
 					m_OpenList.Add(objNode);
 				
 			}
@@ -494,7 +474,7 @@ public class AStar : MonoBehaviour
 			    && CheckList(ParentNode.iIndex + m_iTileCountX))
 			{
 				objNode = CreateNode(ParentNode, ParentNode.iIndex + m_iTileCountX, (int)DIR.SEQU);
-				if (objNode.fGCost < fStartGCost)
+//				if (objNode.fGCost < fStartGCost)
 					m_OpenList.Add(objNode);
 				
 			}
@@ -506,7 +486,7 @@ public class AStar : MonoBehaviour
 			    && CheckList(ParentNode.iIndex - 1))
 			{
 				objNode = CreateNode(ParentNode, ParentNode.iIndex - 1, (int)DIR.SEQU);
-				if (objNode.fGCost < fStartGCost)
+//				if (objNode.fGCost < fStartGCost)
 					m_OpenList.Add(objNode);
 				
 			}
@@ -520,18 +500,18 @@ public class AStar : MonoBehaviour
 			
 			m_CloseList.Add(ParentNode);
 			
-			if (fClosestNodeInDest_GCost == m_CloseList[m_CloseList.Count - 1].fGCost)
-			{
-				if (GetDisCost(m_CloseList[m_CloseList.Count - 1].iIndex, m_iStartIndex) < GetDisCost(iClosestNodeInDest_Idx, m_iStartIndex))
-				{
-					fClosestNodeInDest_GCost = m_CloseList[m_CloseList.Count - 1].fGCost;
-					iClosestNodeInDest_Idx = m_CloseList[m_CloseList.Count - 1].iIndex;
-				}
-			}else if (fClosestNodeInDest_GCost > m_CloseList[m_CloseList.Count - 1].fGCost)
-			{
-				fClosestNodeInDest_GCost = m_CloseList[m_CloseList.Count - 1].fGCost;
-				iClosestNodeInDest_Idx = m_CloseList[m_CloseList.Count - 1].iIndex;
-			}
+//			if (fClosestNodeInDest_GCost == m_CloseList[m_CloseList.Count - 1].fGCost)
+//			{
+//				if (GetDisCost(m_CloseList[m_CloseList.Count - 1].iIndex, m_iStartIndex) < GetDisCost(iClosestNodeInDest_Idx, m_iStartIndex))
+//				{
+//					fClosestNodeInDest_GCost = m_CloseList[m_CloseList.Count - 1].fGCost;
+//					iClosestNodeInDest_Idx = m_CloseList[m_CloseList.Count - 1].iIndex;
+//				}
+//			}else if (fClosestNodeInDest_GCost > m_CloseList[m_CloseList.Count - 1].fGCost)
+//			{
+//				fClosestNodeInDest_GCost = m_CloseList[m_CloseList.Count - 1].fGCost;
+//				iClosestNodeInDest_Idx = m_CloseList[m_CloseList.Count - 1].iIndex;
+//			}
 			
 			m_OpenList.Remove(m_OpenList[0]);
 			

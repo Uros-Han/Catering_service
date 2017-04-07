@@ -187,6 +187,7 @@
      <Compile Include="Assets\NGUI\Scripts\UI\UITooltip.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UIViewport.cs" />
      <Compile Include="Assets\Scripts\Header\Enum.cs" />
+     <Compile Include="Assets\Scripts\Header\Singleton.cs" />
      <Compile Include="Assets\Scripts\Manager\AStar.cs" />
      <Compile Include="Assets\Scripts\Manager\BattleSceneMgr.cs" />
      <Compile Include="Assets\Scripts\Manager\DebugLine.cs" />
@@ -196,6 +197,7 @@
      <Compile Include="Assets\Scripts\Manager\ObjectFactory.cs" />
      <Compile Include="Assets\Scripts\Objects\Core.cs" />
      <Compile Include="Assets\Scripts\Objects\Enemy.cs" />
+     <Compile Include="Assets\Scripts\Objects\Morgue.cs" />
      <Compile Include="Assets\Scripts\Objects\Part.cs" />
      <Compile Include="Assets\Scripts\Objects\SpriteSheet.cs" />
      <Compile Include="Assets\Scripts\UI\TurnState.cs" />

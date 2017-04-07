@@ -2,28 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleSceneMgr : MonoBehaviour {
+public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 
-	private static BattleSceneMgr instance;
-
-	public static BattleSceneMgr getInstance
-	{
-		get
-		{
-			if (instance == null)
-			{
-				instance = FindObjectOfType(typeof(BattleSceneMgr)) as BattleSceneMgr;
-			}
-
-			if (instance == null)
-			{
-				GameObject obj = new GameObject("BattleSceneMgr");
-				instance = obj.AddComponent(typeof(BattleSceneMgr)) as BattleSceneMgr;
-			}
-
-			return instance;
-		}
-	}
 
 	// Use this for initialization
 	void Start () {
@@ -68,9 +48,18 @@ public class BattleSceneMgr : MonoBehaviour {
 		yield return new WaitForSeconds (1.5f);
 
 		if (EnemyEliminatedCheck ()) {
+			yield return new WaitForSeconds(Morgue.getInstance.m_fBodyMoveTime + 0.25f);
+			iTween.ValueTo(Camera.main.gameObject, iTween.Hash ("from", Camera.main.orthographicSize, "to", 1f, "time", 1f, "easetype", "easeInOutBack", "onupdate", "UpdateOrthographicCameraSize",
+			                                                    "onupdatetarget", gameObject));
+			yield return new WaitForSeconds(1f);
+			iTween.MoveTo (GameObject.Find ("Morgue"), iTween.Hash ("y" , -0.72f, "islocal", false, "time", 0.35f, "easetype", "easeOutBack"));
+
+			yield return new WaitForSeconds(0.4f);
+
 			GameMgr.getInstance.m_turnState = TURN_STATE.ASSEMBLE;
-			GameObject.Find ("Enemies").BroadcastMessage ("Assemble", null, SendMessageOptions.DontRequireReceiver);
+			GameObject.Find ("Morgue").BroadcastMessage ("Assemble", null, SendMessageOptions.DontRequireReceiver);
 			GameObject.Find ("Core").BroadcastMessage ("Assemble", null, SendMessageOptions.DontRequireReceiver);
+//			GameObject.Find ("Core").transform.position = new Vector2(0,0);
 
 			GameObject.Find ("StopAssembleButton").GetComponent<UIPanel>().alpha = 1;
 //			StartCoroutine(CheckAssembleIsDone());
@@ -83,6 +72,10 @@ public class BattleSceneMgr : MonoBehaviour {
 
 			StartCoroutine (EnemyAttackTurn ());
 		}
+	}
+	
+	void UpdateOrthographicCameraSize (float size) {
+		Camera.main.orthographicSize = size;
 	}
 
 	IEnumerator EnemyAttackTurn()
@@ -129,10 +122,23 @@ public class BattleSceneMgr : MonoBehaviour {
 
 	public void StopAssemble()
 	{
-		GameObject.Find ("StopAssembleButton").GetComponent<UIPanel> ().alpha = 0;
+		StartCoroutine (StopAssemble_Coroutine ());
+	}
 
+	IEnumerator StopAssemble_Coroutine()
+	{
+		iTween.MoveTo (GameObject.Find ("Morgue"), iTween.Hash ("y" , -1.36f, "islocal", false, "time", 0.35f, "easetype", "easeOutBack"));
+		yield return new WaitForSeconds(0.4f);
+
+		iTween.ValueTo(Camera.main.gameObject, iTween.Hash ("from", Camera.main.orthographicSize, "to", 1.57f, "time", 1f, "easetype", "easeInOutBack", "onupdate", "UpdateOrthographicCameraSize",
+		                                                    "onupdatetarget", gameObject));
+		yield return new WaitForSeconds(1f);
+
+		GameObject.Find ("StopAssembleButton").GetComponent<UIPanel> ().alpha = 0;
+		
 		EnemyGenerate ();
 		GameObject.Find("Core").BroadcastMessage("StopAssemble");
+
 		StartCoroutine (UserMove (true));
 	}
 
@@ -147,5 +153,19 @@ public class BattleSceneMgr : MonoBehaviour {
 
 		if(obj.GetComponent<Part> ().AssembleRoutine == null)
 			obj.GetComponent<Part> ().AssembleRoutine = StartCoroutine (obj.GetComponent<Part> ().Assemble ());
+	}
+
+	public void PartDestroied()
+	{
+		StartCoroutine (PartDestroied_Coroutine());
+	}
+
+	IEnumerator PartDestroied_Coroutine()
+	{
+		yield return null;
+		yield return null;
+
+//		GameObject.Find("Core").BroadcastMessage("AmI_InCoreSide");
+		GameObject.Find("Core").BroadcastMessage("DestroyPart_WhenPathBreaked");
 	}
 }

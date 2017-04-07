@@ -2,36 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectFactory : MonoBehaviour {
+public class ObjectFactory : Singleton<ObjectFactory> {
 
-	private static ObjectFactory instance;
-	
-	public static ObjectFactory getInstance
-	{
-		get
-		{
-			if (instance == null)
-			{
-				instance = FindObjectOfType(typeof(ObjectFactory)) as ObjectFactory;
-			}
-			
-			if (instance == null)
-			{
-				GameObject obj = new GameObject("ObjectFactory");
-				instance = obj.AddComponent(typeof(ObjectFactory)) as ObjectFactory;
-			}
-			
-			return instance;
-		}
-	}
 
-	void Awake () {
-		if (instance == null)
-			instance = this;
-		
-		else if (instance != this)
-			Destroy(gameObject);
-		
+	void Awake () {		
 		DontDestroyOnLoad(gameObject);
 	}
 	GameObject m_objAleart;

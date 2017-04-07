@@ -61,8 +61,10 @@ public class Enemy : Part {
 				{
 					if(isSeatOccupied(iThisGrid + 1)) // Occupied
 					{
+
 					}else{ // empty
-						transform.position = new Vector2(transform.position.x + GridMgr.getInstance.m_fYsize , transform.position.y);
+//						transform.position = new Vector2(transform.position.x + GridMgr.getInstance.m_fYsize , transform.position.y);
+						iTween.MoveTo(gameObject, iTween.Hash ("x" , transform.position.x + GridMgr.getInstance.m_fXsize, "islocal", false, "time", 0.25f, "easetype", "easeOutBack"));
 						m_bFindedSeat = true;
 					}
 				}else if(iCoreGrid%grid.m_iXcount < iThisGrid%grid.m_iXcount) // core is my left side
@@ -70,8 +72,11 @@ public class Enemy : Part {
 					if(isSeatOccupied(iThisGrid - 1)) // Occupied
 					{
 					}else{ // empty
-						transform.position = new Vector2(transform.position.x - GridMgr.getInstance.m_fYsize , transform.position.y);
+//						transform.position = new Vector2(transform.position.x - GridMgr.getInstance.m_fYsize , transform.position.y);
+						iTween.MoveTo(gameObject, iTween.Hash ("x" , transform.position.x - GridMgr.getInstance.m_fXsize, "islocal", false, "time", 0.25f, "easetype", "easeOutBack"));
 						m_bFindedSeat = true;
+						//Done to here below here is OT
+
 					}
 				}
 			}
@@ -83,7 +88,8 @@ public class Enemy : Part {
 					if(isSeatOccupied(iThisGrid + grid.m_iXcount)) // Occupied
 					{
 					}else{ // empty
-						transform.position = new Vector2(transform.position.x, transform.position.y -GridMgr.getInstance.m_fYsize );
+//						transform.position = new Vector2(transform.position.x, transform.position.y -GridMgr.getInstance.m_fYsize );
+						iTween.MoveTo(gameObject, iTween.Hash ("y" , transform.position.y - GridMgr.getInstance.m_fYsize, "islocal", false, "time", 0.25f, "easetype", "easeOutBack"));
 						m_bFindedSeat = true;
 					}
 				}else if(iCoreGrid/grid.m_iXcount < iThisGrid/grid.m_iXcount) // core is my up side
@@ -91,7 +97,8 @@ public class Enemy : Part {
 					if(isSeatOccupied(iThisGrid - grid.m_iXcount)) // Occupied
 					{
 					}else{ // empty
-						transform.position = new Vector2(transform.position.x, transform.position.y + GridMgr.getInstance.m_fYsize );
+//						transform.position = new Vector2(transform.position.x, transform.position.y + GridMgr.getInstance.m_fYsize );
+						iTween.MoveTo(gameObject, iTween.Hash ("y" , transform.position.y + GridMgr.getInstance.m_fYsize, "islocal", false, "time", 0.25f, "easetype", "easeOutBack"));
 						m_bFindedSeat = true;
 					}
 				}
