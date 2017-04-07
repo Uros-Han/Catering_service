@@ -48,6 +48,7 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 		yield return new WaitForSeconds (1.5f);
 
 		if (EnemyEliminatedCheck ()) {
+			GameObject.Find("AssembleCurtains").BroadcastMessage("CurtainOn");
 			yield return new WaitForSeconds(Morgue.getInstance.m_fBodyMoveTime + 0.25f);
 			iTween.ValueTo(Camera.main.gameObject, iTween.Hash ("from", Camera.main.orthographicSize, "to", 1f, "time", 1f, "easetype", "easeInOutBack", "onupdate", "UpdateOrthographicCameraSize",
 			                                                    "onupdatetarget", gameObject));
@@ -132,6 +133,7 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 
 		iTween.ValueTo(Camera.main.gameObject, iTween.Hash ("from", Camera.main.orthographicSize, "to", 1.57f, "time", 1f, "easetype", "easeInOutBack", "onupdate", "UpdateOrthographicCameraSize",
 		                                                    "onupdatetarget", gameObject));
+		GameObject.Find("AssembleCurtains").BroadcastMessage("CurtainOff");
 		yield return new WaitForSeconds(1f);
 
 		GameObject.Find ("StopAssembleButton").GetComponent<UIPanel> ().alpha = 0;
