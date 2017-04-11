@@ -10,10 +10,10 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	}
 	GameObject m_objAleart;
 	GameObject m_objStickableDot;
-	GameObject m_objPig;
+	GameObject m_objCattle;
 	GameObject m_objWolf;
 
-	public Sprite[] m_sheet_pig;
+	public Sprite[][] m_sheet_cattle;
 	public Sprite[] m_sheet_core;
 	public Sprite[] m_sheet_wolf;
 
@@ -21,10 +21,13 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	public void ResourcesLoad () {
 		m_objAleart = Resources.Load ("Prefabs/Objects/Aleart") as GameObject;
 		m_objStickableDot = Resources.Load ("Prefabs/Objects/StickableDot") as GameObject;
-		m_objPig = Resources.Load ("Prefabs/Objects/Parts/Pig") as GameObject;
+		m_objCattle = Resources.Load ("Prefabs/Objects/Parts/Cattle") as GameObject;
 		m_objWolf = Resources.Load ("Prefabs/Objects/Parts/Wolf") as GameObject;
 
-		m_sheet_pig = Resources.LoadAll<Sprite>("Sprites/Sheets/sheet_pig");
+		m_sheet_cattle = new Sprite[4][];
+		for(int i = 0; i < 4; ++i)
+			m_sheet_cattle[i] = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/sheet_cattle_{0}",i));
+
 		m_sheet_core = Resources.LoadAll<Sprite>("Sprites/Sheets/sheet_core");
 		m_sheet_wolf = Resources.LoadAll<Sprite>("Sprites/Sheets/sheet_wolf");
 	}
@@ -50,9 +53,9 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		return obj;
 	}
 
-	public GameObject Create_Pig(DIRECTION dir)
+	public GameObject Create_Cattle(DIRECTION dir)
 	{
-		GameObject obj = Instantiate (m_objPig) as GameObject;
+		GameObject obj = Instantiate (m_objCattle) as GameObject;
 		obj.transform.parent = GameObject.Find("Enemies").transform;
 
 		obj.GetComponent<Enemy> ().m_headingDirection = dir;

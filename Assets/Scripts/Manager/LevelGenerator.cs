@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,10 +14,10 @@ public class LevelGenerator : Singleton<LevelGenerator> {
 	void LevelPool()
 	{
 		farmCrowdPool = new VictimCrowd[]{ 
-			new VictimCrowd (AREA_STATE.FARM, 1, new VICTIM[] { VICTIM.PIG }),
-			new VictimCrowd (AREA_STATE.FARM, 1, new VICTIM[] { VICTIM.PIG, VICTIM.PIG }),
+			new VictimCrowd (AREA_STATE.FARM, 1, new VICTIM[] { VICTIM.CATTLE }),
+			new VictimCrowd (AREA_STATE.FARM, 1, new VICTIM[] { VICTIM.CATTLE, VICTIM.CATTLE }),
 			new VictimCrowd (AREA_STATE.FARM, 1, new VICTIM[] { VICTIM.WOLF }),
-			new VictimCrowd (AREA_STATE.FARM, 1, new VICTIM[] { VICTIM.WOLF, VICTIM.PIG }),
+			new VictimCrowd (AREA_STATE.FARM, 1, new VICTIM[] { VICTIM.WOLF, VICTIM.CATTLE }),
 			new VictimCrowd (AREA_STATE.FARM, 1, new VICTIM[] { VICTIM.WOLF, VICTIM.WOLF })
 		};
 		
@@ -96,8 +96,8 @@ public class LevelGenerator : Singleton<LevelGenerator> {
 
 			switch(victimArr[i])
 			{
-			case VICTIM.PIG:
-				objVictim = ObjectFactory.getInstance.Create_Pig(headingDir);
+			case VICTIM.CATTLE:
+				objVictim = ObjectFactory.getInstance.Create_Cattle(headingDir);
 				break;
 
 			case VICTIM.WOLF:

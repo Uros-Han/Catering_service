@@ -11,10 +11,12 @@ public class SpriteSheet : MonoBehaviour {
 
 		if(gameObject.name.Contains("Core"))
 			m_sheet_sprite = ObjectFactory.getInstance.m_sheet_core;
-		else if(gameObject.name.Contains("Pig"))
-			m_sheet_sprite = ObjectFactory.getInstance.m_sheet_pig;
+		else if(gameObject.name.Contains("Cattle"))
+			m_sheet_sprite = ObjectFactory.getInstance.m_sheet_cattle[Random.Range(0,4)];
 		else if(gameObject.name.Contains("Wolf"))
 			m_sheet_sprite = ObjectFactory.getInstance.m_sheet_wolf;
+
+		GetComponent<SpriteRenderer> ().sprite = m_sheet_sprite [0];
 	}
 
 	public bool[] m_bOpenedDir; // Direction (0-Left, 1-Up, 2-Right, 3-Down) 해당 인접 방향에 물체가 존재하면 참, 없으면 거짓
