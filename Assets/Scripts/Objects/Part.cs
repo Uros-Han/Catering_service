@@ -350,6 +350,9 @@ public class Part : MonoBehaviour {
 						GetComponent<SpriteRenderer>().sortingLayerName = "Objects";
 
 						OriginPos = transform.position;
+
+						GetComponent<SpriteParticleEmitter.DynamicEmitter>().enabled = true;
+						GetComponent<SpriteRenderer>().enabled = false;
 					}
 				}
 

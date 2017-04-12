@@ -1,20 +1,11 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Objects/AssembleCurtain.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Objects/Part.cs">
     <Files>
-      <File FileName="Assets/Scripts/Manager/BattleSceneMgr.cs" Line="136" Column="67" />
-      <File FileName="Assets/Scripts/Objects/Part.cs" Line="364" Column="63" />
-      <File FileName="Assets/Scripts/Objects/SpriteSheet.cs" Line="129" Column="2" />
-      <File FileName="Assets/Scripts/Objects/Morgue.cs" Line="45" Column="20" />
-      <File FileName="Assets/Scripts/Manager/AStar.cs" Line="7" Column="32" />
-      <File FileName="Assets/Scripts/Manager/DebugLine.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Manager/GameMgr.cs" Line="16" Column="1" />
-      <File FileName="Assets/Scripts/Manager/GridMgr.cs" Line="4" Column="42" />
-      <File FileName="Assets/Scripts/Manager/LevelGenerator.cs" Line="5" Column="58" />
-      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="5" Column="54" />
-      <File FileName="Assets/Scripts/Objects/Core.cs" Line="49" Column="7" />
-      <File FileName="Assets/Scripts/Objects/Enemy.cs" Line="101" Column="162" />
-      <File FileName="Assets/Scripts/Objects/AssembleCurtain.cs" Line="41" Column="75" />
+      <File FileName="Assets/Scripts/Objects/Core.cs" Line="78" Column="54" />
+      <File FileName="Assets/Scripts/UI/ControlTap.cs" Line="32" Column="32" />
+      <File FileName="Assets/Scripts/Objects/Part.cs" Line="354" Column="28" />
+      <File FileName="Assets/SpriteParticleEmitter/Code/DynamicEmitter.cs" Line="12" Column="28" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

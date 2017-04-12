@@ -5,6 +5,7 @@ using UnityEngine;
 public class Core : Part {
 
 	public int m_MoveCount = 1;
+	public bool[] m_bControl;
 
 	// Use this for initialization
 	void Start () {
@@ -13,6 +14,8 @@ public class Core : Part {
 		m_bAttackAvailable = true;
 		m_bFriendly = true;
 		m_StickAvailableSeat = new List<int> ();
+
+		m_bControl = new bool[4];
 	}
 
 	void OnDestroy()
@@ -23,7 +26,7 @@ public class Core : Part {
 	TURN_STATE m_beforeState;
 	int m_iCoreIdx;
 	public List<int> m_StickAvailableSeat;
-
+	
 	IEnumerator UserControl()
 	{
 		GameMgr gMgr = GameMgr.getInstance;
@@ -42,7 +45,7 @@ public class Core : Part {
 					GameObject.Find ("CanMove").GetComponent<UILabel> ().text = "MOVE : " + m_MoveCount;
 				}
 
-				if (Input.GetKey (KeyCode.W)) {
+				if (Input.GetKey (KeyCode.W) || m_bControl[1]) {
 					if (GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position + new Vector3 (0, GridMgr.getInstance.m_fYsize))) <= m_MoveCount) {
 						MoveEnemies(DIRECTION.RIGHT, "y", -GridMgr.getInstance.m_fYsize);
 						MoveEnemies(DIRECTION.LEFT, "y", -GridMgr.getInstance.m_fYsize);
@@ -52,7 +55,7 @@ public class Core : Part {
 //						MoveGridIdx();
 						yield return new WaitForSeconds(0.25f);
 					}
-				}else if (Input.GetKey (KeyCode.S)) {
+				}else if (Input.GetKey (KeyCode.S) || m_bControl[3]) {
 					if (GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position - new Vector3 (0, GridMgr.getInstance.m_fYsize))) <= m_MoveCount) {
 						MoveEnemies(DIRECTION.RIGHT, "y", GridMgr.getInstance.m_fYsize);
 						MoveEnemies(DIRECTION.LEFT, "y", GridMgr.getInstance.m_fYsize);
@@ -62,7 +65,7 @@ public class Core : Part {
 //						MoveGridIdx();
 						yield return new WaitForSeconds(0.25f);
 					}
-				}else if (Input.GetKey(KeyCode.A)) {
+				}else if (Input.GetKey(KeyCode.A) || m_bControl[0]) {
 					if (GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position - new Vector3 (GridMgr.getInstance.m_fXsize, 0))) <= m_MoveCount) {
 						MoveEnemies(DIRECTION.UP, "x", GridMgr.getInstance.m_fXsize);
 						MoveEnemies(DIRECTION.DOWN, "x", GridMgr.getInstance.m_fXsize);
@@ -72,7 +75,7 @@ public class Core : Part {
 //						MoveGridIdx();
 						yield return new WaitForSeconds(0.25f);
 					}
-				}else if (Input.GetKey(KeyCode.D)) {
+				}else if (Input.GetKey(KeyCode.D) || m_bControl[2]) {
 					if (GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position + new Vector3 (GridMgr.getInstance.m_fXsize, 0))) <= m_MoveCount) {
 						MoveEnemies(DIRECTION.UP, "x", -GridMgr.getInstance.m_fXsize);
 						MoveEnemies(DIRECTION.DOWN, "x", -GridMgr.getInstance.m_fXsize);
