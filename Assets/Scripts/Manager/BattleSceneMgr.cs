@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Com.LuisPedroFonseca.ProCamera2D;
 
 public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 
@@ -13,7 +14,7 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 
 	void EnemyGenerate()
 	{
-		LevelGenerator.getInstance.Encount (AREA_STATE.FARM, 2);
+//		LevelGenerator.getInstance.Encount (AREA_STATE.FARM, 2);
 	}
 	
 	IEnumerator UserMove(bool isBattleFirst = false)
@@ -95,8 +96,8 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 		Transform EnemyParent = GameObject.Find ("Enemies").transform;
 
 		for (int i = 0; i < EnemyParent.childCount; ++i) {
-			if(!EnemyParent.GetChild(i).GetComponent<Enemy>().m_bDestroied)
-				return false;
+//			if(!EnemyParent.GetChild(i).GetComponent<Enemy>().m_bDestroied)
+//				return false;
 		}
 
 		return true;
@@ -169,5 +170,69 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 
 //		GameObject.Find("Core").BroadcastMessage("AmI_InCoreSide");
 		GameObject.Find("Core").BroadcastMessage("DestroyPart_WhenPathBreaked");
+	}
+
+	public void OnField(GameObject target)
+	{
+		StartCoroutine (target.GetComponent<Part>().OnField());
+	}
+
+	bool bMorgueOn = false;
+	public void ToggleMorge()
+	{
+		Transform morgueTrans = GameObject.Find("Morgue").transform;
+		float fMovedCamXPos = Camera.main.transform.position.x + 1.7f;
+		float fOringXPos = 0f;
+		GameObject grids = GameObject.Find("Grids").gameObject;
+
+		if (!bMorgueOn) {
+			GameObject.Find ("Core").transform.position = new Vector3(0,0);
+			GameObject.Find ("Core").GetComponent<Part>().m_iGridIdx = GridMgr.getInstance.GetGridIdx(new Vector2(0,0));
+
+			GameObject.Find ("Morgue").BroadcastMessage ("Assemble", null, SendMessageOptions.DontRequireReceiver);
+			GameObject.Find ("Core").BroadcastMessage ("Assemble", null, SendMessageOptions.DontRequireReceiver);
+
+			StartCoroutine(GameObject.Find("glass").GetComponent<Glass>().ToggleColor(true));
+	
+			for(int i = 0 ; i < grids.transform.childCount; ++i)
+			{
+				grids.transform.GetChild(i).gameObject.SetActive(true);
+				StartCoroutine(grids.transform.GetChild(i).GetComponent<DebugLine>().AlphToggle(true));
+			}
+			StartCoroutine(CamOffset_XChg(true));
+			iTween.MoveTo (morgueTrans.gameObject, iTween.Hash ("x",  0.5f, "time", 0.25f, "easetype", "easeInSine", "islocal", true));
+			bMorgueOn = true;
+		} else {
+			StartCoroutine(GameObject.Find("glass").GetComponent<Glass>().ToggleColor(false));
+			
+			for(int i = 0 ; i < grids.transform.childCount; ++i)
+			{
+				grids.transform.GetChild(i).gameObject.SetActive(true);
+				StartCoroutine(grids.transform.GetChild(i).GetComponent<DebugLine>().AlphToggle(false));
+			}
+			StartCoroutine(CamOffset_XChg(false));
+			iTween.MoveTo (morgueTrans.gameObject, iTween.Hash ("x", 1.5f, "time", 0.25f, "easetype", "easeInSine","islocal", true));
+			bMorgueOn = false;
+		}
+	}
+
+	IEnumerator CamOffset_XChg(bool bMorgueOn)
+	{
+		if(bMorgueOn)
+		{
+			do{
+				ProCamera2D.Instance.OffsetX += 0.04f;
+				yield return null;
+			}while(ProCamera2D.Instance.OffsetX < 0.5f);
+
+			ProCamera2D.Instance.OffsetX = 0.5f;
+		}else{
+			do{
+				ProCamera2D.Instance.OffsetX -= 0.04f;
+				yield return null;
+			}while(ProCamera2D.Instance.OffsetX > 0f);
+
+			ProCamera2D.Instance.OffsetX = 0f;
+		}
 	}
 }

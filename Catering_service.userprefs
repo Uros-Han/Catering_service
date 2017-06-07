@@ -1,13 +1,6 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Objects/Part.cs">
-    <Files>
-      <File FileName="Assets/Scripts/Objects/Core.cs" Line="78" Column="54" />
-      <File FileName="Assets/Scripts/UI/ControlTap.cs" Line="32" Column="32" />
-      <File FileName="Assets/Scripts/Objects/Part.cs" Line="354" Column="28" />
-      <File FileName="Assets/SpriteParticleEmitter/Code/DynamicEmitter.cs" Line="12" Column="28" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

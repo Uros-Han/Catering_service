@@ -50,28 +50,7 @@ public class GridMgr : Singleton<GridMgr>
 			else
 				tmpLine.GetComponent<DebugLine>().Init(new Vector3(0, fStartYPos - ( (i-m_iXcount) * m_fYsize)),false,m_fXsize,m_iXcount,m_iYcount);
 
-//			//바닥라인 (플로어생기는 칸) 초록색으로
-//			if(i == m_iXcount+m_iYcount+1 || i == m_iXcount+m_iYcount)
-//				tmpLine.GetComponent<SpriteRenderer>().color = Color.green;
-//
-//			switch(i)
-//			{
-//			case 25:
-//				tmpLine.GetComponent<SpriteRenderer>().color = Color.red;
-//				break;
-//			case 50:
-//				tmpLine.GetComponent<SpriteRenderer>().color = Color.yellow;
-//				break;
-//			case 75:
-//				tmpLine.GetComponent<SpriteRenderer>().color = Color.blue;
-//				break;
-//			case 100:
-//				tmpLine.GetComponent<SpriteRenderer>().color = Color.yellow;
-//				break;
-//			case 125:
-//				tmpLine.GetComponent<SpriteRenderer>().color = Color.red;
-//				break;
-//			}
+			tmpLine.SetActive(false);
 
 			iTmpCounter += 1;
 		}

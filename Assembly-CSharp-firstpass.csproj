@@ -54,18 +54,15 @@
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\NGUI\ReadMe - 3.10.2.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked 1.shader" />
-     <None Include="Assets\2DDL\2DLight\Shaders\StencilObject.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
      <None Include="Assets\SpriteParticleEmitter\UI Particles Shaders\UI Particle Premultiply Blend.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 2.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked 2.shader" />
      <None Include="Assets\NGUI\Examples\Models\Orc\Orc Skin.shader" />
-     <None Include="Assets\2DDL\2DLight\Shaders\DefaultTexturized.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo20.txt" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\ShowAlphaChannel.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo14.txt" />
-     <None Include="Assets\2DDL\Bugs\READ FIRST.txt" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\SunShaftsComposite.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 1.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored (TextureClip).shader" />
@@ -81,8 +78,6 @@
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo18.txt" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\VignetteShader.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\DepthOfFieldScatter.shader" />
-     <None Include="Assets\2DDL\2DLight\Shaders\RadialGradientAlphaBlend.shader" />
-     <None Include="Assets\2DDL\2DLight\Shaders\DepthMask.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\MotionBlur.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBloom.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\MinMaxReduction.shader" />
@@ -92,7 +87,6 @@
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\RadialBlur.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Header.txt" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\DepthOfFieldDX11.shader" />
-     <None Include="Assets\2DDL\2DLight\Shaders\CGTexturizing.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\ContrastComposite.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset3.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\FisheyeShader.shader" />
@@ -105,11 +99,11 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored 3.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Normal.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 2.shader" />
-     <None Include="Assets\2DDL\2DLight\Shaders\OffsetShader.shader" />
      <None Include="Assets\SpriteParticleEmitter\UI Particles Shaders\UI Particle MultiplyDouble.shader" />
      <None Include="Assets\SpriteParticleEmitter\Demo\Others\Shaders\PriorityParticleAlpha.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\DepthOfField34.shader" />
      <None Include="Assets\SpriteParticleEmitter\UI Particles Shaders\UI Particle VertexLit Blended.shader" />
+     <None Include="Assets\ProCamera2D\Code\Helpers\TransitionFX\Resources\PC2D_Circle.shader" />
      <None Include="Assets\SpriteParticleEmitter\UI Particles Shaders\UI Particle AddSmooth.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 3.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 2.shader" />
@@ -118,36 +112,40 @@
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\ConvertDepth.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionCurvesSimple.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderYUV.shader" />
+     <None Include="Assets\ProCamera2D\Code\Helpers\TransitionFX\Resources\PC2D_Wipe.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\CreaseApply.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 1.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 1.shader" />
      <None Include="Assets\SpriteParticleEmitter\UI Particles Shaders\UI Particle Alpha Blend.shader" />
      <None Include="Assets\SpriteParticleEmitter\UI Particles Shaders\UI Particle AddMultiply.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\ChromaticAberrationShader.shader" />
+     <None Include="Assets\ProCamera2D\Code\Helpers\TransitionFX\Resources\PC2D_Texture.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\GlobalFog.shader" />
      <None Include="Assets\SpriteParticleEmitter\Demo\Others\Shaders\PriorityParticleAddSoft.shader" />
      <None Include="Assets\SpriteParticleEmitter\UI Particles Shaders\UI Particle Blend.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Luminance.shader" />
      <None Include="Assets\SpriteParticleEmitter\Demo\Static Sprite Examples\Art\GlassStainedBumpDistortFede.shader" />
+     <None Include="Assets\ProCamera2D\Code\Helpers\TransitionFX\Resources\PC2D_Blinds.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionSelective.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\Bokeh34.shader" />
-     <None Include="Assets\2DDL\2DLight\Shaders\StencilMask.shader" />
+     <None Include="Assets\ProCamera2D\Code\Helpers\Letterbox\Resources\Letterbox.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\CameraMotionBlurDX11.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\SeparableBlurPlus.shader" />
-     <None Include="Assets\2DDL\2DLight\Shaders\VertexColor.shader" />
      <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MultiPassHollywoodFlares.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\BlurEffectConeTaps.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\CameraMotionBlur.shader" />
+     <None Include="Assets\ProCamera2D\README.txt" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\DLAA.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\NoiseAndGrainDX11.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 3.shader" />
+     <None Include="Assets\ProCamera2D\Code\Helpers\TransitionFX\Resources\PC2D_Shutters.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BrightPassFilter2.shader" />
-     <None Include="Assets\2DDL\2DLight\Shaders\Gradient-ZFighting.shader" />
+     <None Include="Assets\ProCamera2D\TransitionFX Textures\README.txt" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableBlur.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\MotionBlurClear.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionEffect.shader" />
@@ -176,15 +174,13 @@
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Normal.txt" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\SimpleClear.shader" />
      <None Include="Assets\SpriteParticleEmitter\Demo\Others\Shaders\PriorityParticleAdd.shader" />
+     <None Include="Assets\ProCamera2D\Code\Helpers\TransitionFX\Resources\PC2D_Fade.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAA3Console.shader" />
      <None Include="Assets\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
      <None Include="Assets\NGUI\Examples\Resources\Localization.txt" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset2.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendForBloom.shader" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -199,9 +195,6 @@
  </Reference>
  <Reference Include="UnityEngine.HoloLens">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Purchasing">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityPurchasing/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.VR">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>

@@ -7,8 +7,8 @@ public class Part : MonoBehaviour {
 	public float m_fHealth; // Health
 	public bool m_bAttackAvailable; //Can hit enemy?
 	public float m_fAttackDmg; //Damage
-	public bool m_bFriendly; //아군?
-	public Color m_colorLine; //공격 이펙트 줄 색
+//	public bool m_bFriendly; //아군?
+//	public Color m_colorLine; //공격 이펙트 줄 색
 	public bool m_bDestroied;
 	public bool m_bEdgePart;
 	public int m_iGridIdx;
@@ -60,125 +60,154 @@ public class Part : MonoBehaviour {
 		int iThisIdx = grid.GetGridIdx (transform.position);
 		Transform Core = GameObject.Find ("Core").transform;
 
-		if (m_bFriendly) {
-			Transform EnemyParent = GameObject.Find ("Enemies").transform;
+//		if (m_bFriendly) {
+//			Transform EnemyParent = GameObject.Find ("Enemies").transform;
+//
+//			for (int i = 0; i < EnemyParent.childCount; ++i) {
+//				GameObject tmpPart = EnemyParent.GetChild (i).gameObject;
+//				int iTargetIdx = grid.GetGridIdx (tmpPart.transform.position);
+//
+//				if (iThisIdx % grid.m_iXcount == iTargetIdx % grid.m_iXcount) { //세로 일치
+//					if(tmpPart.GetComponent<Part>() != null)
+//					{
+//						if(m_headingDirection == DIRECTION.UP && iThisIdx > iTargetIdx)
+//							StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
+//						else if(m_headingDirection == DIRECTION.DOWN && iThisIdx < iTargetIdx)
+//							StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
+//						else if(m_headingDirection == DIRECTION.EVERYWHERE)
+//							StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
+//					}
+//				}else if(iThisIdx / grid.m_iXcount == iTargetIdx / grid.m_iXcount){ //가로 일치
+//					if(tmpPart.GetComponent<Part>() != null)
+//					{
+//						if(m_headingDirection == DIRECTION.LEFT && iThisIdx > iTargetIdx)
+//							StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
+//						else if(m_headingDirection == DIRECTION.RIGHT && iThisIdx < iTargetIdx)
+//							StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
+//						else if(m_headingDirection == DIRECTION.EVERYWHERE)
+//							StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
+//					}
+//				}
+//			}
+//
+//		} 
 
-			for (int i = 0; i < EnemyParent.childCount; ++i) {
-				GameObject tmpPart = EnemyParent.GetChild (i).gameObject;
-				int iTargetIdx = grid.GetGridIdx (tmpPart.transform.position);
-
-				if (iThisIdx % grid.m_iXcount == iTargetIdx % grid.m_iXcount) { //세로 일치
-					if(tmpPart.GetComponent<Part>() != null)
-					{
-						if(m_headingDirection == DIRECTION.UP && iThisIdx > iTargetIdx)
-							StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
-						else if(m_headingDirection == DIRECTION.DOWN && iThisIdx < iTargetIdx)
-							StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
-						else if(m_headingDirection == DIRECTION.EVERYWHERE)
-							StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
-					}
-				}else if(iThisIdx / grid.m_iXcount == iTargetIdx / grid.m_iXcount){ //가로 일치
-					if(tmpPart.GetComponent<Part>() != null)
-					{
-						if(m_headingDirection == DIRECTION.LEFT && iThisIdx > iTargetIdx)
-							StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
-						else if(m_headingDirection == DIRECTION.RIGHT && iThisIdx < iTargetIdx)
-							StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
-						else if(m_headingDirection == DIRECTION.EVERYWHERE)
-							StartCoroutine(tmpPart.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
-					}
-				}
-			}
-
-		} else {
-			for (int i = 0; i < Core.childCount + 1; ++i) {
-				
-				GameObject tmpPart;
-
-				if (i == Core.childCount) 
-					tmpPart = Core.gameObject;
-				else
-					tmpPart = Core.GetChild (i).gameObject;
-
-				int iTargetIdx = grid.GetGridIdx (tmpPart.transform.position);
-
-				if (iThisIdx % grid.m_iXcount == iTargetIdx % grid.m_iXcount) { //세로 일치
-					if(tmpPart.GetComponent<Part>() != null)
-					{
-						if(m_headingDirection == DIRECTION.UP)
-						{
-							if(iClosestIdx == -1 || iTargetIdx > iClosestIdx)
-							{
-								iClosestIdx = iTargetIdx;
-								ClosestTarget = tmpPart;
-							}
-						}else if(m_headingDirection == DIRECTION.DOWN)
-						{
-							if(iClosestIdx == -1 || iTargetIdx < iClosestIdx)
-							{
-								iClosestIdx = iTargetIdx;
-								ClosestTarget = tmpPart;
-							}
-						}
-					}
-				}else if(iThisIdx / grid.m_iXcount == iTargetIdx / grid.m_iXcount){ //가로 일치
-					if(tmpPart.GetComponent<Part>() != null)
-					{
-						if(m_headingDirection == DIRECTION.LEFT)
-						{
-							if(iClosestIdx == -1 || iTargetIdx > iClosestIdx)
-							{
-								iClosestIdx = iTargetIdx;
-								ClosestTarget = tmpPart;
-							}
-						}else if(m_headingDirection == DIRECTION.RIGHT)
-						{
-							if(iClosestIdx == -1 || iTargetIdx < iClosestIdx)
-							{
-								iClosestIdx = iTargetIdx;
-								ClosestTarget = tmpPart;
-							}
-						}
-					}
-				}
-			}
-
-			if(ClosestTarget != null)
-				StartCoroutine(ClosestTarget.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
-		}
+//		else {
+//			for (int i = 0; i < Core.childCount + 1; ++i) {
+//				
+//				GameObject tmpPart;
+//
+//				if (i == Core.childCount) 
+//					tmpPart = Core.gameObject;
+//				else
+//					tmpPart = Core.GetChild (i).gameObject;
+//
+//				int iTargetIdx = grid.GetGridIdx (tmpPart.transform.position);
+//
+//				if (iThisIdx % grid.m_iXcount == iTargetIdx % grid.m_iXcount) { //세로 일치
+//					if(tmpPart.GetComponent<Part>() != null)
+//					{
+//						if(m_headingDirection == DIRECTION.UP)
+//						{
+//							if(iClosestIdx == -1 || iTargetIdx > iClosestIdx)
+//							{
+//								iClosestIdx = iTargetIdx;
+//								ClosestTarget = tmpPart;
+//							}
+//						}else if(m_headingDirection == DIRECTION.DOWN)
+//						{
+//							if(iClosestIdx == -1 || iTargetIdx < iClosestIdx)
+//							{
+//								iClosestIdx = iTargetIdx;
+//								ClosestTarget = tmpPart;
+//							}
+//						}
+//					}
+//				}else if(iThisIdx / grid.m_iXcount == iTargetIdx / grid.m_iXcount){ //가로 일치
+//					if(tmpPart.GetComponent<Part>() != null)
+//					{
+//						if(m_headingDirection == DIRECTION.LEFT)
+//						{
+//							if(iClosestIdx == -1 || iTargetIdx > iClosestIdx)
+//							{
+//								iClosestIdx = iTargetIdx;
+//								ClosestTarget = tmpPart;
+//							}
+//						}else if(m_headingDirection == DIRECTION.RIGHT)
+//						{
+//							if(iClosestIdx == -1 || iTargetIdx < iClosestIdx)
+//							{
+//								iClosestIdx = iTargetIdx;
+//								ClosestTarget = tmpPart;
+//							}
+//						}
+//					}
+//				}
+//			}
+//
+//			if(ClosestTarget != null)
+//				StartCoroutine(ClosestTarget.GetComponent<Part>().Damaged(m_fAttackDmg, gameObject));
+//		}
 	}
 
-	public IEnumerator Damaged(float fDamage, GameObject Attakcer)
+//	public IEnumerator Damaged(float fDamage, GameObject Attakcer)
+//	{
+//		if (m_bDestroied)
+//			yield break;
+//
+//		yield return new WaitForSeconds (Random.Range(0f, 0.75f));
+//
+//		Color originColor = GetComponent<SpriteRenderer> ().color;
+//
+//		GetComponent<SpriteRenderer> ().color = Color.red;
+//		iTween.ShakePosition (gameObject, iTween.Hash ("x", 0.05f, "y", 0.05f, "time", 0.5f));
+//		DrawLine (Attakcer.transform.position, transform.position, Attakcer.GetComponent<Part>().m_colorLine, 0.5f);
+//		yield return new WaitForSeconds (0.51f);
+//
+//		GetComponent<SpriteRenderer> ().color = originColor;
+//		transform.position = GridMgr.getInstance.GetPosOfIdx(GridMgr.getInstance.GetGridIdx(transform.position));
+//
+//		m_fHealth -= fDamage;
+//
+//		if (m_fHealth <= 0f) { //DIE
+////			GetComponent<SpriteRenderer> ().color = new Color (218/255f, 118/255f, 118/255f);
+//			m_bDestroied = true;
+//
+//			if(transform.parent.name.Equals("Core"))
+//			{
+//				BattleSceneMgr.getInstance.PartDestroied();
+//				Destroy(gameObject);
+//				GetComponent<SpriteSheet>().DestroyThis();
+//			}else{
+//				Morgue.getInstance.AddBody(false, gameObject);
+//			}
+//		}
+//	}
+
+	public IEnumerator OnField()
 	{
-		if (m_bDestroied)
-			yield break;
+		Vector2 mousePosition = Vector2.zero;
+		BoxCollider2D collider2D = GetComponent<BoxCollider2D> ();
 
-		yield return new WaitForSeconds (Random.Range(0f, 0.75f));
+		while(transform.parent.name.Equals("Field"))
+		{
+			mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-		Color originColor = GetComponent<SpriteRenderer> ().color;
-
-		GetComponent<SpriteRenderer> ().color = Color.red;
-		iTween.ShakePosition (gameObject, iTween.Hash ("x", 0.05f, "y", 0.05f, "time", 0.5f));
-		DrawLine (Attakcer.transform.position, transform.position, Attakcer.GetComponent<Part>().m_colorLine, 0.5f);
-		yield return new WaitForSeconds (0.51f);
-
-		GetComponent<SpriteRenderer> ().color = originColor;
-		transform.position = GridMgr.getInstance.GetPosOfIdx(GridMgr.getInstance.GetGridIdx(transform.position));
-
-		m_fHealth -= fDamage;
-
-		if (m_fHealth <= 0f) { //DIE
-//			GetComponent<SpriteRenderer> ().color = new Color (218/255f, 118/255f, 118/255f);
-			m_bDestroied = true;
-
-			if(transform.parent.name.Equals("Core"))
+			if(Input.GetMouseButton(0) && collider2D.OverlapPoint(mousePosition))
 			{
-				BattleSceneMgr.getInstance.PartDestroied();
-				Destroy(gameObject);
-				GetComponent<SpriteSheet>().DestroyThis();
-			}else{
-				Morgue.getInstance.AddBody(false, gameObject);
+				Vector3 corePos = GameObject.Find("Core").transform.position;
+				iTween.MoveTo(gameObject, iTween.Hash("x", corePos.x, "y", corePos.y, "time" , 0.5f, "easetype", "easeInSine"));
+
+				yield return new WaitForSeconds(0.55f);
+
+				transform.parent = GameObject.Find("Morgue").transform;
+				transform.position = transform.parent.position;
+				//set morgue's position in here
+				Morgue.getInstance.AddBody(false,gameObject);
+				GetComponent<SpriteRenderer>().sortingLayerName = "DeadBodies";
 			}
+
+			yield return null;
 		}
 	}
 
@@ -199,7 +228,7 @@ public class Part : MonoBehaviour {
 		bool bParentWasCore = false;
 		int iBeforeSeatIdx = -1;
 		bStopAssemble = false;
-		int[] morgueIdxArr = Morgue.getInstance.m_iMorgueIdxArr;
+//		int[] morgueIdxArr = Morgue.getInstance.m_iMorgueIdxArr;
 		int curGridIdx = 0;
 		
 		GridMgr grid = GridMgr.getInstance;
@@ -208,6 +237,7 @@ public class Part : MonoBehaviour {
 			mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			if(Input.GetMouseButtonDown(0) && collider2D.OverlapPoint(mousePosition))
 			{
+				OriginPos = transform.position;
 				bFollowCursor = true;
 
 				if(transform.parent.name.Equals("Core"))
@@ -224,7 +254,11 @@ public class Part : MonoBehaviour {
 				}
 
 				GetComponent<SpriteRenderer>().sortingLayerName = "FrontObject";
+				GetComponent<ParticleSystemRenderer>().sortingLayerName = "FrontObject_Particle";
 
+				GetComponent<SpriteParticleEmitter.DynamicEmitter>().enabled = false;
+				GetComponent<SpriteRenderer>().enabled = true;
+				
 				core.CalculateStickableSeat (true);
 			}
 			
@@ -265,27 +299,39 @@ public class Part : MonoBehaviour {
 
 						if(iIdx + 1 == iTargetIdx){
 							m_headingDirection = DIRECTION.LEFT;
-							iTween.RotateTo(gameObject, iTween.Hash ("z", 270f, "time", 0.2f));
+							if(m_bEdgePart)
+								iTween.RotateTo(gameObject, iTween.Hash ("z", 270f, "time", 0.2f));
+							else
+								iTween.RotateTo(gameObject, iTween.Hash ("z", 90f, "time", 0.2f));
 						}else if(iIdx - 1 == iTargetIdx){
 							m_headingDirection = DIRECTION.RIGHT;
-							iTween.RotateTo(gameObject, iTween.Hash ("z", 90f, "time", 0.2f));
+							if(m_bEdgePart)
+								iTween.RotateTo(gameObject, iTween.Hash ("z", 90f, "time", 0.2f));
+							else
+								iTween.RotateTo(gameObject, iTween.Hash ("z", 270f, "time", 0.2f));
 						}else if(iIdx - grid.m_iXcount == iTargetIdx){
 							m_headingDirection = DIRECTION.DOWN;
-							iTween.RotateTo(gameObject, iTween.Hash ("z", 0f, "time", 0.2f));
+							if(m_bEdgePart)
+								iTween.RotateTo(gameObject, iTween.Hash ("z", 0f, "time", 0.2f));
+							else
+								iTween.RotateTo(gameObject, iTween.Hash ("z", 180f, "time", 0.2f));
 						}else if(iIdx + grid.m_iXcount == iTargetIdx){
 							m_headingDirection = DIRECTION.UP;
-							iTween.RotateTo(gameObject, iTween.Hash ("z", 180f, "time", 0.2f));
+							if(m_bEdgePart)
+								iTween.RotateTo(gameObject, iTween.Hash ("z", 180f, "time", 0.2f));
+							else
+								iTween.RotateTo(gameObject, iTween.Hash ("z", 0f, "time", 0.2f));
 						}
 					}
 				}
 
-				for(int i = 0; i < morgueIdxArr.Length; ++i)
-				{
-					if(morgueIdxArr[i].Equals(curGridIdx) && (!Morgue.getInstance.m_bBodyArr[i] || curGridIdx.Equals(grid.GetGridIdx(OriginPos)))){ //드래그중 비어있는 시체창고 안에 들어옴
-						transform.position = grid.GetPosOfIdx(morgueIdxArr[i]);
-						iTween.RotateTo(gameObject, iTween.Hash ("z", 0f, "time", 0.2f));
-					}
-				}
+//				for(int i = 0; i < morgueIdxArr.Length; ++i)
+//				{
+//					if(morgueIdxArr[i].Equals(curGridIdx) && (!Morgue.getInstance.m_bBodyArr[i] || curGridIdx.Equals(grid.GetGridIdx(OriginPos)))){ //드래그중 비어있는 시체창고 안에 들어옴
+//						transform.position = grid.GetPosOfIdx(morgueIdxArr[i]);
+//						iTween.RotateTo(gameObject, iTween.Hash ("z", 0f, "time", 0.2f));
+//					}
+//				}
 
 				if(m_objAleart != null)
 					Destroy(m_objAleart);
@@ -308,27 +354,27 @@ public class Part : MonoBehaviour {
 						GetComponent<SpriteRenderer>().color = new Color(180/255f, 200/255f, 180/255f);
 						transform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
 
-						if(GetComponent<Enemy>() != null)
-						{
-							Part part = gameObject.AddComponent<Part>();
-							part.m_fHealth = 1;
-							part.m_fAttackDmg = 0;
-							part.m_bFriendly = true;
-							part.m_bAttackAvailable = m_bAttackAvailable;
-							part.m_colorLine = transform.parent.GetComponent<Core>().m_colorLine;
-							part.m_iGridIdx = core.m_StickAvailableSeat[i];
-
-							if(m_bEdgePart)
-								part.m_headingDirection = m_headingDirection;
-							else
-								part.m_headingDirection = DIRECTION.EVERYWHERE;
-
-							part.m_bEdgePart = GetComponent<Enemy>().m_bEdgePart;
-
-							BattleSceneMgr.getInstance.StartAssembleAfter(gameObject); // part's assemble coroutine start
-							
-							Destroy(GetComponent<Enemy>());
-						}
+//						if(GetComponent<Enemy>() != null)
+//						{
+//							Part part = gameObject.AddComponent<Part>();
+//							part.m_fHealth = 1;
+//							part.m_fAttackDmg = 0;
+//							part.m_bFriendly = true;
+//							part.m_bAttackAvailable = m_bAttackAvailable;
+//							part.m_colorLine = transform.parent.GetComponent<Core>().m_colorLine;
+//							part.m_iGridIdx = core.m_StickAvailableSeat[i];
+//
+//							if(m_bEdgePart)
+//								part.m_headingDirection = m_headingDirection;
+//							else
+//								part.m_headingDirection = DIRECTION.EVERYWHERE;
+//
+////							part.m_bEdgePart = GetComponent<Enemy>().m_bEdgePart;
+//
+//							BattleSceneMgr.getInstance.StartAssembleAfter(gameObject); // part's assemble coroutine start
+//							
+//							Destroy(GetComponent<Enemy>());
+//						}
 
 						if(bParentWasCore)
 						{
@@ -343,11 +389,12 @@ public class Part : MonoBehaviour {
 
 							transform.parent.BroadcastMessage("AmI_InCoreSide");
 						}else{
-							Morgue.getInstance.RemoveBody(grid.GetGridIdx(OriginPos));
+							Morgue.getInstance.RemoveBody(OriginPos);
 						}
 
 						GetComponent<SpriteSheet>().CheckAround(false);
 						GetComponent<SpriteRenderer>().sortingLayerName = "Objects";
+						GetComponent<ParticleSystemRenderer>().sortingLayerName = "Object_Particle";
 
 						OriginPos = transform.position;
 
@@ -356,30 +403,34 @@ public class Part : MonoBehaviour {
 					}
 				}
 
-				for(int i = 0; i < morgueIdxArr.Length; ++i)
-				{
-					if(morgueIdxArr[i].Equals(curGridIdx) && (!Morgue.getInstance.m_bBodyArr[i] || curGridIdx.Equals(grid.GetGridIdx(OriginPos)))){ 
-						transform.position = grid.GetPosOfIdx(morgueIdxArr[i]);
-						bToOrigin = false;
-						transform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
-
-						if(!bParentWasCore)
-							Morgue.getInstance.RemoveBody(grid.GetGridIdx(OriginPos));
-						else{
-							GetComponent<SpriteSheet>().CheckAround(false, iBeforeSeatIdx);
-							iBeforeSeatIdx = -1;
-							bParentWasCore = false;
-
-							GameObject.Find("Core").BroadcastMessage("AmI_InCoreSide");
-						}
-
-						Morgue.getInstance.AddBody(true, gameObject, curGridIdx);
-
-						GetComponent<SpriteRenderer>().sortingLayerName = "DeadBodies";
-						OriginPos = transform.position;
-						transform.parent = GameObject.Find("Morgue").transform;
-					}
-				}
+//				for(int i = 0; i < morgueIdxArr.Length; ++i) // get in morgue
+//				{
+//					if(morgueIdxArr[i].Equals(curGridIdx) && (!Morgue.getInstance.m_bBodyArr[i] || curGridIdx.Equals(grid.GetGridIdx(OriginPos)))){ 
+//						transform.position = grid.GetPosOfIdx(morgueIdxArr[i]);
+//						bToOrigin = false;
+//						transform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
+//
+//						if(!bParentWasCore)
+//							Morgue.getInstance.RemoveBody(grid.GetGridIdx(OriginPos));
+//						else{
+//							GetComponent<SpriteSheet>().CheckAround(false, iBeforeSeatIdx);
+//							iBeforeSeatIdx = -1;
+//							bParentWasCore = false;
+//
+//							GameObject.Find("Core").BroadcastMessage("AmI_InCoreSide");
+//						}
+//
+//						Morgue.getInstance.AddBody(true, gameObject, curGridIdx);
+//
+//						GetComponent<SpriteRenderer>().sortingLayerName = "DeadBodies";
+//						GetComponent<ParticleSystemRenderer>().sortingLayerName = "DeadBodies_Particle";
+//
+//
+//
+//						OriginPos = transform.position;
+//						transform.parent = GameObject.Find("Morgue").transform;
+//					}
+//				}
 				
 				if(bToOrigin)
 				{
@@ -393,8 +444,10 @@ public class Part : MonoBehaviour {
 
 						transform.parent.BroadcastMessage("AmI_InCoreSide");
 						GetComponent<SpriteRenderer>().sortingLayerName = "Objects";
+						GetComponent<ParticleSystemRenderer>().sortingLayerName = "Objects_Particle";
 					}else
 						GetComponent<SpriteRenderer>().sortingLayerName = "DeadBodies";
+					GetComponent<ParticleSystemRenderer>().sortingLayerName = "DeadBodies_Particle";
 
 					m_headingDirection = m_BeforeheadingDirection;
 					GetComponent<SpriteSheet>().CheckAround(false);

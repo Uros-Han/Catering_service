@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 5b1807707e49f4c28ad1e935a75a1e4d
+timeCreated: 1495445420
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: YDIWebDotum
+  fontNames:
+  - YDIWebDotum
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -12,7 +12,6 @@ public class Core : Part {
 		StartCoroutine (UserControl());
 
 		m_bAttackAvailable = true;
-		m_bFriendly = true;
 		m_StickAvailableSeat = new List<int> ();
 
 		m_bControl = new bool[4];
@@ -33,62 +32,13 @@ public class Core : Part {
 
 		while (true) {
 
-			if (gMgr.m_turnState.Equals (TURN_STATE.USER_MOVE)) {
-
-				//Init
-				if (m_beforeState != gMgr.m_turnState) {
-					//최초 위치기억 
-					m_iCoreIdx = GridMgr.getInstance.GetGridIdx (transform.position);
-					m_iGridIdx = m_iCoreIdx;
-
-					m_MoveCount = 2;
-					GameObject.Find ("CanMove").GetComponent<UILabel> ().text = "MOVE : " + m_MoveCount;
-				}
-
-				if (Input.GetKey (KeyCode.W) || m_bControl[1]) {
-					if (GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position + new Vector3 (0, GridMgr.getInstance.m_fYsize))) <= m_MoveCount) {
-						MoveEnemies(DIRECTION.RIGHT, "y", -GridMgr.getInstance.m_fYsize);
-						MoveEnemies(DIRECTION.LEFT, "y", -GridMgr.getInstance.m_fYsize);
-						iTween.MoveTo (GameObject.Find ("glass"), iTween.Hash ("y" , GameObject.Find("glass").transform.position.y - GridMgr.getInstance.m_fYsize, "islocal", false, "time", 0.25f, "easetype", "easeOutBack"));
-//						transform.Translate (new Vector3 (0, GridMgr.getInstance.m_fYsize));
-//						GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position), true);
-//						MoveGridIdx();
-						yield return new WaitForSeconds(0.25f);
-					}
-				}else if (Input.GetKey (KeyCode.S) || m_bControl[3]) {
-					if (GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position - new Vector3 (0, GridMgr.getInstance.m_fYsize))) <= m_MoveCount) {
-						MoveEnemies(DIRECTION.RIGHT, "y", GridMgr.getInstance.m_fYsize);
-						MoveEnemies(DIRECTION.LEFT, "y", GridMgr.getInstance.m_fYsize);
-						iTween.MoveTo (GameObject.Find ("glass"), iTween.Hash ("y" , GameObject.Find("glass").transform.position.y + GridMgr.getInstance.m_fYsize, "islocal", false, "time", 0.25f, "easetype", "easeOutBack"));
-//						transform.Translate (new Vector3 (0, -GridMgr.getInstance.m_fYsize));
-//						GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position), true);
-//						MoveGridIdx();
-						yield return new WaitForSeconds(0.25f);
-					}
-				}else if (Input.GetKey(KeyCode.A) || m_bControl[0]) {
-					if (GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position - new Vector3 (GridMgr.getInstance.m_fXsize, 0))) <= m_MoveCount) {
-						MoveEnemies(DIRECTION.UP, "x", GridMgr.getInstance.m_fXsize);
-						MoveEnemies(DIRECTION.DOWN, "x", GridMgr.getInstance.m_fXsize);
-						iTween.MoveTo (GameObject.Find ("glass"), iTween.Hash ("x" , GameObject.Find("glass").transform.position.x + GridMgr.getInstance.m_fYsize, "islocal", false, "time", 0.25f, "easetype", "easeOutBack"));
-//						transform.Translate (new Vector3 (-GridMgr.getInstance.m_fXsize, 0));easeOutBack
-//						GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position), true);
-//						MoveGridIdx();
-						yield return new WaitForSeconds(0.25f);
-					}
-				}else if (Input.GetKey(KeyCode.D) || m_bControl[2]) {
-					if (GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position + new Vector3 (GridMgr.getInstance.m_fXsize, 0))) <= m_MoveCount) {
-						MoveEnemies(DIRECTION.UP, "x", -GridMgr.getInstance.m_fXsize);
-						MoveEnemies(DIRECTION.DOWN, "x", -GridMgr.getInstance.m_fXsize);
-						iTween.MoveTo (GameObject.Find ("glass"), iTween.Hash ("x" , GameObject.Find("glass").transform.position.x - GridMgr.getInstance.m_fYsize, "islocal", false, "time", 0.25f, "easetype", "easeOutBack"));
-//						transform.Translate (new Vector3 (GridMgr.getInstance.m_fXsize, 0));
-//						GetShortestDistance (m_iCoreIdx, GridMgr.getInstance.GetGridIdx (transform.position), true);
-//						MoveGridIdx();
-						yield return new WaitForSeconds(0.25f);
-					}
-				}
+			if(Input.GetKey(KeyCode.A))
+			{
+				transform.Translate(new Vector3(-1,0) * 0.005f);
+			}else if(Input.GetKey(KeyCode.D))
+			{
+				transform.Translate(new Vector3(1,0) * 0.005f);
 			}
-
-			m_beforeState = gMgr.m_turnState;
 
 			yield return null;
 		};

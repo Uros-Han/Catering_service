@@ -16,6 +16,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	public Sprite[][] m_sheet_cattle;
 	public Sprite[] m_sheet_core;
 	public Sprite[] m_sheet_wolf;
+	public Sprite[] m_sheet_farmer_0;
 
 	// Use this for initialization
 	public void ResourcesLoad () {
@@ -30,6 +31,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 
 		m_sheet_core = Resources.LoadAll<Sprite>("Sprites/Sheets/sheet_core");
 		m_sheet_wolf = Resources.LoadAll<Sprite>("Sprites/Sheets/sheet_wolf");
+		m_sheet_farmer_0 = Resources.LoadAll<Sprite> ("Sprites/Sheets/sheet_farmer_0");
 	}
 
 	public GameObject Create_Aleart(int iIdx)
@@ -58,7 +60,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		GameObject obj = Instantiate (m_objCattle) as GameObject;
 		obj.transform.parent = GameObject.Find("Enemies").transform;
 
-		obj.GetComponent<Enemy> ().m_headingDirection = dir;
+//		obj.GetComponent<Enemy> ().m_headingDirection = dir;
 		obj.GetComponent<Part> ().SetDirection ();
 		return obj;
 	}
@@ -68,7 +70,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		GameObject obj = Instantiate (m_objWolf) as GameObject;
 		obj.transform.parent = GameObject.Find("Enemies").transform;
 		
-		obj.GetComponent<Enemy> ().m_headingDirection = dir;
+//		obj.GetComponent<Enemy> ().m_headingDirection = dir;
 		obj.GetComponent<Part> ().SetDirection ();
 		return obj;
 	}

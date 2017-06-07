@@ -5,3 +5,5 @@ public enum DIRECTION { LEFT, UP, DOWN, RIGHT, EVERYWHERE };
 public enum AREA_STATE { FOREST, FARM, VILLAGE, CASTLE };
 
 public enum VICTIM { CATTLE, KNIGHT, WOLF, NONE };
+
+public enum AI_STATE { IDLE, MOVE, ATTACK, END };

@@ -3,48 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Morgue : Singleton<Morgue> {
-	
-	public Vector2[] m_vMorguePosArr;
+
 	public bool[] m_bBodyArr; //자리 차지한 시체들 false == empty
-	public int[] m_iMorgueIdxArr;
+//	public int[] m_iMorgueIdxArr;
 	public float m_fBodyMoveTime;
 
 	void Start()
 	{
-		m_vMorguePosArr = new Vector2[]{ new Vector2(-0.48f,-1.28f), new Vector2(-0.32f,-1.28f), new Vector2(-0.16f,-1.28f), new Vector2(0f,-1.28f), new Vector2(1.6f,-1.28f), new Vector2(3.2f,-1.28f), new Vector2(4.8f,-1.2828f),
-										new Vector2(-0.48f,-1.44f), new Vector2(-0.32f,-1.44f), new Vector2(-0.16f,-1.44f), new Vector2(0f,-1.44f), new Vector2(1.6f,-1.44f), new Vector2(3.2f,-1.44f), new Vector2(4.8f,-1.44f)};
-		m_bBodyArr = new bool[14];
-		m_iMorgueIdxArr = new int[]{ 145, 146, 147, 148, 149, 150, 151, 156, 157, 158, 159, 160, 161, 162};
+		m_bBodyArr = new bool[24];
+//		m_iMorgueIdxArr = new int[]{ 145, 146, 147, 148, 149, 150, 151, 156, 157, 158, 159, 160, 161, 162};
 		m_fBodyMoveTime = 0.25f;
 	}
 
-	public void AddBody(bool bWithDrag, GameObject moveBody, int iGridIdx = -1)
+	public void AddBody(bool bWithDrag, GameObject movePart, int iGridIdx = -1)
 	{
 		if (!bWithDrag) {
 			int iEmptyIdx = EmptyMorgueIdxCheck();
 
 			if(iEmptyIdx != -1) // have space
 			{
-				moveBody.GetComponent<SpriteRenderer>().sortingLayerName = "DeadBodies";
-				iTween.MoveTo (moveBody, iTween.Hash ("x", m_vMorguePosArr[iEmptyIdx].x, "y", m_vMorguePosArr[iEmptyIdx].y, "islocal", false, "time", m_fBodyMoveTime, "easetype", "easeInSine"));
-				iTween.RotateTo(moveBody, iTween.Hash ("z", 0f, "time", m_fBodyMoveTime));
+				movePart.GetComponent<SpriteRenderer>().sortingLayerName = "DeadBodies";
+				movePart.transform.position = GetIdxPos(iEmptyIdx);
+				movePart.transform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
 				m_bBodyArr[iEmptyIdx] = true;
-				moveBody.GetComponent<SpriteSheet>().SetSprite(0);
+				movePart.GetComponent<SpriteRenderer>().color = Color.white;
+//				moveBody.GetComponent<SpriteSheet>().SetSprite(0);
 			}
 
 		} else {
 			int iIdx = GridIdxToMorgueIdx (iGridIdx);
 
-			moveBody.GetComponent<SpriteRenderer>().sortingLayerName = "DeadBodies";
+			movePart.GetComponent<SpriteRenderer>().sortingLayerName = "DeadBodies";
 			m_bBodyArr[iIdx] = true;
 		}
 
-		moveBody.transform.parent = transform;
+		movePart.transform.parent = transform;
 	}
 
-	public void RemoveBody(int iGridIdx)
+	public void RemoveBody(Vector3 vPos)
 	{
-		int iIdx = GridIdxToMorgueIdx (iGridIdx);
+		int iIdx = GetIdxFromPos (vPos);
 
 		m_bBodyArr [iIdx] = false;
 	}
@@ -69,5 +67,24 @@ public class Morgue : Singleton<Morgue> {
 		} else {
 			return iGridIdx - 156 + 7;
 		}
+	}
+
+	Vector3 GetIdxPos(int iIdx)
+	{
+		return new Vector3 (transform.position.x - 0.4f + ((iIdx%6) * 0.16f), transform.position.y + 0.48f - ((iIdx/6) * 0.16f));
+	}
+
+	int GetIdxFromPos(Vector3 vPosition)
+	{
+		vPosition -= transform.position;
+		Vector2 m_fStartPos = new Vector2 ( -0.48f, 0.56f );
+		float m_fYsize = 0.16f;
+		float m_fXsize = 0.16f;
+		int m_iXcount = 6;
+		int m_iYcount = 4;
+
+		int tmpidx = (int)(System.Math.Round((vPosition.y-m_fStartPos.y + (m_fYsize/2)) / m_fYsize) * m_iXcount * -1)+ (int)(System.Math.Round((vPosition.x - m_fStartPos.x- (m_fXsize/2)) / m_fXsize));
+		Debug.Log (tmpidx);
+		return tmpidx;
 	}
 }

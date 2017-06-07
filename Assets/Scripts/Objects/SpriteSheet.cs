@@ -15,12 +15,15 @@ public class SpriteSheet : MonoBehaviour {
 			m_sheet_sprite = ObjectFactory.getInstance.m_sheet_cattle[Random.Range(0,4)];
 		else if(gameObject.name.Contains("Wolf"))
 			m_sheet_sprite = ObjectFactory.getInstance.m_sheet_wolf;
+		else if(transform.parent.name.Contains("Farmer"))
+			m_sheet_sprite = ObjectFactory.getInstance.m_sheet_farmer_0;
 
+		if(!GetComponent<Part>().m_bEdgePart)
 		GetComponent<SpriteRenderer> ().sprite = m_sheet_sprite [0];
 	}
 
 	public bool[] m_bOpenedDir; // Direction (0-Left, 1-Up, 2-Right, 3-Down) 해당 인접 방향에 물체가 존재하면 참, 없으면 거짓
-	Sprite[] m_sheet_sprite;
+	public Sprite[] m_sheet_sprite;
 
 	public void CheckAround(bool bReceiveOnly, int iIdx = -1)
 	{
@@ -266,6 +269,9 @@ public class SpriteSheet : MonoBehaviour {
 
 	public void SetSprite(int iIdx = -1)
 	{
+		if (GetComponent<Part> ().m_bEdgePart)
+			return;
+
 		SpriteRenderer sp = GetComponent<SpriteRenderer> ();
 
 		if(!m_bOpenedDir[0] && !m_bOpenedDir[1] && !m_bOpenedDir[2] && !m_bOpenedDir[3]){
