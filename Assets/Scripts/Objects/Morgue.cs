@@ -37,6 +37,13 @@ public class Morgue : Singleton<Morgue> {
 			m_bBodyArr[iIdx] = true;
 		}
 
+		StartCoroutine (ChangeParentToMorgue(movePart));
+	}
+
+	IEnumerator ChangeParentToMorgue(GameObject movePart)
+	{
+		yield return null;
+
 		movePart.transform.parent = transform;
 	}
 
@@ -84,7 +91,7 @@ public class Morgue : Singleton<Morgue> {
 		int m_iYcount = 4;
 
 		int tmpidx = (int)(System.Math.Round((vPosition.y-m_fStartPos.y + (m_fYsize/2)) / m_fYsize) * m_iXcount * -1)+ (int)(System.Math.Round((vPosition.x - m_fStartPos.x- (m_fXsize/2)) / m_fXsize));
-		Debug.Log (tmpidx);
+//		Debug.Log (tmpidx);
 		return tmpidx;
 	}
 }

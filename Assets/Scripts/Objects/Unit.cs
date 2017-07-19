@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour {
 
-	public IEnumerator Death()
+	public float m_fHealth;
+	public float m_fAttackDmg;
+
+	void Start()
+	{
+		StartCoroutine (CheckUnitEaten ());
+	}
+
+	public void Death()
 	{
 
 		Transform FieldTrans = GameObject.Find ("Field").transform;
@@ -15,6 +23,9 @@ public class Unit : MonoBehaviour {
 		GetComponent<FSM_Enemy> ().StopAllCoroutines ();
 		for(int i = 0 ; i < transform.childCount; ++i)
 		{
+			transform.GetChild(i).GetComponent<SpriteRenderer>().color = Color.white;
+			transform.GetChild(i).GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sprite_meat;
+
 			transform.GetChild(i).GetComponent<Rigidbody2D>().AddForce((transform.GetChild(i).position - bodyPos ) * 10f, ForceMode2D.Impulse);
 			transform.GetChild(i).GetComponent<Rigidbody2D>().AddTorque(Random.Range(0f, 30f));
 			transform.GetChild(i).GetComponent<SpriteRenderer>().color = new Color(160/255f,160/255f,160/255f);
@@ -22,10 +33,7 @@ public class Unit : MonoBehaviour {
 			StartCoroutine(ChangeParentToField(transform.GetChild(i).gameObject));
 		}
 
-		yield return null;
-		yield return null;
-
-		Destroy (gameObject);
+		StartCoroutine (DestroyThis ());
 	}
 
 	IEnumerator ChangeParentToField(GameObject target)
@@ -37,8 +45,37 @@ public class Unit : MonoBehaviour {
 
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Space)) {
-			StartCoroutine(Death());
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			Death ();
 		}
+	}
+
+	IEnumerator CheckUnitEaten()
+	{
+		bool bEaten = false;
+		Vector2 mousePosition = Vector2.zero;
+		BoxCollider2D collider2D = GetComponent<BoxCollider2D> ();
+		Core core = GameObject.Find ("Core").GetComponent<Core> ();
+
+		while (!bEaten) {
+			mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+			if (Input.GetMouseButtonDown (0) && collider2D.OverlapPoint (mousePosition) && core.m_EatenObject == null) {
+				bEaten = true;
+				core.m_EatenObject = gameObject;
+
+				StartCoroutine(GameObject.Find("Core").GetComponent<Core>().Eat(gameObject));
+			}
+
+			yield return null;
+		}
+	}
+
+	public IEnumerator DestroyThis()
+	{
+		yield return null;
+		yield return null;
+
+		BattleSceneMgr.getInstance.EnemyEliminatedCheck ();
+		Destroy (gameObject);
 	}
 }

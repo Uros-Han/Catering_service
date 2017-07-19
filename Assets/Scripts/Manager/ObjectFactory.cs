@@ -13,6 +13,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	GameObject m_objCattle;
 	GameObject m_objWolf;
 
+	public Sprite m_sprite_meat;
 	public Sprite[][] m_sheet_cattle;
 	public Sprite[] m_sheet_core;
 	public Sprite[] m_sheet_wolf;
@@ -24,6 +25,8 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		m_objStickableDot = Resources.Load ("Prefabs/Objects/StickableDot") as GameObject;
 		m_objCattle = Resources.Load ("Prefabs/Objects/Parts/Cattle") as GameObject;
 		m_objWolf = Resources.Load ("Prefabs/Objects/Parts/Wolf") as GameObject;
+
+		m_sprite_meat = Resources.Load<Sprite> ("Sprites/Meat");
 
 		m_sheet_cattle = new Sprite[4][];
 		for(int i = 0; i < 4; ++i)

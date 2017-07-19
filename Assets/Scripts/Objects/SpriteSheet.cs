@@ -59,6 +59,9 @@ public class SpriteSheet : MonoBehaviour {
 			if(target == gameObject)
 				continue;
 
+			if(target.GetComponent<Part>().m_bEdgePart)
+				continue;
+
 			bool bEdgePart = GetComponent<Part>().m_bEdgePart;
 			DIRECTION headingDir = GetComponent<Part>().m_headingDirection;
 			Part TargetPart = target.GetComponent<Part>();

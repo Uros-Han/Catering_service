@@ -23,7 +23,21 @@ public class FSM_Enemy : FSM {
 		case AI_STATE.ATTACK:
 			StartCoroutine (State_Attack ());
 			break;
+
+		case AI_STATE.EATEN:
+			StartCoroutine (State_Eaten ());
+			break;
 		}
+	}
+
+	public IEnumerator State_Eaten()
+	{
+		do{
+			yield return null;
+
+		}while(m_AiState == AI_STATE.EATEN);
+
+		SetState (m_AiState);
 	}
 
 	protected override IEnumerator State_Move()
@@ -68,7 +82,7 @@ public class FSM_Enemy : FSM {
          	iTween.RotateTo(LeftHand, iTween.Hash("z",0f,"time",0.2f));
 			iTween.MoveTo(LeftHand, iTween.Hash("x", -0.129f, "y", 0.08f, "time", 0.2f, "islocal", true));
 			yield return new WaitForSeconds(0.2f);
-			StartCoroutine(Attack(m_target, false));
+			StartCoroutine(Attack(m_target, GetComponent<Unit>().m_fAttackDmg, false));
 			yield return new WaitForSeconds(0.2f);
 
 			if(Vector3.Distance(m_target.transform.position, transform.position) > 0.5f)

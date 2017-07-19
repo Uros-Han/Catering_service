@@ -57,13 +57,20 @@ public class FSM : MonoBehaviour {
 		SetState (m_AiState);
 	}
 
-	protected IEnumerator Attack(GameObject target, bool bEnemy)
+	protected IEnumerator Attack(GameObject target, float fDamage, bool bEnemy)
 	{
-		if (bEnemy) {
+		if (bEnemy) { /// Attack Enemy
 			for (int i = 0; i < target.transform.childCount; ++i) {
 				target.transform.GetChild (i).GetComponent<SpriteRenderer> ().color = Color.red;
 			}
-		} else {
+
+			target.GetComponent<Unit>().m_fHealth -= fDamage;
+			if(target.GetComponent<Unit>().m_fHealth <= 0)
+			{
+				target.GetComponent<Unit>().Death();
+				yield break;
+			}
+		} else { //Attack Friendly
 			target.GetComponent<SpriteRenderer> ().color = Color.red;
 		}
 

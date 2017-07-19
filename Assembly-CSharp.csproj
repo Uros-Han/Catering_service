@@ -296,7 +296,7 @@
      <Compile Include="Assets\Scripts\Objects\SpriteSheet.cs" />
      <Compile Include="Assets\Scripts\Objects\Unit.cs" />
      <Compile Include="Assets\Scripts\UI\ControlTap.cs" />
-     <Compile Include="Assets\Scripts\UI\TurnState.cs" />
+     <Compile Include="Assets\Scripts\UI\MeatState.cs" />
      <Compile Include="Assets\SpriteParticleEmitter\Code\Core\EmitterBase.cs" />
      <Compile Include="Assets\SpriteParticleEmitter\Code\Core\EmitterBaseUI.cs" />
      <Compile Include="Assets\SpriteParticleEmitter\Code\Core\StaticSpriteEmitter.cs" />

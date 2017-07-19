@@ -5,11 +5,12 @@ using Com.LuisPedroFonseca.ProCamera2D;
 
 public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 
+	public int m_iMeat = 0;
 
 	// Use this for initialization
 	void Start () {
 		EnemyGenerate ();
-		StartCoroutine (UserMove (true));
+//		StartCoroutine (UserMove (true));
 	}
 
 	void EnemyGenerate()
@@ -17,90 +18,109 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 //		LevelGenerator.getInstance.Encount (AREA_STATE.FARM, 2);
 	}
 	
-	IEnumerator UserMove(bool isBattleFirst = false)
-	{
-		if (isBattleFirst)
-			yield return new WaitForSeconds (1f);
-		else
-			yield return null;
+//	IEnumerator UserMove(bool isBattleFirst = false)
+//	{
+//		if (isBattleFirst)
+//			yield return new WaitForSeconds (1f);
+//		else
+//			yield return null;
+//
+//		GameMgr.getInstance.m_turnState = TURN_STATE.USER_MOVE;
+//
+//		GameObject.Find ("EndTurnButton").GetComponent<UIButton> ().enabled = true;
+//		GameObject.Find ("EndTurnButton").GetComponent<UIButtonScale> ().enabled = true;
+//	}
 
-		GameMgr.getInstance.m_turnState = TURN_STATE.USER_MOVE;
+//	public void EndUserMoveTurn()
+//	{
+//		if (GameMgr.getInstance.m_turnState != TURN_STATE.USER_MOVE)
+//			return;
+//		
+//		GameMgr.getInstance.m_turnState = TURN_STATE.USER_ATTACK;
+//
+//		GameObject.Find ("EndTurnButton").GetComponent<UIButton> ().enabled = false;
+//		GameObject.Find ("EndTurnButton").GetComponent<UIButtonScale> ().enabled = false;
+//
+//		GameObject.Find ("Core").BroadcastMessage ("Attack", null ,SendMessageOptions.DontRequireReceiver);
+//		StartCoroutine (EnemyMoveTurn ());
+//	}
 
-		GameObject.Find ("EndTurnButton").GetComponent<UIButton> ().enabled = true;
-		GameObject.Find ("EndTurnButton").GetComponent<UIButtonScale> ().enabled = true;
-	}
-
-	public void EndUserMoveTurn()
-	{
-		if (GameMgr.getInstance.m_turnState != TURN_STATE.USER_MOVE)
-			return;
-		
-		GameMgr.getInstance.m_turnState = TURN_STATE.USER_ATTACK;
-
-		GameObject.Find ("EndTurnButton").GetComponent<UIButton> ().enabled = false;
-		GameObject.Find ("EndTurnButton").GetComponent<UIButtonScale> ().enabled = false;
-
-		GameObject.Find ("Core").BroadcastMessage ("Attack", null ,SendMessageOptions.DontRequireReceiver);
-		StartCoroutine (EnemyMoveTurn ());
-	}
-
-	IEnumerator EnemyMoveTurn()
-	{
-		yield return new WaitForSeconds (1.5f);
-
-		if (EnemyEliminatedCheck ()) {
-			GameObject.Find("AssembleCurtains").BroadcastMessage("CurtainOn");
-			yield return new WaitForSeconds(Morgue.getInstance.m_fBodyMoveTime + 0.25f);
-			iTween.ValueTo(Camera.main.gameObject, iTween.Hash ("from", Camera.main.orthographicSize, "to", 1f, "time", 1f, "easetype", "easeInOutBack", "onupdate", "UpdateOrthographicCameraSize",
-			                                                    "onupdatetarget", gameObject));
-			yield return new WaitForSeconds(1f);
-			iTween.MoveTo (GameObject.Find ("Morgue"), iTween.Hash ("y" , -0.72f, "islocal", false, "time", 0.35f, "easetype", "easeOutBack"));
-
-			yield return new WaitForSeconds(0.4f);
-
-			GameMgr.getInstance.m_turnState = TURN_STATE.ASSEMBLE;
-			GameObject.Find ("Morgue").BroadcastMessage ("Assemble", null, SendMessageOptions.DontRequireReceiver);
-			GameObject.Find ("Core").BroadcastMessage ("Assemble", null, SendMessageOptions.DontRequireReceiver);
-//			GameObject.Find ("Core").transform.position = new Vector2(0,0);
-
-			GameObject.Find ("StopAssembleButton").GetComponent<UIPanel>().alpha = 1;
-//			StartCoroutine(CheckAssembleIsDone());
-		} else {
-
-			GameMgr.getInstance.m_turnState = TURN_STATE.ENEMY_MOVE;
-			GameObject.Find ("Enemies").BroadcastMessage ("FindNewSeat", null, SendMessageOptions.DontRequireReceiver);
-
-			yield return new WaitForSeconds (1.5f);
-
-			StartCoroutine (EnemyAttackTurn ());
-		}
-	}
+//	IEnumerator EnemyMoveTurn()
+//	{
+//		yield return new WaitForSeconds (1.5f);
+//
+//		if (EnemyEliminatedCheck ()) {
+//			GameObject.Find("AssembleCurtains").BroadcastMessage("CurtainOn");
+//			yield return new WaitForSeconds(Morgue.getInstance.m_fBodyMoveTime + 0.25f);
+//			iTween.ValueTo(Camera.main.gameObject, iTween.Hash ("from", Camera.main.orthographicSize, "to", 1f, "time", 1f, "easetype", "easeInOutBack", "onupdate", "UpdateOrthographicCameraSize",
+//			                                                    "onupdatetarget", gameObject));
+//			yield return new WaitForSeconds(1f);
+//			iTween.MoveTo (GameObject.Find ("Morgue"), iTween.Hash ("y" , -0.72f, "islocal", false, "time", 0.35f, "easetype", "easeOutBack"));
+//
+//			yield return new WaitForSeconds(0.4f);
+//
+//			GameMgr.getInstance.m_turnState = TURN_STATE.ASSEMBLE;
+//			GameObject.Find ("Morgue").BroadcastMessage ("Assemble", null, SendMessageOptions.DontRequireReceiver);
+//			GameObject.Find ("Core").BroadcastMessage ("Assemble", null, SendMessageOptions.DontRequireReceiver);
+////			GameObject.Find ("Core").transform.position = new Vector2(0,0);
+//
+//			GameObject.Find ("StopAssembleButton").GetComponent<UIPanel>().alpha = 1;
+////			StartCoroutine(CheckAssembleIsDone());
+//		} else {
+//
+//			GameMgr.getInstance.m_turnState = TURN_STATE.ENEMY_MOVE;
+//			GameObject.Find ("Enemies").BroadcastMessage ("FindNewSeat", null, SendMessageOptions.DontRequireReceiver);
+//
+//			yield return new WaitForSeconds (1.5f);
+//
+//			StartCoroutine (EnemyAttackTurn ());
+//		}
+//	}
 	
 	void UpdateOrthographicCameraSize (float size) {
 		Camera.main.orthographicSize = size;
 	}
 
-	IEnumerator EnemyAttackTurn()
+//	IEnumerator EnemyAttackTurn()
+//	{
+//		GameMgr.getInstance.m_turnState = TURN_STATE.ENEMY_ATTACK;
+//
+//		GameObject.Find ("Enemies").BroadcastMessage ("Attack", null ,SendMessageOptions.DontRequireReceiver);
+//
+//		yield return new WaitForSeconds (1.5f);
+//
+//		StartCoroutine (UserMove ());
+//	}
+
+	public void EnemyEliminatedCheck()
 	{
-		GameMgr.getInstance.m_turnState = TURN_STATE.ENEMY_ATTACK;
-
-		GameObject.Find ("Enemies").BroadcastMessage ("Attack", null ,SendMessageOptions.DontRequireReceiver);
-
-		yield return new WaitForSeconds (1.5f);
-
-		StartCoroutine (UserMove ());
+		StartCoroutine (EnemyEliminatedCheckCoroutine());
 	}
 
-	bool EnemyEliminatedCheck()
+	IEnumerator EnemyEliminatedCheckCoroutine()
 	{
+		yield return new WaitForSeconds(1f);
+		
 		Transform EnemyParent = GameObject.Find ("Enemies").transform;
-
-		for (int i = 0; i < EnemyParent.childCount; ++i) {
-//			if(!EnemyParent.GetChild(i).GetComponent<Enemy>().m_bDestroied)
-//				return false;
+		
+		if (EnemyParent.childCount == 0) { // All Enemies Dead. Turn to night
+			StartCoroutine (NightTurn ());
 		}
+	}
 
-		return true;
+	IEnumerator DayTurn()
+	{
+		GameObject.Find ("MorgueToggle").GetComponent<UIPanel> ().alpha = 0;
+		GameMgr.getInstance.m_turnState = TURN_STATE.DAY;
+		yield return null;
+	}
+
+	IEnumerator NightTurn()
+	{
+		ToggleMorgue (true);
+		GameObject.Find ("MorgueToggle").GetComponent<UIPanel> ().alpha = 1;
+		GameMgr.getInstance.m_turnState = TURN_STATE.NIGHT;
+		yield return null;
 	}
 
 //	IEnumerator CheckAssembleIsDone()
@@ -142,7 +162,7 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 		EnemyGenerate ();
 		GameObject.Find("Core").BroadcastMessage("StopAssemble");
 
-		StartCoroutine (UserMove (true));
+//		StartCoroutine (UserMove (true));
 	}
 
 	public void StartAssembleAfter(GameObject obj)
@@ -177,15 +197,15 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 		StartCoroutine (target.GetComponent<Part>().OnField());
 	}
 
-	bool bMorgueOn = false;
-	public void ToggleMorge()
+	public bool MorgueFalse = false;
+	public void ToggleMorgue(bool bOn)
 	{
 		Transform morgueTrans = GameObject.Find("Morgue").transform;
 		float fMovedCamXPos = Camera.main.transform.position.x + 1.7f;
 		float fOringXPos = 0f;
 		GameObject grids = GameObject.Find("Grids").gameObject;
 
-		if (!bMorgueOn) {
+		if (bOn) {
 			GameObject.Find ("Core").transform.position = new Vector3(0,0);
 			GameObject.Find ("Core").GetComponent<Part>().m_iGridIdx = GridMgr.getInstance.GetGridIdx(new Vector2(0,0));
 
@@ -201,10 +221,10 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 			}
 			StartCoroutine(CamOffset_XChg(true));
 			iTween.MoveTo (morgueTrans.gameObject, iTween.Hash ("x",  0.5f, "time", 0.25f, "easetype", "easeInSine", "islocal", true));
-			bMorgueOn = true;
 		} else {
 			StartCoroutine(GameObject.Find("glass").GetComponent<Glass>().ToggleColor(false));
-			
+			GameObject.Find ("Core").BroadcastMessage("StopAssemble", SendMessageOptions.DontRequireReceiver);
+
 			for(int i = 0 ; i < grids.transform.childCount; ++i)
 			{
 				grids.transform.GetChild(i).gameObject.SetActive(true);
@@ -212,7 +232,8 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 			}
 			StartCoroutine(CamOffset_XChg(false));
 			iTween.MoveTo (morgueTrans.gameObject, iTween.Hash ("x", 1.5f, "time", 0.25f, "easetype", "easeInSine","islocal", true));
-			bMorgueOn = false;
+
+			StartCoroutine(DayTurn());
 		}
 	}
 

@@ -13,16 +13,19 @@ public class FSM_Freindly : FSM {
 	protected override IEnumerator State_Idle()
 	{
 		Transform EnemyTrans = GameObject.Find("Enemies").transform;
+		bool bAttackAble = GetComponent<Part> ().m_bAttackAvailable;
 
 		do{
 			yield return null;
 
-			for(int i =0 ; i < EnemyTrans.childCount; ++i)
-			{
-				if(Vector3.Distance(EnemyTrans.GetChild(i).transform.position, transform.position) < 0.5f)
+			if(bAttackAble){
+				for(int i =0 ; i < EnemyTrans.childCount; ++i)
 				{
-					m_target = EnemyTrans.GetChild(i).gameObject;
-					m_AiState = AI_STATE.ATTACK;
+					if(Vector3.Distance(EnemyTrans.GetChild(i).transform.position, transform.position) < 0.5f && EnemyTrans.GetChild(i).gameObject.activeInHierarchy)
+					{
+						m_target = EnemyTrans.GetChild(i).gameObject;
+						m_AiState = AI_STATE.ATTACK;
+					}
 				}
 			}
 			
@@ -40,8 +43,15 @@ public class FSM_Freindly : FSM {
 			yield return new WaitForSeconds(1.1f);
 			iTween.RotateTo(gameObject, iTween.Hash("z",0f,"time",0.2f));
 			yield return new WaitForSeconds(0.2f);
-			StartCoroutine(Attack(m_target, true));
+			StartCoroutine(Attack(m_target, GetComponent<Part>().m_fAttackDmg, true));
 			yield return new WaitForSeconds(0.2f); //Delay
+
+			if(m_target == null || !m_target.activeInHierarchy)
+			{
+				m_AiState = AI_STATE.IDLE;
+				m_target = null;
+				break;
+			}
 
 			if(Vector3.Distance(m_target.transform.position, transform.position) > 0.5f)
 			{
