@@ -31,7 +31,7 @@ public class Morgue : Singleton<Morgue> {
 			}
 
 		} else {
-			int iIdx = GridIdxToMorgueIdx (iGridIdx);
+			int iIdx = GetIdxFromPos(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
 			movePart.GetComponent<SpriteRenderer>().sortingLayerName = "DeadBodies";
 			m_bBodyArr[iIdx] = true;
@@ -66,22 +66,22 @@ public class Morgue : Singleton<Morgue> {
 
 		return -1;
 	}
+//
+//	int GridIdxToMorgueIdx(int iGridIdx)
+//	{
+//		if (iGridIdx < 156) {
+//			return iGridIdx - 145;
+//		} else {
+//			return iGridIdx - 156 + 7;
+//		}
+//	}
 
-	int GridIdxToMorgueIdx(int iGridIdx)
-	{
-		if (iGridIdx < 156) {
-			return iGridIdx - 145;
-		} else {
-			return iGridIdx - 156 + 7;
-		}
-	}
-
-	Vector3 GetIdxPos(int iIdx)
+	public Vector3 GetIdxPos(int iIdx)
 	{
 		return new Vector3 (transform.position.x - 0.4f + ((iIdx%6) * 0.16f), transform.position.y + 0.48f - ((iIdx/6) * 0.16f));
 	}
 
-	int GetIdxFromPos(Vector3 vPosition)
+	public int GetIdxFromPos(Vector3 vPosition)
 	{
 		vPosition -= transform.position;
 		Vector2 m_fStartPos = new Vector2 ( -0.48f, 0.56f );

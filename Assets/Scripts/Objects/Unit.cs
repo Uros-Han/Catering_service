@@ -6,6 +6,7 @@ public class Unit : MonoBehaviour {
 
 	public float m_fHealth;
 	public float m_fAttackDmg;
+	public float m_fMoveSpeed;
 
 	void Start()
 	{

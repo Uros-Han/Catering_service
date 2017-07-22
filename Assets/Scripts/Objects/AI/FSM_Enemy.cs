@@ -18,6 +18,7 @@ public class FSM_Enemy : FSM {
 		{
 		case AI_STATE.MOVE:
 			StartCoroutine (State_Move ());
+			StartCoroutine(Tremble());
 			break;
 
 		case AI_STATE.ATTACK:
@@ -43,6 +44,7 @@ public class FSM_Enemy : FSM {
 	protected override IEnumerator State_Move()
 	{
 		Transform CoreTrans = GameObject.Find ("Core").transform;
+		float fMoveSpeed = GetComponent<Unit> ().m_fMoveSpeed;
 
 		do{
 			yield return null;
@@ -62,11 +64,44 @@ public class FSM_Enemy : FSM {
 			}
 
 			if(m_AiState == AI_STATE.MOVE)
-				transform.Translate(new Vector3(-1,0) * 0.005f);
+				transform.Translate(new Vector3(-1,0) * fMoveSpeed * Time.deltaTime);
 
 		}while(m_AiState == AI_STATE.MOVE);
 
 		SetState (m_AiState);
+	}
+
+	IEnumerator Tremble()
+	{
+		yield return new WaitForSeconds(Random.Range(0.1f, 0.4f));
+		bool bOnGround = true;
+
+		float fJumpPower = 0.25f;
+		float fJumpResistance = 0.04f;
+		float fCurJumpSpeed = 0f;
+
+		float fOriginYPos = transform.position.y;
+
+		do{
+			if(bOnGround)
+			{
+				bOnGround = false;
+				fCurJumpSpeed = fJumpPower;
+			}
+
+			transform.Translate(new Vector3(0,1) * fCurJumpSpeed * Time.deltaTime);
+
+			fCurJumpSpeed -= fJumpResistance;
+
+			if(transform.position.y < fOriginYPos)
+			{
+				transform.position = new Vector3(transform.position.x, fOriginYPos);
+				bOnGround = true;
+			}
+
+			yield return null;
+
+		}while(m_AiState == AI_STATE.MOVE || transform.position.y > fOriginYPos);
 	}
 
 	protected override IEnumerator State_Attack()

@@ -112,7 +112,14 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 	{
 		GameObject.Find ("MorgueToggle").GetComponent<UIPanel> ().alpha = 0;
 		GameMgr.getInstance.m_turnState = TURN_STATE.DAY;
-		yield return null;
+
+		yield return new WaitForSeconds(0.25f);
+
+		//Clean Morgue
+		Transform morgueTrans = GameObject.Find ("Morgue").transform;
+		for (int i = 0; i < morgueTrans.childCount; ++i) {
+			Destroy(morgueTrans.GetChild(i).gameObject);
+		}
 	}
 
 	IEnumerator NightTurn()

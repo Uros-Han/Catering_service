@@ -78,6 +78,7 @@ public class Part : MonoBehaviour {
 
 		Vector2 mousePosition = Vector2.zero;
 		BoxCollider2D collider2D = GetComponent<BoxCollider2D> ();
+		BoxCollider2D morgueCollider2D = GameObject.Find ("Morgue").GetComponent<BoxCollider2D> ();
 		Vector3 OriginPos = transform.position;
 		
 		Core core = GameObject.Find ("Core").GetComponent<Core> ();
@@ -183,6 +184,15 @@ public class Part : MonoBehaviour {
 					}
 				}
 
+				if(morgueCollider2D.OverlapPoint(mousePosition)) // get in morgue
+				{
+					if(!Morgue.getInstance.m_bBodyArr[Morgue.getInstance.GetIdxFromPos(mousePosition)])
+					{
+						transform.position = Morgue.getInstance.GetIdxPos(Morgue.getInstance.GetIdxFromPos(mousePosition));
+						iTween.RotateTo(gameObject, iTween.Hash ("z", 0f, "time", 0.2f));
+					}
+				}
+
 //				for(int i = 0; i < morgueIdxArr.Length; ++i)
 //				{
 //					if(morgueIdxArr[i].Equals(curGridIdx) && (!Morgue.getInstance.m_bBodyArr[i] || curGridIdx.Equals(grid.GetGridIdx(OriginPos)))){ //드래그중 비어있는 시체창고 안에 들어옴
@@ -241,6 +251,36 @@ public class Part : MonoBehaviour {
 
 						GetComponent<SpriteParticleEmitter.DynamicEmitter>().enabled = true;
 						GetComponent<SpriteRenderer>().enabled = false;
+					}
+				}
+
+				if(morgueCollider2D.OverlapPoint(mousePosition)) // get in morgue
+				{
+					if(!Morgue.getInstance.m_bBodyArr[Morgue.getInstance.GetIdxFromPos(mousePosition)])
+					{
+						transform.position = Morgue.getInstance.GetIdxPos(Morgue.getInstance.GetIdxFromPos(mousePosition));
+						bToOrigin = false;
+						transform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
+
+						if(!bParentWasCore)
+							Morgue.getInstance.RemoveBody(OriginPos);
+						else{
+							GetComponent<SpriteSheet>().CheckAround(false, iBeforeSeatIdx);
+							iBeforeSeatIdx = -1;
+							bParentWasCore = false;
+
+							GameObject.Find("Core").BroadcastMessage("AmI_InCoreSide");
+						}
+
+						Morgue.getInstance.AddBody(true, gameObject, curGridIdx);
+
+						GetComponent<SpriteRenderer>().sortingLayerName = "DeadBodies";
+						GetComponent<ParticleSystemRenderer>().sortingLayerName = "DeadBodies_Particle";
+
+
+
+						OriginPos = transform.position;
+						transform.parent = GameObject.Find("Morgue").transform;
 					}
 				}
 
