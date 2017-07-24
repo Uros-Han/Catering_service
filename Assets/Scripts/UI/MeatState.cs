@@ -13,6 +13,6 @@ public class MeatState : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		m_label.text = "Meat : " + BattleSceneMgr.getInstance.m_iMeat;
+		m_label.text = BattleSceneMgr.getInstance.m_iMeat.ToString();
 	}
 }

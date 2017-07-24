@@ -40,8 +40,8 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	public GameObject Create_Aleart(int iIdx)
 	{
 		GameObject obj = Instantiate (m_objAleart) as GameObject;
-		obj.transform.parent = GameObject.Find("Alearts").transform;
-		obj.transform.position = GridMgr.getInstance.GetPosOfIdx (iIdx);
+		obj.transform.parent = GameObject.Find("PartBorder").transform;
+		obj.transform.position = GridMgr.getInstance.GetPosOfIdx(iIdx);
 		
 		return obj;
 	}
@@ -57,24 +57,24 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 
 		return obj;
 	}
-
-	public GameObject Create_Cattle(DIRECTION dir)
-	{
-		GameObject obj = Instantiate (m_objCattle) as GameObject;
-		obj.transform.parent = GameObject.Find("Enemies").transform;
-
-//		obj.GetComponent<Enemy> ().m_headingDirection = dir;
-		obj.GetComponent<Part> ().SetDirection ();
-		return obj;
-	}
-
-	public GameObject Create_Wolf(DIRECTION dir)
-	{
-		GameObject obj = Instantiate (m_objWolf) as GameObject;
-		obj.transform.parent = GameObject.Find("Enemies").transform;
-		
-//		obj.GetComponent<Enemy> ().m_headingDirection = dir;
-		obj.GetComponent<Part> ().SetDirection ();
-		return obj;
-	}
+//
+//	public GameObject Create_Cattle(DIRECTION dir)
+//	{
+//		GameObject obj = Instantiate (m_objCattle) as GameObject;
+//		obj.transform.parent = GameObject.Find("Enemies").transform;
+//
+////		obj.GetComponent<Enemy> ().m_headingDirection = dir;
+//		obj.GetComponent<Part> ().SetDirection ();
+//		return obj;
+//	}
+//
+//	public GameObject Create_Wolf(DIRECTION dir)
+//	{
+//		GameObject obj = Instantiate (m_objWolf) as GameObject;
+//		obj.transform.parent = GameObject.Find("Enemies").transform;
+//		
+////		obj.GetComponent<Enemy> ().m_headingDirection = dir;
+//		obj.GetComponent<Part> ().SetDirection ();
+//		return obj;
+//	}
 }

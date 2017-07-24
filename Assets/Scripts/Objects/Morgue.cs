@@ -7,10 +7,12 @@ public class Morgue : Singleton<Morgue> {
 	public bool[] m_bBodyArr; //자리 차지한 시체들 false == empty
 //	public int[] m_iMorgueIdxArr;
 	public float m_fBodyMoveTime;
+	int m_iIdxCount = 24;
+	public Part m_SelectedPart;
 
 	void Start()
 	{
-		m_bBodyArr = new bool[24];
+		m_bBodyArr = new bool[m_iIdxCount];
 //		m_iMorgueIdxArr = new int[]{ 145, 146, 147, 148, 149, 150, 151, 156, 157, 158, 159, 160, 161, 162};
 		m_fBodyMoveTime = 0.25f;
 	}
@@ -38,6 +40,22 @@ public class Morgue : Singleton<Morgue> {
 		}
 
 		StartCoroutine (ChangeParentToMorgue(movePart));
+	}
+
+	public void SelectPart(Part part)
+	{
+		m_SelectedPart = part;
+		Transform morguePanel = GameObject.Find ("MorguePanel").transform;
+
+		morguePanel.Find ("PartName").GetComponent<UILabel> ().text = part.m_strNameKey;  //TODO : Localize
+	}
+
+	public void DeselectPart()
+	{
+		m_SelectedPart = null;
+		Transform morguePanel = GameObject.Find ("MorguePanel").transform;
+		
+		morguePanel.Find ("PartName").GetComponent<UILabel> ().text = "";
 	}
 
 	IEnumerator ChangeParentToMorgue(GameObject movePart)
@@ -91,7 +109,10 @@ public class Morgue : Singleton<Morgue> {
 		int m_iYcount = 4;
 
 		int tmpidx = (int)(System.Math.Round((vPosition.y-m_fStartPos.y + (m_fYsize/2)) / m_fYsize) * m_iXcount * -1)+ (int)(System.Math.Round((vPosition.x - m_fStartPos.x- (m_fXsize/2)) / m_fXsize));
-//		Debug.Log (tmpidx);
+
+		if (tmpidx < 0 || tmpidx >= m_iIdxCount)
+			tmpidx = -1;
+
 		return tmpidx;
 	}
 }

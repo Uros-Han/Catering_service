@@ -97,11 +97,11 @@ public class LevelGenerator : Singleton<LevelGenerator> {
 			switch(victimArr[i])
 			{
 			case VICTIM.CATTLE:
-				objVictim = ObjectFactory.getInstance.Create_Cattle(headingDir);
+//				objVictim = ObjectFactory.getInstance.Create_Cattle(headingDir);
 				break;
 
 			case VICTIM.WOLF:
-				objVictim = ObjectFactory.getInstance.Create_Wolf(headingDir);
+//				objVictim = ObjectFactory.getInstance.Create_Wolf(headingDir);
 				break;
 				
 			case VICTIM.KNIGHT:

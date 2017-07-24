@@ -280,10 +280,12 @@
      <Compile Include="Assets\Scripts\Manager\AStar.cs" />
      <Compile Include="Assets\Scripts\Manager\BattleSceneMgr.cs" />
      <Compile Include="Assets\Scripts\Manager\DebugLine.cs" />
+     <Compile Include="Assets\Scripts\Manager\FIleSystem.cs" />
      <Compile Include="Assets\Scripts\Manager\GameMgr.cs" />
      <Compile Include="Assets\Scripts\Manager\GridMgr.cs" />
      <Compile Include="Assets\Scripts\Manager\LevelGenerator.cs" />
      <Compile Include="Assets\Scripts\Manager\ObjectFactory.cs" />
+     <Compile Include="Assets\Scripts\Manager\UIFollowTarget.cs" />
      <Compile Include="Assets\Scripts\Objects\AI\FSM.cs" />
      <Compile Include="Assets\Scripts\Objects\AI\FSM_Enemy.cs" />
      <Compile Include="Assets\Scripts\Objects\AI\FSM_Freindly.cs" />
@@ -296,7 +298,9 @@
      <Compile Include="Assets\Scripts\Objects\SpriteSheet.cs" />
      <Compile Include="Assets\Scripts\Objects\Unit.cs" />
      <Compile Include="Assets\Scripts\UI\ControlTap.cs" />
+     <Compile Include="Assets\Scripts\UI\Main\MainButtons.cs" />
      <Compile Include="Assets\Scripts\UI\MeatState.cs" />
+     <Compile Include="Assets\Scripts\UI\WantedReward.cs" />
      <Compile Include="Assets\SpriteParticleEmitter\Code\Core\EmitterBase.cs" />
      <Compile Include="Assets\SpriteParticleEmitter\Code\Core\EmitterBaseUI.cs" />
      <Compile Include="Assets\SpriteParticleEmitter\Code\Core\StaticSpriteEmitter.cs" />

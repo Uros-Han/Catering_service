@@ -17,6 +17,9 @@ public class Part : MonoBehaviour {
 
 	public DIRECTION m_headingDirection;
 
+	public string m_strNameKey; // TODO : Localize
+	public string m_strExplainKey;
+
 	public void SetDirection()
 	{
 		switch (m_headingDirection) {
@@ -79,6 +82,9 @@ public class Part : MonoBehaviour {
 		Vector2 mousePosition = Vector2.zero;
 		BoxCollider2D collider2D = GetComponent<BoxCollider2D> ();
 		BoxCollider2D morgueCollider2D = GameObject.Find ("Morgue").GetComponent<BoxCollider2D> ();
+
+		bool bWasPoop = false;
+		BoxCollider2D PoopColldier2D = GameObject.Find ("Poop").GetComponent<BoxCollider2D> ();
 		Vector3 OriginPos = transform.position;
 		
 		Core core = GameObject.Find ("Core").GetComponent<Core> ();
@@ -89,6 +95,8 @@ public class Part : MonoBehaviour {
 		bStopAssemble = false;
 //		int[] morgueIdxArr = Morgue.getInstance.m_iMorgueIdxArr;
 		int curGridIdx = 0;
+
+		GameObject PartBorder = GameObject.Find ("PartBorder").gameObject;
 		
 		GridMgr grid = GridMgr.getInstance;
 		DIRECTION m_BeforeheadingDirection = DIRECTION.EVERYWHERE;
@@ -98,6 +106,9 @@ public class Part : MonoBehaviour {
 			{
 				OriginPos = transform.position;
 				bFollowCursor = true;
+
+				Morgue.getInstance.SelectPart(this);
+				PartBorder.GetComponent<SpriteRenderer>().enabled = false;
 
 				if(transform.parent.name.Equals("Core"))
 				{
@@ -186,10 +197,22 @@ public class Part : MonoBehaviour {
 
 				if(morgueCollider2D.OverlapPoint(mousePosition)) // get in morgue
 				{
-					if(!Morgue.getInstance.m_bBodyArr[Morgue.getInstance.GetIdxFromPos(mousePosition)])
+					if(Morgue.getInstance.GetIdxFromPos(mousePosition) != -1 && !Morgue.getInstance.m_bBodyArr[Morgue.getInstance.GetIdxFromPos(mousePosition)])
 					{
 						transform.position = Morgue.getInstance.GetIdxPos(Morgue.getInstance.GetIdxFromPos(mousePosition));
 						iTween.RotateTo(gameObject, iTween.Hash ("z", 0f, "time", 0.2f));
+					}
+				}
+				 
+				if(PoopColldier2D.OverlapPoint(mousePosition)) // get in poop
+				{
+					GetComponent<SpriteRenderer>().color = new Color(1,0,0,0.5f);
+					bWasPoop = true;
+				}else{
+					if(bWasPoop)
+					{
+						GetComponent<SpriteRenderer>().color = new Color(1,1,1,1f);
+						bWasPoop = false;
 					}
 				}
 
@@ -256,7 +279,7 @@ public class Part : MonoBehaviour {
 
 				if(morgueCollider2D.OverlapPoint(mousePosition)) // get in morgue
 				{
-					if(!Morgue.getInstance.m_bBodyArr[Morgue.getInstance.GetIdxFromPos(mousePosition)])
+					if(Morgue.getInstance.GetIdxFromPos(mousePosition) != -1 && !Morgue.getInstance.m_bBodyArr[Morgue.getInstance.GetIdxFromPos(mousePosition)])
 					{
 						transform.position = Morgue.getInstance.GetIdxPos(Morgue.getInstance.GetIdxFromPos(mousePosition));
 						bToOrigin = false;
@@ -282,6 +305,14 @@ public class Part : MonoBehaviour {
 						OriginPos = transform.position;
 						transform.parent = GameObject.Find("Morgue").transform;
 					}
+				}
+
+				if(PoopColldier2D.OverlapPoint(mousePosition)) // get in poop
+				{
+					Morgue.getInstance.DeselectPart();
+					Morgue.getInstance.RemoveBody(OriginPos);
+					core.CalculateStickableSeat (false);
+					Destroy(gameObject);
 				}
 
 //				for(int i = 0; i < morgueIdxArr.Length; ++i) // get in morgue
@@ -338,6 +369,8 @@ public class Part : MonoBehaviour {
 				
 				bFollowCursor = false;
 
+				PartBorder.GetComponent<SpriteRenderer>().enabled = true;
+				PartBorder.transform.position = OriginPos;
 			}
 			
 			yield return null;

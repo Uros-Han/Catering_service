@@ -6,10 +6,12 @@ using Com.LuisPedroFonseca.ProCamera2D;
 public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 
 	public int m_iMeat = 0;
+	public int m_iReward = 0;
 
 	// Use this for initialization
 	void Start () {
 		EnemyGenerate ();
+		StartCoroutine(DayTurn());
 //		StartCoroutine (UserMove (true));
 	}
 
@@ -118,8 +120,11 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 		//Clean Morgue
 		Transform morgueTrans = GameObject.Find ("Morgue").transform;
 		for (int i = 0; i < morgueTrans.childCount; ++i) {
-			Destroy(morgueTrans.GetChild(i).gameObject);
+			if(morgueTrans.GetChild(i).gameObject.name != "Poop")
+				Destroy(morgueTrans.GetChild(i).gameObject);
 		}
+
+		StartCoroutine(GameObject.Find ("WantedReward").GetComponent<WantedReward> ().WantedPop ());
 	}
 
 	IEnumerator NightTurn()
