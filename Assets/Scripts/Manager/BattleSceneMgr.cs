@@ -121,7 +121,10 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 		Transform morgueTrans = GameObject.Find ("Morgue").transform;
 		for (int i = 0; i < morgueTrans.childCount; ++i) {
 			if(morgueTrans.GetChild(i).gameObject.name != "Poop")
+			{
 				Destroy(morgueTrans.GetChild(i).gameObject);
+				ObjectFactory.getInstance.Create_Poop();
+			}
 		}
 
 		StartCoroutine(GameObject.Find ("WantedReward").GetComponent<WantedReward> ().WantedPop ());
@@ -244,6 +247,8 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 			}
 			StartCoroutine(CamOffset_XChg(false));
 			iTween.MoveTo (morgueTrans.gameObject, iTween.Hash ("x", 1.5f, "time", 0.25f, "easetype", "easeInSine","islocal", true));
+
+			GameObject.Find("PartBorder").GetComponent<SpriteRenderer>().enabled = false;
 
 			StartCoroutine(DayTurn());
 		}

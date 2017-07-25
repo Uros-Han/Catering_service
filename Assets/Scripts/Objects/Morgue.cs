@@ -63,6 +63,7 @@ public class Morgue : Singleton<Morgue> {
 		yield return null;
 
 		movePart.transform.parent = transform;
+		movePart.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
 	}
 
 	public void RemoveBody(Vector3 vPos)

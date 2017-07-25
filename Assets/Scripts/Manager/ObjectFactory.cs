@@ -12,6 +12,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	GameObject m_objStickableDot;
 	GameObject m_objCattle;
 	GameObject m_objWolf;
+	GameObject m_objPoop;
 
 	public Sprite m_sprite_meat;
 	public Sprite[][] m_sheet_cattle;
@@ -25,6 +26,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		m_objStickableDot = Resources.Load ("Prefabs/Objects/StickableDot") as GameObject;
 		m_objCattle = Resources.Load ("Prefabs/Objects/Parts/Cattle") as GameObject;
 		m_objWolf = Resources.Load ("Prefabs/Objects/Parts/Wolf") as GameObject;
+		m_objPoop = Resources.Load ("Prefabs/Objects/PoopParticle") as GameObject;
 
 		m_sprite_meat = Resources.Load<Sprite> ("Sprites/Meat");
 
@@ -40,8 +42,8 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	public GameObject Create_Aleart(int iIdx)
 	{
 		GameObject obj = Instantiate (m_objAleart) as GameObject;
-		obj.transform.parent = GameObject.Find("PartBorder").transform;
-		obj.transform.position = GridMgr.getInstance.GetPosOfIdx(iIdx);
+		obj.transform.parent = GameObject.Find("Alearts").transform;
+		obj.transform.position = GridMgr.getInstance.GetPosOfIdx (iIdx);
 		
 		return obj;
 	}
@@ -57,6 +59,16 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 
 		return obj;
 	}
+
+	public GameObject Create_Poop()
+	{
+		GameObject obj = Instantiate (m_objPoop) as GameObject;
+		obj.transform.parent = GameObject.Find("Poops").transform;
+		obj.transform.position = GameObject.Find("Core").transform.position;
+		
+		return obj;
+	}
+
 //
 //	public GameObject Create_Cattle(DIRECTION dir)
 //	{

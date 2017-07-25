@@ -20,6 +20,8 @@ public class Part : MonoBehaviour {
 	public string m_strNameKey; // TODO : Localize
 	public string m_strExplainKey;
 
+	public float m_fOriginEmissionRate;
+
 	public void SetDirection()
 	{
 		switch (m_headingDirection) {
@@ -109,6 +111,7 @@ public class Part : MonoBehaviour {
 
 				Morgue.getInstance.SelectPart(this);
 				PartBorder.GetComponent<SpriteRenderer>().enabled = false;
+				transform.localScale = new Vector3(1f, 1f, 1f);
 
 				if(transform.parent.name.Equals("Core"))
 				{
@@ -127,7 +130,7 @@ public class Part : MonoBehaviour {
 				GetComponent<ParticleSystemRenderer>().sortingLayerName = "FrontObject_Particle";
 
 				GetComponent<SpriteParticleEmitter.DynamicEmitter>().enabled = false;
-				GetComponent<SpriteRenderer>().enabled = true;
+				GetComponent<SpriteRenderer>().color = Color.white;
 				
 				core.CalculateStickableSeat (true);
 			}
@@ -242,8 +245,6 @@ public class Part : MonoBehaviour {
 						bToOrigin = false;
 						transform.parent = GameObject.Find("Core").transform;
 
-						GetComponent<SpriteRenderer>().color = new Color(180/255f, 200/255f, 180/255f);
-
 						if(!m_bEdgePart)
 							transform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
 
@@ -272,8 +273,8 @@ public class Part : MonoBehaviour {
 
 						OriginPos = transform.position;
 
+						GetComponent<SpriteRenderer>().color = Color.red;
 						GetComponent<SpriteParticleEmitter.DynamicEmitter>().enabled = true;
-						GetComponent<SpriteRenderer>().enabled = false;
 					}
 				}
 
@@ -313,6 +314,7 @@ public class Part : MonoBehaviour {
 					Morgue.getInstance.RemoveBody(OriginPos);
 					core.CalculateStickableSeat (false);
 					Destroy(gameObject);
+					ObjectFactory.getInstance.Create_Poop();
 				}
 
 //				for(int i = 0; i < morgueIdxArr.Length; ++i) // get in morgue
