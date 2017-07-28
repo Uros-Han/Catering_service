@@ -24,6 +24,10 @@ public class FSM : MonoBehaviour {
 		case AI_STATE.ATTACK:
 			StartCoroutine (State_Attack ());
 			break;
+
+		case AI_STATE.DISABLED:
+			StartCoroutine (State_Disabled ());
+			break;
 		}
 	}
 
@@ -60,29 +64,49 @@ public class FSM : MonoBehaviour {
 	protected IEnumerator Attack(GameObject target, float fDamage, bool bEnemy)
 	{
 		if (bEnemy) { /// Attack Enemy
+
+			target.GetComponent<Unit>().m_fCurHealth -= fDamage;
+
 			for (int i = 0; i < target.transform.childCount; ++i) {
-				target.transform.GetChild (i).GetComponent<SpriteRenderer> ().color = Color.red;
+				target.transform.GetChild (i).GetComponent<Part>().AdjustEmissionRate();
 			}
 
-			target.GetComponent<Unit>().m_fHealth -= fDamage;
-			if(target.GetComponent<Unit>().m_fHealth <= 0)
+			if(target.GetComponent<Unit>().m_fCurHealth <= 0)
 			{
 				target.GetComponent<Unit>().Death();
 				yield break;
 			}
 		} else { //Attack Friendly
-			target.GetComponent<SpriteRenderer> ().color = Color.red;
+
+			target.GetComponent<Part>().m_fCurHealth -= fDamage;
+
+			target.GetComponent<Part>().AdjustEmissionRate();
+			if(target.GetComponent<Part>().m_fCurHealth <= 0)
+			{
+				target.GetComponent<Part>().PartDestroyed();
+				yield break;
+			}
 		}
 
 		yield return new WaitForSeconds (0.15f);
 
 		if (bEnemy) {
 			for (int i = 0; i < target.transform.childCount; ++i) {
-				target.transform.GetChild (i).GetComponent<SpriteRenderer> ().color = Color.white;
+//				target.transform.GetChild (i).GetComponent<SpriteRenderer> ().color = Color.white;
 			}
 		} else {
-			target.GetComponent<SpriteRenderer> ().color = Color.white;
+//			target.GetComponent<SpriteRenderer> ().color = Color.white;
 		}
 
+	}
+	
+	protected virtual IEnumerator State_Disabled()
+	{
+		do{
+			yield return null;
+			
+		}while(m_AiState == AI_STATE.DISABLED);
+		
+		SetState (m_AiState);
 	}
 }

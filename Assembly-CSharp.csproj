@@ -296,10 +296,13 @@
      <Compile Include="Assets\Scripts\Objects\Morgue.cs" />
      <Compile Include="Assets\Scripts\Objects\Part.cs" />
      <Compile Include="Assets\Scripts\Objects\Poop.cs" />
+     <Compile Include="Assets\Scripts\Objects\SpriteModifier.cs" />
      <Compile Include="Assets\Scripts\Objects\SpriteSheet.cs" />
+     <Compile Include="Assets\Scripts\Objects\Tangled.cs" />
      <Compile Include="Assets\Scripts\Objects\Unit.cs" />
      <Compile Include="Assets\Scripts\UI\ControlTap.cs" />
      <Compile Include="Assets\Scripts\UI\Main\MainButtons.cs" />
+     <Compile Include="Assets\Scripts\UI\MeatButton.cs" />
      <Compile Include="Assets\Scripts\UI\MeatState.cs" />
      <Compile Include="Assets\Scripts\UI\WantedReward.cs" />
      <Compile Include="Assets\SpriteParticleEmitter\Code\Core\EmitterBase.cs" />

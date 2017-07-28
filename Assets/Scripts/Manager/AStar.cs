@@ -380,17 +380,12 @@ public class AStar : Singleton<AStar>
 
 		m_listPart.Clear ();
 
-		Transform CoreTrans = GameObject.Find ("Core").transform;
+		Transform PlayerTrans = GameObject.Find ("Player").transform;
 		GridMgr grid = GridMgr.getInstance;
 
 
-		for (int i = 0; i < CoreTrans.childCount + 1; ++i) {
-			if(i == CoreTrans.childCount)
-			{
-				m_listPart.Add(CoreTrans.GetComponent<Part>());
-			}else{
-				m_listPart.Add(CoreTrans.GetChild(i).GetComponent<Part>());
-			}
+		for (int i = 0; i < PlayerTrans.childCount; ++i) {
+			m_listPart.Add(PlayerTrans.GetChild(i).GetComponent<Part>());
 		}
 	}
 

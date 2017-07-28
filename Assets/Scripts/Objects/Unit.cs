@@ -5,19 +5,23 @@ using UnityEngine;
 public class Unit : MonoBehaviour {
 
 	public float m_fHealth;
+	public float m_fCurHealth;
+
 	public float m_fAttackDmg;
 	public float m_fMoveSpeed;
+	public ENEMY_TYPE m_enemyType;
 
 	void Start()
 	{
 		StartCoroutine (CheckUnitEaten ());
+		m_fCurHealth = m_fHealth;
 	}
 
 	public void Death()
 	{
 
 		Transform FieldTrans = GameObject.Find ("Field").transform;
-		Vector3 bodyPos = transform.FindChild ("Body").position;
+		Vector3 bodyPos = transform.position;
 		Vector3 RandomPos = new Vector3 (Random.Range (-0.1f, 0.1f), Random.Range (-0.1f, 0.1f));
 		bodyPos += RandomPos;
 

@@ -3,11 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FSM_Enemy : FSM {
-	
+
+	List<GameObject> m_AttackAvailableParts;
+
+	float fBornPosX = 0;
 
 	// Use this for initialization
 	void Start () {
 		SetState (AI_STATE.MOVE);
+
+		m_AttackAvailableParts = new List<GameObject> ();
+
+		//Find AttackAvailable Part
+		for(int i =0 ; i < transform.childCount; ++i)
+		{
+			if(transform.GetChild(i).GetComponent<Part>().m_bAttackAvailable)
+				m_AttackAvailableParts.Add(transform.GetChild(i).gameObject);
+		}
+
+		fBornPosX = transform.position.x;
 	}
 
 	void SetState(AI_STATE state)
@@ -22,6 +36,9 @@ public class FSM_Enemy : FSM {
 			break;
 
 		case AI_STATE.ATTACK:
+			for(int i = 0 ; i < m_AttackAvailableParts.Count; ++i)
+				StartCoroutine(AttackablePart(m_AttackAvailableParts[i], i));
+
 			StartCoroutine (State_Attack ());
 			break;
 
@@ -43,28 +60,35 @@ public class FSM_Enemy : FSM {
 
 	protected override IEnumerator State_Move()
 	{
-		Transform CoreTrans = GameObject.Find ("Core").transform;
+		Transform PlayerTrans = GameObject.Find ("Player").transform;
 		float fMoveSpeed = GetComponent<Unit> ().m_fMoveSpeed;
 
 		do{
 			yield return null;
 
-			if(Vector3.Distance(CoreTrans.position, transform.position) < 0.5f)
+			if(m_AiState == AI_STATE.MOVE)
+				transform.Translate(new Vector3(-1,0) * fMoveSpeed * Time.deltaTime);
+
+			if(transform.position.x < -fBornPosX) //Run Away
 			{
-				m_target = CoreTrans.gameObject;
-				m_AiState = AI_STATE.ATTACK;
+				BattleSceneMgr.getInstance.EnemyEliminatedCheck ();
+				Destroy (gameObject);
 			}
-			for(int i=0; i < CoreTrans.childCount; ++i)
+
+			if(m_AttackAvailableParts.Count.Equals(0))
+				continue;
+
+			//// TODO : Attack logic modify
+
+			for(int i=0; i < PlayerTrans.childCount; ++i)
 			{
-				if(Vector3.Distance(CoreTrans.GetChild(i).transform.position, transform.position) < 0.5f)
+				if(Vector3.Distance(PlayerTrans.GetChild(i).transform.position, transform.position) < 0.5f)
 				{
-					m_target = CoreTrans.GetChild(i).gameObject;
+					m_target = PlayerTrans.GetChild(i).gameObject;
 					m_AiState = AI_STATE.ATTACK;
 				}
 			}
-
-			if(m_AiState == AI_STATE.MOVE)
-				transform.Translate(new Vector3(-1,0) * fMoveSpeed * Time.deltaTime);
+			//////////////////////////////////
 
 		}while(m_AiState == AI_STATE.MOVE);
 
@@ -106,19 +130,8 @@ public class FSM_Enemy : FSM {
 
 	protected override IEnumerator State_Attack()
 	{
-		GameObject LeftHand = transform.FindChild ("Hand_L").gameObject;
-
 		do{
 			yield return null;
-
-			iTween.RotateTo(LeftHand, iTween.Hash("z",-100f,"time",0.8f));
-			iTween.MoveTo(LeftHand, iTween.Hash("x", -0.095f, "y", 0.209f, "time", 0.8f, "islocal", true));
-			yield return new WaitForSeconds(1.1f);
-         	iTween.RotateTo(LeftHand, iTween.Hash("z",0f,"time",0.2f));
-			iTween.MoveTo(LeftHand, iTween.Hash("x", -0.129f, "y", 0.08f, "time", 0.2f, "islocal", true));
-			yield return new WaitForSeconds(0.2f);
-			StartCoroutine(Attack(m_target, GetComponent<Unit>().m_fAttackDmg, false));
-			yield return new WaitForSeconds(0.2f);
 
 			if(Vector3.Distance(m_target.transform.position, transform.position) > 0.5f)
 			{
@@ -129,5 +142,41 @@ public class FSM_Enemy : FSM {
 		}while(m_AiState == AI_STATE.ATTACK);
 
 		SetState (m_AiState);
+	}
+
+	IEnumerator AttackablePart(GameObject AttackPart, int iCount)
+	{
+		yield return new WaitForSeconds (iCount * 0.5f);
+
+		Part targetPart = m_target.GetComponent<Part> ();
+		Quaternion originRotate = AttackPart.transform.localRotation;
+		Vector3 originPos = AttackPart.transform.localPosition;
+
+		while(m_AiState == AI_STATE.ATTACK){
+
+			iTween.RotateTo(AttackPart, iTween.Hash("z",-100f,"time",0.8f, "islocal", true));
+			iTween.MoveTo(AttackPart, iTween.Hash("x", -0.095f, "y", 0.209f, "time", 0.8f, "islocal", true));
+			yield return new WaitForSeconds(1.1f);
+
+			if(targetPart.m_bDestroied)
+			{
+				AttackPart.transform.localRotation = originRotate;
+				AttackPart.transform.localPosition = originPos;
+				continue;
+			}
+			iTween.RotateTo(AttackPart, iTween.Hash("z",0f,"time",0.2f, "islocal", true));
+			iTween.MoveTo(AttackPart, iTween.Hash("x", -0.129f, "y", 0.08f, "time", 0.2f, "islocal", true));
+			yield return new WaitForSeconds(0.2f);
+			if(targetPart.m_bDestroied)
+			{
+				AttackPart.transform.localRotation = originRotate;
+				AttackPart.transform.localPosition = originPos;
+				continue;
+			}
+
+			StartCoroutine(Attack(m_target, GetComponent<Unit>().m_fAttackDmg, false));
+			yield return new WaitForSeconds(0.2f);
+
+		};
 	}
 }

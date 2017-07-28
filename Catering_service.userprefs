@@ -1,17 +1,20 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Manager/BattleSceneMgr.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Objects/SpriteSheet.cs">
     <Files>
-      <File FileName="Assets/Scripts/Objects/Core.cs" Line="110" Column="40" />
-      <File FileName="Assets/Scripts/Objects/Unit.cs" Line="6" Column="2" />
-      <File FileName="Assets/Scripts/Objects/AI/FSM_Freindly.cs" Line="20" Column="4" />
-      <File FileName="Assets/Scripts/Objects/AI/FSM.cs" Line="69" Column="5" />
-      <File FileName="Assets/Scripts/Objects/AI/FSM_Enemy.cs" Line="76" Column="58" />
-      <File FileName="Assets/Scripts/Header/Enum.cs" Line="9" Column="50" />
-      <File FileName="Assets/Scripts/Manager/BattleSceneMgr.cs" Line="121" Column="47" />
-      <File FileName="Assets/Scripts/Manager/GameMgr.cs" Line="7" Column="14" />
-      <File FileName="Assets/Scripts/Objects/Morgue.cs" Line="50" Column="2" />
-      <File FileName="Assets/Scripts/Objects/Part.cs" Line="261" Column="42" />
+      <File FileName="Assets/Scripts/Objects/Part.cs" Line="472" Column="64" />
+      <File FileName="Assets/Scripts/Manager/BattleSceneMgr.cs" Line="211" Column="18" />
+      <File FileName="Assets/Scripts/Objects/Unit.cs" Line="49" Column="3" />
+      <File FileName="Assets/Scripts/Objects/Core.cs" Line="125" Column="4" />
+      <File FileName="Assets/Scripts/Objects/Morgue.cs" Line="68" Column="48" />
+      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="37" Column="82" />
+      <File FileName="Assets/Scripts/Objects/Poop.cs" Line="9" Column="92" />
+      <File FileName="Assets/Scripts/Objects/SpriteSheet.cs" Line="18" Column="47" />
+      <File FileName="Assets/Scripts/Objects/AI/FSM_Enemy.cs" Line="178" Column="42" />
+      <File FileName="Assets/Scripts/Objects/AI/FSM.cs" Line="64" Column="26" />
+      <File FileName="Assets/Scripts/Manager/AStar.cs" Line="436" Column="19" />
+      <File FileName="Assets/Scripts/Objects/AI/FSM_Freindly.cs" Line="10" Column="11" />
+      <File FileName="Assets/Scripts/Objects/SpriteModifier.cs" Line="9" Column="28" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -5,6 +5,8 @@ using UnityEngine;
 public class Part : MonoBehaviour {
 
 	public float m_fHealth; // Health
+	public float m_fCurHealth;
+
 	public bool m_bAttackAvailable; //Can hit enemy?
 	public float m_fAttackDmg; //Damage
 //	public bool m_bFriendly; //아군?
@@ -21,6 +23,14 @@ public class Part : MonoBehaviour {
 	public string m_strExplainKey;
 
 	public float m_fOriginEmissionRate;
+
+	void Start()
+	{
+		m_fOriginEmissionRate = GetComponent<SpriteParticleEmitter.DynamicEmitter> ().EmissionRate;
+		m_fCurHealth = m_fHealth;
+
+		StartCoroutine (Heal ());
+	}
 
 	public void SetDirection()
 	{
@@ -102,7 +112,15 @@ public class Part : MonoBehaviour {
 		
 		GridMgr grid = GridMgr.getInstance;
 		DIRECTION m_BeforeheadingDirection = DIRECTION.EVERYWHERE;
+		BattleSceneMgr battleSceneMgr = BattleSceneMgr.getInstance;
+
 		do{
+			if(!battleSceneMgr.m_mouseState.Equals(MOUSE_STATE.NORMAL))
+			{
+				yield return null;
+				continue;
+			}
+
 			mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			if(Input.GetMouseButtonDown(0) && collider2D.OverlapPoint(mousePosition))
 			{
@@ -147,16 +165,13 @@ public class Part : MonoBehaviour {
 						transform.position = grid.GetPosOfIdx(core.m_StickAvailableSeat[i]);
 
 						//붙는방향으로 파츠 회전하도록
-						Transform CoreTrans = GameObject.Find("Core").transform;
+						Transform PlayerTrans = GameObject.Find("Player").transform;
 						GameObject ClosestPart = null;
 
-						for(int j=0 ; j < CoreTrans.childCount + 1; ++j)
+						for(int j=0 ; j < PlayerTrans.childCount; ++j)
 						{
 							GameObject target;
-							if(j == CoreTrans.childCount)
-								target = CoreTrans.gameObject;
-							else
-								target = CoreTrans.GetChild(j).gameObject;
+							target = PlayerTrans.GetChild(j).gameObject;
 
 							if(ClosestPart == null)
 								ClosestPart = target;
@@ -243,7 +258,7 @@ public class Part : MonoBehaviour {
 					{
 						transform.position = grid.GetPosOfIdx(core.m_StickAvailableSeat[i]);
 						bToOrigin = false;
-						transform.parent = GameObject.Find("Core").transform;
+						transform.parent = GameObject.Find("Player").transform;
 
 						if(!m_bEdgePart)
 							transform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
@@ -379,6 +394,50 @@ public class Part : MonoBehaviour {
 		}while(!bStopAssemble);
 	}
 
+	public void HealCheck()
+	{
+		StartCoroutine (Heal ());
+	}
+
+	protected IEnumerator Heal()
+	{
+		Vector3 mousePosition;
+		BoxCollider2D collider2D = GetComponent<BoxCollider2D> ();
+		BattleSceneMgr battleSceneMgr = BattleSceneMgr.getInstance;
+		bool bHighlighted = false;
+
+		do{
+			mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+			if(!bHighlighted && collider2D.OverlapPoint(mousePosition))
+			{
+				bHighlighted = true;
+				iTween.ScaleTo(gameObject, iTween.Hash("x", 1.3f, "y", 1.3f, "time" , 0.1f, "easetype", "easeInSine"));
+			}else if(bHighlighted && !collider2D.OverlapPoint(mousePosition)){
+				bHighlighted = false;
+				iTween.ScaleTo(gameObject, iTween.Hash("x", 1f, "y", 1f, "time" , 0.1f, "easetype", "easeInSine"));
+			}
+
+			if(Input.GetMouseButtonDown(0) && collider2D.OverlapPoint(mousePosition))
+			{
+				if(m_fCurHealth < m_fHealth && battleSceneMgr.m_iMeat > 0)
+				{
+					battleSceneMgr.m_iMeat -= 1;
+					m_fCurHealth += 1;
+					AdjustEmissionRate();
+				}
+			}
+
+			yield return null;
+
+		}while(battleSceneMgr.m_mouseState == MOUSE_STATE.HEAL);
+
+		if (bHighlighted) {
+			bHighlighted = false;
+			iTween.ScaleTo(gameObject, iTween.Hash("x", 1f, "y", 1f, "time" , 0.1f, "easetype", "easeInSine"));
+		}
+	}
+
 	IEnumerator ResetRotation()
 	{
 		yield return null;
@@ -386,7 +445,18 @@ public class Part : MonoBehaviour {
 		yield return null;
 
 		transform.localRotation = Quaternion.AngleAxis (0f, Vector3.forward);
+	}
 
+	public void AdjustEmissionRate()
+	{
+		if (transform.parent.GetComponent<FSM_Enemy> () != null) { // Enemy
+			Unit unit = transform.parent.GetComponent<Unit>();
+			if(unit.m_fCurHealth == unit.m_fHealth)
+				GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = 1;
+			else
+				GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = (int)((unit.m_fCurHealth / unit.m_fHealth) * m_fOriginEmissionRate / 3f);
+		}else
+			GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = (m_fCurHealth / m_fHealth) * m_fOriginEmissionRate;
 	}
 
 	public GameObject m_objAleart;
@@ -425,17 +495,51 @@ public class Part : MonoBehaviour {
 		int iStart = GridMgr.getInstance.GetGridIdx (transform.position);
 		int iEnd = GridMgr.getInstance.GetGridIdx (GameObject.Find("Core").transform.position);
 
-		if (!AStar.getInstance.AStarStart_CoreFind (iStart, iEnd)) {//Breaked Path
-			if(m_objAleart == null)
-				m_objAleart = ObjectFactory.getInstance.Create_Aleart (iStart);
-			else
-				m_objAleart.transform.position = transform.position;
+		if (!AStar.getInstance.AStarStart_CoreFind (iStart, iEnd)) {//Breaked Path -> Disabled
+
+			GetComponent<FSM_Freindly>().m_AiState = AI_STATE.DISABLED;
+			GetComponent<SpriteParticleEmitter.DynamicEmitter>().enabled = false;
+			GetComponent<SpriteRenderer>().color = Color.gray;
+
 		} else {//CoreSide
 
-		}
 
+		}
 	}
-	
+
+	public void DestroyThis()
+	{
+		Destroy (gameObject);
+	}
+
+	public void PartDestroyed()
+	{
+		m_bDestroied = true;
+
+		Transform FieldTrans = GameObject.Find ("Field").transform;
+
+		Destroy (GetComponent<FSM_Freindly> ());
+		transform.localRotation = Quaternion.AngleAxis (0, Vector3.forward);
+
+		GetComponent<SpriteRenderer>().color = Color.white;
+
+		GetComponent<Rigidbody2D>().AddTorque(Random.Range(0f, 30f));
+		GetComponent<SpriteRenderer>().color = new Color(160/255f,160/255f,160/255f);
+		
+		StartCoroutine(ChangeParentToField(gameObject));
+	}
+
+	IEnumerator ChangeParentToField(GameObject target)
+	{
+		yield return null;
+		target.transform.parent = GameObject.Find ("Field").transform;
+		BattleSceneMgr.getInstance.OnField(target);
+
+		GameObject.Find ("Player").BroadcastMessage ("DestroyPart_WhenPathBreaked");
+		GetComponent<SpriteSheet>().CheckAround(false);
+		GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sprite_meat;
+	}
+
 //	void DrawLine(Vector3 start, Vector3 end, Color color, float duration = 0.2f)
 //	{
 //		GameObject myLine = new GameObject();

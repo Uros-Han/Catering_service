@@ -9,12 +9,15 @@ public class Core : Part {
 
 	// Use this for initialization
 	void Start () {
-		StartCoroutine (UserControl());
+//		StartCoroutine (UserControl());
 
 		m_bAttackAvailable = true;
 		m_StickAvailableSeat = new List<int> ();
 
 		m_bControl = new bool[4];
+
+		m_fOriginEmissionRate = GetComponent<SpriteParticleEmitter.DynamicEmitter> ().EmissionRate;
+		m_fCurHealth = m_fHealth;
 	}
 
 	void OnDestroy()
@@ -111,11 +114,15 @@ public class Core : Part {
 		}
 
 		//Digest done!
+
 		m_EatenObject.GetComponent<Unit> ().m_fHealth = 0f;
 		iTween.ScaleTo(gameObject, iTween.Hash("x", 1f, "y", 1f, "time" , 1f, "easetype", "easeInElastic"));
 
 		Transform morgueTrans = GameObject.Find ("Morgue").transform;
 		for (int i =0; i< m_EatenObject.transform.childCount; ++i) {
+			if(m_EatenObject.transform.GetChild(i).GetComponent<SpriteModifier>() != null)
+				m_EatenObject.transform.GetChild(i).GetComponent<SpriteModifier>().SpriteModify();
+
 			Morgue.getInstance.AddBody(false,m_EatenObject.transform.GetChild(i).gameObject);
 		}
 
@@ -133,14 +140,14 @@ public class Core : Part {
 		GridMgr grid = GridMgr.getInstance;
 		TakenSeat.Add (grid.GetGridIdx(transform.position));
 		
-		for (int i = 0; i < transform.childCount + 1; ++i) {
+		for (int i = 0; i < transform.parent.childCount; ++i) {
 			bEdgePart = false;
 
-			if(i == transform.childCount){
+			if(i == 0){
 				iPartGrid = grid.GetGridIdx(transform.position);
 			}else{
-				iPartGrid = grid.GetGridIdx(transform.GetChild(i).position);
-				bEdgePart = transform.GetChild(i).GetComponent<Part>().m_bEdgePart;
+				iPartGrid = grid.GetGridIdx(transform.parent.GetChild(i).position);
+				bEdgePart = transform.parent.GetChild(i).GetComponent<Part>().m_bEdgePart;
 			}
 			TakenSeat.Add(iPartGrid);
 

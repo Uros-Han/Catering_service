@@ -7,6 +7,7 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 
 	public int m_iMeat = 0;
 	public int m_iReward = 0;
+	public MOUSE_STATE m_mouseState = MOUSE_STATE.NORMAL;
 
 	// Use this for initialization
 	void Start () {
@@ -117,17 +118,18 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 
 		yield return new WaitForSeconds(0.25f);
 
+		StartCoroutine(GameObject.Find ("WantedReward").GetComponent<WantedReward> ().WantedPop ());
+
 		//Clean Morgue
 		Transform morgueTrans = GameObject.Find ("Morgue").transform;
 		for (int i = 0; i < morgueTrans.childCount; ++i) {
 			if(morgueTrans.GetChild(i).gameObject.name != "Poop")
 			{
-				Destroy(morgueTrans.GetChild(i).gameObject);
 				ObjectFactory.getInstance.Create_Poop();
+				yield return new WaitForSeconds(Random.Range(0.1f, 0.3f));
 			}
 		}
-
-		StartCoroutine(GameObject.Find ("WantedReward").GetComponent<WantedReward> ().WantedPop ());
+		morgueTrans.gameObject.BroadcastMessage("DestroyThis", SendMessageOptions.DontRequireReceiver);
 	}
 
 	IEnumerator NightTurn()
@@ -238,7 +240,7 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 			iTween.MoveTo (morgueTrans.gameObject, iTween.Hash ("x",  0.5f, "time", 0.25f, "easetype", "easeInSine", "islocal", true));
 		} else {
 			StartCoroutine(GameObject.Find("glass").GetComponent<Glass>().ToggleColor(false));
-			GameObject.Find ("Core").BroadcastMessage("StopAssemble", SendMessageOptions.DontRequireReceiver);
+			GameObject.Find ("Player").BroadcastMessage("StopAssemble", SendMessageOptions.DontRequireReceiver);
 
 			for(int i = 0 ; i < grids.transform.childCount; ++i)
 			{

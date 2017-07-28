@@ -64,6 +64,8 @@ public class Morgue : Singleton<Morgue> {
 
 		movePart.transform.parent = transform;
 		movePart.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
+
+		movePart.GetComponent<Part> ().AdjustEmissionRate ();
 	}
 
 	public void RemoveBody(Vector3 vPos)

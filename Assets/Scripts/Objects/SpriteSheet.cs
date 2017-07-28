@@ -11,15 +11,15 @@ public class SpriteSheet : MonoBehaviour {
 
 		if(gameObject.name.Contains("Core"))
 			m_sheet_sprite = ObjectFactory.getInstance.m_sheet_core;
-		else if(gameObject.name.Contains("Cattle"))
-			m_sheet_sprite = ObjectFactory.getInstance.m_sheet_cattle[Random.Range(0,4)];
-		else if(gameObject.name.Contains("Wolf"))
-			m_sheet_sprite = ObjectFactory.getInstance.m_sheet_wolf;
 		else if(transform.parent.name.Contains("Farmer"))
 			m_sheet_sprite = ObjectFactory.getInstance.m_sheet_farmer_0;
+		else if(transform.parent.name.Contains("Chicken"))
+			m_sheet_sprite = ObjectFactory.getInstance.m_sheet_chicken_0;
+		else if(transform.parent.name.Contains("Goat"))
+			m_sheet_sprite = ObjectFactory.getInstance.m_sheet_goat_0;
 
-		if(!GetComponent<Part>().m_bEdgePart)
-		GetComponent<SpriteRenderer> ().sprite = m_sheet_sprite [0];
+//		if(!GetComponent<Part>().m_bEdgePart)
+//		GetComponent<SpriteRenderer> ().sprite = m_sheet_sprite [0];
 	}
 
 	public bool[] m_bOpenedDir; // Direction (0-Left, 1-Up, 2-Right, 3-Down) 해당 인접 방향에 물체가 존재하면 참, 없으면 거짓
@@ -27,11 +27,11 @@ public class SpriteSheet : MonoBehaviour {
 
 	public void CheckAround(bool bReceiveOnly, int iIdx = -1)
 	{
-		Transform CoreTrans = GameObject.Find ("Core").transform;
+		Transform PlayerTrans = GameObject.Find ("Player").transform;
 
 		m_bOpenedDir = new bool[4]{false, false, false, false};
 
-		for (int i= 0; i < CoreTrans.childCount+1; ++i) {
+		for (int i= 0; i < PlayerTrans.childCount; ++i) {
 			GridMgr grid = GridMgr.getInstance;
 			int iTargetIdx = 0;
 			int iThisIdx = 0;
@@ -47,14 +47,8 @@ public class SpriteSheet : MonoBehaviour {
 
 			GameObject target = null;
 
-			if(i==CoreTrans.childCount)
-			{
-				iTargetIdx = grid.GetGridIdx(CoreTrans.position);
-				target = CoreTrans.gameObject;
-			}else{
-				iTargetIdx = grid.GetGridIdx(CoreTrans.GetChild(i).position);
-				target = CoreTrans.GetChild(i).gameObject;
-			}
+			iTargetIdx = grid.GetGridIdx(PlayerTrans.GetChild(i).position);
+			target = PlayerTrans.GetChild(i).gameObject;
 
 			if(target == gameObject)
 				continue;
@@ -136,9 +130,9 @@ public class SpriteSheet : MonoBehaviour {
 
 	public void DestroyThis()
 	{
-		Transform CoreTrans = GameObject.Find ("Core").transform;
+		Transform PlayerTrans = GameObject.Find ("Player").transform;
 
-		for (int i= 0; i < CoreTrans.childCount+1; ++i) {
+		for (int i= 0; i < PlayerTrans.childCount; ++i) {
 			GridMgr grid = GridMgr.getInstance;
 			int iTargetIdx = 0;
 			int iThisIdx = grid.GetGridIdx(transform.position);
@@ -146,14 +140,8 @@ public class SpriteSheet : MonoBehaviour {
 			
 			GameObject target = null;
 			
-			if(i==CoreTrans.childCount)
-			{
-				iTargetIdx = grid.GetGridIdx(CoreTrans.position);
-				target = CoreTrans.gameObject;
-			}else{
-				iTargetIdx = grid.GetGridIdx(CoreTrans.GetChild(i).position);
-				target = CoreTrans.GetChild(i).gameObject;
-			}
+			iTargetIdx = grid.GetGridIdx(PlayerTrans.GetChild(i).position);
+			target = PlayerTrans.GetChild(i).gameObject;
 			
 			if(target == gameObject)
 				continue;
@@ -232,19 +220,14 @@ public class SpriteSheet : MonoBehaviour {
 
 	DIRECTION FindNewStickerDirection(GameObject target, DIRECTION beforDir)
 	{
-		Transform CoreTrans = GameObject.Find ("Core").transform;
+		Transform PlayerTrans = GameObject.Find ("Player").transform;
 		int iTargetIdx = -1;
 		GridMgr grid = GridMgr.getInstance;
 		int iThisIdx = grid.GetGridIdx(target.transform.position);
 
-		for (int i = 0; i < CoreTrans.childCount + 1; ++i) {
+		for (int i = 0; i < PlayerTrans.childCount; ++i) {
 
-			if(i==CoreTrans.childCount)
-			{
-				iTargetIdx = grid.GetGridIdx(CoreTrans.position);
-			}else{
-				iTargetIdx = grid.GetGridIdx(CoreTrans.GetChild(i).position);
-			}
+			iTargetIdx = grid.GetGridIdx(PlayerTrans.GetChild(i).position);
 
 			if(iTargetIdx == iThisIdx - 1)
 			{

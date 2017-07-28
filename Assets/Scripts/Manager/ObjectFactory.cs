@@ -10,8 +10,6 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	}
 	GameObject m_objAleart;
 	GameObject m_objStickableDot;
-	GameObject m_objCattle;
-	GameObject m_objWolf;
 	GameObject m_objPoop;
 
 	public Sprite m_sprite_meat;
@@ -19,13 +17,13 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	public Sprite[] m_sheet_core;
 	public Sprite[] m_sheet_wolf;
 	public Sprite[] m_sheet_farmer_0;
+	public Sprite[] m_sheet_chicken_0;
+	public Sprite[] m_sheet_goat_0;
 
 	// Use this for initialization
 	public void ResourcesLoad () {
 		m_objAleart = Resources.Load ("Prefabs/Objects/Aleart") as GameObject;
 		m_objStickableDot = Resources.Load ("Prefabs/Objects/StickableDot") as GameObject;
-		m_objCattle = Resources.Load ("Prefabs/Objects/Parts/Cattle") as GameObject;
-		m_objWolf = Resources.Load ("Prefabs/Objects/Parts/Wolf") as GameObject;
 		m_objPoop = Resources.Load ("Prefabs/Objects/PoopParticle") as GameObject;
 
 		m_sprite_meat = Resources.Load<Sprite> ("Sprites/Meat");
@@ -37,6 +35,8 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		m_sheet_core = Resources.LoadAll<Sprite>("Sprites/Sheets/sheet_core");
 		m_sheet_wolf = Resources.LoadAll<Sprite>("Sprites/Sheets/sheet_wolf");
 		m_sheet_farmer_0 = Resources.LoadAll<Sprite> ("Sprites/Sheets/sheet_farmer_0");
+		m_sheet_chicken_0 = Resources.LoadAll<Sprite> ("Sprites/Sheets/sheet_chicken_0");
+		m_sheet_goat_0 = Resources.LoadAll<Sprite> ("Sprites/Sheets/sheet_goat_0");
 	}
 
 	public GameObject Create_Aleart(int iIdx)
@@ -69,7 +69,6 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		return obj;
 	}
 
-//
 //	public GameObject Create_Cattle(DIRECTION dir)
 //	{
 //		GameObject obj = Instantiate (m_objCattle) as GameObject;
