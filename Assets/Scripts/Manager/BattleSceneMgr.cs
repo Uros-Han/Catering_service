@@ -5,6 +5,7 @@ using Com.LuisPedroFonseca.ProCamera2D;
 
 public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 
+	public int m_iDay = 0;
 	public int m_iMeat = 0;
 	public int m_iReward = 0;
 	public MOUSE_STATE m_mouseState = MOUSE_STATE.NORMAL;
@@ -113,6 +114,8 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 
 	IEnumerator DayTurn()
 	{
+		m_iDay += 1;
+
 		GameObject.Find ("MorgueToggle").GetComponent<UIPanel> ().alpha = 0;
 		GameMgr.getInstance.m_turnState = TURN_STATE.DAY;
 

@@ -15,7 +15,7 @@ public class Tangled : MonoBehaviour {
 		m_listCurve = new List<Vector3> ();
 		StartCoroutine (TangledPoint ());
 	}
-	
+	 
 	// Update is called once per frame
 	void Update () {
 		Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
