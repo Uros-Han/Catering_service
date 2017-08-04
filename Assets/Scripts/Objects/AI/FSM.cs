@@ -90,6 +90,9 @@ public class FSM : MonoBehaviour {
 
 		yield return new WaitForSeconds (0.15f);
 
+		if (target == null)
+			yield break;
+
 		if (bEnemy) {
 			for (int i = 0; i < target.transform.childCount; ++i) {
 //				target.transform.GetChild (i).GetComponent<SpriteRenderer> ().color = Color.white;

@@ -51,7 +51,7 @@ public class Part : MonoBehaviour {
 
 	void OnDestroy()
 	{
-		if (transform.parent.name.Equals ("Core")) {
+		if (transform.parent.name.Equals ("Player")) {
 
 		}
 	}
@@ -131,7 +131,7 @@ public class Part : MonoBehaviour {
 				PartBorder.GetComponent<SpriteRenderer>().enabled = false;
 				transform.localScale = new Vector3(1f, 1f, 1f);
 
-				if(transform.parent.name.Equals("Core"))
+				if(transform.parent.name.Equals("Player"))
 				{
 					transform.parent = GameObject.Find("Temp").transform;
 					iBeforeSeatIdx = grid.GetGridIdx(transform.position);
@@ -259,6 +259,8 @@ public class Part : MonoBehaviour {
 						transform.position = grid.GetPosOfIdx(core.m_StickAvailableSeat[i]);
 						bToOrigin = false;
 						transform.parent = GameObject.Find("Player").transform;
+						m_iGridIdx = core.m_StickAvailableSeat[i];
+						StartCoroutine(Debug_AStarLine());
 
 						if(!m_bEdgePart)
 							transform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
@@ -308,7 +310,7 @@ public class Part : MonoBehaviour {
 							iBeforeSeatIdx = -1;
 							bParentWasCore = false;
 
-							GameObject.Find("Core").BroadcastMessage("AmI_InCoreSide");
+							GameObject.Find("Player").BroadcastMessage("AmI_InCoreSide");
 						}
 
 						Morgue.getInstance.AddBody(true, gameObject, curGridIdx);
@@ -369,7 +371,7 @@ public class Part : MonoBehaviour {
 
 					if(bParentWasCore)
 					{
-						transform.parent = GameObject.Find("Core").transform;
+						transform.parent = GameObject.Find("Player").transform;
 
 						transform.parent.BroadcastMessage("AmI_InCoreSide");
 						GetComponent<SpriteRenderer>().sortingLayerName = "Objects";
@@ -392,6 +394,30 @@ public class Part : MonoBehaviour {
 			
 			yield return null;
 		}while(!bStopAssemble);
+	}
+
+	IEnumerator Debug_AStarLine()
+	{
+		Vector2 mousePosition = Vector2.zero;
+		BoxCollider2D collider2D = GetComponent<BoxCollider2D> ();
+		int coreIdx = GridMgr.getInstance.GetGridIdx (GameObject.Find ("Core").transform.position);
+		int partIdx = GridMgr.getInstance.GetGridIdx (transform.position);
+
+		do {
+			mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+			if(collider2D.OverlapPoint(mousePosition))
+			{
+				if(AStar.getInstance.AStarStart_CoreFind(partIdx, coreIdx, true))
+				{
+					yield return new WaitForSeconds(0.08f);
+					continue;
+				}
+			}
+
+			yield return null;
+
+		} while(transform.parent.name.Equals("Player"));
 	}
 
 	public void HealCheck()
@@ -452,7 +478,7 @@ public class Part : MonoBehaviour {
 		if (transform.parent.GetComponent<FSM_Enemy> () != null) { // Enemy
 			Unit unit = transform.parent.GetComponent<Unit>();
 			if(unit.m_fCurHealth == unit.m_fHealth)
-				GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = 1;
+				GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = m_fOriginEmissionRate;
 			else
 				GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = (int)((unit.m_fCurHealth / unit.m_fHealth) * m_fOriginEmissionRate / 3f);
 		}else

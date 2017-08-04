@@ -525,7 +525,7 @@ public class AStar : Singleton<AStar>
 		}
 	}
 
-	public bool AStarStart_CoreFind(int iStart, int iEnd)
+	public bool AStarStart_CoreFind(int iStart, int iEnd, bool bDrawDebugLine = false)
 	{
 		
 		if (iStart == iEnd)
@@ -561,6 +561,37 @@ public class AStar : Singleton<AStar>
 			return false;
 		}
 
+		if (bDrawDebugLine) {
+			for(int i = 0; i < m_BestList.Count; ++i)
+			{
+
+				Vector3 listPos;
+				if(i == 0)
+					listPos = GridMgr.getInstance.GetPosOfIdx(m_iStartIndex);
+				else
+					listPos= GridMgr.getInstance.GetPosOfIdx(m_BestList[i-1]);
+
+				Vector3 listPos_next = GridMgr.getInstance.GetPosOfIdx(m_BestList[i]);
+
+				DrawDebugLine(listPos, listPos_next, new Color(254/255f, 223/255f, 16/255f));
+			}
+		}
+
 		return true;
+	}
+
+	void DrawDebugLine(Vector3 start, Vector3 end, Color color, float duration = 0.1f)
+	{
+		GameObject myLine = new GameObject();
+		myLine.transform.position = start;
+		myLine.AddComponent<LineRenderer>();
+		LineRenderer lr = myLine.GetComponent<LineRenderer>();
+		lr.material = new Material(Shader.Find("Sprites/Default"));
+		lr.SetColors(color, color);
+		lr.SetWidth(0.025f, 0.025f);
+		lr.SetPosition(0, start);
+		lr.SetPosition(1, end);
+		lr.sortingLayerName = "FrontObject";
+		GameObject.Destroy(myLine, duration);
 	}
 }

@@ -20,7 +20,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	public Sprite[][] m_sheet_cattle;
 	public Sprite[] m_sheet_core;
 	public Sprite[] m_sheet_wolf;
-	public Sprite[] m_sheet_farmer_0;
+	public Sprite[] m_sheet_civilian_0;
 	public Sprite[] m_sheet_chicken_0;
 	public Sprite[] m_sheet_goat_0;
 
@@ -38,7 +38,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 
 		m_sheet_core = Resources.LoadAll<Sprite>("Sprites/Sheets/sheet_core");
 		m_sheet_wolf = Resources.LoadAll<Sprite>("Sprites/Sheets/sheet_wolf");
-		m_sheet_farmer_0 = Resources.LoadAll<Sprite> ("Sprites/Sheets/sheet_farmer_0");
+		m_sheet_civilian_0 = Resources.LoadAll<Sprite> ("Sprites/Sheets/sheet_farmer_0");
 		m_sheet_chicken_0 = Resources.LoadAll<Sprite> ("Sprites/Sheets/sheet_chicken_0");
 		m_sheet_goat_0 = Resources.LoadAll<Sprite> ("Sprites/Sheets/sheet_goat_0");
 

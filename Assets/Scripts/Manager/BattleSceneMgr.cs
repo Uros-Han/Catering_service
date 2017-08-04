@@ -182,7 +182,7 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 		GameObject.Find ("StopAssembleButton").GetComponent<UIPanel> ().alpha = 0;
 		
 		EnemyGenerate ();
-		GameObject.Find("Core").BroadcastMessage("StopAssemble");
+		GameObject.Find("Player").BroadcastMessage("StopAssemble");
 
 //		StartCoroutine (UserMove (true));
 	}
@@ -211,7 +211,7 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 		yield return null;
 
 //		GameObject.Find("Core").BroadcastMessage("AmI_InCoreSide");
-		GameObject.Find("Core").BroadcastMessage("DestroyPart_WhenPathBreaked");
+		GameObject.Find("Player").BroadcastMessage("DestroyPart_WhenPathBreaked");
 	}
 
 	public void OnField(GameObject target)
@@ -232,7 +232,7 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 			GameObject.Find ("Core").GetComponent<Part>().m_iGridIdx = GridMgr.getInstance.GetGridIdx(new Vector2(0,0));
 
 			GameObject.Find ("Morgue").BroadcastMessage ("Assemble", null, SendMessageOptions.DontRequireReceiver);
-			GameObject.Find ("Core").BroadcastMessage ("Assemble", null, SendMessageOptions.DontRequireReceiver);
+			GameObject.Find ("Player").BroadcastMessage ("Assemble", null, SendMessageOptions.DontRequireReceiver);
 
 			StartCoroutine(GameObject.Find("glass").GetComponent<Glass>().ToggleColor(true));
 	
