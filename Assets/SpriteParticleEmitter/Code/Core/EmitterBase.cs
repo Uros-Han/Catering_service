@@ -1,15 +1,20 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace SpriteParticleEmitter
 {
     public delegate void SimpleEvent();
 
     /// <summary>
-    /// Works as a Base For all emitters defining all common methods and variables
+    /// Obsolete: Use SpriteToParticles component instead - Works as a Base For all emitters defining all common methods and variables
     /// </summary>
+    //[Obsolete("Use SpriteToParticles component instead")]
     [SerializeField]
     public abstract class EmitterBase : MonoBehaviour
     {
+        //! Should show warnings and errors?
+        public bool verboseDebug = false;
+
         [Header("References")]
         [Tooltip("If none is provided the script will look for one in this game object.")]
         //! If none is provided the script will look for one in this game object.
@@ -18,7 +23,25 @@ namespace SpriteParticleEmitter
         //! If none is provided the script will look for one in this game object.
         public ParticleSystem particlesSystem;
 
-        [Header("Color Emission Options")]
+        [Header("Emission Options")]
+        [Tooltip("Start emitting as soon as able. (On static emission activating this will force CacheOnAwake)")]
+        //! Activating this will force CacheOnAwake
+        public bool PlayOnAwake = true;
+        [Tooltip("Particles to emit per second")]
+        //! Particles to emit per second
+        public float EmissionRate = 1000;
+        [Tooltip("Should new particles override ParticleSystem's startColor and use the color in the pixel they're emitting from?")]
+        //! Should new particles override ParticleSystem's startColor and use the color in the pixel they're emitting from?
+        public bool UsePixelSourceColor;
+        public enum BorderEmission
+        {
+            Off,
+            Fast,
+            Precise
+        }
+        public BorderEmission borderEmission;
+
+        [Space(10)]
         //! Activating this will make the Emitter only emit from selected color.
         public bool UseEmissionFromColor = false;
         [Tooltip("Emission will take this color as only source position")]
@@ -36,11 +59,7 @@ namespace SpriteParticleEmitter
         [Tooltip("In conjunction with EmitFromColor. Defines how much can it deviate from blue spectrum for selected color.")]
         //! In conjunction with EmitFromColor. Defines how much can it deviate from blue spectrum for selected color.
         public float BlueTolerance = 0.05f;
-        [Tooltip("Should new particles override ParticleSystem's startColor and use the color in the pixel they're emitting from?")]
-        //! Should new particles override ParticleSystem's startColor and use the color in the pixel they're emitting from?
-        public bool UsePixelSourceColor;
 
-        [Tooltip("Must match Particle System's same option")]
         //! Must match Particle System's same option
         protected ParticleSystemSimulationSpace SimulationSpace;
 
@@ -51,6 +70,27 @@ namespace SpriteParticleEmitter
         protected ParticleSystem.MainModule mainModule;
 #endif
 
+#if UNITY_EDITOR
+        protected Sprite cachedSprite;
+#endif
+        [Header("Advanced")]
+        [Tooltip("This will save memory size when dealing with same sprite being loaded repeatedly by different GameObjects.")]
+        //! This will save memory size when dealing with same sprite being loaded repeatedly by different GameObjects.
+        public bool useSpritesSharingCache;
+
+        public bool useBetweenFramesPrecision;
+        protected Vector3 lastTransformPosition;
+
+        //! Save time to know how many particles to show per frame
+        protected float ParticlesToEmitThisFrame;
+
+        //public enum RenderSystemUsing
+        //{
+        //    SpriteRenderer,
+        //    ImageRenderer,
+        //}
+        //
+        //protected RenderSystemUsing renderSystemUsing;
         /// <summary>
         /// Obtain needed references and define base variables.
         /// </summary>
@@ -59,11 +99,13 @@ namespace SpriteParticleEmitter
             //Find Renderer in current gameObject if non is draggued
             if (!spriteRenderer)
             {
-                Debug.LogWarning("Sprite Renderer not defined, trying to find in same GameObject");
+                if (verboseDebug)
+                    Debug.LogWarning("Sprite Renderer not defined, trying to find in same GameObject");
                 spriteRenderer = GetComponent<SpriteRenderer>();
                 if (!spriteRenderer)
                 {
-                    Debug.LogWarning("Sprite Renderer not found");
+                    if (verboseDebug)
+                        Debug.LogWarning("Sprite Renderer not found");
                 }
             }
 
@@ -73,7 +115,8 @@ namespace SpriteParticleEmitter
                 particlesSystem = GetComponent<ParticleSystem>();
                 if (!particlesSystem)
                 {
-                    Debug.LogError("No particle system found. Static Sprite Emission won't work");
+                    if (verboseDebug)
+                        Debug.LogError("No particle system found. Static Sprite Emission won't work");
                     return;
                 }
             }
@@ -122,5 +165,14 @@ namespace SpriteParticleEmitter
         public virtual event SimpleEvent OnCacheEnded;
         //! Event will be called when the system is available to be played
         public virtual event SimpleEvent OnAvailableToPlay;
+
+        private void DummyMethod()
+        {
+            if (OnAvailableToPlay != null)
+                OnAvailableToPlay();
+
+            if (OnCacheEnded != null)
+                OnCacheEnded();
+        }
     }
 }

@@ -1,25 +1,6 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Objects/Tangled.cs">
-    <Files>
-      <File FileName="Assets/Scripts/Objects/Part.cs" Line="71" Column="71" />
-      <File FileName="Assets/Scripts/Manager/BattleSceneMgr.cs" Line="240" Column="106" />
-      <File FileName="Assets/Scripts/Objects/Unit.cs" Line="49" Column="3" />
-      <File FileName="Assets/Scripts/Objects/Core.cs" Line="13" Column="3" />
-      <File FileName="Assets/Scripts/Objects/Morgue.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/Poop.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/SpriteSheet.cs" Line="18" Column="47" />
-      <File FileName="Assets/Scripts/Objects/AI/FSM_Enemy.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/AI/FSM.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Manager/AStar.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/AI/FSM_Freindly.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/SpriteModifier.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Header/Enum.cs" Line="14" Column="1" />
-      <File FileName="Assets/Scripts/UI/MeatButton.cs" Line="21" Column="60" />
-      <File FileName="Assets/Scripts/Objects/Tangled.cs" Line="18" Column="2" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

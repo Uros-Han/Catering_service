@@ -12,6 +12,10 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	GameObject m_objStickableDot;
 	GameObject m_objPoop;
 
+	GameObject m_objChicken;
+	GameObject m_objGoat;
+	GameObject m_objCivilian;
+
 	public Sprite m_sprite_meat;
 	public Sprite[][] m_sheet_cattle;
 	public Sprite[] m_sheet_core;
@@ -37,6 +41,10 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		m_sheet_farmer_0 = Resources.LoadAll<Sprite> ("Sprites/Sheets/sheet_farmer_0");
 		m_sheet_chicken_0 = Resources.LoadAll<Sprite> ("Sprites/Sheets/sheet_chicken_0");
 		m_sheet_goat_0 = Resources.LoadAll<Sprite> ("Sprites/Sheets/sheet_goat_0");
+
+		m_objChicken = Resources.Load("Prefabs/Objects/Enemies/Chicken") as GameObject;
+		m_objGoat = Resources.Load("Prefabs/Objects/Enemies/Goat") as GameObject;
+		m_objCivilian = Resources.Load("Prefabs/Objects/Enemies/Civilian") as GameObject;
 	}
 
 	public GameObject Create_Aleart(int iIdx)
@@ -69,23 +77,45 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		return obj;
 	}
 
-//	public GameObject Create_Cattle(DIRECTION dir)
-//	{
-//		GameObject obj = Instantiate (m_objCattle) as GameObject;
-//		obj.transform.parent = GameObject.Find("Enemies").transform;
-//
-////		obj.GetComponent<Enemy> ().m_headingDirection = dir;
-//		obj.GetComponent<Part> ().SetDirection ();
-//		return obj;
-//	}
-//
-//	public GameObject Create_Wolf(DIRECTION dir)
-//	{
-//		GameObject obj = Instantiate (m_objWolf) as GameObject;
-//		obj.transform.parent = GameObject.Find("Enemies").transform;
-//		
-////		obj.GetComponent<Enemy> ().m_headingDirection = dir;
-//		obj.GetComponent<Part> ().SetDirection ();
-//		return obj;
-//	}
+	public GameObject Create_LiveStock()
+	{
+		GameObject obj;
+
+		if(Random.Range(0f,1f) <= 0.5f)
+			obj = Instantiate (m_objChicken) as GameObject;
+		else
+			obj = Instantiate (m_objGoat) as GameObject;
+
+		obj.transform.parent = GameObject.Find ("Enemies").transform;
+		obj.transform.localPosition = RandomBornPos (obj);
+
+		return obj;
+	}
+
+	public GameObject Create_Civilian() // TODO : part random
+	{
+		GameObject obj;
+		
+		obj = Instantiate (m_objCivilian) as GameObject;
+		
+		obj.transform.parent = GameObject.Find ("Enemies").transform;
+		obj.transform.localPosition = RandomBornPos (obj);
+
+		return obj;
+	}
+
+	Vector3 RandomBornPos(GameObject obj)
+	{
+		Vector3 vecBornPos = new Vector3 (0, Random.Range (-0.35f, 0.35f));
+
+		if (Random.Range (0, 2) == 0) {
+			vecBornPos = new Vector3 (2f, vecBornPos.y);
+			obj.GetComponent<FSM_Enemy> ().m_bBornAtLeft = false;
+		} else {
+			vecBornPos = new Vector3 (-2f, vecBornPos.y);
+			obj.GetComponent<FSM_Enemy> ().m_bBornAtLeft = true;
+		}
+
+		return vecBornPos;
+	}
 }

@@ -1,10 +1,12 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace SpriteParticleEmitter
 {
+//[Obsolete("Use SpriteToParticles component instead")]
 /// <summary>
-/// Refer to manual for description.
+/// Obsolete: Use SpriteToParticles component instead - Refer to manual for description.
 /// </summary>
 public class StaticEmitterContinuousUI : StaticUIImageEmitter
 {
@@ -24,13 +26,6 @@ public class StaticEmitterContinuousUI : StaticUIImageEmitter
         targetRectTransform = imageRenderer.GetComponent<RectTransform>();
     }
 
-    [Tooltip("Should the transform match target Image Renderer Position?")]
-    //! Should the transform match target Image Renderer Position?
-    public bool matchImageRendererPostionData = true;
-    [Tooltip("Should the transform match target Image Renderer Scale?")]
-    //! Should the RectTransform match target Image Renderer Position?
-    public bool matchImageRendererScale = true;
-    
     //! The target Image Renderer's RectTransform
     private RectTransform targetRectTransform;
     //! This RectTransform

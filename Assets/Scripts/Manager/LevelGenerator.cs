@@ -7,7 +7,7 @@ public class LevelGenerator : Singleton<LevelGenerator> {
 	int[] m_iTypeCost; // Cost per type
 	int[] m_iTypeDay; // 타입별로 최초 등장 권장하는 날짜
 
-	void Start()
+	void Awake()
 	{
 		m_iTypeCost = new int[(int)ENEMY_TYPE.END - 1];
 		m_iTypeDay = new int[(int)ENEMY_TYPE.END - 1];
@@ -23,9 +23,27 @@ public class LevelGenerator : Singleton<LevelGenerator> {
 		m_iTypeDay [(int)ENEMY_TYPE.KNIGHT] = 28;
 	}
 
-	public void Generate(ENEMY_TYPE enemyType, int iHeroNum = 0) //적 타입에 맞게 적을 생성해준다.
+	void Generate(ENEMY_TYPE enemyType, int iHeroNum = 0) //적 타입에 맞게 적을 생성해준다.
 	{
+		switch(enemyType)
+		{
+		case ENEMY_TYPE.LIVESTOCK:
+			ObjectFactory.getInstance.Create_LiveStock();
+			break;
 
+		case ENEMY_TYPE.CIVILIAN:
+			ObjectFactory.getInstance.Create_Civilian();
+			break;
+
+		case ENEMY_TYPE.MERCENARY:
+			break;
+
+		case ENEMY_TYPE.KNIGHT:
+			break;
+
+		case ENEMY_TYPE.HERO:
+			break;
+		}
 	}
 
 	public void Encount(int iCost, int iDay) //코스트와 날짜에 맞는 적타입을 리스트로 뽑아준다.
@@ -69,11 +87,19 @@ public class LevelGenerator : Singleton<LevelGenerator> {
 			bHeroContained = true;
 		}
 
+		StartCoroutine (GenerateQueue (list_enemyType, iDay));
+
+	}
+
+	IEnumerator GenerateQueue(List<ENEMY_TYPE> list_enemyType, int iDay)
+	{
 		for (int i=0; i<list_enemyType.Count; ++i) {
 			if(list_enemyType[i] != ENEMY_TYPE.HERO)
 				Generate(list_enemyType[i]);
 			else
 				Generate(list_enemyType[i], iDay/10);
+
+			yield return new WaitForSeconds(0.5f);
 		}
 	}
 

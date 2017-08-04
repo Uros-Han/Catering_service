@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SpriteParticleEmitter
+namespace SpriteToParticlesAsset
 {
 #if UNITY_5_3_OR_NEWER
     /// <summary>
@@ -75,12 +75,14 @@ namespace SpriteParticleEmitter
                 pRenderer = pSystem.GetComponent<ParticleSystemRenderer>();
                 if (pRenderer != null)
                     pRenderer.enabled = false;
-                
-                Shader foundShader = Shader.Find("UI/Particles/Additive");
-                Material pMaterial = new Material(foundShader);
 
                 if (material == null)
+                {
+                    Shader foundShader = Shader.Find("UI/Particles/Additive");
+                    Material pMaterial = new Material(foundShader);
+
                     material = pMaterial;
+                }
 
                 currentMaterial = material;
                 if (currentMaterial && currentMaterial.HasProperty("_MainTex"))

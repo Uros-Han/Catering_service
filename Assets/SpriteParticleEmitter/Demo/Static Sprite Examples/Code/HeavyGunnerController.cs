@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using SpriteParticleEmitter;
+using SpriteToParticlesAsset;
 
 public class HeavyGunnerController : MonoBehaviour
 {
-    public List<StaticEmitterContinuous> ShadowFxs;
-    public List<StaticEmitterContinuous> WeirdFxs;
+    public List<SpriteToParticles> ShadowFxs;
+    public List<SpriteToParticles> WeirdFxs;
 
-    public DynamicEmitter GunPrep;
+    public SpriteToParticles GunPrep;
 
     public float Speed = 20;
     public GameObject LookAtAim;
@@ -95,14 +95,14 @@ public class HeavyGunnerController : MonoBehaviour
     {
         if (ShadowFxs[0].IsPlaying())
         {
-            foreach (StaticEmitterContinuous emitter in ShadowFxs)
+            foreach (SpriteToParticles emitter in ShadowFxs)
             {
                 emitter.Stop();
             }
         }
         else
         {
-            foreach (StaticEmitterContinuous emitter in ShadowFxs)
+            foreach (SpriteToParticles emitter in ShadowFxs)
             {
                 emitter.Play();
             }
@@ -114,14 +114,14 @@ public class HeavyGunnerController : MonoBehaviour
     {
         if (WeirdFxs[0].IsPlaying())
         {
-            foreach (StaticEmitterContinuous emitter in WeirdFxs)
+            foreach (SpriteToParticles emitter in WeirdFxs)
             {
                 emitter.Stop();
             }
         }
         else
         {
-            foreach (StaticEmitterContinuous emitter in WeirdFxs)
+            foreach (SpriteToParticles emitter in WeirdFxs)
             {
                 emitter.Play();
             }

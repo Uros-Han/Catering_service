@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using SpriteToParticlesAsset;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace SpriteParticleEmitter
@@ -6,11 +8,15 @@ namespace SpriteParticleEmitter
     //public delegate void SimpleEvent();
 
     /// <summary>
-    /// Works as a Base For all emitters defining all common methods and variables
+    ///Obsolete: Use SpriteToParticles component instead -  Works as a Base For all emitters defining all common methods and variables
     /// </summary>
+    //[Obsolete("Use SpriteToParticles component instead")]
     [SerializeField]
     public abstract class EmitterBaseUI : MonoBehaviour
     {
+        //! Should show warnings and errors?
+        public bool verboseDebug = false;
+
         [Header("References")]
         [Tooltip("Must be provided by other GameObject's ImageRenderer.")]
         //! Must be provided by other GameObject's ImageRenderer.
@@ -54,17 +60,34 @@ namespace SpriteParticleEmitter
 #if UNITY_5_5_OR_NEWER
         protected ParticleSystem.MainModule mainModule;
 #endif
+#if UNITY_EDITOR
+        protected Sprite cachedSprite;
+#endif
+        [Tooltip("Should the transform match target Image Renderer Position?")]
+        //! Should the transform match target Image Renderer Position?
+        public bool matchImageRendererPostionData = true;
+        [Tooltip("Should the transform match target Image Renderer Scale?")]
+        //! Should the RectTransform match target Image Renderer Position?
+        public bool matchImageRendererScale = true;
+
+        [Header("Advanced")]
+        [Tooltip("This will save memory size when dealing with same sprite being loaded repeatedly by different GameObjects.")]
+        //! This will save memory size when dealing with same sprite being loaded repeatedly by different GameObjects.
+        public bool useSpritesSharingCache;
+
         /// <summary>
         /// Obtain needed references and define base variables.
         /// </summary>
         protected virtual void Awake()
         {
             uiParticleSystem = GetComponent<UIParticleRenderer>();
+
             //uiParticleSystem.GetComponent<UIParticleSystem>().hideFlags = HideFlags.HideInInspector;
             //Find Renderer in current gameObject if non is draggued
             if (!imageRenderer)
             {
-                Debug.LogWarning("Image Renderer not defined, must be defined in order for the system to work");
+                if (verboseDebug)
+                    Debug.LogWarning("Image Renderer not defined, must be defined in order for the system to work");
                 isPlaying = false;
             }
 
@@ -74,7 +97,8 @@ namespace SpriteParticleEmitter
                 particlesSystem = GetComponent<ParticleSystem>();
                 if (!particlesSystem)
                 {
-                    Debug.LogError("No particle system found. Static Sprite Emission won't work");
+                    if (verboseDebug)
+                        Debug.LogError("No particle system found. Static Sprite Emission won't work");
                     return;
                 }
             }
@@ -123,5 +147,14 @@ namespace SpriteParticleEmitter
         public virtual event SimpleEvent OnCacheEnded;
         //! Event will be called when the system is available to be played
         public virtual event SimpleEvent OnAvailableToPlay;
+
+        private void DummyMethod()
+        {
+            if (OnAvailableToPlay != null)
+                OnAvailableToPlay();
+
+            if (OnCacheEnded != null)
+                OnCacheEnded();
+        }
     }
 }

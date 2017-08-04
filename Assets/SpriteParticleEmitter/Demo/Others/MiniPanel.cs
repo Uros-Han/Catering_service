@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using SpriteParticleEmitter;
+using SpriteToParticlesAsset;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -11,11 +11,11 @@ using UnityEngine.UI;
 public class MiniPanel : MonoBehaviour
 {
     //reference to emitters
-    public List<EmitterBase> PlayableFXs;
+    public List<SpriteToParticles> PlayableFXs;
     public Button PlayButton;
     public Button PauseButton;
     public Toggle WindButton;
-    private int SceneCount = 10;
+    private int SceneCount = 11;
 
     public WindZone wind;
 
@@ -25,7 +25,7 @@ public class MiniPanel : MonoBehaviour
 	void Start ()
 	{
         if (PlayableFXs == null || PlayableFXs.Count <= 0)
-            PlayableFXs = FindObjectsOfType<EmitterBase>().ToList();
+            PlayableFXs = FindObjectsOfType<SpriteToParticles>().ToList();
 
         if (PlayableFXs == null || PlayableFXs.Count <= 0)
 	    {
@@ -39,9 +39,10 @@ public class MiniPanel : MonoBehaviour
         if (!wind)
             WindButton.gameObject.SetActive(false);
 
-        foreach (EmitterBase fx in PlayableFXs)
+        foreach (SpriteToParticles fx in PlayableFXs)
 	    {
-	        fx.OnAvailableToPlay += BecameAvailableToPlay;
+            if (fx)
+	            fx.OnAvailableToPlay += BecameAvailableToPlay;
 	    }
 
         RefreshButtons();
@@ -61,12 +62,12 @@ public class MiniPanel : MonoBehaviour
         bool isPlaying = PlayableFXs.TrueForAll(x => x.IsPlaying());
         if (isPlaying)
         {
-            foreach (EmitterBase fx in PlayableFXs)
+            foreach (SpriteToParticles fx in PlayableFXs)
                 fx.Pause();
         }
         else
         {
-            foreach (EmitterBase fx in PlayableFXs)
+            foreach (SpriteToParticles fx in PlayableFXs)
                 fx.Play();
         }
 
@@ -78,7 +79,7 @@ public class MiniPanel : MonoBehaviour
     /// </summary>
     public void Stop()
     {
-        foreach (EmitterBase fx in PlayableFXs)
+        foreach (SpriteToParticles fx in PlayableFXs)
             fx.Stop();
 
         RefreshButtons();
@@ -134,7 +135,7 @@ public class MiniPanel : MonoBehaviour
 
     void UnloadCurrentScene()
     {
-        foreach (EmitterBase fx in PlayableFXs)
+        foreach (SpriteToParticles fx in PlayableFXs)
         {
             DestroyImmediate(fx.gameObject);
         }

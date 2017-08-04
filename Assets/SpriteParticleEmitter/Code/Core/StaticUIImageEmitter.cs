@@ -1,14 +1,17 @@
 ﻿//#define MEM_DEBUG
-
+using System;
 using UnityEngine;
 using System.Collections.Generic;
+using SpriteToParticlesAsset;
 using UnityEngine.Assertions.Comparers;
 
 namespace SpriteParticleEmitter
 {
+//[Obsolete("Use SpriteToParticles component instead")]
 /// <summary>
-/// Base component for StaticEmitterOneShot and StaticEmitterContinuous
+/// Obsolete: Use SpriteToParticles component instead - Base component for StaticEmitterOneShot and StaticEmitterContinuous
 /// </summary>
+[ExecuteInEditMode]
 [RequireComponent(typeof(UIParticleRenderer))]
 public class StaticUIImageEmitter : EmitterBaseUI
 {
@@ -67,6 +70,13 @@ public class StaticUIImageEmitter : EmitterBaseUI
 
         Sprite sprite = imageRenderer.sprite;
 
+        if (!sprite)
+        {
+            if (verboseDebug)
+                Debug.LogError("Unable to cache. Sprite is null in game object " + name);
+            return;
+        }
+
         float colorR = EmitFromColor.r;
         float colorG = EmitFromColor.g;
         float colorB = EmitFromColor.b;
@@ -74,7 +84,8 @@ public class StaticUIImageEmitter : EmitterBaseUI
         float PixelsPerUnit = sprite.pixelsPerUnit;
         if (imageRenderer == null || imageRenderer.sprite == null)
         {
-            Debug.LogError("Image UI reference missing");
+            if (verboseDebug)
+                Debug.LogError("Image UI reference missing");
         }
 
         float width = (int)sprite.rect.size.x;
@@ -92,7 +103,11 @@ public class StaticUIImageEmitter : EmitterBaseUI
         float offsetY = sprite.pivot.y / PixelsPerUnit;
 
         //ask texture for wanted sprite
-        Color[] pix = sprite.texture.GetPixels((int)sprite.rect.position.x, (int)sprite.rect.position.y, (int)width, (int)height);
+        Color[] pix;
+        if (useSpritesSharingCache && Application.isPlaying)
+            pix = SpritesDataPool.GetSpriteColors(sprite, (int)sprite.rect.position.x, (int)sprite.rect.position.y, (int)width, (int)height);
+        else
+            pix = sprite.texture.GetPixels((int)sprite.rect.position.x, (int)sprite.rect.position.y, (int)width, (int)height);
 
         float toleranceR = RedTolerance;
         float toleranceG = GreenTolerance;
@@ -139,7 +154,8 @@ public class StaticUIImageEmitter : EmitterBaseUI
         particleInitColorCache = colorsCache.ToArray();
         if (particlesCacheCount <= 0)
         {
-            Debug.LogWarning("Caching particle emission went wrong. This is most probably because couldn't find wanted color in sprite");
+            if (verboseDebug)
+                Debug.LogWarning("Caching particle emission went wrong. This is most probably because couldn't find wanted color in sprite");
             return;
         }
 
@@ -159,6 +175,9 @@ public class StaticUIImageEmitter : EmitterBaseUI
 #if MEM_DEBUG
         Debug.Log("<color=blue>F02 = </color> = " + System.GC.GetTotalMemory(false) / 1024 / 1024 + " | final delta: " + (System.GC.GetTotalMemory(false) - mem) / 1024 / 1024);
 #endif
+#if UNITY_EDITOR
+        cachedSprite = sprite;
+#endif
         //finally call event to warn we've finished
         if (OnCacheEnded != null)
             OnCacheEnded();
@@ -173,7 +192,29 @@ public class StaticUIImageEmitter : EmitterBaseUI
             Debug.Log("Current = " + mem / 1024 / 1024);
         }
 #endif
+
+#if UNITY_EDITOR
+        if (cachedSprite != imageRenderer.sprite)
+            EditorInvalidate();
+#endif
     }
+
+
+#if UNITY_EDITOR
+    void OnValidate()
+    {
+        EditorInvalidate();
+    }
+
+    void EditorInvalidate()
+    {
+        if (particlesSystem)
+            particlesSystem.Stop();
+        isPlaying = false;
+        Awake();
+        CacheSprite();
+    }
+#endif
 
     public override void Play() { }
     public override void Stop() { }
@@ -187,6 +228,15 @@ public class StaticUIImageEmitter : EmitterBaseUI
     public override bool IsAvailableToPlay()
     {
         return hasCachingEnded;
+    }
+
+    private void DummyMethod()
+    {
+        if (OnAvailableToPlay != null)
+            OnAvailableToPlay();
+
+        if (OnCacheEnded != null)
+            OnCacheEnded();
     }
 }
 }

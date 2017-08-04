@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 
 namespace SpriteParticleEmitter
 {
+//[Obsolete("Use SpriteToParticles component instead")]
 /// <summary>
-/// Read the manual for a description of this component.
+/// Obsolete: Use SpriteToParticles component instead - Read the manual for a description of this component.
 /// </summary>
 public class StaticEmitterOneShot : StaticSpriteEmitter
 {

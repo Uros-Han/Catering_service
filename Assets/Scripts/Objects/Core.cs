@@ -123,6 +123,9 @@ public class Core : Part {
 			if(m_EatenObject.transform.GetChild(i).GetComponent<SpriteModifier>() != null)
 				m_EatenObject.transform.GetChild(i).GetComponent<SpriteModifier>().SpriteModify();
 
+			if(m_EatenObject.transform.GetChild(i).GetComponent<SpriteRenderer>().flipX)
+				m_EatenObject.transform.GetChild(i).GetComponent<SpriteRenderer>().flipX = false;
+
 			Morgue.getInstance.AddBody(false,m_EatenObject.transform.GetChild(i).gameObject);
 		}
 
@@ -143,12 +146,9 @@ public class Core : Part {
 		for (int i = 0; i < transform.parent.childCount; ++i) {
 			bEdgePart = false;
 
-			if(i == 0){
-				iPartGrid = grid.GetGridIdx(transform.position);
-			}else{
-				iPartGrid = grid.GetGridIdx(transform.parent.GetChild(i).position);
-				bEdgePart = transform.parent.GetChild(i).GetComponent<Part>().m_bEdgePart;
-			}
+			iPartGrid = grid.GetGridIdx(transform.parent.GetChild(i).position);
+			bEdgePart = transform.parent.GetChild(i).GetComponent<Part>().m_bEdgePart;
+
 			TakenSeat.Add(iPartGrid);
 
 			///check A* CoreSide
@@ -157,7 +157,6 @@ public class Core : Part {
 			int iEnd = GridMgr.getInstance.GetGridIdx (transform.position);
 			
 			if (AStar.getInstance.AStarStart_CoreFind (iStart, iEnd) && !bEdgePart) { //코어 쪽 붙은애들에만 붙을수있음
-
 				if(!m_StickAvailableSeat.Contains(iPartGrid-1))
 					m_StickAvailableSeat.Add(iPartGrid-1);
 				if(!m_StickAvailableSeat.Contains(iPartGrid+1))
@@ -172,7 +171,6 @@ public class Core : Part {
 			{
 				m_StickAvailableSeat.Remove(TakenSeat[j]);
 			}
-
 			
 		}
 

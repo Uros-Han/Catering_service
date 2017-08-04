@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FSM_Enemy : FSM {
 
+	public bool m_bBornAtLeft;
+
 	List<GameObject> m_AttackAvailableParts;
 
 	float fBornPosX = 0;
@@ -15,13 +17,16 @@ public class FSM_Enemy : FSM {
 		m_AttackAvailableParts = new List<GameObject> ();
 
 		//Find AttackAvailable Part
-		for(int i =0 ; i < transform.childCount; ++i)
-		{
-			if(transform.GetChild(i).GetComponent<Part>().m_bAttackAvailable)
-				m_AttackAvailableParts.Add(transform.GetChild(i).gameObject);
+		for (int i =0; i < transform.childCount; ++i) {
+			if (transform.GetChild (i).GetComponent<Part> ().m_bAttackAvailable)
+				m_AttackAvailableParts.Add (transform.GetChild (i).gameObject);
 		}
 
 		fBornPosX = transform.position.x;
+
+		if (m_bBornAtLeft) {
+			StartCoroutine (SpriteFlip ());
+		}
 	}
 
 	void SetState(AI_STATE state)
@@ -67,9 +72,14 @@ public class FSM_Enemy : FSM {
 			yield return null;
 
 			if(m_AiState == AI_STATE.MOVE)
-				transform.Translate(new Vector3(-1,0) * fMoveSpeed * Time.deltaTime);
+			{
+				if(!m_bBornAtLeft)
+					transform.Translate(new Vector3(-1,0) * fMoveSpeed * Time.deltaTime);
+				else
+					transform.Translate(new Vector3(1,0) * fMoveSpeed * Time.deltaTime);
+			}
 
-			if(transform.position.x < -fBornPosX) //Run Away
+			if((!m_bBornAtLeft && transform.position.x < -fBornPosX) || (m_bBornAtLeft && transform.position.x > -fBornPosX)) //Run Away
 			{
 				BattleSceneMgr.getInstance.EnemyEliminatedCheck ();
 				Destroy (gameObject);
@@ -178,5 +188,15 @@ public class FSM_Enemy : FSM {
 			yield return new WaitForSeconds(0.2f);
 
 		};
+	}
+
+	IEnumerator SpriteFlip(){
+		yield return new WaitForSeconds(0.1f);
+		
+		for(int i = 0 ; i < transform.childCount; ++i){
+			transform.GetChild (i).localPosition = new Vector3(-transform.GetChild (i).localPosition.x, transform.GetChild (i).localPosition.y);
+			transform.GetChild (i).localRotation = Quaternion.AngleAxis(-transform.GetChild (i).localRotation.z, Vector3.forward);
+			transform.GetChild(i).GetComponent<SpriteRenderer> ().flipX = true;
+		}
 	}
 }

@@ -1,19 +1,15 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace SpriteParticleEmitter
 {
+//[Obsolete("Use SpriteToParticles component instead")]
 /// <summary>
-/// Refer to manual for description.
+/// Obsolete: Use SpriteToParticles component instead - Refer to manual for description.
 /// </summary>
 public class StaticEmitterContinuous : StaticSpriteEmitter
 {
-    [Header("Emission")]
-    [Tooltip("Particles to emit per second")]
-    //! Particles to emit per second
-    public float EmissionRate = 1000;
-    //! Save time to know how many particles to show per frame
-    protected float ParticlesToEmitThisFrame;
     //! Will be called when the emitter is ready to play (after caching)
     public override event SimpleEvent OnAvailableToPlay;
 
@@ -51,6 +47,7 @@ public class StaticEmitterContinuous : StaticSpriteEmitter
 
         //getting sprite source as gameobject for pos rot and scale
         Vector3 transformPos = spriteRenderer.gameObject.transform.position;
+        Vector3 betweenFramesPrecisionPos = transformPos;
         Quaternion transformRot = spriteRenderer.gameObject.transform.rotation;
         Vector3 transformScale = spriteRenderer.gameObject.transform.lossyScale;
         ParticleSystemSimulationSpace currentSimulationSpace = SimulationSpace;
@@ -70,6 +67,12 @@ public class StaticEmitterContinuous : StaticSpriteEmitter
         for (int i = 0; i < EmissionCount; i++)
         {
             int rnd = Random.Range(0, pCount);
+            if (useBetweenFramesPrecision)
+            {
+                float randomDelta = Random.Range(0,1f);
+                betweenFramesPrecisionPos = Vector3.Lerp(lastTransformPosition, transformPos, randomDelta);
+            }
+
             ParticleSystem.EmitParams em = new ParticleSystem.EmitParams();
             if (UsePixelSourceColor)
                 em.startColor = colorCache[rnd];
@@ -83,7 +86,7 @@ public class StaticEmitterContinuous : StaticSpriteEmitter
                 tempV.x = origPos.x * transformScale.x;
                 tempV.y = origPos.y * transformScale.y;
 
-                em.position = transformRot * tempV + transformPos;
+                em.position = transformRot * tempV + betweenFramesPrecisionPos;
                 particlesSystem.Emit(em, 1);
             }
             else
@@ -95,6 +98,7 @@ public class StaticEmitterContinuous : StaticSpriteEmitter
 
         //sustract integer particles emitted and leave the float bit
         ParticlesToEmitThisFrame -= EmissionCount;
+        lastTransformPosition = transformPos;
     }
 
     public override void Play()

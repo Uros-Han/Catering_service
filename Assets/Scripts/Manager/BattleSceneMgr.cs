@@ -116,6 +116,8 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 	{
 		m_iDay += 1;
 
+		LevelGenerator.getInstance.Encount (m_iDay, m_iDay);
+
 		GameObject.Find ("MorgueToggle").GetComponent<UIPanel> ().alpha = 0;
 		GameMgr.getInstance.m_turnState = TURN_STATE.DAY;
 

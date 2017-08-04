@@ -1,26 +1,22 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
+using SpriteToParticlesAsset;
 using UnityEngine.Assertions.Comparers;
-using UnityEngine.Profiling;
-
+using Random = UnityEngine.Random;
 
 namespace SpriteParticleEmitter
 {
+//[Obsolete("Use SpriteToParticles component instead")]
 /// <summary>
-/// Refer to manual for description.
+/// Obsolete: Use SpriteToParticles component instead - Refer to manual for description.
 /// </summary>
+[ExecuteInEditMode]
 public class DynamicEmitter : EmitterBase
 {
-    [Tooltip("Start emitting as soon as able")]
+    //[Tooltip("Start emitting as soon as able")]
     //! Start emitting as soon as able?
-    public bool PlayOnAwake = true;
-
-    [Header("Emission")]
-    [Tooltip("Particles to emit per second")]
-    //! Particles to emit per second
-    public float EmissionRate = 1000;
-    //! Save time to know how many particles to show per frame
-    protected float ParticlesToEmitThisFrame;
+    //public bool PlayOnAwake = true;
 
     [Tooltip("Should the system cache sprites data? (Refer to manual for further explanation)")]
     //! Should the system cache sprites data? (Refer to manual for further explanation)
@@ -73,6 +69,13 @@ public class DynamicEmitter : EmitterBase
     {
         Sprite sprite = spriteRenderer.sprite;
 
+        if (!sprite)
+        {
+            if (verboseDebug)
+                Debug.LogError("Unable to emit. Sprite is null in game object " + name);
+            return;
+        }
+
         float colorR = EmitFromColor.r;
         float colorG = EmitFromColor.g;
         float colorB = EmitFromColor.b;
@@ -97,7 +100,10 @@ public class DynamicEmitter : EmitterBase
         float width = (int) sprite.rect.size.x;
         float height = (int) sprite.rect.size.y;
 
+        int intWidth = (int) width;
+
         //set particle size based on sprite Pixels per unit and particle system prefered size
+        float halfPixelSize = 1 / PixelsPerUnit / 2;
         #if UNITY_5_5_OR_NEWER
         float startSize = 1 / (PixelsPerUnit);
         startSize *= mainModule.startSize.constant; //TODO ability to process different sizes coming in next update
@@ -112,7 +118,11 @@ public class DynamicEmitter : EmitterBase
 
         //if the sprite raw data is cached use that one, if not ask for it to the texture.
         Color[] pix;
-        if (CacheSprites)
+        if (useSpritesSharingCache && Application.isPlaying)
+        {
+            pix = SpritesDataPool.GetSpriteColors(sprite, (int)sprite.rect.position.x, (int)sprite.rect.position.y, (int)width, (int) height);
+        }
+        else if (CacheSprites)
         {
             if (spritesSoFar.ContainsKey(sprite))
                 pix = spritesSoFar[sprite];
@@ -144,33 +154,131 @@ public class DynamicEmitter : EmitterBase
             iCache = indexCache;
         }
 
-        //Profiler.BeginSample("Part ONe");
-        //find available pixels to emit from
+        bool UseEmissionFromColorLocal = UseEmissionFromColor;
         int matchesCount = 0;
-        for (int i = 0; i < widthByHeight; i++)
+
+        bool borderEmissionLocal = borderEmission == BorderEmission.Fast || borderEmission == BorderEmission.Precise;
+        #region BLA
+        if (borderEmissionLocal)
         {
-            //Profiler.BeginSample("Color access");
-            Color c = pix[i];
-            //Profiler.EndSample();
-            //skip pixels with alpha 0
-            if (c.a <= 0)
-                continue;
+            bool lastVisible = false;
+            Color lastColor = pix[0];
+            int widthInt = (int)width;
+            
+            bool borderEmissionPreciseLocal = borderEmission == BorderEmission.Precise;
 
-            //Profiler.BeginSample("Color comparer");
-            //Skip unwanted colors when using Emission from color.
-            if (UseEmissionFromColor) 
-                if(!FloatComparer.AreEqual(colorR, c.r, toleranceR) ||
-                 !FloatComparer.AreEqual(colorG, c.g, toleranceG) ||
-                 !FloatComparer.AreEqual(colorB, c.b, toleranceB))
-                continue;
-            //Profiler.EndSample();
+            for (int i = 0; i < widthByHeight; i++)
+            {
+                Color c = pix[i];
+                //skip pixels with alpha 0
+                bool currentVisible = c.a > 0;
 
-            //Profiler.BeginSample("Assignation");
-            cCache[matchesCount] = c;
-            iCache[matchesCount] = i;
-            matchesCount++;
-            //Profiler.EndSample();
+                if (borderEmissionPreciseLocal)
+                {
+                    int prevYindex = i - widthInt;
+                    if (prevYindex > 0)
+                    {
+                        Color cPrev = pix[prevYindex];
+                        bool prevVisibleInY = cPrev.a > 0;
+                        if (currentVisible)
+                        {
+                            if (!prevVisibleInY)
+                            {
+                                //Skip unwanted colors when using Emission from color.
+                                if (UseEmissionFromColorLocal)
+                                    if (!FloatComparer.AreEqual(colorR, c.r, toleranceR) ||
+                                     !FloatComparer.AreEqual(colorG, c.g, toleranceG) ||
+                                     !FloatComparer.AreEqual(colorB, c.b, toleranceB))
+                                        continue;
+
+                                cCache[matchesCount] = c;
+                                iCache[matchesCount] = i;
+                                matchesCount++;
+                                lastColor = c;
+                                lastVisible = true;
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            if (prevVisibleInY)
+                            {
+                                //Skip unwanted colors when using Emission from color.
+                                if (UseEmissionFromColorLocal)
+                                    if (!FloatComparer.AreEqual(colorR, cPrev.r, toleranceR) ||
+                                     !FloatComparer.AreEqual(colorG, cPrev.g, toleranceG) ||
+                                     !FloatComparer.AreEqual(colorB, cPrev.b, toleranceB))
+                                        continue;
+
+                                cCache[matchesCount] = cPrev;
+                                iCache[matchesCount] = prevYindex;
+                                matchesCount++;
+                            }
+                        }
+                    }
+                }
+
+                if (borderEmissionLocal && !currentVisible && lastVisible)
+                {
+                    //Skip unwanted colors when using Emission from color.
+                    if (UseEmissionFromColorLocal)
+                        if (!FloatComparer.AreEqual(colorR, lastColor.r, toleranceR) ||
+                         !FloatComparer.AreEqual(colorG, lastColor.g, toleranceG) ||
+                         !FloatComparer.AreEqual(colorB, lastColor.b, toleranceB))
+                            continue;
+
+                    cCache[matchesCount] = lastColor;
+                    iCache[matchesCount] = i - 1;
+                    matchesCount++;
+                    lastVisible = true;
+                }
+
+                lastColor = c;
+                if (!currentVisible)
+                {
+                    lastVisible = false;
+                    continue;
+                }
+
+                if (!borderEmissionLocal || (currentVisible && !lastVisible))
+                {
+                    //Skip unwanted colors when using Emission from color.
+                    if (UseEmissionFromColorLocal)
+                        if (!FloatComparer.AreEqual(colorR, c.r, toleranceR) ||
+                         !FloatComparer.AreEqual(colorG, c.g, toleranceG) ||
+                         !FloatComparer.AreEqual(colorB, c.b, toleranceB))
+                            continue;
+
+                    cCache[matchesCount] = c;
+                    iCache[matchesCount] = i;
+                    matchesCount++;
+                    lastVisible = true;
+                }
+            }
         }
+        else
+        {
+            //find available pixels to emit from
+            for (int i = 0; i < widthByHeight; i++)
+            {
+                Color c = pix[i];
+                //skip pixels with alpha 0
+                if (c.a <= 0)
+                    continue;
+
+                //Skip unwanted colors when using Emission from color.
+                if (UseEmissionFromColorLocal)
+                    if (!FloatComparer.AreEqual(colorR, c.r, toleranceR) ||
+                        !FloatComparer.AreEqual(colorG, c.g, toleranceG) ||
+                        !FloatComparer.AreEqual(colorB, c.b, toleranceB))
+                        continue;
+
+                cCache[matchesCount] = c;
+                iCache[matchesCount] = i;
+                matchesCount++;
+            }
+        }
+        #endregion
         //Profiler.EndSample();
 
         //no colors were matched, stop
@@ -188,7 +296,7 @@ public class DynamicEmitter : EmitterBase
 
             //get pixel position in texture
             float posX = ((i%width)/PixelsPerUnit) - offsetX;
-            float posY = ((i/width)/PixelsPerUnit) - offsetY;
+            float posY = ((i / intWidth) / PixelsPerUnit) - offsetY;
 
             //handle sprite renderer fliping
             if (flipX)
@@ -196,8 +304,8 @@ public class DynamicEmitter : EmitterBase
             if (flipY)
                 posY = height/PixelsPerUnit - posY - offsetY*2;
 
-            tempV.x = posX * transformScale.x;
-            tempV.y = posY * transformScale.y;
+            tempV.x = posX * transformScale.x - halfPixelSize;
+            tempV.y = posY * transformScale.y + halfPixelSize;
 
             ParticleSystem.EmitParams em = new ParticleSystem.EmitParams();
             // define new particle start position based on Sprite pixel position in texture, this game object's rotation and position.
@@ -222,6 +330,13 @@ public class DynamicEmitter : EmitterBase
             spriteRenderer.enabled = false;
 
         Sprite sprite = spriteRenderer.sprite;
+
+        if (!sprite)
+        {
+            if (verboseDebug)
+                Debug.LogError("Unable to emit. Sprite is null in game object " + name);
+            return;
+        }
 
         float colorR = EmitFromColor.r;
         float colorG = EmitFromColor.g;
@@ -261,7 +376,11 @@ public class DynamicEmitter : EmitterBase
 
         //if the sprite raw data is cached use that one, if not ask for it to the texture.
         Color[] pix;
-        if (CacheSprites)
+        if (useSpritesSharingCache && Application.isPlaying)
+        {
+            pix = SpritesDataPool.GetSpriteColors(sprite, (int)sprite.rect.position.x, (int)sprite.rect.position.y, (int)width, (int)height);
+        }
+        else if (CacheSprites)
         {
             if (spritesSoFar.ContainsKey(sprite))
                 pix = spritesSoFar[sprite];
@@ -281,7 +400,6 @@ public class DynamicEmitter : EmitterBase
         float toleranceB = BlueTolerance;
 
         float widthByHeight = width*height;
-
         Vector3 tempV = Vector3.zero;
 
         for (int i = 0; i < widthByHeight; i++)
@@ -321,6 +439,15 @@ public class DynamicEmitter : EmitterBase
             particlesSystem.Emit(em, 1);
         }
     }
+
+
+ #if UNITY_EDITOR
+ void OnValidate()
+ {
+     Awake();
+ }
+ 
+ #endif
 
     /// <summary>
     /// Enable spriteRenderer if it was disabled.
@@ -365,6 +492,12 @@ public class DynamicEmitter : EmitterBase
     public void ClearCachedSprites()
     {
         spritesSoFar = new Dictionary<Sprite, Color[]>();
+    }
+
+    private void DummyMethod()
+    {
+      // if (OnAvailableToPlay != null)
+      //     OnAvailableToPlay();
     }
 }
 }

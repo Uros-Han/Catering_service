@@ -8,7 +8,7 @@ public class WantedReward : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		m_RewardMoneyLabel = transform.FindChild ("Reward").GetComponent<UILabel> ();
+		m_RewardMoneyLabel = transform.Find ("Reward").GetComponent<UILabel> ();
 	}
 
 	void Update()

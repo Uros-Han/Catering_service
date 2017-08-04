@@ -33,7 +33,7 @@ public class Tangled : MonoBehaviour {
 		}
 
 		for (int i=0; i<4; ++i) {
-			DrawLine(m_listCurve[i], m_listCurve[i+1], new Color(90/255f, 28/255f, 111/255f));
+			DrawLine(m_listCurve[i], m_listCurve[i+1], new Color(80/255f, 25/255f, 100/255f));
 		}
 
 		m_vecBeforeP1 = m_vecP1;

@@ -1,20 +1,26 @@
 ﻿//#define MEM_DEBUG
 
+using System;
 using UnityEngine;
 using System.Collections.Generic;
+using SpriteToParticlesAsset;
 using UnityEngine.Assertions.Comparers;
 
 namespace SpriteParticleEmitter
 {
+//[Obsolete("Use SpriteToParticles component instead")]
 /// <summary>
-/// Base component for StaticEmitterOneShot and StaticEmitterContinuous
+/// Obsolete: Use SpriteToParticles component instead - Base component for StaticEmitterOneShot and StaticEmitterContinuous
 /// </summary>
+[ExecuteInEditMode]
 public class StaticSpriteEmitter : EmitterBase
 {
+    ///new protected bool useSpritesSharingCache;
+
     [Header("Awake Options")]
-    [Tooltip("Activating this will force CacheOnAwake")]
-    //! Activating this will force CacheOnAwake
-    public bool PlayOnAwake = true;
+    //[Tooltip("Activating this will force CacheOnAwake")]
+    ////! Activating this will force CacheOnAwake
+    //public bool PlayOnAwake = true;
     [Tooltip("Should the system cache on Awake method? - Static emission needs to be cached first, if this property is not checked the CacheSprite() method should be called by code. (Refer to manual for further explanation)")]
     //! Should the system cache on Awake method? - Static emission needs to be cached first, if this property is not checked the CacheSprite() method should be called by code. (Refer to manual for further explanation)
     public bool CacheOnAwake = true;
@@ -66,6 +72,13 @@ public class StaticSpriteEmitter : EmitterBase
 
         Sprite sprite = spriteRenderer.sprite;
 
+        if (!sprite)
+        {
+            if (verboseDebug)
+                Debug.LogError("Unable to cache. Sprite is null in game object " + name);
+            return;
+        }
+
         float colorR = EmitFromColor.r;
         float colorG = EmitFromColor.g;
         float colorB = EmitFromColor.b;
@@ -82,7 +95,8 @@ public class StaticSpriteEmitter : EmitterBase
 
         if (spriteRenderer == null || spriteRenderer.sprite == null)
         {
-            Debug.LogError("Sprite reference missing");
+            if (verboseDebug)
+                Debug.LogError("Sprite reference missing");
         }
 
         float width = (int)sprite.rect.size.x;
@@ -102,7 +116,11 @@ public class StaticSpriteEmitter : EmitterBase
         float offsetY = sprite.pivot.y / PixelsPerUnit;
 
         //ask texture for wanted sprite
-        Color[] pix = sprite.texture.GetPixels((int)sprite.rect.position.x, (int)sprite.rect.position.y, (int)width, (int)height);
+        Color[] pix;
+        if (useSpritesSharingCache && Application.isPlaying)
+            pix = SpritesDataPool.GetSpriteColors(sprite, (int)sprite.rect.position.x, (int)sprite.rect.position.y, (int)width, (int)height);
+        else
+            pix = sprite.texture.GetPixels((int)sprite.rect.position.x, (int)sprite.rect.position.y, (int)width, (int)height);
 
         float toleranceR = RedTolerance;
         float toleranceG = GreenTolerance;
@@ -155,7 +173,8 @@ public class StaticSpriteEmitter : EmitterBase
         particleInitColorCache = colorsCache.ToArray();
         if (particlesCacheCount <= 0)
         {
-            Debug.LogWarning("Caching particle emission went wrong. This is most probably because couldn't find wanted color in sprite");
+            if (verboseDebug)
+                Debug.LogWarning("Caching particle emission went wrong. This is most probably because couldn't find wanted color in sprite");
             return;
         }
 
@@ -175,6 +194,9 @@ public class StaticSpriteEmitter : EmitterBase
 #if MEM_DEBUG
         Debug.Log("<color=blue>F02 = </color> = " + System.GC.GetTotalMemory(false) / 1024 / 1024 + " | final delta: " + (System.GC.GetTotalMemory(false) - mem) / 1024 / 1024);
 #endif
+#if UNITY_EDITOR
+        cachedSprite = sprite;
+#endif
         //finally call event to warn we've finished
         if (OnCacheEnded != null)
             OnCacheEnded();
@@ -189,7 +211,26 @@ public class StaticSpriteEmitter : EmitterBase
             Debug.Log("Current = " + mem / 1024 / 1024);
         }
 #endif
+
+#if UNITY_EDITOR
+        if (cachedSprite != spriteRenderer.sprite)
+            EditorInvalidate();
+#endif
     }
+
+
+#if UNITY_EDITOR
+    void OnValidate()
+    {
+        EditorInvalidate();
+    }
+
+    void EditorInvalidate()
+    {
+        Awake();
+        CacheSprite();
+    }
+#endif
 
     public override void Play() { }
     public override void Stop() { }
@@ -203,6 +244,15 @@ public class StaticSpriteEmitter : EmitterBase
     public override bool IsAvailableToPlay()
     {
         return hasCachingEnded;
+    }
+
+    private void DummyMethod()
+    {
+        if (OnAvailableToPlay != null)
+            OnAvailableToPlay();
+
+        if (OnCacheEnded != null)
+            OnCacheEnded();
     }
 }
 }

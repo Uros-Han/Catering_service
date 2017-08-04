@@ -1,13 +1,18 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
+using SpriteToParticlesAsset;
 using UnityEngine.Assertions.Comparers;
+using Random = UnityEngine.Random;
 
 namespace SpriteParticleEmitter
 {
-/// <summary>
-/// Refer to manual for description.
-/// </summary>
+//[Obsolete("Use SpriteToParticles component instead")]
+[ExecuteInEditMode]
 [RequireComponent(typeof(UIParticleRenderer))]
+/// <summary>
+///Obsolete: Use SpriteToParticles component instead -  Refer to manual for description.
+/// </summary>
 public class DynamicEmitterUI : EmitterBaseUI
 {
     [Tooltip("Start emitting as soon as able")]
@@ -49,13 +54,6 @@ public class DynamicEmitterUI : EmitterBaseUI
         #endif
     }
 
-    [Tooltip("Should the transform match target Image Renderer Position?")]
-    //! Should the transform match target Image Renderer Position?
-    public bool matchImageRendererPostionData;
-    [Tooltip("Should the transform match target Image Renderer Scale?")]
-    //! Should the RectTransform match target Image Renderer Position?
-    public bool matchImageRendererScale;
-
     //! The target Image Renderer's RectTransform
     private RectTransform targetRectTransform;
     //! This RectTransform
@@ -67,7 +65,6 @@ public class DynamicEmitterUI : EmitterBaseUI
     //! Multiplier used with texture's Pixels per unit
     protected float hMult = 100;
 
-
     /// <summary>
     /// When playing it emits particles based on EmissionRate.
     /// </summary>
@@ -77,7 +74,8 @@ public class DynamicEmitterUI : EmitterBaseUI
         {
             if (imageRenderer == null)
             {
-                Debug.LogError("Image Renderer component not referenced in DynamicEmitterUI component");
+                if (verboseDebug)
+                    Debug.LogError("Image Renderer component not referenced in DynamicEmitterUI component");
                 isPlaying = false;
                 return;
             }
@@ -106,9 +104,49 @@ public class DynamicEmitterUI : EmitterBaseUI
             float offsetY = (1 - targetRectTransform.pivot.y) * (-targetRectTransform.rect.height) + targetRectTransform.rect.height / 2;
             offsetXY = new Vector2(offsetX, offsetY);
             Sprite sprite = imageRenderer.sprite;
+
+            if (!sprite)
+            {
+                if (verboseDebug)
+                    Debug.LogError("Unable to get positions. Sprite is null in game object " + name);
+                return;
+            }
+
+            //Zachary Scaling bug
+            //// If the target image has "PreserveAspect" enabled then we need to figure out which dimension got shorter. 
+            //if (imageRenderer.preserveAspect)
+            //{
+            //
+            //    // Get the aspect ratio of the sprite here as defined by aspect = height / width. Keep this definition consistent for now. 
+            //    // Remember that if the sprite aspect is larger than the target rect, the sprite was shrunken horizontally and the 'wMult' must be made smaller.
+            //    // If the sprite aspect is smaller than the target rect, the sprite was shrunken vertically and the 'hMult' must be made smaller. 
+            //    // This is based on the above definition that a = h/w. 
+            //    float spriteAspect = sprite.rect.size.y / sprite.rect.size.x;
+            //    float targetAspect = targetRectTransform.rect.height / targetRectTransform.rect.width;
+            //
+            //
+            //    // If this sprite aspect is larger than the target RectTransform then we must scale the x-scale accordingly or the particles will be emitted too far out horizontally. 
+            //    if (spriteAspect > targetAspect)
+            //    {
+            //        //Debug.Log("[DynamicEmitterUI] Sprite aspect larger - targetRectTransform aspect: " + targetAspect + ", sprite aspect: " + spriteAspect);
+            //        wMult = sprite.pixelsPerUnit * (targetRectTransform.rect.width / sprite.rect.size.x) * (targetAspect / spriteAspect);
+            //        hMult = sprite.pixelsPerUnit * (targetRectTransform.rect.height / sprite.rect.size.y);
+            //    }
+            //    else
+            //    {
+            //        //Debug.Log("[DynamicEmitterUI] targetRectTransform aspect larger - targetRectTransform aspect: " + targetAspect + ", sprite aspect: " + spriteAspect);
+            //        wMult = sprite.pixelsPerUnit * (targetRectTransform.rect.width / sprite.rect.size.x);
+            //        hMult = sprite.pixelsPerUnit * (targetRectTransform.rect.height / sprite.rect.size.y) * (spriteAspect / targetAspect);
+            //    }
+            //}
+            //else
+            //{
+            //    wMult = sprite.pixelsPerUnit * (targetRectTransform.rect.width / sprite.rect.size.x);
+            //    hMult = sprite.pixelsPerUnit * (targetRectTransform.rect.height / sprite.rect.size.y);
+            //}
+
             wMult = sprite.pixelsPerUnit * (targetRectTransform.rect.width / sprite.rect.size.x);
             hMult = sprite.pixelsPerUnit * (targetRectTransform.rect.height / sprite.rect.size.y);
-
 
             ParticlesToEmitThisFrame += EmissionRate * Time.deltaTime;
             int EmissionCount = (int) ParticlesToEmitThisFrame;
@@ -130,6 +168,13 @@ public class DynamicEmitterUI : EmitterBaseUI
         {
             sprite = imageRenderer.overrideSprite;
             //Debug.Log(sprite.rect.size.x);
+        }
+
+        if (!sprite)
+        {
+            if (verboseDebug)
+                Debug.LogError("Unable to emit. Sprite is null in game object " + name);
+            return;
         }
 
         float colorR = EmitFromColor.r;
@@ -154,7 +199,11 @@ public class DynamicEmitterUI : EmitterBaseUI
 
         //if the sprite raw data is cached use that one, if not ask for it to the texture.
         Color[] pix;
-        if (CacheSprites)
+        if (useSpritesSharingCache && Application.isPlaying)
+        {
+            pix = SpritesDataPool.GetSpriteColors(sprite, (int)sprite.rect.position.x, (int)sprite.rect.position.y, (int)width, (int)height);
+        }
+        else if (CacheSprites)
         {
             if (spritesSoFar.ContainsKey(sprite))
                 pix = spritesSoFar[sprite];
@@ -252,6 +301,13 @@ public class DynamicEmitterUI : EmitterBaseUI
 
         Sprite sprite = imageRenderer.sprite;
 
+        if (!sprite)
+        {
+            if (verboseDebug)
+                Debug.LogError("Unable to emit. Sprite is null in game object " + name);
+            return;
+        }
+
         float colorR = EmitFromColor.r;
         float colorG = EmitFromColor.g;
         float colorB = EmitFromColor.b;
@@ -274,7 +330,11 @@ public class DynamicEmitterUI : EmitterBaseUI
 
         //if the sprite raw data is cached use that one, if not ask for it to the texture.
         Color[] pix;
-        if (CacheSprites)
+        if (useSpritesSharingCache && Application.isPlaying)
+        {
+            pix = SpritesDataPool.GetSpriteColors(sprite, (int)sprite.rect.position.x, (int)sprite.rect.position.y, (int)width, (int)height);
+        }
+        else if (CacheSprites)
         {
             if (spritesSoFar.ContainsKey(sprite))
                 pix = spritesSoFar[sprite];
@@ -328,25 +388,63 @@ public class DynamicEmitterUI : EmitterBaseUI
             particlesSystem.Emit(em, 1);
         }
     }
+#if UNITY_EDITOR
+    private static List<DynamicEmitterUI> deUIs;
+
+    void OnValidate()
+    {
+        //if (EditorApplication.isCompiling)
+        //{
+        //    if (deUIs == null)
+        //    {
+        //        deUIs = new List<DynamicEmitterUI>();
+        //    }
+        //    if (!deUIs.Contains(this) && uiParticleSystem != null && uiParticleSystem.enabled)
+        //    {
+        //        uiParticleSystem.enabled = false;
+        //        deUIs.Add(this);hgjfd
+        //    }
+        //}
+        if (particlesSystem)
+            particlesSystem.Stop();
+        isPlaying = false;
+        Awake();
+    }
+    
+    //[UnityEditor.Callbacks.DidReloadScripts]
+    //private static void OnScriptsReloaded()
+    //{
+    //    if (deUIs != null)
+    //    {
+    //        foreach (DynamicEmitterUI particleRenderer in deUIs)
+    //        {
+    //            particleRenderer.uiParticleSystem.enabled = true;
+    //        }
+    //    }
+    //    deUIs = null;
+    //}
+
+#endif
 
     /// <summary>
     /// Enable spriteRenderer if it was disabled.
     /// </summary>
     public void RestoreSprite()
     {
-        imageRenderer.enabled = true;
+        if (imageRenderer)
+            imageRenderer.enabled = true;
     }
 
     public override void Play()
     {
-        if (!isPlaying)
+        if (!isPlaying && particlesSystem)
             particlesSystem.Play();
         isPlaying = true;
     }
 
     public override void Pause()
     {
-        if (isPlaying)
+        if (isPlaying && particlesSystem)
             particlesSystem.Pause();
         isPlaying = false;
     }
