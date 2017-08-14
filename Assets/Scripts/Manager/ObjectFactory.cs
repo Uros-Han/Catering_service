@@ -17,12 +17,15 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	GameObject m_objCivilian;
 
 	public Sprite m_sprite_meat;
-	public Sprite[][] m_sheet_cattle;
 	public Sprite[] m_sheet_core;
-	public Sprite[] m_sheet_wolf;
-	public Sprite[] m_sheet_civilian_0;
+
 	public Sprite[] m_sheet_chicken_0;
 	public Sprite[] m_sheet_goat_0;
+
+	public Sprite[] m_sheet_civilian_head;
+	public Sprite[] m_sheet_civilian_leg;
+	public Sprite[] m_sheet_civilian_arm;
+	public Sprite[] m_sheet_civilian_body_0;
 
 	// Use this for initialization
 	public void ResourcesLoad () {
@@ -32,18 +35,20 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 
 		m_sprite_meat = Resources.Load<Sprite> ("Sprites/Meat");
 
-		m_sheet_cattle = new Sprite[4][];
-		for(int i = 0; i < 4; ++i)
-			m_sheet_cattle[i] = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/sheet_cattle_{0}",i));
-
 		m_sheet_core = Resources.LoadAll<Sprite>("Sprites/Sheets/sheet_core");
-		m_sheet_wolf = Resources.LoadAll<Sprite>("Sprites/Sheets/sheet_wolf");
-		m_sheet_civilian_0 = Resources.LoadAll<Sprite> ("Sprites/Sheets/sheet_farmer_0");
-		m_sheet_chicken_0 = Resources.LoadAll<Sprite> ("Sprites/Sheets/sheet_chicken_0");
-		m_sheet_goat_0 = Resources.LoadAll<Sprite> ("Sprites/Sheets/sheet_goat_0");
+
+		///Livestocks
+		m_sheet_chicken_0 = Resources.LoadAll<Sprite> ("Sprites/Sheets/Livestock/sheet_chicken_0");
+		m_sheet_goat_0 = Resources.LoadAll<Sprite> ("Sprites/Sheets/Livestock/sheet_goat_0");
 
 		m_objChicken = Resources.Load("Prefabs/Objects/Enemies/Chicken") as GameObject;
 		m_objGoat = Resources.Load("Prefabs/Objects/Enemies/Goat") as GameObject;
+
+		///Civilians
+		m_sheet_civilian_head = Resources.LoadAll<Sprite> ("Sprites/Sheets/Civilian/sheet_civ_heads");
+		m_sheet_civilian_leg = Resources.LoadAll<Sprite> ("Sprites/Sheets/Civilian/sheet_civ_legs");
+		m_sheet_civilian_arm = Resources.LoadAll<Sprite> ("Sprites/Sheets/Civilian/sheet_civ_arms");
+		m_sheet_civilian_body_0 = Resources.LoadAll<Sprite> ("Sprites/Sheets/Civilian/sheet_civ_0");
 		m_objCivilian = Resources.Load("Prefabs/Objects/Enemies/Civilian") as GameObject;
 	}
 
@@ -100,6 +105,65 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		
 		obj.transform.parent = GameObject.Find ("Enemies").transform;
 		obj.transform.localPosition = RandomBornPos (obj);
+
+		//Head Setting
+		GameObject head = obj.transform.Find ("Head").gameObject;
+		int iHeadRandom = Random.Range (0, m_sheet_civilian_head.Length);
+		head.GetComponent<SpriteRenderer>().sprite = m_sheet_civilian_head[iHeadRandom];
+		if (iHeadRandom < 3) { // Young
+			head.GetComponent<Part>().m_strNameKey = "어린 시민 머리";
+		} else if (iHeadRandom < 9) { // MiddleAge
+			head.GetComponent<Part>().m_strNameKey = "시민 머리";
+		} else { // Old
+			head.GetComponent<Part>().m_strNameKey = "늙은 시민 머리";
+		}
+
+		//Body Setting
+
+
+		//Arms Setting
+		GameObject arm = obj.transform.Find ("Hand_R").gameObject;
+		int iArmRandom = Random.Range (0, m_sheet_civilian_arm.Length);
+		arm.GetComponent<SpriteRenderer>().sprite = m_sheet_civilian_arm[iArmRandom];
+		switch (iArmRandom) {
+		case 0:
+			arm.GetComponent<Part>().m_strNameKey = "큰 낫";
+			break;
+		case 1:
+			arm.GetComponent<Part>().m_strNameKey = "낫";
+			break;
+		case 2:
+			arm.GetComponent<Part>().m_strNameKey = "원형 낫";
+			break;
+		case 3:
+			arm.GetComponent<Part>().m_strNameKey = "도끼";
+			break;
+		case 4:
+			arm.GetComponent<Part>().m_strNameKey = "곡괭이";
+			break;
+		case 5:
+			arm.GetComponent<Part>().m_strNameKey = "쇠스랑";
+			break;
+		case 6:
+			arm.GetComponent<Part>().m_strNameKey = "삽";
+			break;
+		case 7:
+			arm.GetComponent<Part>().m_strNameKey = "망치";
+			break;
+		case 8:
+			arm.GetComponent<Part>().m_strNameKey = "식칼";
+			break;
+		}
+
+		//Legs Setting
+		GameObject leg = obj.transform.Find ("Leg").gameObject;
+		int iLegRandom = Random.Range (0, m_sheet_civilian_leg.Length);
+		leg.GetComponent<SpriteRenderer>().sprite = m_sheet_civilian_leg[iLegRandom];
+		if (iLegRandom < 6) { // normal
+			leg.GetComponent<Part>().m_strNameKey = "시민 다리";
+		} else { // thin
+			leg.GetComponent<Part>().m_strNameKey = "가녀린 시민 다리";
+		}
 
 		return obj;
 	}

@@ -12,7 +12,7 @@ public class SpriteSheet : MonoBehaviour {
 		if(gameObject.name.Contains("Core"))
 			m_sheet_sprite = ObjectFactory.getInstance.m_sheet_core;
 		else if(transform.parent.name.Contains("Civilian"))
-			m_sheet_sprite = ObjectFactory.getInstance.m_sheet_civilian_0;
+			m_sheet_sprite = ObjectFactory.getInstance.m_sheet_civilian_body_0;
 		else if(transform.parent.name.Contains("Chicken"))
 			m_sheet_sprite = ObjectFactory.getInstance.m_sheet_chicken_0;
 		else if(transform.parent.name.Contains("Goat"))

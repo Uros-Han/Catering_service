@@ -1,6 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench>
+    <Files>
+      <File FileName="Assets/Scripts/Manager/BattleSceneMgr.cs" Line="1" Column="1" />
+      <File FileName="../../../SallysLaw/SallysLaw/Assets/Script/Manager/GameMgr.cs" Line="1" Column="1" />
+      <File FileName="../../../SallysLaw/SallysLaw/Assets/Script/Maptool/MapToolMgr.cs" Line="1" Column="1" />
+      <File FileName="../../../SallysLaw/SallysLaw/Assets/Script/UI/MapList/MapIcon.cs" Line="1" Column="1" />
+      <File FileName="../../../SallysLaw/SallysLaw/Assets/Script/UI/MapList/OpenFolder.cs" Line="1" Column="1" />
+      <File FileName="../../../SallysLaw/SallysLaw/Assets/Script/UI/MapToolUI/SaveBtn.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
