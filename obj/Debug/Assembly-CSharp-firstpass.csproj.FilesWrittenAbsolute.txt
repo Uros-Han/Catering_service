@@ -42,3 +42,8 @@
 /Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/Mono.Cecil.Mdb.dll
 /Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/UnityEngine.Advertisements.dll
 /Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/UnityEngine.Purchasing.dll
+/Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/UnityEngine.TestRunner.dll
+/Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/nunit.framework.dll
+/Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/UnityEngine.Timeline.dll
+/Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/ExCSS.Unity.dll
+/Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/Unity.Legacy.NRefactory.dll

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GridMgr : Singleton<GridMgr>
 {
@@ -91,4 +92,55 @@ public class GridMgr : Singleton<GridMgr>
 		return Vector3.zero;
 	}
 
+	public int GetWidthOrHeightOfMonster() //return bigger int of Width or Height
+	{
+
+		int iLeftestIdx = m_iXcount - 1;
+		int iRightestIdx = 0;
+
+		int iBottomIdx = 0;
+		int iTopIdx = m_iYcount - 1;
+
+		Transform player = GameObject.Find ("Player").transform;
+
+		for (int i = 0; i < player.childCount; ++i) {
+			int idx = GetGridIdx(player.GetChild(i).position);
+
+			if(idx % m_iXcount < iLeftestIdx)
+				iLeftestIdx = idx % m_iXcount;
+
+			if(idx % m_iXcount > iRightestIdx)
+				iRightestIdx = idx % m_iXcount;
+
+			if (idx / m_iYcount < iTopIdx)
+				iTopIdx = idx / m_iYcount;
+			
+			if (idx / m_iYcount > iBottomIdx)
+				iBottomIdx = idx / m_iYcount;
+		}
+
+		int iWidth = iRightestIdx - iLeftestIdx + 1;
+		int iHeight = iBottomIdx - iTopIdx + 1;
+
+		if (iWidth > iHeight)
+			return iWidth;
+		else
+			return iHeight;
+	}
+
+	public List<GameObject> listObjectsOfIdxs(List<int> listIdx)
+	{
+		Transform PlayerTrans = GameObject.Find ("Player").transform;
+		List<GameObject> listObj = new List<GameObject> ();
+
+		for (int i = 0; i < PlayerTrans.childCount; ++i) {
+			for (int j = 0; j < listIdx.Count; ++j) {
+				if (PlayerTrans.GetChild (i).GetComponent<Part> ().m_iGridIdx.Equals (listIdx [j])) {
+					listObj.Add (PlayerTrans.GetChild (i).gameObject);
+				}
+			}
+		}
+
+		return listObj;
+	}
 }

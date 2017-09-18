@@ -298,6 +298,7 @@
      <Compile Include="Assets\Scripts\Objects\CameraScript.cs" />
      <Compile Include="Assets\Scripts\Objects\Core.cs" />
      <Compile Include="Assets\Scripts\Objects\Glass.cs" />
+     <Compile Include="Assets\Scripts\Objects\HealthBar.cs" />
      <Compile Include="Assets\Scripts\Objects\Morgue.cs" />
      <Compile Include="Assets\Scripts\Objects\Part.cs" />
      <Compile Include="Assets\Scripts\Objects\Poop.cs" />
@@ -306,6 +307,7 @@
      <Compile Include="Assets\Scripts\Objects\Tangled.cs" />
      <Compile Include="Assets\Scripts\Objects\Unit.cs" />
      <Compile Include="Assets\Scripts\UI\ControlTap.cs" />
+     <Compile Include="Assets\Scripts\UI\DamageUI.cs" />
      <Compile Include="Assets\Scripts\UI\Main\MainButtons.cs" />
      <Compile Include="Assets\Scripts\UI\MeatButton.cs" />
      <Compile Include="Assets\Scripts\UI\MeatState.cs" />
@@ -497,7 +499,6 @@
      <None Include="Assets\ProCamera2D\Code\Helpers\TransitionFX\Resources\PC2D_Fade.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAA3Console.shader" />
      <None Include="Assets\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
-     <None Include="Assets\NGUI\Examples\Resources\Localization.txt" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset2.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendForBloom.shader" />

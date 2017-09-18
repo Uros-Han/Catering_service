@@ -8,6 +8,7 @@ public class Morgue : Singleton<Morgue> {
 //	public int[] m_iMorgueIdxArr;
 	public float m_fBodyMoveTime;
 	int m_iIdxCount = 24;
+
 	public Part m_SelectedPart;
 
 	void Start()
@@ -48,6 +49,26 @@ public class Morgue : Singleton<Morgue> {
 		Transform morguePanel = GameObject.Find ("MorguePanel").transform;
 
 		morguePanel.Find ("PartName").GetComponent<UILabel> ().text = part.m_strNameKey;  //TODO : Localize
+
+		morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text = "";
+		foreach (KeyValuePair<string, float> tmp in part.m_dicStat) {
+			if ((tmp.Value != 0 || part.m_dicStatBuff [tmp.Key] != 0)) {
+				if (part.m_dicStatBuff [tmp.Key] > 0)
+					morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += string.Format ("{0} : {1}[00DA2EFF](+{2})[-]", Localization.Get (tmp.Key), tmp.Value, part.m_dicStatBuff [tmp.Key] + "\n");
+				else if (part.m_dicStatBuff [tmp.Key] < 0)
+					morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += string.Format ("{0} : {1}[EC0E0E15](-{2})[-]", Localization.Get (tmp.Key), tmp.Value, part.m_dicStatBuff [tmp.Key] + "\n");
+				else
+					morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += string.Format ("{0} : {1}", Localization.Get (tmp.Key), tmp.Value + "\n");
+			}
+		}
+		for (int i = 0; i < part.m_lstStrBuff.Count; ++i) {
+			string tmpBuff = Localization.Get (part.m_lstStrBuff [i]);
+
+			if(tmpBuff.Contains("+"))
+				morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += "[00DA2EFF]" + tmpBuff.Substring(1) + "[-]";
+			else if(tmpBuff.Contains("-"))
+				morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += "[EC0E0E15]" + tmpBuff.Substring(1) + "[-]";
+		}
 	}
 
 	public void DeselectPart()
@@ -56,6 +77,7 @@ public class Morgue : Singleton<Morgue> {
 		Transform morguePanel = GameObject.Find ("MorguePanel").transform;
 		
 		morguePanel.Find ("PartName").GetComponent<UILabel> ().text = "";
+		morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text = "";
 	}
 
 	IEnumerator ChangeParentToMorgue(GameObject movePart)
@@ -66,6 +88,13 @@ public class Morgue : Singleton<Morgue> {
 		movePart.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
 
 		movePart.GetComponent<Part> ().AdjustEmissionRate ();
+	}
+
+	public void ClearMorgue()
+	{
+		for (int i = 0; i < m_bBodyArr.Length; ++i) {
+			m_bBodyArr [i] = false;
+		}
 	}
 
 	public void RemoveBody(Vector3 vPos)

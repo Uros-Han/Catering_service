@@ -93,10 +93,18 @@ public class Core : Part {
 	public GameObject m_EatenObject = null;
 	public IEnumerator Eat(GameObject target)
 	{
-		iTween.MoveTo(m_EatenObject, iTween.Hash("x", transform.position.x, "y", transform.position.y, "time" , 0.5f, "easetype", "easeInSine"));
-		m_EatenObject.GetComponent<FSM_Enemy> ().m_AiState = AI_STATE.EATEN;
-
+//		iTween.MoveTo(m_EatenObject, iTween.Hash("x", transform.position.x, "y", transform.position.y, "time" , 0.5f, "easetype", "easeInSine"));
+//		m_EatenObject.GetComponent<FSM_Enemy> ().m_AiState = AI_STATE.EATEN;
+		Tangled tangled = GameObject.Find ("Tangled").GetComponent<Tangled> ();
+		float fTime = 0;
 		yield return new WaitForSeconds (0.5f);
+		Destroy (m_EatenObject.GetComponent<FSM_Enemy> ().m_objHealthBar);
+
+		do {
+			m_EatenObject.transform.position = tangled.m_vecTangledEdge;
+			fTime += Time.deltaTime;
+			yield return null;
+		} while(fTime < 0.5f);
 
 		m_EatenObject.SetActive (false);
 		iTween.ScaleTo(gameObject, iTween.Hash("x", 2f, "y", 2f, "time" , 1f, "easetype", "easeOutElastic"));
@@ -120,6 +128,15 @@ public class Core : Part {
 
 		Transform morgueTrans = GameObject.Find ("Morgue").transform;
 		for (int i =0; i< m_EatenObject.transform.childCount; ++i) {
+
+			if (m_EatenObject.transform.GetChild (i).GetComponent<Part> ().m_strNameKey.Equals ("시민 팔")) {
+				Destroy (m_EatenObject.transform.GetChild (i).gameObject);
+				continue;
+			}else if (Random.Range(0.0f,1.0f) < 0.3f) {
+				Destroy (m_EatenObject.transform.GetChild (i).gameObject);
+				continue;
+			}
+
 			if(m_EatenObject.transform.GetChild(i).GetComponent<SpriteModifier>() != null)
 				m_EatenObject.transform.GetChild(i).GetComponent<SpriteModifier>().SpriteModify();
 
@@ -127,6 +144,7 @@ public class Core : Part {
 				m_EatenObject.transform.GetChild(i).GetComponent<SpriteRenderer>().flipX = false;
 
 			Morgue.getInstance.AddBody(false,m_EatenObject.transform.GetChild(i).gameObject);
+			m_EatenObject.transform.GetChild(i).gameObject.GetComponent<Part>().m_objHealthBar = ObjectFactory.getInstance.Create_HealthBar (m_EatenObject.transform.GetChild(i).gameObject);
 		}
 
 		StartCoroutine(m_EatenObject.GetComponent<Unit> ().DestroyThis ());

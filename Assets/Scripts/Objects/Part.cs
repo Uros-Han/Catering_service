@@ -20,9 +20,33 @@ public class Part : MonoBehaviour {
 	public DIRECTION m_headingDirection;
 
 	public string m_strNameKey; // TODO : Localize
-	public string m_strExplainKey;
+	public Dictionary<string,float> m_dicStat;
+	public Dictionary<string,float> m_dicStatBuff;
+	public List<string> m_lstStrBuff;
 
 	public float m_fOriginEmissionRate;
+	float m_fHandRotater;
+	public GameObject m_objHealthBar;
+
+	public GameObject m_objParentPart;
+
+	Coroutine buffCoroutine;
+
+	void Awake()
+	{
+		m_dicStat = new Dictionary<string, float> ();
+		m_dicStatBuff = new Dictionary<string, float> ();
+		m_lstStrBuff = new List<string> ();
+
+		if(!m_dicStatBuff.ContainsKey("Health"))
+			m_dicStatBuff.Add ("Health", 0);
+		if(!m_dicStatBuff.ContainsKey("Defense"))
+			m_dicStatBuff.Add ("Defense", 0);
+		if(!m_dicStatBuff.ContainsKey("Dodge"))
+			m_dicStatBuff.Add ("Dodge", 0);
+		if(!m_dicStatBuff.ContainsKey ("Attack"))
+			m_dicStatBuff.Add ("Attack", 0);
+	}
 
 	void Start()
 	{
@@ -30,6 +54,19 @@ public class Part : MonoBehaviour {
 		m_fCurHealth = m_fHealth;
 
 		StartCoroutine (Heal ());
+
+		if (gameObject.name.Equals ("Hand_R")) {
+			m_fHandRotater = 90;
+		}
+
+		if(!m_dicStat.ContainsKey("Health"))
+			m_dicStat.Add ("Health", 0);
+		if(!m_dicStat.ContainsKey("Defense"))
+			m_dicStat.Add ("Defense", 0);
+		if(!m_dicStat.ContainsKey("Dodge"))
+			m_dicStat.Add ("Dodge", 0);
+		if (m_bAttackAvailable && !m_dicStat.ContainsKey ("Attack"))
+			m_dicStat.Add ("Attack", 0);
 	}
 
 	public void SetDirection()
@@ -69,7 +106,8 @@ public class Part : MonoBehaviour {
 		BoxCollider2D collider2D = GetComponent<BoxCollider2D> ();
 
 		mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		
+		Destroy (m_objHealthBar);
+
 		yield return new WaitForSeconds(1f);
 		
 		Vector3 corePos = GameObject.Find("Core").transform.position;
@@ -77,8 +115,16 @@ public class Part : MonoBehaviour {
 		
 		yield return new WaitForSeconds(0.55f);
 		
-		BattleSceneMgr.getInstance.m_iMeat += 1;
+//		BattleSceneMgr.getInstance.m_iMeat += 1;
+		Part CorePart = GameObject.Find("Core").GetComponent<Part>();
+
+		ObjectFactory.getInstance.Create_DamageUI (GameObject.Find ("Core").gameObject, 1f, false);
+
+		CorePart.m_fCurHealth += 1f;
+		if (CorePart.m_fCurHealth > CorePart.m_fHealth)
+			CorePart.m_fCurHealth = CorePart.m_fHealth;
 		
+
 		Destroy(gameObject);
 		
 		yield return null;
@@ -128,6 +174,11 @@ public class Part : MonoBehaviour {
 				bFollowCursor = true;
 
 				Morgue.getInstance.SelectPart(this);
+				if(m_lstStrBuff.Count > 0 && buffCoroutine == null)
+				{
+					buffCoroutine = StartCoroutine(Buff());
+				}
+
 				PartBorder.GetComponent<SpriteRenderer>().enabled = false;
 				transform.localScale = new Vector3(1f, 1f, 1f);
 
@@ -157,6 +208,7 @@ public class Part : MonoBehaviour {
 			{
 				transform.position = mousePosition;
 				curGridIdx = grid.GetGridIdx(transform.position);
+				m_objParentPart = null;
 
 				for(int i = 0 ; i < core.m_StickAvailableSeat.Count; ++i)
 				{
@@ -188,28 +240,30 @@ public class Part : MonoBehaviour {
 						if(iIdx + 1 == iTargetIdx){
 							m_headingDirection = DIRECTION.LEFT;
 							if(m_bEdgePart && gameObject.name != "Head")
-								iTween.RotateTo(gameObject, iTween.Hash ("z", 270f, "time", 0.2f));
+								iTween.RotateTo(gameObject, iTween.Hash ("z", 270f + m_fHandRotater, "time", 0.2f));
 							else
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 90f, "time", 0.2f));
 						}else if(iIdx - 1 == iTargetIdx){
 							m_headingDirection = DIRECTION.RIGHT;
 							if(m_bEdgePart && gameObject.name != "Head")
-								iTween.RotateTo(gameObject, iTween.Hash ("z", 90f, "time", 0.2f));
+								iTween.RotateTo(gameObject, iTween.Hash ("z", 90f + m_fHandRotater, "time", 0.2f));
 							else
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 270f, "time", 0.2f));
 						}else if(iIdx - grid.m_iXcount == iTargetIdx){
 							m_headingDirection = DIRECTION.DOWN;
 							if(m_bEdgePart && gameObject.name != "Head")
-								iTween.RotateTo(gameObject, iTween.Hash ("z", 0f, "time", 0.2f));
+								iTween.RotateTo(gameObject, iTween.Hash ("z", 0f + m_fHandRotater, "time", 0.2f));
 							else
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 180f, "time", 0.2f));
 						}else if(iIdx + grid.m_iXcount == iTargetIdx){
 							m_headingDirection = DIRECTION.UP;
 							if(m_bEdgePart && gameObject.name != "Head")
-								iTween.RotateTo(gameObject, iTween.Hash ("z", 180f, "time", 0.2f));
+								iTween.RotateTo(gameObject, iTween.Hash ("z", 180f + m_fHandRotater, "time", 0.2f));
 							else
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 0f, "time", 0.2f));
 						}
+
+						m_objParentPart = ClosestPart;
 					}
 				}
 
@@ -290,7 +344,7 @@ public class Part : MonoBehaviour {
 
 						OriginPos = transform.position;
 
-						GetComponent<SpriteRenderer>().color = Color.red;
+						GetComponent<SpriteRenderer>().color = Color.white;
 						GetComponent<SpriteParticleEmitter.DynamicEmitter>().enabled = true;
 					}
 				}
@@ -330,6 +384,8 @@ public class Part : MonoBehaviour {
 					Morgue.getInstance.DeselectPart();
 					Morgue.getInstance.RemoveBody(OriginPos);
 					core.CalculateStickableSeat (false);
+					if(m_objHealthBar != null)
+						Destroy(m_objHealthBar);
 					Destroy(gameObject);
 					ObjectFactory.getInstance.Create_Poop();
 				}
@@ -372,7 +428,6 @@ public class Part : MonoBehaviour {
 					if(bParentWasCore)
 					{
 						transform.parent = GameObject.Find("Player").transform;
-
 						transform.parent.BroadcastMessage("AmI_InCoreSide");
 						GetComponent<SpriteRenderer>().sortingLayerName = "Objects";
 						GetComponent<ParticleSystemRenderer>().sortingLayerName = "Objects_Particle";
@@ -425,12 +480,82 @@ public class Part : MonoBehaviour {
 		StartCoroutine (Heal ());
 	}
 
+	List<GameObject> listBuff;
+	public IEnumerator Buff()
+	{
+		Morgue morgue = Morgue.getInstance;
+		Vector2 mousePosition = Vector2.zero;
+		BoxCollider2D collider2D = GetComponent<BoxCollider2D> ();
+		GameObject beforeParentPart = null;
+		Transform PlayerTrans = GameObject.Find ("Player").transform;
+		listBuff = new List<GameObject> ();
+
+		do{
+			if(m_objParentPart != null && m_objParentPart != beforeParentPart)
+			{
+				//clear buffs
+				for(int i=0; i < listBuff.Count; ++i)
+				{
+					Destroy(listBuff[i].gameObject);
+				}
+				listBuff.Clear ();
+
+				int iParentIdx = m_objParentPart.GetComponent<Part>().m_iGridIdx;
+				for(int i =0; i < m_lstStrBuff.Count; ++i)
+				{
+					if(m_lstStrBuff[i].Equals("LegBuff"))
+					{
+						List<int> buffIdx = new List<int>();
+						List<GameObject> buffObjList = new List<GameObject>();
+
+						buffIdx.Add(iParentIdx);
+						buffIdx.Add(iParentIdx + 1);
+						buffIdx.Add(iParentIdx - 1);
+						buffIdx.Add(iParentIdx + GridMgr.getInstance.m_iXcount);
+						buffIdx.Add(iParentIdx - GridMgr.getInstance.m_iXcount);
+						buffObjList = GridMgr.getInstance.listObjectsOfIdxs(buffIdx);
+
+						for(int j = 0; j < buffObjList.Count; ++j)
+						{
+							Part idxPart = buffObjList[j].GetComponent<Part>();
+
+							if(idxPart != this && (!idxPart.m_bEdgePart || (idxPart.m_bEdgePart && idxPart.m_objParentPart == m_objParentPart)))
+								listBuff.Add(ObjectFactory.getInstance.Create_Buff(buffObjList[j].GetComponent<Part>().m_iGridIdx, true));
+						}
+					}
+				}
+			}else if(m_objParentPart == null){
+				for(int i=0; i < listBuff.Count; ++i)
+				{
+					Destroy(listBuff[i].gameObject);
+				}
+				listBuff.Clear ();
+			}
+
+			beforeParentPart = m_objParentPart;
+			yield return null;
+				
+		}while(morgue.m_SelectedPart.Equals(this));
+
+		for(int i=0; i < listBuff.Count; ++i)
+		{
+			Destroy(listBuff[i].gameObject);
+		}
+		listBuff.Clear ();
+
+		buffCoroutine = null;
+	}
+
 	protected IEnumerator Heal()
 	{
+		if (gameObject.name.Equals ("Core"))
+			yield break;
+
 		Vector3 mousePosition;
 		BoxCollider2D collider2D = GetComponent<BoxCollider2D> ();
 		BattleSceneMgr battleSceneMgr = BattleSceneMgr.getInstance;
 		bool bHighlighted = false;
+		Part CorePart = GameObject.Find ("Core").GetComponent<Part> ();
 
 		do{
 			mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -446,11 +571,14 @@ public class Part : MonoBehaviour {
 
 			if(Input.GetMouseButtonDown(0) && collider2D.OverlapPoint(mousePosition))
 			{
-				if(m_fCurHealth < m_fHealth && battleSceneMgr.m_iMeat > 0)
+				if(m_fCurHealth < m_fHealth && CorePart.m_fCurHealth > 1)
 				{
-					battleSceneMgr.m_iMeat -= 1;
+					CorePart.m_fCurHealth -= 1;
 					m_fCurHealth += 1;
 					AdjustEmissionRate();
+
+					ObjectFactory.getInstance.Create_DamageUI(GameObject.Find ("Core").gameObject, 1, true);
+					ObjectFactory.getInstance.Create_DamageUI(gameObject, 1, false);
 				}
 			}
 
@@ -477,12 +605,21 @@ public class Part : MonoBehaviour {
 	{
 		if (transform.parent.GetComponent<FSM_Enemy> () != null) { // Enemy
 			Unit unit = transform.parent.GetComponent<Unit>();
+//			if(unit.m_fCurHealth == unit.m_fHealth)
+//				GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = m_fOriginEmissionRate;
+//			else
+//				GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = (int)((unit.m_fCurHealth / unit.m_fHealth) * m_fOriginEmissionRate / 3f);
+
 			if(unit.m_fCurHealth == unit.m_fHealth)
-				GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = m_fOriginEmissionRate;
+				GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = 0;
 			else
-				GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = (int)((unit.m_fCurHealth / unit.m_fHealth) * m_fOriginEmissionRate / 3f);
+				GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = (int)( (1 - (unit.m_fCurHealth / unit.m_fHealth)) * 10f);
+
 		}else
-			GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = (m_fCurHealth / m_fHealth) * m_fOriginEmissionRate;
+			if(gameObject.name.Equals("Core"))
+				GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = (m_fCurHealth / m_fHealth) * m_fOriginEmissionRate;
+			else
+				GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = (int)( (1 - (m_fCurHealth / m_fHealth)) * 10f);
 	}
 
 	public GameObject m_objAleart;
@@ -535,6 +672,7 @@ public class Part : MonoBehaviour {
 
 	public void DestroyThis()
 	{
+		Destroy (m_objHealthBar);
 		Destroy (gameObject);
 	}
 

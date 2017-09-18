@@ -66,6 +66,7 @@ public class FSM : MonoBehaviour {
 		if (bEnemy) { /// Attack Enemy
 
 			target.GetComponent<Unit>().m_fCurHealth -= fDamage;
+			ObjectFactory.getInstance.Create_DamageUI (target, fDamage, true);
 
 			for (int i = 0; i < target.transform.childCount; ++i) {
 				target.transform.GetChild (i).GetComponent<Part>().AdjustEmissionRate();
@@ -73,12 +74,13 @@ public class FSM : MonoBehaviour {
 
 			if(target.GetComponent<Unit>().m_fCurHealth <= 0)
 			{
-				target.GetComponent<Unit>().Death();
+				StartCoroutine(target.GetComponent<Unit>().Groggy());
 				yield break;
 			}
 		} else { //Attack Friendly
 
 			target.GetComponent<Part>().m_fCurHealth -= fDamage;
+			ObjectFactory.getInstance.Create_DamageUI (target, fDamage, true);
 
 			target.GetComponent<Part>().AdjustEmissionRate();
 			if(target.GetComponent<Part>().m_fCurHealth <= 0)

@@ -5,6 +5,7 @@ using UnityEngine;
 public class FSM_Enemy : FSM {
 
 	public bool m_bBornAtLeft;
+	public GameObject m_objHealthBar;
 
 	List<GameObject> m_AttackAvailableParts;
 
@@ -82,6 +83,7 @@ public class FSM_Enemy : FSM {
 			if((!m_bBornAtLeft && transform.position.x < -fBornPosX) || (m_bBornAtLeft && transform.position.x > -fBornPosX)) //Run Away
 			{
 				BattleSceneMgr.getInstance.EnemyEliminatedCheck ();
+				Destroy (m_objHealthBar);
 				Destroy (gameObject);
 			}
 
@@ -163,9 +165,12 @@ public class FSM_Enemy : FSM {
 		Vector3 originPos = AttackPart.transform.localPosition;
 
 		while(m_AiState == AI_STATE.ATTACK){
-
-			iTween.RotateTo(AttackPart, iTween.Hash("z",-100f,"time",0.8f, "islocal", true));
-			iTween.MoveTo(AttackPart, iTween.Hash("x", -0.095f, "y", 0.209f, "time", 0.8f, "islocal", true));
+			if(!m_bBornAtLeft)
+				iTween.RotateTo(AttackPart, iTween.Hash("z",-100f,"time",0.8f, "islocal", true));
+			else
+				iTween.RotateTo(AttackPart, iTween.Hash("z",100f,"time",0.8f, "islocal", true));
+			
+			iTween.MoveTo(AttackPart, iTween.Hash("x", -0.005f, "y", 0.206f, "time", 0.8f, "islocal", true));
 			yield return new WaitForSeconds(1.1f);
 
 			if(targetPart.m_bDestroied)
@@ -175,7 +180,7 @@ public class FSM_Enemy : FSM {
 				continue;
 			}
 			iTween.RotateTo(AttackPart, iTween.Hash("z",0f,"time",0.2f, "islocal", true));
-			iTween.MoveTo(AttackPart, iTween.Hash("x", -0.129f, "y", 0.08f, "time", 0.2f, "islocal", true));
+			iTween.MoveTo(AttackPart, iTween.Hash("x", originPos.x, "y", originPos.y, "time", 0.2f, "islocal", true));
 			yield return new WaitForSeconds(0.2f);
 			if(targetPart.m_bDestroied)
 			{
