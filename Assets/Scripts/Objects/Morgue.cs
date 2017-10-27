@@ -52,11 +52,16 @@ public class Morgue : Singleton<Morgue> {
 
 		morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text = "";
 		foreach (KeyValuePair<string, float> tmp in part.m_dicStat) {
-			if ((tmp.Value != 0 || part.m_dicStatBuff [tmp.Key] != 0)) {
-				if (part.m_dicStatBuff [tmp.Key] > 0)
-					morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += string.Format ("{0} : {1}[00DA2EFF](+{2})[-]", Localization.Get (tmp.Key), tmp.Value, part.m_dicStatBuff [tmp.Key] + "\n");
-				else if (part.m_dicStatBuff [tmp.Key] < 0)
-					morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += string.Format ("{0} : {1}[EC0E0E15](-{2})[-]", Localization.Get (tmp.Key), tmp.Value, part.m_dicStatBuff [tmp.Key] + "\n");
+			float fBuffedStat = 0f;
+			for (int i = 0; i < part.m_lstPartBuffed.Count; ++i) {
+				fBuffedStat += part.m_lstPartBuffed [i].m_dicStatBuff [tmp.Key];
+			}
+
+			if ((tmp.Value != 0 || fBuffedStat != 0)) {
+				if (fBuffedStat > 0)
+					morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += string.Format ("{0} : {1}[00DA2EFF](+{2})[-]\n", Localization.Get (tmp.Key), tmp.Value, fBuffedStat);
+				else if (fBuffedStat < 0)
+					morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += string.Format ("{0} : {1}[EC0E0E15](-{2})[-]\n", Localization.Get (tmp.Key), tmp.Value, fBuffedStat);
 				else
 					morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += string.Format ("{0} : {1}", Localization.Get (tmp.Key), tmp.Value + "\n");
 			}

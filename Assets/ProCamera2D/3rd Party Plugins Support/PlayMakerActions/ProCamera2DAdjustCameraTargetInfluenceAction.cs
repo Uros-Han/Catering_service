@@ -1,11 +1,10 @@
-﻿#if PC2D_PLAYMAKER_SUPPORT
-
+﻿#if PLAYMAKER
 using Com.LuisPedroFonseca.ProCamera2D;
 using HutongGames.PlayMaker;
 using TooltipAttribute = HutongGames.PlayMaker.TooltipAttribute;
 
 [Tooltip("Adjusts a target influence")]
-public class ProCamera2DAdjustCameraTargetInfluenceAction : FsmStateActionProCamera2DBase
+public class PC2DAdjustCameraTargetInfluence : FsmStateActionProCamera2DBase
 {
 	[RequiredField]
 	[Tooltip("The Transform of the target")]
@@ -30,5 +29,4 @@ public class ProCamera2DAdjustCameraTargetInfluenceAction : FsmStateActionProCam
 		Finish();
 	}
 }
-
 #endif

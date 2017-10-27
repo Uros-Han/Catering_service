@@ -94,10 +94,21 @@ public class FSM_Enemy : FSM {
 
 			for(int i=0; i < PlayerTrans.childCount; ++i)
 			{
-				if(Vector3.Distance(PlayerTrans.GetChild(i).transform.position, transform.position) < 0.5f)
+				if((PlayerTrans.GetChild(i).gameObject.name.Equals("Body") || PlayerTrans.GetChild(i).gameObject.name.Equals("Core")) && Vector3.Distance(PlayerTrans.GetChild(i).transform.position, transform.position) < 0.5f)
 				{
 					m_target = PlayerTrans.GetChild(i).gameObject;
 					m_AiState = AI_STATE.ATTACK;
+				}
+			}
+
+			if(!m_AiState.Equals(AI_STATE.ATTACK)){
+				for(int i=0; i < PlayerTrans.childCount; ++i)
+				{
+					if(Vector3.Distance(PlayerTrans.GetChild(i).transform.position, transform.position) < 0.3f)
+					{
+						m_target = PlayerTrans.GetChild(i).gameObject;
+						m_AiState = AI_STATE.ATTACK;
+					}
 				}
 			}
 			//////////////////////////////////

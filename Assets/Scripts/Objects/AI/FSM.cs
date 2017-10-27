@@ -64,7 +64,7 @@ public class FSM : MonoBehaviour {
 	protected IEnumerator Attack(GameObject target, float fDamage, bool bEnemy)
 	{
 		if (bEnemy) { /// Attack Enemy
-
+			
 			target.GetComponent<Unit>().m_fCurHealth -= fDamage;
 			ObjectFactory.getInstance.Create_DamageUI (target, fDamage, true);
 
@@ -74,18 +74,36 @@ public class FSM : MonoBehaviour {
 
 			if(target.GetComponent<Unit>().m_fCurHealth <= 0)
 			{
+				target.GetComponent<Unit> ().m_fCurHealth = 0;
 				StartCoroutine(target.GetComponent<Unit>().Groggy());
 				yield break;
 			}
 		} else { //Attack Friendly
 
-			target.GetComponent<Part>().m_fCurHealth -= fDamage;
-			ObjectFactory.getInstance.Create_DamageUI (target, fDamage, true);
+			Part targetPart = target.GetComponent<Part> ();
+			float fDodgePercent = targetPart.m_dicStat ["Dodge"];
+			for (int i = 0; i < targetPart.m_lstPartBuffed.Count; ++i) {
+				fDodgePercent += targetPart.m_lstPartBuffed [i].m_dicStatBuff ["Dodge"];
+			}
+			fDodgePercent *= 10f;
 
-			target.GetComponent<Part>().AdjustEmissionRate();
-			if(target.GetComponent<Part>().m_fCurHealth <= 0)
+			float fDealedDmg = fDamage - targetPart.m_dicStat["Defense"];
+
+			if (Random.Range (0, 100) < (int)fDodgePercent) { // Dodge!!
+				ObjectFactory.getInstance.Create_DamageUI (target, 0, true, true);
+			} else {
+				if (fDealedDmg > 0) {
+					targetPart.m_fCurHealth -= fDealedDmg;
+					ObjectFactory.getInstance.Create_DamageUI (target, fDamage, true);
+				} else {
+					ObjectFactory.getInstance.Create_DamageUI (target, 0f, true);
+				}
+			}
+
+			targetPart.AdjustEmissionRate();
+			if(targetPart.m_fCurHealth <= 0)
 			{
-				target.GetComponent<Part>().PartDestroyed();
+				targetPart.PartDestroyed();
 				yield break;
 			}
 		}

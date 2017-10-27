@@ -1,11 +1,10 @@
-﻿#if PC2D_PLAYMAKER_SUPPORT
-
+﻿#if PLAYMAKER
 using Com.LuisPedroFonseca.ProCamera2D;
 using HutongGames.PlayMaker;
 using TooltipAttribute = HutongGames.PlayMaker.TooltipAttribute;
 
 [Tooltip("Remove a target from the camera")]
-public class ProCamera2DRemoveCameraTargetAction : FsmStateActionProCamera2DBase
+public class PC2DRemoveCameraTarget : FsmStateActionProCamera2DBase
 {
 	[RequiredField]
 	[Tooltip("The Transform of the target")]
@@ -22,5 +21,4 @@ public class ProCamera2DRemoveCameraTargetAction : FsmStateActionProCamera2DBase
 		Finish();
 	}
 }
-
 #endif

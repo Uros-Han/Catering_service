@@ -24,7 +24,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
         {
             base.Awake();
 
-            ProCamera2D.Instance.AddPositionDeltaChanger(this);
+            ProCamera2D.AddPositionDeltaChanger(this);
         }
 
         protected override void OnDestroy()

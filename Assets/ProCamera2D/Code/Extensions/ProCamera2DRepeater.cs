@@ -75,7 +75,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
             if (ObjectOnStage)
                 InitCopy(ObjectToRepeat);
 
-            ProCamera2D.Instance.AddPostMover(this);
+            ProCamera2D.AddPostMover(this);
         }
 
         protected override void OnDestroy()

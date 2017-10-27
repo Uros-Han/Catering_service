@@ -21,7 +21,7 @@ public class FSM_Freindly : FSM {
 			if(bAttackAble){
 				for(int i =0 ; i < EnemyTrans.childCount; ++i)
 				{
-					if(Vector3.Distance(EnemyTrans.GetChild(i).transform.position, transform.position) < 0.5f && EnemyTrans.GetChild(i).gameObject.activeInHierarchy)
+					if(Vector3.Distance(EnemyTrans.GetChild(i).transform.position, transform.position) < 0.5f && EnemyTrans.GetChild(i).gameObject.activeInHierarchy && EnemyTrans.GetChild(i).gameObject.GetComponent<Unit>().m_fCurHealth > 0)
 					{
 						m_target = EnemyTrans.GetChild(i).gameObject;
 						m_AiState = AI_STATE.ATTACK;
@@ -36,6 +36,8 @@ public class FSM_Freindly : FSM {
 	
 	protected override IEnumerator State_Attack()
 	{
+		Unit targetUnit = m_target.GetComponent<Unit> ();
+
 		do{
 			yield return null;
 			
@@ -45,6 +47,13 @@ public class FSM_Freindly : FSM {
 			yield return new WaitForSeconds(0.2f);
 			StartCoroutine(Attack(m_target, GetComponent<Part>().m_fAttackDmg, true));
 			yield return new WaitForSeconds(0.2f); //Delay
+
+			if(targetUnit.m_fCurHealth <= 0)
+			{
+				m_AiState = AI_STATE.IDLE;
+				m_target = null;
+				break;
+			}
 
 			if(m_target == null || !m_target.activeInHierarchy)
 			{

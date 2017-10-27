@@ -69,7 +69,11 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 		morgueTrans.gameObject.BroadcastMessage("DestroyThis", SendMessageOptions.DontRequireReceiver);
 		Morgue.getInstance.ClearMorgue ();
 
-
+		//Clean Buff Icons
+		Transform BuffTrans = GameObject.Find("Buffs").transform;
+		for (int i = 0; i < BuffTrans.childCount; ++i) {
+			Destroy (BuffTrans.GetChild (i).gameObject);
+		}
 	}
 
 	IEnumerator NightTurn()

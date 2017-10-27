@@ -17,7 +17,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
     public class ProCamera2D : MonoBehaviour, ISerializationCallbackReceiver
     {
 		public const string Title = "Pro Camera 2D";
-        public static readonly Version Version = new Version("2.4.2");
+        public static readonly Version Version = new Version("2.5.1");
 
         #region Inspector Variables
 
@@ -71,6 +71,17 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 
         /// <summary>Property to know if there's a ProCamera2D present</summary>
         public static bool Exists { get { return _instance != null; } }
+
+		/// <summary>Is the camera moving?</summary>
+		public bool IsMoving 
+		{ 
+			get 
+			{ 
+				return 
+					Vector3H(_transform.localPosition) != Vector3H(_previousCameraPosition) || 
+					Vector3V(_transform.localPosition) != Vector3V(_previousCameraPosition);
+			} 
+		}
 
         /// <summary>Update ProCamera2D's camera rect</summary>
         public Rect Rect
@@ -190,8 +201,13 @@ namespace Com.LuisPedroFonseca.ProCamera2D
         float _previousCameraTargetVerticalPositionSmoothed;
         int _previousScreenWidth;
         int _previousScreenHeight;
+		Vector3 _previousCameraPosition;
 
-        WaitForFixedUpdate _waitForFixedUpdate = new WaitForFixedUpdate();
+		#if PC2D_TK2D_SUPPORT
+		public float _startZoomFactor;
+		#endif
+
+		WaitForFixedUpdate _waitForFixedUpdate = new WaitForFixedUpdate();
 
         Transform _transform;
 
@@ -222,6 +238,8 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 
             #if PC2D_TK2D_SUPPORT
             Tk2dCam = GetComponent<tk2dCamera>();
+			if(Tk2dCam != null)
+				_startZoomFactor = Tk2dCam.ZoomFactor;
             #endif
 
             // Reset the axis functions
@@ -238,7 +256,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 
             // Calculates current screen size
             CalculateScreenSize();
-            _startScreenSizeInWorldCoordinates = _screenSizeInWorldCoordinates;
+            ResetStartSize();
 
             // We save this so we know the direction of the camera when moving it on the depth axis
             _originalCameraDepthSign = Mathf.Sign(Vector3D(_transform.localPosition));
@@ -359,6 +377,13 @@ namespace Com.LuisPedroFonseca.ProCamera2D
                 AddCameraTarget(targetsTransforms[i], targetsInfluenceH, targetsInfluenceV, duration, targetOffset);
             }
         }
+
+		/// <summary>Add multiple targets for the camera to follow.</summary>
+		/// <param name="cameraTargets">An array or list with the new targets</param>
+		public void AddCameraTargets(IList<CameraTarget> cameraTargets)
+		{
+			CameraTargets.AddRange(cameraTargets);
+		}
 
         /// <summary>Gets the corresponding CameraTarget from an object's transform.</summary>
         /// <param name="targetTransform">The Transform of the target</param>
@@ -494,6 +519,17 @@ namespace Com.LuisPedroFonseca.ProCamera2D
             SetScreenSize(_startScreenSizeInWorldCoordinates.y / 2);
         }
 
+		/// <summary>
+		/// Resets the start camera size that is used for some calculations.
+		/// </summary>
+		public void ResetStartSize(Vector2 newSize = default(Vector2))
+		{
+			if(newSize != default(Vector2))
+				_startScreenSizeInWorldCoordinates = newSize;
+			else
+				_startScreenSizeInWorldCoordinates = Utils.GetScreenSizeInWorldCoords(GameCamera, Mathf.Abs(Vector3D(_transform.localPosition)));
+		}
+
         /// <summary>
         /// Resets all active extensions to their start values.
         /// Notice you can manually reset each extension using the "OnReset" method.
@@ -593,6 +629,9 @@ namespace Com.LuisPedroFonseca.ProCamera2D
         /// <param name="deltaTime">The time in seconds it took to complete the last frame</param>
         public void Move(float deltaTime)
         {
+			// Save previous camera position
+			_previousCameraPosition = _transform.localPosition;
+
             //Detect resolution changes
             if (Screen.width != _previousScreenWidth || Screen.height != _previousScreenHeight)
                 CalculateScreenSize();
@@ -919,21 +958,21 @@ namespace Com.LuisPedroFonseca.ProCamera2D
             _screenSizeInWorldCoordinates = new Vector2(newSize * 2f * GameCamera.aspect, newSize * 2f);
 
 #if PC2D_TK2D_SUPPORT
-            if (Tk2dCam == null)
-                return;
-
-            if (Tk2dCam.CameraSettings.projection == tk2dCameraSettings.ProjectionType.Orthographic)
+            if (Tk2dCam != null)
             {
-                if (Tk2dCam.CameraSettings.orthographicType == tk2dCameraSettings.OrthographicType.OrthographicSize)
-                    Tk2dCam.ZoomFactor = Tk2dCam.CameraSettings.orthographicSize / newSize;
-                else
-                {
+				if (Tk2dCam.CameraSettings.projection == tk2dCameraSettings.ProjectionType.Orthographic)
+				{
+					if (Tk2dCam.CameraSettings.orthographicType == tk2dCameraSettings.OrthographicType.OrthographicSize)
+						Tk2dCam.ZoomFactor = Tk2dCam.CameraSettings.orthographicSize / newSize;
+					else
+					{
 #if UNITY_EDITOR
-                    if (Application.isPlaying)
+						if (Application.isPlaying)
 #endif
-                        Tk2dCam.ZoomFactor = (_startScreenSizeInWorldCoordinates.y * .5f) / newSize;
-                }
-            }
+							Tk2dCam.ZoomFactor = (_startScreenSizeInWorldCoordinates.y * _startZoomFactor) / (newSize * 2f);
+					}
+				}
+			}
 #endif
 
             if (OnCameraResize != null)

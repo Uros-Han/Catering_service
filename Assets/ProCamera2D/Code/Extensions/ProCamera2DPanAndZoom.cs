@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 namespace Com.LuisPedroFonseca.ProCamera2D
 {
 #if UNITY_5_3_OR_NEWER
 	[HelpURL("http://www.procamera2d.com/user-guide/extension-pan-and-zoom/")]
 #endif
-	public class ProCamera2DPanAndZoom : BasePC2D, ISizeDeltaChanger, IPreMover
+	public class ProCamera2DPanAndZoom : BasePC2D, IPreMover
 	{
 		public static string ExtensionName = "Pan And Zoom";
+
+		public bool DisableOverUGUI = true;
 
 		// Zoom
 		public bool AllowZoom = true;
@@ -76,9 +79,12 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 
 		Vector3 _prevMousePosition;
 		Vector3 _prevTouchPosition;
+		int _prevTouchId;
 
 		bool _onMaxZoom;
 		bool _onMinZoom;
+		EventSystem _eventSystem;
+		bool _skip;
 
 		protected override void Awake()
 		{
@@ -86,10 +92,11 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 
 			UpdateCurrentFollowSmoothness();
 
+			_eventSystem = EventSystem.current;
+
 			_panTarget = new GameObject("PC2DPanTarget").transform;
 
 			ProCamera2D.AddPreMover(this);
-			ProCamera2D.AddSizeDeltaChanger(this);
 		}
 
 		protected override void OnDestroy()
@@ -97,7 +104,6 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 			base.OnDestroy();
 
 			ProCamera2D.RemovePreMover(this);
-			ProCamera2D.RemoveSizeDeltaChanger(this);
 		}
 
 		void Start()
@@ -111,7 +117,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 
 			CenterPanTargetOnCamera(1f);
 
-			ProCamera2D.Instance.AddCameraTarget(_panTarget);
+			ProCamera2D.AddCameraTarget(_panTarget);
 		}
 
 		protected override void OnDisable()
@@ -129,8 +135,40 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 
 		public void PreMove(float deltaTime)
 		{
-			if (enabled && AllowPan)
+			// Detect if the user is pointing over an UI element
+#if (UNITY_IOS || UNITY_ANDROID || UNITY_WINRT) && !UNITY_EDITOR
+			_skip = DisableOverUGUI && _eventSystem;
+			if(_skip)
+			{
+				_skip = false;
+				for (int i = 0; i < Input.touchCount; i++)
+				{
+					if(_eventSystem.IsPointerOverGameObject(Input.GetTouch(i).fingerId))
+					{
+						_skip = true;
+						break;
+					}
+				}
+			}
+			if (_skip)
+			{
+				_prevTouchPosition = new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, Mathf.Abs(Vector3D(ProCamera2D.LocalPosition)));
+				CancelZoom();
+			}
+#elif UNITY_STANDALONE || UNITY_WEBGL || UNITY_WEBPLAYER || UNITY_EDITOR
+			_skip = DisableOverUGUI && _eventSystem && _eventSystem.IsPointerOverGameObject();
+			if (_skip)
+			{
+				_prevMousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Mathf.Abs(Vector3D(ProCamera2D.LocalPosition)));
+				CancelZoom();
+			}
+#endif
+
+			if (enabled && AllowPan && !_skip)
 				Pan(deltaTime);
+
+			if (enabled && AllowZoom && !_skip)
+				Zoom(deltaTime);
 		}
 
 		public int PrMOrder { get { return _prmOrder; } set { _prmOrder = value; } }
@@ -139,63 +177,58 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 
 		#endregion
 
-		#region ISizeDeltaChanger implementation
-
-		public float AdjustSize(float deltaTime, float originalDelta)
-		{
-			if (enabled && AllowZoom)
-				return Zoom(deltaTime) + originalDelta;
-
-			return originalDelta;
-		}
-
-		public int SDCOrder { get { return _sdcOrder; } set { _sdcOrder = value; } }
-		int _sdcOrder = 0;
-
-		#endregion
-
 		void Pan(float deltaTime)
 		{
 			_panDelta = Vector2.zero;
 
 #if UNITY_IOS || UNITY_ANDROID || UNITY_WINRT
-            // Time since zoom
-            if (Time.time - _touchZoomTime < .1f)
-                return;
-            
-            // Touch delta
-            if (Input.touchCount == 1)
-            {
-                var touch = Input.GetTouch(0);
+			// Time since zoom
+			if (Time.time - _touchZoomTime < .1f)
+			{
+				if (Input.touchCount > 0)
+					_prevTouchPosition = new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, Mathf.Abs(Vector3D(ProCamera2D.LocalPosition)));
 
-                // Reset camera inertia and previous touch position on pan start
-                if(touch.phase == TouchPhase.Began)
-                {
-                    _prevTouchPosition = new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, Mathf.Abs(Vector3D(ProCamera2D.LocalPosition)));
-                    CenterPanTargetOnCamera(StopSpeedOnDragStart);
-                }
+				return;
+			}
 
-                var touchPos = new Vector3(touch.position.x, touch.position.y, Mathf.Abs(Vector3D(ProCamera2D.LocalPosition)));
+			// Touch delta
+			if (AllowZoom && Input.touchCount == 1 || 
+			    !AllowZoom && Input.touchCount > 0)
+			{
+				var touch = Input.GetTouch(Input.touchCount - 1);
 
-                var normalizedTouchPos = new Vector2(touch.position.x / Screen.width, touch.position.y / Screen.height);
-                
-                if (InsideDraggableArea(normalizedTouchPos))
-                {
-                    var prevTouchPositionWorldCoord = ProCamera2D.GameCamera.ScreenToWorldPoint(_prevTouchPosition);
+				// Reset camera inertia and previous touch position on pan start
+				if (touch.phase == TouchPhase.Began)
+				{
+					_prevTouchId = touch.fingerId;
+					_prevTouchPosition = new Vector3(touch.position.x, touch.position.y, Mathf.Abs(Vector3D(ProCamera2D.LocalPosition)));
+					CenterPanTargetOnCamera(StopSpeedOnDragStart);
+				}
+				
+				// Ignore if using different finger
+				if(touch.fingerId != _prevTouchId)
+					return;
 
-                    if (ResetPrevPanPoint)
-                    {
-                        prevTouchPositionWorldCoord = ProCamera2D.GameCamera.ScreenToWorldPoint(touchPos);
-                        ResetPrevPanPoint = false;
-                    }
+				var touchPos = new Vector3(touch.position.x, touch.position.y, Mathf.Abs(Vector3D(ProCamera2D.LocalPosition)));
+				var normalizedTouchPos = new Vector2(touch.position.x / ProCamera2D.GameCamera.pixelWidth, touch.position.y / ProCamera2D.GameCamera.pixelHeight);
 
-                    var currentTouchPositionWorldCoord = ProCamera2D.GameCamera.ScreenToWorldPoint(touchPos);
-                    var panDelta = prevTouchPositionWorldCoord - currentTouchPositionWorldCoord;
-                    _panDelta = new Vector2(Vector3H(panDelta), Vector3V(panDelta));
-                }
+				if (ProCamera2D.GameCamera.pixelRect.Contains(touchPos) && InsideDraggableArea(normalizedTouchPos))
+				{
+					var prevTouchPositionWorldCoord = ProCamera2D.GameCamera.ScreenToWorldPoint(_prevTouchPosition);
 
-                _prevTouchPosition = touchPos;
-            }
+					if (ResetPrevPanPoint)
+					{
+						prevTouchPositionWorldCoord = ProCamera2D.GameCamera.ScreenToWorldPoint(touchPos);
+						ResetPrevPanPoint = false;
+					}
+
+					var currentTouchPositionWorldCoord = ProCamera2D.GameCamera.ScreenToWorldPoint(touchPos);
+					var panDelta = prevTouchPositionWorldCoord - currentTouchPositionWorldCoord;
+					_panDelta = new Vector2(Vector3H(panDelta), Vector3V(panDelta));
+				}
+
+				_prevTouchPosition = touchPos;
+			}
 #endif
 
 			var panSpeed = DragPanSpeedMultiplier;
@@ -211,8 +244,8 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 			var mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Mathf.Abs(Vector3D(ProCamera2D.LocalPosition)));
 			if (UsePanByDrag && Input.GetMouseButton(0))
 			{
-				var normalizedMousePos = new Vector2(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height);
-				if (InsideDraggableArea(normalizedMousePos))
+				var normalizedMousePos = new Vector2(Input.mousePosition.x / ProCamera2D.GameCamera.pixelWidth, Input.mousePosition.y / ProCamera2D.GameCamera.pixelHeight);
+				if (ProCamera2D.GameCamera.pixelRect.Contains(mousePos) && InsideDraggableArea(normalizedMousePos))
 				{
 					var prevMousePositionWorldCoord = ProCamera2D.GameCamera.ScreenToWorldPoint(_prevMousePosition);
 
@@ -279,57 +312,50 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 				_panTarget.position = VectorHVD(Vector3H(_panTarget.position), Vector3V(ProCamera2D.LocalPosition), Vector3D(_panTarget.position));
 		}
 
-		float Zoom(float deltaTime)
+		void Zoom(float deltaTime)
 		{
-			if (_panDelta != Vector2.zero)
-			{
-				CancelZoom();
-				RestoreFollowSmoothness();
-				return 0;
-			}
-
 			var zoomInput = 0f;
 
 #if UNITY_IOS || UNITY_ANDROID || UNITY_WINRT
-            if (Input.touchCount == 2)
-            {
-                var touchZero = Input.GetTouch(0);
-                var touchOne = Input.GetTouch(1);
+			if (Input.touchCount == 2)
+			{
+				var touchZero = Input.GetTouch(0);
+				var touchOne = Input.GetTouch(1);
 
-                var touchZeroPrevPos = touchZero.position - new Vector2(touchZero.deltaPosition.x / Screen.width, touchZero.deltaPosition.y / Screen.height);
-                var touchOnePrevPos = touchOne.position - new Vector2(touchOne.deltaPosition.x / Screen.width, touchOne.deltaPosition.y / Screen.height);
+				var touchZeroPrevPos = touchZero.position - new Vector2(touchZero.deltaPosition.x / Screen.width, touchZero.deltaPosition.y / Screen.height);
+				var touchOnePrevPos = touchOne.position - new Vector2(touchOne.deltaPosition.x / Screen.width, touchOne.deltaPosition.y / Screen.height);
 
-                var prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
-                var touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
+				var prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+				var touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
 
-                // Zoom input
-                zoomInput = prevTouchDeltaMag - touchDeltaMag;
+				// Zoom input
+				zoomInput = prevTouchDeltaMag - touchDeltaMag;
 
-                // Zoom point
-                var midTouch = Vector2.Lerp(touchZero.position, touchOne.position, .5f);
-                _zoomPoint = new Vector3(midTouch.x, midTouch.y, Mathf.Abs(Vector3D(ProCamera2D.LocalPosition)));
+				// Zoom point
+				var midTouch = Vector2.Lerp(touchZero.position, touchOne.position, .5f);
+				_zoomPoint = new Vector3(midTouch.x, midTouch.y, Mathf.Abs(Vector3D(ProCamera2D.LocalPosition)));
 
-                // Smoothness to 0
-                if (!_zoomStarted)
-                {
-                    _zoomStarted = true;
-                    _panTarget.position = ProCamera2D.LocalPosition - ProCamera2D.InfluencesSum;
-                    UpdateCurrentFollowSmoothness();
-                    RemoveFollowSmoothness();
-                }
+				// Smoothness to 0
+				if (!_zoomStarted)
+				{
+					_zoomStarted = true;
+					_panTarget.position = ProCamera2D.LocalPosition - ProCamera2D.InfluencesSum;
+					UpdateCurrentFollowSmoothness();
+					RemoveFollowSmoothness();
+				}
 
-                // Save time
-                _touchZoomTime = Time.time;
-            }
-            else
-            {
-                // Reset smoothness
-                if (_zoomStarted && Mathf.Abs(_zoomAmount) < .001f)
-                {
-                    RestoreFollowSmoothness();
-                    _zoomStarted = false;
-                }
-            }
+				// Save time
+				_touchZoomTime = Time.time;
+			}
+			else
+			{
+				// Reset smoothness
+				if (_zoomStarted && Mathf.Abs(_zoomAmount) < .001f)
+				{
+					RestoreFollowSmoothness();
+					_zoomStarted = false;
+				}
+			}
 #endif
 
 #if UNITY_STANDALONE || UNITY_WEBGL || UNITY_WEBPLAYER || UNITY_EDITOR
@@ -339,6 +365,10 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 			// Zoom point
 			_zoomPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Mathf.Abs(Vector3D(ProCamera2D.LocalPosition)));
 #endif
+			
+			// Stop zoom if zoomPoint not on this camera
+			if(!ProCamera2D.GameCamera.pixelRect.Contains(_zoomPoint))
+				return;
 
 			// Different zoom speed according to the platform
 			var zoomSpeed = 0f;
@@ -352,7 +382,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 			if ((_onMaxZoom && zoomInput * zoomSpeed < 0) || (_onMinZoom && zoomInput * zoomSpeed > 0))
 			{
 				CancelZoom();
-				return 0;
+				return;
 			}
 
 			// Zoom amount
@@ -367,7 +397,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 
 				_zoomStarted = false;
 				_prevZoomAmount = 0;
-				return 0;
+				return;
 			}
 
 			// Smoothness to 0
@@ -397,17 +427,18 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 				_onMinZoom = true;
 			}
 
+			// Save previous zoom amount
 			_prevZoomAmount = _zoomAmount;
 
 			// Move camera towards zoom point
-			if (ZoomToInputCenter)
+			if (ZoomToInputCenter && _zoomAmount != 0)
 			{
 				var multiplier = _zoomAmount / (ProCamera2D.ScreenSizeInWorldCoordinates.y / 2);
 				_panTarget.position += ((_panTarget.position - ProCamera2D.GameCamera.ScreenToWorldPoint(_zoomPoint)) * multiplier);
 			}
 
 			// Zoom
-			return _zoomAmount;
+			ProCamera2D.Zoom(_zoomAmount);
 		}
 
 		/// <summary>

@@ -1,11 +1,10 @@
-﻿#if PC2D_PLAYMAKER_SUPPORT
-
+﻿#if PLAYMAKER
 using Com.LuisPedroFonseca.ProCamera2D;
 using HutongGames.PlayMaker;
 using TooltipAttribute = HutongGames.PlayMaker.TooltipAttribute;
 
 [Tooltip("Add a target for the camera to follow.")]
-public class ProCamera2DAddCameraTargetAction : FsmStateActionProCamera2DBase
+public class PC2DAddCameraTarget : FsmStateActionProCamera2DBase
 {
 	[RequiredField]
 	[Tooltip("The camera target to add")]
@@ -30,5 +29,4 @@ public class ProCamera2DAddCameraTargetAction : FsmStateActionProCamera2DBase
 		Finish();
 	}
 }
-
 #endif

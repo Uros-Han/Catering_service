@@ -51,7 +51,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
             if (CameraTargets.Count == 0)
                 enabled = false;
 
-            ProCamera2D.Instance.AddPreMover(this);
+            ProCamera2D.AddPreMover(this);
 
             Step();
         }

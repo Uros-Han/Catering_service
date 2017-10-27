@@ -53,7 +53,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 
             StartCoroutine(Enable());
 
-            ProCamera2D.Instance.AddPreMover(this);
+            ProCamera2D.AddPreMover(this);
         }
 
         protected override void OnDestroy()

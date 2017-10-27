@@ -11,6 +11,9 @@ public class Unit : MonoBehaviour {
 	public float m_fMoveSpeed;
 	public ENEMY_TYPE m_enemyType;
 
+	public bool m_bEaten = false;
+	public bool m_bGroggy = false;
+
 	void Start()
 	{
 		StartCoroutine (CoreTangleCheck ());
@@ -19,6 +22,9 @@ public class Unit : MonoBehaviour {
 
 	public void Death()
 	{
+		if (GetComponent<FSM_Enemy> ().m_AiState == AI_STATE.EATEN)
+			return;
+		
 		Transform FieldTrans = GameObject.Find ("Field").transform;
 		Vector3 bodyPos = transform.position;
 		Vector3 RandomPos = new Vector3 (Random.Range (-0.1f, 0.1f), Random.Range (-0.1f, 0.1f));
@@ -41,6 +47,7 @@ public class Unit : MonoBehaviour {
 	}
 
 	public IEnumerator Groggy(){
+		m_bGroggy = true;
 
 		for (int i = 0; i < transform.childCount; ++i) {
 			transform.GetChild (i).GetComponent<SpriteRenderer> ().color = new Color(128/255f, 171/255f, 255/255f);
@@ -73,15 +80,13 @@ public class Unit : MonoBehaviour {
 
 	IEnumerator CoreTangleCheck()
 	{
-		bool bEaten = false;
-		bool bGroggy = false;
 		Vector2 mousePosition = Vector2.zero;
 		CircleCollider2D collider2D = GetComponent<CircleCollider2D> ();
 		Core core = GameObject.Find ("Core").GetComponent<Core> ();
 		Tangled tangled = GameObject.Find ("Tangled").GetComponent<Tangled> ();
 		BattleSceneMgr battleScene = BattleSceneMgr.getInstance;
 
-		while (!bEaten) {
+		while (!m_bEaten) {
 			mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 			transform.localRotation = Quaternion.AngleAxis (0, Vector3.forward);
 
@@ -90,16 +95,16 @@ public class Unit : MonoBehaviour {
 				continue;
 			}
 
-			if (bGroggy && tangled.m_bTangledReady && Input.GetMouseButton (0) && collider2D.OverlapPoint (mousePosition) && core.m_EatenObject == null) { //Eatten by core
+			if (m_bGroggy && tangled.m_bTangledReady && Input.GetMouseButton (0) && collider2D.OverlapPoint (mousePosition) && core.m_EatenObject == null) { //Eatten by core
 				GetComponent<FSM_Enemy> ().m_AiState = AI_STATE.EATEN;
 
-				bEaten = true;
+				m_bEaten = true;
 				core.m_EatenObject = gameObject;
 
 				StartCoroutine(GameObject.Find("Core").GetComponent<Core>().Eat(gameObject));
 				tangled.TangledAttack(transform);
 
-			} else if (!bGroggy && tangled.m_bTangledReady && Input.GetMouseButton (0) && collider2D.OverlapPoint (mousePosition)) { // Hit by core
+			} else if (!m_bGroggy && tangled.m_bTangledReady && Input.GetMouseButton (0) && collider2D.OverlapPoint (mousePosition)) { // Hit by core
 
 				tangled.TangledAttack(transform);
 				m_fCurHealth -= GameObject.Find("Core").GetComponent<Core>().m_fAttackDmg;
@@ -107,8 +112,6 @@ public class Unit : MonoBehaviour {
 
 				if (m_fCurHealth <= 0) {
 					m_fCurHealth = 0;
-					bGroggy = true;
-
 					StartCoroutine (Groggy ());
 				}
 			}

@@ -21,7 +21,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
         {
             base.Awake();
 
-            ProCamera2D.Instance.AddPreMover(this);
+            ProCamera2D.AddPreMover(this);
         }
 
         protected override void OnDestroy()

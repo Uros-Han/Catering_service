@@ -53,15 +53,18 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 		{
 			get { return _currentRoomIndex; }
 		}
-
 		int _currentRoomIndex = -1;
 
 		public int PreviousRoomIndex
 		{
 			get { return _previousRoomIndex; }
 		}
-
 		int _previousRoomIndex = -1;
+
+		public Room CurrentRoom
+		{
+			get { return (_currentRoomIndex >= 0 && _currentRoomIndex < Rooms.Count) ? Rooms[_currentRoomIndex] : null; }
+		}
 
 		public List<Room> Rooms = new List<Room>();
 
@@ -102,8 +105,8 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 
 			_originalSize = ProCamera2D.ScreenSizeInWorldCoordinates.y / 2;
 
-			ProCamera2D.Instance.AddPositionOverrider(this);
-			ProCamera2D.Instance.AddSizeOverrider(this);
+			ProCamera2D.AddPositionOverrider(this);
+			ProCamera2D.AddSizeOverrider(this);
 		}
 
 		void Start()
@@ -330,6 +333,15 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 		public void SetDefaultNumericBoundariesSettings(NumericBoundariesSettings settings)
 		{
 			_defaultNumericBoundariesSettings = settings;
+		}
+
+		/// <summary>
+		/// Returns a room by its ID. From this you can get all the room properties such as dimensions, zoom, etc.
+		/// </summary>
+		/// <param name="roomID">The room ID</param>
+		public Room GetRoom(string roomID)
+		{
+			return Rooms.Find((Room obj) => obj.ID == roomID);
 		}
 
 		IEnumerator TestRoomRoutine()

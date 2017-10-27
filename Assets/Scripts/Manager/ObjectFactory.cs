@@ -117,7 +117,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		return obj;
 	}
 
-	public GameObject Create_DamageUI(GameObject target, float fDamage, bool bMinus)
+	public GameObject Create_DamageUI(GameObject target, float fDamage, bool bMinus, bool bDodge = false)
 	{
 		GameObject obj = Instantiate (m_DamageUI) as GameObject;
 		obj.transform.parent = GameObject.Find ("DamagePanel").transform;
@@ -125,6 +125,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		obj.transform.localScale = Vector3.one;
 		obj.GetComponent<DamageUI> ().m_fDamage = fDamage;
 		obj.GetComponent<DamageUI> ().m_bMinus = bMinus;
+		obj.GetComponent<DamageUI> ().m_bDodge = bDodge;
 
 		return obj;
 	}
@@ -264,6 +265,8 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		leg.GetComponent<Part> ().m_fCurHealth = fRandom;
 		leg.GetComponent<Part> ().m_dicStat.Add ("Health", fRandom);
 		leg.GetComponent<Part> ().m_dicStat.Add ("Dodge", fRandomDodge);
+
+		leg.GetComponent<Part> ().m_dicStatBuff["Dodge"] = fRandomDodge;
 
 		leg.GetComponent<Part> ().m_lstStrBuff.Add ("LegBuff");
 

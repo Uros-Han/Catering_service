@@ -35,6 +35,11 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 		public bool DrawGrid;
 		public Color GridColor = new Color(1f, 0f, 0f, .1f);
 		public float GridDensity;
+		
+		/// <summary>
+		/// Returns the current viewport scale. This can be useful for other components (like a CanvasScaler for example)
+		/// </summary>
+		public float ViewportScale { get; private set; }
 
 		public float PixelStep
 		{
@@ -49,8 +54,6 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 		}
 
 		float _pixelStep = -1;
-
-		float _viewportScale;
 
 		Transform _parent;
 
@@ -94,7 +97,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 			// We do this so we can have the camera movement not snapping to the grid, while the sprites are
 			var cameraPixelStep = _pixelStep;
 			if (SnapMovementToGrid && !SnapCameraToGrid)
-				cameraPixelStep = 1f / (PixelsPerUnit * _viewportScale * Zoom);
+				cameraPixelStep = 1f / (PixelsPerUnit * (ViewportScale + Zoom - 1));
 
 			// If shaking, align the shake parent position to pixel-perfect
 			_parent = _transform.parent;
@@ -122,11 +125,11 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 		/// </summary>
 		public void ResizeCameraToPixelPerfect()
 		{
-			_viewportScale = CalculateViewportScale();
+			ViewportScale = CalculateViewportScale();
 
-			_pixelStep = CalculatePixelStep(_viewportScale);
+			_pixelStep = CalculatePixelStep(ViewportScale);
 
-			var newSize = ((ProCamera2D.GameCamera.pixelHeight * .5f) * (1f / PixelsPerUnit)) / (Zoom * _viewportScale);
+			var newSize = ((ProCamera2D.GameCamera.pixelHeight * .5f) * (1f / PixelsPerUnit)) / (ViewportScale + Zoom - 1);
 
 			ProCamera2D.UpdateScreenSize(newSize);
 		}
@@ -164,7 +167,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 
 		float CalculatePixelStep(float viewportScale)
 		{
-			return SnapMovementToGrid ? 1f / PixelsPerUnit : 1f / (PixelsPerUnit * viewportScale * Zoom);
+			return SnapMovementToGrid ? 1f / PixelsPerUnit : 1f / (PixelsPerUnit * (viewportScale + Zoom - 1));
 		}
 
 #if UNITY_EDITOR

@@ -1,12 +1,11 @@
-﻿#if PC2D_PLAYMAKER_SUPPORT
-
+﻿#if PLAYMAKER
 using Com.LuisPedroFonseca.ProCamera2D;
 using HutongGames.PlayMaker;
 using TooltipAttribute = HutongGames.PlayMaker.TooltipAttribute;
 using UnityEngine;
 
 [Tooltip("Shakes the camera position along its horizontal and vertical axes using a preset configured in the editor")]
-public class ProCamera2DShakeWithPresetAction : FsmStateActionProCamera2DBase
+public class PC2DShakeWithPreset : FsmStateActionProCamera2DBase
 {
 	[RequiredField]
 	[Tooltip("The camera with the ProCamera2D component, most probably the MainCamera")]
@@ -28,5 +27,4 @@ public class ProCamera2DShakeWithPresetAction : FsmStateActionProCamera2DBase
 		Finish();
 	}
 }
-
 #endif

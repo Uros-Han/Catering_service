@@ -23,12 +23,14 @@ public class Part : MonoBehaviour {
 	public Dictionary<string,float> m_dicStat;
 	public Dictionary<string,float> m_dicStatBuff;
 	public List<string> m_lstStrBuff;
+	public List<Part> m_lstPartBuffed;
 
 	public float m_fOriginEmissionRate;
 	float m_fHandRotater;
 	public GameObject m_objHealthBar;
 
 	public GameObject m_objParentPart;
+	public GameObject m_objLastPart;
 
 	Coroutine buffCoroutine;
 
@@ -37,6 +39,7 @@ public class Part : MonoBehaviour {
 		m_dicStat = new Dictionary<string, float> ();
 		m_dicStatBuff = new Dictionary<string, float> ();
 		m_lstStrBuff = new List<string> ();
+		m_lstPartBuffed = new List<Part> ();
 
 		if(!m_dicStatBuff.ContainsKey("Health"))
 			m_dicStatBuff.Add ("Health", 0);
@@ -134,8 +137,8 @@ public class Part : MonoBehaviour {
 	GameObject m_StickedPart = null;
 	public IEnumerator Assemble()
 	{
-		if (gameObject.name.Equals ("Core"))
-			yield break;
+//		if (gameObject.name.Equals ("Core"))
+//			yield break;
 
 		Vector2 mousePosition = Vector2.zero;
 		BoxCollider2D collider2D = GetComponent<BoxCollider2D> ();
@@ -171,7 +174,8 @@ public class Part : MonoBehaviour {
 			if(Input.GetMouseButtonDown(0) && collider2D.OverlapPoint(mousePosition))
 			{
 				OriginPos = transform.position;
-				bFollowCursor = true;
+				if (!gameObject.name.Equals ("Core"))
+					bFollowCursor = true;
 
 				Morgue.getInstance.SelectPart(this);
 				if(m_lstStrBuff.Count > 0 && buffCoroutine == null)
@@ -179,10 +183,15 @@ public class Part : MonoBehaviour {
 					buffCoroutine = StartCoroutine(Buff());
 				}
 
-				PartBorder.GetComponent<SpriteRenderer>().enabled = false;
+				if (!gameObject.name.Equals ("Core"))
+					PartBorder.GetComponent<SpriteRenderer>().enabled = false;
+				else{
+					PartBorder.GetComponent<SpriteRenderer>().enabled = true;
+					PartBorder.transform.position = transform.position;
+				}
 				transform.localScale = new Vector3(1f, 1f, 1f);
 
-				if(transform.parent.name.Equals("Player"))
+				if(transform.parent.name.Equals("Player") && !gameObject.name.Equals ("Core"))
 				{
 					transform.parent = GameObject.Find("Temp").transform;
 					iBeforeSeatIdx = grid.GetGridIdx(transform.position);
@@ -194,14 +203,16 @@ public class Part : MonoBehaviour {
 					m_BeforeheadingDirection = m_headingDirection;
 					GetComponent<SpriteSheet>().CheckAround(false, iBeforeSeatIdx);
 				}
-
-				GetComponent<SpriteRenderer>().sortingLayerName = "FrontObject";
-				GetComponent<ParticleSystemRenderer>().sortingLayerName = "FrontObject_Particle";
+				if (!gameObject.name.Equals ("Core")){
+					GetComponent<SpriteRenderer>().sortingLayerName = "FrontObject";
+					GetComponent<ParticleSystemRenderer>().sortingLayerName = "FrontObject_Particle";
+				}
 
 				GetComponent<SpriteParticleEmitter.DynamicEmitter>().enabled = false;
 				GetComponent<SpriteRenderer>().color = Color.white;
-				
-				core.CalculateStickableSeat (true);
+
+				if (!gameObject.name.Equals ("Core"))
+					core.CalculateStickableSeat (true);
 			}
 			
 			if(bFollowCursor && Input.GetMouseButton(0)) //클릭시 따라다니게
@@ -310,6 +321,7 @@ public class Part : MonoBehaviour {
 				{
 					if(core.m_StickAvailableSeat[i].Equals(curGridIdx)) // Stick!!!!!
 					{
+						m_objLastPart = m_objParentPart;
 						transform.position = grid.GetPosOfIdx(core.m_StickAvailableSeat[i]);
 						bToOrigin = false;
 						transform.parent = GameObject.Find("Player").transform;
@@ -346,6 +358,10 @@ public class Part : MonoBehaviour {
 
 						GetComponent<SpriteRenderer>().color = Color.white;
 						GetComponent<SpriteParticleEmitter.DynamicEmitter>().enabled = true;
+
+
+						ClearBuffBeforeCheck();
+						GameObject.Find("Player").BroadcastMessage("BuffCheck");
 					}
 				}
 
@@ -353,6 +369,7 @@ public class Part : MonoBehaviour {
 				{
 					if(Morgue.getInstance.GetIdxFromPos(mousePosition) != -1 && !Morgue.getInstance.m_bBodyArr[Morgue.getInstance.GetIdxFromPos(mousePosition)])
 					{
+						m_objLastPart = null;
 						transform.position = Morgue.getInstance.GetIdxPos(Morgue.getInstance.GetIdxFromPos(mousePosition));
 						bToOrigin = false;
 						transform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
@@ -376,6 +393,9 @@ public class Part : MonoBehaviour {
 
 						OriginPos = transform.position;
 						transform.parent = GameObject.Find("Morgue").transform;
+
+						ClearBuffBeforeCheck();
+						GameObject.Find("Player").BroadcastMessage("BuffCheck");
 					}
 				}
 
@@ -431,6 +451,9 @@ public class Part : MonoBehaviour {
 						transform.parent.BroadcastMessage("AmI_InCoreSide");
 						GetComponent<SpriteRenderer>().sortingLayerName = "Objects";
 						GetComponent<ParticleSystemRenderer>().sortingLayerName = "Objects_Particle";
+
+						if(m_lstStrBuff.Count > 0)
+							StartCoroutine(Buff(true));
 					}else
 						GetComponent<SpriteRenderer>().sortingLayerName = "DeadBodies";
 					GetComponent<ParticleSystemRenderer>().sortingLayerName = "DeadBodies_Particle";
@@ -480,27 +503,54 @@ public class Part : MonoBehaviour {
 		StartCoroutine (Heal ());
 	}
 
-	List<GameObject> listBuff;
-	public IEnumerator Buff()
+	void ClearBuffBeforeCheck()
+	{
+		Transform playerTrans = GameObject.Find ("Player").transform;
+		for (int i = 0; i < playerTrans.childCount; ++i) {
+			playerTrans.GetChild (i).GetComponent<Part> ().m_lstPartBuffed.Clear ();
+		}
+
+		playerTrans = GameObject.Find ("Morgue").transform;
+		for (int i = 1; i < playerTrans.childCount; ++i) {
+			playerTrans.GetChild (i).GetComponent<Part> ().m_lstPartBuffed.Clear ();
+		}
+	}
+
+	public void BuffCheck()
+	{
+		if (m_lstStrBuff.Count > 0)
+			StartCoroutine (Buff (true));
+	}
+
+	public IEnumerator Buff(bool bStatAdapt = false)
 	{
 		Morgue morgue = Morgue.getInstance;
 		Vector2 mousePosition = Vector2.zero;
 		BoxCollider2D collider2D = GetComponent<BoxCollider2D> ();
 		GameObject beforeParentPart = null;
 		Transform PlayerTrans = GameObject.Find ("Player").transform;
-		listBuff = new List<GameObject> ();
+		List<GameObject> listBuffIcon = new List<GameObject> ();
 
 		do{
-			if(m_objParentPart != null && m_objParentPart != beforeParentPart)
+			if((m_objParentPart != null && m_objParentPart != beforeParentPart) || bStatAdapt)
 			{
 				//clear buffs
-				for(int i=0; i < listBuff.Count; ++i)
-				{
-					Destroy(listBuff[i].gameObject);
+				if(!bStatAdapt){
+					for(int i=0; i < listBuffIcon.Count; ++i)
+					{
+						Destroy(listBuffIcon[i].gameObject);
+					}
+					listBuffIcon.Clear ();
 				}
-				listBuff.Clear ();
 
-				int iParentIdx = m_objParentPart.GetComponent<Part>().m_iGridIdx;
+				int iParentIdx = 0;
+				if(bStatAdapt){
+					if(m_objLastPart != null)
+						iParentIdx = m_objLastPart.GetComponent<Part>().m_iGridIdx;
+				}else{
+					iParentIdx = m_objParentPart.GetComponent<Part>().m_iGridIdx;
+				}
+
 				for(int i =0; i < m_lstStrBuff.Count; ++i)
 				{
 					if(m_lstStrBuff[i].Equals("LegBuff"))
@@ -520,30 +570,42 @@ public class Part : MonoBehaviour {
 							Part idxPart = buffObjList[j].GetComponent<Part>();
 
 							if(idxPart != this && (!idxPart.m_bEdgePart || (idxPart.m_bEdgePart && idxPart.m_objParentPart == m_objParentPart)))
-								listBuff.Add(ObjectFactory.getInstance.Create_Buff(buffObjList[j].GetComponent<Part>().m_iGridIdx, true));
+							{
+								if(!bStatAdapt)
+									listBuffIcon.Add(ObjectFactory.getInstance.Create_Buff(idxPart.m_iGridIdx, true));
+								else{
+									if(!idxPart.m_lstPartBuffed.Contains(this))
+										idxPart.m_lstPartBuffed.Add(this);
+								}
+							}
 						}
 					}
 				}
-			}else if(m_objParentPart == null){
-				for(int i=0; i < listBuff.Count; ++i)
+				Morgue.getInstance.SelectPart(Morgue.getInstance.m_SelectedPart);
+			}else if(m_objParentPart == null && !bStatAdapt){
+				for(int i=0; i < listBuffIcon.Count; ++i)
 				{
-					Destroy(listBuff[i].gameObject);
+					Destroy(listBuffIcon[i].gameObject);
 				}
-				listBuff.Clear ();
+				listBuffIcon.Clear ();
+				Morgue.getInstance.SelectPart(Morgue.getInstance.m_SelectedPart);
 			}
 
-			beforeParentPart = m_objParentPart;
+			if(!bStatAdapt)
+				beforeParentPart = m_objParentPart;
+			
 			yield return null;
 				
-		}while(morgue.m_SelectedPart.Equals(this));
+		}while(morgue.m_SelectedPart.Equals(this) && !bStatAdapt);
 
-		for(int i=0; i < listBuff.Count; ++i)
-		{
-			Destroy(listBuff[i].gameObject);
+		if (!bStatAdapt) {
+			for (int i = 0; i < listBuffIcon.Count; ++i) {
+				Destroy (listBuffIcon [i].gameObject);
+			}
+			listBuffIcon.Clear ();
+
+			buffCoroutine = null;
 		}
-		listBuff.Clear ();
-
-		buffCoroutine = null;
 	}
 
 	protected IEnumerator Heal()
@@ -603,23 +665,19 @@ public class Part : MonoBehaviour {
 
 	public void AdjustEmissionRate()
 	{
-		if (transform.parent.GetComponent<FSM_Enemy> () != null) { // Enemy
-			Unit unit = transform.parent.GetComponent<Unit>();
+//		if (transform.parent.GetComponent<FSM_Enemy> () != null) { // Enemy
+//			Unit unit = transform.parent.GetComponent<Unit>();
+//
 //			if(unit.m_fCurHealth == unit.m_fHealth)
-//				GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = m_fOriginEmissionRate;
+//				GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = 0;
 //			else
-//				GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = (int)((unit.m_fCurHealth / unit.m_fHealth) * m_fOriginEmissionRate / 3f);
-
-			if(unit.m_fCurHealth == unit.m_fHealth)
-				GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = 0;
-			else
-				GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = (int)( (1 - (unit.m_fCurHealth / unit.m_fHealth)) * 10f);
-
-		}else
-			if(gameObject.name.Equals("Core"))
-				GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = (m_fCurHealth / m_fHealth) * m_fOriginEmissionRate;
-			else
-				GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = (int)( (1 - (m_fCurHealth / m_fHealth)) * 10f);
+//				GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = (int)( (1 - (unit.m_fCurHealth / unit.m_fHealth)) * 10f);
+//
+//		}else
+//			if(gameObject.name.Equals("Core"))
+//				GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = (m_fCurHealth / m_fHealth) * m_fOriginEmissionRate;
+//			else
+//				GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate = (int)( (1 - (m_fCurHealth / m_fHealth)) * 10f);
 	}
 
 	public GameObject m_objAleart;

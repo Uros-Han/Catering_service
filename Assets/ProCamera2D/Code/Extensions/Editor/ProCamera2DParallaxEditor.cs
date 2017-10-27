@@ -297,11 +297,11 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 			}
 
 			// Limit back and front depth start
-			if (_proCamera2DParallax.FrontDepthStart <= ProCamera2D.Instance.GameCamera.depth)
-				_proCamera2DParallax.FrontDepthStart = (int)ProCamera2D.Instance.GameCamera.depth + 1;
+			if (_proCamera2DParallax.FrontDepthStart <= _proCamera2D.GameCamera.depth)
+				_proCamera2DParallax.FrontDepthStart = (int)_proCamera2D.GameCamera.depth + 1;
 
-			if (_proCamera2DParallax.BackDepthStart >= ProCamera2D.Instance.GameCamera.depth)
-				_proCamera2DParallax.BackDepthStart = (int)ProCamera2D.Instance.GameCamera.depth - 1;
+			if (_proCamera2DParallax.BackDepthStart >= _proCamera2D.GameCamera.depth)
+				_proCamera2DParallax.BackDepthStart = (int)_proCamera2D.GameCamera.depth - 1;
 
 			// Rename layers
 			if (serializedObject.ApplyModifiedProperties())

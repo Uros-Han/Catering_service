@@ -1,5 +1,4 @@
-﻿#if PC2D_PLAYMAKER_SUPPORT
-
+﻿#if PLAYMAKER
 using Com.LuisPedroFonseca.ProCamera2D;
 using HutongGames.PlayMaker;
 
@@ -7,5 +6,4 @@ using HutongGames.PlayMaker;
 public abstract class FsmStateActionProCamera2DBase : FsmStateAction
 {
 }
-
 #endif

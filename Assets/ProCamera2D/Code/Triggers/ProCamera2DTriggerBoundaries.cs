@@ -73,7 +73,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
         {
             base.Awake();
 
-            ProCamera2D.Instance.AddPositionOverrider(this);
+            ProCamera2D.AddPositionOverrider(this);
         }
 
         protected override void OnDestroy()

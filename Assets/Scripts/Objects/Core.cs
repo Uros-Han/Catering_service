@@ -18,6 +18,17 @@ public class Core : Part {
 
 		m_fOriginEmissionRate = GetComponent<SpriteParticleEmitter.DynamicEmitter> ().EmissionRate;
 		m_fCurHealth = m_fHealth;
+
+		if(!m_dicStat.ContainsKey("Health"))
+			m_dicStat.Add ("Health", m_fHealth);
+		if(!m_dicStat.ContainsKey("Defense"))
+			m_dicStat.Add ("Defense", 0);
+		if(!m_dicStat.ContainsKey("Dodge"))
+			m_dicStat.Add ("Dodge", 0);
+		if (m_bAttackAvailable && !m_dicStat.ContainsKey ("Attack"))
+			m_dicStat.Add ("Attack", 1);
+
+		m_lstStrBuff.Add ("CoreBuff");
 	}
 
 	void OnDestroy()

@@ -27,6 +27,11 @@ public class HealthBar : MonoBehaviour {
 	{
 		Part part = null;
 		Unit unit = null;
+		UIPanel panel = GetComponent<UIPanel> ();
+		bool bCoreHealthBar = false;
+
+		if(gameObject.name.Equals("CoreHealthBar"))
+			bCoreHealthBar = true;
 
 		if (m_bEnemy)
 			unit = m_Target.GetComponent<Unit> ();
@@ -40,6 +45,15 @@ public class HealthBar : MonoBehaviour {
 				m_slider.value = part.m_fCurHealth / part.m_fHealth;
 			
 			yield return null;
+
+			if(!bCoreHealthBar){
+				if(panel.alpha.Equals(1) && m_slider.value == 1)
+				{
+					panel.alpha = 0;
+				}else if(panel.alpha.Equals(0) && m_slider.value != 1){
+					panel.alpha = 1;
+				}
+			}
 
 		}while(m_Target != null);
 	}

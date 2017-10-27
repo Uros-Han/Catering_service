@@ -1,12 +1,11 @@
-﻿#if PC2D_PLAYMAKER_SUPPORT
-
+﻿#if PLAYMAKER
 using Com.LuisPedroFonseca.ProCamera2D;
 using HutongGames.PlayMaker;
 using TooltipAttribute = HutongGames.PlayMaker.TooltipAttribute;
 using UnityEngine;
 
 [Tooltip("Apply the given influences to the camera during the corresponding durations")]
-public class ProCamera2DApplyInfluencesTimedAction : FsmStateActionProCamera2DBase
+public class PC2DApplyInfluencesTimed : FsmStateActionProCamera2DBase
 {
 	[RequiredField]
 	[Tooltip("An array of the vectors representing the influences to be applied")]
@@ -46,5 +45,4 @@ public class ProCamera2DApplyInfluencesTimedAction : FsmStateActionProCamera2DBa
 		Finish();
 	}
 }
-
 #endif

@@ -1,22 +1,23 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Manager/ObjectFactory.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../../../../../Applications/Unity/MonoDevelop.app/Contents/Frameworks/Mono.framework/Versions/Current/lib/mono/4.5/Microsoft.Common.targets">
     <Files>
-      <File FileName="Assets/Scripts/Header/Enum.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Header/Enum.cs" Line="7" Column="77" />
       <File FileName="Assets/Scripts/Objects/AI/FSM_Enemy.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Manager/BattleSceneMgr.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Objects/HealthBar.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/Part.cs" Line="42" Column="48" />
-      <File FileName="Assets/Scripts/Objects/Core.cs" Line="132" Column="67" />
+      <File FileName="Assets/Scripts/Objects/Part.cs" Line="578" Column="46" />
+      <File FileName="Assets/Scripts/Objects/Core.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Objects/Tangled.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/Unit.cs" Line="10" Column="28" />
+      <File FileName="Assets/Scripts/Objects/Unit.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Objects/AI/FSM.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="160" Column="1" />
+      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="268" Column="66" />
       <File FileName="Assets/Scripts/Manager/GridMgr.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/UI/DamageUI.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/UI/MeatButton.cs" Line="27" Column="60" />
+      <File FileName="Assets/Scripts/UI/MeatButton.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Manager/GameMgr.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/Morgue.cs" Line="64" Column="48" />
+      <File FileName="Assets/Scripts/Objects/Morgue.cs" Line="48" Column="17" />
+      <File FileName="../../../../../../Applications/Unity/MonoDevelop.app/Contents/Frameworks/Mono.framework/Versions/Current/lib/mono/4.5/Microsoft.Common.targets" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

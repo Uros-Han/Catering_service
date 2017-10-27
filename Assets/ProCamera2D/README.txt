@@ -37,6 +37,47 @@ Twitter - http://www.twitter.com/lpfonseca
 
 ## CHANGELOG ##
 
+2.5.1
+- ContentFitter - Small tweaks
+
+2.5.0
+- ContentFitter - New extension! Fit anything on screen and easily control how it looks across different screen sizes
+
+2.4.8
+- LimitDistance - Added an option to use the targets position instead of the camera center for calculations
+- LimitDistance - Fixed stutter when the camera target goes beyond the limits
+
+2.4.7
+- Core - Removed calls to static instance for easier support of multiple cameras setups
+- PanAndZoom - Added support for multiple cameras setups
+- PanAndZoom - Added support for multiple fingers panning
+- PixelPerfect - Added a getter for the current viewport scale (can be useful for other components)
+
+2.4.6
+- LimitDistance - Added support for limiting the top, bottom, left and right directions instead of only vertically and horizontally
+- LimitDistance - Fixed incorrect reset of the smoothed camera position which could interfere with other extensions dependent on it
+- BaseTrigger - Disabling a trigger now calls the ExitedTrigger method for consistency
+- ZoomToFit - Added a "CompensateForCameraPosition" property (on by default) that makes the calculations from the camera center and not the targets 
+- PanAndZoom - Fixed wobbly zoom behaviour that could occur under certain circumstances
+- PanAndZoom - Zooming while over pan edges is now supported
+- PanAndZoom - 2DToolkit - Fixed zooming when the start zoom factor is different from one
+- PlayMaker - Added the actions back to the package while transitioning to the new PlayMaker Ecosystem
+
+2.4.5
+- Rooms - Added a move gizmo so you can easily move rooms while in edit mode
+- Rooms - Added a property (CurrentRoom) that returns the room the camera is currently in, if any
+
+2.4.4
+- PanAndZoom - Added an option to prevent panning and zooming if the user is pointing (or touching) on an UI element
+- PanAndZoom - Fixed issue that could cause an instant camera movement after zooming
+
+2.4.3
+- Core - Added an IsMoving property
+- Core - Added an overloaded AddCameraTargets method that takes a list of CameraTarget's
+- PixelPerfect - Zoom is now applied additively for greater control
+- Rooms - Added a "GetRoom" method that returns a room by its ID. Useful, for example, if you're trying to know information about a specific room size
+- PlayMaker - Current actions were marked as obsolete. New and improved actions will be added directly to the PlayMaker ecosystem for improved integration
+
 2.4.2
 - Core - Fixed a OutOfRange error that could occur when removing targets at runtime
 - Rooms - Added an extra parameter to the EnterRoom method that allows you to instantly enter a room (bypassing the configured transition)

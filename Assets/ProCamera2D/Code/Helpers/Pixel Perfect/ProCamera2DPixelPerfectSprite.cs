@@ -88,6 +88,11 @@ namespace Com.LuisPedroFonseca.ProCamera2D
         void GetPixelPerfectPlugin()
         {
             _pixelPerfectPlugin = ProCamera2D.GetComponent<ProCamera2DPixelPerfect>();
+            
+            #if UNITY_EDITOR
+            if(_pixelPerfectPlugin == null)
+                Debug.LogWarning("PixelPerfect extension not present. Please add it to the ProCamera2D core.");
+            #endif
         }
 
         void GetSprite()

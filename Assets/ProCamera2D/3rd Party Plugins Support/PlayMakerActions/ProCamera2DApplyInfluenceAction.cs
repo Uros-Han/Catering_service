@@ -1,11 +1,10 @@
-﻿#if PC2D_PLAYMAKER_SUPPORT
-
+﻿#if PLAYMAKER
 using Com.LuisPedroFonseca.ProCamera2D;
 using HutongGames.PlayMaker;
 using TooltipAttribute = HutongGames.PlayMaker.TooltipAttribute;
 
 [Tooltip("Apply the given influence to the camera")]
-public class ProCamera2DApplyInfluenceAction : FsmStateActionProCamera2DBase
+public class PC2DApplyInfluence : FsmStateActionProCamera2DBase
 {
 	[Tooltip("The vector representing the influence to be applied")]
 	public FsmVector2 Influence;
@@ -16,5 +15,4 @@ public class ProCamera2DApplyInfluenceAction : FsmStateActionProCamera2DBase
 			ProCamera2D.Instance.ApplyInfluence(Influence.Value);
 	}
 }
-
 #endif

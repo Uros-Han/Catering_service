@@ -8,7 +8,7 @@ Dodge,Dodge,회피
 Attack,Attack,공격
 ,,
 BuffStr,,
-LegBuff,+LegBuffDesc,+부모 파츠와 부모 파츠에 붙은 인접한 파츠의 회피를 올려줍니다.
-,,
+LegBuff,+LegBuffDesc,+부모 파츠와 부모 파츠에 붙은 파츠의 회피를 올려줍니다.
+CoreBuff,+CoreBuff,+적을 탭하여 촉수로 공격할 수 있습니다.
 ,,
 ,,

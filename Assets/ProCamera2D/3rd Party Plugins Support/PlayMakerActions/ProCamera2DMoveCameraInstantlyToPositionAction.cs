@@ -1,11 +1,10 @@
-﻿#if PC2D_PLAYMAKER_SUPPORT
-
+﻿#if PLAYMAKER
 using Com.LuisPedroFonseca.ProCamera2D;
 using HutongGames.PlayMaker;
 using TooltipAttribute = HutongGames.PlayMaker.TooltipAttribute;
 
 [Tooltip("Moves the camera instantly to the defined position")]
-public class ProCamera2DMoveCameraInstantlyToPositionAction : FsmStateActionProCamera2DBase
+public class PC2DMoveCameraInstantlyToPosition : FsmStateActionProCamera2DBase
 {
 	[RequiredField]
 	[Tooltip("The final position of the camera")]
@@ -19,5 +18,4 @@ public class ProCamera2DMoveCameraInstantlyToPositionAction : FsmStateActionProC
 		Finish();
 	}
 }
-
 #endif

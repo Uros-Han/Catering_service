@@ -1,12 +1,11 @@
-﻿#if PC2D_PLAYMAKER_SUPPORT
-
+﻿#if PLAYMAKER
 using Com.LuisPedroFonseca.ProCamera2D;
 using HutongGames.PlayMaker;
 using TooltipAttribute = HutongGames.PlayMaker.TooltipAttribute;
 using UnityEngine;
 
 [Tooltip("Enter a room when using the Rooms extension")]
-public class ProCamera2DRoomsEnterAction : FsmStateActionProCamera2DBase
+public class PC2DRoomsEnter : FsmStateActionProCamera2DBase
 {
 	[Tooltip("Set the current room by index"), RequiredField]
 	public FsmInt RoomIndex;
@@ -56,5 +55,4 @@ public class ProCamera2DRoomsEnterAction : FsmStateActionProCamera2DBase
 		}
 	}
 }
-
 #endif

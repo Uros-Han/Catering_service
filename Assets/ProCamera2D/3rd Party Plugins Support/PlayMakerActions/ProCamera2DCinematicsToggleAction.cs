@@ -1,12 +1,11 @@
-﻿#if PC2D_PLAYMAKER_SUPPORT
-
+﻿#if PLAYMAKER
 using Com.LuisPedroFonseca.ProCamera2D;
 using HutongGames.PlayMaker;
 using TooltipAttribute = HutongGames.PlayMaker.TooltipAttribute;
 using UnityEngine;
 
 [Tooltip("Starts or stops a cinematic")]
-public class ProCamera2DCinematicsToggleAction : FsmStateActionProCamera2DBase
+public class PC2DCinematicsToggle : FsmStateActionProCamera2DBase
 {
 	[RequiredField]
 	[Tooltip("The gameObject that contains the ProCamera2DCinematics component")]
@@ -25,5 +24,4 @@ public class ProCamera2DCinematicsToggleAction : FsmStateActionProCamera2DBase
 		Finish();
 	}
 }
-
 #endif
