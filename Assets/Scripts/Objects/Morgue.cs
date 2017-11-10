@@ -68,11 +68,18 @@ public class Morgue : Singleton<Morgue> {
 		}
 		for (int i = 0; i < part.m_lstStrBuff.Count; ++i) {
 			string tmpBuff = Localization.Get (part.m_lstStrBuff [i]);
+			int iArgument = System.Convert.ToInt32(tmpBuff [1]);
 
-			if(tmpBuff.Contains("+"))
-				morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += "[00DA2EFF]" + tmpBuff.Substring(1) + "[-]";
-			else if(tmpBuff.Contains("-"))
-				morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += "[EC0E0E15]" + tmpBuff.Substring(1) + "[-]";
+			if (!iArgument.Equals (0)) {
+				if (part.m_lstStrBuff [i].Equals ("HeadBuff_0")) {
+					tmpBuff = string.Format (tmpBuff, part.m_dicStatBuff["Attack"]);
+				}
+			}
+
+			if (tmpBuff.Contains ("+"))
+				morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += "[00DA2EFF]" + tmpBuff.Substring (2) + "[-]";
+			else if (tmpBuff.Contains ("-"))
+				morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += "[EC0E0E15]" + tmpBuff.Substring (2) + "[-]";
 		}
 	}
 

@@ -37,15 +37,31 @@ public class FSM_Freindly : FSM {
 	protected override IEnumerator State_Attack()
 	{
 		Unit targetUnit = m_target.GetComponent<Unit> ();
+		Part attackPart = GetComponent<Part> ();
+
+		float fDmg = attackPart.m_dicStat["Attack"];
+		for(int i = 0 ; i < attackPart.m_lstPartBuffed.Count; ++i)
+		{
+			fDmg += attackPart.m_lstPartBuffed[i].m_dicStatBuff["Attack"];
+		}
+
+		float fAttackSpeed = attackPart.m_dicStat["AttackSpeed"];
+		for(int i = 0 ; i < attackPart.m_lstPartBuffed.Count; ++i)
+		{
+			fAttackSpeed += attackPart.m_lstPartBuffed[i].m_dicStatBuff["AttackSpeed"];
+		}
+		fAttackSpeed = 10f - fAttackSpeed;
+		if (fAttackSpeed < 1)
+			fAttackSpeed = 1;
 
 		do{
 			yield return null;
 			
-			iTween.RotateTo(gameObject, iTween.Hash("z",-100f,"time",0.8f));
-			yield return new WaitForSeconds(1.1f);
-			iTween.RotateTo(gameObject, iTween.Hash("z",0f,"time",0.2f));
-			yield return new WaitForSeconds(0.2f);
-			StartCoroutine(Attack(m_target, GetComponent<Part>().m_fAttackDmg, true));
+			iTween.RotateTo(gameObject, iTween.Hash("z",-100f,"time", fAttackSpeed * 0.1f));
+			yield return new WaitForSeconds(fAttackSpeed * 0.1f + 0.5f);
+			iTween.RotateTo(gameObject, iTween.Hash("z",0f,"time", fAttackSpeed * 0.02f));
+			yield return new WaitForSeconds(fAttackSpeed * 0.2f + 0.2f);
+			StartCoroutine(Attack(m_target, fDmg, true));
 			yield return new WaitForSeconds(0.2f); //Delay
 
 			if(targetUnit.m_fCurHealth <= 0)

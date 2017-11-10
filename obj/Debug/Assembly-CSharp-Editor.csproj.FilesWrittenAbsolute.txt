@@ -24,6 +24,7 @@
 /Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/UnityEngine.SpatialTracking.dll
 /Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/UnityEditor.VR.dll
 /Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/UnityEditor.Graphs.dll
+/Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/UnityEditor.Android.Extensions.dll
 /Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/UnityEditor.OSXStandalone.Extensions.dll
 /Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/UnityEditor.Advertisements.dll
 /Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/UnityEngine.Analytics.dll
@@ -46,4 +47,3 @@
 /Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/Unity.Cecil.Mdb.dll
 /Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/UnityEditor.iOS.Extensions.Xcode.dll
 /Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/UnityEditor.iOS.Extensions.Xcode.xml
-/Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/UnityEditor.Android.Extensions.dll

@@ -56,6 +56,7 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 		yield return new WaitForSeconds(0.25f);
 
 		StartCoroutine(GameObject.Find ("WantedReward").GetComponent<WantedReward> ().WantedPop ());
+		StartCoroutine(GameObject.Find ("DayNotification").GetComponent<WantedReward> ().WantedPop ());
 
 		//Clean Morgue
 		Transform morgueTrans = GameObject.Find ("Morgue").transform;
@@ -203,7 +204,7 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 			StartCoroutine(CamOffset_XChg(true));
 
 			if(!m_bBigSize)
-				iTween.MoveTo (morgueTrans.gameObject, iTween.Hash ("x",  0.5f, "y", 0f, "time", 0.25f, "easetype", "easeInSine", "islocal", true));
+				iTween.MoveTo (morgueTrans.gameObject, iTween.Hash ("x",  0.52f, "y", 0f, "time", 0.25f, "easetype", "easeInSine", "islocal", true));
 			else
 				iTween.MoveTo (morgueTrans.gameObject, iTween.Hash ("x",  0.765f, "y", 0.155f, "time", 0.25f, "easetype", "easeInSine", "islocal", true));
 		} else {

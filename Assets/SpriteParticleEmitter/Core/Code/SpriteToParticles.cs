@@ -334,10 +334,15 @@ public class SpriteToParticles : MonoBehaviour
     /// <param name="emitCount">Amount of particles to emit</param>
     public void Emit(int emitCount)
     {
-        if (mode == SpriteMode.Dynamic)
-            EmitDynamic(emitCount);
-        else
-            EmitStatic(emitCount);
+			if (mode == SpriteMode.Dynamic) {
+				if (!particlesSystem.isEmitting)
+				{
+					particlesSystem.Emit(1);
+					particlesSystem.Clear();
+				}
+				EmitDynamic (emitCount);
+			}else
+        		EmitStatic(emitCount);
     }
 
     /// <summary>

@@ -175,14 +175,23 @@ public class FSM_Enemy : FSM {
 		Quaternion originRotate = AttackPart.transform.localRotation;
 		Vector3 originPos = AttackPart.transform.localPosition;
 
+		Part attackPart = AttackPart.GetComponent<Part>();
+		float fDamage = attackPart.m_dicStat ["Attack"];
+		float fAttackSpeed = attackPart.m_dicStat ["AttackSpeed"];
+		fAttackSpeed = 10f - fAttackSpeed;
+		if (fAttackSpeed < 1)
+			fAttackSpeed = 1;
+
+		Debug.Log (fAttackSpeed);
+
 		while(m_AiState == AI_STATE.ATTACK){
 			if(!m_bBornAtLeft)
-				iTween.RotateTo(AttackPart, iTween.Hash("z",-100f,"time",0.8f, "islocal", true));
+				iTween.RotateTo(AttackPart, iTween.Hash("z",-100f,"time", fAttackSpeed * 0.1f, "islocal", true));
 			else
-				iTween.RotateTo(AttackPart, iTween.Hash("z",100f,"time",0.8f, "islocal", true));
+				iTween.RotateTo(AttackPart, iTween.Hash("z",100f,"time", fAttackSpeed * 0.1f, "islocal", true));
 			
-			iTween.MoveTo(AttackPart, iTween.Hash("x", -0.005f, "y", 0.206f, "time", 0.8f, "islocal", true));
-			yield return new WaitForSeconds(1.1f);
+			iTween.MoveTo(AttackPart, iTween.Hash("x", -0.005f, "y", 0.206f, "time", fAttackSpeed * 0.1f, "islocal", true));
+			yield return new WaitForSeconds(fAttackSpeed * 0.1f + 0.5f);
 
 			if(targetPart.m_bDestroied)
 			{
@@ -190,9 +199,9 @@ public class FSM_Enemy : FSM {
 				AttackPart.transform.localPosition = originPos;
 				continue;
 			}
-			iTween.RotateTo(AttackPart, iTween.Hash("z",0f,"time",0.2f, "islocal", true));
-			iTween.MoveTo(AttackPart, iTween.Hash("x", originPos.x, "y", originPos.y, "time", 0.2f, "islocal", true));
-			yield return new WaitForSeconds(0.2f);
+			iTween.RotateTo(AttackPart, iTween.Hash("z",0f,"time",fAttackSpeed * 0.02f, "islocal", true));
+			iTween.MoveTo(AttackPart, iTween.Hash("x", originPos.x, "y", originPos.y, "time", fAttackSpeed * 0.02f, "islocal", true));
+			yield return new WaitForSeconds(fAttackSpeed * 0.02f + 0.2f);
 			if(targetPart.m_bDestroied)
 			{
 				AttackPart.transform.localRotation = originRotate;
@@ -200,7 +209,7 @@ public class FSM_Enemy : FSM {
 				continue;
 			}
 
-			StartCoroutine(Attack(m_target, GetComponent<Unit>().m_fAttackDmg, false));
+			StartCoroutine(Attack(m_target, fDamage, false));
 			yield return new WaitForSeconds(0.2f);
 
 		};

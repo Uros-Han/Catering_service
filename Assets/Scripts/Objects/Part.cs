@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class Part : MonoBehaviour {
 
+	public PART_TYPE m_partType;
+
 	public float m_fHealth; // Health
 	public float m_fCurHealth;
 
 	public bool m_bAttackAvailable; //Can hit enemy?
 	public float m_fAttackDmg; //Damage
-//	public bool m_bFriendly; //아군?
-//	public Color m_colorLine; //공격 이펙트 줄 색
+	public bool m_bUse32PixelHand; //무기중 위로 32픽셀 쓰는 무기
+
 	public bool m_bDestroied;
 	public bool m_bEdgePart;
 	public int m_iGridIdx;
 
-	public int m_iMove; //턴 당 몇번 움직일 수 있는지
-
 	public DIRECTION m_headingDirection;
 
 	public string m_strNameKey; // TODO : Localize
-	public Dictionary<string,float> m_dicStat;
-	public Dictionary<string,float> m_dicStatBuff;
-	public List<string> m_lstStrBuff;
-	public List<Part> m_lstPartBuffed;
+	public Dictionary<string,float> m_dicStat; //자신의 능력치
+	public Dictionary<string,float> m_dicStatBuff; // 자신의 버프 능력치 이 스탯을 주변에 공유해준다.
+	public List<string> m_lstStrBuff; // 자신의 버프 이름
+	public List<Part> m_lstPartBuffed; //자신에게 버프를 준 파츠 리스트
 
 	public float m_fOriginEmissionRate;
 	float m_fHandRotater;
@@ -33,6 +33,8 @@ public class Part : MonoBehaviour {
 	public GameObject m_objLastPart;
 
 	Coroutine buffCoroutine;
+
+	public bool m_bNeedToStickHead; // 몸에 달라 붙도록 코딩이 필요한 머리 파츠 ex)동물은 default가 붙어있는상태
 
 	void Awake()
 	{
@@ -49,6 +51,10 @@ public class Part : MonoBehaviour {
 			m_dicStatBuff.Add ("Dodge", 0);
 		if(!m_dicStatBuff.ContainsKey ("Attack"))
 			m_dicStatBuff.Add ("Attack", 0);
+		if(!m_dicStatBuff.ContainsKey ("AttackSpeed"))
+			m_dicStatBuff.Add ("AttackSpeed", 0);
+		if(!m_dicStatBuff.ContainsKey ("IQ"))
+			m_dicStatBuff.Add ("IQ", 0);
 	}
 
 	void Start()
@@ -68,8 +74,12 @@ public class Part : MonoBehaviour {
 			m_dicStat.Add ("Defense", 0);
 		if(!m_dicStat.ContainsKey("Dodge"))
 			m_dicStat.Add ("Dodge", 0);
-		if (m_bAttackAvailable && !m_dicStat.ContainsKey ("Attack"))
+		if(m_bAttackAvailable && !m_dicStat.ContainsKey ("Attack"))
 			m_dicStat.Add ("Attack", 0);
+		if(m_bAttackAvailable && !m_dicStat.ContainsKey ("AttackSpeed"))
+			m_dicStat.Add ("AttackSpeed", 0);
+		if(m_partType.Equals(PART_TYPE.HEAD) && !m_dicStat.ContainsKey ("IQ"))
+			m_dicStat.Add ("IQ", 0);
 	}
 
 	public void SetDirection()
@@ -174,6 +184,10 @@ public class Part : MonoBehaviour {
 			if(Input.GetMouseButtonDown(0) && collider2D.OverlapPoint(mousePosition))
 			{
 				OriginPos = transform.position;
+
+				if(m_bNeedToStickHead)
+					GetComponent<BoxCollider2D>().offset = new Vector2(0f, 0f);
+
 				if (!gameObject.name.Equals ("Core"))
 					bFollowCursor = true;
 
@@ -245,6 +259,7 @@ public class Part : MonoBehaviour {
 							}
 						}
 
+						Vector3 idxPos = transform.position;
 						int iIdx = grid.GetGridIdx(transform.position);
 						int iTargetIdx = grid.GetGridIdx(ClosestPart.transform.position);
 
@@ -252,26 +267,38 @@ public class Part : MonoBehaviour {
 							m_headingDirection = DIRECTION.LEFT;
 							if(m_bEdgePart && gameObject.name != "Head")
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 270f + m_fHandRotater, "time", 0.2f));
-							else
+							else{
+								if(m_bNeedToStickHead)
+									transform.position = new Vector3(transform.position.x + 0.02f, transform.position.y);
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 90f, "time", 0.2f));
+							}
 						}else if(iIdx - 1 == iTargetIdx){
 							m_headingDirection = DIRECTION.RIGHT;
 							if(m_bEdgePart && gameObject.name != "Head")
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 90f + m_fHandRotater, "time", 0.2f));
-							else
+							else{
+								if(m_bNeedToStickHead)
+									transform.position = new Vector3(transform.position.x - 0.02f, transform.position.y);
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 270f, "time", 0.2f));
+							}
 						}else if(iIdx - grid.m_iXcount == iTargetIdx){
 							m_headingDirection = DIRECTION.DOWN;
 							if(m_bEdgePart && gameObject.name != "Head")
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 0f + m_fHandRotater, "time", 0.2f));
-							else
+							else{
+								if(m_bNeedToStickHead)
+									transform.position = new Vector3(transform.position.x, transform.position.y + 0.02f);
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 180f, "time", 0.2f));
+							}
 						}else if(iIdx + grid.m_iXcount == iTargetIdx){
 							m_headingDirection = DIRECTION.UP;
 							if(m_bEdgePart && gameObject.name != "Head")
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 180f + m_fHandRotater, "time", 0.2f));
-							else
+							else{
+								if(m_bNeedToStickHead)
+									transform.position = new Vector3(transform.position.x, transform.position.y - 0.02f);
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 0f, "time", 0.2f));
+							}
 						}
 
 						m_objParentPart = ClosestPart;
@@ -323,6 +350,25 @@ public class Part : MonoBehaviour {
 					{
 						m_objLastPart = m_objParentPart;
 						transform.position = grid.GetPosOfIdx(core.m_StickAvailableSeat[i]);
+						if(m_bNeedToStickHead){
+							GetComponent<BoxCollider2D>().offset = new Vector2(0f, 0.04f);
+
+							switch(m_headingDirection){
+							case DIRECTION.LEFT:
+								transform.position = new Vector3(transform.position.x + 0.04f, transform.position.y);
+								break;
+							case DIRECTION.RIGHT:
+								transform.position = new Vector3(transform.position.x - 0.04f, transform.position.y);
+								break;
+							case DIRECTION.DOWN:
+								transform.position = new Vector3(transform.position.x, transform.position.y + 0.04f);
+								break;
+							case DIRECTION.UP:
+								transform.position = new Vector3(transform.position.x, transform.position.y - 0.04f);
+								break;
+							}
+						}
+
 						bToOrigin = false;
 						transform.parent = GameObject.Find("Player").transform;
 						m_iGridIdx = core.m_StickAvailableSeat[i];
@@ -467,7 +513,7 @@ public class Part : MonoBehaviour {
 				bFollowCursor = false;
 
 				PartBorder.GetComponent<SpriteRenderer>().enabled = true;
-				PartBorder.transform.position = OriginPos;
+				PartBorder.transform.position = GridMgr.getInstance.GetPosOfIdx(GridMgr.getInstance.GetGridIdx(OriginPos));
 			}
 			
 			yield return null;
@@ -553,32 +599,27 @@ public class Part : MonoBehaviour {
 
 				for(int i =0; i < m_lstStrBuff.Count; ++i)
 				{
+					//버프 범위 정하는 곳
+					List<int> buffIdx = new List<int>();
+
 					if(m_lstStrBuff[i].Equals("LegBuff"))
 					{
-						List<int> buffIdx = new List<int>();
-						List<GameObject> buffObjList = new List<GameObject>();
-
 						buffIdx.Add(iParentIdx);
 						buffIdx.Add(iParentIdx + 1);
 						buffIdx.Add(iParentIdx - 1);
 						buffIdx.Add(iParentIdx + GridMgr.getInstance.m_iXcount);
 						buffIdx.Add(iParentIdx - GridMgr.getInstance.m_iXcount);
-						buffObjList = GridMgr.getInstance.listObjectsOfIdxs(buffIdx);
 
-						for(int j = 0; j < buffObjList.Count; ++j)
-						{
-							Part idxPart = buffObjList[j].GetComponent<Part>();
+						listBuffIcon = BuffCreateAndStatAdapt(bStatAdapt, buffIdx);
+					}else if(m_lstStrBuff[i].Equals("HeadBuff_0"))
+					{
+						buffIdx.Add(iParentIdx);
+						buffIdx.Add(iParentIdx + 1);
+						buffIdx.Add(iParentIdx - 1);
+						buffIdx.Add(iParentIdx + GridMgr.getInstance.m_iXcount);
+						buffIdx.Add(iParentIdx - GridMgr.getInstance.m_iXcount);
 
-							if(idxPart != this && (!idxPart.m_bEdgePart || (idxPart.m_bEdgePart && idxPart.m_objParentPart == m_objParentPart)))
-							{
-								if(!bStatAdapt)
-									listBuffIcon.Add(ObjectFactory.getInstance.Create_Buff(idxPart.m_iGridIdx, true));
-								else{
-									if(!idxPart.m_lstPartBuffed.Contains(this))
-										idxPart.m_lstPartBuffed.Add(this);
-								}
-							}
-						}
+						listBuffIcon = BuffCreateAndStatAdapt(bStatAdapt, buffIdx, true);
 					}
 				}
 				Morgue.getInstance.SelectPart(Morgue.getInstance.m_SelectedPart);
@@ -760,6 +801,69 @@ public class Part : MonoBehaviour {
 		GameObject.Find ("Player").BroadcastMessage ("DestroyPart_WhenPathBreaked");
 		GetComponent<SpriteSheet>().CheckAround(false);
 		GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sprite_meat;
+	}
+
+	List<GameObject> BuffCreateAndStatAdapt(bool bStatAdapt, List<int> buffIdx, bool bAdaptOnlyAttackPart = false)
+	{
+		List<GameObject> buffObjList = new List<GameObject>();
+		List<GameObject> listBuffIcon = new List<GameObject> ();
+
+		buffObjList = GridMgr.getInstance.listObjectsOfIdxs(buffIdx);
+
+		if(!bStatAdapt)
+		{
+			for(int j = 0; j < buffIdx.Count; ++j)
+			{
+				if(buffIdx[j].Equals(GridMgr.getInstance.GetGridIdx(transform.position)))
+					continue;
+
+				bool bSkip = false;
+				for(int k =0; k< buffObjList.Count; ++k)
+				{
+					Part idxPart = buffObjList [k].GetComponent<Part> ();
+
+					if(idxPart.m_iGridIdx == buffIdx[j])
+					{
+						bSkip = true;
+
+						if (bAdaptOnlyAttackPart && !idxPart.m_bAttackAvailable) 
+						{
+							bSkip = false;
+						}
+
+						break;
+					}
+				}
+
+				if(!bSkip)
+					listBuffIcon.Add(ObjectFactory.getInstance.Create_Buff(buffIdx[j], true, true));
+			}
+		}
+
+		for(int j = 0; j < buffObjList.Count; ++j)
+		{
+			Part idxPart = buffObjList[j].GetComponent<Part>();
+
+			if(idxPart != this && (!idxPart.m_bEdgePart || (idxPart.m_bEdgePart && idxPart.m_objParentPart == m_objParentPart)))
+			{
+				if(bStatAdapt){
+					if(!idxPart.m_lstPartBuffed.Contains(this))
+						idxPart.m_lstPartBuffed.Add(this);
+				}else{
+					bool bSkip = false;
+
+					if (bAdaptOnlyAttackPart && !idxPart.m_bAttackAvailable) 
+					{
+						bSkip = true;
+					}
+
+					if(!bSkip)
+						listBuffIcon.Add(ObjectFactory.getInstance.Create_Buff(idxPart.m_iGridIdx, true, false));
+				}
+			}
+		}
+
+		return listBuffIcon;
 	}
 
 //	void DrawLine(Vector3 start, Vector3 end, Color color, float duration = 0.2f)

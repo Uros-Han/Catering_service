@@ -5,15 +5,22 @@ using UnityEngine;
 public class WantedReward : MonoBehaviour {
 
 	UILabel m_RewardMoneyLabel;
-
+	bool m_bWantedReward;
 	// Use this for initialization
 	void Start () {
-		m_RewardMoneyLabel = transform.Find ("Reward").GetComponent<UILabel> ();
+		if (gameObject.name.Equals ("WantedReward")) {
+			m_RewardMoneyLabel = transform.Find ("Reward").GetComponent<UILabel> ();
+			m_bWantedReward = true;
+		}else
+			m_RewardMoneyLabel = transform.Find ("Num").GetComponent<UILabel> ();
 	}
 
 	void Update()
 	{
-		m_RewardMoneyLabel.text = BattleSceneMgr.getInstance.m_iReward.ToString();
+		if(m_bWantedReward)
+			m_RewardMoneyLabel.text = BattleSceneMgr.getInstance.m_iReward.ToString();
+		else
+			m_RewardMoneyLabel.text = BattleSceneMgr.getInstance.m_iDay.ToString();
 	}
 
 	public IEnumerator WantedPop()
