@@ -23,7 +23,7 @@ public class LevelGenerator : Singleton<LevelGenerator> {
 		m_iTypeDay [(int)ENEMY_TYPE.KNIGHT] = 28;
 	}
 
-	void Generate(ENEMY_TYPE enemyType, int iHeroNum = 0) //적 타입에 맞게 적을 생성해준다.
+	void Generate(ENEMY_TYPE enemyType, int iHeroIdx = 0) //적 타입에 맞게 적을 생성해준다.
 	{
 		switch(enemyType)
 		{
@@ -42,6 +42,7 @@ public class LevelGenerator : Singleton<LevelGenerator> {
 			break;
 
 		case ENEMY_TYPE.HERO:
+			ObjectFactory.getInstance.Create_Hero(iHeroIdx);
 			break;
 		}
 	}
@@ -97,7 +98,7 @@ public class LevelGenerator : Singleton<LevelGenerator> {
 			if(list_enemyType[i] != ENEMY_TYPE.HERO)
 				Generate(list_enemyType[i]);
 			else
-				Generate(list_enemyType[i], iDay/10);
+				Generate(list_enemyType[i], iDay/10 - 1);
 
 			yield return new WaitForSeconds(0.5f);
 		}

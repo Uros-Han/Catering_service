@@ -17,6 +17,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 
 	GameObject m_objChicken;
 	GameObject m_objGoat;
+	GameObject[] m_objHero;
 	GameObject m_objCivilian;
 
 	public Sprite m_sprite_meat;
@@ -51,6 +52,9 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		m_objChicken = Resources.Load("Prefabs/Objects/Enemies/Chicken") as GameObject;
 		m_objGoat = Resources.Load("Prefabs/Objects/Enemies/Goat") as GameObject;
 
+		//Heroes
+		m_objHero = Resources.LoadAll<GameObject> ("Prefabs/Objects/Enemies/Heroes");
+
 		///Civilians
 		m_sheet_civilian_head = Resources.LoadAll<Sprite> ("Sprites/Sheets/Civilian/sheet_civ_heads");
 		m_sheet_civilian_leg = Resources.LoadAll<Sprite> ("Sprites/Sheets/Civilian/sheet_civ_legs");
@@ -61,6 +65,8 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 			m_sheet_civilian_body[i] = Resources.LoadAll<Sprite> (string.Format("Sprites/Sheets/Civilian/sheet_civ_body_{0}",i));
 		}
 		m_objCivilian = Resources.Load("Prefabs/Objects/Enemies/Civilian") as GameObject;
+
+
 	}
 
 	public GameObject Create_Aleart(int iIdx)
@@ -152,7 +158,75 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		return obj;
 	}
 
-	public GameObject Create_Civilian() // TODO : part random
+	public GameObject Create_Hero(int iHeroIdx)
+	{
+		GameObject obj;
+		float fRandom = 0f;
+
+		obj = Instantiate (m_objHero[iHeroIdx]) as GameObject;
+
+		obj.transform.parent = GameObject.Find ("Enemies").transform;
+		obj.transform.localPosition = RandomBornPos (obj);
+
+		switch (iHeroIdx) {
+		case 0:
+			GameObject head = obj.transform.Find ("Head").gameObject;
+			Part headPart = head.GetComponent<Part> ();
+			headPart.m_fHealth = Random.Range(15,18);
+			headPart.m_fCurHealth = fRandom;
+			headPart.m_dicStat.Add ("Health", headPart.m_fHealth);
+			headPart.m_dicStat.Add ("IQ", 100);
+			headPart.m_lstStrBuff.Add ("HeadBuff_2");
+			headPart.m_dicStatBuff["Attack"] = 2;
+			headPart.m_dicStatBuff["AttackSpeed"] = 2;
+
+			GameObject Upbody = obj.transform.GetChild(1).gameObject;
+			Part UpbodyPart = Upbody.GetComponent<Part> ();
+			fRandom = Random.Range (25,30);
+			UpbodyPart.m_fHealth = fRandom;
+			UpbodyPart.m_fCurHealth = fRandom;
+			UpbodyPart.m_dicStat.Add ("Health", fRandom);
+			fRandom = Random.Range (5,8);
+			UpbodyPart.m_dicStat.Add ("Defense", fRandom);
+
+			GameObject Downbody = obj.transform.GetChild(2).gameObject;
+			Part DownbodyPart = Downbody.GetComponent<Part> ();
+			fRandom = Random.Range (25,30);
+			DownbodyPart.m_fHealth = fRandom;
+			DownbodyPart.m_fCurHealth = fRandom;
+			DownbodyPart.m_dicStat.Add ("Health", fRandom);
+			fRandom = Random.Range (5,8);
+			DownbodyPart.m_dicStat.Add ("Defense", fRandom);
+
+			GameObject arm = obj.transform.Find ("Hand_R").gameObject;
+			Part armPart = arm.GetComponent<Part> ();
+			fRandom = Random.Range (5, 9);
+			float fSpeedRandom = Random.Range (1, 3);
+			armPart.m_bUse32PixelHand = true;
+			armPart.m_dicStat.Add ("Attack", fRandom);
+			armPart.m_dicStat.Add ("AttackSpeed", fSpeedRandom);
+			fRandom = Random.Range (15,18);
+			armPart.m_fHealth = fRandom;
+			armPart.m_fCurHealth = fRandom;
+			armPart.m_dicStat.Add ("Health", fRandom);
+
+			GameObject leg = obj.transform.Find ("Leg").gameObject;
+			Part legPart = leg.GetComponent<Part> ();
+			fRandom = Random.Range (15,18);
+			float fRandomDodge = Random.Range (5,7);
+			legPart.m_fHealth = fRandom;
+			legPart.m_fCurHealth = fRandom;
+			legPart.m_dicStat.Add ("Health", fRandom);
+			legPart.m_dicStat.Add ("Dodge", fRandomDodge);
+			legPart.m_dicStatBuff["Dodge"] = fRandomDodge;
+			legPart.m_lstStrBuff.Add ("LegBuff");
+			break;
+		}
+
+		return obj;
+	}
+
+	public GameObject Create_Civilian()
 	{
 		GameObject obj;
 		float fRandom = 0f;
@@ -187,13 +261,22 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		headPart.m_dicStat.Add ("Health", fRandom);
 		headPart.m_dicStat.Add ("IQ", fRandomIQ);
 
-		switch (0) {
+		switch (Random.Range(0,3)) {
 		case 0:
+			break;
+		case 1:
 			headPart.m_lstStrBuff.Add ("HeadBuff_0");
 			if(headPart.m_dicStat["IQ"] < 80)
 				headPart.m_dicStatBuff["Attack"] = 1;
 			else
 				headPart.m_dicStatBuff["Attack"] = 2;
+			break;
+		case 2:
+			headPart.m_lstStrBuff.Add ("HeadBuff_1");
+			if(headPart.m_dicStat["IQ"] < 80)
+				headPart.m_dicStatBuff["AttackSpeed"] = 1;
+			else
+				headPart.m_dicStatBuff["AttackSpeed"] = 2;
 			break;
 		}
 

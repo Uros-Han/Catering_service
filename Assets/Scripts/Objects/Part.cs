@@ -35,6 +35,7 @@ public class Part : MonoBehaviour {
 	Coroutine buffCoroutine;
 
 	public bool m_bNeedToStickHead; // 몸에 달라 붙도록 코딩이 필요한 머리 파츠 ex)동물은 default가 붙어있는상태
+	public bool m_bReverseBody; //조립시 상하좌우 반전해야하는 파츠
 
 	void Awake()
 	{
@@ -265,7 +266,7 @@ public class Part : MonoBehaviour {
 
 						if(iIdx + 1 == iTargetIdx){
 							m_headingDirection = DIRECTION.LEFT;
-							if(m_bEdgePart && gameObject.name != "Head")
+							if(m_bEdgePart && gameObject.name != "Head" || m_bReverseBody)
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 270f + m_fHandRotater, "time", 0.2f));
 							else{
 								if(m_bNeedToStickHead)
@@ -274,7 +275,7 @@ public class Part : MonoBehaviour {
 							}
 						}else if(iIdx - 1 == iTargetIdx){
 							m_headingDirection = DIRECTION.RIGHT;
-							if(m_bEdgePart && gameObject.name != "Head")
+							if(m_bEdgePart && gameObject.name != "Head" || m_bReverseBody)
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 90f + m_fHandRotater, "time", 0.2f));
 							else{
 								if(m_bNeedToStickHead)
@@ -283,7 +284,7 @@ public class Part : MonoBehaviour {
 							}
 						}else if(iIdx - grid.m_iXcount == iTargetIdx){
 							m_headingDirection = DIRECTION.DOWN;
-							if(m_bEdgePart && gameObject.name != "Head")
+							if(m_bEdgePart && gameObject.name != "Head" || m_bReverseBody)
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 0f + m_fHandRotater, "time", 0.2f));
 							else{
 								if(m_bNeedToStickHead)
@@ -292,7 +293,7 @@ public class Part : MonoBehaviour {
 							}
 						}else if(iIdx + grid.m_iXcount == iTargetIdx){
 							m_headingDirection = DIRECTION.UP;
-							if(m_bEdgePart && gameObject.name != "Head")
+							if(m_bEdgePart && gameObject.name != "Head" || m_bReverseBody)
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 180f + m_fHandRotater, "time", 0.2f));
 							else{
 								if(m_bNeedToStickHead)
@@ -610,8 +611,26 @@ public class Part : MonoBehaviour {
 						buffIdx.Add(iParentIdx + GridMgr.getInstance.m_iXcount);
 						buffIdx.Add(iParentIdx - GridMgr.getInstance.m_iXcount);
 
-						listBuffIcon = BuffCreateAndStatAdapt(bStatAdapt, buffIdx);
+						listBuffIcon = BuffCreateAndStatAdapt(bStatAdapt, buffIdx, false, true);
 					}else if(m_lstStrBuff[i].Equals("HeadBuff_0"))
+					{
+						buffIdx.Add(iParentIdx);
+						buffIdx.Add(iParentIdx + 1);
+						buffIdx.Add(iParentIdx - 1);
+						buffIdx.Add(iParentIdx + GridMgr.getInstance.m_iXcount);
+						buffIdx.Add(iParentIdx - GridMgr.getInstance.m_iXcount);
+
+						listBuffIcon = BuffCreateAndStatAdapt(bStatAdapt, buffIdx, true);
+					}else if(m_lstStrBuff[i].Equals("HeadBuff_1"))
+					{
+						buffIdx.Add(iParentIdx);
+						buffIdx.Add(iParentIdx + 1);
+						buffIdx.Add(iParentIdx - 1);
+						buffIdx.Add(iParentIdx + GridMgr.getInstance.m_iXcount);
+						buffIdx.Add(iParentIdx - GridMgr.getInstance.m_iXcount);
+
+						listBuffIcon = BuffCreateAndStatAdapt(bStatAdapt, buffIdx, true);
+					}else if(m_lstStrBuff[i].Equals("HeadBuff_2"))
 					{
 						buffIdx.Add(iParentIdx);
 						buffIdx.Add(iParentIdx + 1);
@@ -803,7 +822,7 @@ public class Part : MonoBehaviour {
 		GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sprite_meat;
 	}
 
-	List<GameObject> BuffCreateAndStatAdapt(bool bStatAdapt, List<int> buffIdx, bool bAdaptOnlyAttackPart = false)
+	List<GameObject> BuffCreateAndStatAdapt(bool bStatAdapt, List<int> buffIdx, bool bAdaptOnlyAttackPart = false, bool bAdaptOnlyBodyPart = false)
 	{
 		List<GameObject> buffObjList = new List<GameObject>();
 		List<GameObject> listBuffIcon = new List<GameObject> ();
@@ -831,6 +850,11 @@ public class Part : MonoBehaviour {
 							bSkip = false;
 						}
 
+						if (bAdaptOnlyBodyPart && !idxPart.m_partType.Equals (PART_TYPE.BODY)) 
+						{
+							bSkip = false;
+						}
+
 						break;
 					}
 				}
@@ -846,19 +870,25 @@ public class Part : MonoBehaviour {
 
 			if(idxPart != this && (!idxPart.m_bEdgePart || (idxPart.m_bEdgePart && idxPart.m_objParentPart == m_objParentPart)))
 			{
-				if(bStatAdapt){
-					if(!idxPart.m_lstPartBuffed.Contains(this))
-						idxPart.m_lstPartBuffed.Add(this);
-				}else{
-					bool bSkip = false;
+				bool bSkip = false;
 
-					if (bAdaptOnlyAttackPart && !idxPart.m_bAttackAvailable) 
-					{
-						bSkip = true;
+				if (bAdaptOnlyAttackPart && !idxPart.m_bAttackAvailable) 
+				{
+					bSkip = true;
+				}
+
+				if (bAdaptOnlyBodyPart && !idxPart.m_partType.Equals (PART_TYPE.BODY)) 
+				{
+					bSkip = true;
+				}
+
+				if (!bSkip) {
+					if (bStatAdapt) {
+						if (!idxPart.m_lstPartBuffed.Contains (this))
+							idxPart.m_lstPartBuffed.Add (this);
+					} else {
+						listBuffIcon.Add (ObjectFactory.getInstance.Create_Buff (idxPart.m_iGridIdx, true, false));
 					}
-
-					if(!bSkip)
-						listBuffIcon.Add(ObjectFactory.getInstance.Create_Buff(idxPart.m_iGridIdx, true, false));
 				}
 			}
 		}

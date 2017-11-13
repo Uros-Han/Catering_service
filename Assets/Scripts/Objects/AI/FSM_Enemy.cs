@@ -186,12 +186,12 @@ public class FSM_Enemy : FSM {
 
 		while(m_AiState == AI_STATE.ATTACK){
 			if(!m_bBornAtLeft)
-				iTween.RotateTo(AttackPart, iTween.Hash("z",-100f,"time", fAttackSpeed * 0.1f, "islocal", true));
+				iTween.RotateTo(AttackPart, iTween.Hash("z",-100f,"time", fAttackSpeed * 0.2f, "islocal", true));
 			else
-				iTween.RotateTo(AttackPart, iTween.Hash("z",100f,"time", fAttackSpeed * 0.1f, "islocal", true));
+				iTween.RotateTo(AttackPart, iTween.Hash("z",100f,"time", fAttackSpeed * 0.2f, "islocal", true));
 			
-			iTween.MoveTo(AttackPart, iTween.Hash("x", -0.005f, "y", 0.206f, "time", fAttackSpeed * 0.1f, "islocal", true));
-			yield return new WaitForSeconds(fAttackSpeed * 0.1f + 0.5f);
+			iTween.MoveTo(AttackPart, iTween.Hash("x", -0.005f, "y", 0.206f, "time", fAttackSpeed * 0.2f, "islocal", true));
+			yield return new WaitForSeconds((fAttackSpeed * 0.2f) + (fAttackSpeed * 0.1f));
 
 			if(targetPart.m_bDestroied)
 			{
@@ -201,7 +201,7 @@ public class FSM_Enemy : FSM {
 			}
 			iTween.RotateTo(AttackPart, iTween.Hash("z",0f,"time",fAttackSpeed * 0.02f, "islocal", true));
 			iTween.MoveTo(AttackPart, iTween.Hash("x", originPos.x, "y", originPos.y, "time", fAttackSpeed * 0.02f, "islocal", true));
-			yield return new WaitForSeconds(fAttackSpeed * 0.02f + 0.2f);
+			yield return new WaitForSeconds(fAttackSpeed * 0.02f);
 			if(targetPart.m_bDestroied)
 			{
 				AttackPart.transform.localRotation = originRotate;
@@ -210,7 +210,7 @@ public class FSM_Enemy : FSM {
 			}
 
 			StartCoroutine(Attack(m_target, fDamage, false));
-			yield return new WaitForSeconds(0.2f);
+			yield return new WaitForSeconds(fAttackSpeed * 0.1f);
 
 		};
 	}

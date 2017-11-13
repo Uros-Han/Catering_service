@@ -57,12 +57,12 @@ public class FSM_Freindly : FSM {
 		do{
 			yield return null;
 			
-			iTween.RotateTo(gameObject, iTween.Hash("z",-100f,"time", fAttackSpeed * 0.1f));
-			yield return new WaitForSeconds(fAttackSpeed * 0.1f + 0.5f);
+			iTween.RotateTo(gameObject, iTween.Hash("z",-100f,"time", fAttackSpeed * 0.2f));
+			yield return new WaitForSeconds((fAttackSpeed * 0.2f) + (fAttackSpeed * 0.1f));
 			iTween.RotateTo(gameObject, iTween.Hash("z",0f,"time", fAttackSpeed * 0.02f));
-			yield return new WaitForSeconds(fAttackSpeed * 0.2f + 0.2f);
+			yield return new WaitForSeconds(fAttackSpeed * 0.02f);
 			StartCoroutine(Attack(m_target, fDmg, true));
-			yield return new WaitForSeconds(0.2f); //Delay
+			yield return new WaitForSeconds(fAttackSpeed * 0.1f); //Delay
 
 			if(targetUnit.m_fCurHealth <= 0)
 			{

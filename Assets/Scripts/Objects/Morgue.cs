@@ -7,7 +7,7 @@ public class Morgue : Singleton<Morgue> {
 	public bool[] m_bBodyArr; //자리 차지한 시체들 false == empty
 //	public int[] m_iMorgueIdxArr;
 	public float m_fBodyMoveTime;
-	int m_iIdxCount = 24;
+	int m_iIdxCount = 18;
 
 	public Part m_SelectedPart;
 
@@ -73,6 +73,10 @@ public class Morgue : Singleton<Morgue> {
 			if (!iArgument.Equals (0)) {
 				if (part.m_lstStrBuff [i].Equals ("HeadBuff_0")) {
 					tmpBuff = string.Format (tmpBuff, part.m_dicStatBuff["Attack"]);
+				}else if (part.m_lstStrBuff [i].Equals ("HeadBuff_1")) {
+					tmpBuff = string.Format (tmpBuff, part.m_dicStatBuff["AttackSpeed"]);
+				}else if (part.m_lstStrBuff [i].Equals ("HeadBuff_2")) {
+					tmpBuff = string.Format (tmpBuff, part.m_dicStatBuff["AttackSpeed"]);
 				}
 			}
 
