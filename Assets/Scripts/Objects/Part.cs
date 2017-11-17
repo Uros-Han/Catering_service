@@ -266,36 +266,53 @@ public class Part : MonoBehaviour {
 
 						if(iIdx + 1 == iTargetIdx){
 							m_headingDirection = DIRECTION.LEFT;
-							if(m_bEdgePart && gameObject.name != "Head" || m_bReverseBody)
+							if(m_bEdgePart && gameObject.name != "Head" || m_bReverseBody){
+								if(m_partType.Equals(PART_TYPE.ARM))
+								{
+									iTween.ScaleTo(gameObject, iTween.Hash ("x", 1, "time", 0.2f));
+								}
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 270f + m_fHandRotater, "time", 0.2f));
-							else{
+							}else{
 								if(m_bNeedToStickHead)
 									transform.position = new Vector3(transform.position.x + 0.02f, transform.position.y);
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 90f, "time", 0.2f));
 							}
 						}else if(iIdx - 1 == iTargetIdx){
 							m_headingDirection = DIRECTION.RIGHT;
-							if(m_bEdgePart && gameObject.name != "Head" || m_bReverseBody)
-								iTween.RotateTo(gameObject, iTween.Hash ("z", 90f + m_fHandRotater, "time", 0.2f));
-							else{
+							if(m_bEdgePart && gameObject.name != "Head" || m_bReverseBody){
+								if(m_partType.Equals(PART_TYPE.ARM))
+								{
+									iTween.ScaleTo(gameObject, iTween.Hash ("x", -1, "time", 0.2f));
+									iTween.RotateTo(gameObject, iTween.Hash ("z", -90f + m_fHandRotater, "time", 0.2f));
+								}else
+									iTween.RotateTo(gameObject, iTween.Hash ("z", 90f + m_fHandRotater, "time", 0.2f));
+							}else{
 								if(m_bNeedToStickHead)
 									transform.position = new Vector3(transform.position.x - 0.02f, transform.position.y);
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 270f, "time", 0.2f));
 							}
 						}else if(iIdx - grid.m_iXcount == iTargetIdx){
 							m_headingDirection = DIRECTION.DOWN;
-							if(m_bEdgePart && gameObject.name != "Head" || m_bReverseBody)
+							if(m_bEdgePart && gameObject.name != "Head" || m_bReverseBody){
+								if(m_partType.Equals(PART_TYPE.ARM))
+								{
+									iTween.ScaleTo(gameObject, iTween.Hash ("x", 1, "time", 0.2f));
+								}
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 0f + m_fHandRotater, "time", 0.2f));
-							else{
+							}else{
 								if(m_bNeedToStickHead)
 									transform.position = new Vector3(transform.position.x, transform.position.y + 0.02f);
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 180f, "time", 0.2f));
 							}
 						}else if(iIdx + grid.m_iXcount == iTargetIdx){
 							m_headingDirection = DIRECTION.UP;
-							if(m_bEdgePart && gameObject.name != "Head" || m_bReverseBody)
+							if(m_bEdgePart && gameObject.name != "Head" || m_bReverseBody){
+								if(m_partType.Equals(PART_TYPE.ARM))
+								{
+									iTween.ScaleTo(gameObject, iTween.Hash ("x", 1, "time", 0.2f));
+								}
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 180f + m_fHandRotater, "time", 0.2f));
-							else{
+							}else{
 								if(m_bNeedToStickHead)
 									transform.position = new Vector3(transform.position.x, transform.position.y - 0.02f);
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 0f, "time", 0.2f));
