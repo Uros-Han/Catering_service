@@ -37,6 +37,14 @@ Twitter - http://www.twitter.com/lpfonseca
 
 ## CHANGELOG ##
 
+2.5.2
+- Core - Added two new events - "OnUpdateScreenSizeFinished" and "OnDollyZoomFinished"
+- Core - Code cleanup
+- Parallax - Added compatibility with the ContentFitter extension
+- TransitionsFX - Added option to use realtime transitions
+- PanAndZoom - Added option to choose which mouse button to use for panning
+- TriggerBoundaries - Fixed bug when comparing trigger boundaries that use the relative mode
+
 2.5.1
 - ContentFitter - Small tweaks
 

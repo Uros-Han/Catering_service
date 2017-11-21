@@ -51,7 +51,7 @@ public class GridMgr : Singleton<GridMgr>
 			else
 				tmpLine.GetComponent<DebugLine>().Init(new Vector3(0, fStartYPos - ( (i-m_iXcount) * m_fYsize)),false,m_fXsize,m_iXcount,m_iYcount);
 
-			tmpLine.SetActive(false);
+//			tmpLine.SetActive(false);
 
 			iTmpCounter += 1;
 		}

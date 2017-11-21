@@ -20,6 +20,8 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	GameObject[] m_objHero;
 	GameObject m_objCivilian;
 
+	GameObject m_WorldIcon;
+
 	public Sprite m_sprite_meat;
 	public Sprite[] m_sheet_core;
 
@@ -31,6 +33,8 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	public Sprite[] m_sheet_civilian_leg;
 	public Sprite[] m_sheet_civilian_arm;
 	public Sprite[][] m_sheet_civilian_body;
+
+	public Sprite[] m_sheet_worldicon;
 
 	// Use this for initialization
 	public void ResourcesLoad () {
@@ -66,7 +70,9 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		}
 		m_objCivilian = Resources.Load("Prefabs/Objects/Enemies/Civilian") as GameObject;
 
-
+		//WorldMap
+		m_WorldIcon = Resources.Load("Prefabs/Objects/World/WorldIcon") as GameObject;
+		m_sheet_worldicon = Resources.LoadAll<Sprite> ("Sprites/Sheets/World_Icon");
 	}
 
 	public GameObject Create_Aleart(int iIdx)
@@ -107,6 +113,42 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 
 		if (color != default(Color))
 			obj.GetComponent<SpriteRenderer> ().color = color;
+
+		return obj;
+	}
+
+	public GameObject Create_WorldIcon(Vector3 pos, int type = 0)
+	{
+		GameObject obj = Instantiate (m_WorldIcon) as GameObject;
+		obj.transform.parent = GameObject.Find ("WorldIcons").transform;
+		obj.transform.position = pos;
+
+		switch (type) {
+		case (int)WORLDICON_TYPE.EMPTY:
+			break;
+
+		case (int)WORLDICON_TYPE.FARM:
+			obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_worldicon [1];
+			break;
+
+		case (int)WORLDICON_TYPE.RANCH:
+			obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_worldicon [2];
+			break;
+
+		case (int)WORLDICON_TYPE.VILLAGE:
+			obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_worldicon [3];
+			break;
+
+		case (int)WORLDICON_TYPE.CITY:
+			obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_worldicon [4];
+			obj.transform.parent = GameObject.Find ("Cities").transform;
+			break;
+
+		case (int)WORLDICON_TYPE.CASTLE:
+			obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_worldicon [5];
+			obj.transform.parent = GameObject.Find ("Castles").transform;
+			break;
+		}
 
 		return obj;
 	}

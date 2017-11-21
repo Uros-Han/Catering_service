@@ -42,7 +42,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 
             // ProCamera2D
             _tooltip = new GUIContent("Pro Camera 2D", "");
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("ProCamera2D"), _tooltip);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("_pc2D"), _tooltip);
     
             // Mode
             var changedMode = false;
@@ -88,7 +88,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
                     // Target Aspect Ratio
                     EditorGUI.BeginChangeCheck ();
                     _tooltip = new GUIContent("Target Aspect Ratio", "");
-                    EditorGUILayout.PropertyField(serializedObject.FindProperty("TargetAspectRatio"), _tooltip);
+                    EditorGUILayout.PropertyField(serializedObject.FindProperty("_targetAspectRatio"), _tooltip);
                     if (EditorGUI.EndChangeCheck ())
                     {
                         changedWidth = true;

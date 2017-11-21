@@ -43,7 +43,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 	}
 
 #if UNITY_5_3_OR_NEWER
-	[HelpURL("http://www.procamera2d.com/user-guide/extension-rooms/")]
+	[HelpURLAttribute("http://www.procamera2d.com/user-guide/extension-rooms/")]
 #endif
 	public class ProCamera2DRooms : BasePC2D, IPositionOverrider, ISizeOverrider
 	{

@@ -11,7 +11,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 	}
 
 #if UNITY_5_3_OR_NEWER
-	[HelpURL("http://www.procamera2d.com/user-guide/extension-pixel-perfect/")]
+	[HelpURLAttribute("http://www.procamera2d.com/user-guide/extension-pixel-perfect/")]
 #endif
 	public class ProCamera2DPixelPerfect : BasePC2D, IPositionOverrider
 	{

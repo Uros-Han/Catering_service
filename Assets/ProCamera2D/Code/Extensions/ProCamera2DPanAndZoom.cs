@@ -5,10 +5,17 @@ using UnityEngine.EventSystems;
 namespace Com.LuisPedroFonseca.ProCamera2D
 {
 #if UNITY_5_3_OR_NEWER
-	[HelpURL("http://www.procamera2d.com/user-guide/extension-pan-and-zoom/")]
+	[HelpURLAttribute("http://www.procamera2d.com/user-guide/extension-pan-and-zoom/")]
 #endif
 	public class ProCamera2DPanAndZoom : BasePC2D, IPreMover
 	{
+		public enum MouseButton
+		{
+			Left = 0,
+			Right = 1,
+			Middle = 2
+		}
+		
 		public static string ExtensionName = "Pan And Zoom";
 
 		public bool DisableOverUGUI = true;
@@ -69,6 +76,8 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 
 		[Range(0, .99f)]
 		public float RightPanEdge = .9f;
+
+		public MouseButton PanMouseButton; 
 
 		[HideInInspector]
 		public bool ResetPrevPanPoint;
@@ -235,14 +244,14 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 
 #if UNITY_STANDALONE || UNITY_WEBGL || UNITY_WEBPLAYER || UNITY_EDITOR
 			// Reset camera inertia on pan start
-			if (UsePanByDrag && Input.GetMouseButtonDown(0))
+			if (UsePanByDrag && Input.GetMouseButtonDown((int)PanMouseButton))
 			{
 				CenterPanTargetOnCamera(StopSpeedOnDragStart);
 			}
 
 			// Mouse drag delta
 			var mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Mathf.Abs(Vector3D(ProCamera2D.LocalPosition)));
-			if (UsePanByDrag && Input.GetMouseButton(0))
+			if (UsePanByDrag && Input.GetMouseButton((int)PanMouseButton))
 			{
 				var normalizedMousePos = new Vector2(Input.mousePosition.x / ProCamera2D.GameCamera.pixelWidth, Input.mousePosition.y / ProCamera2D.GameCamera.pixelHeight);
 				if (ProCamera2D.GameCamera.pixelRect.Contains(mousePos) && InsideDraggableArea(normalizedMousePos))
@@ -261,7 +270,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
 				}
 			}
 			// Move to edges delta
-			else if (UsePanByMoveToEdges && !Input.GetMouseButton(0))
+			else if (UsePanByMoveToEdges && !Input.GetMouseButton((int)PanMouseButton))
 			{
 				var normalizedMousePosX = (-Screen.width * .5f + Input.mousePosition.x) / Screen.width;
 				var normalizedMousePosY = (-Screen.height * .5f + Input.mousePosition.y) / Screen.height;

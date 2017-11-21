@@ -5,7 +5,7 @@ using System.Collections;
 namespace Com.LuisPedroFonseca.ProCamera2D
 {
 #if UNITY_5_3_OR_NEWER
-	[HelpURL("http://www.procamera2d.com/user-guide/extension-zoom-to-fit/")]
+	[HelpURLAttribute("http://www.procamera2d.com/user-guide/extension-zoom-to-fit/")]
 #endif
 	public class ProCamera2DZoomToFitTargets : BasePC2D, ISizeOverrider
 	{

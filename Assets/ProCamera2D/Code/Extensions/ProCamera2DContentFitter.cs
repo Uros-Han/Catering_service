@@ -12,7 +12,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
     }
 
 #if UNITY_5_3_OR_NEWER
-    [HelpURL("http://www.procamera2d.com/user-guide/extension-content-fitter/")]
+    [HelpURLAttribute("http://www.procamera2d.com/user-guide/extension-content-fitter/")]
 #endif
     public class ProCamera2DContentFitter : BasePC2D, ISizeOverrider
     {
@@ -38,7 +38,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
             set
             {
                 _useLetterOrPillarboxing = value;
-                ToggleLetterPillarboxingCamera(value);
+                ToggleLetterPillarboxing(value);
             }
             get { return _useLetterOrPillarboxing; }
         }
@@ -75,7 +75,18 @@ namespace Com.LuisPedroFonseca.ProCamera2D
         [SerializeField]
         private float _targetWidth = 10;
 
-        [Range(.1f, 3f)] public float TargetAspectRatio = 16 / 9f;
+        public float TargetAspectRatio
+        {
+            get { return _targetAspectRatio; }
+            set
+            {
+                _targetAspectRatio = value;
+                _targetWidth = _targetHeight * value;
+            }
+        }
+        [Range(.1f, 3f)]
+        [SerializeField]
+        private float _targetAspectRatio = 16 / 9f;
 
         [Range(-1, 1)] public float VerticalAlignment;
 
@@ -120,11 +131,15 @@ namespace Com.LuisPedroFonseca.ProCamera2D
         {
             base.OnDestroy();
 
-            ProCamera2D.RemoveSizeOverrider(this);
+            if(ProCamera2D)
+                ProCamera2D.RemoveSizeOverrider(this);
         }
-
-        private void OnDrawGizmosSelected()
+        
+        #if UNITY_EDITOR
+        protected override void DrawGizmosSelected()
         {
+            base.DrawGizmosSelected();
+            
             var fillColor = EditorPrefsX.GetColor(PrefsData.FitterFillColorKey, PrefsData.FitterFillColorValue);
             var lineColor = EditorPrefsX.GetColor(PrefsData.FitterLineColorKey, PrefsData.FitterFillColorValue);
 
@@ -196,6 +211,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
                 Utils.DrawArrowForGizmo(camPos, -ProCamera2D.transform.up * TargetHeight * .5f, camSize.y * .03f);
             }
         }
+        #endif
 
         #region ISizeOverrider implementation
 
@@ -253,7 +269,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
             var isPillarbox = TargetHeight * .5f > TargetWidth * .5f / ScreenAspectRatio;
                         
             if(_prevUseLetterOrPillarboxing != _useLetterOrPillarboxing)
-                ToggleLetterPillarboxingCamera(_useLetterOrPillarboxing);
+                ToggleLetterPillarboxing(_useLetterOrPillarboxing);
 
             if (UseLetterOrPillarboxing)
             {
@@ -332,7 +348,7 @@ namespace Com.LuisPedroFonseca.ProCamera2D
             }
         }
 
-        private void ToggleLetterPillarboxingCamera(bool value)
+        private void ToggleLetterPillarboxing(bool value)
         {
             if (value && _letterPillarboxingCamera == null)
                 CreateLetterPillarboxingCamera();

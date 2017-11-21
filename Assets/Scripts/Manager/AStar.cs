@@ -217,14 +217,13 @@ public class AStar : Singleton<AStar>
 
 //			// 오아
 //			if (ParentNode.iIndex < m_iTileCountX * m_iTileCountY - m_iTileCountX
-//				&& (ParentNode.iIndex + 1) % m_iTileCountX != 0
+//			&& (ParentNode.iIndex + 1) % m_iTileCountX != 0
 //				&& m_ListTile[ParentNode.iIndex + 1 + m_iTileCountX].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BLOCK
 //				&& m_ListTile[ParentNode.iIndex + 1 + m_iTileCountX].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BUILD
-//				&& CheckList(ParentNode.iIndex + 1 + m_iTileCountX))
-//			{
-//				objNode = CreateNode(ParentNode, ParentNode.iIndex + m_iTileCountX + 1, (int)DIR.DAEGAK);
+//			   && CheckList (ParentNode.iIndex + 1 + m_iTileCountX)) {
+//				objNode = CreateNode (ParentNode, ParentNode.iIndex + m_iTileCountX + 1, (int)DIR.DAEGAK);
 //				if (objNode.fGCost < fStartGCost)
-//					m_OpenList.Add(objNode);
+//				m_OpenList.Add (objNode);
 //
 //			}
 
@@ -578,6 +577,212 @@ public class AStar : Singleton<AStar>
 		}
 
 		return true;
+	}
+
+	void MakeBestList_World()
+	{
+
+		Node ParentNode = null;
+
+		ParentNode = MakeParent();
+
+		//		fStartGCost = ParentNode.fGCost + 0.3f;
+
+		Node objNode = null;
+
+		//		fClosestNodeInDest_GCost = ParentNode.fGCost;
+		//		iClosestNodeInDest_Idx = m_iStartIndex;
+
+		while (true)
+		{
+
+			// 위
+			if (ParentNode.iIndex >= m_iTileCountX
+				//				&& m_ListTile[ParentNode.iIndex - m_iTileCountX].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BLOCK
+				//				&& m_ListTile[ParentNode.iIndex - m_iTileCountX].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BUILD
+				&& CheckList(ParentNode.iIndex - m_iTileCountX))
+			{
+				objNode = CreateNode(ParentNode, ParentNode.iIndex - m_iTileCountX, (int)DIR.SEQU);
+				//				if (objNode.fGCost < fStartGCost)
+				m_OpenList.Add(objNode);
+
+			}
+			// 오위
+			if (ParentNode.iIndex >= m_iTileCountX
+				&& (ParentNode.iIndex + 1) % m_iTileCountX != 0
+				//				&& m_ListTile[ParentNode.iIndex - m_iTileCountX + 1].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BLOCK
+				//				&& m_ListTile[ParentNode.iIndex - m_iTileCountX + 1].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BUILD
+				&& CheckList(ParentNode.iIndex - m_iTileCountX + 1))
+			{
+				objNode = CreateNode(ParentNode, ParentNode.iIndex - m_iTileCountX + 1, (int)DIR.DAEGAK);
+				//				if (objNode.fGCost < fStartGCost)
+				m_OpenList.Add(objNode);
+				//
+			}
+
+			// 오
+			if ((ParentNode.iIndex + 1) % m_iTileCountX != 0
+				//				&& m_ListTile[ParentNode.iIndex + 1].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BLOCK
+				//				&& m_ListTile[ParentNode.iIndex + 1].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BUILD
+				&& CheckList(ParentNode.iIndex + 1))
+			{
+				objNode = CreateNode(ParentNode, ParentNode.iIndex + 1, (int)DIR.SEQU);
+				//				if (objNode.fGCost < fStartGCost)
+				m_OpenList.Add(objNode);
+
+			}
+
+			// 오아
+			if (ParentNode.iIndex < m_iTileCountX * m_iTileCountY - m_iTileCountX
+				&& (ParentNode.iIndex + 1) % m_iTileCountX != 0
+				//				&& m_ListTile[ParentNode.iIndex + 1 + m_iTileCountX].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BLOCK
+				//				&& m_ListTile[ParentNode.iIndex + 1 + m_iTileCountX].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BUILD
+				&& CheckList (ParentNode.iIndex + 1 + m_iTileCountX)) {
+				objNode = CreateNode (ParentNode, ParentNode.iIndex + m_iTileCountX + 1, (int)DIR.DAEGAK);
+				//				if (objNode.fGCost < fStartGCost)
+				m_OpenList.Add (objNode);
+				//
+			}
+
+			// 아
+			if (ParentNode.iIndex < m_iTileCountX * m_iTileCountY - m_iTileCountX
+				//				&& m_ListTile[ParentNode.iIndex + m_iTileCountX].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BLOCK
+				//				&& m_ListTile[ParentNode.iIndex + m_iTileCountX].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BUILD
+				&& CheckList(ParentNode.iIndex + m_iTileCountX))
+			{
+				objNode = CreateNode(ParentNode, ParentNode.iIndex + m_iTileCountX, (int)DIR.SEQU);
+				//				if (objNode.fGCost < fStartGCost)
+				m_OpenList.Add(objNode);
+
+			}
+
+			// 왼아
+			if (ParentNode.iIndex % m_iTileCountX != 0
+				&& ParentNode.iIndex < m_iTileCountX * m_iTileCountY - m_iTileCountX
+				//				&& m_ListTile[ParentNode.iIndex + m_iTileCountX - 1].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BLOCK
+				//				&& m_ListTile[ParentNode.iIndex + m_iTileCountX - 1].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BUILD
+				&& CheckList(ParentNode.iIndex + m_iTileCountX - 1))
+			{
+				objNode = CreateNode(ParentNode, ParentNode.iIndex + m_iTileCountX - 1, (int)DIR.DAEGAK);
+				//				if (objNode.fGCost < fStartGCost)
+				m_OpenList.Add(objNode);
+				//
+			}
+
+			// 왼
+			if (ParentNode.iIndex % m_iTileCountX != 0
+				//				&& m_ListTile[ParentNode.iIndex - 1].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BLOCK
+				//				&& m_ListTile[ParentNode.iIndex - 1].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BUILD
+				&& CheckList(ParentNode.iIndex - 1))
+			{
+				objNode = CreateNode(ParentNode, ParentNode.iIndex - 1, (int)DIR.SEQU);
+				//				if (objNode.fGCost < fStartGCost)
+				m_OpenList.Add(objNode);
+
+			}
+
+			// 왼위
+			if (ParentNode.iIndex >= m_iTileCountX
+				&& ParentNode.iIndex % m_iTileCountX != 0
+				//				&& m_ListTile[ParentNode.iIndex - 1 - m_iTileCountX].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BLOCK
+				//				&& m_ListTile[ParentNode.iIndex - 1 - m_iTileCountX].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BUILD
+				&& CheckList(ParentNode.iIndex - 1 - m_iTileCountX))
+			{
+				objNode = CreateNode(ParentNode, ParentNode.iIndex - m_iTileCountX - 1, (int)DIR.DAEGAK);
+				//				if (objNode.fGCost < fStartGCost)
+				m_OpenList.Add(objNode);
+			}
+
+			if (m_OpenList.Count == 0)
+				break;
+
+			m_OpenList.Sort(Compare);
+
+			ParentNode = m_OpenList[0];
+
+			m_CloseList.Add(ParentNode);
+
+			//			if (fClosestNodeInDest_GCost == m_CloseList[m_CloseList.Count - 1].fGCost)
+			//			{
+			//				if (GetDisCost(m_CloseList[m_CloseList.Count - 1].iIndex, m_iStartIndex) < GetDisCost(iClosestNodeInDest_Idx, m_iStartIndex))
+			//				{
+			//					fClosestNodeInDest_GCost = m_CloseList[m_CloseList.Count - 1].fGCost;
+			//					iClosestNodeInDest_Idx = m_CloseList[m_CloseList.Count - 1].iIndex;
+			//				}
+			//			}else if (fClosestNodeInDest_GCost > m_CloseList[m_CloseList.Count - 1].fGCost)
+			//			{
+			//				fClosestNodeInDest_GCost = m_CloseList[m_CloseList.Count - 1].fGCost;
+			//				iClosestNodeInDest_Idx = m_CloseList[m_CloseList.Count - 1].iIndex;
+			//			}
+
+			m_OpenList.Remove(m_OpenList[0]);
+
+
+			if (ParentNode.iIndex == m_iEndIndex)
+			{
+				while (true)
+				{
+					if (ParentNode.ParentNode == null)
+						break;
+					m_BestList.Insert(0, ParentNode.iIndex);
+					ParentNode = ParentNode.ParentNode;
+				}
+				break;
+			}
+		}
+	}
+
+	public List<int> AStarStart_World(int iStart, int iEnd)
+	{
+
+		if (iStart == iEnd)
+		{
+			if (m_BestList == null)
+				m_BestList = new List<int>();
+
+			m_BestList.Clear();
+			m_BestList.Add(iEnd);
+			return m_BestList;
+		}
+
+
+		if (m_OpenList == null)
+			m_OpenList = new List<Node>();
+		if (m_CloseList == null)
+			m_CloseList = new List<Node>();
+		if (m_BestList == null)
+			m_BestList = new List<int>();
+
+
+		ClearNode();
+
+		m_iStartIndex = iStart;
+		m_iEndIndex = iEnd;
+
+		m_iTileCountX = GridMgr.getInstance.m_iXcount;
+		m_iTileCountY = GridMgr.getInstance.m_iYcount;
+
+		MakeBestList_World();
+
+		if (m_BestList.Count == 0) // 길막힘
+		{
+
+			if (m_iEndIndex == m_iStartIndex)
+			{
+				if (m_BestList == null)
+					m_BestList = new List<int>();
+
+				m_BestList.Clear();
+				m_BestList.Add(m_iEndIndex);
+				return m_BestList;
+			}
+
+			ClearNode();
+
+			MakeBestList_World();
+		}
+
+		return m_BestList;
 	}
 
 	void DrawDebugLine(Vector3 start, Vector3 end, Color color, float duration = 0.1f)

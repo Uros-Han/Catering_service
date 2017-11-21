@@ -6,7 +6,7 @@ using System;
 namespace Com.LuisPedroFonseca.ProCamera2D
 {
     #if UNITY_5_3_OR_NEWER
-    [HelpURL("http://www.procamera2d.com/user-guide/extension-repeater/")]
+    [HelpURLAttribute("http://www.procamera2d.com/user-guide/extension-repeater/")]
     #endif
     public class ProCamera2DRepeater : BasePC2D, IPostMover
     {
@@ -82,7 +82,8 @@ namespace Com.LuisPedroFonseca.ProCamera2D
         {
             base.OnDestroy();
 
-            ProCamera2D.RemovePostMover(this);
+            if(ProCamera2D)
+                ProCamera2D.RemovePostMover(this);
         }
 
         #region IPostMover implementation
