@@ -3,27 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WorldGenerator : Singleton<WorldGenerator> {
+	GridMgr grid;
+	Transform m_geoTrans;
 
 	// Use this for initialization
 	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+		grid = GridMgr.getInstance;
+		m_geoTrans = GameObject.Find ("Geo").transform;
 	}
 
-	public void GenerateWorldMap()
+	public IEnumerator GenerateWorldMap()
 	{
+		LoadingProgress (0.01f, "Instantiate");
+		yield return new WaitForSeconds (0.3f);
 
 		int iCityNum = 20;
 		int iCastleNum = 10;
 
-		GridMgr grid = GridMgr.getInstance;
 		ObjectFactory objFac = ObjectFactory.getInstance;
 		List<int> idxList = new List<int> ();
 
+		//지형생성
+		for(int i = 0 ; i < grid.m_iXcount * grid.m_iYcount; ++i){
+			objFac.Creat_WorldGeo (grid.GetPosOfIdx(i));
+			if (i % 100 == 0) {
+				float fProgress = (((float)i / ((float)grid.m_iXcount * (float)grid.m_iYcount)) * 0.3f);
+				LoadingProgress (fProgress, string.Format ("Create Geometry ({0}/{1})", i, grid.m_iXcount * grid.m_iYcount));
+				yield return new WaitForSeconds (0.001f);
+			}
+		}
+
+		//아이콘 생성
 		for (int i = 0; i < grid.m_iXcount * grid.m_iYcount; ++i) {
 			// idx -> x, y
 			int x = i % grid.m_iXcount;
@@ -48,32 +58,79 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 				idxList.Add (i);
 		}
 
+		if (!idxList.Contains (grid.m_iXcount * grid.m_iYcount / 2))
+			idxList.Add (grid.m_iXcount * grid.m_iYcount / 2);
+
 		for (int i = 0; i < iCastleNum; ++i) {
 //			int iRandomIdx = idxList[(int)GenerateNormalRandom(idxList.Count/2f, 10f)];
 			int iRandomIdx = idxList[Random.Range (0, idxList.Count)];
 
-			objFac.Create_WorldIcon (grid.GetPosOfIdx (iRandomIdx), (int)WORLDICON_TYPE.CASTLE);
+			GameObject objIcon = objFac.Create_WorldIcon (grid.GetPosOfIdx (iRandomIdx), (int)WORLDICON_TYPE.CASTLE);
+			m_geoTrans.GetChild (iRandomIdx).GetComponent<WorldGeo> ().m_worldIcon = objIcon;
 			idxList.Remove (iRandomIdx);
 		}
+
+		LoadingProgress (0.3f, "Castle Instantiate");
+		yield return new WaitForSeconds(0.1f);
 
 		for (int i = 0; i < iCityNum; ++i) {
 			int iRandomIdx = idxList[Random.Range (0, idxList.Count)];
 
-			objFac.Create_WorldIcon (grid.GetPosOfIdx (iRandomIdx), (int)WORLDICON_TYPE.CITY);
+			GameObject objIcon = objFac.Create_WorldIcon (grid.GetPosOfIdx (iRandomIdx), (int)WORLDICON_TYPE.CITY);
+			m_geoTrans.GetChild (iRandomIdx).GetComponent<WorldGeo> ().m_worldIcon = objIcon;
 			idxList.Remove (iRandomIdx);
 		}
 
+		LoadingProgress (0.4f, "City Instantiate");
+		yield return new WaitForSeconds(0.1f);
+
 		for (int i = 0; i < idxList.Count; ++i) {
 			int iRandom = Random.Range (0, 100);
+			GameObject objIcon = null;
+
 			if(iRandom < 33)
-				objFac.Create_WorldIcon (grid.GetPosOfIdx (idxList[i]), (int)WORLDICON_TYPE.FARM);
+				objIcon = objFac.Create_WorldIcon (grid.GetPosOfIdx (idxList[i]), (int)WORLDICON_TYPE.FARM);
 			else if(iRandom < 66)
-				objFac.Create_WorldIcon (grid.GetPosOfIdx (idxList[i]), (int)WORLDICON_TYPE.RANCH);
+				objIcon = objFac.Create_WorldIcon (grid.GetPosOfIdx (idxList[i]), (int)WORLDICON_TYPE.RANCH);
 			else if(iRandom < 88)
-				objFac.Create_WorldIcon (grid.GetPosOfIdx (idxList[i]), (int)WORLDICON_TYPE.VILLAGE);
-			else if(iRandom < 88)
-				objFac.Create_WorldIcon (grid.GetPosOfIdx (idxList[i]), (int)WORLDICON_TYPE.EMPTY);
+				objIcon = objFac.Create_WorldIcon (grid.GetPosOfIdx (idxList[i]), (int)WORLDICON_TYPE.VILLAGE);
+			else
+				objIcon = objFac.Create_WorldIcon (grid.GetPosOfIdx (idxList[i]), (int)WORLDICON_TYPE.EMPTY);
+
+			m_geoTrans.GetChild (idxList[i]).GetComponent<WorldGeo> ().m_worldIcon = objIcon;
 		}
+
+		LoadingProgress (0.5f, "Icons Instantiate");
+		yield return new WaitForSeconds(0.1f);
+
+//		GameObject.Find ("WorldIcons").BroadcastMessage ("CheckAroundAmIAlone");
+
+		Transform icons = GameObject.Find ("WorldIcons").transform;
+		for (int i = 0; i < icons.childCount; ++i) {
+			icons.GetChild (i).SendMessage ("CheckAroundAmIAlone");
+			if (i % 100 == 0) {
+				float fProgress = 0.5f + ((float)i / (float)icons.childCount * 0.3f);
+				LoadingProgress (fProgress, string.Format ("Check Unreachable Islands ({0}/{1})", i, icons.childCount));
+				yield return new WaitForSeconds (0.001f);
+			}
+		}
+
+		LoadingProgress (0.8f, "Destorying Unreachable Islands");
+		icons.BroadcastMessage("DestroyIfIsland");
+		yield return new WaitForSeconds (0.5f);
+
+		FloodFill (0,0,WORLD_GEO.WATER);
+		FloodFill (grid.m_iXcount-1,0,WORLD_GEO.WATER);
+		FloodFill (0,grid.m_iYcount-1,WORLD_GEO.WATER);
+		FloodFill (grid.m_iXcount-1,grid.m_iYcount-1,WORLD_GEO.WATER);
+		LoadingProgress (0.9f, "Pumping Ocean");
+		yield return new WaitForSeconds (0.5f);
+
+
+		LoadingProgress (1f , "Done");
+		yield return new WaitForSeconds (1f);
+		GameObject.Find ("LoadingBar").GetComponent<UIPanel> ().alpha = 0f;
+		
 	}
 
 	float GenerateNormalRandom(float mean, float stdDev) //평균, 표준편차
@@ -85,5 +142,31 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 		float randNormal = mean + stdDev * randStdNormal; //random normal(mean,stdDev^2)
 
 		return randNormal;
+	}
+
+	public void LoadingProgress(float fProgress, string strLabel){
+		GameObject.Find ("progress").GetComponent<UISlider> ().value = fProgress;
+		GameObject.Find ("ProgressLabel").GetComponent<UILabel> ().text = strLabel;
+	}
+		
+	void FloodFill(int iX, int iY, WORLD_GEO geoTarget)
+	{
+		if ((iX < 0) || (iX >= grid.m_iXcount))
+			return;
+		if ((iY < 0) || (iY >= grid.m_iYcount))
+			return;
+
+		if (m_geoTrans.GetChild (iY * grid.m_iXcount + iX).GetComponent<WorldGeo> ().m_worldIcon != null)
+			return;
+
+		if (!m_geoTrans.GetChild (iY * grid.m_iXcount + iX).GetComponent<WorldGeo> ().m_geoStatus.Equals (geoTarget)) {
+			m_geoTrans.GetChild (iY * grid.m_iXcount + iX).GetComponent<WorldGeo> ().m_geoStatus = geoTarget;
+			m_geoTrans.GetChild (iY * grid.m_iXcount + iX).GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sheet_worldGeo[(int)geoTarget];
+
+			FloodFill (iX+1, iY, geoTarget);
+			FloodFill (iX, iY+1, geoTarget);
+			FloodFill (iX-1, iY, geoTarget);
+			FloodFill (iX, iY-1, geoTarget);
+		}
 	}
 }

@@ -143,4 +143,43 @@ public class GridMgr : Singleton<GridMgr>
 
 		return listObj;
 	}
+		
+	public List<GameObject> FindObjAsList(List<int> iIdx, Transform parent)
+	{
+		List<GameObject> ObjList = new List<GameObject> ();
+
+		for (int i = 0; i < parent.childCount; ++i) {
+			int iFountIdx = -1;
+
+			for(int j = 0; j < iIdx.Count; ++j)
+			{
+				if (iIdx [j].Equals (GetGridIdx (parent.GetChild (i).position))) {
+					iFountIdx = j;
+					ObjList.Add (parent.GetChild (i).gameObject);
+				}
+			}
+
+			if(iFountIdx != -1)
+				iIdx.RemoveAt (iFountIdx);
+
+			if (iIdx.Count.Equals (0))
+				break;
+		}
+
+		return ObjList;
+	}
+
+	public GameObject FindObj(int iIdx, Transform parent)
+	{
+		GameObject Obj = null;
+
+		for (int i = 0; i < parent.childCount; ++i) {
+			if (iIdx.Equals (GetGridIdx (parent.GetChild (i).position))) {
+				Obj = parent.GetChild (i).gameObject;
+				break;
+			}
+		}
+
+		return Obj;
+	}
 }

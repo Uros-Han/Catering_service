@@ -73,6 +73,7 @@ public class Core_World : MonoBehaviour {
 
 		ProCamera2D.Instance.AdjustCameraTargetInfluence (ProCamera2D.Instance.CameraTargets [0], 0f, 0f);
 		ProCamera2D.Instance.AdjustCameraTargetInfluence (ProCamera2D.Instance.CameraTargets [1], 1f, 1f);
+		GameObject.Find ("PC2DPanTarget").transform.position = GameObject.Find ("Core").transform.position;
 
 		world.m_worldTurnState = WORLDTURN_STATE.IDLE;
 		StartCoroutine (Idle());

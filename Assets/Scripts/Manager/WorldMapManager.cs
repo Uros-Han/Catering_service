@@ -9,7 +9,7 @@ public class WorldMapManager : Singleton<WorldMapManager> {
 
 	// Use this for initialization
 	void Start () {
-		WorldGenerator.getInstance.GenerateWorldMap ();
+		StartCoroutine(WorldGenerator.getInstance.GenerateWorldMap ());
 		m_worldTurnState = WORLDTURN_STATE.IDLE;
 	}
 

@@ -593,13 +593,32 @@ public class AStar : Singleton<AStar>
 		//		fClosestNodeInDest_GCost = ParentNode.fGCost;
 		//		iClosestNodeInDest_Idx = m_iStartIndex;
 
+		List<int> iAroundIdxList = new List<int> ();
+		List<GameObject> objAroundObj = new List<GameObject> ();
+		GridMgr grid = GridMgr.getInstance;
+
 		while (true)
 		{
+			//주변 타일 오브젝트 미리 가지고있기 
+//			int iIdx = ParentNode.iIndex;
+//			iAroundIdxList.Clear ();
+//
+//			iAroundIdxList.Add (iIdx + grid.m_iXcount);
+//			iAroundIdxList.Add (iIdx - grid.m_iXcount);
+//			iAroundIdxList.Add (iIdx + 1);
+//			iAroundIdxList.Add (iIdx - 1);
+//			iAroundIdxList.Add (iIdx - grid.m_iXcount - 1);
+//			iAroundIdxList.Add (iIdx - grid.m_iXcount + 1);
+//			iAroundIdxList.Add (iIdx + grid.m_iXcount - 1);
+//			iAroundIdxList.Add (iIdx + grid.m_iXcount + 1);
+//
+//			objAroundObj = grid.FindObjAsList (iAroundIdxList, GameObject.Find ("WorldIcons").transform);
+
+			Transform geoTransform = GameObject.Find ("Geo").transform;
 
 			// 위
 			if (ParentNode.iIndex >= m_iTileCountX
-				//				&& m_ListTile[ParentNode.iIndex - m_iTileCountX].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BLOCK
-				//				&& m_ListTile[ParentNode.iIndex - m_iTileCountX].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BUILD
+				&& geoTransform.GetChild(ParentNode.iIndex - m_iTileCountX).GetComponent<WorldGeo>().m_worldIcon != null
 				&& CheckList(ParentNode.iIndex - m_iTileCountX))
 			{
 				objNode = CreateNode(ParentNode, ParentNode.iIndex - m_iTileCountX, (int)DIR.SEQU);
@@ -610,8 +629,7 @@ public class AStar : Singleton<AStar>
 			// 오위
 			if (ParentNode.iIndex >= m_iTileCountX
 				&& (ParentNode.iIndex + 1) % m_iTileCountX != 0
-				//				&& m_ListTile[ParentNode.iIndex - m_iTileCountX + 1].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BLOCK
-				//				&& m_ListTile[ParentNode.iIndex - m_iTileCountX + 1].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BUILD
+				&& geoTransform.GetChild(ParentNode.iIndex - m_iTileCountX + 1).GetComponent<WorldGeo>().m_worldIcon != null
 				&& CheckList(ParentNode.iIndex - m_iTileCountX + 1))
 			{
 				objNode = CreateNode(ParentNode, ParentNode.iIndex - m_iTileCountX + 1, (int)DIR.DAEGAK);
@@ -622,8 +640,7 @@ public class AStar : Singleton<AStar>
 
 			// 오
 			if ((ParentNode.iIndex + 1) % m_iTileCountX != 0
-				//				&& m_ListTile[ParentNode.iIndex + 1].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BLOCK
-				//				&& m_ListTile[ParentNode.iIndex + 1].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BUILD
+				&& geoTransform.GetChild(ParentNode.iIndex + 1).GetComponent<WorldGeo>().m_worldIcon != null
 				&& CheckList(ParentNode.iIndex + 1))
 			{
 				objNode = CreateNode(ParentNode, ParentNode.iIndex + 1, (int)DIR.SEQU);
@@ -635,8 +652,7 @@ public class AStar : Singleton<AStar>
 			// 오아
 			if (ParentNode.iIndex < m_iTileCountX * m_iTileCountY - m_iTileCountX
 				&& (ParentNode.iIndex + 1) % m_iTileCountX != 0
-				//				&& m_ListTile[ParentNode.iIndex + 1 + m_iTileCountX].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BLOCK
-				//				&& m_ListTile[ParentNode.iIndex + 1 + m_iTileCountX].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BUILD
+				&& geoTransform.GetChild(ParentNode.iIndex + m_iTileCountX + 1).GetComponent<WorldGeo>().m_worldIcon != null
 				&& CheckList (ParentNode.iIndex + 1 + m_iTileCountX)) {
 				objNode = CreateNode (ParentNode, ParentNode.iIndex + m_iTileCountX + 1, (int)DIR.DAEGAK);
 				//				if (objNode.fGCost < fStartGCost)
@@ -646,8 +662,7 @@ public class AStar : Singleton<AStar>
 
 			// 아
 			if (ParentNode.iIndex < m_iTileCountX * m_iTileCountY - m_iTileCountX
-				//				&& m_ListTile[ParentNode.iIndex + m_iTileCountX].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BLOCK
-				//				&& m_ListTile[ParentNode.iIndex + m_iTileCountX].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BUILD
+				&& geoTransform.GetChild(ParentNode.iIndex + m_iTileCountX).GetComponent<WorldGeo>().m_worldIcon != null
 				&& CheckList(ParentNode.iIndex + m_iTileCountX))
 			{
 				objNode = CreateNode(ParentNode, ParentNode.iIndex + m_iTileCountX, (int)DIR.SEQU);
@@ -659,8 +674,7 @@ public class AStar : Singleton<AStar>
 			// 왼아
 			if (ParentNode.iIndex % m_iTileCountX != 0
 				&& ParentNode.iIndex < m_iTileCountX * m_iTileCountY - m_iTileCountX
-				//				&& m_ListTile[ParentNode.iIndex + m_iTileCountX - 1].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BLOCK
-				//				&& m_ListTile[ParentNode.iIndex + m_iTileCountX - 1].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BUILD
+				&& geoTransform.GetChild(ParentNode.iIndex + m_iTileCountX - 1).GetComponent<WorldGeo>().m_worldIcon != null
 				&& CheckList(ParentNode.iIndex + m_iTileCountX - 1))
 			{
 				objNode = CreateNode(ParentNode, ParentNode.iIndex + m_iTileCountX - 1, (int)DIR.DAEGAK);
@@ -671,8 +685,7 @@ public class AStar : Singleton<AStar>
 
 			// 왼
 			if (ParentNode.iIndex % m_iTileCountX != 0
-				//				&& m_ListTile[ParentNode.iIndex - 1].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BLOCK
-				//				&& m_ListTile[ParentNode.iIndex - 1].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BUILD
+				&& geoTransform.GetChild(ParentNode.iIndex - 1).GetComponent<WorldGeo>().m_worldIcon != null
 				&& CheckList(ParentNode.iIndex - 1))
 			{
 				objNode = CreateNode(ParentNode, ParentNode.iIndex - 1, (int)DIR.SEQU);
@@ -684,8 +697,7 @@ public class AStar : Singleton<AStar>
 			// 왼위
 			if (ParentNode.iIndex >= m_iTileCountX
 				&& ParentNode.iIndex % m_iTileCountX != 0
-				//				&& m_ListTile[ParentNode.iIndex - 1 - m_iTileCountX].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BLOCK
-				//				&& m_ListTile[ParentNode.iIndex - 1 - m_iTileCountX].GetComponent<Tile>().m_iOption != (int)TILE_OPTION.BUILD
+				&& geoTransform.GetChild(ParentNode.iIndex - m_iTileCountX - 1).GetComponent<WorldGeo>().m_worldIcon != null
 				&& CheckList(ParentNode.iIndex - 1 - m_iTileCountX))
 			{
 				objNode = CreateNode(ParentNode, ParentNode.iIndex - m_iTileCountX - 1, (int)DIR.DAEGAK);
@@ -731,6 +743,19 @@ public class AStar : Singleton<AStar>
 			}
 		}
 	}
+
+//	GameObject FindObjInList(int iIdx, List<GameObject> objList)
+//	{
+//		GridMgr grid = GridMgr.getInstance;
+//
+//		for (int i = 0; i < objList.Count; ++i) {
+//			if (grid.GetGridIdx (objList [i].transform.position).Equals (iIdx)) {
+//				return objList [i];
+//			}
+//		}
+//
+//		return null;
+//	}
 
 	public List<int> AStarStart_World(int iStart, int iEnd)
 	{
@@ -779,7 +804,7 @@ public class AStar : Singleton<AStar>
 
 			ClearNode();
 
-			MakeBestList_World();
+//			MakeBestList_World();
 		}
 
 		return m_BestList;

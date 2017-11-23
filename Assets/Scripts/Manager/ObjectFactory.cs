@@ -21,6 +21,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	GameObject m_objCivilian;
 
 	GameObject m_WorldIcon;
+	GameObject m_WorldGeo;
 
 	public Sprite m_sprite_meat;
 	public Sprite[] m_sheet_core;
@@ -35,6 +36,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	public Sprite[][] m_sheet_civilian_body;
 
 	public Sprite[] m_sheet_worldicon;
+	public Sprite[] m_sheet_worldGeo;
 
 	// Use this for initialization
 	public void ResourcesLoad () {
@@ -73,6 +75,8 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		//WorldMap
 		m_WorldIcon = Resources.Load("Prefabs/Objects/World/WorldIcon") as GameObject;
 		m_sheet_worldicon = Resources.LoadAll<Sprite> ("Sprites/Sheets/World_Icon");
+		m_WorldGeo = Resources.Load ("Prefabs/Objects/World/WorldGeo") as GameObject;
+		m_sheet_worldGeo = Resources.LoadAll<Sprite> ("Sprites/Sheets/World_Geo");
 	}
 
 	public GameObject Create_Aleart(int iIdx)
@@ -141,17 +145,36 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 
 		case (int)WORLDICON_TYPE.CITY:
 			obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_worldicon [4];
-			obj.transform.parent = GameObject.Find ("Cities").transform;
+//			obj.transform.parent = GameObject.Find ("Cities").transform;
 			break;
 
 		case (int)WORLDICON_TYPE.CASTLE:
 			obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_worldicon [5];
-			obj.transform.parent = GameObject.Find ("Castles").transform;
+//			obj.transform.parent = GameObject.Find ("Castles").transform;
 			break;
 		}
 
 		return obj;
 	}
+
+	public GameObject Creat_WorldGeo(Vector3 pos, int iType = 0)
+	{
+		GameObject obj = Instantiate (m_WorldGeo) as GameObject;
+		obj.transform.parent = GameObject.Find ("Geo").transform;
+		obj.transform.position = pos;
+
+		switch (iType) {
+		case (int)WORLD_GEO.GRASS:
+			break;
+		case (int)WORLD_GEO.WATER:
+			obj.GetComponent<WorldGeo> ().m_geoStatus = WORLD_GEO.WATER;
+			obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_worldGeo [1];
+			break;
+		}
+
+		return obj;
+	}
+
 
 	public GameObject Create_Poop()
 	{
