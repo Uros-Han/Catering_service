@@ -14,6 +14,8 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 
 	public IEnumerator GenerateWorldMap()
 	{
+		GameObject.Find ("LoadingBar").GetComponent<UIPanel> ().alpha = 1f;
+
 		LoadingProgress (0.01f, "Instantiate");
 		yield return new WaitForSeconds (0.3f);
 
@@ -25,7 +27,7 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 
 		//지형생성
 		for(int i = 0 ; i < grid.m_iXcount * grid.m_iYcount; ++i){
-			objFac.Creat_WorldGeo (grid.GetPosOfIdx(i));
+			objFac.Create_WorldGeo (grid.GetPosOfIdx(i));
 			if (i % 100 == 0) {
 				float fProgress = (((float)i / ((float)grid.m_iXcount * (float)grid.m_iYcount)) * 0.3f);
 				LoadingProgress (fProgress, string.Format ("Create Geometry ({0}/{1})", i, grid.m_iXcount * grid.m_iYcount));
@@ -53,7 +55,6 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 
 			float fChance = 1 - (((float)x + (float)y) / ((float)(grid.m_iXcount / 2f) + (float)(grid.m_iYcount / 2f)));
 
-			Debug.Log (GenerateNormalRandom (0.5f, 0.1f));
 			if (GenerateNormalRandom(0.5f, 0.1f) < fChance)
 				idxList.Add (i);
 		}
@@ -66,7 +67,7 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 			int iRandomIdx = idxList[Random.Range (0, idxList.Count)];
 
 			GameObject objIcon = objFac.Create_WorldIcon (grid.GetPosOfIdx (iRandomIdx), (int)WORLDICON_TYPE.CASTLE);
-			m_geoTrans.GetChild (iRandomIdx).GetComponent<WorldGeo> ().m_worldIcon = objIcon;
+//			m_geoTrans.GetChild (iRandomIdx).GetComponent<WorldGeo> ().m_worldIcon = objIcon;
 			idxList.Remove (iRandomIdx);
 		}
 
@@ -77,7 +78,7 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 			int iRandomIdx = idxList[Random.Range (0, idxList.Count)];
 
 			GameObject objIcon = objFac.Create_WorldIcon (grid.GetPosOfIdx (iRandomIdx), (int)WORLDICON_TYPE.CITY);
-			m_geoTrans.GetChild (iRandomIdx).GetComponent<WorldGeo> ().m_worldIcon = objIcon;
+//			m_geoTrans.GetChild (iRandomIdx).GetComponent<WorldGeo> ().m_worldIcon = objIcon;
 			idxList.Remove (iRandomIdx);
 		}
 
@@ -97,7 +98,7 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 			else
 				objIcon = objFac.Create_WorldIcon (grid.GetPosOfIdx (idxList[i]), (int)WORLDICON_TYPE.EMPTY);
 
-			m_geoTrans.GetChild (idxList[i]).GetComponent<WorldGeo> ().m_worldIcon = objIcon;
+//			m_geoTrans.GetChild (idxList[i]).GetComponent<WorldGeo> ().m_worldIcon = objIcon;
 		}
 
 		LoadingProgress (0.5f, "Icons Instantiate");

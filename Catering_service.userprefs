@@ -1,28 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Objects/AI/FSM_Freindly.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Objects/World/WorldIcon.cs">
     <Files>
+      <File FileName="Assets/Scripts/Manager/WorldGenerator.cs" Line="17" Column="68" />
+      <File FileName="Assets/Scripts/Objects/World/WorldIcon.cs" Line="5" Column="1" />
+      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="157" Column="47" />
       <File FileName="Assets/Scripts/Header/Enum.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/AI/FSM_Enemy.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Manager/BattleSceneMgr.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/HealthBar.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/Part.cs" Line="286" Column="57" />
-      <File FileName="Assets/Scripts/Objects/Core.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/Tangled.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/Unit.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/AI/FSM.cs" Line="54" Column="2" />
-      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="190" Column="50" />
-      <File FileName="Assets/Scripts/Manager/GridMgr.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/UI/DamageUI.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/UI/MeatButton.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Manager/GameMgr.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/Morgue.cs" Line="10" Column="22" />
-      <File FileName="../../../../../../Applications/Unity/MonoDevelop.app/Contents/Frameworks/Mono.framework/Versions/Current/lib/mono/4.5/Microsoft.Common.targets" Line="1" Column="1" />
-      <File FileName="Assets/Plugins/Pixelplacement/iTween/iTween.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/UI/WantedReward.cs" Line="1" Column="1" />
-      <File FileName="Assets/SpriteParticleEmitter/Core/Code/SpriteToParticles.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Manager/LevelGenerator.cs" Line="101" Column="44" />
-      <File FileName="Assets/Scripts/Objects/AI/FSM_Freindly.cs" Line="70" Column="21" />
+      <File FileName="Assets/Scripts/Objects/World/WorldGeo.cs" Line="7" Column="31" />
+      <File FileName="Assets/Scripts/Manager/AStar.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Manager/SaveManager.cs" Line="51" Column="48" />
+      <File FileName="Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_Camera.cs" Line="136" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

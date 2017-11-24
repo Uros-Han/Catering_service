@@ -125,39 +125,16 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	{
 		GameObject obj = Instantiate (m_WorldIcon) as GameObject;
 		obj.transform.parent = GameObject.Find ("WorldIcons").transform;
-		obj.transform.position = pos;
 
-		switch (type) {
-		case (int)WORLDICON_TYPE.EMPTY:
-			break;
+		obj.GetComponent<WorldIcon> ().m_iconType = type;
+		obj.GetComponent<WorldIcon>().m_iGridIdx = GridMgr.getInstance.GetGridIdx(pos);
 
-		case (int)WORLDICON_TYPE.FARM:
-			obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_worldicon [1];
-			break;
-
-		case (int)WORLDICON_TYPE.RANCH:
-			obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_worldicon [2];
-			break;
-
-		case (int)WORLDICON_TYPE.VILLAGE:
-			obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_worldicon [3];
-			break;
-
-		case (int)WORLDICON_TYPE.CITY:
-			obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_worldicon [4];
-//			obj.transform.parent = GameObject.Find ("Cities").transform;
-			break;
-
-		case (int)WORLDICON_TYPE.CASTLE:
-			obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_worldicon [5];
-//			obj.transform.parent = GameObject.Find ("Castles").transform;
-			break;
-		}
+		obj.GetComponent<WorldIcon> ().Init ();
 
 		return obj;
 	}
 
-	public GameObject Creat_WorldGeo(Vector3 pos, int iType = 0)
+	public GameObject Create_WorldGeo(Vector3 pos, int iType = 0)
 	{
 		GameObject obj = Instantiate (m_WorldGeo) as GameObject;
 		obj.transform.parent = GameObject.Find ("Geo").transform;
