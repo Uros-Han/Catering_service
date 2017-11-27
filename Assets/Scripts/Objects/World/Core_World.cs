@@ -42,7 +42,12 @@ public class Core_World : MonoBehaviour {
 				if(fMouseTimer < 0.1f && Vector3.Distance(vecMouseClickedPos, mousePosition) < 0.1f){
 					m_listMoveIdx = AStar.getInstance.AStarStart_World(grid.GetGridIdx(GameObject.Find("Core").transform.position), grid.m_iGridIdx);
 					m_iDestinationIdx = grid.m_iGridIdx;
-					world.m_worldTurnState = WORLDTURN_STATE.MOVE;
+					DrawPath();
+
+					GameObject Dest = GameObject.Find("Destination").gameObject;
+					Dest.GetComponent<SpriteRenderer>().enabled = true;
+					Dest.transform.position = grid.GetPosOfIdx(grid.GetGridIdx(vecMouseClickedPos));
+					GameObject.Find("MoveOrderPanel").GetComponent<UIPanel>().alpha = 1f;
 				}
 			}
 
@@ -51,6 +56,20 @@ public class Core_World : MonoBehaviour {
 		}while(world.m_worldTurnState.Equals(WORLDTURN_STATE.IDLE));
 
 		StartCoroutine (Move());
+	}
+
+	public void MoveOrder()
+	{
+		WorldMapManager.getInstance.m_worldTurnState = WORLDTURN_STATE.MOVE;
+
+		GameObject Dest = GameObject.Find("Destination").gameObject;
+		Dest.GetComponent<SpriteRenderer>().enabled = false;
+		GameObject.Find("MoveOrderPanel").GetComponent<UIPanel>().alpha = 0f;
+	
+		Transform pathTrans = GameObject.Find ("Path").transform;
+		for (int i = 0; i < pathTrans.childCount; ++i) {
+			Destroy (pathTrans.GetChild (i).gameObject);
+		}
 	}
 
 	IEnumerator Move()
@@ -77,5 +96,35 @@ public class Core_World : MonoBehaviour {
 
 		world.m_worldTurnState = WORLDTURN_STATE.IDLE;
 		StartCoroutine (Idle());
+	}
+
+	void DrawPath()
+	{
+		GridMgr grid = GridMgr.getInstance;
+
+		Transform pathTrans = GameObject.Find ("Path").transform;
+		for (int i = 0; i < pathTrans.childCount; ++i) {
+			Destroy (pathTrans.GetChild (i).gameObject);
+		}
+
+		for (int i = 0; i < m_listMoveIdx.Count; ++i) {
+			GameObject myLine = new GameObject ();
+			myLine.transform.position = grid.GetPosOfIdx(m_listMoveIdx[i]);
+			myLine.AddComponent<LineRenderer> ();
+			LineRenderer lr = myLine.GetComponent<LineRenderer> ();
+			lr.material = new Material (Shader.Find ("Sprites/Default"));
+			lr.SetColors (new Color (119 / 255f, 43 / 255f, 130 / 255f), new Color (119 / 255f, 43 / 255f, 130 / 255f));
+			lr.SetWidth (0.05f, 0.05f);
+			if (i == 0) {
+				lr.SetPosition (0, GameObject.Find("Core").transform.position);
+				lr.SetPosition (1, grid.GetPosOfIdx (m_listMoveIdx [i]));
+			} else {
+				lr.SetPosition (0, grid.GetPosOfIdx (m_listMoveIdx [i - 1]));
+				lr.SetPosition (1, grid.GetPosOfIdx (m_listMoveIdx [i]));
+			}
+			lr.sortingLayerName = "Default";
+			lr.sortingOrder = -1;
+			lr.transform.parent = GameObject.Find ("Path").transform;
+		}
 	}
 }
