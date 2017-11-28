@@ -182,8 +182,6 @@ public class FSM_Enemy : FSM {
 		if (fAttackSpeed < 1)
 			fAttackSpeed = 1;
 
-		Debug.Log (fAttackSpeed);
-
 		while(m_AiState == AI_STATE.ATTACK){
 			if(!m_bBornAtLeft)
 				iTween.RotateTo(AttackPart, iTween.Hash("z",-100f,"time", fAttackSpeed * 0.2f, "islocal", true));

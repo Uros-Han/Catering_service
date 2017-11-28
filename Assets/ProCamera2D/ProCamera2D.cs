@@ -287,6 +287,11 @@ namespace Com.LuisPedroFonseca.ProCamera2D
             }
         }
 
+		void OnEnable()
+		{
+			_instance = this;
+		}
+
         void LateUpdate()
         {
             if (UpdateType == UpdateType.LateUpdate)

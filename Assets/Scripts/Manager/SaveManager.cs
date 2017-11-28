@@ -77,5 +77,8 @@ public class SaveManager : MonoBehaviour {
 			fogByte [i] = FogList [i];
 		}
 		FoW.FogOfWar.current.fogValues = fogByte;
+
+		GameObject.Find ("PC2DPanTarget").transform.position = GameObject.Find ("Core").transform.position;
+		GameObject.Find ("WorldTool").GetComponent<UIPanel> ().alpha = 0f;
 	}
 }

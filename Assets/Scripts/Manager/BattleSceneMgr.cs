@@ -14,9 +14,16 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 
 	// Use this for initialization
 	void Start () {
-		EnemyGenerate ();
-		StartCoroutine(DayTurn());
+//		EnemyGenerate ();
+//		StartCoroutine(DayTurn());
+//		StartCoroutine(NightTurn());
 //		StartCoroutine (UserMove (true));
+
+		if (GameMgr.getInstance.m_bAssembleOnly)
+			StartCoroutine (NightTurn ());
+		else {
+			StartCoroutine(DayTurn());
+		}
 	}
 
 	void EnemyGenerate()
@@ -48,7 +55,7 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 	{
 		m_iDay += 1;
 
-		LevelGenerator.getInstance.Encount (m_iDay, m_iDay);
+//		LevelGenerator.getInstance.Encount (m_iDay, m_iDay);
 
 		GameObject.Find ("MorgueToggle").GetComponent<UIPanel> ().alpha = 0;
 		BattleSceneMgr.getInstance.m_turnState = TURN_STATE.DAY;
@@ -208,6 +215,12 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 			else
 				iTween.MoveTo (morgueTrans.gameObject, iTween.Hash ("x",  0.765f, "y", 0.155f, "time", 0.25f, "easetype", "easeInSine", "islocal", true));
 		} else {
+			Transform WorldTrans = GameObject.Find ("World").transform;
+			for (int i = 0; i < WorldTrans.childCount; ++i) {
+				WorldTrans.GetChild (i).gameObject.SetActive (true);
+			}
+			UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("Battle");
+
 			StartCoroutine(GameObject.Find("glass").GetComponent<Glass>().ToggleColor(false));
 			GameObject.Find ("Player").BroadcastMessage("StopAssemble", SendMessageOptions.DontRequireReceiver);
 

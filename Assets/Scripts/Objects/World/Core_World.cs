@@ -9,7 +9,7 @@ public class Core_World : MonoBehaviour {
 	List<int> m_listMoveIdx;
 
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
 		m_listMoveIdx = new List<int> ();
 		StartCoroutine (Idle ());
 	}
@@ -39,15 +39,21 @@ public class Core_World : MonoBehaviour {
 			{
 				bMouseTimerOn = false;
 
-				if(fMouseTimer < 0.1f && Vector3.Distance(vecMouseClickedPos, mousePosition) < 0.1f){
+				if(Vector3.Distance(vecMouseClickedPos, mousePosition) < 0.025f){
 					m_listMoveIdx = AStar.getInstance.AStarStart_World(grid.GetGridIdx(GameObject.Find("Core").transform.position), grid.m_iGridIdx);
 					m_iDestinationIdx = grid.m_iGridIdx;
 					DrawPath();
 
-					GameObject Dest = GameObject.Find("Destination").gameObject;
-					Dest.GetComponent<SpriteRenderer>().enabled = true;
-					Dest.transform.position = grid.GetPosOfIdx(grid.GetGridIdx(vecMouseClickedPos));
-					GameObject.Find("MoveOrderPanel").GetComponent<UIPanel>().alpha = 1f;
+					if(m_listMoveIdx.Count != 0)
+					{
+						GameObject Dest = GameObject.Find("Destination").gameObject;
+						Dest.GetComponent<SpriteRenderer>().enabled = true;
+						Dest.transform.position = grid.GetPosOfIdx(grid.GetGridIdx(vecMouseClickedPos));
+						GameObject.Find("MoveOrderPanel").GetComponent<UIPanel>().alpha = 1f;
+					}else{
+						GameObject Dest = GameObject.Find("Destination").gameObject;
+						Dest.GetComponent<SpriteRenderer>().enabled = false;
+					}
 				}
 			}
 
@@ -84,8 +90,13 @@ public class Core_World : MonoBehaviour {
 
 		for(int i = 0; i < m_listMoveIdx.Count; ++i)
 		{
+			if (GameMgr.getInstance.m_iHunger <= 0) {
+				GameMgr.getInstance.m_iHunger = 100;
+			}
+
 			Vector3 destPos = grid.GetPosOfIdx(m_listMoveIdx[i]);
 			iTween.MoveTo(gameObject, iTween.Hash("x", destPos.x, "y", destPos.y, "time", 1f, "easetype", "easeInSine"));
+			GameMgr.getInstance.m_iHunger -= 30;
 
 			yield return new WaitForSeconds(1f);
 		}

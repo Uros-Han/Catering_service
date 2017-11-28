@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class GameMgr : Singleton<GameMgr> {
 
+	public int m_iHunger;
+	public bool m_bAssembleOnly = true;
+
+
 	// Use this for initialization
 	void Awake () {
 

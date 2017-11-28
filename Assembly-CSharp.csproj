@@ -335,6 +335,7 @@
      <Compile Include="Assets\Scripts\Objects\Tangled.cs" />
      <Compile Include="Assets\Scripts\Objects\Unit.cs" />
      <Compile Include="Assets\Scripts\Objects\World\Core_World.cs" />
+     <Compile Include="Assets\Scripts\Objects\World\HungerUI.cs" />
      <Compile Include="Assets\Scripts\Objects\World\WorldGeo.cs" />
      <Compile Include="Assets\Scripts\Objects\World\WorldIcon.cs" />
      <Compile Include="Assets\Scripts\UI\ControlTap.cs" />
