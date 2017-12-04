@@ -2,8 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class GridMgr : Singleton<GridMgr>
-{
+public class GridMgr : Singleton<GridMgr> {
 
 
 	public int m_iGridIdx;

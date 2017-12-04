@@ -1,21 +1,19 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Manager/SaveManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Objects/World/Core_World.cs">
     <Files>
-      <File FileName="Assets/Scripts/Objects/World/Core_World.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Manager/WorldGenerator.cs" Line="160" Column="80" />
-      <File FileName="Assets/Scripts/Objects/World/WorldIcon.cs" Line="8" Column="23" />
-      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="132" Column="36" />
+      <File FileName="Assets/Scripts/Objects/World/Core_World.cs" Line="115" Column="36" />
+      <File FileName="Assets/Scripts/Manager/WorldGenerator.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Objects/World/WorldIcon.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Header/Enum.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/World/WorldGeo.cs" Line="7" Column="26" />
-      <File FileName="Assets/Scripts/Manager/AStar.cs" Line="621" Column="83" />
-      <File FileName="Assets/Scripts/Manager/SaveManager.cs" Line="64" Column="60" />
-      <File FileName="Assets/ProCamera2D/Code/Extensions/ProCamera2DPanAndZoom.cs" Line="315" Column="48" />
-      <File FileName="Assets/ProCamera2D/Code/Extensions/ProCamera2DNumericBoundaries.cs" Line="157" Column="17" />
-      <File FileName="Assets/FogOfWar/Scripts/FogOfWar.cs" Line="138" Column="17" />
-      <File FileName="Assets/FogOfWar/Scripts/FogOfWarChunkManager.cs" Line="129" Column="23" />
-      <File FileName="Assets/Easy Save 2/Types/ES2UserType_WorldIcon.cs" Line="11" Column="39" />
-      <File FileName="Assets/Plugins/Easy Save 2/Scripts/Writers/ES2Writer.cs" Line="639" Column="1" />
+      <File FileName="Assets/Scripts/Objects/World/WorldGeo.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Manager/AStar.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Manager/SaveManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/ProCamera2D/Code/Extensions/ProCamera2DPanAndZoom.cs" Line="1" Column="1" />
+      <File FileName="Assets/ProCamera2D/Code/Extensions/ProCamera2DNumericBoundaries.cs" Line="1" Column="1" />
+      <File FileName="Assets/FogOfWar/Scripts/FogOfWar.cs" Line="1" Column="1" />
+      <File FileName="Assets/FogOfWar/Scripts/FogOfWarChunkManager.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -8,9 +8,19 @@ public class WorldMapManager : Singleton<WorldMapManager> {
 	public int m_KingLocIdx;
 	public WORLDTURN_STATE m_worldTurnState;
 
+	bool m_bToBattleScene = false;
+
 	// Use this for initialization
 	void Start () {
 		m_worldTurnState = WORLDTURN_STATE.IDLE;
+	}
+
+	void OnEnable()
+	{
+		if (m_bToBattleScene) {	
+			GameObject.Find ("World").BroadcastMessage ("CameBackFromBattleScene");
+			m_bToBattleScene = false;
+		}
 	}
 
 	public void GenerateWorld()
@@ -20,6 +30,18 @@ public class WorldMapManager : Singleton<WorldMapManager> {
 
 	public void Assembly()
 	{
+		GameMgr.getInstance.m_bAssembleOnly = true;
+		SceneToBattle ();
+	}
+
+	public void EncountEnemy()
+	{
+		GameMgr.getInstance.m_bAssembleOnly = false;
+		SceneToBattle ();
+	}
+
+	public void SceneToBattle()
+	{
 		SceneManager.LoadScene ("Battle", LoadSceneMode.Additive);
 
 		Transform WorldTrans = GameObject.Find ("World").transform;
@@ -27,5 +49,7 @@ public class WorldMapManager : Singleton<WorldMapManager> {
 			WorldTrans.GetChild (i).gameObject.SetActive (false);
 		}
 
+		m_bToBattleScene = true;
 	}
+
 }
