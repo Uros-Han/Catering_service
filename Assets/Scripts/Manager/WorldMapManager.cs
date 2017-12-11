@@ -13,13 +13,18 @@ public class WorldMapManager : Singleton<WorldMapManager> {
 	// Use this for initialization
 	void Start () {
 		m_worldTurnState = WORLDTURN_STATE.IDLE;
+		GridMgr.getInstance.ChgGridInfo ();
 	}
 
 	void OnEnable()
 	{
 		if (m_bToBattleScene) {	
 			GameObject.Find ("World").BroadcastMessage ("CameBackFromBattleScene");
+			GameObject.Find ("Player").SendMessage ("CameBackFromBattleScene");
 			m_bToBattleScene = false;
+
+			SceneManager.SetActiveScene (SceneManager.GetSceneByName("World"));
+			GridMgr.getInstance.ChgGridInfo ();
 		}
 	}
 
@@ -51,5 +56,6 @@ public class WorldMapManager : Singleton<WorldMapManager> {
 
 		m_bToBattleScene = true;
 	}
+
 
 }

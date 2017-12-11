@@ -12,6 +12,7 @@ public class GameMgr : Singleton<GameMgr> {
 	void Awake () {
 
 		DontDestroyOnLoad(gameObject);
+		DontDestroyOnLoad (GameObject.Find("Player"));
 
 		ObjectFactory.getInstance.ResourcesLoad ();
 		Localization.language = "Korean";

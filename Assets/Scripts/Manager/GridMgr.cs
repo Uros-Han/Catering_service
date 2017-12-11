@@ -2,27 +2,61 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class GridMgr : Singleton<GridMgr> {
-
-
+public class GridMgr : Singleton<GridMgr>
+{
+	[Header("Current Scene Grid Info")]
 	public int m_iGridIdx;
 
 	public int m_iXcount; //  Recommand NOT Even!
 	public int m_iYcount; //  Recommand NOT Even! && 정사각형이 되도록 X와Y 수가 같을것
 
-	public Vector2 m_fStartPos;
+	private Vector2 m_fStartPos;
 
 	public float m_fXsize;
 	public float m_fYsize;
 
+	[Header("World Grid Info")]
+	public int m_iWorldXcount;
+	public int m_iWorldYcount;
+	public float m_fXWorldSize;
+	public float m_fYWorldSize;
+
+	[Header("Battle Grid Info")]
+	public int m_iBattleXcount;
+	public int m_iBattleYcount;
+	public float m_fXBattleSize;
+	public float m_fYBattleSize;
+
 	void Start()
 	{
-		LineMaking ();
+		DontDestroyOnLoad (gameObject);
 	}
 
 	void Update()
 	{
 		Picking();
+	}
+
+	public void ChgGridInfo()
+	{
+		Debug.Log (UnityEngine.SceneManagement.SceneManager.GetActiveScene ().name);
+		if (UnityEngine.SceneManagement.SceneManager.GetActiveScene ().name.Equals ("World")) {
+			m_iXcount = m_iWorldXcount;
+			m_iYcount = m_iWorldYcount;
+			m_fXsize = m_fXWorldSize;
+			m_fYsize = m_fYWorldSize;
+		} else {
+			m_iXcount = m_iBattleXcount;
+			m_iYcount = m_iBattleYcount;
+			m_fXsize = m_fXBattleSize;
+			m_fYsize = m_fYBattleSize;
+		}
+
+		m_fStartPos = new Vector2 ( -1 * (m_iXcount * m_fXsize) / 2 , (m_iYcount * m_fYsize) / 2 );
+
+		if (GameObject.Find ("Grids").transform.childCount.Equals (0)) {
+			LineMaking ();
+		}
 	}
 
 	void LineMaking()
@@ -46,7 +80,7 @@ public class GridMgr : Singleton<GridMgr> {
 			float fStartYPos = ((m_iYcount-1)/2) * m_fYsize + m_fYsize * 3/2;
 
 			if(iTmpCounter <= m_iXcount)
-				tmpLine.GetComponent<DebugLine>().Init(new Vector3(fStartXPos + (i* m_fXsize), 0),true,m_fXsize,m_iXcount,m_iYcount);
+				tmpLine.GetComponent<DebugLine>().Init(new Vector3(fStartXPos + (i* m_fXsize), 0),true,m_fYsize,m_iXcount,m_iYcount);
 			else
 				tmpLine.GetComponent<DebugLine>().Init(new Vector3(0, fStartYPos - ( (i-m_iXcount) * m_fYsize)),false,m_fXsize,m_iXcount,m_iYcount);
 
@@ -60,7 +94,6 @@ public class GridMgr : Singleton<GridMgr> {
 
 	void Picking()
 	{
-
 		Vector2 vPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
 		//범위 밖 좌표는 -1 리턴

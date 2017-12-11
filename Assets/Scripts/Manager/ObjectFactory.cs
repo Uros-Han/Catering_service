@@ -14,6 +14,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	GameObject m_objPoop;
 	GameObject m_HealthBar;
 	GameObject m_DamageUI;
+	GameObject m_Part;
 
 	GameObject m_objChicken;
 	GameObject m_objGoat;
@@ -50,6 +51,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		m_sprite_meat = Resources.Load<Sprite> ("Sprites/Meat");
 
 		m_sheet_core = Resources.LoadAll<Sprite>("Sprites/Sheets/sheet_core");
+		m_Part = Resources.Load ("Prefabs/Objects/Part") as GameObject;
 
 		///Livestocks
 		m_sheet_chicken_0 = Resources.LoadAll<Sprite> ("Sprites/Sheets/Livestock/sheet_chicken_0");
@@ -148,6 +150,25 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 			obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_worldGeo [1];
 			break;
 		}
+
+		return obj;
+	}
+
+	public GameObject Create_Part(Sprite curSprite, Sprite[] spriteSheet, Part part)
+	{
+		GameObject obj = Instantiate (m_Part) as GameObject;
+		obj.transform.parent = GameObject.Find ("Player").transform;
+		obj.transform.position = GridMgr.getInstance.GetPosOfIdx (part.m_iGridIdx);
+
+		Part cpart = obj.GetComponent<Part> ();
+		System.Reflection.FieldInfo[] fields = cpart.GetType().GetFields(); 
+		foreach (System.Reflection.FieldInfo field in fields)
+		{
+			field.SetValue(cpart, field.GetValue(part));
+		}
+
+		obj.GetComponent<SpriteRenderer> ().sprite = curSprite;
+		obj.GetComponent<SpriteSheet> ().m_sheet_sprite = spriteSheet;
 
 		return obj;
 	}

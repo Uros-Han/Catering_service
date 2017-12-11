@@ -1,23 +1,31 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Objects/World/Core_World.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Manager/SaveManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/Objects/World/Core_World.cs" Line="115" Column="36" />
+      <File FileName="Assets/Scripts/Objects/World/Core_World.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Manager/WorldGenerator.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Objects/World/WorldIcon.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Header/Enum.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Objects/World/WorldGeo.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Manager/AStar.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Manager/SaveManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Manager/SaveManager.cs" Line="6" Column="2" />
       <File FileName="Assets/ProCamera2D/Code/Extensions/ProCamera2DPanAndZoom.cs" Line="1" Column="1" />
       <File FileName="Assets/ProCamera2D/Code/Extensions/ProCamera2DNumericBoundaries.cs" Line="1" Column="1" />
       <File FileName="Assets/FogOfWar/Scripts/FogOfWar.cs" Line="1" Column="1" />
       <File FileName="Assets/FogOfWar/Scripts/FogOfWarChunkManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Manager/BattleSceneMgr.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Manager/WorldMapManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Manager/GridMgr.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Objects/AI/FSM_Enemy.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Objects/AI/FSM.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Manager/GameMgr.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Assets/Scripts/Manager/GridMgr.cs" line="42" column="34" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

@@ -51,6 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Easy Save 3\Types\ES3Type_Part.cs" />
+     <Compile Include="Assets\Easy Save 3\Types\ES3Type_PartSaveForm.cs" />
      <Compile Include="Assets\Easy Save 3\Types\ES3Type_WorldIcon.cs" />
      <Compile Include="Assets\FogOfWar\Samples\Test2D\FogOfWarTest2DPlayer.cs" />
      <Compile Include="Assets\FogOfWar\Samples\Test3D\FogOfWarTestEnemy.cs" />
@@ -329,6 +331,7 @@
      <Compile Include="Assets\Scripts\Objects\HealthBar.cs" />
      <Compile Include="Assets\Scripts\Objects\Morgue.cs" />
      <Compile Include="Assets\Scripts\Objects\Part.cs" />
+     <Compile Include="Assets\Scripts\Objects\Player.cs" />
      <Compile Include="Assets\Scripts\Objects\Poop.cs" />
      <Compile Include="Assets\Scripts\Objects\SpriteModifier.cs" />
      <Compile Include="Assets\Scripts\Objects\SpriteSheet.cs" />

@@ -24,6 +24,10 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 		else {
 			StartCoroutine(DayTurn());
 		}
+
+		GameObject.Find ("Player").GetComponent<Player> ().BattleScene ();
+		UnityEngine.SceneManagement.SceneManager.SetActiveScene (UnityEngine.SceneManagement.SceneManager.GetSceneByName("Battle"));
+		GridMgr.getInstance.ChgGridInfo ();
 	}
 
 	void EnemyGenerate()

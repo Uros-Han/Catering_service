@@ -2,21 +2,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SaveManager : MonoBehaviour {
+public class SaveManager : Singleton<SaveManager> {
 
 	// Use this for initialization
 	void Start () {
-		
+		DontDestroyOnLoad (gameObject);
 	}
 
 	public void LocalSave()
 	{
 		SaveWorld ();
+		SaveCore ();
 	}
 
 	public void LocalLoad()
 	{
 		LoadWorld ();
+		LoadCore ();
+	}
+
+	void SaveCore()
+	{
+		List<PartSaveForm> listPartSaveForm = new List<PartSaveForm> ();
+
+		Transform playerTrans = GameObject.Find ("Player").transform;
+		for (int i = 1; i < playerTrans.childCount; ++i) {
+			PartSaveForm partSave = new PartSaveForm();
+			partSave.m_curSprite = playerTrans.GetChild (i).GetComponent<SpriteRenderer> ().sprite;
+			partSave.m_curSpriteSheet = playerTrans.GetChild (i).GetComponent<SpriteSheet> ().m_sheet_sprite;
+			partSave.m_part = playerTrans.GetChild (i).GetComponent<Part> ();
+
+			listPartSaveForm.Add (partSave);
+		}
+
+		ES3.Save<List<PartSaveForm>> ("partSaveForm", listPartSaveForm, "core.txt");
+	}
+
+	void LoadCore()
+	{
+		List<PartSaveForm> listPartSaveForm = ES3.Load<List<PartSaveForm>> ("partSaveForm", "core.txt");
+		ObjectFactory objFac = ObjectFactory.getInstance;
+
+		for (int i = 1; i < listPartSaveForm.Count; ++i) {
+			PartSaveForm sf = listPartSaveForm [i];
+			objFac.Create_Part (sf.m_curSprite, sf.m_curSpriteSheet, sf.m_part);
+		}
 	}
 
 	void SaveWorld()
@@ -80,5 +110,12 @@ public class SaveManager : MonoBehaviour {
 
 		GameObject.Find ("PC2DPanTarget").transform.position = GameObject.Find ("Core").transform.position;
 		GameObject.Find ("WorldTool").GetComponent<UIPanel> ().alpha = 0f;
+	}
+
+	public class PartSaveForm
+	{
+		public Sprite m_curSprite;
+		public Sprite[] m_curSpriteSheet;
+		public Part m_part;
 	}
 }
