@@ -14,9 +14,10 @@ namespace ES3Types
 		{
 			var instance = (SaveManager.PartSaveForm)obj;
 
-			writer.WriteProperty<Sprite> ("sprite", instance.m_curSprite);
-			writer.WriteProperty<Sprite[]> ("spriteSheet", instance.m_curSpriteSheet);
 			writer.WriteProperty<Part> ("part", instance.m_part);
+			writer.WriteProperty<string> ("name", instance.m_name);
+			writer.WriteProperty<float> ("rotation", instance.m_fRotation);
+			writer.WriteProperty<float> ("scaleX", instance.m_fScaleX);
 		}
 
 		protected override void ReadObject<T>(ES3Reader reader, object obj)
@@ -26,16 +27,18 @@ namespace ES3Types
 			{
 				switch(propertyName)
 				{
-					case "sprite":
-						instance.m_curSprite = reader.Read<Sprite>();
-						break;
-					case "spriteSheet":
-						instance.m_curSpriteSheet = reader.Read<Sprite[]>();
-						break;
 					case "part":
 						instance.m_part = reader.Read<Part>();
 						break;
-
+					case "name":
+						instance.m_name = reader.Read<string> ();
+						break;
+					case "rotation":
+						instance.m_fRotation = reader.Read<float> ();
+						break;
+					case "scaleX":
+						instance.m_fScaleX = reader.Read<float> ();
+						break;
 					default:
 						reader.Skip();
 						break;

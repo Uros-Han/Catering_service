@@ -131,7 +131,9 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 		LoadingProgress (1f , "Done");
 		yield return new WaitForSeconds (1f);
 		GameObject.Find ("LoadingBar").GetComponent<UIPanel> ().alpha = 0f;
-		
+
+
+		SaveManager.getInstance.LocalSave ();
 	}
 
 	float GenerateNormalRandom(float mean, float stdDev) //평균, 표준편차

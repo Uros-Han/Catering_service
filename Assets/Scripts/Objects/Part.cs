@@ -29,20 +29,26 @@ public class Part : MonoBehaviour {
 	float m_fHandRotater;
 	public GameObject m_objHealthBar;
 
-	public GameObject m_objParentPart;
-	public GameObject m_objLastPart;
+	public GameObject m_objCurParentPart; // used in buff
+	public GameObject m_objLastParentPart; // used in buff
+	public int m_iLastParentPartIdx; //used in buff load data
 
 	Coroutine buffCoroutine;
 
 	public bool m_bNeedToStickHead; // 몸에 달라 붙도록 코딩이 필요한 머리 파츠 ex)동물은 default가 붙어있는상태
 	public bool m_bReverseBody; //조립시 상하좌우 반전해야하는 파츠
 
+	public int m_iEnemyType; // use to cast enemytype
+	public int m_iSaveValue;
+
+	public bool m_bLoadedPart = false;
+
 	void Awake()
 	{
+		m_lstPartBuffed = new List<Part> ();
+		m_lstStrBuff = new List<string> ();
 		m_dicStat = new Dictionary<string, float> ();
 		m_dicStatBuff = new Dictionary<string, float> ();
-		m_lstStrBuff = new List<string> ();
-		m_lstPartBuffed = new List<Part> ();
 
 		if(!m_dicStatBuff.ContainsKey("Health"))
 			m_dicStatBuff.Add ("Health", 0);
@@ -58,16 +64,115 @@ public class Part : MonoBehaviour {
 			m_dicStatBuff.Add ("IQ", 0);
 	}
 
+	public void SetListBuff()
+	{
+		m_lstPartBuffed = new List<Part> ();
+	}
+
 	void Start()
 	{
-		m_fOriginEmissionRate = GetComponent<SpriteParticleEmitter.DynamicEmitter> ().EmissionRate;
-		m_fCurHealth = m_fHealth;
-
-		StartCoroutine (Heal ());
-
 		if (gameObject.name.Equals ("Hand_R")) {
 			m_fHandRotater = 90;
 		}
+
+		if (m_bLoadedPart) {
+			m_bLoadedPart = true;
+
+			gameObject.AddComponent<FSM_Freindly> ();
+			m_fHealth = m_dicStat ["Health"];
+
+			if (m_lstPartBuffed == null) {
+				m_lstPartBuffed = new List<Part> ();
+			}if (m_lstStrBuff == null)
+				m_lstStrBuff = new List<string> ();
+			
+			if (gameObject.name.Contains ("Head")) {
+				m_partType = PART_TYPE.HEAD;
+			}else if (gameObject.name.Contains ("Body")) {
+				m_partType = PART_TYPE.BODY;
+			}else if (gameObject.name.Contains ("Hand")) {
+				m_partType = PART_TYPE.ARM;
+			}else if (gameObject.name.Contains ("Leg")) {
+				m_partType = PART_TYPE.LEG;
+			}
+				
+			if (!m_bEdgePart) {
+				m_headingDirection = DIRECTION.EVERYWHERE;
+			} else {
+				if (m_bEdgePart && gameObject.name != "Head" || m_bReverseBody) {
+					if (transform.localRotation.eulerAngles.z.Equals (0f + m_fHandRotater)) {
+						m_headingDirection = DIRECTION.DOWN;
+					} else if (transform.localRotation.eulerAngles.z.Equals (90f + m_fHandRotater)) {
+						m_headingDirection = DIRECTION.RIGHT;
+					} else if (transform.localRotation.eulerAngles.z.Equals (180f + m_fHandRotater)) {
+						m_headingDirection = DIRECTION.UP;
+					} else if (transform.localRotation.eulerAngles.z.Equals (270f + m_fHandRotater)) {
+						m_headingDirection = DIRECTION.LEFT;
+					}
+
+					if (m_partType.Equals (PART_TYPE.ARM) && transform.localScale.x < 0) {
+						m_headingDirection = DIRECTION.RIGHT;
+					}
+
+				} else {
+					if (transform.localRotation.eulerAngles.z.Equals (0f)) {
+						m_headingDirection = DIRECTION.UP;
+					} else if (transform.localRotation.eulerAngles.z.Equals (90f)) {
+						m_headingDirection = DIRECTION.LEFT;
+					} else if (transform.localRotation.eulerAngles.z.Equals (180f)) {
+						m_headingDirection = DIRECTION.DOWN;
+					} else if (transform.localRotation.eulerAngles.z.Equals (270f)) {
+						m_headingDirection = DIRECTION.RIGHT;
+					}
+				}
+			}
+
+			////////
+			/// 
+
+			m_objLastParentPart = GridMgr.getInstance.FindObj(m_iLastParentPartIdx, GameObject.Find("Player").transform);
+			m_objCurParentPart = m_objLastParentPart;
+			Core core = GameObject.Find ("Core").GetComponent<Core> ();
+
+			if(m_bNeedToStickHead){
+				GetComponent<BoxCollider2D>().offset = new Vector2(0f, 0.04f);
+
+				switch(m_headingDirection){
+				case DIRECTION.LEFT:
+					transform.position = new Vector3(transform.position.x + 0.04f, transform.position.y);
+					break;
+				case DIRECTION.RIGHT:
+					transform.position = new Vector3(transform.position.x - 0.04f, transform.position.y);
+					break;
+				case DIRECTION.DOWN:
+					transform.position = new Vector3(transform.position.x, transform.position.y + 0.04f);
+					break;
+				case DIRECTION.UP:
+					transform.position = new Vector3(transform.position.x, transform.position.y - 0.04f);
+					break;
+				}
+			}
+
+			transform.parent = GameObject.Find("Player").transform;
+			StartCoroutine(Debug_AStarLine());
+
+			if(!m_bEdgePart)
+				transform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
+
+			GetComponent<SpriteSheet>().CheckAround(false);
+			GetComponent<SpriteRenderer>().sortingLayerName = "Objects";
+			GetComponent<ParticleSystemRenderer>().sortingLayerName = "Object_Particle";
+
+			ClearBuffBeforeCheck();
+			GameObject.Find("Player").BroadcastMessage("BuffCheck");
+
+		} else {
+			m_fCurHealth = m_fHealth;
+		}
+
+		m_fOriginEmissionRate = GetComponent<SpriteParticleEmitter.DynamicEmitter> ().EmissionRate;
+
+		StartCoroutine (Heal ());
 
 		if(!m_dicStat.ContainsKey("Health"))
 			m_dicStat.Add ("Health", 0);
@@ -234,7 +339,7 @@ public class Part : MonoBehaviour {
 			{
 				transform.position = mousePosition;
 				curGridIdx = grid.GetGridIdx(transform.position);
-				m_objParentPart = null;
+				m_objCurParentPart = null;
 
 				for(int i = 0 ; i < core.m_StickAvailableSeat.Count; ++i)
 				{
@@ -319,7 +424,7 @@ public class Part : MonoBehaviour {
 							}
 						}
 
-						m_objParentPart = ClosestPart;
+						m_objCurParentPart = ClosestPart;
 					}
 				}
 
@@ -366,7 +471,8 @@ public class Part : MonoBehaviour {
 				{
 					if(core.m_StickAvailableSeat[i].Equals(curGridIdx)) // Stick!!!!!
 					{
-						m_objLastPart = m_objParentPart;
+						m_objLastParentPart = m_objCurParentPart;
+						m_iLastParentPartIdx = grid.GetGridIdx(m_objLastParentPart.transform.position);
 						transform.position = grid.GetPosOfIdx(core.m_StickAvailableSeat[i]);
 						if(m_bNeedToStickHead){
 							GetComponent<BoxCollider2D>().offset = new Vector2(0f, 0.04f);
@@ -433,7 +539,8 @@ public class Part : MonoBehaviour {
 				{
 					if(Morgue.getInstance.GetIdxFromPos(mousePosition) != -1 && !Morgue.getInstance.m_bBodyArr[Morgue.getInstance.GetIdxFromPos(mousePosition)])
 					{
-						m_objLastPart = null;
+						m_objLastParentPart = null;
+						m_iLastParentPartIdx = -1;
 						transform.position = Morgue.getInstance.GetIdxPos(Morgue.getInstance.GetIdxFromPos(mousePosition));
 						bToOrigin = false;
 						transform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
@@ -596,7 +703,7 @@ public class Part : MonoBehaviour {
 		List<GameObject> listBuffIcon = new List<GameObject> ();
 
 		do{
-			if((m_objParentPart != null && m_objParentPart != beforeParentPart) || bStatAdapt)
+			if((m_objCurParentPart != null && m_objCurParentPart != beforeParentPart) || bStatAdapt)
 			{
 				//clear buffs
 				if(!bStatAdapt){
@@ -609,10 +716,10 @@ public class Part : MonoBehaviour {
 
 				int iParentIdx = 0;
 				if(bStatAdapt){
-					if(m_objLastPart != null)
-						iParentIdx = m_objLastPart.GetComponent<Part>().m_iGridIdx;
+					if(m_objLastParentPart != null)
+						iParentIdx = m_objLastParentPart.GetComponent<Part>().m_iGridIdx;
 				}else{
-					iParentIdx = m_objParentPart.GetComponent<Part>().m_iGridIdx;
+					iParentIdx = m_objCurParentPart.GetComponent<Part>().m_iGridIdx;
 				}
 
 				for(int i =0; i < m_lstStrBuff.Count; ++i)
@@ -658,22 +765,24 @@ public class Part : MonoBehaviour {
 						listBuffIcon = BuffCreateAndStatAdapt(bStatAdapt, buffIdx, true);
 					}
 				}
-				Morgue.getInstance.SelectPart(Morgue.getInstance.m_SelectedPart);
-			}else if(m_objParentPart == null && !bStatAdapt){
+				if(BattleSceneMgr.getInstance.m_turnState.Equals(TURN_STATE.NIGHT))
+					Morgue.getInstance.SelectPart(Morgue.getInstance.m_SelectedPart);
+			}else if(m_objCurParentPart == null && !bStatAdapt){
 				for(int i=0; i < listBuffIcon.Count; ++i)
 				{
 					Destroy(listBuffIcon[i].gameObject);
 				}
 				listBuffIcon.Clear ();
+
 				Morgue.getInstance.SelectPart(Morgue.getInstance.m_SelectedPart);
 			}
 
 			if(!bStatAdapt)
-				beforeParentPart = m_objParentPart;
+				beforeParentPart = m_objCurParentPart;
 			
 			yield return null;
 				
-		}while(morgue.m_SelectedPart.Equals(this) && !bStatAdapt);
+		}while(!bStatAdapt && morgue.m_SelectedPart.Equals(this));
 
 		if (!bStatAdapt) {
 			for (int i = 0; i < listBuffIcon.Count; ++i) {
@@ -885,7 +994,7 @@ public class Part : MonoBehaviour {
 		{
 			Part idxPart = buffObjList[j].GetComponent<Part>();
 
-			if(idxPart != this && (!idxPart.m_bEdgePart || (idxPart.m_bEdgePart && idxPart.m_objParentPart == m_objParentPart)))
+			if(idxPart != this && (!idxPart.m_bEdgePart || (idxPart.m_bEdgePart && idxPart.m_objCurParentPart == m_objCurParentPart)))
 			{
 				bool bSkip = false;
 

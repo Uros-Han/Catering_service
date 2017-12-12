@@ -18,18 +18,23 @@ public class GridMgr : Singleton<GridMgr>
 	[Header("World Grid Info")]
 	public int m_iWorldXcount;
 	public int m_iWorldYcount;
+	private Vector2 m_fWorldStartPos;
 	public float m_fXWorldSize;
 	public float m_fYWorldSize;
 
 	[Header("Battle Grid Info")]
 	public int m_iBattleXcount;
 	public int m_iBattleYcount;
+	private Vector2 m_fBattleStartPos;
 	public float m_fXBattleSize;
 	public float m_fYBattleSize;
 
 	void Start()
 	{
 		DontDestroyOnLoad (gameObject);
+
+		m_fBattleStartPos = new Vector2 ( -1 * (m_iBattleXcount * m_fXBattleSize) / 2 , (m_iBattleYcount * m_fYBattleSize) / 2 );
+		m_fWorldStartPos = new Vector2 ( -1 * (m_iWorldXcount * m_fXWorldSize) / 2 , (m_iWorldYcount * m_fYWorldSize) / 2 );
 	}
 
 	void Update()
@@ -120,6 +125,16 @@ public class GridMgr : Singleton<GridMgr>
 			return new Vector3(((float)(m_iGridIdx % m_iXcount) * m_fXsize) + (m_fXsize/2) + m_fStartPos.x, (float)(m_iGridIdx / m_iXcount) * -1 * m_fXsize - (m_fYsize/2) + m_fStartPos.y);
 		else // Know to Want Grid
 			return new Vector3(((float)(m_iIdx % m_iXcount) * m_fXsize) + (m_fXsize/2) + m_fStartPos.x, (float)(m_iIdx / m_iXcount) * -1 * m_fXsize - (m_fYsize/2) + m_fStartPos.y);
+
+		return Vector3.zero;
+	}
+
+	public Vector3 GetPosOfIdx_BattleGrid(int m_iIdx = -1)
+	{
+		if(m_iIdx == -1) // This Grid
+			return new Vector3(((float)(m_iGridIdx % m_iBattleXcount) * m_fXBattleSize) + (m_fXBattleSize/2) + m_fBattleStartPos.x, (float)(m_iGridIdx / m_iBattleXcount) * -1 * m_fXBattleSize - (m_fYBattleSize/2) + m_fBattleStartPos.y);
+		else // Know to Want Grid
+			return new Vector3(((float)(m_iIdx % m_iBattleXcount) * m_fXBattleSize) + (m_fXBattleSize/2) + m_fBattleStartPos.x, (float)(m_iIdx / m_iBattleXcount) * -1 * m_fXBattleSize - (m_fYBattleSize/2) + m_fBattleStartPos.y);
 
 		return Vector3.zero;
 	}

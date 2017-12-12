@@ -154,11 +154,14 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		return obj;
 	}
 
-	public GameObject Create_Part(Sprite curSprite, Sprite[] spriteSheet, Part part)
+	public GameObject Create_Part(Part part, string name, float rotation, float scaleX)
 	{
 		GameObject obj = Instantiate (m_Part) as GameObject;
 		obj.transform.parent = GameObject.Find ("Player").transform;
-		obj.transform.position = GridMgr.getInstance.GetPosOfIdx (part.m_iGridIdx);
+		obj.transform.position = GridMgr.getInstance.GetPosOfIdx_BattleGrid (part.m_iGridIdx);
+		obj.transform.localRotation = Quaternion.AngleAxis (rotation, Vector3.forward);
+		obj.transform.localScale = new Vector3 (scaleX, 1, 1);
+		obj.gameObject.name = name;
 
 		Part cpart = obj.GetComponent<Part> ();
 		System.Reflection.FieldInfo[] fields = cpart.GetType().GetFields(); 
@@ -167,8 +170,44 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 			field.SetValue(cpart, field.GetValue(part));
 		}
 
-		obj.GetComponent<SpriteRenderer> ().sprite = curSprite;
-		obj.GetComponent<SpriteSheet> ().m_sheet_sprite = spriteSheet;
+		cpart.m_bLoadedPart = true;
+		cpart.SetListBuff ();
+
+		switch(part.m_iEnemyType)
+		{
+		case (int)ENEMY_TYPE.CIVILIAN:
+			if (name.Contains ("Head")) {
+				obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_civilian_head [part.m_iSaveValue];
+			} else if (name.Contains ("Body")) {
+				obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_civilian_body [part.m_iSaveValue][0];
+				obj.GetComponent<SpriteSheet> ().m_sheet_sprite = m_sheet_civilian_body [part.m_iSaveValue];
+			} else if (name.Contains ("Hand")) {
+				obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_civilian_arm [part.m_iSaveValue];
+			} else if (name.Contains ("Leg")) {
+				obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_civilian_leg [part.m_iSaveValue];
+			}
+			break;
+
+		case (int)ENEMY_TYPE.HERO:
+			switch (part.m_iSaveValue) { // used to hero index
+			case (int)HERO.WALLACE:
+				if (name.Equals ("Head")) {
+					obj.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite>("Sprites/Sheets/Heroes/Wallace/wallace_head_0");
+				} else if (name.Equals ("Body_0")) {
+					obj.GetComponent<SpriteSheet> ().m_sheet_sprite = Resources.LoadAll<Sprite> ("Sprites/Sheets/Heroes/Wallace/sheet_wallace_body_0");
+					obj.GetComponent<SpriteRenderer> ().sprite = obj.GetComponent<SpriteSheet> ().m_sheet_sprite [0];
+				} else if (name.Equals ("Body_1")) {
+					obj.GetComponent<SpriteSheet> ().m_sheet_sprite = Resources.LoadAll<Sprite> ("Sprites/Sheets/Heroes/Wallace/sheet_wallace_body_1");
+					obj.GetComponent<SpriteRenderer> ().sprite = obj.GetComponent<SpriteSheet> ().m_sheet_sprite [0];
+				} else if (name.Equals ("Leg")) {
+					obj.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite>("Sprites/Sheets/Heroes/Wallace/wallace_legs_0");
+				} else if (name.Equals ("Hand_R")) {
+					obj.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite>("Sprites/Sheets/Heroes/Wallace/wallace_arms_0");
+				}
+				break;
+			}
+			break;
+		}
 
 		return obj;
 	}
@@ -232,16 +271,17 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		obj.transform.localPosition = RandomBornPos (obj);
 
 		switch (iHeroIdx) {
-		case 0:
+		case 0: //wallace
 			GameObject head = obj.transform.Find ("Head").gameObject;
 			Part headPart = head.GetComponent<Part> ();
-			headPart.m_fHealth = Random.Range(15,18);
+			headPart.m_fHealth = Random.Range (15, 18);
 			headPart.m_fCurHealth = fRandom;
 			headPart.m_dicStat.Add ("Health", headPart.m_fHealth);
 			headPart.m_dicStat.Add ("IQ", 100);
 			headPart.m_lstStrBuff.Add ("HeadBuff_2");
-			headPart.m_dicStatBuff["Attack"] = 2;
-			headPart.m_dicStatBuff["AttackSpeed"] = 2;
+			headPart.m_dicStatBuff ["Attack"] = 2;
+			headPart.m_dicStatBuff ["AttackSpeed"] = 2;
+			headPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
 
 			GameObject Upbody = obj.transform.GetChild(1).gameObject;
 			Part UpbodyPart = Upbody.GetComponent<Part> ();
@@ -251,6 +291,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 			UpbodyPart.m_dicStat.Add ("Health", fRandom);
 			fRandom = Random.Range (5,8);
 			UpbodyPart.m_dicStat.Add ("Defense", fRandom);
+			UpbodyPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
 
 			GameObject Downbody = obj.transform.GetChild(2).gameObject;
 			Part DownbodyPart = Downbody.GetComponent<Part> ();
@@ -260,6 +301,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 			DownbodyPart.m_dicStat.Add ("Health", fRandom);
 			fRandom = Random.Range (5,8);
 			DownbodyPart.m_dicStat.Add ("Defense", fRandom);
+			DownbodyPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
 
 			GameObject arm = obj.transform.Find ("Hand_R").gameObject;
 			Part armPart = arm.GetComponent<Part> ();
@@ -272,6 +314,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 			armPart.m_fHealth = fRandom;
 			armPart.m_fCurHealth = fRandom;
 			armPart.m_dicStat.Add ("Health", fRandom);
+			armPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
 
 			GameObject leg = obj.transform.Find ("Leg").gameObject;
 			Part legPart = leg.GetComponent<Part> ();
@@ -283,6 +326,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 			legPart.m_dicStat.Add ("Dodge", fRandomDodge);
 			legPart.m_dicStatBuff["Dodge"] = fRandomDodge;
 			legPart.m_lstStrBuff.Add ("LegBuff");
+			legPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
 			break;
 		}
 
@@ -323,6 +367,8 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		headPart.m_fCurHealth = fRandom;
 		headPart.m_dicStat.Add ("Health", fRandom);
 		headPart.m_dicStat.Add ("IQ", fRandomIQ);
+		headPart.m_iSaveValue = iHeadRandom;
+		headPart.m_iEnemyType = (int)ENEMY_TYPE.CIVILIAN;
 
 		switch (Random.Range(0,3)) {
 		case 0:
@@ -352,116 +398,125 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 //		body.GetComponent<Part> ().m_dicStat = new Dictionary<string, float>();
 
 		fRandom = Random.Range (8,13);
-		body.GetComponent<Part> ().m_fHealth = fRandom;
-		body.GetComponent<Part> ().m_fCurHealth = fRandom;
-		body.GetComponent<Part> ().m_dicStat.Add ("Health", fRandom);
+		Part bodyPart = body.GetComponent<Part> ();
+		bodyPart.m_fHealth = fRandom;
+		bodyPart.m_fCurHealth = fRandom;
+		bodyPart.m_dicStat.Add ("Health", fRandom);
 
 		fRandom = Random.Range (0,3);
-		body.GetComponent<Part> ().m_dicStat.Add ("Defense", fRandom);
+		bodyPart.m_dicStat.Add ("Defense", fRandom);
+		bodyPart.m_iSaveValue = iBodyRandom;
+		bodyPart.m_iEnemyType = (int)ENEMY_TYPE.CIVILIAN;
 
 		//Arms Setting
 		GameObject arm = obj.transform.Find ("Hand_R").gameObject;
+		Part armPart = arm.GetComponent<Part> ();
 		int iArmRandom = Random.Range (0, m_sheet_civilian_arm.Length);
 		arm.GetComponent<SpriteRenderer>().sprite = m_sheet_civilian_arm[iArmRandom];
 		float fSpeedRandom = 0f;
 		switch (iArmRandom) {
 		case 0:
-			arm.GetComponent<Part> ().m_strNameKey = "큰 낫";
+			armPart.m_strNameKey = "큰 낫";
 			fRandom = Random.Range (3, 5);
 			fSpeedRandom = Random.Range (1, 3);
 			Destroy (obj.transform.Find ("Hand_L").gameObject);
-			arm.GetComponent<Part> ().m_bUse32PixelHand = true;
+			armPart.m_bUse32PixelHand = true;
 			break;
 		case 1:
-			arm.GetComponent<Part>().m_strNameKey = "낫";
+			armPart.m_strNameKey = "낫";
 			fRandom = Random.Range (1,3);
 			fSpeedRandom = Random.Range (4, 7);
 			break;
 		case 2:
-			arm.GetComponent<Part>().m_strNameKey = "원형 낫";
+			armPart.m_strNameKey = "원형 낫";
 			fRandom = Random.Range (1,3);
 			fSpeedRandom = Random.Range (4, 7);
 			break;
 		case 3:
-			arm.GetComponent<Part>().m_strNameKey = "도끼";
+			armPart.m_strNameKey = "도끼";
 			fRandom = Random.Range (2,4);
 			fSpeedRandom = Random.Range (2, 5);
 			break;
 		case 4:
-			arm.GetComponent<Part>().m_strNameKey = "곡괭이";
+			armPart.m_strNameKey = "곡괭이";
 			fRandom = Random.Range (2,4);
 			fSpeedRandom = Random.Range (1, 3);
 			Destroy (obj.transform.Find ("Hand_L").gameObject);
-			arm.GetComponent<Part> ().m_bUse32PixelHand = true;
+			armPart.m_bUse32PixelHand = true;
 			break;
 		case 5:
-			arm.GetComponent<Part>().m_strNameKey = "쇠스랑";
+			armPart.m_strNameKey = "쇠스랑";
 			fRandom = Random.Range (1,3);
 			fSpeedRandom = Random.Range (1, 3);
 			Destroy (obj.transform.Find ("Hand_L").gameObject);
-			arm.GetComponent<Part> ().m_bUse32PixelHand = true;
+			armPart.m_bUse32PixelHand = true;
 			break;
 		case 6:
-			arm.GetComponent<Part>().m_strNameKey = "삽";
+			armPart.m_strNameKey = "삽";
 			fRandom = Random.Range (1,3);
 			fSpeedRandom = Random.Range (1, 3);
 			Destroy (obj.transform.Find ("Hand_L").gameObject);
-			arm.GetComponent<Part> ().m_bUse32PixelHand = true;
+			armPart.m_bUse32PixelHand = true;
 			break;
 		case 7:
-			arm.GetComponent<Part>().m_strNameKey = "망치";
+			armPart.m_strNameKey = "망치";
 			fRandom = Random.Range (2,4);
 			fSpeedRandom = Random.Range (2, 5);
 			break;
 		case 8:
-			arm.GetComponent<Part>().m_strNameKey = "식칼";
+			armPart.m_strNameKey = "식칼";
 			fRandom = Random.Range (1,3);
 			fSpeedRandom = Random.Range (4, 7);
 			break;
 		case 9:
-			arm.GetComponent<Part> ().m_strNameKey = "오함마";
+			armPart.m_strNameKey = "오함마";
 			fRandom = Random.Range (3, 5);
 			fSpeedRandom = Random.Range (1, 3);
 			Destroy (obj.transform.Find ("Hand_L").gameObject);
-			arm.GetComponent<Part> ().m_bUse32PixelHand = true;
+			armPart.m_bUse32PixelHand = true;
 			break;
 		}
 
 //		arm.GetComponent<Part> ().m_dicStat = new Dictionary<string, float>();
 
-		arm.GetComponent<Part> ().m_dicStat.Add ("Attack", fRandom);
-		arm.GetComponent<Part> ().m_dicStat.Add ("AttackSpeed", fSpeedRandom);
+		armPart.m_dicStat.Add ("Attack", fRandom);
+		armPart.m_dicStat.Add ("AttackSpeed", fSpeedRandom);
 
 		fRandom = Random.Range (4,7);
-		arm.GetComponent<Part> ().m_fHealth = fRandom;
-		arm.GetComponent<Part> ().m_fCurHealth = fRandom;
-		arm.GetComponent<Part> ().m_dicStat.Add ("Health", fRandom);
+		armPart.m_fHealth = fRandom;
+		armPart.m_fCurHealth = fRandom;
+		armPart.m_dicStat.Add ("Health", fRandom);
+		armPart.m_iSaveValue = iArmRandom;
+		armPart.m_iEnemyType = (int)ENEMY_TYPE.CIVILIAN;
 
 		//Legs Setting
 		float fRandomDodge = 0;
 		GameObject leg = obj.transform.Find ("Leg").gameObject;
+		Part legPart = leg.GetComponent<Part> ();
 		int iLegRandom = Random.Range (0, m_sheet_civilian_leg.Length);
 		leg.GetComponent<SpriteRenderer>().sprite = m_sheet_civilian_leg[iLegRandom];
 		if (iLegRandom < 6) { // normal
-			leg.GetComponent<Part>().m_strNameKey = "시민 다리";
+			legPart.m_strNameKey = "시민 다리";
 			fRandom = Random.Range (5,7);
 			fRandomDodge = Random.Range (3,5);
 		} else { // thin
-			leg.GetComponent<Part>().m_strNameKey = "가녀린 시민 다리";
+			legPart.m_strNameKey = "가녀린 시민 다리";
 			fRandom = Random.Range (3,5);
 			fRandomDodge = Random.Range (1,3);
 		}
 			
 //		leg.GetComponent<Part> ().m_dicStat = new Dictionary<string, float>();
 
-		leg.GetComponent<Part> ().m_fHealth = fRandom;
-		leg.GetComponent<Part> ().m_fCurHealth = fRandom;
-		leg.GetComponent<Part> ().m_dicStat.Add ("Health", fRandom);
-		leg.GetComponent<Part> ().m_dicStat.Add ("Dodge", fRandomDodge);
+		legPart.m_fHealth = fRandom;
+		legPart.m_fCurHealth = fRandom;
+		legPart.m_dicStat.Add ("Health", fRandom);
+		legPart.m_dicStat.Add ("Dodge", fRandomDodge);
 
-		leg.GetComponent<Part> ().m_dicStatBuff["Dodge"] = fRandomDodge;
+		legPart.m_dicStatBuff["Dodge"] = fRandomDodge;
 
-		leg.GetComponent<Part> ().m_lstStrBuff.Add ("LegBuff");
+		legPart.m_lstStrBuff.Add ("LegBuff");
+		legPart.m_iSaveValue = iLegRandom;
+		legPart.m_iEnemyType = (int)ENEMY_TYPE.CIVILIAN;
 
 		return obj;
 	}

@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace ES3Types
 {
@@ -21,7 +22,13 @@ namespace ES3Types
 			writer.WriteProperty<bool> ("use32PixelHand", instance.m_bUse32PixelHand);
 			writer.WriteProperty<float> ("curHealth", instance.m_fCurHealth);
 			writer.WriteProperty<int> ("gridIdx", instance.m_iGridIdx);
-
+			writer.WriteProperty<Dictionary<string, float>> ("dicStat", instance.m_dicStat);
+			writer.WriteProperty<Dictionary<string, float>> ("dicStatBuff", instance.m_dicStatBuff);
+			writer.WriteProperty<int>("enemyType", instance.m_iEnemyType);
+			writer.WriteProperty<int>("saveValue", instance.m_iSaveValue);
+			writer.WriteProperty<string> ("nameKey",instance.m_strNameKey);
+			writer.WriteProperty<List<string>> ("listStrBuff", instance.m_lstStrBuff);
+			writer.WriteProperty<int> ("lastParentPartIdx", instance.m_iLastParentPartIdx);
 		}
 
 		protected override void ReadObject<T>(ES3Reader reader, object obj)
@@ -42,7 +49,7 @@ namespace ES3Types
 					break;
 
 				case "reverseBody":
-					instance.m_bReverseBodyObjectFactory = reader.Read<bool>();
+					instance.m_bReverseBody = reader.Read<bool>();
 					break;
 
 				case "use32PixelHand":
@@ -55,6 +62,34 @@ namespace ES3Types
 
 				case "gridIdx":
 					instance.m_iGridIdx = reader.Read<int>();
+					break;
+
+				case "dicStat":
+					instance.m_dicStat = reader.Read<Dictionary<string, float>>();
+					break;
+
+				case "dicStatBuff":
+					instance.m_dicStatBuff = reader.Read<Dictionary<string, float>>();
+					break;
+
+				case "enemyType":
+					instance.m_iEnemyType = reader.Read<int>();
+					break;
+
+				case "saveValue":
+					instance.m_iSaveValue = reader.Read<int>();
+					break;
+
+				case "nameKey":
+					instance.m_strNameKey = reader.Read<string> ();
+					break;
+
+				case "listStrBuff":
+					instance.m_lstStrBuff = reader.Read<List<string>> ();
+					break;
+
+				case "lastParentPartIdx":
+					instance.m_iLastParentPartIdx = reader.Read<int> ();
 					break;
 
 				default:

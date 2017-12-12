@@ -15,3 +15,5 @@ public enum WORLDICON_TYPE { EMPTY, FARM, RANCH, VILLAGE, CITY, CASTLE, END };
 public enum WORLDTURN_STATE { IDLE, MOVE, END };
 
 public enum WORLD_GEO { GRASS, WATER, END };
+
+public enum HERO { WALLACE, END };

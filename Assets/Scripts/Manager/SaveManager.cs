@@ -26,11 +26,15 @@ public class SaveManager : Singleton<SaveManager> {
 		List<PartSaveForm> listPartSaveForm = new List<PartSaveForm> ();
 
 		Transform playerTrans = GameObject.Find ("Player").transform;
-		for (int i = 1; i < playerTrans.childCount; ++i) {
+		for (int i = 0; i < playerTrans.childCount; ++i) {
+			if (playerTrans.GetChild (i).gameObject.name.Contains ("Core"))
+				continue;
+
 			PartSaveForm partSave = new PartSaveForm();
-			partSave.m_curSprite = playerTrans.GetChild (i).GetComponent<SpriteRenderer> ().sprite;
-			partSave.m_curSpriteSheet = playerTrans.GetChild (i).GetComponent<SpriteSheet> ().m_sheet_sprite;
 			partSave.m_part = playerTrans.GetChild (i).GetComponent<Part> ();
+			partSave.m_name = playerTrans.GetChild (i).gameObject.name;
+			partSave.m_fRotation = playerTrans.GetChild (i).transform.localRotation.eulerAngles.z;
+			partSave.m_fScaleX = playerTrans.GetChild (i).transform.localScale.x;
 
 			listPartSaveForm.Add (partSave);
 		}
@@ -43,9 +47,9 @@ public class SaveManager : Singleton<SaveManager> {
 		List<PartSaveForm> listPartSaveForm = ES3.Load<List<PartSaveForm>> ("partSaveForm", "core.txt");
 		ObjectFactory objFac = ObjectFactory.getInstance;
 
-		for (int i = 1; i < listPartSaveForm.Count; ++i) {
+		for (int i = 0; i < listPartSaveForm.Count; ++i) {
 			PartSaveForm sf = listPartSaveForm [i];
-			objFac.Create_Part (sf.m_curSprite, sf.m_curSpriteSheet, sf.m_part);
+			objFac.Create_Part (sf.m_part, sf.m_name, sf.m_fRotation, sf.m_fScaleX).SetActive(false);
 		}
 	}
 
@@ -114,8 +118,9 @@ public class SaveManager : Singleton<SaveManager> {
 
 	public class PartSaveForm
 	{
-		public Sprite m_curSprite;
-		public Sprite[] m_curSpriteSheet;
 		public Part m_part;
+		public string m_name;
+		public float m_fRotation;
+		public float m_fScaleX;
 	}
 }
