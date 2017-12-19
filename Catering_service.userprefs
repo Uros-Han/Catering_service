@@ -9,7 +9,7 @@
       <File FileName="Assets/Scripts/Header/Enum.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Objects/World/WorldGeo.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Manager/AStar.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Manager/SaveManager.cs" Line="44" Column="1" />
+      <File FileName="Assets/Scripts/Manager/SaveManager.cs" Line="37" Column="73" />
       <File FileName="Assets/ProCamera2D/Code/Extensions/ProCamera2DPanAndZoom.cs" Line="1" Column="1" />
       <File FileName="Assets/ProCamera2D/Code/Extensions/ProCamera2DNumericBoundaries.cs" Line="1" Column="1" />
       <File FileName="Assets/FogOfWar/Scripts/FogOfWar.cs" Line="1" Column="1" />

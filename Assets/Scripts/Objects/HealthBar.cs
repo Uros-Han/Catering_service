@@ -10,11 +10,29 @@ public class HealthBar : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if (!gameObject.name.Equals ("CoreHealthBar"))
+		if (!gameObject.name.Equals ("CoreHealthBar")) {
 			m_Target = GetComponent<UIFollowTarget> ().target;
-		else
-			m_Target = GameObject.Find ("Core").transform;
+
+			m_slider = transform.GetChild(0).GetComponent<UISlider> ();
+
+			if (m_Target.parent.name.Equals ("Enemies"))
+				m_bEnemy = true;
+
+			StartCoroutine (Health ());
+		} else {
+			StartCoroutine (CoreHealthBar ());
+
+		}
 		
+
+	}
+
+	IEnumerator CoreHealthBar()
+	{
+		yield return null;
+
+		m_Target = GameObject.Find ("Core").transform;
+
 		m_slider = transform.GetChild(0).GetComponent<UISlider> ();
 
 		if (m_Target.parent.name.Equals ("Enemies"))
@@ -22,6 +40,7 @@ public class HealthBar : MonoBehaviour {
 
 		StartCoroutine (Health ());
 	}
+
 
 	IEnumerator Health()
 	{

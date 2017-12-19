@@ -127,11 +127,12 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	{
 		GameObject obj = Instantiate (m_WorldIcon) as GameObject;
 		obj.transform.parent = GameObject.Find ("WorldIcons").transform;
+		WorldIcon worldIcon = obj.GetComponent<WorldIcon> ();
 
-		obj.GetComponent<WorldIcon> ().m_iconType = type;
-		obj.GetComponent<WorldIcon>().m_iGridIdx = GridMgr.getInstance.GetGridIdx(pos);
+		worldIcon.m_iconType = type;
+		worldIcon.m_iGridIdx = GridMgr.getInstance.GetGridIdx (pos);
 
-		obj.GetComponent<WorldIcon> ().Init ();
+		worldIcon.Init ();
 
 		return obj;
 	}
@@ -333,7 +334,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		return obj;
 	}
 
-	public GameObject Create_Civilian()
+	public GameObject Create_Civilian(float fProsperity)
 	{
 		GameObject obj;
 		float fRandom = 0f;

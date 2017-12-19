@@ -154,7 +154,7 @@ public class Core : Part {
 			if(m_EatenObject.transform.GetChild(i).GetComponent<SpriteRenderer>().flipX)
 				m_EatenObject.transform.GetChild(i).GetComponent<SpriteRenderer>().flipX = false;
 
-			Morgue.getInstance.AddBody(false,m_EatenObject.transform.GetChild(i).gameObject);
+			morgueTrans.GetComponent<Morgue>().AddBody(false,m_EatenObject.transform.GetChild(i).gameObject);
 			m_EatenObject.transform.GetChild(i).gameObject.GetComponent<Part>().m_objHealthBar = ObjectFactory.getInstance.Create_HealthBar (m_EatenObject.transform.GetChild(i).gameObject);
 		}
 

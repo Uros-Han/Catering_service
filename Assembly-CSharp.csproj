@@ -311,6 +311,7 @@
      <Compile Include="Assets\Scripts\Header\Singleton.cs" />
      <Compile Include="Assets\Scripts\Manager\AStar.cs" />
      <Compile Include="Assets\Scripts\Manager\BattleSceneMgr.cs" />
+     <Compile Include="Assets\Scripts\Manager\BattleSceneSetter.cs" />
      <Compile Include="Assets\Scripts\Manager\DebugLine.cs" />
      <Compile Include="Assets\Scripts\Manager\FIleSystem.cs" />
      <Compile Include="Assets\Scripts\Manager\GameMgr.cs" />
@@ -341,6 +342,7 @@
      <Compile Include="Assets\Scripts\Objects\World\HungerUI.cs" />
      <Compile Include="Assets\Scripts\Objects\World\WorldGeo.cs" />
      <Compile Include="Assets\Scripts\Objects\World\WorldIcon.cs" />
+     <Compile Include="Assets\Scripts\Objects\World\WorldOverView.cs" />
      <Compile Include="Assets\Scripts\UI\ControlTap.cs" />
      <Compile Include="Assets\Scripts\UI\DamageUI.cs" />
      <Compile Include="Assets\Scripts\UI\Main\MainButtons.cs" />

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace ES3Types
 {
@@ -19,6 +20,10 @@ namespace ES3Types
 
 			writer.WriteProperty<int>("iconType", instance.m_iconType);
 			writer.WriteProperty<int>("gridIdx", instance.m_iGridIdx);
+			writer.WriteProperty<float> ("fProsperity", instance.m_fProsperity);
+			writer.WriteProperty<float> ("fPopulation", instance.m_fPopulation);
+			writer.WriteProperty<int> ("iRaided",instance.m_iRaided);
+			writer.WriteProperty<List<int>> ("list_enemyType", instance.m_list_enemyType);
 		}
 
 		protected override void ReadComponent<T>(ES3Reader reader, object obj)
@@ -28,16 +33,32 @@ namespace ES3Types
 			{
 				switch(propertyName)
 				{
-					case "iconType":
+				case "iconType":
 					instance.m_iconType = reader.Read<int>();
 						break;
-					case "gridIdx":
+				case "gridIdx":
 					instance.m_iGridIdx = reader.Read<int>();
 						break;
 
-					default:
-						reader.Skip();
-						break;
+				case "fProsperity":
+					instance.m_fProsperity = reader.Read<float> ();
+					break;
+
+				case "fPopulation":
+					instance.m_fPopulation = reader.Read<float> ();
+					break;
+
+				case "iRaided":
+					instance.m_iRaided = reader.Read<int> ();
+					break;
+
+				case "list_enemyType":
+					instance.m_list_enemyType = reader.Read<List<int>> ();
+					break;
+
+				default:
+					reader.Skip();
+					break;
 				}
 			}
 		}

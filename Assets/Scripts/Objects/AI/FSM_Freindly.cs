@@ -6,7 +6,7 @@ public class FSM_Freindly : FSM {
 
 
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
 		SetState (AI_STATE.IDLE);
 	}
 
@@ -56,6 +56,13 @@ public class FSM_Freindly : FSM {
 
 		do{
 			yield return null;
+
+			if(m_target == null || !m_target.activeInHierarchy)
+			{
+				m_AiState = AI_STATE.IDLE;
+				m_target = null;
+				break;
+			}
 			
 			iTween.RotateTo(gameObject, iTween.Hash("z",-100f,"time", fAttackSpeed * 0.2f));
 			yield return new WaitForSeconds((fAttackSpeed * 0.2f) + (fAttackSpeed * 0.1f));

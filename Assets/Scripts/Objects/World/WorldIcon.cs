@@ -8,9 +8,10 @@ public class WorldIcon : MonoBehaviour {
 	public int m_iconType = 0;
 	public int m_iGridIdx = 0;
 
-	public float m_fProsperity = 100f; // 번영도 -> 장비의 질
-	public float m_fPopulation = 100f; // 인구점수 -> 인구의 수a
+	public float m_fProsperity = 0f; // 번영도 -> 장비의 질 0~100
+	public float m_fPopulation = 0f; // 인구점수 -> 인구의 수a (1 man per 10)
 	public int m_iRaided = 0; // 습격 당한 횟수
+	public List<int> m_list_enemyType;
 
 	bool bIsThisIsland = false;
 

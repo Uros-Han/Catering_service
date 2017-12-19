@@ -19,12 +19,13 @@ public class WorldMapManager : Singleton<WorldMapManager> {
 	void OnEnable()
 	{
 		if (m_bToBattleScene) {	
+			SceneManager.SetActiveScene (SceneManager.GetSceneByName("World"));
+			GridMgr.getInstance.ChgGridInfo ();
+
 			GameObject.Find ("World").BroadcastMessage ("CameBackFromBattleScene");
 			GameObject.Find ("Player").SendMessage ("CameBackFromBattleScene");
 			m_bToBattleScene = false;
-
-			SceneManager.SetActiveScene (SceneManager.GetSceneByName("World"));
-			GridMgr.getInstance.ChgGridInfo ();
+			BattleSceneMgr.getInstance.m_turnState = TURN_STATE.DAY;
 		}
 	}
 

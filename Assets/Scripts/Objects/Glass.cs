@@ -10,14 +10,20 @@ public class Glass : MonoBehaviour {
 
 		if (!bToBlack) {
 			do{
+				if(sprite == null)
+					yield break;
+
 				sprite.color = new Color(sprite.color.r + 0.02f, sprite.color.g + 0.02f, sprite.color.b + 0.02f);
 				yield return null;
-			}while(sprite.color.r < 1f);
+			}while(sprite!=null && sprite.color.r < 1f);
 		} else {
 			do{
+				if(sprite == null)
+					yield break;
+				
 				sprite.color = new Color(sprite.color.r - 0.02f, sprite.color.g - 0.02f, sprite.color.b - 0.02f);
 				yield return null;
-			}while(sprite.color.r > 0f);
+			}while(sprite!=null && sprite.color.r > 0f);
 		}
 	}
 }

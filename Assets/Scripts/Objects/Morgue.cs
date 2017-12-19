@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Morgue : Singleton<Morgue> {
+public class Morgue : MonoBehaviour {
 
 	public bool[] m_bBodyArr; //자리 차지한 시체들 false == empty
 //	public int[] m_iMorgueIdxArr;
@@ -47,6 +47,9 @@ public class Morgue : Singleton<Morgue> {
 	{
 		m_SelectedPart = part;
 		Transform morguePanel = GameObject.Find ("MorguePanel").transform;
+
+		if (m_SelectedPart == null)
+			return;
 
 		morguePanel.Find ("PartName").GetComponent<UILabel> ().text = part.m_strNameKey;  //TODO : Localize
 

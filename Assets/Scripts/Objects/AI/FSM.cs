@@ -63,6 +63,9 @@ public class FSM : MonoBehaviour {
 
 	protected IEnumerator Attack(GameObject target, float fDamage, bool bEnemy)
 	{
+		if(target == null)
+			yield break;
+
 		if (bEnemy) { /// Attack Enemy
 			
 			target.GetComponent<Unit>().m_fCurHealth -= fDamage;

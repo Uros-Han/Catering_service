@@ -14,20 +14,6 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 
 	// Use this for initialization
 	void Start () {
-//		EnemyGenerate ();
-//		StartCoroutine(DayTurn());
-//		StartCoroutine(NightTurn());
-//		StartCoroutine (UserMove (true));
-
-		if (GameMgr.getInstance.m_bAssembleOnly)
-			StartCoroutine (NightTurn ());
-		else {
-			StartCoroutine(DayTurn());
-		}
-
-		GameObject.Find ("Player").GetComponent<Player> ().BattleScene ();
-		UnityEngine.SceneManagement.SceneManager.SetActiveScene (UnityEngine.SceneManagement.SceneManager.GetSceneByName("Battle"));
-		GridMgr.getInstance.ChgGridInfo ();
 	}
 
 	void EnemyGenerate()
@@ -55,11 +41,11 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 		}
 	}
 
-	IEnumerator DayTurn()
+	public IEnumerator DayTurn()
 	{
 		m_iDay += 1;
 
-		LevelGenerator.getInstance.Encount (m_iDay, m_iDay);
+//		LevelGenerator.getInstance.Encount (m_iDay, m_iDay);
 
 		GameObject.Find ("MorgueToggle").GetComponent<UIPanel> ().alpha = 0;
 		BattleSceneMgr.getInstance.m_turnState = TURN_STATE.DAY;
@@ -79,7 +65,7 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 			}
 		}
 		morgueTrans.gameObject.BroadcastMessage("DestroyThis", SendMessageOptions.DontRequireReceiver);
-		Morgue.getInstance.ClearMorgue ();
+		GameObject.Find("Morgue").GetComponent<Morgue>().ClearMorgue ();
 
 		//Clean Buff Icons
 		Transform BuffTrans = GameObject.Find("Buffs").transform;
@@ -88,7 +74,7 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 		}
 	}
 
-	IEnumerator NightTurn()
+	public IEnumerator NightTurn()
 	{
 		if (BattleSceneMgr.getInstance.m_turnState == TURN_STATE.NIGHT)
 			yield break;
@@ -219,30 +205,30 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 			else
 				iTween.MoveTo (morgueTrans.gameObject, iTween.Hash ("x",  0.765f, "y", 0.155f, "time", 0.25f, "easetype", "easeInSine", "islocal", true));
 		} else {
-			Transform WorldTrans = GameObject.Find ("World").transform;
-			for (int i = 0; i < WorldTrans.childCount; ++i) {
-				WorldTrans.GetChild (i).gameObject.SetActive (true);
-			}
-			UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("Battle");
-
-			StartCoroutine(GameObject.Find("glass").GetComponent<Glass>().ToggleColor(false));
-			GameObject.Find ("Player").BroadcastMessage("StopAssemble", SendMessageOptions.DontRequireReceiver);
-
-			for(int i = 0 ; i < grids.transform.childCount; ++i)
-			{
-				grids.transform.GetChild(i).gameObject.SetActive(true);
-				StartCoroutine(grids.transform.GetChild(i).GetComponent<DebugLine>().AlphToggle(false));
-			}
-			StartCoroutine(CamOffset_XChg(false));
-
-			if(!m_bBigSize)
-				iTween.MoveTo (morgueTrans.gameObject, iTween.Hash ("x", 1.5f, "y", 0f, "time", 0.25f, "easetype", "easeInSine","islocal", true));
-			else
-				iTween.MoveTo (morgueTrans.gameObject, iTween.Hash ("x", 1.75f, "y", 0.155f, "time", 0.25f, "easetype", "easeInSine","islocal", true));
-
-			GameObject.Find("PartBorder").GetComponent<SpriteRenderer>().enabled = false;
-
-			StartCoroutine(DayTurn());
+//			Transform WorldTrans = GameObject.Find ("World").transform;
+//			for (int i = 0; i < WorldTrans.childCount; ++i) {
+//				WorldTrans.GetChild (i).gameObject.SetActive (true);
+//			}
+//			UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("Battle");
+//
+//			StartCoroutine(GameObject.Find("glass").GetComponent<Glass>().ToggleColor(false));
+//			GameObject.Find ("Player").BroadcastMessage("StopAssemble", SendMessageOptions.DontRequireReceiver);
+//
+//			for(int i = 0 ; i < grids.transform.childCount; ++i)
+//			{
+//				grids.transform.GetChild(i).gameObject.SetActive(true);
+//				StartCoroutine(grids.transform.GetChild(i).GetComponent<DebugLine>().AlphToggle(false));
+//			}
+//			StartCoroutine(CamOffset_XChg(false));
+//
+//			if(!m_bBigSize)
+//				iTween.MoveTo (morgueTrans.gameObject, iTween.Hash ("x", 1.5f, "y", 0f, "time", 0.25f, "easetype", "easeInSine","islocal", true));
+//			else
+//				iTween.MoveTo (morgueTrans.gameObject, iTween.Hash ("x", 1.75f, "y", 0.155f, "time", 0.25f, "easetype", "easeInSine","islocal", true));
+//
+//			GameObject.Find("PartBorder").GetComponent<SpriteRenderer>().enabled = false;
+//
+//			StartCoroutine(DayTurn());
 		}
 	}
 

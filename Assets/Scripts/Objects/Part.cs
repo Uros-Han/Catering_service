@@ -166,6 +166,8 @@ public class Part : MonoBehaviour {
 			ClearBuffBeforeCheck();
 			GameObject.Find("Player").BroadcastMessage("BuffCheck");
 
+			m_objHealthBar = ObjectFactory.getInstance.Create_HealthBar (gameObject);
+
 		} else {
 			m_fCurHealth = m_fHealth;
 		}
@@ -259,6 +261,7 @@ public class Part : MonoBehaviour {
 		Vector2 mousePosition = Vector2.zero;
 		BoxCollider2D collider2D = GetComponent<BoxCollider2D> ();
 		BoxCollider2D morgueCollider2D = GameObject.Find ("Morgue").GetComponent<BoxCollider2D> ();
+		Morgue morgue = GameObject.Find ("Morgue").GetComponent<Morgue> ();
 
 		bool bWasPoop = false;
 		BoxCollider2D PoopColldier2D = GameObject.Find ("Poop").GetComponent<BoxCollider2D> ();
@@ -297,7 +300,7 @@ public class Part : MonoBehaviour {
 				if (!gameObject.name.Equals ("Core"))
 					bFollowCursor = true;
 
-				Morgue.getInstance.SelectPart(this);
+				morgue.SelectPart(this);
 				if(m_lstStrBuff.Count > 0 && buffCoroutine == null)
 				{
 					buffCoroutine = StartCoroutine(Buff());
@@ -430,9 +433,9 @@ public class Part : MonoBehaviour {
 
 				if(morgueCollider2D.OverlapPoint(mousePosition)) // get in morgue
 				{
-					if(Morgue.getInstance.GetIdxFromPos(mousePosition) != -1 && !Morgue.getInstance.m_bBodyArr[Morgue.getInstance.GetIdxFromPos(mousePosition)])
+					if(morgue.GetIdxFromPos(mousePosition) != -1 && !morgue.m_bBodyArr[morgue.GetIdxFromPos(mousePosition)])
 					{
-						transform.position = Morgue.getInstance.GetIdxPos(Morgue.getInstance.GetIdxFromPos(mousePosition));
+						transform.position = morgue.GetIdxPos(morgue.GetIdxFromPos(mousePosition));
 						iTween.RotateTo(gameObject, iTween.Hash ("z", 0f, "time", 0.2f));
 					}
 				}
@@ -517,7 +520,7 @@ public class Part : MonoBehaviour {
 
 							transform.parent.BroadcastMessage("AmI_InCoreSide");
 						}else{
-							Morgue.getInstance.RemoveBody(OriginPos);
+							morgue.RemoveBody(OriginPos);
 						}
 
 						GetComponent<SpriteSheet>().CheckAround(false);
@@ -537,16 +540,16 @@ public class Part : MonoBehaviour {
 
 				if(morgueCollider2D.OverlapPoint(mousePosition)) // get in morgue
 				{
-					if(Morgue.getInstance.GetIdxFromPos(mousePosition) != -1 && !Morgue.getInstance.m_bBodyArr[Morgue.getInstance.GetIdxFromPos(mousePosition)])
+					if(morgue.GetIdxFromPos(mousePosition) != -1 && !morgue.m_bBodyArr[morgue.GetIdxFromPos(mousePosition)])
 					{
 						m_objLastParentPart = null;
 						m_iLastParentPartIdx = -1;
-						transform.position = Morgue.getInstance.GetIdxPos(Morgue.getInstance.GetIdxFromPos(mousePosition));
+						transform.position = morgue.GetIdxPos(morgue.GetIdxFromPos(mousePosition));
 						bToOrigin = false;
 						transform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
 
 						if(!bParentWasCore)
-							Morgue.getInstance.RemoveBody(OriginPos);
+							morgue.RemoveBody(OriginPos);
 						else{
 							GetComponent<SpriteSheet>().CheckAround(false, iBeforeSeatIdx);
 							iBeforeSeatIdx = -1;
@@ -555,7 +558,7 @@ public class Part : MonoBehaviour {
 							GameObject.Find("Player").BroadcastMessage("AmI_InCoreSide");
 						}
 
-						Morgue.getInstance.AddBody(true, gameObject, curGridIdx);
+						morgue.AddBody(true, gameObject, curGridIdx);
 
 						GetComponent<SpriteRenderer>().sortingLayerName = "DeadBodies";
 						GetComponent<ParticleSystemRenderer>().sortingLayerName = "DeadBodies_Particle";
@@ -572,8 +575,8 @@ public class Part : MonoBehaviour {
 
 				if(PoopColldier2D.OverlapPoint(mousePosition)) // get in poop
 				{
-					Morgue.getInstance.DeselectPart();
-					Morgue.getInstance.RemoveBody(OriginPos);
+					morgue.DeselectPart();
+					morgue.RemoveBody(OriginPos);
 					core.CalculateStickableSeat (false);
 					if(m_objHealthBar != null)
 						Destroy(m_objHealthBar);
@@ -695,7 +698,7 @@ public class Part : MonoBehaviour {
 
 	public IEnumerator Buff(bool bStatAdapt = false)
 	{
-		Morgue morgue = Morgue.getInstance;
+		Morgue morgue = GameObject.Find("Morgue").GetComponent<Morgue>();
 		Vector2 mousePosition = Vector2.zero;
 		BoxCollider2D collider2D = GetComponent<BoxCollider2D> ();
 		GameObject beforeParentPart = null;
@@ -766,7 +769,7 @@ public class Part : MonoBehaviour {
 					}
 				}
 				if(BattleSceneMgr.getInstance.m_turnState.Equals(TURN_STATE.NIGHT))
-					Morgue.getInstance.SelectPart(Morgue.getInstance.m_SelectedPart);
+					morgue.SelectPart(morgue.m_SelectedPart);
 			}else if(m_objCurParentPart == null && !bStatAdapt){
 				for(int i=0; i < listBuffIcon.Count; ++i)
 				{
@@ -774,7 +777,7 @@ public class Part : MonoBehaviour {
 				}
 				listBuffIcon.Clear ();
 
-				Morgue.getInstance.SelectPart(Morgue.getInstance.m_SelectedPart);
+				morgue.SelectPart(morgue.m_SelectedPart);
 			}
 
 			if(!bStatAdapt)

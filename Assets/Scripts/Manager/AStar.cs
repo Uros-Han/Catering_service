@@ -586,35 +586,15 @@ public class AStar : Singleton<AStar>
 
 		ParentNode = MakeParent();
 
-		//		fStartGCost = ParentNode.fGCost + 0.3f;
-
 		Node objNode = null;
 
-		//		fClosestNodeInDest_GCost = ParentNode.fGCost;
-		//		iClosestNodeInDest_Idx = m_iStartIndex;
-
-		List<int> iAroundIdxList = new List<int> ();
-		List<GameObject> objAroundObj = new List<GameObject> ();
 		GridMgr grid = GridMgr.getInstance;
 
 		while (true)
 		{
-			//주변 타일 오브젝트 미리 가지고있기 
-//			int iIdx = ParentNode.iIndex;
-//			iAroundIdxList.Clear ();
-//
-//			iAroundIdxList.Add (iIdx + grid.m_iXcount);
-//			iAroundIdxList.Add (iIdx - grid.m_iXcount);
-//			iAroundIdxList.Add (iIdx + 1);
-//			iAroundIdxList.Add (iIdx - 1);
-//			iAroundIdxList.Add (iIdx - grid.m_iXcount - 1);
-//			iAroundIdxList.Add (iIdx - grid.m_iXcount + 1);
-//			iAroundIdxList.Add (iIdx + grid.m_iXcount - 1);
-//			iAroundIdxList.Add (iIdx + grid.m_iXcount + 1);
-//
-//			objAroundObj = grid.FindObjAsList (iAroundIdxList, GameObject.Find ("WorldIcons").transform);
-
 			Transform geoTransform = GameObject.Find ("Geo").transform;
+
+			Debug.Log (ParentNode.iIndex);
 
 			// 위
 			if (ParentNode.iIndex >= m_iTileCountX

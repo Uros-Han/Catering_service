@@ -52,11 +52,13 @@ public class Core_World : MonoBehaviour {
 					m_iDestinationIdx = grid.m_iGridIdx;
 					DrawPath();
 
-					if(m_listMoveIdx.Count != 0)
+					if(m_listMoveIdx.Count != 0) // Select WorldIcon
 					{
 						GameObject Dest = GameObject.Find("Destination").gameObject;
 						Dest.GetComponent<SpriteRenderer>().enabled = true;
 						Dest.transform.position = grid.GetPosOfIdx(grid.GetGridIdx(vecMouseClickedPos));
+
+						WorldOverView.getInstance.SelectWorldIcon(GameObject.Find("Geo").transform.GetChild(grid.m_iGridIdx).GetComponent<WorldGeo>());
 
 						bOverviewOn = true;
 						iTween.MoveTo(GameObject.Find("WorldOverview").transform.GetChild(0).gameObject, iTween.Hash("x", -150f, "time", 0.5f,"isLocal", true,  "easetype", "easeInSine"));

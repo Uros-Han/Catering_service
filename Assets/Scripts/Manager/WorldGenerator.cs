@@ -6,6 +6,7 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 	GridMgr grid;
 	Transform m_geoTrans;
 
+
 	// Use this for initialization
 	void Start () {
 		grid = GridMgr.getInstance;
@@ -109,23 +110,35 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 		Transform icons = GameObject.Find ("WorldIcons").transform;
 		for (int i = 0; i < icons.childCount; ++i) {
 			icons.GetChild (i).SendMessage ("CheckAroundAmIAlone");
-			if (i % 100 == 0) {
-				float fProgress = 0.5f + ((float)i / (float)icons.childCount * 0.3f);
+			if (i % 10 == 0) {
+				float fProgress = 0.5f + ((float)i / (float)icons.childCount * 0.2f);
 				LoadingProgress (fProgress, string.Format ("Check Unreachable Islands ({0}/{1})", i, icons.childCount));
 				yield return new WaitForSeconds (0.001f);
 			}
 		}
 
-		LoadingProgress (0.8f, "Destorying Unreachable Islands");
+		LoadingProgress (0.7f, "Destorying Unreachable Islands");
 		icons.BroadcastMessage("DestroyIfIsland");
 		yield return new WaitForSeconds (0.5f);
 
+		LoadingProgress (0.8f, "Pumping Ocean");
 		FloodFill (0,0,WORLD_GEO.WATER);
 		FloodFill (grid.m_iXcount-1,0,WORLD_GEO.WATER);
 		FloodFill (0,grid.m_iYcount-1,WORLD_GEO.WATER);
 		FloodFill (grid.m_iXcount-1,grid.m_iYcount-1,WORLD_GEO.WATER);
-		LoadingProgress (0.9f, "Pumping Ocean");
 		yield return new WaitForSeconds (0.5f);
+
+		for(int i =0; i < icons.childCount; ++i)
+		{
+			int iIdx = grid.GetGridIdx (icons.GetChild (i).position);
+			WorldIcon icon = icons.GetChild (i).GetComponent<WorldIcon> ();
+			SetWorldPropertyAndPopulation (iIdx, icon, (WORLDICON_TYPE)icon.m_iconType);
+			if (i % 100 == 0) {
+				float fProgress = 0.8f + ((float)i / (float)icons.childCount * 0.1f);
+				LoadingProgress (fProgress, string.Format ("Set World Property & Population ({0}/{1})", i, icons.childCount));
+				yield return new WaitForSeconds (0.001f);
+			}
+		}
 
 
 		LoadingProgress (1f , "Done");
@@ -150,6 +163,48 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 	public void LoadingProgress(float fProgress, string strLabel){
 		GameObject.Find ("progress").GetComponent<UISlider> ().value = fProgress;
 		GameObject.Find ("ProgressLabel").GetComponent<UILabel> ().text = strLabel;
+	}
+
+	void SetWorldPropertyAndPopulation(int iGridIdx, WorldIcon worldIcon, WORLDICON_TYPE type)
+	{
+		if (type.Equals (WORLDICON_TYPE.EMPTY)) {
+			return;
+		}
+
+		worldIcon.m_iGridIdx = iGridIdx;
+
+		int iDistanceWithCore = AStar.getInstance.AStarStart_World (iGridIdx, GridMgr.getInstance.GetGridIdx (GameObject.Find ("Core").transform.position)).Count;
+
+		if (iDistanceWithCore < 3) {
+			worldIcon.m_fProsperity = GenerateNormalRandom (20f, 10f);
+			worldIcon.m_fPopulation = GenerateNormalRandom (20f, 10f);
+		}else{
+			worldIcon.m_fProsperity = Random.Range (40, 80f);
+			switch(type)
+			{
+			case WORLDICON_TYPE.FARM:
+				worldIcon.m_fPopulation = GenerateNormalRandom (50f, 10f);
+				break;
+			case WORLDICON_TYPE.RANCH:
+				worldIcon.m_fPopulation = GenerateNormalRandom (50f, 10f);
+				break;
+			case WORLDICON_TYPE.VILLAGE:
+				worldIcon.m_fPopulation = GenerateNormalRandom (100f, 50f);
+				break;
+			case WORLDICON_TYPE.CITY:
+				worldIcon.m_fPopulation = GenerateNormalRandom (150f, 50f);
+				break;
+			case WORLDICON_TYPE.CASTLE:
+				worldIcon.m_fPopulation = GenerateNormalRandom (250f, 50f);
+				break;
+
+			default:
+				Debug.LogError ("Fuck you unknown wordld icon type");
+				break;
+			}
+		}
+
+		worldIcon.m_list_enemyType = LevelGenerator.getInstance.DeployEnemyList (worldIcon.m_fPopulation, type);
 	}
 		
 	void FloodFill(int iX, int iY, WORLD_GEO geoTarget)

@@ -4,23 +4,16 @@ using UnityEngine;
 
 public class LevelGenerator : Singleton<LevelGenerator> {
 
-	int[] m_iTypeCost; // Cost per type
-	int[] m_iTypeDay; // 타입별로 최초 등장 권장하는 날짜
+	float[] m_fTypeCost; // Cost per type
 
 	void Awake()
 	{
-		m_iTypeCost = new int[(int)ENEMY_TYPE.END - 1];
-		m_iTypeDay = new int[(int)ENEMY_TYPE.END - 1];
+		m_fTypeCost = new float[(int)ENEMY_TYPE.END - 1];
 
-		m_iTypeCost[(int)ENEMY_TYPE.LIVESTOCK] = 1;
-		m_iTypeCost[(int)ENEMY_TYPE.CIVILIAN] = 4;
-		m_iTypeCost[(int)ENEMY_TYPE.MERCENARY] = 10;
-		m_iTypeCost[(int)ENEMY_TYPE.KNIGHT] = 20;
-
-		m_iTypeDay [(int)ENEMY_TYPE.LIVESTOCK] = 1;
-		m_iTypeDay [(int)ENEMY_TYPE.CIVILIAN] = 4;
-		m_iTypeDay [(int)ENEMY_TYPE.MERCENARY] = 14;
-		m_iTypeDay [(int)ENEMY_TYPE.KNIGHT] = 28;
+		m_fTypeCost[(int)ENEMY_TYPE.LIVESTOCK] = 10f;
+		m_fTypeCost[(int)ENEMY_TYPE.CIVILIAN] = 10f;
+		m_fTypeCost[(int)ENEMY_TYPE.MERCENARY] = 10f;
+		m_fTypeCost[(int)ENEMY_TYPE.KNIGHT] = 10f;
 	}
 
 	void Generate(ENEMY_TYPE enemyType, int iHeroIdx = 0) //적 타입에 맞게 적을 생성해준다.
@@ -32,7 +25,7 @@ public class LevelGenerator : Singleton<LevelGenerator> {
 			break;
 
 		case ENEMY_TYPE.CIVILIAN:
-			ObjectFactory.getInstance.Create_Civilian();
+			ObjectFactory.getInstance.Create_Civilian(100f);
 			break;
 
 		case ENEMY_TYPE.MERCENARY:
@@ -47,49 +40,109 @@ public class LevelGenerator : Singleton<LevelGenerator> {
 		}
 	}
 
-	public void Encount(int iCost, int iDay) //코스트와 날짜에 맞는 적타입을 리스트로 뽑아준다.
+//	public void Encount(int iCost, int iDay) //코스트와 날짜에 맞는 적타입을 리스트로 뽑아준다.
+//	{
+//		List<ENEMY_TYPE> list_enemyType = new List<ENEMY_TYPE> ();
+//
+//		float fAdjustProbabilty = 0f;
+//		bool bDidntChoiced = true;
+//		bool bHeroContained = false;
+//
+//		while(iCost > 0)
+//		{
+//			bDidntChoiced = true;
+//
+//			if(iCost >= m_iTypeCost[(int)ENEMY_TYPE.LIVESTOCK] && Random.Range(0f, 1f) < CalculateProbablity(ENEMY_TYPE.LIVESTOCK, iDay) + fAdjustProbabilty){
+//				bDidntChoiced = false;
+//				list_enemyType.Add(ENEMY_TYPE.LIVESTOCK);
+//				iCost -= m_iTypeCost[(int)ENEMY_TYPE.LIVESTOCK];
+//			}else if(iCost >= m_iTypeCost[(int)ENEMY_TYPE.CIVILIAN] && Random.Range(0f, 1f) < CalculateProbablity(ENEMY_TYPE.CIVILIAN, iDay) + fAdjustProbabilty){
+//				bDidntChoiced = false;
+//				list_enemyType.Add(ENEMY_TYPE.CIVILIAN);
+//				iCost -= m_iTypeCost[(int)ENEMY_TYPE.CIVILIAN];
+//			}else if(iCost >= m_iTypeCost[(int)ENEMY_TYPE.MERCENARY] && Random.Range(0f, 1f) < CalculateProbablity(ENEMY_TYPE.MERCENARY, iDay) + fAdjustProbabilty){
+//				bDidntChoiced = false;
+//				list_enemyType.Add(ENEMY_TYPE.MERCENARY);
+//				iCost -= m_iTypeCost[(int)ENEMY_TYPE.MERCENARY];
+//			}else if(iCost >= m_iTypeCost[(int)ENEMY_TYPE.KNIGHT]){
+//				bDidntChoiced = false;
+//				list_enemyType.Add(ENEMY_TYPE.KNIGHT);
+//				iCost -= m_iTypeCost[(int)ENEMY_TYPE.KNIGHT];
+//			}
+//
+//			if(bDidntChoiced)
+//			{
+//				fAdjustProbabilty += 0.02f;
+//			}
+//		}
+//
+//		if (iDay % 10 == 0) {
+//			list_enemyType.Add(ENEMY_TYPE.HERO);
+//			bHeroContained = true;
+//		}
+//
+//		StartCoroutine (GenerateQueue (list_enemyType, iDay));
+//
+//	}
+
+	public List<int> DeployEnemyList(float fPopulation, WORLDICON_TYPE world_type) //번영도와 인구수에 맞는 적을 리스트로 뽑아준다. (번영도는 적 생성시 적용)
 	{
-		List<ENEMY_TYPE> list_enemyType = new List<ENEMY_TYPE> ();
+		List<int> list_enemyType = new List<int> ();
 
-		float fAdjustProbabilty = 0f;
-		bool bDidntChoiced = true;
 		bool bHeroContained = false;
+		float fRandom = 0f;
 
-		while(iCost > 0)
+		while(fPopulation > 0)
 		{
-			bDidntChoiced = true;
+			switch (world_type) {
+			case WORLDICON_TYPE.FARM:
+				list_enemyType.Add ((int)ENEMY_TYPE.CIVILIAN);
+				fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.CIVILIAN];
+				break;
+			case WORLDICON_TYPE.RANCH:
+				fRandom = Random.Range (0f, 100f);
 
-			if(iCost >= m_iTypeCost[(int)ENEMY_TYPE.LIVESTOCK] && Random.Range(0f, 1f) < CalculateProbablity(ENEMY_TYPE.LIVESTOCK, iDay) + fAdjustProbabilty){
-				bDidntChoiced = false;
-				list_enemyType.Add(ENEMY_TYPE.LIVESTOCK);
-				iCost -= m_iTypeCost[(int)ENEMY_TYPE.LIVESTOCK];
-			}else if(iCost >= m_iTypeCost[(int)ENEMY_TYPE.CIVILIAN] && Random.Range(0f, 1f) < CalculateProbablity(ENEMY_TYPE.CIVILIAN, iDay) + fAdjustProbabilty){
-				bDidntChoiced = false;
-				list_enemyType.Add(ENEMY_TYPE.CIVILIAN);
-				iCost -= m_iTypeCost[(int)ENEMY_TYPE.CIVILIAN];
-			}else if(iCost >= m_iTypeCost[(int)ENEMY_TYPE.MERCENARY] && Random.Range(0f, 1f) < CalculateProbablity(ENEMY_TYPE.MERCENARY, iDay) + fAdjustProbabilty){
-				bDidntChoiced = false;
-				list_enemyType.Add(ENEMY_TYPE.MERCENARY);
-				iCost -= m_iTypeCost[(int)ENEMY_TYPE.MERCENARY];
-			}else if(iCost >= m_iTypeCost[(int)ENEMY_TYPE.KNIGHT]){
-				bDidntChoiced = false;
-				list_enemyType.Add(ENEMY_TYPE.KNIGHT);
-				iCost -= m_iTypeCost[(int)ENEMY_TYPE.KNIGHT];
-			}
+				if (fRandom < 70) {
+					list_enemyType.Add ((int)ENEMY_TYPE.LIVESTOCK);
+					fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.LIVESTOCK];
+				} else {
+					list_enemyType.Add ((int)ENEMY_TYPE.CIVILIAN);
+					fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.CIVILIAN];
+				}
+				break;
+			case WORLDICON_TYPE.VILLAGE:
+				fRandom = Random.Range (0f, 100f);
 
-			if(bDidntChoiced)
-			{
-				fAdjustProbabilty += 0.02f;
+				if (fRandom < 70) {
+					list_enemyType.Add ((int)ENEMY_TYPE.MERCENARY);
+					fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.MERCENARY];
+				} else {
+					list_enemyType.Add ((int)ENEMY_TYPE.CIVILIAN);
+					fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.CIVILIAN];
+				}
+				break;
+			case WORLDICON_TYPE.CITY:
+				fRandom = Random.Range (0f, 100f);
+
+				if (fRandom < 50) {
+					list_enemyType.Add ((int)ENEMY_TYPE.KNIGHT);
+					fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.KNIGHT];
+				} else if (fRandom < 80) {
+					list_enemyType.Add ((int)ENEMY_TYPE.MERCENARY);
+					fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.MERCENARY];
+				} else {
+					list_enemyType.Add ((int)ENEMY_TYPE.CIVILIAN);
+					fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.CIVILIAN];
+				}
+				break;
+			case WORLDICON_TYPE.CASTLE:
+				list_enemyType.Add ((int)ENEMY_TYPE.KNIGHT);
+				fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.KNIGHT];
+				break;
 			}
 		}
 
-		if (iDay % 10 == 0) {
-			list_enemyType.Add(ENEMY_TYPE.HERO);
-			bHeroContained = true;
-		}
-
-		StartCoroutine (GenerateQueue (list_enemyType, iDay));
-
+		return list_enemyType;
 	}
 
 	IEnumerator GenerateQueue(List<ENEMY_TYPE> list_enemyType, int iDay)
@@ -102,20 +155,6 @@ public class LevelGenerator : Singleton<LevelGenerator> {
 
 			yield return new WaitForSeconds(0.5f);
 		}
-	}
-
-	float CalculateProbablity(ENEMY_TYPE enemyType, int iDay)
-	{
-		if(iDay < m_iTypeDay[(int)enemyType + 1])
-			return 1f;
-		else if(iDay == m_iTypeDay[(int)enemyType + 1])
-			return 0.75f;
-		else if(iDay == m_iTypeDay[(int)enemyType + 1] + 1)
-			return 0.5f;
-		else if(iDay == m_iTypeDay[(int)enemyType + 1] + 2)
-			return 0.25f;
-		else
-			return 0f;
 	}
 }
 
