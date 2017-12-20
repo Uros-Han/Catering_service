@@ -472,7 +472,7 @@ public static class ES3
 			throw new System.Exception(www.error);
 
 		#if UNITY_5_6_OR_NEWER
-		return WWWAudioExtensions.GetAudioClip(www);
+		return www.GetAudioClip(false, false, AudioType.OGGVORBIS);
 		#else
 		return www.audioClip;
 		#endif

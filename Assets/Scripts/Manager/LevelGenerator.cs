@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class LevelGenerator : Singleton<LevelGenerator> {
 
-	float[] m_fTypeCost; // Cost per type
-
-	void Awake()
-	{
-		m_fTypeCost = new float[(int)ENEMY_TYPE.END - 1];
-
-		m_fTypeCost[(int)ENEMY_TYPE.LIVESTOCK] = 10f;
-		m_fTypeCost[(int)ENEMY_TYPE.CIVILIAN] = 10f;
-		m_fTypeCost[(int)ENEMY_TYPE.MERCENARY] = 10f;
-		m_fTypeCost[(int)ENEMY_TYPE.KNIGHT] = 10f;
-	}
-
 	void Generate(ENEMY_TYPE enemyType, int iHeroIdx = 0) //적 타입에 맞게 적을 생성해준다.
 	{
 		switch(enemyType)
@@ -85,73 +73,27 @@ public class LevelGenerator : Singleton<LevelGenerator> {
 //
 //	}
 
-	public List<int> DeployEnemyList(float fPopulation, WORLDICON_TYPE world_type) //번영도와 인구수에 맞는 적을 리스트로 뽑아준다. (번영도는 적 생성시 적용)
+	public void Encount()
 	{
-		List<int> list_enemyType = new List<int> ();
+		List<int> iEnemyList = new List<int> ();
+		List<ENEMY_TYPE> enemyList = new List<ENEMY_TYPE> ();
 
-		bool bHeroContained = false;
-		float fRandom = 0f;
-
-		while(fPopulation > 0)
-		{
-			switch (world_type) {
-			case WORLDICON_TYPE.FARM:
-				list_enemyType.Add ((int)ENEMY_TYPE.CIVILIAN);
-				fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.CIVILIAN];
-				break;
-			case WORLDICON_TYPE.RANCH:
-				fRandom = Random.Range (0f, 100f);
-
-				if (fRandom < 70) {
-					list_enemyType.Add ((int)ENEMY_TYPE.LIVESTOCK);
-					fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.LIVESTOCK];
-				} else {
-					list_enemyType.Add ((int)ENEMY_TYPE.CIVILIAN);
-					fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.CIVILIAN];
-				}
-				break;
-			case WORLDICON_TYPE.VILLAGE:
-				fRandom = Random.Range (0f, 100f);
-
-				if (fRandom < 70) {
-					list_enemyType.Add ((int)ENEMY_TYPE.MERCENARY);
-					fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.MERCENARY];
-				} else {
-					list_enemyType.Add ((int)ENEMY_TYPE.CIVILIAN);
-					fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.CIVILIAN];
-				}
-				break;
-			case WORLDICON_TYPE.CITY:
-				fRandom = Random.Range (0f, 100f);
-
-				if (fRandom < 50) {
-					list_enemyType.Add ((int)ENEMY_TYPE.KNIGHT);
-					fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.KNIGHT];
-				} else if (fRandom < 80) {
-					list_enemyType.Add ((int)ENEMY_TYPE.MERCENARY);
-					fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.MERCENARY];
-				} else {
-					list_enemyType.Add ((int)ENEMY_TYPE.CIVILIAN);
-					fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.CIVILIAN];
-				}
-				break;
-			case WORLDICON_TYPE.CASTLE:
-				list_enemyType.Add ((int)ENEMY_TYPE.KNIGHT);
-				fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.KNIGHT];
-				break;
-			}
+		iEnemyList = GameMgr.getInstance.m_ilistCurEnemyList;
+		for (int i = 0; i < iEnemyList.Count; ++i) {
+			enemyList.Add ((ENEMY_TYPE)iEnemyList [i]);
 		}
 
-		return list_enemyType;
+		StartCoroutine (GenerateQueue (enemyList));
 	}
 
-	IEnumerator GenerateQueue(List<ENEMY_TYPE> list_enemyType, int iDay)
+
+	IEnumerator GenerateQueue(List<ENEMY_TYPE> list_enemyType/*, int iDay*/)
 	{
 		for (int i=0; i<list_enemyType.Count; ++i) {
 			if(list_enemyType[i] != ENEMY_TYPE.HERO)
 				Generate(list_enemyType[i]);
-			else
-				Generate(list_enemyType[i], iDay/10 - 1);
+//			else
+//				Generate(list_enemyType[i], iDay/10 - 1);
 
 			yield return new WaitForSeconds(0.5f);
 		}

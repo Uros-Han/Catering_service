@@ -6,6 +6,23 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 	GridMgr grid;
 	Transform m_geoTrans;
 
+	public float m_fFarmPopulationStandard = 50f;
+	public float m_fRanchPopulationStandard = 50f;
+	public float m_fVillagePopulationStandard = 100f;
+	public float m_fCityPopulationStandard = 150f;
+	public float m_fCastlePopulationStandard = 250f;
+
+	float[] m_fTypeCost; // Cost per type
+
+	void Awake()
+	{
+		m_fTypeCost = new float[(int)ENEMY_TYPE.END - 1];
+
+		m_fTypeCost[(int)ENEMY_TYPE.LIVESTOCK] = 10f;
+		m_fTypeCost[(int)ENEMY_TYPE.CIVILIAN] = 10f;
+		m_fTypeCost[(int)ENEMY_TYPE.MERCENARY] = 10f;
+		m_fTypeCost[(int)ENEMY_TYPE.KNIGHT] = 10f;
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -165,6 +182,66 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 		GameObject.Find ("ProgressLabel").GetComponent<UILabel> ().text = strLabel;
 	}
 
+	public List<int> DeployEnemyList(float fPopulation, WORLDICON_TYPE world_type) //번영도와 인구수에 맞는 적을 리스트로 뽑아준다. (번영도는 적 생성시 적용)
+	{
+		List<int> list_enemyType = new List<int> ();
+
+		bool bHeroContained = false;
+		float fRandom = 0f;
+
+		while(fPopulation > 0)
+		{
+			switch (world_type) {
+			case WORLDICON_TYPE.FARM:
+				list_enemyType.Add ((int)ENEMY_TYPE.CIVILIAN);
+				fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.CIVILIAN];
+				break;
+			case WORLDICON_TYPE.RANCH:
+				fRandom = Random.Range (0f, 100f);
+
+				if (fRandom < 70) {
+					list_enemyType.Add ((int)ENEMY_TYPE.LIVESTOCK);
+					fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.LIVESTOCK];
+				} else {
+					list_enemyType.Add ((int)ENEMY_TYPE.CIVILIAN);
+					fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.CIVILIAN];
+				}
+				break;
+			case WORLDICON_TYPE.VILLAGE:
+				fRandom = Random.Range (0f, 100f);
+
+				if (fRandom < 70) {
+					list_enemyType.Add ((int)ENEMY_TYPE.MERCENARY);
+					fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.MERCENARY];
+				} else {
+					list_enemyType.Add ((int)ENEMY_TYPE.CIVILIAN);
+					fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.CIVILIAN];
+				}
+				break;
+			case WORLDICON_TYPE.CITY:
+				fRandom = Random.Range (0f, 100f);
+
+				if (fRandom < 50) {
+					list_enemyType.Add ((int)ENEMY_TYPE.KNIGHT);
+					fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.KNIGHT];
+				} else if (fRandom < 80) {
+					list_enemyType.Add ((int)ENEMY_TYPE.MERCENARY);
+					fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.MERCENARY];
+				} else {
+					list_enemyType.Add ((int)ENEMY_TYPE.CIVILIAN);
+					fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.CIVILIAN];
+				}
+				break;
+			case WORLDICON_TYPE.CASTLE:
+				list_enemyType.Add ((int)ENEMY_TYPE.KNIGHT);
+				fPopulation -= m_fTypeCost [(int)ENEMY_TYPE.KNIGHT];
+				break;
+			}
+		}
+
+		return list_enemyType;
+	}
+
 	void SetWorldPropertyAndPopulation(int iGridIdx, WorldIcon worldIcon, WORLDICON_TYPE type)
 	{
 		if (type.Equals (WORLDICON_TYPE.EMPTY)) {
@@ -183,19 +260,19 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 			switch(type)
 			{
 			case WORLDICON_TYPE.FARM:
-				worldIcon.m_fPopulation = GenerateNormalRandom (50f, 10f);
+				worldIcon.m_fPopulation = GenerateNormalRandom (m_fFarmPopulationStandard, 10f);
 				break;
 			case WORLDICON_TYPE.RANCH:
-				worldIcon.m_fPopulation = GenerateNormalRandom (50f, 10f);
+				worldIcon.m_fPopulation = GenerateNormalRandom (m_fRanchPopulationStandard, 10f);
 				break;
 			case WORLDICON_TYPE.VILLAGE:
-				worldIcon.m_fPopulation = GenerateNormalRandom (100f, 50f);
+				worldIcon.m_fPopulation = GenerateNormalRandom (m_fVillagePopulationStandard, 50f);
 				break;
 			case WORLDICON_TYPE.CITY:
-				worldIcon.m_fPopulation = GenerateNormalRandom (150f, 50f);
+				worldIcon.m_fPopulation = GenerateNormalRandom (m_fCityPopulationStandard, 50f);
 				break;
 			case WORLDICON_TYPE.CASTLE:
-				worldIcon.m_fPopulation = GenerateNormalRandom (250f, 50f);
+				worldIcon.m_fPopulation = GenerateNormalRandom (m_fCastlePopulationStandard, 50f);
 				break;
 
 			default:
@@ -204,7 +281,7 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 			}
 		}
 
-		worldIcon.m_list_enemyType = LevelGenerator.getInstance.DeployEnemyList (worldIcon.m_fPopulation, type);
+		worldIcon.m_list_enemyType = DeployEnemyList (worldIcon.m_fPopulation, type);
 	}
 		
 	void FloodFill(int iX, int iY, WORLD_GEO geoTarget)
