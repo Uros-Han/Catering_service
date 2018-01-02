@@ -7,7 +7,7 @@ public class MainButtons : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		if (gameObject.name.Equals ("Continue")) {
-			if(!FileSystem.SaveFileExistCheck("SaveData"))
+			if(!ES3.FileExists("world.txt"))
 				gameObject.SetActive(false);
 		}
 	}
@@ -21,10 +21,11 @@ public class MainButtons : MonoBehaviour {
 	{
 		switch(gameObject.name){
 		case "Continue":
+			GameMgr.getInstance.ContinueGame ();
 			break;
 
 		case "NewGame":
-			Application.LoadLevel("Battle");
+			GameMgr.getInstance.CreateGame ();
 			break;
 
 		case "Collection":
@@ -34,4 +35,5 @@ public class MainButtons : MonoBehaviour {
 			break;			
 		}
 	}
+
 }

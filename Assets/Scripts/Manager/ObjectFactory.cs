@@ -15,6 +15,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	GameObject m_HealthBar;
 	GameObject m_DamageUI;
 	GameObject m_Part;
+	GameObject m_MessageBox;
 
 	GameObject m_objChicken;
 	GameObject m_objGoat;
@@ -23,6 +24,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 
 	GameObject m_WorldIcon;
 	GameObject m_WorldGeo;
+	GameObject m_Polluted;
 
 	public Sprite m_sprite_meat;
 	public Sprite[] m_sheet_core;
@@ -47,6 +49,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		m_objPoop = Resources.Load ("Prefabs/Objects/PoopParticle") as GameObject;
 		m_HealthBar = Resources.Load ("Prefabs/UI/HealthBar") as GameObject;
 		m_DamageUI = Resources.Load ("Prefabs/UI/DamageUI") as GameObject;
+		m_MessageBox = Resources.Load ("Prefabs/UI/MessageBox") as GameObject;
 
 		m_sprite_meat = Resources.Load<Sprite> ("Sprites/Meat");
 
@@ -79,6 +82,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		m_sheet_worldicon = Resources.LoadAll<Sprite> ("Sprites/Sheets/World_Icon");
 		m_WorldGeo = Resources.Load ("Prefabs/Objects/World/WorldGeo") as GameObject;
 		m_sheet_worldGeo = Resources.LoadAll<Sprite> ("Sprites/Sheets/World_Geo");
+		m_Polluted = Resources.Load ("Prefabs/Objects/World/Polluted") as GameObject;
 	}
 
 	public GameObject Create_Aleart(int iIdx)
@@ -155,6 +159,15 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		return obj;
 	}
 
+	public GameObject Create_Polluted(int iGrid)
+	{
+		GameObject obj = Instantiate (m_Polluted) as GameObject;
+		obj.transform.parent = GameObject.Find ("Geo").transform.GetChild(iGrid);
+		obj.transform.position = GridMgr.getInstance.GetPosOfIdx(iGrid);
+
+		return obj;
+	}
+
 	public GameObject Create_Part(Part part, string name, float rotation, float scaleX)
 	{
 		GameObject obj = Instantiate (m_Part) as GameObject;
@@ -219,6 +232,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		GameObject obj = Instantiate (m_objPoop) as GameObject;
 		obj.transform.parent = GameObject.Find("Poops").transform;
 		obj.transform.position = GameObject.Find("Core").transform.position;
+		GameMgr.getInstance.m_iHunger += 10;
 		
 		return obj;
 	}
@@ -242,6 +256,58 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		obj.GetComponent<DamageUI> ().m_fDamage = fDamage;
 		obj.GetComponent<DamageUI> ().m_bMinus = bMinus;
 		obj.GetComponent<DamageUI> ().m_bDodge = bDodge;
+
+		return obj;
+	}
+
+	public GameObject Create_MessageBox_OneButton(string strMessage, string strFunctionName, GameObject FunctionObject = null, string strButtonName = "")
+	{
+		GameObject obj = Instantiate (m_MessageBox) as GameObject;
+		obj.transform.parent = GameObject.Find("UI Root").transform;
+		obj.transform.localScale = Vector3.one;
+		obj.transform.Find ("Desc").Find ("label").GetComponent<UILabel> ().text = strMessage;
+		if (strButtonName == "") 
+			obj.transform.Find ("Btn0").Find ("label").GetComponent<UILabel> ().text = Localization.Get("Confirm");
+		else
+			obj.transform.Find ("Btn0").Find ("label").GetComponent<UILabel> ().text = strButtonName;
+		
+		obj.transform.Find ("Btn0").localPosition = new Vector2 (115f, -95f);
+		obj.transform.Find ("Btn1").gameObject.SetActive (false);
+
+
+		MessageBox msgBox = obj.GetComponent<MessageBox> ();
+		if (FunctionObject != null)
+			msgBox.m_functionObject = FunctionObject;
+		else
+			msgBox.m_functionObject = GameObject.Find ("MessageButtonManager").gameObject;
+		msgBox.m_strFunction_0 = strFunctionName;
+
+		return obj;
+	}
+
+	public GameObject Create_MessageBox_TwoButton(string strMessage, string strFunctionName_0, string strFunctionName_1, GameObject FunctionObject = null, string strButtonName_0 = "", string strButtonName_1 = "")
+	{
+		GameObject obj = Instantiate (m_MessageBox) as GameObject;
+		obj.transform.parent = GameObject.Find("UI Root").transform;
+		obj.transform.localScale = Vector3.one;
+		obj.transform.Find ("Desc").Find ("label").GetComponent<UILabel> ().text = strMessage;
+		if (strButtonName_0 == "") 
+			obj.transform.Find ("Btn0").Find ("label").GetComponent<UILabel> ().text = Localization.Get("Yes");
+		else
+			obj.transform.Find ("Btn0").Find ("label").GetComponent<UILabel> ().text = strButtonName_0;
+		
+		if (strButtonName_1 == "") 
+			obj.transform.Find ("Btn1").Find ("label").GetComponent<UILabel> ().text = Localization.Get("No");
+		else
+			obj.transform.Find ("Btn1").Find ("label").GetComponent<UILabel> ().text = strButtonName_1;
+
+		MessageBox msgBox = obj.GetComponent<MessageBox> ();
+		if (FunctionObject != null)
+			msgBox.m_functionObject = FunctionObject;
+		else
+			msgBox.m_functionObject = GameObject.Find ("MessageButtonManager").gameObject;
+		msgBox.m_strFunction_0 = strFunctionName_0;
+		msgBox.m_strFunction_1 = strFunctionName_1;
 
 		return obj;
 	}

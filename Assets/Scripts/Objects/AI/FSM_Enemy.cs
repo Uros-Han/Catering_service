@@ -30,9 +30,11 @@ public class FSM_Enemy : FSM {
 		}
 	}
 
-	void SetState(AI_STATE state)
+	public void SetState(AI_STATE state)
 	{
 		m_AiState = state;
+
+		StopAllCoroutines ();
 
 		switch(state)
 		{
@@ -42,6 +44,7 @@ public class FSM_Enemy : FSM {
 			break;
 
 		case AI_STATE.ATTACK:
+			Debug.Log ("Attack Availpart : " + m_AttackAvailableParts.Count);
 			for(int i = 0 ; i < m_AttackAvailableParts.Count; ++i)
 				StartCoroutine(AttackablePart(m_AttackAvailableParts[i], i));
 
@@ -50,6 +53,10 @@ public class FSM_Enemy : FSM {
 
 		case AI_STATE.EATEN:
 			StartCoroutine (State_Eaten ());
+			break;
+
+		case AI_STATE.GROGGY:
+			StartCoroutine (State_Groggy ());
 			break;
 		}
 	}
@@ -116,6 +123,24 @@ public class FSM_Enemy : FSM {
 		}while(m_AiState == AI_STATE.MOVE);
 
 		SetState (m_AiState);
+	}
+
+	public IEnumerator State_Groggy(){
+		GetComponent<Unit>().m_bGroggy = true;
+
+		for (int i = 0; i < transform.childCount; ++i) {
+			transform.GetChild (i).GetComponent<SpriteRenderer> ().color = new Color(128/255f, 171/255f, 255/255f);
+		}
+		GetComponent<FSM_Enemy> ().m_AiState = AI_STATE.DISABLED;
+
+		float fGroggyTime = 2f;
+		yield return new WaitForSeconds (fGroggyTime);
+
+		if (GetComponent<FSM_Enemy> ().m_AiState == AI_STATE.EATEN)
+			yield break;
+
+		GetComponent<Unit>().Death ();
+
 	}
 
 	IEnumerator Tremble()

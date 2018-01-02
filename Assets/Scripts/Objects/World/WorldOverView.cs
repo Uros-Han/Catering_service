@@ -47,6 +47,9 @@ public class WorldOverView : Singleton<WorldOverView> {
 		string strIconType = "";
 		switch(m_selectedWorldIcon.m_iconType)
 		{
+		case (int)WORLDICON_TYPE.EMPTY:
+			strIconType = "Empty";
+			break;
 		case (int)WORLDICON_TYPE.FARM:
 			strIconType = "Farm";
 			break;
@@ -80,31 +83,41 @@ public class WorldOverView : Singleton<WorldOverView> {
 
 		switch (m_selectedWorldIcon.m_iconType) {
 		case (int)WORLDICON_TYPE.FARM:
-			if (m_selectedWorldIcon.m_fPopulation < WorldGenerator.getInstance.m_fFarmPopulationStandard)
+			if (m_selectedWorldIcon.m_fPopulation < WorldGenerator.getInstance.m_fFarmPopulationStandard/2f)
+				iPopulation = 0;
+			else if (m_selectedWorldIcon.m_fPopulation < WorldGenerator.getInstance.m_fFarmPopulationStandard)
 				iPopulation = 1;
 			else
 				iPopulation = 2;
 			break;
 		case (int)WORLDICON_TYPE.RANCH:
-			if (m_selectedWorldIcon.m_fPopulation < WorldGenerator.getInstance.m_fRanchPopulationStandard)
+			if (m_selectedWorldIcon.m_fPopulation < WorldGenerator.getInstance.m_fRanchPopulationStandard/2f)
+				iPopulation = 0;
+			else if (m_selectedWorldIcon.m_fPopulation < WorldGenerator.getInstance.m_fRanchPopulationStandard)
 				iPopulation = 1;
 			else
 				iPopulation = 2;
 			break;
 		case (int)WORLDICON_TYPE.VILLAGE:
-			if (m_selectedWorldIcon.m_fPopulation < WorldGenerator.getInstance.m_fVillagePopulationStandard)
+			if (m_selectedWorldIcon.m_fPopulation < WorldGenerator.getInstance.m_fVillagePopulationStandard/2f)
+				iPopulation = 0;
+			else if (m_selectedWorldIcon.m_fPopulation < WorldGenerator.getInstance.m_fVillagePopulationStandard)
 				iPopulation = 1;
 			else
 				iPopulation = 2;
 			break;
 		case (int)WORLDICON_TYPE.CITY:
-			if (m_selectedWorldIcon.m_fPopulation < WorldGenerator.getInstance.m_fCityPopulationStandard)
+			if (m_selectedWorldIcon.m_fPopulation < WorldGenerator.getInstance.m_fCityPopulationStandard/2f)
+				iPopulation = 0;
+			else if (m_selectedWorldIcon.m_fPopulation < WorldGenerator.getInstance.m_fCityPopulationStandard)
 				iPopulation = 1;
 			else
 				iPopulation = 2;
 			break;
 		case (int)WORLDICON_TYPE.CASTLE:
-			if (m_selectedWorldIcon.m_fPopulation < WorldGenerator.getInstance.m_fCastlePopulationStandard)
+			if (m_selectedWorldIcon.m_fPopulation < WorldGenerator.getInstance.m_fCastlePopulationStandard/2f)
+				iPopulation = 0;
+			else if (m_selectedWorldIcon.m_fPopulation < WorldGenerator.getInstance.m_fCastlePopulationStandard)
 				iPopulation = 1;
 			else
 				iPopulation = 2;
@@ -144,6 +157,15 @@ public class WorldOverView : Singleton<WorldOverView> {
 		string strDesc = string.Format("??? : {0}", iLivestockCount + iCivCount + iMerCount + iKntCount);
 
 		transform.Find ("EnemyInfo").Find ("Desc").GetComponent<UILabel> ().text = strDesc;
+
+
+		/////////////////////////////////////////////
+		///Hunger Info
+		/////////////////////////////////////////////
+
+		int iNeedHunger = GameObject.Find("Core").GetComponent<Core_World>().m_iNeedHunger;
+
+		transform.Find ("HungerInfo").Find ("Desc").GetComponent<UILabel> ().text = iNeedHunger.ToString();
 	}
 
 }

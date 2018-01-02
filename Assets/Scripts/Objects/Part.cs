@@ -42,6 +42,7 @@ public class Part : MonoBehaviour {
 	public int m_iSaveValue;
 
 	public bool m_bLoadedPart = false;
+	bool m_bTurnIntoMeat;
 
 	void Awake()
 	{
@@ -223,6 +224,7 @@ public class Part : MonoBehaviour {
 
 	public IEnumerator OnField()
 	{
+		m_bTurnIntoMeat = true;
 		Vector2 mousePosition = Vector2.zero;
 		BoxCollider2D collider2D = GetComponent<BoxCollider2D> ();
 
@@ -576,12 +578,17 @@ public class Part : MonoBehaviour {
 				if(PoopColldier2D.OverlapPoint(mousePosition)) // get in poop
 				{
 					morgue.DeselectPart();
-					morgue.RemoveBody(OriginPos);
+					if(!bParentWasCore){
+						morgue.RemoveBody(OriginPos);
+					}
 					core.CalculateStickableSeat (false);
 					if(m_objHealthBar != null)
 						Destroy(m_objHealthBar);
 					Destroy(gameObject);
 					ObjectFactory.getInstance.Create_Poop();
+
+					ClearBuffBeforeCheck();
+					GameObject.Find("Player").BroadcastMessage("BuffCheck");
 				}
 
 //				for(int i = 0; i < morgueIdxArr.Length; ++i) // get in morgue
@@ -905,11 +912,14 @@ public class Part : MonoBehaviour {
 		int iStart = GridMgr.getInstance.GetGridIdx (transform.position);
 		int iEnd = GridMgr.getInstance.GetGridIdx (GameObject.Find("Core").transform.position);
 
-		if (!AStar.getInstance.AStarStart_CoreFind (iStart, iEnd)) {//Breaked Path -> Disabled
-
+		if (m_objCurParentPart.GetComponent<Part>().m_bDestroied || m_objCurParentPart.transform.parent.name.Equals("Field")) {//Breaked Path -> Disabled
+			transform.parent = GameObject.Find("Field").transform;
 			GetComponent<FSM_Freindly>().m_AiState = AI_STATE.DISABLED;
 			GetComponent<SpriteParticleEmitter.DynamicEmitter>().enabled = false;
 			GetComponent<SpriteRenderer>().color = Color.gray;
+			GetComponent<Rigidbody2D> ().isKinematic = false;
+			GetComponent<Rigidbody2D> ().AddTorque(Random.Range(-180f, 180f));
+			GetComponent<Rigidbody2D> ().AddForce (Vector3.Normalize(m_objCurParentPart.transform.position - transform.position) * -1f, ForceMode2D.Impulse);
 
 		} else {//CoreSide
 
@@ -921,6 +931,9 @@ public class Part : MonoBehaviour {
 	{
 		Destroy (m_objHealthBar);
 		Destroy (gameObject);
+
+		ClearBuffBeforeCheck();
+		GameObject.Find("Player").BroadcastMessage("BuffCheck");
 	}
 
 	public void PartDestroyed()
@@ -938,6 +951,9 @@ public class Part : MonoBehaviour {
 		GetComponent<SpriteRenderer>().color = new Color(160/255f,160/255f,160/255f);
 		
 		StartCoroutine(ChangeParentToField(gameObject));
+
+		ClearBuffBeforeCheck();
+		GameObject.Find("Player").BroadcastMessage("BuffCheck");
 	}
 
 	IEnumerator ChangeParentToField(GameObject target)
@@ -1024,6 +1040,27 @@ public class Part : MonoBehaviour {
 
 		return listBuffIcon;
 	}
+
+	void HarvestPartInField()
+	{
+		if (m_bTurnIntoMeat)
+			return;
+
+		StartCoroutine (HarvestPartInField_Coroutine ());
+	}
+
+	IEnumerator HarvestPartInField_Coroutine()
+	{
+		Vector3 corePos = GameObject.Find("Core").transform.position;
+		iTween.MoveTo(gameObject, iTween.Hash("x", corePos.x, "y", corePos.y, "time" , 0.5f, "easetype", "easeInSine"));
+		GetComponent<Rigidbody2D> ().isKinematic = true;
+
+		yield return new WaitForSeconds (0.55f);
+
+		GameObject.Find ("Morgue").GetComponent<Morgue> ().AddBody (false, gameObject);
+		StartCoroutine (Assemble ());
+	}
+
 
 //	void DrawLine(Vector3 start, Vector3 end, Color color, float duration = 0.2f)
 //	{

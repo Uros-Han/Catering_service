@@ -9,6 +9,8 @@ public class FSM : MonoBehaviour {
 
 	public void SetState(AI_STATE state)
 	{
+		StopAllCoroutines ();
+
 		m_AiState = state;
 		
 		switch(state)
@@ -78,7 +80,7 @@ public class FSM : MonoBehaviour {
 			if(target.GetComponent<Unit>().m_fCurHealth <= 0)
 			{
 				target.GetComponent<Unit> ().m_fCurHealth = 0;
-				StartCoroutine(target.GetComponent<Unit>().Groggy());
+				target.GetComponent<FSM_Enemy> ().SetState (AI_STATE.GROGGY);	
 				yield break;
 			}
 		} else { //Attack Friendly

@@ -46,24 +46,6 @@ public class Unit : MonoBehaviour {
 		StartCoroutine (DestroyThis ());
 	}
 
-	public IEnumerator Groggy(){
-		m_bGroggy = true;
-
-		for (int i = 0; i < transform.childCount; ++i) {
-			transform.GetChild (i).GetComponent<SpriteRenderer> ().color = new Color(128/255f, 171/255f, 255/255f);
-		}
-		GetComponent<FSM_Enemy> ().m_AiState = AI_STATE.DISABLED;
-
-		float fGroggyTime = 2f;
-		yield return new WaitForSeconds (fGroggyTime);
-
-		if (GetComponent<FSM_Enemy> ().m_AiState == AI_STATE.EATEN)
-			yield break;
-
-		Death ();
-
-	}
-
 	IEnumerator ChangeParentToField(GameObject target)
 	{
 		yield return null;
@@ -112,7 +94,7 @@ public class Unit : MonoBehaviour {
 
 				if (m_fCurHealth <= 0) {
 					m_fCurHealth = 0;
-					StartCoroutine (Groggy ());
+					GetComponent<FSM_Enemy> ().SetState (AI_STATE.GROGGY);
 				}
 			}
 

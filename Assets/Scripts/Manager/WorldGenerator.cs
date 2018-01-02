@@ -32,6 +32,7 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 
 	public IEnumerator GenerateWorldMap()
 	{
+		GameObject.Find ("WorldTool").GetComponent<UIPanel> ().alpha = 0f;
 		GameObject.Find ("LoadingBar").GetComponent<UIPanel> ().alpha = 1f;
 
 		LoadingProgress (0.01f, "Instantiate");
@@ -145,6 +146,8 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 		FloodFill (grid.m_iXcount-1,grid.m_iYcount-1,WORLD_GEO.WATER);
 		yield return new WaitForSeconds (0.5f);
 
+		CorePositioning ();
+
 		for(int i =0; i < icons.childCount; ++i)
 		{
 			int iIdx = grid.GetGridIdx (icons.GetChild (i).position);
@@ -161,7 +164,7 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 		LoadingProgress (1f , "Done");
 		yield return new WaitForSeconds (1f);
 		GameObject.Find ("LoadingBar").GetComponent<UIPanel> ().alpha = 0f;
-
+		GameObject.Find ("WorldTool").GetComponent<UIPanel> ().alpha = 0f;
 
 		SaveManager.getInstance.LocalSave ();
 	}
@@ -175,6 +178,40 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 		float randNormal = mean + stdDev * randStdNormal; //random normal(mean,stdDev^2)
 
 		return randNormal;
+	}
+
+	void CorePositioning()
+	{
+		bool bPosioningDone = false;
+		int iX = GridMgr.getInstance.m_iXcount;
+		int iY = GridMgr.getInstance.m_iYcount;
+		int iCoreGrid = 0;
+
+		do {
+			int iX_Random = Random.Range (15, iX - 15);
+			int iY_Random = Random.Range (15, iY - 15);
+			int iRandomGrid = (iX * iY_Random) + iX_Random;
+			iCoreGrid = iRandomGrid;
+
+			WorldGeo RandomGeo = GameObject.Find ("Geo").transform.GetChild (iCoreGrid).GetComponent<WorldGeo> ();
+			if(!RandomGeo.m_geoStatus.Equals (WORLD_GEO.WATER))
+				bPosioningDone = true;
+
+		} while(!bPosioningDone);
+
+		GameObject.Find ("Core").transform.position = GridMgr.getInstance.GetPosOfIdx (iCoreGrid);
+
+		GameObject coreIcon = GameObject.Find ("Geo").transform.GetChild (iCoreGrid).GetComponent<WorldGeo> ().m_worldIcon;
+		if (!coreIcon.GetComponent<WorldIcon> ().m_iconType.Equals (WORLDICON_TYPE.EMPTY)) {
+			Destroy (coreIcon);
+			ObjectFactory.getInstance.Create_WorldIcon (grid.GetPosOfIdx (iCoreGrid), (int)WORLDICON_TYPE.EMPTY);
+		}
+
+		GameObject.Find ("PC2DPanTarget").transform.position = GameObject.Find ("Core").transform.position;
+		Com.LuisPedroFonseca.ProCamera2D.ProCamera2D.Instance.MoveCameraInstantlyToPosition (GameObject.Find ("Core").transform.position);
+		GameObject.Find ("Core").GetComponent<FoW.FogOfWarUnit> ().enabled = true;
+
+		GameMgr.getInstance.m_iHunger = 100;
 	}
 
 	public void LoadingProgress(float fProgress, string strLabel){
@@ -245,6 +282,8 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 	void SetWorldPropertyAndPopulation(int iGridIdx, WorldIcon worldIcon, WORLDICON_TYPE type)
 	{
 		if (type.Equals (WORLDICON_TYPE.EMPTY)) {
+			worldIcon.m_fProsperity = 0f;
+			worldIcon.m_fPopulation = 0f;
 			return;
 		}
 

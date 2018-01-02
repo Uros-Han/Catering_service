@@ -594,8 +594,6 @@ public class AStar : Singleton<AStar>
 		{
 			Transform geoTransform = GameObject.Find ("Geo").transform;
 
-			Debug.Log (ParentNode.iIndex);
-
 			// 위
 			if (ParentNode.iIndex >= m_iTileCountX
 				&& geoTransform.GetChild(ParentNode.iIndex - m_iTileCountX).GetComponent<WorldGeo>().m_worldIcon != null

@@ -9,11 +9,14 @@ public class WorldMapManager : Singleton<WorldMapManager> {
 	public WORLDTURN_STATE m_worldTurnState;
 
 	bool m_bToBattleScene = false;
+	public List<int> m_iPollutedIdxList;
 
 	// Use this for initialization
 	void Start () {
 		m_worldTurnState = WORLDTURN_STATE.IDLE;
 		GridMgr.getInstance.ChgGridInfo ();
+
+		m_iPollutedIdxList = new List<int> ();
 	}
 
 	void OnEnable()
@@ -26,6 +29,20 @@ public class WorldMapManager : Singleton<WorldMapManager> {
 			GameObject.Find ("Player").SendMessage ("CameBackFromBattleScene");
 			m_bToBattleScene = false;
 			BattleSceneMgr.getInstance.m_turnState = TURN_STATE.DAY;
+
+			if (!GameMgr.getInstance.m_bAssembleOnly) { // 지역점령 
+				int iPollutedIdx = GridMgr.getInstance.GetGridIdx(GameObject.Find("Core").transform.position);
+				ObjectFactory.getInstance.Create_Polluted(iPollutedIdx);
+				m_iPollutedIdxList.Add (iPollutedIdx);
+
+				WorldIcon pollutedIcon = GameObject.Find ("Geo").transform.GetChild (iPollutedIdx).GetComponent<WorldGeo> ().m_worldIcon.GetComponent<WorldIcon>();
+				pollutedIcon.m_fPopulation = 0f;
+				pollutedIcon.m_fProsperity = 0f;
+				pollutedIcon.m_iRaided += 1;
+				pollutedIcon.m_list_enemyType.Clear ();
+			}
+
+			SaveManager.getInstance.LocalSave ();
 		}
 	}
 
@@ -58,5 +75,11 @@ public class WorldMapManager : Singleton<WorldMapManager> {
 		m_bToBattleScene = true;
 	}
 
+	public void Pollute(List<int> iPollutedList)
+	{
+		for (int i = 0; i < iPollutedList.Count; ++i) {
+			ObjectFactory.getInstance.Create_Polluted (iPollutedList [i]);
+		}
+	}
 
 }

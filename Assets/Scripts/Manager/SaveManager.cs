@@ -19,6 +19,8 @@ public class SaveManager : Singleton<SaveManager> {
 	{
 		LoadWorld ();
 		LoadCore ();
+		GameObject.Find ("Core").GetComponent<FoW.FogOfWarUnit> ().enabled = true;
+		Com.LuisPedroFonseca.ProCamera2D.ProCamera2D.Instance.MoveCameraInstantlyToPosition (GameObject.Find ("Core").transform.position);
 	}
 
 	void SaveCore()
@@ -40,6 +42,8 @@ public class SaveManager : Singleton<SaveManager> {
 		}
 
 		ES3.Save<List<PartSaveForm>> ("partSaveForm", listPartSaveForm, "core.txt");
+
+		ES3.Save<int> ("hunger", GameMgr.getInstance.m_iHunger, "core.txt");
 	}
 
 	void LoadCore()
@@ -51,6 +55,8 @@ public class SaveManager : Singleton<SaveManager> {
 			PartSaveForm sf = listPartSaveForm [i];
 			objFac.Create_Part (sf.m_part, sf.m_name, sf.m_fRotation, sf.m_fScaleX).SetActive(false);
 		}
+
+		GameMgr.getInstance.m_iHunger = ES3.Load<int> ("hunger", "core.txt");
 	}
 
 	void SaveWorld()
@@ -79,6 +85,8 @@ public class SaveManager : Singleton<SaveManager> {
 			fogList.Add (FoW.FogOfWar.current.fogValues [i]);
 		}
 		ES3.Save <List<byte>> ("fogValues", fogList, "world.txt");
+
+		ES3.Save <List<int>> ("pollutedList", WorldMapManager.getInstance.m_iPollutedIdxList, "world.txt");
 	}
 
 	void LoadWorld()
@@ -111,6 +119,9 @@ public class SaveManager : Singleton<SaveManager> {
 			fogByte [i] = FogList [i];
 		}
 		FoW.FogOfWar.current.fogValues = fogByte;
+
+		WorldMapManager.getInstance.m_iPollutedIdxList = ES3.Load <List<int>> ("pollutedList", "world.txt");
+		WorldMapManager.getInstance.Pollute (WorldMapManager.getInstance.m_iPollutedIdxList);
 
 		GameObject.Find ("PC2DPanTarget").transform.position = GameObject.Find ("Core").transform.position;
 		GameObject.Find ("WorldTool").GetComponent<UIPanel> ().alpha = 0f;

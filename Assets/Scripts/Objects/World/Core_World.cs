@@ -10,6 +10,8 @@ public class Core_World : MonoBehaviour {
 
 	bool m_bWasMovingBeforeChgedScene = false;
 
+	public int m_iNeedHunger; // 여행에 필요한 허기 
+
 	// Use this for initialization
 	void Start()
 	{
@@ -34,7 +36,7 @@ public class Core_World : MonoBehaviour {
 			if(bMouseTimerOn)
 				fMouseTimer += Time.deltaTime;
 
-			if(Input.GetMouseButtonDown(0)){
+			if(Input.GetMouseButtonDown(0) && UICamera.selectedObject == GameObject.Find("UI Root")){
 				fMouseTimer = 0f;
 				bMouseTimerOn = true;
 				vecMouseClickedPos = mousePosition;
@@ -47,13 +49,24 @@ public class Core_World : MonoBehaviour {
 			{
 				bMouseTimerOn = false;
 
-				if(Vector3.Distance(vecMouseClickedPos, mousePosition) < 0.025f){
+				if(FoW.FogOfWar.current.GetFogValue(grid.GetPosOfIdx(grid.GetGridIdx(vecMouseClickedPos))) > 250){
+
+					Transform pathTrans = GameObject.Find ("Path").transform;
+					for (int i = 0; i < pathTrans.childCount; ++i) {
+						Destroy (pathTrans.GetChild (i).gameObject);
+					}
+
+					GameObject Dest = GameObject.Find("Destination").gameObject;
+					Dest.GetComponent<SpriteRenderer>().enabled = false;
+
+				}else if(Vector3.Distance(vecMouseClickedPos, mousePosition) < 0.025f){
 					m_listMoveIdx = AStar.getInstance.AStarStart_World(grid.GetGridIdx(gameObject.transform.position), grid.m_iGridIdx);
 					m_iDestinationIdx = grid.m_iGridIdx;
 					DrawPath();
 
 					if(m_listMoveIdx.Count != 0) // Select WorldIcon
 					{
+						m_iNeedHunger = m_listMoveIdx.Count * 30;
 						GameObject Dest = GameObject.Find("Destination").gameObject;
 						Dest.GetComponent<SpriteRenderer>().enabled = true;
 						Dest.transform.position = grid.GetPosOfIdx(grid.GetGridIdx(vecMouseClickedPos));
@@ -75,6 +88,15 @@ public class Core_World : MonoBehaviour {
 		}while(world.m_worldTurnState.Equals(WORLDTURN_STATE.IDLE));
 
 		StartCoroutine (Move());
+	}
+
+	public void HungerCheck()
+	{
+		if (m_iNeedHunger > GameMgr.getInstance.m_iHunger) {
+			//TODO: HUNGER CHECKER
+			ObjectFactory.getInstance.Create_MessageBox_TwoButton(Localization.Get("HungerCheckerMsg"), "HungerCheckerEnforcement", "DestroyMessageBox");
+		} else
+			MoveOrder ();
 	}
 
 	public void MoveOrder()
@@ -134,9 +156,10 @@ public class Core_World : MonoBehaviour {
 	bool CheckLocationBreak()
 	{
 		int iCoreIdx = GridMgr.getInstance.GetGridIdx (gameObject.transform.position);
-		GameObject objIcon = GameObject.Find ("Geo").transform.GetChild (iCoreIdx).GetComponent<WorldGeo> ().m_worldIcon;
+		GameObject target = GameObject.Find ("Geo").transform.GetChild (iCoreIdx).GetComponent<WorldGeo> ().m_worldIcon;
+		WorldIcon objIcon = target.GetComponent<WorldIcon> ();
 
-		if (objIcon.GetComponent<WorldIcon> ().m_iconType != 0) {
+		if (objIcon.m_iconType != 0 && objIcon.m_list_enemyType.Count != 0) {
 			WorldMapManager.getInstance.EncountEnemy ();
 			return true;
 		}

@@ -16,11 +16,6 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 	void Start () {
 	}
 
-	void EnemyGenerate()
-	{
-//		LevelGenerator.getInstance.Encount (AREA_STATE.FARM, 2);
-	}
-
 	void UpdateOrthographicCameraSize (float size) {
 		Camera.main.orthographicSize = size;
 	}
@@ -80,6 +75,8 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 		if (BattleSceneMgr.getInstance.m_turnState == TURN_STATE.NIGHT)
 			yield break;
 
+		GameObject.Find ("Field").BroadcastMessage ("HarvestPartInField");
+
 		if (GridMgr.getInstance.GetWidthOrHeightOfMonster () > 5) {
 			m_bBigSize = true;
 			GameObject.Find ("Morgue").transform.localPosition = new Vector3 (1.75f, 0.155f, 10f);
@@ -103,6 +100,7 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 	{
 		Camera.main.orthographicSize = newVal;
 	}
+
 
 //	IEnumerator CheckAssembleIsDone()
 //	{
@@ -140,7 +138,7 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 
 		GameObject.Find ("StopAssembleButton").GetComponent<UIPanel> ().alpha = 0;
 		
-		EnemyGenerate ();
+//		EnemyGenerate ();
 		GameObject.Find("Player").BroadcastMessage("StopAssemble");
 
 //		StartCoroutine (UserMove (true));
