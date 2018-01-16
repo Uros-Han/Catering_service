@@ -11,12 +11,20 @@ public class WorldMapManager : Singleton<WorldMapManager> {
 	bool m_bToBattleScene = false;
 	public List<int> m_iPollutedIdxList;
 
+	public List<int> m_iListVillage;
+	public List<int> m_iListCity;
+	public List<int> m_iListCastle;
+
 	// Use this for initialization
 	void Start () {
 		m_worldTurnState = WORLDTURN_STATE.IDLE;
 		GridMgr.getInstance.ChgGridInfo ();
 
 		m_iPollutedIdxList = new List<int> ();
+
+		m_iListVillage = new List<int> ();
+		m_iListCity = new List<int> ();
+		m_iListCastle = new List<int> ();
 	}
 
 	void OnEnable()

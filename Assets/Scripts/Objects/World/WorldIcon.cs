@@ -33,14 +33,17 @@ public class WorldIcon : MonoBehaviour {
 
 		case (int)WORLDICON_TYPE.VILLAGE:
 			GetComponent<SpriteRenderer> ().sprite = ObjectFactory.getInstance.m_sheet_worldicon [3];
+			WorldMapManager.getInstance.m_iListVillage.Add (m_iGridIdx);
 			break;
 
 		case (int)WORLDICON_TYPE.CITY:
 			GetComponent<SpriteRenderer> ().sprite = ObjectFactory.getInstance.m_sheet_worldicon [4];
+			WorldMapManager.getInstance.m_iListCity.Add (m_iGridIdx);
 			break;
 
 		case (int)WORLDICON_TYPE.CASTLE:
 			GetComponent<SpriteRenderer> ().sprite = ObjectFactory.getInstance.m_sheet_worldicon [5];
+			WorldMapManager.getInstance.m_iListCastle.Add (m_iGridIdx);
 			break;
 		}
 

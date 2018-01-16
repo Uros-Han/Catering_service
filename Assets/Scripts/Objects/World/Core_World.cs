@@ -19,6 +19,25 @@ public class Core_World : MonoBehaviour {
 		StartCoroutine (Idle ());
 	}
 
+	void Update()
+	{
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			GameObject.Find ("Party").BroadcastMessage ("Idling", SendMessageOptions.DontRequireReceiver);
+			GameObject.Find ("Party").BroadcastMessage ("MoveOrder", SendMessageOptions.DontRequireReceiver);
+
+			Camera.main.GetComponent<FoW.FogOfWar> ().enabled = false;
+
+			GameObject.Find ("Party").transform.GetChild (0).gameObject.SetActive (true);
+
+			Transform civTrans = GameObject.Find ("Civilian").transform;
+			for (int i = 0; i < civTrans.childCount; ++i) {
+				civTrans.GetChild (i).GetComponent<FoW.HideInFog> ().enabled = false;
+				civTrans.GetChild (i).GetComponent<SpriteRenderer> ().enabled = true;
+			}
+			civTrans.GetComponent<FoW.HideInFog> ().enabled = false;
+		}
+	}
+
 	IEnumerator Idle()
 	{
 		WorldMapManager world = WorldMapManager.getInstance;
@@ -126,6 +145,9 @@ public class Core_World : MonoBehaviour {
 
 		for(int i = 0; i < m_listMoveIdx.Count; ++i)
 		{
+			GameObject.Find ("Party").BroadcastMessage ("Idling");
+			GameObject.Find ("Party").BroadcastMessage ("MoveOrder");
+
 			if (GameMgr.getInstance.m_iHunger <= 0) {
 				GameMgr.getInstance.m_iHunger = 100;
 			}
@@ -135,6 +157,7 @@ public class Core_World : MonoBehaviour {
 			GameMgr.getInstance.m_iHunger -= 30;
 
 			yield return new WaitForSeconds(1f);
+
 
 			if(i != m_listMoveIdx.Count - 1)
 				m_bWasMovingBeforeChgedScene = true;
@@ -159,8 +182,30 @@ public class Core_World : MonoBehaviour {
 		GameObject target = GameObject.Find ("Geo").transform.GetChild (iCoreIdx).GetComponent<WorldGeo> ().m_worldIcon;
 		WorldIcon objIcon = target.GetComponent<WorldIcon> ();
 
-		if (objIcon.m_iconType != 0 && objIcon.m_list_enemyType.Count != 0) {
+
+		GameMgr gMgr = GameMgr.getInstance;
+		gMgr.m_ilistCurEnemyList = objIcon.m_list_enemyType;
+		Transform PartyTrans = GameObject.Find ("Party").transform;
+
+		string strDebug = "Enemy Encount : " + objIcon.m_list_enemyType.Count + " enemies in Local, ";
+
+		for (int i = 0; i < PartyTrans.childCount; ++i) {
+			Party party = PartyTrans.GetChild (i).GetComponent<Party> ();
+			if(party.m_iGridIdx == objIcon.m_iGridIdx)
+			{
+				for (int j = 0; j < party.m_list_enemyType.Count; ++j) {
+					gMgr.m_ilistCurEnemyList.Add (party.m_list_enemyType[j]);	
+				}
+
+				strDebug += party.m_list_enemyType.Count + " enemies in " + party.m_strPartyName + ", ";
+			}
+		}
+
+
+		if (gMgr.m_ilistCurEnemyList.Count != 0 ) {
+
 			WorldMapManager.getInstance.EncountEnemy ();
+			Debug.Log (strDebug);
 			return true;
 		}
 

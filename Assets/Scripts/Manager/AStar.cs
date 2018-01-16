@@ -737,7 +737,6 @@ public class AStar : Singleton<AStar>
 
 	public List<int> AStarStart_World(int iStart, int iEnd)
 	{
-
 		if (iStart == iEnd)
 		{
 			if (m_BestList == null)
@@ -753,8 +752,9 @@ public class AStar : Singleton<AStar>
 			m_OpenList = new List<Node>();
 		if (m_CloseList == null)
 			m_CloseList = new List<Node>();
-		if (m_BestList == null)
-			m_BestList = new List<int>();
+
+
+		m_BestList = new List<int>();
 
 
 		ClearNode();

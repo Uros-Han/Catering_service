@@ -44,7 +44,6 @@ public class FSM_Enemy : FSM {
 			break;
 
 		case AI_STATE.ATTACK:
-			Debug.Log ("Attack Availpart : " + m_AttackAvailableParts.Count);
 			for(int i = 0 ; i < m_AttackAvailableParts.Count; ++i)
 				StartCoroutine(AttackablePart(m_AttackAvailableParts[i], i));
 

@@ -7,9 +7,11 @@ public class WorldOverView : Singleton<WorldOverView> {
 	public WorldIcon m_selectedWorldIcon = null;
 	public WorldGeo m_selectedWorldGeo = null;
 
+	List<Party> m_listSelectedParty;
+
 	// Use this for initialization
 	void Start () {
-		
+		m_listSelectedParty = new List<Party> ();
 	}
 
 	public void SelectWorldIcon(WorldGeo worldGeo)
@@ -18,9 +20,19 @@ public class WorldOverView : Singleton<WorldOverView> {
 		///GEO Info
 		/////////////////////////////////////////////
 
+		m_listSelectedParty.Clear ();
+
 		m_selectedWorldGeo = worldGeo;
 		m_selectedWorldIcon = worldGeo.m_worldIcon.GetComponent<WorldIcon>();
-		GameMgr.getInstance.m_ilistCurEnemyList = m_selectedWorldIcon.m_list_enemyType;
+
+		Transform PartyTrans = GameObject.Find ("Party").transform;
+		for (int i = 0; i < PartyTrans.childCount; ++i) {
+			Party party = PartyTrans.GetChild (i).GetComponent<Party> ();
+			if(party.m_iGridIdx == m_selectedWorldIcon.m_iGridIdx)
+			{
+				m_listSelectedParty.Add (party);
+			}
+		}
 
 		string strGeoNameKey = "";
 		string strGeoDescKey = "";
@@ -154,7 +166,11 @@ public class WorldOverView : Singleton<WorldOverView> {
 			}
 		}
 		// TODO : 코어 능력에 맞게 적 상세정찵토록
-		string strDesc = string.Format("??? : {0}", iLivestockCount + iCivCount + iMerCount + iKntCount);
+		string strDesc = string.Format("{0} : {1}", Localization.Get(string.Format("Icon_{0}_name", strIconType)) , iLivestockCount + iCivCount + iMerCount + iKntCount);
+
+		for (int i = 0; i < m_listSelectedParty.Count; ++i) {
+			strDesc += string.Format("\n{0} : {1}", m_listSelectedParty[i].m_strPartyName , m_listSelectedParty[i].m_list_enemyType.Count);
+		}
 
 		transform.Find ("EnemyInfo").Find ("Desc").GetComponent<UILabel> ().text = strDesc;
 

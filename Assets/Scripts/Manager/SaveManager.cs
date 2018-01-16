@@ -95,6 +95,7 @@ public class SaveManager : Singleton<SaveManager> {
 		GridMgr gridMgr = GridMgr.getInstance;
 
 		GameObject.Find ("Core").transform.position = ES3.Load<Vector3>("corePos", "world.txt");
+		WorldMapManager worldMapManager = WorldMapManager.getInstance;
 
 		List<int> iGeoList = new List<int> ();
 		iGeoList = ES3.Load<List<int>>("geoList", "world.txt");

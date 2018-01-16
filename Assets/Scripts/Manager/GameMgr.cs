@@ -8,6 +8,8 @@ public class GameMgr : Singleton<GameMgr> {
 	public bool m_bAssembleOnly = true;
 	public List<int> m_ilistCurEnemyList;
 
+	public bool m_bDeveloperMode;
+
 	// Use this for initialization
 	void Awake () {
 		m_ilistCurEnemyList = new List<int> ();

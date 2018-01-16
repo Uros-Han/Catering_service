@@ -1,22 +1,20 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Plugins/Easy Save 3/Scripts/ES3ReferenceMgr.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Objects/Party/Raider.cs">
     <Files>
-      <File FileName="Assets/Scripts/UI/Main/MainButtons.cs" Line="28" Column="31" />
-      <File FileName="Assets/Plugins/Easy Save 3/Scripts/ES3ReferenceMgrBase.cs" Line="73" Column="1" />
-      <File FileName="Assets/Scripts/Header/Enum.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/Part.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/Morgue.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Manager/BattleSceneMgr.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Manager/AStar.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/Core.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Manager/BattleSceneSetter.cs" Line="9" Column="1" />
-      <File FileName="Assets/Scripts/Manager/SaveManager.cs" Line="18" Column="25" />
-      <File FileName="Assets/Scripts/Manager/GameMgr.cs" Line="42" Column="35" />
-      <File FileName="Assets/Scripts/Objects/CameraScript.cs" Line="10" Column="1" />
-      <File FileName="Assets/Scripts/Manager/WorldMapManager.cs" Line="51" Column="49" />
-      <File FileName="Assets/Scripts/Manager/WorldGenerator.cs" Line="35" Column="67" />
-      <File FileName="Assets/Plugins/Easy Save 3/Scripts/ES3ReferenceMgr.cs" Line="126" Column="1" />
+      <File FileName="Assets/Scripts/Objects/AI/FSM_Enemy.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Objects/AI/FSM.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Objects/AI/FSM_Freindly.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Objects/Unit.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Manager/GridMgr.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Manager/GameMgr.cs" Line="11" Column="30" />
+      <File FileName="Assets/Scripts/Objects/World/WorldOverView.cs" Line="139" Column="133" />
+      <File FileName="Assets/Scripts/Manager/LevelGenerator.cs" Line="81" Column="36" />
+      <File FileName="Assets/Scripts/Objects/World/Core_World.cs" Line="149" Column="52" />
+      <File FileName="Assets/Scripts/Objects/Party/Party.cs" Line="135" Column="43" />
+      <File FileName="Assets/Scripts/Objects/Party/Caravan.cs" Line="125" Column="14" />
+      <File FileName="Assets/Scripts/Objects/Party/Raider.cs" Line="10" Column="3" />
+      <File FileName="Assets/Scripts/Manager/AStar.cs" Line="797" Column="41" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

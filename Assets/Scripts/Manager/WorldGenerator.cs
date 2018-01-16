@@ -108,13 +108,13 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 			int iRandom = Random.Range (0, 100);
 			GameObject objIcon = null;
 
-			if(iRandom < 33)
-				objIcon = objFac.Create_WorldIcon (grid.GetPosOfIdx (idxList[i]), (int)WORLDICON_TYPE.FARM);
-			else if(iRandom < 66)
-				objIcon = objFac.Create_WorldIcon (grid.GetPosOfIdx (idxList[i]), (int)WORLDICON_TYPE.RANCH);
-			else if(iRandom < 88)
-				objIcon = objFac.Create_WorldIcon (grid.GetPosOfIdx (idxList[i]), (int)WORLDICON_TYPE.VILLAGE);
-			else
+			if (iRandom < 33)
+				objIcon = objFac.Create_WorldIcon (grid.GetPosOfIdx (idxList [i]), (int)WORLDICON_TYPE.FARM);
+			else if (iRandom < 66)
+				objIcon = objFac.Create_WorldIcon (grid.GetPosOfIdx (idxList [i]), (int)WORLDICON_TYPE.RANCH);
+			else if (iRandom < 88) {
+				objIcon = objFac.Create_WorldIcon (grid.GetPosOfIdx (idxList [i]), (int)WORLDICON_TYPE.VILLAGE);
+			}else
 				objIcon = objFac.Create_WorldIcon (grid.GetPosOfIdx (idxList[i]), (int)WORLDICON_TYPE.EMPTY);
 
 //			m_geoTrans.GetChild (idxList[i]).GetComponent<WorldGeo> ().m_worldIcon = objIcon;
