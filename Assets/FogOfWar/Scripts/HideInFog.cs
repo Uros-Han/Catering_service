@@ -20,6 +20,11 @@ namespace FoW
             _renderer = GetComponent<Renderer>();
             _graphic = GetComponent<Graphic>();
             _canvas = GetComponent<Canvas>();
+
+			if (GameMgr.getInstance.m_bDeveloperMode) {
+				if (GameObject.Find ("DeveloperTools").GetComponent<DeveloperTool> ().m_bFogDisabled)
+					this.enabled = false;
+			}
         }
 
         void Update()

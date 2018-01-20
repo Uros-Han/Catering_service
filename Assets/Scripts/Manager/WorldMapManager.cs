@@ -97,12 +97,21 @@ public class WorldMapManager : Singleton<WorldMapManager> {
 	{
 		StartCoroutine (TimeMgr.getInstance.Play ());
 
+		GameObject.Find ("Core").GetComponent<Core_World> ().m_listMoveIdx.Clear ();
+
 		GameMgr.getInstance.m_iHunger -= 30;
 
 		if (GameMgr.getInstance.m_iHunger <= 0) {
 			GameMgr.getInstance.m_iHunger = 100;
 			//TODO: Eat Part
 		}
+
+		StartCoroutine (EnemyCheck ());
+	}
+
+	IEnumerator EnemyCheck()
+	{
+		yield return new WaitForSeconds (1f);
 
 		GameObject.Find ("Core").GetComponent<Core_World> ().CheckLocationBreak ();
 	}

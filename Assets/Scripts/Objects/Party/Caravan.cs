@@ -16,9 +16,10 @@ public class Caravan : Party {
 
 	protected override void Start ()
 	{
-		base.Start ();
-
 		m_strPartyName = Localization.Get ("Party_Caravan");
+		m_partyType = PARTY_TYPE.CARAVAN;
+
+		base.Start ();
 
 		if (!bLoaded) {
 			if (m_departureLoc.GetComponent<WorldIcon> ().m_iconType == (int)WORLDICON_TYPE.CITY) {
@@ -29,8 +30,6 @@ public class Caravan : Party {
 				m_bCargoLoaded = false;
 			}
 		}
-
-		m_partyType = PARTY_TYPE.CARAVAN;
 	}
 
 	protected override void ThinkWhatAreDoingNext()
@@ -64,6 +63,12 @@ public class Caravan : Party {
 
 				m_iWaitTurnCount = Random.Range (2, 5);
 				m_state = AI_WORLD_STATE.CAMP;
+				transform.GetChild(7).gameObject.SetActive(true);
+				for (int i = 0; i < 7; ++i) {
+					if (i == 5)
+						continue;
+					transform.GetChild(i).gameObject.SetActive(false);
+				}
 
 				m_bCargoLoaded = true;
 
@@ -71,14 +76,15 @@ public class Caravan : Party {
 			}
 		}
 
-		if (Random.Range (0, 100) < 70) { // MOVE
+		//Move
+		SetDestination ();
+		m_state = AI_WORLD_STATE.MOVE;
 
-			SetDestination ();
-			m_state = AI_WORLD_STATE.MOVE;
-
-		} else { // IDLE
-			m_iWaitTurnCount = Random.Range (2, 5);
-			m_state = AI_WORLD_STATE.CAMP;
+		transform.GetChild(7).gameObject.SetActive(false);
+		for (int i = 0; i < 7; ++i) {
+			if (i == 5)
+				continue;
+			transform.GetChild(i).gameObject.SetActive(true);
 		}
 	}
 
@@ -174,14 +180,13 @@ public class Caravan : Party {
 				}
 			}
 
-
+			m_iFatigue = Random.Range (4, 8);
 			
 			m_destinationLoc = GameObject.Find ("Geo").transform.GetChild (m_iDestinationIdx).GetComponent<WorldGeo> ().m_worldIcon;
 		}
 
 		m_listMoveIdx = AStar.getInstance.AStarStart_World(m_iGridIdx, m_iDestinationIdx);
 
-		m_iFatigue = Random.Range (4, 8);
 
 		base.SetDestination ();
 	}

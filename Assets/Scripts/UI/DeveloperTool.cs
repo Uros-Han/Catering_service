@@ -10,6 +10,7 @@ public class DeveloperTool : MonoBehaviour {
 	DEBUG_MOUSE_STATE debugMouseState = DEBUG_MOUSE_STATE.NORMAL;
 	DEBUG_STATE curDebug;
 	bool bMouseFollowBugOn;
+	string strCurDebugLabel;
 
 	void Update()
 	{
@@ -55,6 +56,7 @@ public class DeveloperTool : MonoBehaviour {
 			debugMouseState = DEBUG_MOUSE_STATE.DEBUG;
 			curDebug = debugState;
 			transform.GetChild (0).gameObject.SetActive (true);
+			transform.GetChild (0).GetChild (0).GetComponent<UILabel> ().text = strCurDebugLabel;
 			bMouseFollowBugOn = true;
 		} else {
 			debugMouseState = DEBUG_MOUSE_STATE.NORMAL;
@@ -63,15 +65,51 @@ public class DeveloperTool : MonoBehaviour {
 		}
 	}
 
+	public bool m_bFogDisabled = false;
+	void Debug_DisableFog()
+	{
+		if (!m_bFogDisabled) {
+			Camera.main.GetComponent<FoW.FogOfWar> ().enabled = false;
+
+			Transform Party = GameObject.Find ("Party").transform;
+			for (int j = 0; j < Party.childCount; ++j) {
+				Transform civTrans = Party.GetChild (j).transform;
+
+				for (int i = 0; i < civTrans.childCount; ++i) {
+					civTrans.GetChild (i).GetComponent<FoW.HideInFog> ().enabled = false;
+					civTrans.GetChild (i).GetComponent<SpriteRenderer> ().enabled = true;
+				}
+			}
+
+			m_bFogDisabled = true;
+		} else {
+			Camera.main.GetComponent<FoW.FogOfWar> ().enabled = true;
+
+			Transform Party = GameObject.Find ("Party").transform;
+			for (int j = 0; j < Party.childCount; ++j) {
+				Transform civTrans = Party.GetChild (j).transform;
+
+				for (int i = 0; i < civTrans.childCount; ++i) {
+					civTrans.GetChild (i).GetComponent<FoW.HideInFog> ().enabled = true;
+					civTrans.GetChild (i).GetComponent<SpriteRenderer> ().enabled = false;
+				}
+			}
+
+			m_bFogDisabled = false;
+		}
+	}
+
 	void Debug_CreateCaravan()
 	{
 		Debug_Escape ();
+		strCurDebugLabel = "Create Caravan";
 		MouseDebugOn (true, DEBUG_STATE.CREATE_CARAVAN);
 	}
 
 	void Debug_CreateRaider()
 	{
 		Debug_Escape ();
+		strCurDebugLabel = "Create Raider";
 		MouseDebugOn (true, DEBUG_STATE.CREATE_RAIDER);
 	}
 }

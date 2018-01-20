@@ -59,15 +59,7 @@ public class Party : MonoBehaviour {
 	{
 		GridMgr grid = GridMgr.getInstance;
 
-		int iCurPath = 0;
-		for (int i = 0; i < m_listMoveIdx.Count; ++i) {
-			if (m_listMoveIdx [i] == m_iGridIdx) {
-				iCurPath = i;
-				break;
-			}
-		}
-
-		Vector3 destPos = grid.GetPosOfIdx(m_listMoveIdx[iCurPath]);
+		Vector3 destPos = grid.GetPosOfIdx(m_listMoveIdx[0]);
 		iTween.MoveTo(gameObject, iTween.Hash("x", destPos.x, "y", destPos.y, "time", 1f, "easetype", "easeInSine"));
 
 		yield return new WaitForSeconds(1f);
@@ -75,19 +67,18 @@ public class Party : MonoBehaviour {
 		m_iFatigue -= 1;
 		m_iGridIdx = grid.GetGridIdx (transform.position);
 
-		if(iCurPath != m_listMoveIdx.Count - 1)
-			m_bWasMovingBeforeChgedScene = true;
-		else
-			m_bWasMovingBeforeChgedScene = false;
-
 		DrawPath ();
 
-		if (m_iFatigue <= 0 && iCurPath != m_listMoveIdx.Count -1) {
+		if (m_iFatigue <= 0) {
 			Camping ();
 			yield break;
 		}
 
-		ThinkWhatAreDoingNext ();
+		//Reach Destination
+		if (m_partyType == PARTY_TYPE.CARAVAN) {
+			if (m_listMoveIdx.Count == 1)
+				ThinkWhatAreDoingNext ();
+		}
 	}
 
 	protected void Idling()
@@ -101,26 +92,54 @@ public class Party : MonoBehaviour {
 
 	protected void Camping()
 	{
-		m_state = AI_WORLD_STATE.CAMP;
+ 		m_state = AI_WORLD_STATE.CAMP;
 		m_iWaitTurnCount = Random.Range (2, 4);
+		m_iFatigue = Random.Range (4, 8);
+
+		if (m_partyType == PARTY_TYPE.CARAVAN) {
+			transform.GetChild(7).gameObject.SetActive(true);
+			for (int i = 0; i < 7; ++i) {
+				if (i == 5)
+					continue;
+				transform.GetChild(i).gameObject.SetActive(false);
+			}
+		} else {
+			transform.GetChild(7).gameObject.SetActive(true);
+			for (int i = 0; i < 6; ++i) {
+				transform.GetChild(i).gameObject.SetActive(false);
+			}
+		}
 	}
 
 	protected virtual void ThinkWhatAreDoingNext()
 	{
-		if (Random.Range (0, 100) < 70) { // MOVE
+		//Move
+		SetDestination ();
+		m_state = AI_WORLD_STATE.MOVE;
 
-			SetDestination ();
-			m_state = AI_WORLD_STATE.MOVE;
-
-		} else { // IDLE
-			m_iWaitTurnCount = Random.Range (2, 5);
-			m_state = AI_WORLD_STATE.CAMP;
+		transform.GetChild(7).gameObject.SetActive(false);
+		for (int i = 0; i < 6; ++i) {
+			transform.GetChild(i).gameObject.SetActive(true);
 		}
 	}
 
 	protected virtual void SetDestination()
 	{
 		m_state = AI_WORLD_STATE.MOVE;
+
+		if (m_partyType == PARTY_TYPE.CARAVAN) {
+			transform.GetChild(7).gameObject.SetActive(false);
+			for (int i = 0; i < 7; ++i) {
+				if (i == 5)
+					continue;
+				transform.GetChild(i).gameObject.SetActive(true);
+			}
+		} else {
+			transform.GetChild(7).gameObject.SetActive(false);
+			for (int i = 0; i < 6; ++i) {
+				transform.GetChild(i).gameObject.SetActive(true);
+			}
+		}
 
 		DrawPath();
 	}
@@ -169,10 +188,7 @@ public class Party : MonoBehaviour {
 			lr.SetColors (new Color (255 / 255f, 0 / 255f, 0 / 255f), new Color (255 / 255f, 0 / 255f, 0 / 255f));
 			lr.SetWidth (0.05f, 0.05f);
 			if (i == 0) {
-				if(GameMgr.getInstance.m_bDeveloperMode && m_partyType != PARTY_TYPE.RAID)
-					lr.SetPosition (0, m_departureLoc.transform.position);
-				else
-					lr.SetPosition (0, transform.position);
+				lr.SetPosition (0, transform.position);
 				lr.SetPosition (1, grid.GetPosOfIdx (m_listMoveIdx [iCurPath]));
 			} else {
 				lr.SetPosition (0, grid.GetPosOfIdx (m_listMoveIdx [iCurPath - 1]));

@@ -99,6 +99,9 @@ public class GridMgr : Singleton<GridMgr>
 
 	void Picking()
 	{
+		if (Camera.main == null)
+			return;
+		
 		Vector2 vPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
 		//범위 밖 좌표는 -1 리턴

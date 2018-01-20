@@ -22,20 +22,18 @@ public class Core_World : MonoBehaviour {
 	void Update()
 	{
 		if (Input.GetKeyDown (KeyCode.Space)) {
-			StartCoroutine (TimeMgr.getInstance.Play ());
+			WorldMapManager.getInstance.Wait ();
+		}
 
-			Camera.main.GetComponent<FoW.FogOfWar> ().enabled = false;
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			GameObject Dest = GameObject.Find("Destination").gameObject;
+			Dest.GetComponent<SpriteRenderer>().enabled = false;
 
-			Transform Party = GameObject.Find ("Party").transform;
-			for (int j = 0; j < Party.childCount; ++j) {
-				Transform civTrans = Party.GetChild(j).transform;
+			iTween.MoveTo(GameObject.Find("WorldOverview").transform.GetChild(0).gameObject, iTween.Hash("x", 150f, "time", 0.5f,"isLocal", true,  "easetype", "easeInSine"));
 
-				for (int i = 0; i < civTrans.childCount; ++i) {
-					civTrans.GetChild (i).GetComponent<FoW.HideInFog> ().enabled = false;
-					civTrans.GetChild (i).GetComponent<SpriteRenderer> ().enabled = true;
-				}
-
-				civTrans.GetComponent<FoW.HideInFog> ().enabled = false;
+			Transform pathTrans = GameObject.Find ("Path").transform;
+			for (int i = 0; i < pathTrans.childCount; ++i) {
+				Destroy (pathTrans.GetChild (i).gameObject);
 			}
 		}
 	}
@@ -70,16 +68,15 @@ public class Core_World : MonoBehaviour {
 			{
 				bMouseTimerOn = false;
 
-				if(FoW.FogOfWar.current.GetFogValue(grid.GetPosOfIdx(grid.GetGridIdx(vecMouseClickedPos))) > 250){
+				if(FoW.FogOfWar.current.GetFogValue(grid.GetPosOfIdx(grid.GetGridIdx(vecMouseClickedPos))) > 250 && !(GameMgr.getInstance.m_bDeveloperMode && GameObject.Find("DeveloperTools").GetComponent<DeveloperTool>().m_bFogDisabled)){
+					
+						Transform pathTrans = GameObject.Find ("Path").transform;
+						for (int i = 0; i < pathTrans.childCount; ++i) {
+							Destroy (pathTrans.GetChild (i).gameObject);
+						}
 
-					Transform pathTrans = GameObject.Find ("Path").transform;
-					for (int i = 0; i < pathTrans.childCount; ++i) {
-						Destroy (pathTrans.GetChild (i).gameObject);
-					}
-
-					GameObject Dest = GameObject.Find("Destination").gameObject;
-					Dest.GetComponent<SpriteRenderer>().enabled = false;
-
+						GameObject Dest = GameObject.Find("Destination").gameObject;
+						Dest.GetComponent<SpriteRenderer>().enabled = false;
 				}else if(Vector3.Distance(vecMouseClickedPos, mousePosition) < 0.025f){
 					m_listMoveIdx = AStar.getInstance.AStarStart_World(grid.GetGridIdx(gameObject.transform.position), grid.m_iGridIdx);
 					m_iDestinationIdx = grid.m_iGridIdx;
