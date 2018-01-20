@@ -44,6 +44,9 @@ public class WorldMapManager : Singleton<WorldMapManager> {
 				m_iPollutedIdxList.Add (iPollutedIdx);
 
 				WorldIcon pollutedIcon = GameObject.Find ("Geo").transform.GetChild (iPollutedIdx).GetComponent<WorldGeo> ().m_worldIcon.GetComponent<WorldIcon>();
+
+				GameMgr.getInstance.m_iReward += (int)pollutedIcon.m_fPopulation * 10;
+
 				pollutedIcon.m_fPopulation = 0f;
 				pollutedIcon.m_fProsperity = 0f;
 				pollutedIcon.m_iRaided += 1;
@@ -88,6 +91,20 @@ public class WorldMapManager : Singleton<WorldMapManager> {
 		for (int i = 0; i < iPollutedList.Count; ++i) {
 			ObjectFactory.getInstance.Create_Polluted (iPollutedList [i]);
 		}
+	}
+
+	public void Wait()
+	{
+		StartCoroutine (TimeMgr.getInstance.Play ());
+
+		GameMgr.getInstance.m_iHunger -= 30;
+
+		if (GameMgr.getInstance.m_iHunger <= 0) {
+			GameMgr.getInstance.m_iHunger = 100;
+			//TODO: Eat Part
+		}
+
+		GameObject.Find ("Core").GetComponent<Core_World> ().CheckLocationBreak ();
 	}
 
 }

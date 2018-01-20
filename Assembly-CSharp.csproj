@@ -318,7 +318,9 @@
      <Compile Include="Assets\Scripts\Manager\LevelGenerator.cs" />
      <Compile Include="Assets\Scripts\Manager\MessageButtonManager.cs" />
      <Compile Include="Assets\Scripts\Manager\ObjectFactory.cs" />
+     <Compile Include="Assets\Scripts\Manager\PartyManager.cs" />
      <Compile Include="Assets\Scripts\Manager\SaveManager.cs" />
+     <Compile Include="Assets\Scripts\Manager\TimeMgr.cs" />
      <Compile Include="Assets\Scripts\Manager\UIFollowTarget.cs" />
      <Compile Include="Assets\Scripts\Manager\WorldGenerator.cs" />
      <Compile Include="Assets\Scripts\Manager\WorldMapManager.cs" />
@@ -348,11 +350,13 @@
      <Compile Include="Assets\Scripts\Objects\World\WorldOverView.cs" />
      <Compile Include="Assets\Scripts\UI\ControlTap.cs" />
      <Compile Include="Assets\Scripts\UI\DamageUI.cs" />
+     <Compile Include="Assets\Scripts\UI\DeveloperTool.cs" />
      <Compile Include="Assets\Scripts\UI\Main\MainButtons.cs" />
      <Compile Include="Assets\Scripts\UI\MeatButton.cs" />
      <Compile Include="Assets\Scripts\UI\MeatState.cs" />
      <Compile Include="Assets\Scripts\UI\MessageBox.cs" />
      <Compile Include="Assets\Scripts\UI\WantedReward.cs" />
+     <Compile Include="Assets\Scripts\UI\World\TimeUI.cs" />
      <Compile Include="Assets\SpriteParticleEmitter\Code\Core\EmitterBase.cs" />
      <Compile Include="Assets\SpriteParticleEmitter\Code\Core\EmitterBaseUI.cs" />
      <Compile Include="Assets\SpriteParticleEmitter\Code\Core\StaticSpriteEmitter.cs" />

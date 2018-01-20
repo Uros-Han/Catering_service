@@ -15,14 +15,6 @@ public class WantedReward : MonoBehaviour {
 			m_RewardMoneyLabel = transform.Find ("Num").GetComponent<UILabel> ();
 	}
 
-	void Update()
-	{
-		if(m_bWantedReward)
-			m_RewardMoneyLabel.text = BattleSceneMgr.getInstance.m_iReward.ToString();
-		else
-			m_RewardMoneyLabel.text = BattleSceneMgr.getInstance.m_iDay.ToString();
-	}
-
 	public IEnumerator WantedPop()
 	{
 		TweenPosition tween = GetComponent<TweenPosition> ();

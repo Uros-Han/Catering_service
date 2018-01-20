@@ -67,4 +67,5 @@ public class WorldIcon : MonoBehaviour {
 			GameObject.Find ("Geo").transform.GetChild (GridMgr.getInstance.GetGridIdx (transform.position)).GetComponent<WorldGeo> ().m_worldIcon = null;
 		}
 	}
+
 }

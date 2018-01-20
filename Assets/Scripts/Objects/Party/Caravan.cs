@@ -29,6 +29,8 @@ public class Caravan : Party {
 				m_bCargoLoaded = false;
 			}
 		}
+
+		m_partyType = PARTY_TYPE.CARAVAN;
 	}
 
 	protected override void ThinkWhatAreDoingNext()
@@ -91,12 +93,7 @@ public class Caravan : Party {
 			{
 				
 				int iRandomRange = Random.Range (0, 100);
-				if (iRandomRange < 33) {
-					List<int> m_iListVillage = WorldMapManager.getInstance.m_iListVillage;
-					for (int i = 0; i < m_iListVillage.Count; ++i) {
-						iDicDistance.Add (m_iListVillage [i], AStar.getInstance.AStarStart_World (m_iGridIdx, m_iListVillage [i]).Count);
-					}
-				} else if (iRandomRange < 66) {
+				if (iRandomRange < 50) {
 					List<int> m_iListCity = WorldMapManager.getInstance.m_iListCity;
 					for (int i = 0; i < m_iListCity.Count; ++i) {
 						iDicDistance.Add (m_iListCity [i], AStar.getInstance.AStarStart_World (m_iGridIdx, m_iListCity [i]).Count);

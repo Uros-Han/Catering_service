@@ -17,6 +17,7 @@ public class LevelGenerator : Singleton<LevelGenerator> {
 			break;
 
 		case ENEMY_TYPE.MERCENARY:
+			ObjectFactory.getInstance.Create_Mercenary(100f);
 			break;
 
 		case ENEMY_TYPE.KNIGHT:

@@ -9,6 +9,7 @@ public class Raider : Party {
 		base.Start ();
 
 		m_strPartyName = Localization.Get ("Party_Raider");
+		m_partyType = PARTY_TYPE.RAID;
 	}
 
 	protected override void SetDestination()

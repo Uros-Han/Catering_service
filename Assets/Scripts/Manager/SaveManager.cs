@@ -44,6 +44,7 @@ public class SaveManager : Singleton<SaveManager> {
 		ES3.Save<List<PartSaveForm>> ("partSaveForm", listPartSaveForm, "core.txt");
 
 		ES3.Save<int> ("hunger", GameMgr.getInstance.m_iHunger, "core.txt");
+		ES3.Save<int> ("reward", GameMgr.getInstance.m_iReward, "core.txt");
 	}
 
 	void LoadCore()
@@ -57,6 +58,7 @@ public class SaveManager : Singleton<SaveManager> {
 		}
 
 		GameMgr.getInstance.m_iHunger = ES3.Load<int> ("hunger", "core.txt");
+		GameMgr.getInstance.m_iReward = ES3.Load<int> ("reward", "core.txt");
 	}
 
 	void SaveWorld()

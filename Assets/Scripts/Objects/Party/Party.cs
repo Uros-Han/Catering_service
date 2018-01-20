@@ -13,6 +13,7 @@ public class Party : MonoBehaviour {
 	public GameObject m_departureLoc;
 
 	public AI_WORLD_STATE m_state = AI_WORLD_STATE.END;
+	protected PARTY_TYPE m_partyType;
 
 	public 	int m_iWaitTurnCount = 0;
 	public	int m_iFatigue = 0;
@@ -168,7 +169,7 @@ public class Party : MonoBehaviour {
 			lr.SetColors (new Color (255 / 255f, 0 / 255f, 0 / 255f), new Color (255 / 255f, 0 / 255f, 0 / 255f));
 			lr.SetWidth (0.05f, 0.05f);
 			if (i == 0) {
-				if(GameMgr.getInstance.m_bDeveloperMode)
+				if(GameMgr.getInstance.m_bDeveloperMode && m_partyType != PARTY_TYPE.RAID)
 					lr.SetPosition (0, m_departureLoc.transform.position);
 				else
 					lr.SetPosition (0, transform.position);

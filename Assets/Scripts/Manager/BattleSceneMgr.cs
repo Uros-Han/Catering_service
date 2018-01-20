@@ -5,9 +5,7 @@ using Com.LuisPedroFonseca.ProCamera2D;
 
 public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 
-	public int m_iDay = 0;
 	public int m_iMeat = 0;
-	public int m_iReward = 0;
 	public MOUSE_STATE m_mouseState = MOUSE_STATE.NORMAL;
 	public TURN_STATE m_turnState = TURN_STATE.END;
 	public bool m_bBigSize = false;
@@ -38,7 +36,6 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 
 	public IEnumerator DayTurn()
 	{
-		m_iDay += 1;
 
 //		LevelGenerator.getInstance.Encount (m_iDay, m_iDay);
 		LevelGenerator.getInstance.Encount();
@@ -48,8 +45,8 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 
 		yield return new WaitForSeconds(0.25f);
 
-		StartCoroutine(GameObject.Find ("WantedReward").GetComponent<WantedReward> ().WantedPop ());
-		StartCoroutine(GameObject.Find ("DayNotification").GetComponent<WantedReward> ().WantedPop ());
+//		StartCoroutine(GameObject.Find ("WantedReward").GetComponent<WantedReward> ().WantedPop ());
+//		StartCoroutine(GameObject.Find ("DayNotification").GetComponent<WantedReward> ().WantedPop ());
 
 		//Clean Morgue
 		Transform morgueTrans = GameObject.Find ("Morgue").transform;

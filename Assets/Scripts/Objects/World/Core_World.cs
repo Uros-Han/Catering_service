@@ -22,19 +22,21 @@ public class Core_World : MonoBehaviour {
 	void Update()
 	{
 		if (Input.GetKeyDown (KeyCode.Space)) {
-			GameObject.Find ("Party").BroadcastMessage ("Idling", SendMessageOptions.DontRequireReceiver);
-			GameObject.Find ("Party").BroadcastMessage ("MoveOrder", SendMessageOptions.DontRequireReceiver);
+			StartCoroutine (TimeMgr.getInstance.Play ());
 
 			Camera.main.GetComponent<FoW.FogOfWar> ().enabled = false;
 
-			GameObject.Find ("Party").transform.GetChild (0).gameObject.SetActive (true);
+			Transform Party = GameObject.Find ("Party").transform;
+			for (int j = 0; j < Party.childCount; ++j) {
+				Transform civTrans = Party.GetChild(j).transform;
 
-			Transform civTrans = GameObject.Find ("Civilian").transform;
-			for (int i = 0; i < civTrans.childCount; ++i) {
-				civTrans.GetChild (i).GetComponent<FoW.HideInFog> ().enabled = false;
-				civTrans.GetChild (i).GetComponent<SpriteRenderer> ().enabled = true;
+				for (int i = 0; i < civTrans.childCount; ++i) {
+					civTrans.GetChild (i).GetComponent<FoW.HideInFog> ().enabled = false;
+					civTrans.GetChild (i).GetComponent<SpriteRenderer> ().enabled = true;
+				}
+
+				civTrans.GetComponent<FoW.HideInFog> ().enabled = false;
 			}
-			civTrans.GetComponent<FoW.HideInFog> ().enabled = false;
 		}
 	}
 
@@ -145,16 +147,17 @@ public class Core_World : MonoBehaviour {
 
 		for(int i = 0; i < m_listMoveIdx.Count; ++i)
 		{
-			GameObject.Find ("Party").BroadcastMessage ("Idling");
-			GameObject.Find ("Party").BroadcastMessage ("MoveOrder");
-
-			if (GameMgr.getInstance.m_iHunger <= 0) {
-				GameMgr.getInstance.m_iHunger = 100;
-			}
+			StartCoroutine (TimeMgr.getInstance.Play ());
 
 			Vector3 destPos = grid.GetPosOfIdx(m_listMoveIdx[i]);
 			iTween.MoveTo(gameObject, iTween.Hash("x", destPos.x, "y", destPos.y, "time", 1f, "easetype", "easeInSine"));
+
 			GameMgr.getInstance.m_iHunger -= 30;
+
+			if (GameMgr.getInstance.m_iHunger <= 0) {
+				GameMgr.getInstance.m_iHunger = 100;
+				//TODO: Eat Part
+			}
 
 			yield return new WaitForSeconds(1f);
 
@@ -176,7 +179,7 @@ public class Core_World : MonoBehaviour {
 		StartCoroutine (Idle());
 	}
 
-	bool CheckLocationBreak()
+	public bool CheckLocationBreak()
 	{
 		int iCoreIdx = GridMgr.getInstance.GetGridIdx (gameObject.transform.position);
 		GameObject target = GameObject.Find ("Geo").transform.GetChild (iCoreIdx).GetComponent<WorldGeo> ().m_worldIcon;
