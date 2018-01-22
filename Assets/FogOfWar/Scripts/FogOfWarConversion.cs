@@ -37,7 +37,21 @@ namespace FoW
                 return Vector2.zero;
             }
         }
-        
+
+        // gets a transform's forward direction on a fog plane
+        public static Vector2 TransformFogPlaneForward(Transform transform, FogOfWarPlane plane)
+        {
+            if (plane == FogOfWarPlane.XY)
+                return new Vector2(transform.up.x, transform.up.y).normalized;
+            else if (plane == FogOfWarPlane.YZ)
+                return new Vector2(transform.up.z, transform.up.y).normalized;
+            else if (plane == FogOfWarPlane.XZ)
+                return new Vector2(transform.forward.x, transform.forward.z).normalized;
+
+            Debug.LogError("FogOfWarPlane is an invalid value!");
+            return Vector2.zero;
+        }
+
         public static Vector2 FogToWorldSize(Vector2 fpos, Vector2i resolution, float size)
         {
             Vector2 res = resolution.vector2;
@@ -90,11 +104,11 @@ namespace FoW
         }
 
         // Snaps a world point to a fog pixel. It returns the position 
-        public static Vector2 SnapWorldPositionToNearestFogPixel(Vector2 worldpos, Vector2 offset, Vector2i resolution, float size)
+        public static Vector2 SnapWorldPositionToNearestFogPixel(FogOfWar fow, Vector2 worldpos, Vector2 offset, Vector2i resolution, float size)
         {
-            Vector2 fogpos = WorldToFog(worldpos, FogOfWar.current.mapOffset, FogOfWar.current.mapResolution, FogOfWar.current.mapSize);
+            Vector2 fogpos = WorldToFog(worldpos, fow.mapOffset, fow.mapResolution, fow.mapSize);
             fogpos = SnapToNearestFogPixel(fogpos);
-            return FogToWorld(fogpos, FogOfWar.current.mapOffset, FogOfWar.current.mapResolution, FogOfWar.current.mapSize);
+            return FogToWorld(fogpos, fow.mapOffset, fow.mapResolution, fow.mapSize);
         }
     }
 }

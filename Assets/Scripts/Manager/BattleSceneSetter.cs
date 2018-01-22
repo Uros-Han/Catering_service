@@ -16,6 +16,8 @@ public class BattleSceneSetter : MonoBehaviour {
 			StartCoroutine(BattleSceneMgr.getInstance.DayTurn());
 		}
 
+		HealthBarSet ();
+		InitLight ();
 	}
 
 	public void ToWorldMap()
@@ -43,5 +45,44 @@ public class BattleSceneSetter : MonoBehaviour {
 			WorldTrans.GetChild (i).gameObject.SetActive (true);
 		}
 		UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("Battle");
+	}
+
+	void HealthBarSet()
+	{
+		Transform PlayerTrans = GameObject.Find ("Player").transform;
+		ObjectFactory objFac = ObjectFactory.getInstance;
+
+		for (int i = 0; i < PlayerTrans.childCount; ++i) {
+			if (PlayerTrans.GetChild (i).GetComponent<Part> ().m_objHealthBar == null) {
+				objFac.Create_HealthBar (PlayerTrans.GetChild (i).gameObject);
+			}
+		}
+	}
+
+	void InitLight()
+	{
+		Light m_sunLight = GameObject.Find ("Sun").GetComponent<Light> ();
+
+		switch ((int)TimeMgr.getInstance.m_fHour) {
+		case 0:
+			m_sunLight.color = Color.white;
+			m_sunLight.intensity = 0f;
+			break;
+
+		case 6:
+			m_sunLight.color = Color.white;
+			m_sunLight.intensity = 0.75f;
+			break;
+
+		case 12:
+			m_sunLight.color = Color.white;
+			m_sunLight.intensity = 1.2f;
+			break;
+
+		case 18:
+			m_sunLight.color = new Color (255 / 255f, 168 / 255f, 0 / 255f);
+			m_sunLight.intensity = 1f;
+			break;
+		}
 	}
 }

@@ -6,6 +6,8 @@ namespace FoW
     [RequireComponent(typeof(Camera))]
     public class FogOfWarSecondary : MonoBehaviour
     {
+        public int team = 0;
+
         Transform _transform;
         Camera _camera;
 
@@ -18,7 +20,7 @@ namespace FoW
 
         void OnRenderImage(RenderTexture source, RenderTexture destination)
         {
-            FogOfWar.current.RenderFog(source, destination, _camera, _transform);
+            FogOfWar.GetFogOfWarTeam(team).RenderFog(source, destination, _camera, _transform);
         }
     }
 }

@@ -13,7 +13,7 @@ public class Party : MonoBehaviour {
 	public GameObject m_departureLoc;
 
 	public AI_WORLD_STATE m_state = AI_WORLD_STATE.END;
-	protected PARTY_TYPE m_partyType;
+	public PARTY_TYPE m_partyType;
 
 	public 	int m_iWaitTurnCount = 0;
 	public	int m_iFatigue = 0;
@@ -24,21 +24,20 @@ public class Party : MonoBehaviour {
 
 	// Use this for initialization
 	protected virtual void Start () {
-		if (m_iDestinationIdx == 0)
+
+		if (m_iDestinationIdx != 0)
 			bLoaded = true;
 
 		m_listMoveIdx = new List<int> ();
 		m_iGridIdx = GridMgr.getInstance.GetGridIdx (transform.position);
 
-		if (bLoaded) {
+		if (!bLoaded) {
 			m_iDepartureIdx = m_iGridIdx;
 		}
 
 		m_departureLoc = GameObject.Find ("Geo").transform.GetChild (m_iDepartureIdx).GetComponent<WorldGeo> ().m_worldIcon;
 
-		ThinkWhatAreDoingNext ();
-
-		if (bLoaded)
+		if (!bLoaded)
 			SetEnemyList ();
 	}
 
@@ -202,5 +201,11 @@ public class Party : MonoBehaviour {
 			else
 				lr.transform.parent = path.transform;
 		}
+	}
+
+	public void DestroyThis()
+	{
+		Destroy (path);
+		Destroy (gameObject);
 	}
 }

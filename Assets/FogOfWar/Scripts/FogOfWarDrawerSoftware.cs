@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace FoW
 {
@@ -99,7 +100,7 @@ namespace FoW
             public DrawInfo(FogOfWarMap map, FogOfWarShape shape, float xradius, float yradius)
             {
                 // convert size to fog space
-                fogForward = FogOfWarConversion.WorldToFogPlane(shape.foward, map.plane).normalized;
+                fogForward = shape.foward;
                 forwardAngle = FogOfWarUtils.ClockwiseAngle(Vector2.up, fogForward) * Mathf.Deg2Rad;
                 float sin = Mathf.Sin(-forwardAngle);
                 float cos = Mathf.Cos(-forwardAngle);
@@ -284,6 +285,20 @@ namespace FoW
                     // read texture
                     Unfog(x, y, SampleTexture(shape.texture, uu, vv));
                 }
+            }
+        }
+
+        public override void Unfog(Rect rect)
+        {
+            rect.xMin = Mathf.Max(rect.xMin, 0);
+            rect.xMax = Mathf.Min(rect.xMax, _map.resolution.x);
+            rect.yMin = Mathf.Max(rect.yMin, 0);
+            rect.yMax = Mathf.Min(rect.yMax, _map.resolution.y);
+
+            for (int y = (int)rect.yMin; y < (int)rect.yMax; ++y)
+            {
+                for (int x = (int)rect.xMin; x < (int)rect.xMax; ++x)
+                    _values[y * _map.resolution.x + x] = 0;
             }
         }
     }

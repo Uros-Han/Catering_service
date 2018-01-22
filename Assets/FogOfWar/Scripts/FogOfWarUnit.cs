@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 namespace FoW
 {
@@ -40,10 +41,22 @@ namespace FoW
 
         Transform _transform;
 
-        void Start()
+        static List<FogOfWarUnit> _registeredUnits = new List<FogOfWarUnit>();
+        public static List<FogOfWarUnit> registeredUnits { get { return _registeredUnits; } }
+
+        void Awake()
         {
             _transform = transform;
-            FogOfWar.RegisterUnit(this);
+        }
+
+        void OnEnable()
+        {
+            registeredUnits.Add(this);
+        }
+
+        void OnDisable()
+        {
+            registeredUnits.Remove(this);
         }
 
         static bool CalculateLineOfSight2D(Vector2 eye, float radius, float penetration, LayerMask layermask, float[] distances)
@@ -71,7 +84,7 @@ namespace FoW
             return hashit;
         }
 
-        static bool CalculateLineOfSight3D(Vector3 eye, float radius, float penetration, LayerMask layermask, float[] distances)
+        static bool CalculateLineOfSight3D(Vector3 eye, float radius, float penetration, LayerMask layermask, float[] distances, Vector3 up, Vector3 forward)
         {
             bool hashit = false;
             float angle = 360.0f / distances.Length;
@@ -79,7 +92,7 @@ namespace FoW
 
             for (int i = 0; i < distances.Length; ++i)
             {
-                Vector3 dir = Quaternion.AngleAxis(angle * i, Vector3.up) * Vector3.forward;
+                Vector3 dir = Quaternion.AngleAxis(angle * i, up) * forward;
                 if (Physics.Raycast(eye, dir, out hit, radius, layermask))
                 {
                     distances[i] = (hit.distance + penetration) / radius;
@@ -95,7 +108,7 @@ namespace FoW
             return hashit;
         }
 
-        public float[] CalculateLineOfSight(FogOfWarPhysics physicsmode, Vector3 eyepos)
+        public float[] CalculateLineOfSight(FogOfWarPhysics physicsmode, Vector3 eyepos, FogOfWarPlane plane)
         {
             if (lineOfSightMask == 0)
                 return null;
@@ -108,9 +121,14 @@ namespace FoW
                 if (CalculateLineOfSight2D(eyepos, radius, lineOfSightPenetration, lineOfSightMask, _distances))
                     return _distances;
             }
-            else // 3D
+            else if (plane == FogOfWarPlane.XZ) // 3D
             {
-                if (CalculateLineOfSight3D(eyepos, radius, lineOfSightPenetration, lineOfSightMask, _distances))
+                if (CalculateLineOfSight3D(eyepos, radius, lineOfSightPenetration, lineOfSightMask, _distances, Vector3.up, Vector3.forward))
+                    return _distances;
+            }
+            else if (plane == FogOfWarPlane.XY) // 3D
+            {
+                if (CalculateLineOfSight3D(eyepos, radius, lineOfSightPenetration, lineOfSightMask, _distances, Vector3.back, Vector3.up))
                     return _distances;
             }
             return null;
@@ -123,7 +141,7 @@ namespace FoW
             return v > 0 ? 1 : -1;
         }
         
-        public bool[] CalculateLineOfSightCells(FogOfWarPhysics physicsmode, Vector3 eyepos)
+        public bool[] CalculateLineOfSightCells(FogOfWar fow, FogOfWarPhysics physicsmode, Vector3 eyepos)
         {
             if (physicsmode == FogOfWarPhysics.Physics3D)
             {
@@ -136,8 +154,8 @@ namespace FoW
             if (_visibleCells == null || _visibleCells.Length != width * width)
                 _visibleCells = new bool[width * width];
 
-            Vector2 cellsize = (FogOfWar.current.mapResolution.vector2 * 1.1f) / FogOfWar.current.mapSize; // do 1.1 to bring it away from the collider a bit so the raycast won't hit it
-            Vector2 playerpos = FogOfWarConversion.SnapWorldPositionToNearestFogPixel(_transform.position, FogOfWar.current.mapOffset, FogOfWar.current.mapResolution, FogOfWar.current.mapSize);
+            Vector2 cellsize = (fow.mapResolution.vector2 * 1.1f) / fow.mapSize; // do 1.1 to bring it away from the collider a bit so the raycast won't hit it
+            Vector2 playerpos = FogOfWarConversion.SnapWorldPositionToNearestFogPixel(fow, _transform.position, fow.mapOffset, fow.mapResolution, fow.mapSize);
             for (int y = -rad; y <= rad; ++y)
             {
                 for (int x = -rad; x <= rad; ++x)
@@ -146,7 +164,7 @@ namespace FoW
 
                     // find the nearest point in the cell to the player and raycast to that point
                     Vector2 fogoffset = offset.vector2 - new Vector2(Sign(offset.x) * cellsize.x, Sign(offset.y) * cellsize.y) * 0.5f;
-                    Vector2 worldoffset = FogOfWarConversion.FogToWorldSize(fogoffset, FogOfWar.current.mapResolution, FogOfWar.current.mapSize);
+                    Vector2 worldoffset = FogOfWarConversion.FogToWorldSize(fogoffset, fow.mapResolution, fow.mapSize);
                     Vector2 worldpos = playerpos + worldoffset;
 
                     Debug.DrawLine(playerpos, worldpos);
@@ -159,7 +177,7 @@ namespace FoW
                     else
                     {
                         _visibleCells[idx] = true;
-                        RaycastHit2D hit = Physics2D.Raycast(playerpos, worldoffset.normalized, worldoffset.magnitude, lineOfSightMask);
+                        RaycastHit2D hit = Physics2D.Raycast(playerpos, worldoffset.normalized, Mathf.Max(worldoffset.magnitude - lineOfSightPenetration, 0.00001f), lineOfSightMask);
                         _visibleCells[idx] = hit.collider == null;
                     }
                 }
@@ -168,27 +186,27 @@ namespace FoW
             return _visibleCells;
         }
 
-        void FillShape(FogOfWarShape shape)
+        void FillShape(FogOfWar fow, FogOfWarShape shape)
         {
             if (antiFlicker)
             {
                 // snap to nearest fog pixel
-                shape.eyePosition = FogOfWarConversion.SnapWorldPositionToNearestFogPixel(FogOfWarConversion.WorldToFogPlane(_transform.position, FogOfWar.current.plane), FogOfWar.current.mapOffset, FogOfWar.current.mapResolution, FogOfWar.current.mapSize);
-                shape.eyePosition = FogOfWarConversion.FogPlaneToWorld(shape.eyePosition.x, shape.eyePosition.y, _transform.position.y, FogOfWar.current.plane);
+                shape.eyePosition = FogOfWarConversion.SnapWorldPositionToNearestFogPixel(fow, FogOfWarConversion.WorldToFogPlane(_transform.position, fow.plane), fow.mapOffset, fow.mapResolution, fow.mapSize);
+                shape.eyePosition = FogOfWarConversion.FogPlaneToWorld(shape.eyePosition.x, shape.eyePosition.y, _transform.position.y, fow.plane);
             }
             else
                 shape.eyePosition = _transform.position;
-            shape.foward = _transform.forward;
+            shape.foward = FogOfWarConversion.TransformFogPlaneForward(_transform, fow.plane);
             shape.offset = offset;
             shape.radius = radius;
         }
 
-        FogOfWarShape CreateShape()
+        FogOfWarShape CreateShape(FogOfWar fow)
         {
             if (shapeType == FogOfWarShapeType.Circle)
             {
                 FogOfWarShapeCircle shape = new FogOfWarShapeCircle();
-                FillShape(shape);
+                FillShape(fow, shape);
                 shape.innerRadius = innerRadius;
                 shape.angle = angle;
                 return shape;
@@ -196,7 +214,7 @@ namespace FoW
             else if (shapeType == FogOfWarShapeType.Box)
             {
                 FogOfWarShapeBox shape = new FogOfWarShapeBox();
-                FillShape(shape);
+                FillShape(fow, shape);
                 return shape;
             }
             else if (shapeType == FogOfWarShapeType.Texture)
@@ -205,7 +223,7 @@ namespace FoW
                     return null;
 
                 FogOfWarShapeTexture shape = new FogOfWarShapeTexture();
-                FillShape(shape);
+                FillShape(fow, shape);
                 shape.texture = texture;
                 shape.rotateToForward = rotateToForward;
                 return shape;
@@ -213,20 +231,20 @@ namespace FoW
             return null;
         }
 
-        public FogOfWarShape GetShape(FogOfWarPhysics physics)
+        public FogOfWarShape GetShape(FogOfWar fow, FogOfWarPhysics physics, FogOfWarPlane plane)
         {
-            FogOfWarShape shape = CreateShape();
+            FogOfWarShape shape = CreateShape(fow);
             if (shape == null)
                 return null;
 
             if (cellBased)
             {
                 shape.lineOfSight = null;
-                shape.visibleCells = CalculateLineOfSightCells(physics, shape.eyePosition);
+                shape.visibleCells = CalculateLineOfSightCells(fow, physics, shape.eyePosition);
             }
             else
             {
-                shape.lineOfSight = CalculateLineOfSight(physics, shape.eyePosition);
+                shape.lineOfSight = CalculateLineOfSight(physics, shape.eyePosition, plane);
                 shape.visibleCells = null;
             }
             return shape;

@@ -12,6 +12,7 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 
 	// Use this for initialization
 	void Start () {
+
 	}
 
 	void UpdateOrthographicCameraSize (float size) {
@@ -75,7 +76,7 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 		GameObject.Find ("Field").BroadcastMessage ("HarvestPartInField");
 
 		if (GridMgr.getInstance.GetWidthOrHeightOfMonster () > 5) {
-			m_bBigSize = true;
+//			m_bBigSize = true;
 			GameObject.Find ("Morgue").transform.localPosition = new Vector3 (1.75f, 0.155f, 10f);
 		} else {
 			m_bBigSize = false;

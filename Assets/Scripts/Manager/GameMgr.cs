@@ -11,6 +11,7 @@ public class GameMgr : Singleton<GameMgr> {
 	public bool m_bDeveloperMode;
 
 	public int m_iReward;
+	public int m_iDay;
 
 	// Use this for initialization
 	void Awake () {
@@ -21,9 +22,6 @@ public class GameMgr : Singleton<GameMgr> {
 
 		ObjectFactory.getInstance.ResourcesLoad ();
 		Localization.language = "Korean";
-
-		if (!m_bDeveloperMode)
-			GameObject.Find ("DeveloperTools").transform.GetChild (1).gameObject.SetActive (false);
 	}
 
 	public IEnumerator ContinueGame_Coroutine()

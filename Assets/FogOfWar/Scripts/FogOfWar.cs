@@ -82,7 +82,7 @@ namespace FoW
         
         [Header("Multithreading")]
         public bool multithreaded = false;
-        [Range(2, 8)]
+        [Range(1, 8)]
         public int threads = 2;
         public double maxMillisecondsPerFrame = 5;
         FogOfWarThreadPool _threadPool = null;
@@ -102,26 +102,23 @@ namespace FoW
 
         Transform _transform;
         Camera _camera;
-        
-        public static FogOfWar current = null;
-        static FoWIDs _ids = null;
 
+        static FoWIDs _ids = null;
         static Shader _fogOfWarShader = null;
         public static Shader fogOfWarShader { get { if (_fogOfWarShader == null) _fogOfWarShader = Resources.Load<Shader>("FogOfWarShader"); return _fogOfWarShader; } }
         static Shader _clearFogShader = null;
         public static Shader clearFogShader { get { if (_clearFogShader == null) _clearFogShader = Resources.Load<Shader>("ClearFogShader"); return _clearFogShader; } }
-        
-        static List<FogOfWarUnit> _registeredUnits = new List<FogOfWarUnit>();
 
-        public static void RegisterUnit(FogOfWarUnit unit)
+        static List<FogOfWar> _instances = new List<FogOfWar>();
+        public static List<FogOfWar> instances { get { return _instances; } }
+
+        public static FogOfWar GetFogOfWarTeam(int team)
         {
-            if (!_registeredUnits.Contains(unit))
-                _registeredUnits.Add(unit);
+            return instances.Find(f => f.team == team);
         }
 
         void Awake()
         {
-            current = this;
             if (_ids == null)
             {
                 _ids = new FoWIDs();
@@ -129,6 +126,16 @@ namespace FoW
             }
 
             Reinitialize();
+        }
+
+        void OnEnable()
+        {
+            _instances.Add(this);
+        }
+
+        void OnDisable()
+        {
+            _instances.Remove(this);
         }
 
         // Call this whenever you change any of the size values of the map
@@ -205,6 +212,19 @@ namespace FoW
             return IsInFog(position, 20);
         }
 
+        public void Unfog(Rect rect)
+        {
+            _drawer.Unfog(rect);
+        }
+
+        public void Unfog(Bounds bounds)
+        {
+            Rect rect = new Rect();
+            rect.min = FogOfWarConversion.WorldToFog(bounds.min, plane, mapOffset, mapResolution, mapSize);
+            rect.max = FogOfWarConversion.WorldToFog(bounds.max, plane, mapOffset, mapResolution, mapSize);
+            Unfog(rect);
+        }
+
         // Checks the visibility of an area, where a value of 0 is fully unfogged and 1 if fully fogged
         public float VisibilityOfArea(Bounds worldbounds)
         {
@@ -238,15 +258,15 @@ namespace FoW
         void ProcessUnits()
         {
             // remove any invalid units
-            _registeredUnits.RemoveAll(u => u == null);
+            FogOfWarUnit.registeredUnits.RemoveAll(u => u == null);
 
             double millisecondfrequency = 1000.0 / System.Diagnostics.Stopwatch.Frequency;
-            for (; _currentUnitProcessing < _registeredUnits.Count; ++_currentUnitProcessing)
+            for (; _currentUnitProcessing < FogOfWarUnit.registeredUnits.Count; ++_currentUnitProcessing)
             {
-                if (!_registeredUnits[_currentUnitProcessing].isActiveAndEnabled || _registeredUnits[_currentUnitProcessing].team != team)
+                if (!FogOfWarUnit.registeredUnits[_currentUnitProcessing].isActiveAndEnabled || FogOfWarUnit.registeredUnits[_currentUnitProcessing].team != team)
                     continue;
 
-                FogOfWarShape shape = _registeredUnits[_currentUnitProcessing].GetShape(physics);
+                FogOfWarShape shape = FogOfWarUnit.registeredUnits[_currentUnitProcessing].GetShape(this, physics, plane);
                 if (multithreaded)
                     _threadPool.Run(() => _drawer.Draw(shape));
                 else
@@ -286,7 +306,7 @@ namespace FoW
             
             // compile final texture
             _timeSinceLastUpdate += Time.deltaTime;
-            if (_currentUnitProcessing >= _registeredUnits.Count && (!multithreaded || _threadPool.hasAllFinished))
+            if (_currentUnitProcessing >= FogOfWarUnit.registeredUnits.Count && (!multithreaded || _threadPool.hasAllFinished))
             {
                 _drawer.GetValues(_fogValuesCopy);
                 _currentUnitProcessing = 0;

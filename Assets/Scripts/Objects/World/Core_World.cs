@@ -68,7 +68,7 @@ public class Core_World : MonoBehaviour {
 			{
 				bMouseTimerOn = false;
 
-				if(FoW.FogOfWar.current.GetFogValue(grid.GetPosOfIdx(grid.GetGridIdx(vecMouseClickedPos))) > 250 && !(GameMgr.getInstance.m_bDeveloperMode && GameObject.Find("DeveloperTools").GetComponent<DeveloperTool>().m_bFogDisabled)){
+				if(FoW.FogOfWar.GetFogOfWarTeam(0) != null && FoW.FogOfWar.GetFogOfWarTeam(0).GetFogValue(grid.GetPosOfIdx(grid.GetGridIdx(vecMouseClickedPos))) > 250 && !(GameMgr.getInstance.m_bDeveloperMode && GameObject.Find("DeveloperTools").GetComponent<DeveloperTool>().m_bFogDisabled)){
 					
 						Transform pathTrans = GameObject.Find ("Path").transform;
 						for (int i = 0; i < pathTrans.childCount; ++i) {
@@ -78,9 +78,9 @@ public class Core_World : MonoBehaviour {
 						GameObject Dest = GameObject.Find("Destination").gameObject;
 						Dest.GetComponent<SpriteRenderer>().enabled = false;
 				}else if(Vector3.Distance(vecMouseClickedPos, mousePosition) < 0.025f){
-					m_listMoveIdx = AStar.getInstance.AStarStart_World(grid.GetGridIdx(gameObject.transform.position), grid.m_iGridIdx);
+					m_listMoveIdx = AStar.getInstance.AStarStart_World(grid.GetGridIdx(gameObject.transform.position), grid.m_iGridIdx, true);
 					m_iDestinationIdx = grid.m_iGridIdx;
-					DrawPath();
+//					DrawPath();
 
 					if(m_listMoveIdx.Count != 0) // Select WorldIcon
 					{
@@ -112,7 +112,7 @@ public class Core_World : MonoBehaviour {
 	{
 		if (m_iNeedHunger > GameMgr.getInstance.m_iHunger) {
 			//TODO: HUNGER CHECKER
-			ObjectFactory.getInstance.Create_MessageBox_TwoButton(Localization.Get("HungerCheckerMsg"), "HungerCheckerEnforcement", "DestroyMessageBox");
+			ObjectFactory.getInstance.Create_MessageBox_TwoButton(Localization.Get("Mbox_HungerChecker"), "HungerCheckerEnforcement", "DestroyMessageBox");
 		} else
 			MoveOrder ();
 	}
@@ -193,6 +193,8 @@ public class Core_World : MonoBehaviour {
 			Party party = PartyTrans.GetChild (i).GetComponent<Party> ();
 			if(party.m_iGridIdx == objIcon.m_iGridIdx)
 			{
+				WorldMapManager.getInstance.m_encountPartyList.Add (PartyTrans.GetChild (i).gameObject);
+
 				for (int j = 0; j < party.m_list_enemyType.Count; ++j) {
 					gMgr.m_ilistCurEnemyList.Add (party.m_list_enemyType[j]);	
 				}
@@ -215,7 +217,7 @@ public class Core_World : MonoBehaviour {
 	void CameBackFromBattleScene()
 	{
 		if (m_bWasMovingBeforeChgedScene) {
-			m_listMoveIdx = AStar.getInstance.AStarStart_World(GridMgr.getInstance.GetGridIdx(gameObject.transform.position), m_iDestinationIdx);
+			m_listMoveIdx = AStar.getInstance.AStarStart_World(GridMgr.getInstance.GetGridIdx(gameObject.transform.position), m_iDestinationIdx, true);
 			StartCoroutine (Move ());
 		} else {
 			ProCamera2D.Instance.AdjustCameraTargetInfluence (ProCamera2D.Instance.CameraTargets [0], 0f, 0f);

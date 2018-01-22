@@ -54,11 +54,6 @@
      <Compile Include="Assets\Easy Save 3\Types\ES3Type_Part.cs" />
      <Compile Include="Assets\Easy Save 3\Types\ES3Type_PartSaveForm.cs" />
      <Compile Include="Assets\Easy Save 3\Types\ES3Type_WorldIcon.cs" />
-     <Compile Include="Assets\FogOfWar\Samples\Test2D\FogOfWarTest2DPlayer.cs" />
-     <Compile Include="Assets\FogOfWar\Samples\Test3D\FogOfWarTestEnemy.cs" />
-     <Compile Include="Assets\FogOfWar\Samples\Test3D\FogOfWarTestGUI.cs" />
-     <Compile Include="Assets\FogOfWar\Samples\Test3D\FogOfWarTestNeutral.cs" />
-     <Compile Include="Assets\FogOfWar\Samples\Test3D\FogOfWarTestNeutralSpawner.cs" />
      <Compile Include="Assets\FogOfWar\Scripts\FogOfWar.cs" />
      <Compile Include="Assets\FogOfWar\Scripts\FogOfWarBlur.cs" />
      <Compile Include="Assets\FogOfWar\Scripts\FogOfWarChunkManager.cs" />
@@ -356,6 +351,7 @@
      <Compile Include="Assets\Scripts\UI\MeatState.cs" />
      <Compile Include="Assets\Scripts\UI\MessageBox.cs" />
      <Compile Include="Assets\Scripts\UI\WantedReward.cs" />
+     <Compile Include="Assets\Scripts\UI\World\AleartMsg.cs" />
      <Compile Include="Assets\Scripts\UI\World\TimeUI.cs" />
      <Compile Include="Assets\SpriteParticleEmitter\Code\Core\EmitterBase.cs" />
      <Compile Include="Assets\SpriteParticleEmitter\Code\Core\EmitterBaseUI.cs" />

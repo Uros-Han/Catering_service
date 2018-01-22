@@ -96,13 +96,18 @@ Icon_Castle_desc_population_2,Castle_Description_population_2,성 안은 훈련�
 ,,
 ,,
 ,,
-,,
+UI,,
 ,,
 MESSAGE BOX,,
 Yes,Yes,예
 No,No,아니요
 Confirm,Confirm,확인
-HungerCheckerMsg,HungerCheckerMsg,여행을 위한 허기가 부족합니다. 먹보괴물은 허기가 모자란다면 여행 도중 자신의 파츠를 무작위로 먹을 것입니다. 정말로 여행을 출발하시겠습니까?
+Mbox_HungerChecker,HungerCheckerMsg,여행을 위한 허기가 부족합니다. 먹보괴물은 허기가 모자란다면 여행 도중 자신의 파츠를 무작위로 먹을 것입니다. 정말로 여행을 출발하시겠습니까?
+,,
+,,
+ALEART MESSAGE,,
+AleartMsg_Create_Raider,Msg_Create_Party_{0},가장 가까운 {0}에서 괴물을 사냥하기 위해 공격대를 파견하였습니다.
+,,
 ,,
 ,,
 ,,

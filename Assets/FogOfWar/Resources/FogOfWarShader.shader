@@ -97,7 +97,7 @@ Shader "Hidden/FogOfWar"
 					// apparently unity inverted the Z buffer when not using Linear01Depth: https://docs.unity3d.com/Manual/UpgradeGuide55.html
 					// this could be avoided if the orthographic camera used Linear01Depth!!
 					// also, the depth buffer seems to be reversed on mobile devices (ie GL ES)
-					#if UNITY_VERSION >= 550 && !SHADER_API_GLES && !SHADER_API_GLES3
+					#if UNITY_VERSION >= 550 && !SHADER_API_GLES && !SHADER_API_GLES3 && !SHADER_API_D3D9
 						rawdpth = 1 - rawdpth;
 					#endif
 					float3 rayCast = (rayFar - rayOrigin) * rawdpth; // just use the raw depth texture for ortho

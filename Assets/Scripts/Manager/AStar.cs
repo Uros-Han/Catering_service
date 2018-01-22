@@ -579,7 +579,7 @@ public class AStar : Singleton<AStar>
 		return true;
 	}
 
-	void MakeBestList_World()
+	void MakeBestList_World(bool bCreateNewList)
 	{
 
 		Node ParentNode = null;
@@ -714,7 +714,11 @@ public class AStar : Singleton<AStar>
 				{
 					if (ParentNode.ParentNode == null)
 						break;
-					m_BestList.Insert(0, ParentNode.iIndex);
+
+					if(!bCreateNewList)
+						m_BestList.Insert(0, ParentNode.iIndex);
+					else
+						m_ReturnList.Insert(0, ParentNode.iIndex);
 					ParentNode = ParentNode.ParentNode;
 				}
 				break;
@@ -735,16 +739,34 @@ public class AStar : Singleton<AStar>
 //		return null;
 //	}
 
-	public List<int> AStarStart_World(int iStart, int iEnd)
+	List<int> m_ReturnList; //이 리스트를 어디 대입할 때는 bMakeNewList = true로 할 것!
+	public List<int> AStarStart_World(int iStart, int iEnd, bool bMakeNewList = false)
 	{
+		if (m_BestList == null)
+			m_BestList = new List<int> ();
+		
+		if(bMakeNewList)
+			m_ReturnList = new List<int>();
+		
 		if (iStart == iEnd)
 		{
-			if (m_BestList == null)
-				m_BestList = new List<int>();
+			if (!bMakeNewList) {
+				if (m_BestList == null)
+					m_BestList = new List<int> ();
 
-			m_BestList.Clear();
-			m_BestList.Add(iEnd);
-			return m_BestList;
+				m_BestList.Clear ();
+				m_BestList.Add (iEnd);
+
+				return m_BestList;
+			} else {
+				if (m_ReturnList == null)
+					m_ReturnList = new List<int> ();
+
+				m_ReturnList.Clear ();
+				m_ReturnList.Add (iEnd);
+
+				return m_ReturnList;
+			}
 		}
 
 
@@ -752,10 +774,6 @@ public class AStar : Singleton<AStar>
 			m_OpenList = new List<Node>();
 		if (m_CloseList == null)
 			m_CloseList = new List<Node>();
-
-
-		m_BestList = new List<int>();
-
 
 		ClearNode();
 
@@ -765,27 +783,41 @@ public class AStar : Singleton<AStar>
 		m_iTileCountX = GridMgr.getInstance.m_iXcount;
 		m_iTileCountY = GridMgr.getInstance.m_iYcount;
 
-		MakeBestList_World();
+		MakeBestList_World(bMakeNewList);
 
-		if (m_BestList.Count == 0) // 길막힘
-		{
+		if (!bMakeNewList) {
+			if (m_BestList.Count == 0) { // 길막힘
 
-			if (m_iEndIndex == m_iStartIndex)
-			{
-				if (m_BestList == null)
-					m_BestList = new List<int>();
+				if (m_iEndIndex == m_iStartIndex) {
+					if (m_BestList == null)
+						m_BestList = new List<int> ();
 
-				m_BestList.Clear();
-				m_BestList.Add(m_iEndIndex);
-				return m_BestList;
+					m_BestList.Clear ();
+					m_BestList.Add (m_iEndIndex);
+					return m_BestList;
+				}
+
+				ClearNode ();
 			}
 
-			ClearNode();
+			return m_BestList;
+		} else {
+			if (m_ReturnList.Count == 0) { // 길막힘
 
-//			MakeBestList_World();
+				if (m_iEndIndex == m_iStartIndex) {
+					if (m_ReturnList == null)
+						m_ReturnList = new List<int> ();
+
+					m_ReturnList.Clear ();
+					m_ReturnList.Add (m_iEndIndex);
+					return m_ReturnList;
+				}
+
+				ClearNode ();
+			}
+
+			return m_ReturnList;
 		}
-
-		return m_BestList;
 	}
 
 	void DrawDebugLine(Vector3 start, Vector3 end, Color color, float duration = 0.1f)

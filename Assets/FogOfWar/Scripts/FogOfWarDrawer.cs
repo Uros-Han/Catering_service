@@ -22,6 +22,7 @@ namespace FoW
         protected abstract void DrawCircle(FogOfWarShapeCircle shape);
         protected abstract void DrawBox(FogOfWarShapeBox shape);
         protected abstract void DrawTexture(FogOfWarShapeTexture shape);
+        public abstract void Unfog(Rect rect);
 
         public void Draw(FogOfWarShape shape)
         {

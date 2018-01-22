@@ -15,6 +15,8 @@ public class WorldMapManager : Singleton<WorldMapManager> {
 	public List<int> m_iListCity;
 	public List<int> m_iListCastle;
 
+	public List<GameObject> m_encountPartyList;
+
 	// Use this for initialization
 	void Start () {
 		m_worldTurnState = WORLDTURN_STATE.IDLE;
@@ -25,6 +27,11 @@ public class WorldMapManager : Singleton<WorldMapManager> {
 		m_iListVillage = new List<int> ();
 		m_iListCity = new List<int> ();
 		m_iListCastle = new List<int> ();
+
+		m_encountPartyList = new List<GameObject> ();
+
+		if (!GameMgr.getInstance.m_bDeveloperMode)
+			GameObject.Find ("DeveloperTools").transform.GetChild (1).gameObject.SetActive (false);
 	}
 
 	void OnEnable()
@@ -51,6 +58,12 @@ public class WorldMapManager : Singleton<WorldMapManager> {
 				pollutedIcon.m_fProsperity = 0f;
 				pollutedIcon.m_iRaided += 1;
 				pollutedIcon.m_list_enemyType.Clear ();
+
+				List<GameObject> elimatedPartyList = WorldMapManager.getInstance.m_encountPartyList;
+				for (int i = 0; i < elimatedPartyList.Count; ++i) {
+					elimatedPartyList [i].GetComponent<Party> ().DestroyThis ();
+					elimatedPartyList.Remove (elimatedPartyList [i]);
+				}
 			}
 
 			SaveManager.getInstance.LocalSave ();

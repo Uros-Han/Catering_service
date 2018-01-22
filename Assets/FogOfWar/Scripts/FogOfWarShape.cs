@@ -5,7 +5,7 @@ namespace FoW
     public abstract class FogOfWarShape
     {
         public Vector3 eyePosition;
-        public Vector3 foward;
+        public Vector2 foward;
         public Vector2 offset;
         public float[] lineOfSight;
         public bool[] visibleCells;

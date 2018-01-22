@@ -11,6 +11,8 @@ public class Raider : Party {
 		m_iFatigue = Random.Range (4, 8);
 
 		base.Start ();
+
+		ThinkWhatAreDoingNext ();
 	}
 
 	protected override void SetDestination()
@@ -34,7 +36,7 @@ public class Raider : Party {
 		}else
 			m_iDestinationIdx = coreIdx;
 
-		m_listMoveIdx = AStar.getInstance.AStarStart_World(GridMgr.getInstance.GetGridIdx(gameObject.transform.position), m_iDestinationIdx);
+		m_listMoveIdx = AStar.getInstance.AStarStart_World(GridMgr.getInstance.GetGridIdx(gameObject.transform.position), m_iDestinationIdx, true);
 
 		base.SetDestination ();
 	}

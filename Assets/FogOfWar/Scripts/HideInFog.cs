@@ -6,6 +6,8 @@ namespace FoW
     [AddComponentMenu("FogOfWar/HideInFog")]
     public class HideInFog : MonoBehaviour
     {
+        public int team = 0;
+
         [Range(0.0f, 1.0f)]
         public float minFogStrength = 0.2f;
         
@@ -29,7 +31,7 @@ namespace FoW
 
         void Update()
         {
-            bool visible = !FogOfWar.current.IsInFog(_transform.position, minFogStrength);
+            bool visible = !FogOfWar.GetFogOfWarTeam(team).IsInFog(_transform.position, minFogStrength);
 
             if (_renderer != null)
                 _renderer.enabled = visible;

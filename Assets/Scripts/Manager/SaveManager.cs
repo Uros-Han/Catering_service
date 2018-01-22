@@ -84,11 +84,12 @@ public class SaveManager : Singleton<SaveManager> {
 
 		List<byte> fogList = new List<byte> ();
 		for (int i = 0; i < 128 * 128; ++i) {
-			fogList.Add (FoW.FogOfWar.current.fogValues [i]);
+			fogList.Add (FoW.FogOfWar.GetFogOfWarTeam(0).fogValues [i]);
 		}
 		ES3.Save <List<byte>> ("fogValues", fogList, "world.txt");
 
 		ES3.Save <List<int>> ("pollutedList", WorldMapManager.getInstance.m_iPollutedIdxList, "world.txt");
+		ES3.Save<int> ("day", GameMgr.getInstance.m_iDay, "world.txt");
 	}
 
 	void LoadWorld()
@@ -121,13 +122,15 @@ public class SaveManager : Singleton<SaveManager> {
 		for (int i = 0; i < fogByte.Length; ++i) {
 			fogByte [i] = FogList [i];
 		}
-		FoW.FogOfWar.current.fogValues = fogByte;
+		FoW.FogOfWar.GetFogOfWarTeam(0).fogValues = fogByte;
 
 		WorldMapManager.getInstance.m_iPollutedIdxList = ES3.Load <List<int>> ("pollutedList", "world.txt");
 		WorldMapManager.getInstance.Pollute (WorldMapManager.getInstance.m_iPollutedIdxList);
 
 		GameObject.Find ("PC2DPanTarget").transform.position = GameObject.Find ("Core").transform.position;
 		GameObject.Find ("WorldTool").GetComponent<UIPanel> ().alpha = 0f;
+
+		GameMgr.getInstance.m_iDay = ES3.Load<int> ("day", "world.txt");
 	}
 
 	public class PartSaveForm

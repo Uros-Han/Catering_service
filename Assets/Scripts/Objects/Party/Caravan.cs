@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 public class Caravan : Party {
 	/// <summary>
@@ -30,6 +29,8 @@ public class Caravan : Party {
 				m_bCargoLoaded = false;
 			}
 		}
+
+		ThinkWhatAreDoingNext ();
 	}
 
 	protected override void ThinkWhatAreDoingNext()
@@ -59,7 +60,7 @@ public class Caravan : Party {
 
 				m_iDepartureIdx = GridMgr.getInstance.GetGridIdx (m_departureLoc.transform.position);
 				m_iDestinationIdx = GridMgr.getInstance.GetGridIdx (m_destinationLoc.transform.position);
-				m_listMoveIdx = AStar.getInstance.AStarStart_World(GridMgr.getInstance.GetGridIdx(gameObject.transform.position), m_iDestinationIdx);
+				m_listMoveIdx = AStar.getInstance.AStarStart_World(GridMgr.getInstance.GetGridIdx(gameObject.transform.position), m_iDestinationIdx, true);
 
 				m_iWaitTurnCount = Random.Range (2, 5);
 				m_state = AI_WORLD_STATE.CAMP;
@@ -94,6 +95,7 @@ public class Caravan : Party {
 		if (m_iDestinationIdx == 0) {
 
 			Dictionary<int,int> iDicDistance = new Dictionary<int, int> ();
+			AStar aStar = AStar.getInstance;
 
 			if(m_bOneWay)
 			{
@@ -102,19 +104,21 @@ public class Caravan : Party {
 				if (iRandomRange < 50) {
 					List<int> m_iListCity = WorldMapManager.getInstance.m_iListCity;
 					for (int i = 0; i < m_iListCity.Count; ++i) {
-						iDicDistance.Add (m_iListCity [i], AStar.getInstance.AStarStart_World (m_iGridIdx, m_iListCity [i]).Count);
+						if (m_iListCity [i] == m_iGridIdx)
+							continue;
+						iDicDistance.Add (m_iListCity [i], aStar.AStarStart_World (m_iGridIdx, m_iListCity [i]).Count);
 					}
 				} else {
 					List<int> m_iListCastle = WorldMapManager.getInstance.m_iListCastle;
 					for (int i = 0; i < m_iListCastle.Count; ++i) {
-						iDicDistance.Add (m_iListCastle [i], AStar.getInstance.AStarStart_World (m_iGridIdx, m_iListCastle [i]).Count);
+						iDicDistance.Add (m_iListCastle [i], aStar.AStarStart_World (m_iGridIdx, m_iListCastle [i]).Count);
 					}
 				}
 
 			}else{
 				List<int> iListCity = WorldMapManager.getInstance.m_iListCity;
 				for (int i = 0; i < iListCity.Count; ++i) {
-					iDicDistance.Add (iListCity [i], AStar.getInstance.AStarStart_World (m_iGridIdx, iListCity [i]).Count);
+					iDicDistance.Add (iListCity [i], aStar.AStarStart_World (m_iGridIdx, iListCity [i]).Count);
 				}
 			}
 
@@ -122,22 +126,30 @@ public class Caravan : Party {
 
 
 			//가까운 순서대로 gridIdx 정렬a
-			List<int> iListCloseLoc = iDicDistance.OrderBy (kp => kp.Value).Select(kp => kp.Key).ToList();
+			List<KeyValuePair<int, int>> iListCloseLoc = new List<KeyValuePair<int, int>>(iDicDistance);
+			iListCloseLoc.Sort(
+				delegate(KeyValuePair<int, int> firstPair,
+					KeyValuePair<int, int> nextPair)
+				{
+					return firstPair.Value.CompareTo(nextPair.Value);
+				}
+			);
+
 			Transform geoTrans = GameObject.Find ("Geo").transform;
 
 			bool bFindDest = false;
 			if (m_bOneWay) {
 				for (int i = 0; i < iListCloseLoc.Count; ++i) {
-					if (geoTrans.GetChild (iListCloseLoc [i]).GetComponent<WorldGeo> ().m_worldIcon.GetComponent<WorldIcon> ().m_fProsperity < 33f) {
-						m_iDestinationIdx = iListCloseLoc [i];
+					if (geoTrans.GetChild (iListCloseLoc [i].Key).GetComponent<WorldGeo> ().m_worldIcon.GetComponent<WorldIcon> ().m_fProsperity < 33f) {
+						m_iDestinationIdx = iListCloseLoc [i].Key;
 						bFindDest = true;
 						break;
 					}
 				}
 				if (!bFindDest) {
 					for (int i = 0; i < iListCloseLoc.Count; ++i) {
-						if (geoTrans.GetChild (iListCloseLoc [i]).GetComponent<WorldGeo> ().m_worldIcon.GetComponent<WorldIcon> ().m_fProsperity < 66f) {
-							m_iDestinationIdx = iListCloseLoc [i];
+						if (geoTrans.GetChild (iListCloseLoc [i].Key).GetComponent<WorldGeo> ().m_worldIcon.GetComponent<WorldIcon> ().m_fProsperity < 66f) {
+							m_iDestinationIdx = iListCloseLoc [i].Key;
 							bFindDest = true;
 							break;
 						}
@@ -145,8 +157,8 @@ public class Caravan : Party {
 				}
 				if (!bFindDest) {
 					for (int i = 0; i < iListCloseLoc.Count; ++i) {
-						if (geoTrans.GetChild (iListCloseLoc [i]).GetComponent<WorldGeo> ().m_worldIcon.GetComponent<WorldIcon> ().m_fProsperity < 100f) {
-							m_iDestinationIdx = iListCloseLoc [i];
+						if (geoTrans.GetChild (iListCloseLoc [i].Key).GetComponent<WorldGeo> ().m_worldIcon.GetComponent<WorldIcon> ().m_fProsperity < 100f) {
+							m_iDestinationIdx = iListCloseLoc [i].Key;
 							bFindDest = true;
 							break;
 						}
@@ -154,16 +166,16 @@ public class Caravan : Party {
 				}
 			} else {
 				for (int i = 0; i < iListCloseLoc.Count; ++i) {
-					if (geoTrans.GetChild (iListCloseLoc [i]).GetComponent<WorldGeo> ().m_worldIcon.GetComponent<WorldIcon> ().m_fProsperity > 66f) {
-						m_iDestinationIdx = iListCloseLoc [i];
+					if (geoTrans.GetChild (iListCloseLoc [i].Key).GetComponent<WorldGeo> ().m_worldIcon.GetComponent<WorldIcon> ().m_fProsperity > 66f) {
+						m_iDestinationIdx = iListCloseLoc [i].Key;
 						bFindDest = true;
 						break;
 					}
 				}
 				if (!bFindDest) {
 					for (int i = 0; i < iListCloseLoc.Count; ++i) {
-						if (geoTrans.GetChild (iListCloseLoc [i]).GetComponent<WorldGeo> ().m_worldIcon.GetComponent<WorldIcon> ().m_fProsperity > 33f) {
-							m_iDestinationIdx = iListCloseLoc [i];
+						if (geoTrans.GetChild (iListCloseLoc [i].Key).GetComponent<WorldGeo> ().m_worldIcon.GetComponent<WorldIcon> ().m_fProsperity > 33f) {
+							m_iDestinationIdx = iListCloseLoc [i].Key;
 							bFindDest = true;
 							break;
 						}
@@ -171,8 +183,8 @@ public class Caravan : Party {
 				}
 				if (!bFindDest) {
 					for (int i = 0; i < iListCloseLoc.Count; ++i) {
-						if (geoTrans.GetChild (iListCloseLoc [i]).GetComponent<WorldGeo> ().m_worldIcon.GetComponent<WorldIcon> ().m_fProsperity > 0f) {
-							m_iDestinationIdx = iListCloseLoc [i];
+						if (geoTrans.GetChild (iListCloseLoc [i].Key).GetComponent<WorldGeo> ().m_worldIcon.GetComponent<WorldIcon> ().m_fProsperity > 0f) {
+							m_iDestinationIdx = iListCloseLoc [i].Key;
 							bFindDest = true;
 							break;
 						}
@@ -185,7 +197,7 @@ public class Caravan : Party {
 			m_destinationLoc = GameObject.Find ("Geo").transform.GetChild (m_iDestinationIdx).GetComponent<WorldGeo> ().m_worldIcon;
 		}
 
-		m_listMoveIdx = AStar.getInstance.AStarStart_World(m_iGridIdx, m_iDestinationIdx);
+		m_listMoveIdx = AStar.getInstance.AStarStart_World(m_iGridIdx, m_iDestinationIdx, true);
 
 
 		base.SetDestination ();

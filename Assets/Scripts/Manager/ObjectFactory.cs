@@ -16,6 +16,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	GameObject m_DamageUI;
 	GameObject m_Part;
 	GameObject m_MessageBox;
+	GameObject m_AleartMsg;
 
 	GameObject m_objChicken;
 	GameObject m_objGoat;
@@ -63,6 +64,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		m_HealthBar = Resources.Load ("Prefabs/UI/HealthBar") as GameObject;
 		m_DamageUI = Resources.Load ("Prefabs/UI/DamageUI") as GameObject;
 		m_MessageBox = Resources.Load ("Prefabs/UI/MessageBox") as GameObject;
+		m_AleartMsg = Resources.Load ("Prefabs/UI/AleartMsg") as GameObject;
 
 		m_sprite_meat = Resources.Load<Sprite> ("Sprites/Meat");
 		m_sheet_flag = Resources.LoadAll<Sprite>("Sprites/Sheets/sheet_flags");
@@ -192,6 +194,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		GameObject obj = Instantiate (m_Polluted) as GameObject;
 		obj.transform.parent = GameObject.Find ("Geo").transform.GetChild(iGrid);
 		obj.transform.position = GridMgr.getInstance.GetPosOfIdx(iGrid);
+		obj.transform.parent.GetComponent<WorldGeo> ().m_bPolluted = true;
 
 		return obj;
 	}
@@ -411,6 +414,21 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 			msgBox.m_functionObject = GameObject.Find ("MessageButtonManager").gameObject;
 		msgBox.m_strFunction_0 = strFunctionName_0;
 		msgBox.m_strFunction_1 = strFunctionName_1;
+
+		return obj;
+	}
+
+	public GameObject Create_AleartMsg(string strMsg)
+	{
+		GameObject obj = Instantiate (m_AleartMsg) as GameObject;
+
+		Transform AleartTrans = GameObject.Find("AleartMsg").transform;
+		AleartTrans.BroadcastMessage ("MoveUp", SendMessageOptions.DontRequireReceiver);
+
+		obj.transform.parent = AleartTrans;
+		obj.transform.localScale = Vector3.one;
+		obj.transform.localPosition = Vector3.zero;
+		obj.transform.GetChild (0).GetComponent<UILabel> ().text = strMsg;
 
 		return obj;
 	}
