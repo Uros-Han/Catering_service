@@ -23356,7 +23356,7 @@ extern "C"  void UIDragCamera_OnPress_m1415309442 (UIDragCamera_t3716731078 * __
 		bool L_0 = Behaviour_get_enabled_m753527255(__this, /*hidden argument*/NULL);
 		if (!L_0)
 		{
-			goto IL_0038;
+			goto IL_0048;
 		}
 	}
 	{
@@ -23365,7 +23365,7 @@ extern "C"  void UIDragCamera_OnPress_m1415309442 (UIDragCamera_t3716731078 * __
 		bool L_2 = NGUITools_GetActive_m1538523522(NULL /*static, unused*/, L_1, /*hidden argument*/NULL);
 		if (!L_2)
 		{
-			goto IL_0038;
+			goto IL_0048;
 		}
 	}
 	{
@@ -23374,17 +23374,26 @@ extern "C"  void UIDragCamera_OnPress_m1415309442 (UIDragCamera_t3716731078 * __
 		bool L_4 = Object_op_Inequality_m4071470834(NULL /*static, unused*/, L_3, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
 		if (!L_4)
 		{
-			goto IL_0038;
+			goto IL_0048;
 		}
 	}
 	{
 		UIDraggableCamera_t1644204495 * L_5 = __this->get_draggableCamera_2();
-		bool L_6 = ___isPressed0;
 		NullCheck(L_5);
-		UIDraggableCamera_Press_m249996667(L_5, L_6, /*hidden argument*/NULL);
+		bool L_6 = Behaviour_get_enabled_m753527255(L_5, /*hidden argument*/NULL);
+		if (!L_6)
+		{
+			goto IL_0048;
+		}
+	}
+	{
+		UIDraggableCamera_t1644204495 * L_7 = __this->get_draggableCamera_2();
+		bool L_8 = ___isPressed0;
+		NullCheck(L_7);
+		UIDraggableCamera_Press_m249996667(L_7, L_8, /*hidden argument*/NULL);
 	}
 
-IL_0038:
+IL_0048:
 	{
 		return;
 	}
@@ -23402,7 +23411,7 @@ extern "C"  void UIDragCamera_OnDrag_m2923138774 (UIDragCamera_t3716731078 * __t
 		bool L_0 = Behaviour_get_enabled_m753527255(__this, /*hidden argument*/NULL);
 		if (!L_0)
 		{
-			goto IL_0038;
+			goto IL_0048;
 		}
 	}
 	{
@@ -23411,7 +23420,7 @@ extern "C"  void UIDragCamera_OnDrag_m2923138774 (UIDragCamera_t3716731078 * __t
 		bool L_2 = NGUITools_GetActive_m1538523522(NULL /*static, unused*/, L_1, /*hidden argument*/NULL);
 		if (!L_2)
 		{
-			goto IL_0038;
+			goto IL_0048;
 		}
 	}
 	{
@@ -23420,17 +23429,26 @@ extern "C"  void UIDragCamera_OnDrag_m2923138774 (UIDragCamera_t3716731078 * __t
 		bool L_4 = Object_op_Inequality_m4071470834(NULL /*static, unused*/, L_3, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
 		if (!L_4)
 		{
-			goto IL_0038;
+			goto IL_0048;
 		}
 	}
 	{
 		UIDraggableCamera_t1644204495 * L_5 = __this->get_draggableCamera_2();
-		Vector2_t2156229523  L_6 = ___delta0;
 		NullCheck(L_5);
-		UIDraggableCamera_Drag_m152535750(L_5, L_6, /*hidden argument*/NULL);
+		bool L_6 = Behaviour_get_enabled_m753527255(L_5, /*hidden argument*/NULL);
+		if (!L_6)
+		{
+			goto IL_0048;
+		}
+	}
+	{
+		UIDraggableCamera_t1644204495 * L_7 = __this->get_draggableCamera_2();
+		Vector2_t2156229523  L_8 = ___delta0;
+		NullCheck(L_7);
+		UIDraggableCamera_Drag_m152535750(L_7, L_8, /*hidden argument*/NULL);
 	}
 
-IL_0038:
+IL_0048:
 	{
 		return;
 	}
@@ -23448,7 +23466,7 @@ extern "C"  void UIDragCamera_OnScroll_m41298423 (UIDragCamera_t3716731078 * __t
 		bool L_0 = Behaviour_get_enabled_m753527255(__this, /*hidden argument*/NULL);
 		if (!L_0)
 		{
-			goto IL_0038;
+			goto IL_0048;
 		}
 	}
 	{
@@ -23457,7 +23475,7 @@ extern "C"  void UIDragCamera_OnScroll_m41298423 (UIDragCamera_t3716731078 * __t
 		bool L_2 = NGUITools_GetActive_m1538523522(NULL /*static, unused*/, L_1, /*hidden argument*/NULL);
 		if (!L_2)
 		{
-			goto IL_0038;
+			goto IL_0048;
 		}
 	}
 	{
@@ -23466,17 +23484,26 @@ extern "C"  void UIDragCamera_OnScroll_m41298423 (UIDragCamera_t3716731078 * __t
 		bool L_4 = Object_op_Inequality_m4071470834(NULL /*static, unused*/, L_3, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
 		if (!L_4)
 		{
-			goto IL_0038;
+			goto IL_0048;
 		}
 	}
 	{
 		UIDraggableCamera_t1644204495 * L_5 = __this->get_draggableCamera_2();
-		float L_6 = ___delta0;
 		NullCheck(L_5);
-		UIDraggableCamera_Scroll_m4282878324(L_5, L_6, /*hidden argument*/NULL);
+		bool L_6 = Behaviour_get_enabled_m753527255(L_5, /*hidden argument*/NULL);
+		if (!L_6)
+		{
+			goto IL_0048;
+		}
+	}
+	{
+		UIDraggableCamera_t1644204495 * L_7 = __this->get_draggableCamera_2();
+		float L_8 = ___delta0;
+		NullCheck(L_7);
+		UIDraggableCamera_Scroll_m4282878324(L_7, L_8, /*hidden argument*/NULL);
 	}
 
-IL_0038:
+IL_0048:
 	{
 		return;
 	}

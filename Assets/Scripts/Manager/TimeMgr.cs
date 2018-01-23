@@ -45,6 +45,9 @@ public class TimeMgr : Singleton<TimeMgr> {
 
 	public void Play()
 	{
+		if(m_sunLight == null)
+			m_sunLight = GameObject.Find ("Light").GetComponent<Light> ();
+
 		StartCoroutine (Play_Coroutine ());
 	}
 

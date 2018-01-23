@@ -471,7 +471,6 @@ extern const Il2CppType ColliderFogRect_t3999891879_0_0_0;
 extern const Il2CppType Action_t1264377477_0_0_0;
 extern const Il2CppType MulticastDelegate_t_0_0_0;
 extern const Il2CppType FogOfWarThread_t2237446017_0_0_0;
-extern const Il2CppType GameMgr_t2744825567_0_0_0;
 extern const Il2CppType InvBaseItem_t2503063521_0_0_0;
 extern const Il2CppType InvDatabase_t3341607346_0_0_0;
 extern const Il2CppType InvStat_t493203737_0_0_0;
@@ -586,7 +585,6 @@ extern const Il2CppType LevelGenerator_t1657704889_0_0_0;
 extern const Il2CppType ObjectFactory_t3832879922_0_0_0;
 extern const Il2CppType TimeMgr_t2757933384_0_0_0;
 extern const Il2CppType SaveManager_t1052965393_0_0_0;
-extern const Il2CppType WorldMapManager_t2538599596_0_0_0;
 extern const Il2CppType ENEMY_TYPE_t3017899397_0_0_0;
 extern const Il2CppType SpriteU5BU5D_t2581906349_0_0_0;
 extern const Il2CppType IList_1_t2095976875_0_0_0;
@@ -597,7 +595,6 @@ extern const Il2CppType ICollection_1_t3459160187_0_0_0;
 extern const Il2CppType IEnumerable_1_t3905828138_0_0_0;
 extern const Il2CppType KeyValuePair_2_t4237331251_0_0_0;
 extern const Il2CppType WorldGenerator_t4010449993_0_0_0;
-extern const Il2CppType WorldOverView_t3958956715_0_0_0;
 extern const Il2CppType Party_t1023098887_0_0_0;
 extern const Il2CppType IList_1_t76038811_0_0_0;
 extern const Il2CppType ICollection_1_t1088871262_0_0_0;
@@ -705,6 +702,7 @@ extern const Il2CppType ProCamera2DNumericBoundaries_t4004299149_0_0_0;
 extern const Il2CppType ProCamera2D_t871561214_0_0_0;
 extern const Il2CppType Morgue_t3835248296_0_0_0;
 extern const Il2CppType Player_t3266647312_0_0_0;
+extern const Il2CppType WorldMapManager_t2538599596_0_0_0;
 extern const Il2CppType UIInput_t421821618_0_0_0;
 extern const Il2CppType CharacterController_t1138636865_0_0_0;
 extern const Il2CppType ProCamera2DParallax_t281912467_0_0_0;
@@ -726,6 +724,7 @@ extern const Il2CppType SpriteModifier_t4180292912_0_0_0;
 extern const Il2CppType Tangled_t4181922870_0_0_0;
 extern const Il2CppType FSM_Enemy_t3265134844_0_0_0;
 extern const Il2CppType DeveloperTool_t629830172_0_0_0;
+extern const Il2CppType WorldOverView_t3958956715_0_0_0;
 extern const Il2CppType HideInFog_t591667357_0_0_0;
 extern const Il2CppType UITexture_t3471168817_0_0_0;
 extern const Il2CppType InvEquipment_t3413562611_0_0_0;
@@ -2332,8 +2331,6 @@ static const RuntimeType* GenInst_MulticastDelegate_t_0_0_0_Types[] = { (&Multic
 extern const Il2CppGenericInst GenInst_MulticastDelegate_t_0_0_0 = { 1, GenInst_MulticastDelegate_t_0_0_0_Types };
 static const RuntimeType* GenInst_FogOfWarThread_t2237446017_0_0_0_Types[] = { (&FogOfWarThread_t2237446017_0_0_0) };
 extern const Il2CppGenericInst GenInst_FogOfWarThread_t2237446017_0_0_0 = { 1, GenInst_FogOfWarThread_t2237446017_0_0_0_Types };
-static const RuntimeType* GenInst_GameMgr_t2744825567_0_0_0_Types[] = { (&GameMgr_t2744825567_0_0_0) };
-extern const Il2CppGenericInst GenInst_GameMgr_t2744825567_0_0_0 = { 1, GenInst_GameMgr_t2744825567_0_0_0_Types };
 static const RuntimeType* GenInst_InvBaseItem_t2503063521_0_0_0_Types[] = { (&InvBaseItem_t2503063521_0_0_0) };
 extern const Il2CppGenericInst GenInst_InvBaseItem_t2503063521_0_0_0 = { 1, GenInst_InvBaseItem_t2503063521_0_0_0_Types };
 static const RuntimeType* GenInst_InvDatabase_t3341607346_0_0_0_Types[] = { (&InvDatabase_t3341607346_0_0_0) };
@@ -2688,8 +2685,6 @@ static const RuntimeType* GenInst_TimeMgr_t2757933384_0_0_0_Types[] = { (&TimeMg
 extern const Il2CppGenericInst GenInst_TimeMgr_t2757933384_0_0_0 = { 1, GenInst_TimeMgr_t2757933384_0_0_0_Types };
 static const RuntimeType* GenInst_SaveManager_t1052965393_0_0_0_Types[] = { (&SaveManager_t1052965393_0_0_0) };
 extern const Il2CppGenericInst GenInst_SaveManager_t1052965393_0_0_0 = { 1, GenInst_SaveManager_t1052965393_0_0_0_Types };
-static const RuntimeType* GenInst_WorldMapManager_t2538599596_0_0_0_Types[] = { (&WorldMapManager_t2538599596_0_0_0) };
-extern const Il2CppGenericInst GenInst_WorldMapManager_t2538599596_0_0_0 = { 1, GenInst_WorldMapManager_t2538599596_0_0_0_Types };
 static const RuntimeType* GenInst_ENEMY_TYPE_t3017899397_0_0_0_Types[] = { (&ENEMY_TYPE_t3017899397_0_0_0) };
 extern const Il2CppGenericInst GenInst_ENEMY_TYPE_t3017899397_0_0_0 = { 1, GenInst_ENEMY_TYPE_t3017899397_0_0_0_Types };
 static const RuntimeType* GenInst_SpriteU5BU5D_t2581906349_0_0_0_Types[] = { (&SpriteU5BU5D_t2581906349_0_0_0) };
@@ -2716,8 +2711,6 @@ static const RuntimeType* GenInst_Int32_t2950945753_0_0_0_Int32_t2950945753_0_0_
 extern const Il2CppGenericInst GenInst_Int32_t2950945753_0_0_0_Int32_t2950945753_0_0_0_KeyValuePair_2_t4237331251_0_0_0 = { 3, GenInst_Int32_t2950945753_0_0_0_Int32_t2950945753_0_0_0_KeyValuePair_2_t4237331251_0_0_0_Types };
 static const RuntimeType* GenInst_WorldGenerator_t4010449993_0_0_0_Types[] = { (&WorldGenerator_t4010449993_0_0_0) };
 extern const Il2CppGenericInst GenInst_WorldGenerator_t4010449993_0_0_0 = { 1, GenInst_WorldGenerator_t4010449993_0_0_0_Types };
-static const RuntimeType* GenInst_WorldOverView_t3958956715_0_0_0_Types[] = { (&WorldOverView_t3958956715_0_0_0) };
-extern const Il2CppGenericInst GenInst_WorldOverView_t3958956715_0_0_0 = { 1, GenInst_WorldOverView_t3958956715_0_0_0_Types };
 static const RuntimeType* GenInst_Party_t1023098887_0_0_0_Types[] = { (&Party_t1023098887_0_0_0) };
 extern const Il2CppGenericInst GenInst_Party_t1023098887_0_0_0 = { 1, GenInst_Party_t1023098887_0_0_0_Types };
 static const RuntimeType* GenInst_Sprite_t280657092_0_0_0_ColorU5BU5D_t941916413_0_0_0_Types[] = { (&Sprite_t280657092_0_0_0), (&ColorU5BU5D_t941916413_0_0_0) };
@@ -2944,6 +2937,8 @@ static const RuntimeType* GenInst_Morgue_t3835248296_0_0_0_Types[] = { (&Morgue_
 extern const Il2CppGenericInst GenInst_Morgue_t3835248296_0_0_0 = { 1, GenInst_Morgue_t3835248296_0_0_0_Types };
 static const RuntimeType* GenInst_Player_t3266647312_0_0_0_Types[] = { (&Player_t3266647312_0_0_0) };
 extern const Il2CppGenericInst GenInst_Player_t3266647312_0_0_0 = { 1, GenInst_Player_t3266647312_0_0_0_Types };
+static const RuntimeType* GenInst_WorldMapManager_t2538599596_0_0_0_Types[] = { (&WorldMapManager_t2538599596_0_0_0) };
+extern const Il2CppGenericInst GenInst_WorldMapManager_t2538599596_0_0_0 = { 1, GenInst_WorldMapManager_t2538599596_0_0_0_Types };
 static const RuntimeType* GenInst_UIInput_t421821618_0_0_0_Types[] = { (&UIInput_t421821618_0_0_0) };
 extern const Il2CppGenericInst GenInst_UIInput_t421821618_0_0_0 = { 1, GenInst_UIInput_t421821618_0_0_0_Types };
 static const RuntimeType* GenInst_SingleU5BU5D_t1444911251_0_0_0_Types[] = { (&SingleU5BU5D_t1444911251_0_0_0) };
@@ -3000,6 +2995,8 @@ static const RuntimeType* GenInst_FSM_Enemy_t3265134844_0_0_0_Types[] = { (&FSM_
 extern const Il2CppGenericInst GenInst_FSM_Enemy_t3265134844_0_0_0 = { 1, GenInst_FSM_Enemy_t3265134844_0_0_0_Types };
 static const RuntimeType* GenInst_DeveloperTool_t629830172_0_0_0_Types[] = { (&DeveloperTool_t629830172_0_0_0) };
 extern const Il2CppGenericInst GenInst_DeveloperTool_t629830172_0_0_0 = { 1, GenInst_DeveloperTool_t629830172_0_0_0_Types };
+static const RuntimeType* GenInst_WorldOverView_t3958956715_0_0_0_Types[] = { (&WorldOverView_t3958956715_0_0_0) };
+extern const Il2CppGenericInst GenInst_WorldOverView_t3958956715_0_0_0 = { 1, GenInst_WorldOverView_t3958956715_0_0_0_Types };
 static const RuntimeType* GenInst_HideInFog_t591667357_0_0_0_Types[] = { (&HideInFog_t591667357_0_0_0) };
 extern const Il2CppGenericInst GenInst_HideInFog_t591667357_0_0_0 = { 1, GenInst_HideInFog_t591667357_0_0_0_Types };
 static const RuntimeType* GenInst_UITexture_t3471168817_0_0_0_Types[] = { (&UITexture_t3471168817_0_0_0) };
@@ -4062,7 +4059,7 @@ static const RuntimeType* GenInst_EditorPrefsX_GetValue_m573191127_gp_0_0_0_0_By
 extern const Il2CppGenericInst GenInst_EditorPrefsX_GetValue_m573191127_gp_0_0_0_0_ByteU5BU5D_t4116647657_0_0_0 = { 2, GenInst_EditorPrefsX_GetValue_m573191127_gp_0_0_0_0_ByteU5BU5D_t4116647657_0_0_0_Types };
 static const RuntimeType* GenInst_Singleton_1_t535200564_gp_0_0_0_0_Types[] = { (&Singleton_1_t535200564_gp_0_0_0_0) };
 extern const Il2CppGenericInst GenInst_Singleton_1_t535200564_gp_0_0_0_0 = { 1, GenInst_Singleton_1_t535200564_gp_0_0_0_0_Types };
-extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[1467] = 
+extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[1466] = 
 {
 	&GenInst_RuntimeObject_0_0_0,
 	&GenInst_Attribute_t861562559_0_0_0,
@@ -4666,7 +4663,6 @@ extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[1467] =
 	&GenInst_Action_t1264377477_0_0_0,
 	&GenInst_MulticastDelegate_t_0_0_0,
 	&GenInst_FogOfWarThread_t2237446017_0_0_0,
-	&GenInst_GameMgr_t2744825567_0_0_0,
 	&GenInst_InvBaseItem_t2503063521_0_0_0,
 	&GenInst_InvDatabase_t3341607346_0_0_0,
 	&GenInst_InvStat_t493203737_0_0_0,
@@ -4844,7 +4840,6 @@ extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[1467] =
 	&GenInst_ObjectFactory_t3832879922_0_0_0,
 	&GenInst_TimeMgr_t2757933384_0_0_0,
 	&GenInst_SaveManager_t1052965393_0_0_0,
-	&GenInst_WorldMapManager_t2538599596_0_0_0,
 	&GenInst_ENEMY_TYPE_t3017899397_0_0_0,
 	&GenInst_SpriteU5BU5D_t2581906349_0_0_0,
 	&GenInst_IList_1_t2095976875_0_0_0,
@@ -4858,7 +4853,6 @@ extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[1467] =
 	&GenInst_Int32_t2950945753_0_0_0_Int32_t2950945753_0_0_0_DictionaryEntry_t3123975638_0_0_0,
 	&GenInst_Int32_t2950945753_0_0_0_Int32_t2950945753_0_0_0_KeyValuePair_2_t4237331251_0_0_0,
 	&GenInst_WorldGenerator_t4010449993_0_0_0,
-	&GenInst_WorldOverView_t3958956715_0_0_0,
 	&GenInst_Party_t1023098887_0_0_0,
 	&GenInst_Sprite_t280657092_0_0_0_ColorU5BU5D_t941916413_0_0_0,
 	&GenInst_ColorU5BU5D_t941916413_0_0_0,
@@ -4972,6 +4966,7 @@ extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[1467] =
 	&GenInst_ProCamera2D_t871561214_0_0_0,
 	&GenInst_Morgue_t3835248296_0_0_0,
 	&GenInst_Player_t3266647312_0_0_0,
+	&GenInst_WorldMapManager_t2538599596_0_0_0,
 	&GenInst_UIInput_t421821618_0_0_0,
 	&GenInst_SingleU5BU5D_t1444911251_0_0_0,
 	&GenInst_Vector2U5BU5D_t1457185986_0_0_0,
@@ -5000,6 +4995,7 @@ extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[1467] =
 	&GenInst_Tangled_t4181922870_0_0_0,
 	&GenInst_FSM_Enemy_t3265134844_0_0_0,
 	&GenInst_DeveloperTool_t629830172_0_0_0,
+	&GenInst_WorldOverView_t3958956715_0_0_0,
 	&GenInst_HideInFog_t591667357_0_0_0,
 	&GenInst_UITexture_t3471168817_0_0_0,
 	&GenInst_InvEquipment_t3413562611_0_0_0,

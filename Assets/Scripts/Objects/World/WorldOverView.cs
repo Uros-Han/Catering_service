@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorldOverView : Singleton<WorldOverView> {
+public class WorldOverView : MonoBehaviour {
 
 	public WorldIcon m_selectedWorldIcon = null;
 	public WorldGeo m_selectedWorldGeo = null;

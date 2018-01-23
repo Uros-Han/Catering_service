@@ -22,7 +22,7 @@ public class Core_World : MonoBehaviour {
 	void Update()
 	{
 		if (Input.GetKeyDown (KeyCode.Space)) {
-			WorldMapManager.getInstance.Wait ();
+			GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().Wait ();
 		}
 
 		if (Input.GetKeyDown (KeyCode.Escape)) {
@@ -40,7 +40,7 @@ public class Core_World : MonoBehaviour {
 
 	IEnumerator Idle()
 	{
-		WorldMapManager world = WorldMapManager.getInstance;
+		WorldMapManager world = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>();
 		GridMgr grid = GridMgr.getInstance;
 
 		float fMouseTimer = 0f;
@@ -89,7 +89,7 @@ public class Core_World : MonoBehaviour {
 						Dest.GetComponent<SpriteRenderer>().enabled = true;
 						Dest.transform.position = grid.GetPosOfIdx(grid.GetGridIdx(vecMouseClickedPos));
 
-						WorldOverView.getInstance.SelectWorldIcon(GameObject.Find("Geo").transform.GetChild(grid.m_iGridIdx).GetComponent<WorldGeo>());
+						GameObject.Find("WorldOverview").transform.GetChild(0).GetComponent<WorldOverView>().SelectWorldIcon(GameObject.Find("Geo").transform.GetChild(grid.m_iGridIdx).GetComponent<WorldGeo>());
 
 						bOverviewOn = true;
 						iTween.MoveTo(GameObject.Find("WorldOverview").transform.GetChild(0).gameObject, iTween.Hash("x", -150f, "time", 0.5f,"isLocal", true,  "easetype", "easeInSine"));
@@ -119,7 +119,7 @@ public class Core_World : MonoBehaviour {
 
 	public void MoveOrder()
 	{
-		WorldMapManager.getInstance.m_worldTurnState = WORLDTURN_STATE.MOVE;
+		GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_worldTurnState = WORLDTURN_STATE.MOVE;
 
 		GameObject Dest = GameObject.Find("Destination").gameObject;
 		Dest.GetComponent<SpriteRenderer>().enabled = false;
@@ -134,7 +134,7 @@ public class Core_World : MonoBehaviour {
 
 	IEnumerator Move(bool bWaitLittleMoment = false)
 	{
-		WorldMapManager world = WorldMapManager.getInstance;
+		WorldMapManager world = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>();
 		GridMgr grid = GridMgr.getInstance;
 
 		if (m_listMoveIdx.Count > 0) {
@@ -192,11 +192,12 @@ public class Core_World : MonoBehaviour {
 
 		string strDebug = "Enemy Encount : " + objIcon.m_list_enemyType.Count + " enemies in Local, ";
 
+		WorldMapManager world = GameObject.Find ("WorldMapManager").GetComponent<WorldMapManager> ();
 		for (int i = 0; i < PartyTrans.childCount; ++i) {
 			Party party = PartyTrans.GetChild (i).GetComponent<Party> ();
 			if(party.m_iGridIdx == objIcon.m_iGridIdx)
 			{
-				WorldMapManager.getInstance.m_encountPartyList.Add (PartyTrans.GetChild (i).gameObject);
+				world.m_encountPartyList.Add (PartyTrans.GetChild (i).gameObject);
 
 				for (int j = 0; j < party.m_list_enemyType.Count; ++j) {
 					gMgr.m_ilistCurEnemyList.Add (party.m_list_enemyType[j]);	
@@ -209,7 +210,7 @@ public class Core_World : MonoBehaviour {
 
 		if (gMgr.m_ilistCurEnemyList.Count != 0 ) {
 
-			WorldMapManager.getInstance.EncountEnemy ();
+			GameObject.Find ("WorldMapManager").GetComponent<WorldMapManager> ().EncountEnemy ();
 			Debug.Log (strDebug);
 			return true;
 		}
@@ -227,7 +228,7 @@ public class Core_World : MonoBehaviour {
 			ProCamera2D.Instance.AdjustCameraTargetInfluence (ProCamera2D.Instance.CameraTargets [1], 1f, 1f);
 			GameObject.Find ("PC2DPanTarget").transform.position = gameObject.transform.position;
 
-			WorldMapManager.getInstance.m_worldTurnState = WORLDTURN_STATE.IDLE;
+			GameObject.Find ("WorldMapManager").GetComponent<WorldMapManager> ().m_worldTurnState = WORLDTURN_STATE.IDLE;
 			StartCoroutine (Idle ());
 		}
 

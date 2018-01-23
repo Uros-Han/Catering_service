@@ -312,8 +312,6 @@ struct AsyncCallback_t3962456242;
 struct RaycastHit_t1056001966;
 // UICenterOnChild
 struct UICenterOnChild_t253063637;
-// UIScrollView/OnDragNotification
-struct OnDragNotification_t1437737811;
 // UIProgressBar/OnDragFinished
 struct OnDragFinished_t3715779777;
 // UIGrid
@@ -396,36 +394,38 @@ struct Comparison_1_t1491403520;
 struct TypeU5BU5D_t3940880105;
 // System.Reflection.MemberFilter
 struct MemberFilter_t426314064;
-// UnityEngine.AudioSourceExtension
-struct AudioSourceExtension_t3064908834;
 // UnityEngine.Camera/CameraCallback
 struct CameraCallback_t190067161;
+// UnityEngine.AudioSourceExtension
+struct AudioSourceExtension_t3064908834;
+// UIRect/AnchorPoint
+struct AnchorPoint_t1754718329;
+// BetterList`1<UIRect>
+struct BetterList_1_t2030980700;
 // BetterList`1<UIScrollView>
 struct BetterList_1_t1128425268;
 // UIProgressBar
 struct UIProgressBar_t1222110469;
+// UIScrollView/OnDragNotification
+struct OnDragNotification_t1437737811;
 // BMFont
 struct BMFont_t2757936676;
 // System.Collections.Generic.List`1<BMSymbol>
 struct List_1_t3058133583;
 // UnityEngine.Font
 struct Font_t1956802104;
-// UIRect/AnchorPoint
-struct AnchorPoint_t1754718329;
-// BetterList`1<UIRect>
-struct BetterList_1_t2030980700;
-// UIInput/OnValidate
-struct OnValidate_t1246632601;
-// UnityEngine.TouchScreenKeyboard
-struct TouchScreenKeyboard_t731888065;
+// SpringPanel/OnFinished
+struct OnFinished_t3778785451;
 // UIWrapContent/OnInitializeItem
 struct OnInitializeItem_t992046894;
 // System.Comparison`1<UnityEngine.Transform>
 struct Comparison_1_t3375297100;
-// SpringPanel/OnFinished
-struct OnFinished_t3778785451;
 // System.Collections.Generic.List`1<UIRoot>
 struct List_1_t1200078896;
+// UIInput/OnValidate
+struct OnValidate_t1246632601;
+// UnityEngine.TouchScreenKeyboard
+struct TouchScreenKeyboard_t731888065;
 // UnityEngine.Sprite[]
 struct SpriteU5BU5D_t2581906349;
 // System.Collections.Generic.List`1<UILabel>
@@ -896,7 +896,6 @@ extern const uint32_t UICenterOnChild_OnDisable_m3444006907_MetadataUsageId;
 extern const uint32_t UICenterOnChild_OnValidate_m2550011834_MetadataUsageId;
 extern const RuntimeType* UIScrollView_t1973404950_0_0_0_var;
 extern RuntimeClass* ObjectU5BU5D_t2843939325_il2cpp_TypeInfo_var;
-extern RuntimeClass* OnDragNotification_t1437737811_il2cpp_TypeInfo_var;
 extern RuntimeClass* OnDragFinished_t3715779777_il2cpp_TypeInfo_var;
 extern const RuntimeMethod* NGUITools_FindInParents_TisUIScrollView_t1973404950_m2584260635_RuntimeMethod_var;
 extern const RuntimeMethod* UICenterOnChild_OnDragFinished_m2738335918_RuntimeMethod_var;
@@ -6027,26 +6026,6 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // ADVANCEDTYPE_T3940519926_H
-#ifndef MATERIAL_T340375123_H
-#define MATERIAL_T340375123_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.Material
-struct  Material_t340375123  : public Object_t631007953
-{
-public:
-
-public:
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // MATERIAL_T340375123_H
 #ifndef SHADER_T4151988712_H
 #define SHADER_T4151988712_H
 #ifdef __clang__
@@ -6087,82 +6066,6 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // TEXTURE_T3661962703_H
-#ifndef DEPTHENTRY_T628749918_H
-#define DEPTHENTRY_T628749918_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UICamera/DepthEntry
-struct  DepthEntry_t628749918 
-{
-public:
-	// System.Int32 UICamera/DepthEntry::depth
-	int32_t ___depth_0;
-	// UnityEngine.RaycastHit UICamera/DepthEntry::hit
-	RaycastHit_t1056001966  ___hit_1;
-	// UnityEngine.Vector3 UICamera/DepthEntry::point
-	Vector3_t3722313464  ___point_2;
-	// UnityEngine.GameObject UICamera/DepthEntry::go
-	GameObject_t1113636619 * ___go_3;
-
-public:
-	inline static int32_t get_offset_of_depth_0() { return static_cast<int32_t>(offsetof(DepthEntry_t628749918, ___depth_0)); }
-	inline int32_t get_depth_0() const { return ___depth_0; }
-	inline int32_t* get_address_of_depth_0() { return &___depth_0; }
-	inline void set_depth_0(int32_t value)
-	{
-		___depth_0 = value;
-	}
-
-	inline static int32_t get_offset_of_hit_1() { return static_cast<int32_t>(offsetof(DepthEntry_t628749918, ___hit_1)); }
-	inline RaycastHit_t1056001966  get_hit_1() const { return ___hit_1; }
-	inline RaycastHit_t1056001966 * get_address_of_hit_1() { return &___hit_1; }
-	inline void set_hit_1(RaycastHit_t1056001966  value)
-	{
-		___hit_1 = value;
-	}
-
-	inline static int32_t get_offset_of_point_2() { return static_cast<int32_t>(offsetof(DepthEntry_t628749918, ___point_2)); }
-	inline Vector3_t3722313464  get_point_2() const { return ___point_2; }
-	inline Vector3_t3722313464 * get_address_of_point_2() { return &___point_2; }
-	inline void set_point_2(Vector3_t3722313464  value)
-	{
-		___point_2 = value;
-	}
-
-	inline static int32_t get_offset_of_go_3() { return static_cast<int32_t>(offsetof(DepthEntry_t628749918, ___go_3)); }
-	inline GameObject_t1113636619 * get_go_3() const { return ___go_3; }
-	inline GameObject_t1113636619 ** get_address_of_go_3() { return &___go_3; }
-	inline void set_go_3(GameObject_t1113636619 * value)
-	{
-		___go_3 = value;
-		Il2CppCodeGenWriteBarrier((&___go_3), value);
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-// Native definition for P/Invoke marshalling of UICamera/DepthEntry
-struct DepthEntry_t628749918_marshaled_pinvoke
-{
-	int32_t ___depth_0;
-	RaycastHit_t1056001966_marshaled_pinvoke ___hit_1;
-	Vector3_t3722313464  ___point_2;
-	GameObject_t1113636619 * ___go_3;
-};
-// Native definition for COM marshalling of UICamera/DepthEntry
-struct DepthEntry_t628749918_marshaled_com
-{
-	int32_t ___depth_0;
-	RaycastHit_t1056001966_marshaled_com ___hit_1;
-	Vector3_t3722313464  ___point_2;
-	GameObject_t1113636619 * ___go_3;
-};
-#endif // DEPTHENTRY_T628749918_H
 #ifndef NGUITOOLS_T1206951095_H
 #define NGUITOOLS_T1206951095_H
 #ifdef __clang__
@@ -6350,6 +6253,65 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // NGUITOOLS_T1206951095_H
+#ifndef TOUCH_T3749196807_H
+#define TOUCH_T3749196807_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UICamera/Touch
+struct  Touch_t3749196807  : public RuntimeObject
+{
+public:
+	// System.Int32 UICamera/Touch::fingerId
+	int32_t ___fingerId_0;
+	// UnityEngine.TouchPhase UICamera/Touch::phase
+	int32_t ___phase_1;
+	// UnityEngine.Vector2 UICamera/Touch::position
+	Vector2_t2156229523  ___position_2;
+	// System.Int32 UICamera/Touch::tapCount
+	int32_t ___tapCount_3;
+
+public:
+	inline static int32_t get_offset_of_fingerId_0() { return static_cast<int32_t>(offsetof(Touch_t3749196807, ___fingerId_0)); }
+	inline int32_t get_fingerId_0() const { return ___fingerId_0; }
+	inline int32_t* get_address_of_fingerId_0() { return &___fingerId_0; }
+	inline void set_fingerId_0(int32_t value)
+	{
+		___fingerId_0 = value;
+	}
+
+	inline static int32_t get_offset_of_phase_1() { return static_cast<int32_t>(offsetof(Touch_t3749196807, ___phase_1)); }
+	inline int32_t get_phase_1() const { return ___phase_1; }
+	inline int32_t* get_address_of_phase_1() { return &___phase_1; }
+	inline void set_phase_1(int32_t value)
+	{
+		___phase_1 = value;
+	}
+
+	inline static int32_t get_offset_of_position_2() { return static_cast<int32_t>(offsetof(Touch_t3749196807, ___position_2)); }
+	inline Vector2_t2156229523  get_position_2() const { return ___position_2; }
+	inline Vector2_t2156229523 * get_address_of_position_2() { return &___position_2; }
+	inline void set_position_2(Vector2_t2156229523  value)
+	{
+		___position_2 = value;
+	}
+
+	inline static int32_t get_offset_of_tapCount_3() { return static_cast<int32_t>(offsetof(Touch_t3749196807, ___tapCount_3)); }
+	inline int32_t get_tapCount_3() const { return ___tapCount_3; }
+	inline int32_t* get_address_of_tapCount_3() { return &___tapCount_3; }
+	inline void set_tapCount_3(int32_t value)
+	{
+		___tapCount_3 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // TOUCH_T3749196807_H
 #ifndef TOUCH_T1921856868_H
 #define TOUCH_T1921856868_H
 #ifdef __clang__
@@ -6509,95 +6471,92 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // TOUCH_T1921856868_H
-#ifndef TOUCH_T3749196807_H
-#define TOUCH_T3749196807_H
+#ifndef DEPTHENTRY_T628749918_H
+#define DEPTHENTRY_T628749918_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// UICamera/Touch
-struct  Touch_t3749196807  : public RuntimeObject
+// UICamera/DepthEntry
+struct  DepthEntry_t628749918 
 {
 public:
-	// System.Int32 UICamera/Touch::fingerId
-	int32_t ___fingerId_0;
-	// UnityEngine.TouchPhase UICamera/Touch::phase
-	int32_t ___phase_1;
-	// UnityEngine.Vector2 UICamera/Touch::position
-	Vector2_t2156229523  ___position_2;
-	// System.Int32 UICamera/Touch::tapCount
-	int32_t ___tapCount_3;
+	// System.Int32 UICamera/DepthEntry::depth
+	int32_t ___depth_0;
+	// UnityEngine.RaycastHit UICamera/DepthEntry::hit
+	RaycastHit_t1056001966  ___hit_1;
+	// UnityEngine.Vector3 UICamera/DepthEntry::point
+	Vector3_t3722313464  ___point_2;
+	// UnityEngine.GameObject UICamera/DepthEntry::go
+	GameObject_t1113636619 * ___go_3;
 
 public:
-	inline static int32_t get_offset_of_fingerId_0() { return static_cast<int32_t>(offsetof(Touch_t3749196807, ___fingerId_0)); }
-	inline int32_t get_fingerId_0() const { return ___fingerId_0; }
-	inline int32_t* get_address_of_fingerId_0() { return &___fingerId_0; }
-	inline void set_fingerId_0(int32_t value)
+	inline static int32_t get_offset_of_depth_0() { return static_cast<int32_t>(offsetof(DepthEntry_t628749918, ___depth_0)); }
+	inline int32_t get_depth_0() const { return ___depth_0; }
+	inline int32_t* get_address_of_depth_0() { return &___depth_0; }
+	inline void set_depth_0(int32_t value)
 	{
-		___fingerId_0 = value;
+		___depth_0 = value;
 	}
 
-	inline static int32_t get_offset_of_phase_1() { return static_cast<int32_t>(offsetof(Touch_t3749196807, ___phase_1)); }
-	inline int32_t get_phase_1() const { return ___phase_1; }
-	inline int32_t* get_address_of_phase_1() { return &___phase_1; }
-	inline void set_phase_1(int32_t value)
+	inline static int32_t get_offset_of_hit_1() { return static_cast<int32_t>(offsetof(DepthEntry_t628749918, ___hit_1)); }
+	inline RaycastHit_t1056001966  get_hit_1() const { return ___hit_1; }
+	inline RaycastHit_t1056001966 * get_address_of_hit_1() { return &___hit_1; }
+	inline void set_hit_1(RaycastHit_t1056001966  value)
 	{
-		___phase_1 = value;
+		___hit_1 = value;
 	}
 
-	inline static int32_t get_offset_of_position_2() { return static_cast<int32_t>(offsetof(Touch_t3749196807, ___position_2)); }
-	inline Vector2_t2156229523  get_position_2() const { return ___position_2; }
-	inline Vector2_t2156229523 * get_address_of_position_2() { return &___position_2; }
-	inline void set_position_2(Vector2_t2156229523  value)
+	inline static int32_t get_offset_of_point_2() { return static_cast<int32_t>(offsetof(DepthEntry_t628749918, ___point_2)); }
+	inline Vector3_t3722313464  get_point_2() const { return ___point_2; }
+	inline Vector3_t3722313464 * get_address_of_point_2() { return &___point_2; }
+	inline void set_point_2(Vector3_t3722313464  value)
 	{
-		___position_2 = value;
+		___point_2 = value;
 	}
 
-	inline static int32_t get_offset_of_tapCount_3() { return static_cast<int32_t>(offsetof(Touch_t3749196807, ___tapCount_3)); }
-	inline int32_t get_tapCount_3() const { return ___tapCount_3; }
-	inline int32_t* get_address_of_tapCount_3() { return &___tapCount_3; }
-	inline void set_tapCount_3(int32_t value)
+	inline static int32_t get_offset_of_go_3() { return static_cast<int32_t>(offsetof(DepthEntry_t628749918, ___go_3)); }
+	inline GameObject_t1113636619 * get_go_3() const { return ___go_3; }
+	inline GameObject_t1113636619 ** get_address_of_go_3() { return &___go_3; }
+	inline void set_go_3(GameObject_t1113636619 * value)
 	{
-		___tapCount_3 = value;
+		___go_3 = value;
+		Il2CppCodeGenWriteBarrier((&___go_3), value);
 	}
 };
 
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // TOUCH_T3749196807_H
-#ifndef SPRITE_T280657092_H
-#define SPRITE_T280657092_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.Sprite
-struct  Sprite_t280657092  : public Object_t631007953
+// Native definition for P/Invoke marshalling of UICamera/DepthEntry
+struct DepthEntry_t628749918_marshaled_pinvoke
 {
-public:
-
-public:
+	int32_t ___depth_0;
+	RaycastHit_t1056001966_marshaled_pinvoke ___hit_1;
+	Vector3_t3722313464  ___point_2;
+	GameObject_t1113636619 * ___go_3;
 };
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // SPRITE_T280657092_H
-#ifndef COMPONENT_T1923634451_H
-#define COMPONENT_T1923634451_H
+// Native definition for COM marshalling of UICamera/DepthEntry
+struct DepthEntry_t628749918_marshaled_com
+{
+	int32_t ___depth_0;
+	RaycastHit_t1056001966_marshaled_com ___hit_1;
+	Vector3_t3722313464  ___point_2;
+	GameObject_t1113636619 * ___go_3;
+};
+#endif // DEPTHENTRY_T628749918_H
+#ifndef MATERIAL_T340375123_H
+#define MATERIAL_T340375123_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// UnityEngine.Component
-struct  Component_t1923634451  : public Object_t631007953
+// UnityEngine.Material
+struct  Material_t340375123  : public Object_t631007953
 {
 public:
 
@@ -6607,136 +6566,7 @@ public:
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // COMPONENT_T1923634451_H
-#ifndef ANIMATIONPROPERTIES_T1280364982_H
-#define ANIMATIONPROPERTIES_T1280364982_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// TweenLetters/AnimationProperties
-struct  AnimationProperties_t1280364982  : public RuntimeObject
-{
-public:
-	// TweenLetters/AnimationLetterOrder TweenLetters/AnimationProperties::animationOrder
-	int32_t ___animationOrder_0;
-	// System.Single TweenLetters/AnimationProperties::overlap
-	float ___overlap_1;
-	// System.Boolean TweenLetters/AnimationProperties::randomDurations
-	bool ___randomDurations_2;
-	// UnityEngine.Vector2 TweenLetters/AnimationProperties::randomness
-	Vector2_t2156229523  ___randomness_3;
-	// UnityEngine.Vector2 TweenLetters/AnimationProperties::offsetRange
-	Vector2_t2156229523  ___offsetRange_4;
-	// UnityEngine.Vector3 TweenLetters/AnimationProperties::pos
-	Vector3_t3722313464  ___pos_5;
-	// UnityEngine.Vector3 TweenLetters/AnimationProperties::rot
-	Vector3_t3722313464  ___rot_6;
-	// UnityEngine.Vector3 TweenLetters/AnimationProperties::scale
-	Vector3_t3722313464  ___scale_7;
-	// System.Single TweenLetters/AnimationProperties::alpha
-	float ___alpha_8;
-
-public:
-	inline static int32_t get_offset_of_animationOrder_0() { return static_cast<int32_t>(offsetof(AnimationProperties_t1280364982, ___animationOrder_0)); }
-	inline int32_t get_animationOrder_0() const { return ___animationOrder_0; }
-	inline int32_t* get_address_of_animationOrder_0() { return &___animationOrder_0; }
-	inline void set_animationOrder_0(int32_t value)
-	{
-		___animationOrder_0 = value;
-	}
-
-	inline static int32_t get_offset_of_overlap_1() { return static_cast<int32_t>(offsetof(AnimationProperties_t1280364982, ___overlap_1)); }
-	inline float get_overlap_1() const { return ___overlap_1; }
-	inline float* get_address_of_overlap_1() { return &___overlap_1; }
-	inline void set_overlap_1(float value)
-	{
-		___overlap_1 = value;
-	}
-
-	inline static int32_t get_offset_of_randomDurations_2() { return static_cast<int32_t>(offsetof(AnimationProperties_t1280364982, ___randomDurations_2)); }
-	inline bool get_randomDurations_2() const { return ___randomDurations_2; }
-	inline bool* get_address_of_randomDurations_2() { return &___randomDurations_2; }
-	inline void set_randomDurations_2(bool value)
-	{
-		___randomDurations_2 = value;
-	}
-
-	inline static int32_t get_offset_of_randomness_3() { return static_cast<int32_t>(offsetof(AnimationProperties_t1280364982, ___randomness_3)); }
-	inline Vector2_t2156229523  get_randomness_3() const { return ___randomness_3; }
-	inline Vector2_t2156229523 * get_address_of_randomness_3() { return &___randomness_3; }
-	inline void set_randomness_3(Vector2_t2156229523  value)
-	{
-		___randomness_3 = value;
-	}
-
-	inline static int32_t get_offset_of_offsetRange_4() { return static_cast<int32_t>(offsetof(AnimationProperties_t1280364982, ___offsetRange_4)); }
-	inline Vector2_t2156229523  get_offsetRange_4() const { return ___offsetRange_4; }
-	inline Vector2_t2156229523 * get_address_of_offsetRange_4() { return &___offsetRange_4; }
-	inline void set_offsetRange_4(Vector2_t2156229523  value)
-	{
-		___offsetRange_4 = value;
-	}
-
-	inline static int32_t get_offset_of_pos_5() { return static_cast<int32_t>(offsetof(AnimationProperties_t1280364982, ___pos_5)); }
-	inline Vector3_t3722313464  get_pos_5() const { return ___pos_5; }
-	inline Vector3_t3722313464 * get_address_of_pos_5() { return &___pos_5; }
-	inline void set_pos_5(Vector3_t3722313464  value)
-	{
-		___pos_5 = value;
-	}
-
-	inline static int32_t get_offset_of_rot_6() { return static_cast<int32_t>(offsetof(AnimationProperties_t1280364982, ___rot_6)); }
-	inline Vector3_t3722313464  get_rot_6() const { return ___rot_6; }
-	inline Vector3_t3722313464 * get_address_of_rot_6() { return &___rot_6; }
-	inline void set_rot_6(Vector3_t3722313464  value)
-	{
-		___rot_6 = value;
-	}
-
-	inline static int32_t get_offset_of_scale_7() { return static_cast<int32_t>(offsetof(AnimationProperties_t1280364982, ___scale_7)); }
-	inline Vector3_t3722313464  get_scale_7() const { return ___scale_7; }
-	inline Vector3_t3722313464 * get_address_of_scale_7() { return &___scale_7; }
-	inline void set_scale_7(Vector3_t3722313464  value)
-	{
-		___scale_7 = value;
-	}
-
-	inline static int32_t get_offset_of_alpha_8() { return static_cast<int32_t>(offsetof(AnimationProperties_t1280364982, ___alpha_8)); }
-	inline float get_alpha_8() const { return ___alpha_8; }
-	inline float* get_address_of_alpha_8() { return &___alpha_8; }
-	inline void set_alpha_8(float value)
-	{
-		___alpha_8 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // ANIMATIONPROPERTIES_T1280364982_H
-#ifndef GAMEOBJECT_T1113636619_H
-#define GAMEOBJECT_T1113636619_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.GameObject
-struct  GameObject_t1113636619  : public Object_t631007953
-{
-public:
-
-public:
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // GAMEOBJECT_T1113636619_H
+#endif // MATERIAL_T340375123_H
 #ifndef MOUSEORTOUCH_T3052596533_H
 #define MOUSEORTOUCH_T3052596533_H
 #ifdef __clang__
@@ -6931,6 +6761,216 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // MOUSEORTOUCH_T3052596533_H
+#ifndef ANIMATIONPROPERTIES_T1280364982_H
+#define ANIMATIONPROPERTIES_T1280364982_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// TweenLetters/AnimationProperties
+struct  AnimationProperties_t1280364982  : public RuntimeObject
+{
+public:
+	// TweenLetters/AnimationLetterOrder TweenLetters/AnimationProperties::animationOrder
+	int32_t ___animationOrder_0;
+	// System.Single TweenLetters/AnimationProperties::overlap
+	float ___overlap_1;
+	// System.Boolean TweenLetters/AnimationProperties::randomDurations
+	bool ___randomDurations_2;
+	// UnityEngine.Vector2 TweenLetters/AnimationProperties::randomness
+	Vector2_t2156229523  ___randomness_3;
+	// UnityEngine.Vector2 TweenLetters/AnimationProperties::offsetRange
+	Vector2_t2156229523  ___offsetRange_4;
+	// UnityEngine.Vector3 TweenLetters/AnimationProperties::pos
+	Vector3_t3722313464  ___pos_5;
+	// UnityEngine.Vector3 TweenLetters/AnimationProperties::rot
+	Vector3_t3722313464  ___rot_6;
+	// UnityEngine.Vector3 TweenLetters/AnimationProperties::scale
+	Vector3_t3722313464  ___scale_7;
+	// System.Single TweenLetters/AnimationProperties::alpha
+	float ___alpha_8;
+
+public:
+	inline static int32_t get_offset_of_animationOrder_0() { return static_cast<int32_t>(offsetof(AnimationProperties_t1280364982, ___animationOrder_0)); }
+	inline int32_t get_animationOrder_0() const { return ___animationOrder_0; }
+	inline int32_t* get_address_of_animationOrder_0() { return &___animationOrder_0; }
+	inline void set_animationOrder_0(int32_t value)
+	{
+		___animationOrder_0 = value;
+	}
+
+	inline static int32_t get_offset_of_overlap_1() { return static_cast<int32_t>(offsetof(AnimationProperties_t1280364982, ___overlap_1)); }
+	inline float get_overlap_1() const { return ___overlap_1; }
+	inline float* get_address_of_overlap_1() { return &___overlap_1; }
+	inline void set_overlap_1(float value)
+	{
+		___overlap_1 = value;
+	}
+
+	inline static int32_t get_offset_of_randomDurations_2() { return static_cast<int32_t>(offsetof(AnimationProperties_t1280364982, ___randomDurations_2)); }
+	inline bool get_randomDurations_2() const { return ___randomDurations_2; }
+	inline bool* get_address_of_randomDurations_2() { return &___randomDurations_2; }
+	inline void set_randomDurations_2(bool value)
+	{
+		___randomDurations_2 = value;
+	}
+
+	inline static int32_t get_offset_of_randomness_3() { return static_cast<int32_t>(offsetof(AnimationProperties_t1280364982, ___randomness_3)); }
+	inline Vector2_t2156229523  get_randomness_3() const { return ___randomness_3; }
+	inline Vector2_t2156229523 * get_address_of_randomness_3() { return &___randomness_3; }
+	inline void set_randomness_3(Vector2_t2156229523  value)
+	{
+		___randomness_3 = value;
+	}
+
+	inline static int32_t get_offset_of_offsetRange_4() { return static_cast<int32_t>(offsetof(AnimationProperties_t1280364982, ___offsetRange_4)); }
+	inline Vector2_t2156229523  get_offsetRange_4() const { return ___offsetRange_4; }
+	inline Vector2_t2156229523 * get_address_of_offsetRange_4() { return &___offsetRange_4; }
+	inline void set_offsetRange_4(Vector2_t2156229523  value)
+	{
+		___offsetRange_4 = value;
+	}
+
+	inline static int32_t get_offset_of_pos_5() { return static_cast<int32_t>(offsetof(AnimationProperties_t1280364982, ___pos_5)); }
+	inline Vector3_t3722313464  get_pos_5() const { return ___pos_5; }
+	inline Vector3_t3722313464 * get_address_of_pos_5() { return &___pos_5; }
+	inline void set_pos_5(Vector3_t3722313464  value)
+	{
+		___pos_5 = value;
+	}
+
+	inline static int32_t get_offset_of_rot_6() { return static_cast<int32_t>(offsetof(AnimationProperties_t1280364982, ___rot_6)); }
+	inline Vector3_t3722313464  get_rot_6() const { return ___rot_6; }
+	inline Vector3_t3722313464 * get_address_of_rot_6() { return &___rot_6; }
+	inline void set_rot_6(Vector3_t3722313464  value)
+	{
+		___rot_6 = value;
+	}
+
+	inline static int32_t get_offset_of_scale_7() { return static_cast<int32_t>(offsetof(AnimationProperties_t1280364982, ___scale_7)); }
+	inline Vector3_t3722313464  get_scale_7() const { return ___scale_7; }
+	inline Vector3_t3722313464 * get_address_of_scale_7() { return &___scale_7; }
+	inline void set_scale_7(Vector3_t3722313464  value)
+	{
+		___scale_7 = value;
+	}
+
+	inline static int32_t get_offset_of_alpha_8() { return static_cast<int32_t>(offsetof(AnimationProperties_t1280364982, ___alpha_8)); }
+	inline float get_alpha_8() const { return ___alpha_8; }
+	inline float* get_address_of_alpha_8() { return &___alpha_8; }
+	inline void set_alpha_8(float value)
+	{
+		___alpha_8 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // ANIMATIONPROPERTIES_T1280364982_H
+#ifndef COMPONENT_T1923634451_H
+#define COMPONENT_T1923634451_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.Component
+struct  Component_t1923634451  : public Object_t631007953
+{
+public:
+
+public:
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // COMPONENT_T1923634451_H
+#ifndef GAMEOBJECT_T1113636619_H
+#define GAMEOBJECT_T1113636619_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.GameObject
+struct  GameObject_t1113636619  : public Object_t631007953
+{
+public:
+
+public:
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // GAMEOBJECT_T1113636619_H
+#ifndef MULTICASTDELEGATE_T_H
+#define MULTICASTDELEGATE_T_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.MulticastDelegate
+struct  MulticastDelegate_t  : public Delegate_t1188392813
+{
+public:
+	// System.MulticastDelegate System.MulticastDelegate::prev
+	MulticastDelegate_t * ___prev_9;
+	// System.MulticastDelegate System.MulticastDelegate::kpm_next
+	MulticastDelegate_t * ___kpm_next_10;
+
+public:
+	inline static int32_t get_offset_of_prev_9() { return static_cast<int32_t>(offsetof(MulticastDelegate_t, ___prev_9)); }
+	inline MulticastDelegate_t * get_prev_9() const { return ___prev_9; }
+	inline MulticastDelegate_t ** get_address_of_prev_9() { return &___prev_9; }
+	inline void set_prev_9(MulticastDelegate_t * value)
+	{
+		___prev_9 = value;
+		Il2CppCodeGenWriteBarrier((&___prev_9), value);
+	}
+
+	inline static int32_t get_offset_of_kpm_next_10() { return static_cast<int32_t>(offsetof(MulticastDelegate_t, ___kpm_next_10)); }
+	inline MulticastDelegate_t * get_kpm_next_10() const { return ___kpm_next_10; }
+	inline MulticastDelegate_t ** get_address_of_kpm_next_10() { return &___kpm_next_10; }
+	inline void set_kpm_next_10(MulticastDelegate_t * value)
+	{
+		___kpm_next_10 = value;
+		Il2CppCodeGenWriteBarrier((&___kpm_next_10), value);
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // MULTICASTDELEGATE_T_H
+#ifndef SPRITE_T280657092_H
+#define SPRITE_T280657092_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.Sprite
+struct  Sprite_t280657092  : public Object_t631007953
+{
+public:
+
+public:
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // SPRITE_T280657092_H
 #ifndef TYPE_T_H
 #define TYPE_T_H
 #ifdef __clang__
@@ -7031,47 +7071,66 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // TYPE_T_H
-#ifndef MULTICASTDELEGATE_T_H
-#define MULTICASTDELEGATE_T_H
+#ifndef RIGIDBODY2D_T939494601_H
+#define RIGIDBODY2D_T939494601_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// System.MulticastDelegate
-struct  MulticastDelegate_t  : public Delegate_t1188392813
+// UnityEngine.Rigidbody2D
+struct  Rigidbody2D_t939494601  : public Component_t1923634451
 {
 public:
-	// System.MulticastDelegate System.MulticastDelegate::prev
-	MulticastDelegate_t * ___prev_9;
-	// System.MulticastDelegate System.MulticastDelegate::kpm_next
-	MulticastDelegate_t * ___kpm_next_10;
 
 public:
-	inline static int32_t get_offset_of_prev_9() { return static_cast<int32_t>(offsetof(MulticastDelegate_t, ___prev_9)); }
-	inline MulticastDelegate_t * get_prev_9() const { return ___prev_9; }
-	inline MulticastDelegate_t ** get_address_of_prev_9() { return &___prev_9; }
-	inline void set_prev_9(MulticastDelegate_t * value)
-	{
-		___prev_9 = value;
-		Il2CppCodeGenWriteBarrier((&___prev_9), value);
-	}
-
-	inline static int32_t get_offset_of_kpm_next_10() { return static_cast<int32_t>(offsetof(MulticastDelegate_t, ___kpm_next_10)); }
-	inline MulticastDelegate_t * get_kpm_next_10() const { return ___kpm_next_10; }
-	inline MulticastDelegate_t ** get_address_of_kpm_next_10() { return &___kpm_next_10; }
-	inline void set_kpm_next_10(MulticastDelegate_t * value)
-	{
-		___kpm_next_10 = value;
-		Il2CppCodeGenWriteBarrier((&___kpm_next_10), value);
-	}
 };
 
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // MULTICASTDELEGATE_T_H
+#endif // RIGIDBODY2D_T939494601_H
+#ifndef VOIDDELEGATE_T3100799918_H
+#define VOIDDELEGATE_T3100799918_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UICamera/VoidDelegate
+struct  VoidDelegate_t3100799918  : public MulticastDelegate_t
+{
+public:
+
+public:
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // VOIDDELEGATE_T3100799918_H
+#ifndef TRANSFORM_T3600365921_H
+#define TRANSFORM_T3600365921_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.Transform
+struct  Transform_t3600365921  : public Component_t1923634451
+{
+public:
+
+public:
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // TRANSFORM_T3600365921_H
 #ifndef GETANYKEYFUNC_T1761480072_H
 #define GETANYKEYFUNC_T1761480072_H
 #ifdef __clang__
@@ -7112,26 +7171,6 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // VECTORDELEGATE_T435795517_H
-#ifndef OBJECTDELEGATE_T2041570719_H
-#define OBJECTDELEGATE_T2041570719_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UICamera/ObjectDelegate
-struct  ObjectDelegate_t2041570719  : public MulticastDelegate_t
-{
-public:
-
-public:
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // OBJECTDELEGATE_T2041570719_H
 #ifndef KEYCODEDELEGATE_T3064672302_H
 #define KEYCODEDELEGATE_T3064672302_H
 #ifdef __clang__
@@ -7212,16 +7251,16 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // GETTOUCHCALLBACK_T97678626_H
-#ifndef GETMOUSEDELEGATE_T662790529_H
-#define GETMOUSEDELEGATE_T662790529_H
+#ifndef OBJECTDELEGATE_T2041570719_H
+#define OBJECTDELEGATE_T2041570719_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// UICamera/GetMouseDelegate
-struct  GetMouseDelegate_t662790529  : public MulticastDelegate_t
+// UICamera/ObjectDelegate
+struct  ObjectDelegate_t2041570719  : public MulticastDelegate_t
 {
 public:
 
@@ -7231,87 +7270,7 @@ public:
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // GETMOUSEDELEGATE_T662790529_H
-#ifndef TRANSFORM_T3600365921_H
-#define TRANSFORM_T3600365921_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.Transform
-struct  Transform_t3600365921  : public Component_t1923634451
-{
-public:
-
-public:
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // TRANSFORM_T3600365921_H
-#ifndef BEHAVIOUR_T1437897464_H
-#define BEHAVIOUR_T1437897464_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.Behaviour
-struct  Behaviour_t1437897464  : public Component_t1923634451
-{
-public:
-
-public:
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // BEHAVIOUR_T1437897464_H
-#ifndef TEXTURE2D_T3840446185_H
-#define TEXTURE2D_T3840446185_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.Texture2D
-struct  Texture2D_t3840446185  : public Texture_t3661962703
-{
-public:
-
-public:
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // TEXTURE2D_T3840446185_H
-#ifndef RENDERER_T2627027031_H
-#define RENDERER_T2627027031_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.Renderer
-struct  Renderer_t2627027031  : public Component_t1923634451
-{
-public:
-
-public:
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // RENDERER_T2627027031_H
+#endif // OBJECTDELEGATE_T2041570719_H
 #ifndef ONPOSTFILLCALLBACK_T2835645043_H
 #define ONPOSTFILLCALLBACK_T2835645043_H
 #ifdef __clang__
@@ -7332,6 +7291,46 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // ONPOSTFILLCALLBACK_T2835645043_H
+#ifndef TEXTURE2D_T3840446185_H
+#define TEXTURE2D_T3840446185_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.Texture2D
+struct  Texture2D_t3840446185  : public Texture_t3661962703
+{
+public:
+
+public:
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // TEXTURE2D_T3840446185_H
+#ifndef BOOLDELEGATE_T3825226153_H
+#define BOOLDELEGATE_T3825226153_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UICamera/BoolDelegate
+struct  BoolDelegate_t3825226153  : public MulticastDelegate_t
+{
+public:
+
+public:
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // BOOLDELEGATE_T3825226153_H
 #ifndef ONCENTERCALLBACK_T2077531662_H
 #define ONCENTERCALLBACK_T2077531662_H
 #ifdef __clang__
@@ -7392,16 +7391,16 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // ONDRAGFINISHED_T3715779777_H
-#ifndef ONDRAGNOTIFICATION_T1437737811_H
-#define ONDRAGNOTIFICATION_T1437737811_H
+#ifndef ONSCHEMECHANGE_T1701155603_H
+#define ONSCHEMECHANGE_T1701155603_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// UIScrollView/OnDragNotification
-struct  OnDragNotification_t1437737811  : public MulticastDelegate_t
+// UICamera/OnSchemeChange
+struct  OnSchemeChange_t1701155603  : public MulticastDelegate_t
 {
 public:
 
@@ -7411,27 +7410,7 @@ public:
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // ONDRAGNOTIFICATION_T1437737811_H
-#ifndef VOIDDELEGATE_T3100799918_H
-#define VOIDDELEGATE_T3100799918_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UICamera/VoidDelegate
-struct  VoidDelegate_t3100799918  : public MulticastDelegate_t
-{
-public:
-
-public:
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // VOIDDELEGATE_T3100799918_H
+#endif // ONSCHEMECHANGE_T1701155603_H
 #ifndef ASYNCCALLBACK_T3962456242_H
 #define ASYNCCALLBACK_T3962456242_H
 #ifdef __clang__
@@ -7452,6 +7431,26 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // ASYNCCALLBACK_T3962456242_H
+#ifndef GETMOUSEDELEGATE_T662790529_H
+#define GETMOUSEDELEGATE_T662790529_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UICamera/GetMouseDelegate
+struct  GetMouseDelegate_t662790529  : public MulticastDelegate_t
+{
+public:
+
+public:
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // GETMOUSEDELEGATE_T662790529_H
 #ifndef GETTOUCHCOUNTCALLBACK_T3185863032_H
 #define GETTOUCHCOUNTCALLBACK_T3185863032_H
 #ifdef __clang__
@@ -7472,6 +7471,26 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // GETTOUCHCOUNTCALLBACK_T3185863032_H
+#ifndef GETAXISFUNC_T2592608932_H
+#define GETAXISFUNC_T2592608932_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UICamera/GetAxisFunc
+struct  GetAxisFunc_t2592608932  : public MulticastDelegate_t
+{
+public:
+
+public:
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // GETAXISFUNC_T2592608932_H
 #ifndef GETKEYSTATEFUNC_T2810275146_H
 #define GETKEYSTATEFUNC_T2810275146_H
 #ifdef __clang__
@@ -7492,6 +7511,26 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // GETKEYSTATEFUNC_T2810275146_H
+#ifndef RENDERER_T2627027031_H
+#define RENDERER_T2627027031_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.Renderer
+struct  Renderer_t2627027031  : public Component_t1923634451
+{
+public:
+
+public:
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // RENDERER_T2627027031_H
 #ifndef COMPAREFUNC_T2967399990_H
 #define COMPAREFUNC_T2967399990_H
 #ifdef __clang__
@@ -7532,46 +7571,6 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // HITCHECK_T2300079615_H
-#ifndef COMPARISON_1_T675239705_H
-#define COMPARISON_1_T675239705_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Comparison`1<UISpriteData>
-struct  Comparison_1_t675239705  : public MulticastDelegate_t
-{
-public:
-
-public:
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // COMPARISON_1_T675239705_H
-#ifndef RIGIDBODY2D_T939494601_H
-#define RIGIDBODY2D_T939494601_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.Rigidbody2D
-struct  Rigidbody2D_t939494601  : public Component_t1923634451
-{
-public:
-
-public:
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // RIGIDBODY2D_T939494601_H
 #ifndef RIGIDBODY_T3916780224_H
 #define RIGIDBODY_T3916780224_H
 #ifdef __clang__
@@ -7592,16 +7591,16 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // RIGIDBODY_T3916780224_H
-#ifndef COLLIDER_T1773347010_H
-#define COLLIDER_T1773347010_H
+#ifndef COMPARISON_1_T675239705_H
+#define COMPARISON_1_T675239705_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// UnityEngine.Collider
-struct  Collider_t1773347010  : public Component_t1923634451
+// System.Comparison`1<UISpriteData>
+struct  Comparison_1_t675239705  : public MulticastDelegate_t
 {
 public:
 
@@ -7611,147 +7610,7 @@ public:
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // COLLIDER_T1773347010_H
-#ifndef BOOLDELEGATE_T3825226153_H
-#define BOOLDELEGATE_T3825226153_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UICamera/BoolDelegate
-struct  BoolDelegate_t3825226153  : public MulticastDelegate_t
-{
-public:
-
-public:
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // BOOLDELEGATE_T3825226153_H
-#ifndef ONSCHEMECHANGE_T1701155603_H
-#define ONSCHEMECHANGE_T1701155603_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UICamera/OnSchemeChange
-struct  OnSchemeChange_t1701155603  : public MulticastDelegate_t
-{
-public:
-
-public:
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // ONSCHEMECHANGE_T1701155603_H
-#ifndef GETAXISFUNC_T2592608932_H
-#define GETAXISFUNC_T2592608932_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UICamera/GetAxisFunc
-struct  GetAxisFunc_t2592608932  : public MulticastDelegate_t
-{
-public:
-
-public:
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // GETAXISFUNC_T2592608932_H
-#ifndef FLOATDELEGATE_T906524069_H
-#define FLOATDELEGATE_T906524069_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UICamera/FloatDelegate
-struct  FloatDelegate_t906524069  : public MulticastDelegate_t
-{
-public:
-
-public:
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // FLOATDELEGATE_T906524069_H
-#ifndef MOVEDELEGATE_T16019400_H
-#define MOVEDELEGATE_T16019400_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UICamera/MoveDelegate
-struct  MoveDelegate_t16019400  : public MulticastDelegate_t
-{
-public:
-
-public:
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // MOVEDELEGATE_T16019400_H
-#ifndef ONSCREENRESIZE_T2279991692_H
-#define ONSCREENRESIZE_T2279991692_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UICamera/OnScreenResize
-struct  OnScreenResize_t2279991692  : public MulticastDelegate_t
-{
-public:
-
-public:
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // ONSCREENRESIZE_T2279991692_H
-#ifndef ONCUSTOMINPUT_T3508588789_H
-#define ONCUSTOMINPUT_T3508588789_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UICamera/OnCustomInput
-struct  OnCustomInput_t3508588789  : public MulticastDelegate_t
-{
-public:
-
-public:
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // ONCUSTOMINPUT_T3508588789_H
+#endif // COMPARISON_1_T675239705_H
 #ifndef COMPAREFUNC_T3695088943_H
 #define COMPAREFUNC_T3695088943_H
 #ifdef __clang__
@@ -7772,16 +7631,16 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // COMPAREFUNC_T3695088943_H
-#ifndef MONOBEHAVIOUR_T3962482529_H
-#define MONOBEHAVIOUR_T3962482529_H
+#ifndef FLOATDELEGATE_T906524069_H
+#define FLOATDELEGATE_T906524069_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// UnityEngine.MonoBehaviour
-struct  MonoBehaviour_t3962482529  : public Behaviour_t1437897464
+// UICamera/FloatDelegate
+struct  FloatDelegate_t906524069  : public MulticastDelegate_t
 {
 public:
 
@@ -7791,48 +7650,107 @@ public:
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // MONOBEHAVIOUR_T3962482529_H
-#ifndef AUDIOSOURCE_T3935305588_H
-#define AUDIOSOURCE_T3935305588_H
+#endif // FLOATDELEGATE_T906524069_H
+#ifndef ONCUSTOMINPUT_T3508588789_H
+#define ONCUSTOMINPUT_T3508588789_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// UnityEngine.AudioSource
-struct  AudioSource_t3935305588  : public Behaviour_t1437897464
+// UICamera/OnCustomInput
+struct  OnCustomInput_t3508588789  : public MulticastDelegate_t
 {
 public:
-	// UnityEngine.AudioSourceExtension UnityEngine.AudioSource::spatializerExtension
-	AudioSourceExtension_t3064908834 * ___spatializerExtension_2;
-	// UnityEngine.AudioSourceExtension UnityEngine.AudioSource::ambisonicExtension
-	AudioSourceExtension_t3064908834 * ___ambisonicExtension_3;
 
 public:
-	inline static int32_t get_offset_of_spatializerExtension_2() { return static_cast<int32_t>(offsetof(AudioSource_t3935305588, ___spatializerExtension_2)); }
-	inline AudioSourceExtension_t3064908834 * get_spatializerExtension_2() const { return ___spatializerExtension_2; }
-	inline AudioSourceExtension_t3064908834 ** get_address_of_spatializerExtension_2() { return &___spatializerExtension_2; }
-	inline void set_spatializerExtension_2(AudioSourceExtension_t3064908834 * value)
-	{
-		___spatializerExtension_2 = value;
-		Il2CppCodeGenWriteBarrier((&___spatializerExtension_2), value);
-	}
-
-	inline static int32_t get_offset_of_ambisonicExtension_3() { return static_cast<int32_t>(offsetof(AudioSource_t3935305588, ___ambisonicExtension_3)); }
-	inline AudioSourceExtension_t3064908834 * get_ambisonicExtension_3() const { return ___ambisonicExtension_3; }
-	inline AudioSourceExtension_t3064908834 ** get_address_of_ambisonicExtension_3() { return &___ambisonicExtension_3; }
-	inline void set_ambisonicExtension_3(AudioSourceExtension_t3064908834 * value)
-	{
-		___ambisonicExtension_3 = value;
-		Il2CppCodeGenWriteBarrier((&___ambisonicExtension_3), value);
-	}
 };
 
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // AUDIOSOURCE_T3935305588_H
+#endif // ONCUSTOMINPUT_T3508588789_H
+#ifndef BEHAVIOUR_T1437897464_H
+#define BEHAVIOUR_T1437897464_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.Behaviour
+struct  Behaviour_t1437897464  : public Component_t1923634451
+{
+public:
+
+public:
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // BEHAVIOUR_T1437897464_H
+#ifndef ONSCREENRESIZE_T2279991692_H
+#define ONSCREENRESIZE_T2279991692_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UICamera/OnScreenResize
+struct  OnScreenResize_t2279991692  : public MulticastDelegate_t
+{
+public:
+
+public:
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // ONSCREENRESIZE_T2279991692_H
+#ifndef COLLIDER_T1773347010_H
+#define COLLIDER_T1773347010_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.Collider
+struct  Collider_t1773347010  : public Component_t1923634451
+{
+public:
+
+public:
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // COLLIDER_T1773347010_H
+#ifndef MOVEDELEGATE_T16019400_H
+#define MOVEDELEGATE_T16019400_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UICamera/MoveDelegate
+struct  MoveDelegate_t16019400  : public MulticastDelegate_t
+{
+public:
+
+public:
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // MOVEDELEGATE_T16019400_H
 #ifndef SPRITERENDERER_T3235626157_H
 #define SPRITERENDERER_T3235626157_H
 #ifdef __clang__
@@ -7853,26 +7771,6 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // SPRITERENDERER_T3235626157_H
-#ifndef ANIMATION_T3648466861_H
-#define ANIMATION_T3648466861_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.Animation
-struct  Animation_t3648466861  : public Behaviour_t1437897464
-{
-public:
-
-public:
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // ANIMATION_T3648466861_H
 #ifndef LIGHT_T3756812086_H
 #define LIGHT_T3756812086_H
 #ifdef __clang__
@@ -7902,16 +7800,16 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // LIGHT_T3756812086_H
-#ifndef COLLIDER2D_T2806799626_H
-#define COLLIDER2D_T2806799626_H
+#ifndef MONOBEHAVIOUR_T3962482529_H
+#define MONOBEHAVIOUR_T3962482529_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// UnityEngine.Collider2D
-struct  Collider2D_t2806799626  : public Behaviour_t1437897464
+// UnityEngine.MonoBehaviour
+struct  MonoBehaviour_t3962482529  : public Behaviour_t1437897464
 {
 public:
 
@@ -7921,7 +7819,7 @@ public:
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // COLLIDER2D_T2806799626_H
+#endif // MONOBEHAVIOUR_T3962482529_H
 #ifndef CAMERA_T4157153871_H
 #define CAMERA_T4157153871_H
 #ifdef __clang__
@@ -7981,6 +7879,935 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // CAMERA_T4157153871_H
+#ifndef ANIMATION_T3648466861_H
+#define ANIMATION_T3648466861_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.Animation
+struct  Animation_t3648466861  : public Behaviour_t1437897464
+{
+public:
+
+public:
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // ANIMATION_T3648466861_H
+#ifndef COLLIDER2D_T2806799626_H
+#define COLLIDER2D_T2806799626_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.Collider2D
+struct  Collider2D_t2806799626  : public Behaviour_t1437897464
+{
+public:
+
+public:
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // COLLIDER2D_T2806799626_H
+#ifndef AUDIOSOURCE_T3935305588_H
+#define AUDIOSOURCE_T3935305588_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.AudioSource
+struct  AudioSource_t3935305588  : public Behaviour_t1437897464
+{
+public:
+	// UnityEngine.AudioSourceExtension UnityEngine.AudioSource::spatializerExtension
+	AudioSourceExtension_t3064908834 * ___spatializerExtension_2;
+	// UnityEngine.AudioSourceExtension UnityEngine.AudioSource::ambisonicExtension
+	AudioSourceExtension_t3064908834 * ___ambisonicExtension_3;
+
+public:
+	inline static int32_t get_offset_of_spatializerExtension_2() { return static_cast<int32_t>(offsetof(AudioSource_t3935305588, ___spatializerExtension_2)); }
+	inline AudioSourceExtension_t3064908834 * get_spatializerExtension_2() const { return ___spatializerExtension_2; }
+	inline AudioSourceExtension_t3064908834 ** get_address_of_spatializerExtension_2() { return &___spatializerExtension_2; }
+	inline void set_spatializerExtension_2(AudioSourceExtension_t3064908834 * value)
+	{
+		___spatializerExtension_2 = value;
+		Il2CppCodeGenWriteBarrier((&___spatializerExtension_2), value);
+	}
+
+	inline static int32_t get_offset_of_ambisonicExtension_3() { return static_cast<int32_t>(offsetof(AudioSource_t3935305588, ___ambisonicExtension_3)); }
+	inline AudioSourceExtension_t3064908834 * get_ambisonicExtension_3() const { return ___ambisonicExtension_3; }
+	inline AudioSourceExtension_t3064908834 ** get_address_of_ambisonicExtension_3() { return &___ambisonicExtension_3; }
+	inline void set_ambisonicExtension_3(AudioSourceExtension_t3064908834 * value)
+	{
+		___ambisonicExtension_3 = value;
+		Il2CppCodeGenWriteBarrier((&___ambisonicExtension_3), value);
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // AUDIOSOURCE_T3935305588_H
+#ifndef TYPEWRITEREFFECT_T1340895546_H
+#define TYPEWRITEREFFECT_T1340895546_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// TypewriterEffect
+struct  TypewriterEffect_t1340895546  : public MonoBehaviour_t3962482529
+{
+public:
+	// System.Int32 TypewriterEffect::charsPerSecond
+	int32_t ___charsPerSecond_3;
+	// System.Single TypewriterEffect::fadeInTime
+	float ___fadeInTime_4;
+	// System.Single TypewriterEffect::delayOnPeriod
+	float ___delayOnPeriod_5;
+	// System.Single TypewriterEffect::delayOnNewLine
+	float ___delayOnNewLine_6;
+	// UIScrollView TypewriterEffect::scrollView
+	UIScrollView_t1973404950 * ___scrollView_7;
+	// System.Boolean TypewriterEffect::keepFullDimensions
+	bool ___keepFullDimensions_8;
+	// System.Collections.Generic.List`1<EventDelegate> TypewriterEffect::onFinished
+	List_1_t4210400802 * ___onFinished_9;
+	// UILabel TypewriterEffect::mLabel
+	UILabel_t3248798549 * ___mLabel_10;
+	// System.String TypewriterEffect::mFullText
+	String_t* ___mFullText_11;
+	// System.Int32 TypewriterEffect::mCurrentOffset
+	int32_t ___mCurrentOffset_12;
+	// System.Single TypewriterEffect::mNextChar
+	float ___mNextChar_13;
+	// System.Boolean TypewriterEffect::mReset
+	bool ___mReset_14;
+	// System.Boolean TypewriterEffect::mActive
+	bool ___mActive_15;
+	// BetterList`1<TypewriterEffect/FadeEntry> TypewriterEffect::mFade
+	BetterList_1_t4089408747 * ___mFade_16;
+
+public:
+	inline static int32_t get_offset_of_charsPerSecond_3() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___charsPerSecond_3)); }
+	inline int32_t get_charsPerSecond_3() const { return ___charsPerSecond_3; }
+	inline int32_t* get_address_of_charsPerSecond_3() { return &___charsPerSecond_3; }
+	inline void set_charsPerSecond_3(int32_t value)
+	{
+		___charsPerSecond_3 = value;
+	}
+
+	inline static int32_t get_offset_of_fadeInTime_4() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___fadeInTime_4)); }
+	inline float get_fadeInTime_4() const { return ___fadeInTime_4; }
+	inline float* get_address_of_fadeInTime_4() { return &___fadeInTime_4; }
+	inline void set_fadeInTime_4(float value)
+	{
+		___fadeInTime_4 = value;
+	}
+
+	inline static int32_t get_offset_of_delayOnPeriod_5() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___delayOnPeriod_5)); }
+	inline float get_delayOnPeriod_5() const { return ___delayOnPeriod_5; }
+	inline float* get_address_of_delayOnPeriod_5() { return &___delayOnPeriod_5; }
+	inline void set_delayOnPeriod_5(float value)
+	{
+		___delayOnPeriod_5 = value;
+	}
+
+	inline static int32_t get_offset_of_delayOnNewLine_6() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___delayOnNewLine_6)); }
+	inline float get_delayOnNewLine_6() const { return ___delayOnNewLine_6; }
+	inline float* get_address_of_delayOnNewLine_6() { return &___delayOnNewLine_6; }
+	inline void set_delayOnNewLine_6(float value)
+	{
+		___delayOnNewLine_6 = value;
+	}
+
+	inline static int32_t get_offset_of_scrollView_7() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___scrollView_7)); }
+	inline UIScrollView_t1973404950 * get_scrollView_7() const { return ___scrollView_7; }
+	inline UIScrollView_t1973404950 ** get_address_of_scrollView_7() { return &___scrollView_7; }
+	inline void set_scrollView_7(UIScrollView_t1973404950 * value)
+	{
+		___scrollView_7 = value;
+		Il2CppCodeGenWriteBarrier((&___scrollView_7), value);
+	}
+
+	inline static int32_t get_offset_of_keepFullDimensions_8() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___keepFullDimensions_8)); }
+	inline bool get_keepFullDimensions_8() const { return ___keepFullDimensions_8; }
+	inline bool* get_address_of_keepFullDimensions_8() { return &___keepFullDimensions_8; }
+	inline void set_keepFullDimensions_8(bool value)
+	{
+		___keepFullDimensions_8 = value;
+	}
+
+	inline static int32_t get_offset_of_onFinished_9() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___onFinished_9)); }
+	inline List_1_t4210400802 * get_onFinished_9() const { return ___onFinished_9; }
+	inline List_1_t4210400802 ** get_address_of_onFinished_9() { return &___onFinished_9; }
+	inline void set_onFinished_9(List_1_t4210400802 * value)
+	{
+		___onFinished_9 = value;
+		Il2CppCodeGenWriteBarrier((&___onFinished_9), value);
+	}
+
+	inline static int32_t get_offset_of_mLabel_10() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___mLabel_10)); }
+	inline UILabel_t3248798549 * get_mLabel_10() const { return ___mLabel_10; }
+	inline UILabel_t3248798549 ** get_address_of_mLabel_10() { return &___mLabel_10; }
+	inline void set_mLabel_10(UILabel_t3248798549 * value)
+	{
+		___mLabel_10 = value;
+		Il2CppCodeGenWriteBarrier((&___mLabel_10), value);
+	}
+
+	inline static int32_t get_offset_of_mFullText_11() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___mFullText_11)); }
+	inline String_t* get_mFullText_11() const { return ___mFullText_11; }
+	inline String_t** get_address_of_mFullText_11() { return &___mFullText_11; }
+	inline void set_mFullText_11(String_t* value)
+	{
+		___mFullText_11 = value;
+		Il2CppCodeGenWriteBarrier((&___mFullText_11), value);
+	}
+
+	inline static int32_t get_offset_of_mCurrentOffset_12() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___mCurrentOffset_12)); }
+	inline int32_t get_mCurrentOffset_12() const { return ___mCurrentOffset_12; }
+	inline int32_t* get_address_of_mCurrentOffset_12() { return &___mCurrentOffset_12; }
+	inline void set_mCurrentOffset_12(int32_t value)
+	{
+		___mCurrentOffset_12 = value;
+	}
+
+	inline static int32_t get_offset_of_mNextChar_13() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___mNextChar_13)); }
+	inline float get_mNextChar_13() const { return ___mNextChar_13; }
+	inline float* get_address_of_mNextChar_13() { return &___mNextChar_13; }
+	inline void set_mNextChar_13(float value)
+	{
+		___mNextChar_13 = value;
+	}
+
+	inline static int32_t get_offset_of_mReset_14() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___mReset_14)); }
+	inline bool get_mReset_14() const { return ___mReset_14; }
+	inline bool* get_address_of_mReset_14() { return &___mReset_14; }
+	inline void set_mReset_14(bool value)
+	{
+		___mReset_14 = value;
+	}
+
+	inline static int32_t get_offset_of_mActive_15() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___mActive_15)); }
+	inline bool get_mActive_15() const { return ___mActive_15; }
+	inline bool* get_address_of_mActive_15() { return &___mActive_15; }
+	inline void set_mActive_15(bool value)
+	{
+		___mActive_15 = value;
+	}
+
+	inline static int32_t get_offset_of_mFade_16() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___mFade_16)); }
+	inline BetterList_1_t4089408747 * get_mFade_16() const { return ___mFade_16; }
+	inline BetterList_1_t4089408747 ** get_address_of_mFade_16() { return &___mFade_16; }
+	inline void set_mFade_16(BetterList_1_t4089408747 * value)
+	{
+		___mFade_16 = value;
+		Il2CppCodeGenWriteBarrier((&___mFade_16), value);
+	}
+};
+
+struct TypewriterEffect_t1340895546_StaticFields
+{
+public:
+	// TypewriterEffect TypewriterEffect::current
+	TypewriterEffect_t1340895546 * ___current_2;
+
+public:
+	inline static int32_t get_offset_of_current_2() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546_StaticFields, ___current_2)); }
+	inline TypewriterEffect_t1340895546 * get_current_2() const { return ___current_2; }
+	inline TypewriterEffect_t1340895546 ** get_address_of_current_2() { return &___current_2; }
+	inline void set_current_2(TypewriterEffect_t1340895546 * value)
+	{
+		___current_2 = value;
+		Il2CppCodeGenWriteBarrier((&___current_2), value);
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // TYPEWRITEREFFECT_T1340895546_H
+#ifndef UITWEENER_T260334902_H
+#define UITWEENER_T260334902_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UITweener
+struct  UITweener_t260334902  : public MonoBehaviour_t3962482529
+{
+public:
+	// UITweener/Method UITweener::method
+	int32_t ___method_3;
+	// UITweener/Style UITweener::style
+	int32_t ___style_4;
+	// UnityEngine.AnimationCurve UITweener::animationCurve
+	AnimationCurve_t3046754366 * ___animationCurve_5;
+	// System.Boolean UITweener::ignoreTimeScale
+	bool ___ignoreTimeScale_6;
+	// System.Single UITweener::delay
+	float ___delay_7;
+	// System.Single UITweener::duration
+	float ___duration_8;
+	// System.Boolean UITweener::steeperCurves
+	bool ___steeperCurves_9;
+	// System.Int32 UITweener::tweenGroup
+	int32_t ___tweenGroup_10;
+	// System.Boolean UITweener::useFixedUpdate
+	bool ___useFixedUpdate_11;
+	// System.Collections.Generic.List`1<EventDelegate> UITweener::onFinished
+	List_1_t4210400802 * ___onFinished_12;
+	// UnityEngine.GameObject UITweener::eventReceiver
+	GameObject_t1113636619 * ___eventReceiver_13;
+	// System.String UITweener::callWhenFinished
+	String_t* ___callWhenFinished_14;
+	// System.Boolean UITweener::mStarted
+	bool ___mStarted_15;
+	// System.Single UITweener::mStartTime
+	float ___mStartTime_16;
+	// System.Single UITweener::mDuration
+	float ___mDuration_17;
+	// System.Single UITweener::mAmountPerDelta
+	float ___mAmountPerDelta_18;
+	// System.Single UITweener::mFactor
+	float ___mFactor_19;
+	// System.Collections.Generic.List`1<EventDelegate> UITweener::mTemp
+	List_1_t4210400802 * ___mTemp_20;
+
+public:
+	inline static int32_t get_offset_of_method_3() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___method_3)); }
+	inline int32_t get_method_3() const { return ___method_3; }
+	inline int32_t* get_address_of_method_3() { return &___method_3; }
+	inline void set_method_3(int32_t value)
+	{
+		___method_3 = value;
+	}
+
+	inline static int32_t get_offset_of_style_4() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___style_4)); }
+	inline int32_t get_style_4() const { return ___style_4; }
+	inline int32_t* get_address_of_style_4() { return &___style_4; }
+	inline void set_style_4(int32_t value)
+	{
+		___style_4 = value;
+	}
+
+	inline static int32_t get_offset_of_animationCurve_5() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___animationCurve_5)); }
+	inline AnimationCurve_t3046754366 * get_animationCurve_5() const { return ___animationCurve_5; }
+	inline AnimationCurve_t3046754366 ** get_address_of_animationCurve_5() { return &___animationCurve_5; }
+	inline void set_animationCurve_5(AnimationCurve_t3046754366 * value)
+	{
+		___animationCurve_5 = value;
+		Il2CppCodeGenWriteBarrier((&___animationCurve_5), value);
+	}
+
+	inline static int32_t get_offset_of_ignoreTimeScale_6() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___ignoreTimeScale_6)); }
+	inline bool get_ignoreTimeScale_6() const { return ___ignoreTimeScale_6; }
+	inline bool* get_address_of_ignoreTimeScale_6() { return &___ignoreTimeScale_6; }
+	inline void set_ignoreTimeScale_6(bool value)
+	{
+		___ignoreTimeScale_6 = value;
+	}
+
+	inline static int32_t get_offset_of_delay_7() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___delay_7)); }
+	inline float get_delay_7() const { return ___delay_7; }
+	inline float* get_address_of_delay_7() { return &___delay_7; }
+	inline void set_delay_7(float value)
+	{
+		___delay_7 = value;
+	}
+
+	inline static int32_t get_offset_of_duration_8() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___duration_8)); }
+	inline float get_duration_8() const { return ___duration_8; }
+	inline float* get_address_of_duration_8() { return &___duration_8; }
+	inline void set_duration_8(float value)
+	{
+		___duration_8 = value;
+	}
+
+	inline static int32_t get_offset_of_steeperCurves_9() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___steeperCurves_9)); }
+	inline bool get_steeperCurves_9() const { return ___steeperCurves_9; }
+	inline bool* get_address_of_steeperCurves_9() { return &___steeperCurves_9; }
+	inline void set_steeperCurves_9(bool value)
+	{
+		___steeperCurves_9 = value;
+	}
+
+	inline static int32_t get_offset_of_tweenGroup_10() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___tweenGroup_10)); }
+	inline int32_t get_tweenGroup_10() const { return ___tweenGroup_10; }
+	inline int32_t* get_address_of_tweenGroup_10() { return &___tweenGroup_10; }
+	inline void set_tweenGroup_10(int32_t value)
+	{
+		___tweenGroup_10 = value;
+	}
+
+	inline static int32_t get_offset_of_useFixedUpdate_11() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___useFixedUpdate_11)); }
+	inline bool get_useFixedUpdate_11() const { return ___useFixedUpdate_11; }
+	inline bool* get_address_of_useFixedUpdate_11() { return &___useFixedUpdate_11; }
+	inline void set_useFixedUpdate_11(bool value)
+	{
+		___useFixedUpdate_11 = value;
+	}
+
+	inline static int32_t get_offset_of_onFinished_12() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___onFinished_12)); }
+	inline List_1_t4210400802 * get_onFinished_12() const { return ___onFinished_12; }
+	inline List_1_t4210400802 ** get_address_of_onFinished_12() { return &___onFinished_12; }
+	inline void set_onFinished_12(List_1_t4210400802 * value)
+	{
+		___onFinished_12 = value;
+		Il2CppCodeGenWriteBarrier((&___onFinished_12), value);
+	}
+
+	inline static int32_t get_offset_of_eventReceiver_13() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___eventReceiver_13)); }
+	inline GameObject_t1113636619 * get_eventReceiver_13() const { return ___eventReceiver_13; }
+	inline GameObject_t1113636619 ** get_address_of_eventReceiver_13() { return &___eventReceiver_13; }
+	inline void set_eventReceiver_13(GameObject_t1113636619 * value)
+	{
+		___eventReceiver_13 = value;
+		Il2CppCodeGenWriteBarrier((&___eventReceiver_13), value);
+	}
+
+	inline static int32_t get_offset_of_callWhenFinished_14() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___callWhenFinished_14)); }
+	inline String_t* get_callWhenFinished_14() const { return ___callWhenFinished_14; }
+	inline String_t** get_address_of_callWhenFinished_14() { return &___callWhenFinished_14; }
+	inline void set_callWhenFinished_14(String_t* value)
+	{
+		___callWhenFinished_14 = value;
+		Il2CppCodeGenWriteBarrier((&___callWhenFinished_14), value);
+	}
+
+	inline static int32_t get_offset_of_mStarted_15() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___mStarted_15)); }
+	inline bool get_mStarted_15() const { return ___mStarted_15; }
+	inline bool* get_address_of_mStarted_15() { return &___mStarted_15; }
+	inline void set_mStarted_15(bool value)
+	{
+		___mStarted_15 = value;
+	}
+
+	inline static int32_t get_offset_of_mStartTime_16() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___mStartTime_16)); }
+	inline float get_mStartTime_16() const { return ___mStartTime_16; }
+	inline float* get_address_of_mStartTime_16() { return &___mStartTime_16; }
+	inline void set_mStartTime_16(float value)
+	{
+		___mStartTime_16 = value;
+	}
+
+	inline static int32_t get_offset_of_mDuration_17() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___mDuration_17)); }
+	inline float get_mDuration_17() const { return ___mDuration_17; }
+	inline float* get_address_of_mDuration_17() { return &___mDuration_17; }
+	inline void set_mDuration_17(float value)
+	{
+		___mDuration_17 = value;
+	}
+
+	inline static int32_t get_offset_of_mAmountPerDelta_18() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___mAmountPerDelta_18)); }
+	inline float get_mAmountPerDelta_18() const { return ___mAmountPerDelta_18; }
+	inline float* get_address_of_mAmountPerDelta_18() { return &___mAmountPerDelta_18; }
+	inline void set_mAmountPerDelta_18(float value)
+	{
+		___mAmountPerDelta_18 = value;
+	}
+
+	inline static int32_t get_offset_of_mFactor_19() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___mFactor_19)); }
+	inline float get_mFactor_19() const { return ___mFactor_19; }
+	inline float* get_address_of_mFactor_19() { return &___mFactor_19; }
+	inline void set_mFactor_19(float value)
+	{
+		___mFactor_19 = value;
+	}
+
+	inline static int32_t get_offset_of_mTemp_20() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___mTemp_20)); }
+	inline List_1_t4210400802 * get_mTemp_20() const { return ___mTemp_20; }
+	inline List_1_t4210400802 ** get_address_of_mTemp_20() { return &___mTemp_20; }
+	inline void set_mTemp_20(List_1_t4210400802 * value)
+	{
+		___mTemp_20 = value;
+		Il2CppCodeGenWriteBarrier((&___mTemp_20), value);
+	}
+};
+
+struct UITweener_t260334902_StaticFields
+{
+public:
+	// UITweener UITweener::current
+	UITweener_t260334902 * ___current_2;
+
+public:
+	inline static int32_t get_offset_of_current_2() { return static_cast<int32_t>(offsetof(UITweener_t260334902_StaticFields, ___current_2)); }
+	inline UITweener_t260334902 * get_current_2() const { return ___current_2; }
+	inline UITweener_t260334902 ** get_address_of_current_2() { return &___current_2; }
+	inline void set_current_2(UITweener_t260334902 * value)
+	{
+		___current_2 = value;
+		Il2CppCodeGenWriteBarrier((&___current_2), value);
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // UITWEENER_T260334902_H
+#ifndef UIBUTTONSCALE_T3973287916_H
+#define UIBUTTONSCALE_T3973287916_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UIButtonScale
+struct  UIButtonScale_t3973287916  : public MonoBehaviour_t3962482529
+{
+public:
+	// UnityEngine.Transform UIButtonScale::tweenTarget
+	Transform_t3600365921 * ___tweenTarget_2;
+	// UnityEngine.Vector3 UIButtonScale::hover
+	Vector3_t3722313464  ___hover_3;
+	// UnityEngine.Vector3 UIButtonScale::pressed
+	Vector3_t3722313464  ___pressed_4;
+	// System.Single UIButtonScale::duration
+	float ___duration_5;
+	// UnityEngine.Vector3 UIButtonScale::mScale
+	Vector3_t3722313464  ___mScale_6;
+	// System.Boolean UIButtonScale::mStarted
+	bool ___mStarted_7;
+
+public:
+	inline static int32_t get_offset_of_tweenTarget_2() { return static_cast<int32_t>(offsetof(UIButtonScale_t3973287916, ___tweenTarget_2)); }
+	inline Transform_t3600365921 * get_tweenTarget_2() const { return ___tweenTarget_2; }
+	inline Transform_t3600365921 ** get_address_of_tweenTarget_2() { return &___tweenTarget_2; }
+	inline void set_tweenTarget_2(Transform_t3600365921 * value)
+	{
+		___tweenTarget_2 = value;
+		Il2CppCodeGenWriteBarrier((&___tweenTarget_2), value);
+	}
+
+	inline static int32_t get_offset_of_hover_3() { return static_cast<int32_t>(offsetof(UIButtonScale_t3973287916, ___hover_3)); }
+	inline Vector3_t3722313464  get_hover_3() const { return ___hover_3; }
+	inline Vector3_t3722313464 * get_address_of_hover_3() { return &___hover_3; }
+	inline void set_hover_3(Vector3_t3722313464  value)
+	{
+		___hover_3 = value;
+	}
+
+	inline static int32_t get_offset_of_pressed_4() { return static_cast<int32_t>(offsetof(UIButtonScale_t3973287916, ___pressed_4)); }
+	inline Vector3_t3722313464  get_pressed_4() const { return ___pressed_4; }
+	inline Vector3_t3722313464 * get_address_of_pressed_4() { return &___pressed_4; }
+	inline void set_pressed_4(Vector3_t3722313464  value)
+	{
+		___pressed_4 = value;
+	}
+
+	inline static int32_t get_offset_of_duration_5() { return static_cast<int32_t>(offsetof(UIButtonScale_t3973287916, ___duration_5)); }
+	inline float get_duration_5() const { return ___duration_5; }
+	inline float* get_address_of_duration_5() { return &___duration_5; }
+	inline void set_duration_5(float value)
+	{
+		___duration_5 = value;
+	}
+
+	inline static int32_t get_offset_of_mScale_6() { return static_cast<int32_t>(offsetof(UIButtonScale_t3973287916, ___mScale_6)); }
+	inline Vector3_t3722313464  get_mScale_6() const { return ___mScale_6; }
+	inline Vector3_t3722313464 * get_address_of_mScale_6() { return &___mScale_6; }
+	inline void set_mScale_6(Vector3_t3722313464  value)
+	{
+		___mScale_6 = value;
+	}
+
+	inline static int32_t get_offset_of_mStarted_7() { return static_cast<int32_t>(offsetof(UIButtonScale_t3973287916, ___mStarted_7)); }
+	inline bool get_mStarted_7() const { return ___mStarted_7; }
+	inline bool* get_address_of_mStarted_7() { return &___mStarted_7; }
+	inline void set_mStarted_7(bool value)
+	{
+		___mStarted_7 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // UIBUTTONSCALE_T3973287916_H
+#ifndef UIBUTTONOFFSET_T4041087173_H
+#define UIBUTTONOFFSET_T4041087173_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UIButtonOffset
+struct  UIButtonOffset_t4041087173  : public MonoBehaviour_t3962482529
+{
+public:
+	// UnityEngine.Transform UIButtonOffset::tweenTarget
+	Transform_t3600365921 * ___tweenTarget_2;
+	// UnityEngine.Vector3 UIButtonOffset::hover
+	Vector3_t3722313464  ___hover_3;
+	// UnityEngine.Vector3 UIButtonOffset::pressed
+	Vector3_t3722313464  ___pressed_4;
+	// System.Single UIButtonOffset::duration
+	float ___duration_5;
+	// UnityEngine.Vector3 UIButtonOffset::mPos
+	Vector3_t3722313464  ___mPos_6;
+	// System.Boolean UIButtonOffset::mStarted
+	bool ___mStarted_7;
+	// System.Boolean UIButtonOffset::mPressed
+	bool ___mPressed_8;
+
+public:
+	inline static int32_t get_offset_of_tweenTarget_2() { return static_cast<int32_t>(offsetof(UIButtonOffset_t4041087173, ___tweenTarget_2)); }
+	inline Transform_t3600365921 * get_tweenTarget_2() const { return ___tweenTarget_2; }
+	inline Transform_t3600365921 ** get_address_of_tweenTarget_2() { return &___tweenTarget_2; }
+	inline void set_tweenTarget_2(Transform_t3600365921 * value)
+	{
+		___tweenTarget_2 = value;
+		Il2CppCodeGenWriteBarrier((&___tweenTarget_2), value);
+	}
+
+	inline static int32_t get_offset_of_hover_3() { return static_cast<int32_t>(offsetof(UIButtonOffset_t4041087173, ___hover_3)); }
+	inline Vector3_t3722313464  get_hover_3() const { return ___hover_3; }
+	inline Vector3_t3722313464 * get_address_of_hover_3() { return &___hover_3; }
+	inline void set_hover_3(Vector3_t3722313464  value)
+	{
+		___hover_3 = value;
+	}
+
+	inline static int32_t get_offset_of_pressed_4() { return static_cast<int32_t>(offsetof(UIButtonOffset_t4041087173, ___pressed_4)); }
+	inline Vector3_t3722313464  get_pressed_4() const { return ___pressed_4; }
+	inline Vector3_t3722313464 * get_address_of_pressed_4() { return &___pressed_4; }
+	inline void set_pressed_4(Vector3_t3722313464  value)
+	{
+		___pressed_4 = value;
+	}
+
+	inline static int32_t get_offset_of_duration_5() { return static_cast<int32_t>(offsetof(UIButtonOffset_t4041087173, ___duration_5)); }
+	inline float get_duration_5() const { return ___duration_5; }
+	inline float* get_address_of_duration_5() { return &___duration_5; }
+	inline void set_duration_5(float value)
+	{
+		___duration_5 = value;
+	}
+
+	inline static int32_t get_offset_of_mPos_6() { return static_cast<int32_t>(offsetof(UIButtonOffset_t4041087173, ___mPos_6)); }
+	inline Vector3_t3722313464  get_mPos_6() const { return ___mPos_6; }
+	inline Vector3_t3722313464 * get_address_of_mPos_6() { return &___mPos_6; }
+	inline void set_mPos_6(Vector3_t3722313464  value)
+	{
+		___mPos_6 = value;
+	}
+
+	inline static int32_t get_offset_of_mStarted_7() { return static_cast<int32_t>(offsetof(UIButtonOffset_t4041087173, ___mStarted_7)); }
+	inline bool get_mStarted_7() const { return ___mStarted_7; }
+	inline bool* get_address_of_mStarted_7() { return &___mStarted_7; }
+	inline void set_mStarted_7(bool value)
+	{
+		___mStarted_7 = value;
+	}
+
+	inline static int32_t get_offset_of_mPressed_8() { return static_cast<int32_t>(offsetof(UIButtonOffset_t4041087173, ___mPressed_8)); }
+	inline bool get_mPressed_8() const { return ___mPressed_8; }
+	inline bool* get_address_of_mPressed_8() { return &___mPressed_8; }
+	inline void set_mPressed_8(bool value)
+	{
+		___mPressed_8 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // UIBUTTONOFFSET_T4041087173_H
+#ifndef UIBUTTONACTIVATE_T1184781629_H
+#define UIBUTTONACTIVATE_T1184781629_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UIButtonActivate
+struct  UIButtonActivate_t1184781629  : public MonoBehaviour_t3962482529
+{
+public:
+	// UnityEngine.GameObject UIButtonActivate::target
+	GameObject_t1113636619 * ___target_2;
+	// System.Boolean UIButtonActivate::state
+	bool ___state_3;
+
+public:
+	inline static int32_t get_offset_of_target_2() { return static_cast<int32_t>(offsetof(UIButtonActivate_t1184781629, ___target_2)); }
+	inline GameObject_t1113636619 * get_target_2() const { return ___target_2; }
+	inline GameObject_t1113636619 ** get_address_of_target_2() { return &___target_2; }
+	inline void set_target_2(GameObject_t1113636619 * value)
+	{
+		___target_2 = value;
+		Il2CppCodeGenWriteBarrier((&___target_2), value);
+	}
+
+	inline static int32_t get_offset_of_state_3() { return static_cast<int32_t>(offsetof(UIButtonActivate_t1184781629, ___state_3)); }
+	inline bool get_state_3() const { return ___state_3; }
+	inline bool* get_address_of_state_3() { return &___state_3; }
+	inline void set_state_3(bool value)
+	{
+		___state_3 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // UIBUTTONACTIVATE_T1184781629_H
+#ifndef UIRECT_T2875960382_H
+#define UIRECT_T2875960382_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UIRect
+struct  UIRect_t2875960382  : public MonoBehaviour_t3962482529
+{
+public:
+	// UIRect/AnchorPoint UIRect::leftAnchor
+	AnchorPoint_t1754718329 * ___leftAnchor_2;
+	// UIRect/AnchorPoint UIRect::rightAnchor
+	AnchorPoint_t1754718329 * ___rightAnchor_3;
+	// UIRect/AnchorPoint UIRect::bottomAnchor
+	AnchorPoint_t1754718329 * ___bottomAnchor_4;
+	// UIRect/AnchorPoint UIRect::topAnchor
+	AnchorPoint_t1754718329 * ___topAnchor_5;
+	// UIRect/AnchorUpdate UIRect::updateAnchors
+	int32_t ___updateAnchors_6;
+	// UnityEngine.GameObject UIRect::mGo
+	GameObject_t1113636619 * ___mGo_7;
+	// UnityEngine.Transform UIRect::mTrans
+	Transform_t3600365921 * ___mTrans_8;
+	// BetterList`1<UIRect> UIRect::mChildren
+	BetterList_1_t2030980700 * ___mChildren_9;
+	// System.Boolean UIRect::mChanged
+	bool ___mChanged_10;
+	// System.Boolean UIRect::mParentFound
+	bool ___mParentFound_11;
+	// System.Boolean UIRect::mUpdateAnchors
+	bool ___mUpdateAnchors_12;
+	// System.Int32 UIRect::mUpdateFrame
+	int32_t ___mUpdateFrame_13;
+	// System.Boolean UIRect::mAnchorsCached
+	bool ___mAnchorsCached_14;
+	// UIRoot UIRect::mRoot
+	UIRoot_t4022971450 * ___mRoot_15;
+	// UIRect UIRect::mParent
+	UIRect_t2875960382 * ___mParent_16;
+	// System.Boolean UIRect::mRootSet
+	bool ___mRootSet_17;
+	// UnityEngine.Camera UIRect::mCam
+	Camera_t4157153871 * ___mCam_18;
+	// System.Boolean UIRect::mStarted
+	bool ___mStarted_19;
+	// System.Single UIRect::finalAlpha
+	float ___finalAlpha_20;
+
+public:
+	inline static int32_t get_offset_of_leftAnchor_2() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___leftAnchor_2)); }
+	inline AnchorPoint_t1754718329 * get_leftAnchor_2() const { return ___leftAnchor_2; }
+	inline AnchorPoint_t1754718329 ** get_address_of_leftAnchor_2() { return &___leftAnchor_2; }
+	inline void set_leftAnchor_2(AnchorPoint_t1754718329 * value)
+	{
+		___leftAnchor_2 = value;
+		Il2CppCodeGenWriteBarrier((&___leftAnchor_2), value);
+	}
+
+	inline static int32_t get_offset_of_rightAnchor_3() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___rightAnchor_3)); }
+	inline AnchorPoint_t1754718329 * get_rightAnchor_3() const { return ___rightAnchor_3; }
+	inline AnchorPoint_t1754718329 ** get_address_of_rightAnchor_3() { return &___rightAnchor_3; }
+	inline void set_rightAnchor_3(AnchorPoint_t1754718329 * value)
+	{
+		___rightAnchor_3 = value;
+		Il2CppCodeGenWriteBarrier((&___rightAnchor_3), value);
+	}
+
+	inline static int32_t get_offset_of_bottomAnchor_4() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___bottomAnchor_4)); }
+	inline AnchorPoint_t1754718329 * get_bottomAnchor_4() const { return ___bottomAnchor_4; }
+	inline AnchorPoint_t1754718329 ** get_address_of_bottomAnchor_4() { return &___bottomAnchor_4; }
+	inline void set_bottomAnchor_4(AnchorPoint_t1754718329 * value)
+	{
+		___bottomAnchor_4 = value;
+		Il2CppCodeGenWriteBarrier((&___bottomAnchor_4), value);
+	}
+
+	inline static int32_t get_offset_of_topAnchor_5() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___topAnchor_5)); }
+	inline AnchorPoint_t1754718329 * get_topAnchor_5() const { return ___topAnchor_5; }
+	inline AnchorPoint_t1754718329 ** get_address_of_topAnchor_5() { return &___topAnchor_5; }
+	inline void set_topAnchor_5(AnchorPoint_t1754718329 * value)
+	{
+		___topAnchor_5 = value;
+		Il2CppCodeGenWriteBarrier((&___topAnchor_5), value);
+	}
+
+	inline static int32_t get_offset_of_updateAnchors_6() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___updateAnchors_6)); }
+	inline int32_t get_updateAnchors_6() const { return ___updateAnchors_6; }
+	inline int32_t* get_address_of_updateAnchors_6() { return &___updateAnchors_6; }
+	inline void set_updateAnchors_6(int32_t value)
+	{
+		___updateAnchors_6 = value;
+	}
+
+	inline static int32_t get_offset_of_mGo_7() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mGo_7)); }
+	inline GameObject_t1113636619 * get_mGo_7() const { return ___mGo_7; }
+	inline GameObject_t1113636619 ** get_address_of_mGo_7() { return &___mGo_7; }
+	inline void set_mGo_7(GameObject_t1113636619 * value)
+	{
+		___mGo_7 = value;
+		Il2CppCodeGenWriteBarrier((&___mGo_7), value);
+	}
+
+	inline static int32_t get_offset_of_mTrans_8() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mTrans_8)); }
+	inline Transform_t3600365921 * get_mTrans_8() const { return ___mTrans_8; }
+	inline Transform_t3600365921 ** get_address_of_mTrans_8() { return &___mTrans_8; }
+	inline void set_mTrans_8(Transform_t3600365921 * value)
+	{
+		___mTrans_8 = value;
+		Il2CppCodeGenWriteBarrier((&___mTrans_8), value);
+	}
+
+	inline static int32_t get_offset_of_mChildren_9() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mChildren_9)); }
+	inline BetterList_1_t2030980700 * get_mChildren_9() const { return ___mChildren_9; }
+	inline BetterList_1_t2030980700 ** get_address_of_mChildren_9() { return &___mChildren_9; }
+	inline void set_mChildren_9(BetterList_1_t2030980700 * value)
+	{
+		___mChildren_9 = value;
+		Il2CppCodeGenWriteBarrier((&___mChildren_9), value);
+	}
+
+	inline static int32_t get_offset_of_mChanged_10() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mChanged_10)); }
+	inline bool get_mChanged_10() const { return ___mChanged_10; }
+	inline bool* get_address_of_mChanged_10() { return &___mChanged_10; }
+	inline void set_mChanged_10(bool value)
+	{
+		___mChanged_10 = value;
+	}
+
+	inline static int32_t get_offset_of_mParentFound_11() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mParentFound_11)); }
+	inline bool get_mParentFound_11() const { return ___mParentFound_11; }
+	inline bool* get_address_of_mParentFound_11() { return &___mParentFound_11; }
+	inline void set_mParentFound_11(bool value)
+	{
+		___mParentFound_11 = value;
+	}
+
+	inline static int32_t get_offset_of_mUpdateAnchors_12() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mUpdateAnchors_12)); }
+	inline bool get_mUpdateAnchors_12() const { return ___mUpdateAnchors_12; }
+	inline bool* get_address_of_mUpdateAnchors_12() { return &___mUpdateAnchors_12; }
+	inline void set_mUpdateAnchors_12(bool value)
+	{
+		___mUpdateAnchors_12 = value;
+	}
+
+	inline static int32_t get_offset_of_mUpdateFrame_13() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mUpdateFrame_13)); }
+	inline int32_t get_mUpdateFrame_13() const { return ___mUpdateFrame_13; }
+	inline int32_t* get_address_of_mUpdateFrame_13() { return &___mUpdateFrame_13; }
+	inline void set_mUpdateFrame_13(int32_t value)
+	{
+		___mUpdateFrame_13 = value;
+	}
+
+	inline static int32_t get_offset_of_mAnchorsCached_14() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mAnchorsCached_14)); }
+	inline bool get_mAnchorsCached_14() const { return ___mAnchorsCached_14; }
+	inline bool* get_address_of_mAnchorsCached_14() { return &___mAnchorsCached_14; }
+	inline void set_mAnchorsCached_14(bool value)
+	{
+		___mAnchorsCached_14 = value;
+	}
+
+	inline static int32_t get_offset_of_mRoot_15() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mRoot_15)); }
+	inline UIRoot_t4022971450 * get_mRoot_15() const { return ___mRoot_15; }
+	inline UIRoot_t4022971450 ** get_address_of_mRoot_15() { return &___mRoot_15; }
+	inline void set_mRoot_15(UIRoot_t4022971450 * value)
+	{
+		___mRoot_15 = value;
+		Il2CppCodeGenWriteBarrier((&___mRoot_15), value);
+	}
+
+	inline static int32_t get_offset_of_mParent_16() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mParent_16)); }
+	inline UIRect_t2875960382 * get_mParent_16() const { return ___mParent_16; }
+	inline UIRect_t2875960382 ** get_address_of_mParent_16() { return &___mParent_16; }
+	inline void set_mParent_16(UIRect_t2875960382 * value)
+	{
+		___mParent_16 = value;
+		Il2CppCodeGenWriteBarrier((&___mParent_16), value);
+	}
+
+	inline static int32_t get_offset_of_mRootSet_17() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mRootSet_17)); }
+	inline bool get_mRootSet_17() const { return ___mRootSet_17; }
+	inline bool* get_address_of_mRootSet_17() { return &___mRootSet_17; }
+	inline void set_mRootSet_17(bool value)
+	{
+		___mRootSet_17 = value;
+	}
+
+	inline static int32_t get_offset_of_mCam_18() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mCam_18)); }
+	inline Camera_t4157153871 * get_mCam_18() const { return ___mCam_18; }
+	inline Camera_t4157153871 ** get_address_of_mCam_18() { return &___mCam_18; }
+	inline void set_mCam_18(Camera_t4157153871 * value)
+	{
+		___mCam_18 = value;
+		Il2CppCodeGenWriteBarrier((&___mCam_18), value);
+	}
+
+	inline static int32_t get_offset_of_mStarted_19() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mStarted_19)); }
+	inline bool get_mStarted_19() const { return ___mStarted_19; }
+	inline bool* get_address_of_mStarted_19() { return &___mStarted_19; }
+	inline void set_mStarted_19(bool value)
+	{
+		___mStarted_19 = value;
+	}
+
+	inline static int32_t get_offset_of_finalAlpha_20() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___finalAlpha_20)); }
+	inline float get_finalAlpha_20() const { return ___finalAlpha_20; }
+	inline float* get_address_of_finalAlpha_20() { return &___finalAlpha_20; }
+	inline void set_finalAlpha_20(float value)
+	{
+		___finalAlpha_20 = value;
+	}
+};
+
+struct UIRect_t2875960382_StaticFields
+{
+public:
+	// UnityEngine.Vector3[] UIRect::mSides
+	Vector3U5BU5D_t1718750761* ___mSides_21;
+
+public:
+	inline static int32_t get_offset_of_mSides_21() { return static_cast<int32_t>(offsetof(UIRect_t2875960382_StaticFields, ___mSides_21)); }
+	inline Vector3U5BU5D_t1718750761* get_mSides_21() const { return ___mSides_21; }
+	inline Vector3U5BU5D_t1718750761** get_address_of_mSides_21() { return &___mSides_21; }
+	inline void set_mSides_21(Vector3U5BU5D_t1718750761* value)
+	{
+		___mSides_21 = value;
+		Il2CppCodeGenWriteBarrier((&___mSides_21), value);
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // UIRECT_T2875960382_H
 #ifndef UISCROLLVIEW_T1973404950_H
 #define UISCROLLVIEW_T1973404950_H
 #ifdef __clang__
@@ -8396,357 +9223,172 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // UISCROLLVIEW_T1973404950_H
-#ifndef UIBUTTONOFFSET_T4041087173_H
-#define UIBUTTONOFFSET_T4041087173_H
+#ifndef UIFONT_T2766063701_H
+#define UIFONT_T2766063701_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// UIButtonOffset
-struct  UIButtonOffset_t4041087173  : public MonoBehaviour_t3962482529
+// UIFont
+struct  UIFont_t2766063701  : public MonoBehaviour_t3962482529
 {
 public:
-	// UnityEngine.Transform UIButtonOffset::tweenTarget
-	Transform_t3600365921 * ___tweenTarget_2;
-	// UnityEngine.Vector3 UIButtonOffset::hover
-	Vector3_t3722313464  ___hover_3;
-	// UnityEngine.Vector3 UIButtonOffset::pressed
-	Vector3_t3722313464  ___pressed_4;
-	// System.Single UIButtonOffset::duration
-	float ___duration_5;
-	// UnityEngine.Vector3 UIButtonOffset::mPos
-	Vector3_t3722313464  ___mPos_6;
-	// System.Boolean UIButtonOffset::mStarted
-	bool ___mStarted_7;
-	// System.Boolean UIButtonOffset::mPressed
-	bool ___mPressed_8;
+	// UnityEngine.Material UIFont::mMat
+	Material_t340375123 * ___mMat_2;
+	// UnityEngine.Rect UIFont::mUVRect
+	Rect_t2360479859  ___mUVRect_3;
+	// BMFont UIFont::mFont
+	BMFont_t2757936676 * ___mFont_4;
+	// UIAtlas UIFont::mAtlas
+	UIAtlas_t3195533529 * ___mAtlas_5;
+	// UIFont UIFont::mReplacement
+	UIFont_t2766063701 * ___mReplacement_6;
+	// System.Collections.Generic.List`1<BMSymbol> UIFont::mSymbols
+	List_1_t3058133583 * ___mSymbols_7;
+	// UnityEngine.Font UIFont::mDynamicFont
+	Font_t1956802104 * ___mDynamicFont_8;
+	// System.Int32 UIFont::mDynamicFontSize
+	int32_t ___mDynamicFontSize_9;
+	// UnityEngine.FontStyle UIFont::mDynamicFontStyle
+	int32_t ___mDynamicFontStyle_10;
+	// UISpriteData UIFont::mSprite
+	UISpriteData_t900308526 * ___mSprite_11;
+	// System.Int32 UIFont::mPMA
+	int32_t ___mPMA_12;
+	// System.Int32 UIFont::mPacked
+	int32_t ___mPacked_13;
 
 public:
-	inline static int32_t get_offset_of_tweenTarget_2() { return static_cast<int32_t>(offsetof(UIButtonOffset_t4041087173, ___tweenTarget_2)); }
-	inline Transform_t3600365921 * get_tweenTarget_2() const { return ___tweenTarget_2; }
-	inline Transform_t3600365921 ** get_address_of_tweenTarget_2() { return &___tweenTarget_2; }
-	inline void set_tweenTarget_2(Transform_t3600365921 * value)
+	inline static int32_t get_offset_of_mMat_2() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mMat_2)); }
+	inline Material_t340375123 * get_mMat_2() const { return ___mMat_2; }
+	inline Material_t340375123 ** get_address_of_mMat_2() { return &___mMat_2; }
+	inline void set_mMat_2(Material_t340375123 * value)
 	{
-		___tweenTarget_2 = value;
-		Il2CppCodeGenWriteBarrier((&___tweenTarget_2), value);
+		___mMat_2 = value;
+		Il2CppCodeGenWriteBarrier((&___mMat_2), value);
 	}
 
-	inline static int32_t get_offset_of_hover_3() { return static_cast<int32_t>(offsetof(UIButtonOffset_t4041087173, ___hover_3)); }
-	inline Vector3_t3722313464  get_hover_3() const { return ___hover_3; }
-	inline Vector3_t3722313464 * get_address_of_hover_3() { return &___hover_3; }
-	inline void set_hover_3(Vector3_t3722313464  value)
+	inline static int32_t get_offset_of_mUVRect_3() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mUVRect_3)); }
+	inline Rect_t2360479859  get_mUVRect_3() const { return ___mUVRect_3; }
+	inline Rect_t2360479859 * get_address_of_mUVRect_3() { return &___mUVRect_3; }
+	inline void set_mUVRect_3(Rect_t2360479859  value)
 	{
-		___hover_3 = value;
+		___mUVRect_3 = value;
 	}
 
-	inline static int32_t get_offset_of_pressed_4() { return static_cast<int32_t>(offsetof(UIButtonOffset_t4041087173, ___pressed_4)); }
-	inline Vector3_t3722313464  get_pressed_4() const { return ___pressed_4; }
-	inline Vector3_t3722313464 * get_address_of_pressed_4() { return &___pressed_4; }
-	inline void set_pressed_4(Vector3_t3722313464  value)
+	inline static int32_t get_offset_of_mFont_4() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mFont_4)); }
+	inline BMFont_t2757936676 * get_mFont_4() const { return ___mFont_4; }
+	inline BMFont_t2757936676 ** get_address_of_mFont_4() { return &___mFont_4; }
+	inline void set_mFont_4(BMFont_t2757936676 * value)
 	{
-		___pressed_4 = value;
+		___mFont_4 = value;
+		Il2CppCodeGenWriteBarrier((&___mFont_4), value);
 	}
 
-	inline static int32_t get_offset_of_duration_5() { return static_cast<int32_t>(offsetof(UIButtonOffset_t4041087173, ___duration_5)); }
-	inline float get_duration_5() const { return ___duration_5; }
-	inline float* get_address_of_duration_5() { return &___duration_5; }
-	inline void set_duration_5(float value)
+	inline static int32_t get_offset_of_mAtlas_5() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mAtlas_5)); }
+	inline UIAtlas_t3195533529 * get_mAtlas_5() const { return ___mAtlas_5; }
+	inline UIAtlas_t3195533529 ** get_address_of_mAtlas_5() { return &___mAtlas_5; }
+	inline void set_mAtlas_5(UIAtlas_t3195533529 * value)
 	{
-		___duration_5 = value;
+		___mAtlas_5 = value;
+		Il2CppCodeGenWriteBarrier((&___mAtlas_5), value);
 	}
 
-	inline static int32_t get_offset_of_mPos_6() { return static_cast<int32_t>(offsetof(UIButtonOffset_t4041087173, ___mPos_6)); }
-	inline Vector3_t3722313464  get_mPos_6() const { return ___mPos_6; }
-	inline Vector3_t3722313464 * get_address_of_mPos_6() { return &___mPos_6; }
-	inline void set_mPos_6(Vector3_t3722313464  value)
+	inline static int32_t get_offset_of_mReplacement_6() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mReplacement_6)); }
+	inline UIFont_t2766063701 * get_mReplacement_6() const { return ___mReplacement_6; }
+	inline UIFont_t2766063701 ** get_address_of_mReplacement_6() { return &___mReplacement_6; }
+	inline void set_mReplacement_6(UIFont_t2766063701 * value)
 	{
-		___mPos_6 = value;
+		___mReplacement_6 = value;
+		Il2CppCodeGenWriteBarrier((&___mReplacement_6), value);
 	}
 
-	inline static int32_t get_offset_of_mStarted_7() { return static_cast<int32_t>(offsetof(UIButtonOffset_t4041087173, ___mStarted_7)); }
-	inline bool get_mStarted_7() const { return ___mStarted_7; }
-	inline bool* get_address_of_mStarted_7() { return &___mStarted_7; }
-	inline void set_mStarted_7(bool value)
+	inline static int32_t get_offset_of_mSymbols_7() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mSymbols_7)); }
+	inline List_1_t3058133583 * get_mSymbols_7() const { return ___mSymbols_7; }
+	inline List_1_t3058133583 ** get_address_of_mSymbols_7() { return &___mSymbols_7; }
+	inline void set_mSymbols_7(List_1_t3058133583 * value)
 	{
-		___mStarted_7 = value;
+		___mSymbols_7 = value;
+		Il2CppCodeGenWriteBarrier((&___mSymbols_7), value);
 	}
 
-	inline static int32_t get_offset_of_mPressed_8() { return static_cast<int32_t>(offsetof(UIButtonOffset_t4041087173, ___mPressed_8)); }
-	inline bool get_mPressed_8() const { return ___mPressed_8; }
-	inline bool* get_address_of_mPressed_8() { return &___mPressed_8; }
-	inline void set_mPressed_8(bool value)
+	inline static int32_t get_offset_of_mDynamicFont_8() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mDynamicFont_8)); }
+	inline Font_t1956802104 * get_mDynamicFont_8() const { return ___mDynamicFont_8; }
+	inline Font_t1956802104 ** get_address_of_mDynamicFont_8() { return &___mDynamicFont_8; }
+	inline void set_mDynamicFont_8(Font_t1956802104 * value)
 	{
-		___mPressed_8 = value;
+		___mDynamicFont_8 = value;
+		Il2CppCodeGenWriteBarrier((&___mDynamicFont_8), value);
+	}
+
+	inline static int32_t get_offset_of_mDynamicFontSize_9() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mDynamicFontSize_9)); }
+	inline int32_t get_mDynamicFontSize_9() const { return ___mDynamicFontSize_9; }
+	inline int32_t* get_address_of_mDynamicFontSize_9() { return &___mDynamicFontSize_9; }
+	inline void set_mDynamicFontSize_9(int32_t value)
+	{
+		___mDynamicFontSize_9 = value;
+	}
+
+	inline static int32_t get_offset_of_mDynamicFontStyle_10() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mDynamicFontStyle_10)); }
+	inline int32_t get_mDynamicFontStyle_10() const { return ___mDynamicFontStyle_10; }
+	inline int32_t* get_address_of_mDynamicFontStyle_10() { return &___mDynamicFontStyle_10; }
+	inline void set_mDynamicFontStyle_10(int32_t value)
+	{
+		___mDynamicFontStyle_10 = value;
+	}
+
+	inline static int32_t get_offset_of_mSprite_11() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mSprite_11)); }
+	inline UISpriteData_t900308526 * get_mSprite_11() const { return ___mSprite_11; }
+	inline UISpriteData_t900308526 ** get_address_of_mSprite_11() { return &___mSprite_11; }
+	inline void set_mSprite_11(UISpriteData_t900308526 * value)
+	{
+		___mSprite_11 = value;
+		Il2CppCodeGenWriteBarrier((&___mSprite_11), value);
+	}
+
+	inline static int32_t get_offset_of_mPMA_12() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mPMA_12)); }
+	inline int32_t get_mPMA_12() const { return ___mPMA_12; }
+	inline int32_t* get_address_of_mPMA_12() { return &___mPMA_12; }
+	inline void set_mPMA_12(int32_t value)
+	{
+		___mPMA_12 = value;
+	}
+
+	inline static int32_t get_offset_of_mPacked_13() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mPacked_13)); }
+	inline int32_t get_mPacked_13() const { return ___mPacked_13; }
+	inline int32_t* get_address_of_mPacked_13() { return &___mPacked_13; }
+	inline void set_mPacked_13(int32_t value)
+	{
+		___mPacked_13 = value;
 	}
 };
 
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // UIBUTTONOFFSET_T4041087173_H
-#ifndef TYPEWRITEREFFECT_T1340895546_H
-#define TYPEWRITEREFFECT_T1340895546_H
+#endif // UIFONT_T2766063701_H
+#ifndef UIWIDGETCONTAINER_T30162560_H
+#define UIWIDGETCONTAINER_T30162560_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// TypewriterEffect
-struct  TypewriterEffect_t1340895546  : public MonoBehaviour_t3962482529
+// UIWidgetContainer
+struct  UIWidgetContainer_t30162560  : public MonoBehaviour_t3962482529
 {
 public:
-	// System.Int32 TypewriterEffect::charsPerSecond
-	int32_t ___charsPerSecond_3;
-	// System.Single TypewriterEffect::fadeInTime
-	float ___fadeInTime_4;
-	// System.Single TypewriterEffect::delayOnPeriod
-	float ___delayOnPeriod_5;
-	// System.Single TypewriterEffect::delayOnNewLine
-	float ___delayOnNewLine_6;
-	// UIScrollView TypewriterEffect::scrollView
-	UIScrollView_t1973404950 * ___scrollView_7;
-	// System.Boolean TypewriterEffect::keepFullDimensions
-	bool ___keepFullDimensions_8;
-	// System.Collections.Generic.List`1<EventDelegate> TypewriterEffect::onFinished
-	List_1_t4210400802 * ___onFinished_9;
-	// UILabel TypewriterEffect::mLabel
-	UILabel_t3248798549 * ___mLabel_10;
-	// System.String TypewriterEffect::mFullText
-	String_t* ___mFullText_11;
-	// System.Int32 TypewriterEffect::mCurrentOffset
-	int32_t ___mCurrentOffset_12;
-	// System.Single TypewriterEffect::mNextChar
-	float ___mNextChar_13;
-	// System.Boolean TypewriterEffect::mReset
-	bool ___mReset_14;
-	// System.Boolean TypewriterEffect::mActive
-	bool ___mActive_15;
-	// BetterList`1<TypewriterEffect/FadeEntry> TypewriterEffect::mFade
-	BetterList_1_t4089408747 * ___mFade_16;
 
 public:
-	inline static int32_t get_offset_of_charsPerSecond_3() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___charsPerSecond_3)); }
-	inline int32_t get_charsPerSecond_3() const { return ___charsPerSecond_3; }
-	inline int32_t* get_address_of_charsPerSecond_3() { return &___charsPerSecond_3; }
-	inline void set_charsPerSecond_3(int32_t value)
-	{
-		___charsPerSecond_3 = value;
-	}
-
-	inline static int32_t get_offset_of_fadeInTime_4() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___fadeInTime_4)); }
-	inline float get_fadeInTime_4() const { return ___fadeInTime_4; }
-	inline float* get_address_of_fadeInTime_4() { return &___fadeInTime_4; }
-	inline void set_fadeInTime_4(float value)
-	{
-		___fadeInTime_4 = value;
-	}
-
-	inline static int32_t get_offset_of_delayOnPeriod_5() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___delayOnPeriod_5)); }
-	inline float get_delayOnPeriod_5() const { return ___delayOnPeriod_5; }
-	inline float* get_address_of_delayOnPeriod_5() { return &___delayOnPeriod_5; }
-	inline void set_delayOnPeriod_5(float value)
-	{
-		___delayOnPeriod_5 = value;
-	}
-
-	inline static int32_t get_offset_of_delayOnNewLine_6() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___delayOnNewLine_6)); }
-	inline float get_delayOnNewLine_6() const { return ___delayOnNewLine_6; }
-	inline float* get_address_of_delayOnNewLine_6() { return &___delayOnNewLine_6; }
-	inline void set_delayOnNewLine_6(float value)
-	{
-		___delayOnNewLine_6 = value;
-	}
-
-	inline static int32_t get_offset_of_scrollView_7() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___scrollView_7)); }
-	inline UIScrollView_t1973404950 * get_scrollView_7() const { return ___scrollView_7; }
-	inline UIScrollView_t1973404950 ** get_address_of_scrollView_7() { return &___scrollView_7; }
-	inline void set_scrollView_7(UIScrollView_t1973404950 * value)
-	{
-		___scrollView_7 = value;
-		Il2CppCodeGenWriteBarrier((&___scrollView_7), value);
-	}
-
-	inline static int32_t get_offset_of_keepFullDimensions_8() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___keepFullDimensions_8)); }
-	inline bool get_keepFullDimensions_8() const { return ___keepFullDimensions_8; }
-	inline bool* get_address_of_keepFullDimensions_8() { return &___keepFullDimensions_8; }
-	inline void set_keepFullDimensions_8(bool value)
-	{
-		___keepFullDimensions_8 = value;
-	}
-
-	inline static int32_t get_offset_of_onFinished_9() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___onFinished_9)); }
-	inline List_1_t4210400802 * get_onFinished_9() const { return ___onFinished_9; }
-	inline List_1_t4210400802 ** get_address_of_onFinished_9() { return &___onFinished_9; }
-	inline void set_onFinished_9(List_1_t4210400802 * value)
-	{
-		___onFinished_9 = value;
-		Il2CppCodeGenWriteBarrier((&___onFinished_9), value);
-	}
-
-	inline static int32_t get_offset_of_mLabel_10() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___mLabel_10)); }
-	inline UILabel_t3248798549 * get_mLabel_10() const { return ___mLabel_10; }
-	inline UILabel_t3248798549 ** get_address_of_mLabel_10() { return &___mLabel_10; }
-	inline void set_mLabel_10(UILabel_t3248798549 * value)
-	{
-		___mLabel_10 = value;
-		Il2CppCodeGenWriteBarrier((&___mLabel_10), value);
-	}
-
-	inline static int32_t get_offset_of_mFullText_11() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___mFullText_11)); }
-	inline String_t* get_mFullText_11() const { return ___mFullText_11; }
-	inline String_t** get_address_of_mFullText_11() { return &___mFullText_11; }
-	inline void set_mFullText_11(String_t* value)
-	{
-		___mFullText_11 = value;
-		Il2CppCodeGenWriteBarrier((&___mFullText_11), value);
-	}
-
-	inline static int32_t get_offset_of_mCurrentOffset_12() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___mCurrentOffset_12)); }
-	inline int32_t get_mCurrentOffset_12() const { return ___mCurrentOffset_12; }
-	inline int32_t* get_address_of_mCurrentOffset_12() { return &___mCurrentOffset_12; }
-	inline void set_mCurrentOffset_12(int32_t value)
-	{
-		___mCurrentOffset_12 = value;
-	}
-
-	inline static int32_t get_offset_of_mNextChar_13() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___mNextChar_13)); }
-	inline float get_mNextChar_13() const { return ___mNextChar_13; }
-	inline float* get_address_of_mNextChar_13() { return &___mNextChar_13; }
-	inline void set_mNextChar_13(float value)
-	{
-		___mNextChar_13 = value;
-	}
-
-	inline static int32_t get_offset_of_mReset_14() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___mReset_14)); }
-	inline bool get_mReset_14() const { return ___mReset_14; }
-	inline bool* get_address_of_mReset_14() { return &___mReset_14; }
-	inline void set_mReset_14(bool value)
-	{
-		___mReset_14 = value;
-	}
-
-	inline static int32_t get_offset_of_mActive_15() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___mActive_15)); }
-	inline bool get_mActive_15() const { return ___mActive_15; }
-	inline bool* get_address_of_mActive_15() { return &___mActive_15; }
-	inline void set_mActive_15(bool value)
-	{
-		___mActive_15 = value;
-	}
-
-	inline static int32_t get_offset_of_mFade_16() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546, ___mFade_16)); }
-	inline BetterList_1_t4089408747 * get_mFade_16() const { return ___mFade_16; }
-	inline BetterList_1_t4089408747 ** get_address_of_mFade_16() { return &___mFade_16; }
-	inline void set_mFade_16(BetterList_1_t4089408747 * value)
-	{
-		___mFade_16 = value;
-		Il2CppCodeGenWriteBarrier((&___mFade_16), value);
-	}
-};
-
-struct TypewriterEffect_t1340895546_StaticFields
-{
-public:
-	// TypewriterEffect TypewriterEffect::current
-	TypewriterEffect_t1340895546 * ___current_2;
-
-public:
-	inline static int32_t get_offset_of_current_2() { return static_cast<int32_t>(offsetof(TypewriterEffect_t1340895546_StaticFields, ___current_2)); }
-	inline TypewriterEffect_t1340895546 * get_current_2() const { return ___current_2; }
-	inline TypewriterEffect_t1340895546 ** get_address_of_current_2() { return &___current_2; }
-	inline void set_current_2(TypewriterEffect_t1340895546 * value)
-	{
-		___current_2 = value;
-		Il2CppCodeGenWriteBarrier((&___current_2), value);
-	}
 };
 
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // TYPEWRITEREFFECT_T1340895546_H
-#ifndef UIBUTTONSCALE_T3973287916_H
-#define UIBUTTONSCALE_T3973287916_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UIButtonScale
-struct  UIButtonScale_t3973287916  : public MonoBehaviour_t3962482529
-{
-public:
-	// UnityEngine.Transform UIButtonScale::tweenTarget
-	Transform_t3600365921 * ___tweenTarget_2;
-	// UnityEngine.Vector3 UIButtonScale::hover
-	Vector3_t3722313464  ___hover_3;
-	// UnityEngine.Vector3 UIButtonScale::pressed
-	Vector3_t3722313464  ___pressed_4;
-	// System.Single UIButtonScale::duration
-	float ___duration_5;
-	// UnityEngine.Vector3 UIButtonScale::mScale
-	Vector3_t3722313464  ___mScale_6;
-	// System.Boolean UIButtonScale::mStarted
-	bool ___mStarted_7;
-
-public:
-	inline static int32_t get_offset_of_tweenTarget_2() { return static_cast<int32_t>(offsetof(UIButtonScale_t3973287916, ___tweenTarget_2)); }
-	inline Transform_t3600365921 * get_tweenTarget_2() const { return ___tweenTarget_2; }
-	inline Transform_t3600365921 ** get_address_of_tweenTarget_2() { return &___tweenTarget_2; }
-	inline void set_tweenTarget_2(Transform_t3600365921 * value)
-	{
-		___tweenTarget_2 = value;
-		Il2CppCodeGenWriteBarrier((&___tweenTarget_2), value);
-	}
-
-	inline static int32_t get_offset_of_hover_3() { return static_cast<int32_t>(offsetof(UIButtonScale_t3973287916, ___hover_3)); }
-	inline Vector3_t3722313464  get_hover_3() const { return ___hover_3; }
-	inline Vector3_t3722313464 * get_address_of_hover_3() { return &___hover_3; }
-	inline void set_hover_3(Vector3_t3722313464  value)
-	{
-		___hover_3 = value;
-	}
-
-	inline static int32_t get_offset_of_pressed_4() { return static_cast<int32_t>(offsetof(UIButtonScale_t3973287916, ___pressed_4)); }
-	inline Vector3_t3722313464  get_pressed_4() const { return ___pressed_4; }
-	inline Vector3_t3722313464 * get_address_of_pressed_4() { return &___pressed_4; }
-	inline void set_pressed_4(Vector3_t3722313464  value)
-	{
-		___pressed_4 = value;
-	}
-
-	inline static int32_t get_offset_of_duration_5() { return static_cast<int32_t>(offsetof(UIButtonScale_t3973287916, ___duration_5)); }
-	inline float get_duration_5() const { return ___duration_5; }
-	inline float* get_address_of_duration_5() { return &___duration_5; }
-	inline void set_duration_5(float value)
-	{
-		___duration_5 = value;
-	}
-
-	inline static int32_t get_offset_of_mScale_6() { return static_cast<int32_t>(offsetof(UIButtonScale_t3973287916, ___mScale_6)); }
-	inline Vector3_t3722313464  get_mScale_6() const { return ___mScale_6; }
-	inline Vector3_t3722313464 * get_address_of_mScale_6() { return &___mScale_6; }
-	inline void set_mScale_6(Vector3_t3722313464  value)
-	{
-		___mScale_6 = value;
-	}
-
-	inline static int32_t get_offset_of_mStarted_7() { return static_cast<int32_t>(offsetof(UIButtonScale_t3973287916, ___mStarted_7)); }
-	inline bool get_mStarted_7() const { return ___mStarted_7; }
-	inline bool* get_address_of_mStarted_7() { return &___mStarted_7; }
-	inline void set_mStarted_7(bool value)
-	{
-		___mStarted_7 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // UIBUTTONSCALE_T3973287916_H
+#endif // UIWIDGETCONTAINER_T30162560_H
 #ifndef UIBUTTONROTATION_T284788413_H
 #define UIBUTTONROTATION_T284788413_H
 #ifdef __clang__
@@ -8827,257 +9469,96 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // UIBUTTONROTATION_T284788413_H
-#ifndef UIBUTTONACTIVATE_T1184781629_H
-#define UIBUTTONACTIVATE_T1184781629_H
+#ifndef SPRINGPANEL_T277350554_H
+#define SPRINGPANEL_T277350554_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// UIButtonActivate
-struct  UIButtonActivate_t1184781629  : public MonoBehaviour_t3962482529
+// SpringPanel
+struct  SpringPanel_t277350554  : public MonoBehaviour_t3962482529
 {
 public:
-	// UnityEngine.GameObject UIButtonActivate::target
-	GameObject_t1113636619 * ___target_2;
-	// System.Boolean UIButtonActivate::state
-	bool ___state_3;
+	// UnityEngine.Vector3 SpringPanel::target
+	Vector3_t3722313464  ___target_3;
+	// System.Single SpringPanel::strength
+	float ___strength_4;
+	// SpringPanel/OnFinished SpringPanel::onFinished
+	OnFinished_t3778785451 * ___onFinished_5;
+	// UIPanel SpringPanel::mPanel
+	UIPanel_t1716472341 * ___mPanel_6;
+	// UnityEngine.Transform SpringPanel::mTrans
+	Transform_t3600365921 * ___mTrans_7;
+	// UIScrollView SpringPanel::mDrag
+	UIScrollView_t1973404950 * ___mDrag_8;
 
 public:
-	inline static int32_t get_offset_of_target_2() { return static_cast<int32_t>(offsetof(UIButtonActivate_t1184781629, ___target_2)); }
-	inline GameObject_t1113636619 * get_target_2() const { return ___target_2; }
-	inline GameObject_t1113636619 ** get_address_of_target_2() { return &___target_2; }
-	inline void set_target_2(GameObject_t1113636619 * value)
+	inline static int32_t get_offset_of_target_3() { return static_cast<int32_t>(offsetof(SpringPanel_t277350554, ___target_3)); }
+	inline Vector3_t3722313464  get_target_3() const { return ___target_3; }
+	inline Vector3_t3722313464 * get_address_of_target_3() { return &___target_3; }
+	inline void set_target_3(Vector3_t3722313464  value)
 	{
-		___target_2 = value;
-		Il2CppCodeGenWriteBarrier((&___target_2), value);
+		___target_3 = value;
 	}
 
-	inline static int32_t get_offset_of_state_3() { return static_cast<int32_t>(offsetof(UIButtonActivate_t1184781629, ___state_3)); }
-	inline bool get_state_3() const { return ___state_3; }
-	inline bool* get_address_of_state_3() { return &___state_3; }
-	inline void set_state_3(bool value)
+	inline static int32_t get_offset_of_strength_4() { return static_cast<int32_t>(offsetof(SpringPanel_t277350554, ___strength_4)); }
+	inline float get_strength_4() const { return ___strength_4; }
+	inline float* get_address_of_strength_4() { return &___strength_4; }
+	inline void set_strength_4(float value)
 	{
-		___state_3 = value;
+		___strength_4 = value;
+	}
+
+	inline static int32_t get_offset_of_onFinished_5() { return static_cast<int32_t>(offsetof(SpringPanel_t277350554, ___onFinished_5)); }
+	inline OnFinished_t3778785451 * get_onFinished_5() const { return ___onFinished_5; }
+	inline OnFinished_t3778785451 ** get_address_of_onFinished_5() { return &___onFinished_5; }
+	inline void set_onFinished_5(OnFinished_t3778785451 * value)
+	{
+		___onFinished_5 = value;
+		Il2CppCodeGenWriteBarrier((&___onFinished_5), value);
+	}
+
+	inline static int32_t get_offset_of_mPanel_6() { return static_cast<int32_t>(offsetof(SpringPanel_t277350554, ___mPanel_6)); }
+	inline UIPanel_t1716472341 * get_mPanel_6() const { return ___mPanel_6; }
+	inline UIPanel_t1716472341 ** get_address_of_mPanel_6() { return &___mPanel_6; }
+	inline void set_mPanel_6(UIPanel_t1716472341 * value)
+	{
+		___mPanel_6 = value;
+		Il2CppCodeGenWriteBarrier((&___mPanel_6), value);
+	}
+
+	inline static int32_t get_offset_of_mTrans_7() { return static_cast<int32_t>(offsetof(SpringPanel_t277350554, ___mTrans_7)); }
+	inline Transform_t3600365921 * get_mTrans_7() const { return ___mTrans_7; }
+	inline Transform_t3600365921 ** get_address_of_mTrans_7() { return &___mTrans_7; }
+	inline void set_mTrans_7(Transform_t3600365921 * value)
+	{
+		___mTrans_7 = value;
+		Il2CppCodeGenWriteBarrier((&___mTrans_7), value);
+	}
+
+	inline static int32_t get_offset_of_mDrag_8() { return static_cast<int32_t>(offsetof(SpringPanel_t277350554, ___mDrag_8)); }
+	inline UIScrollView_t1973404950 * get_mDrag_8() const { return ___mDrag_8; }
+	inline UIScrollView_t1973404950 ** get_address_of_mDrag_8() { return &___mDrag_8; }
+	inline void set_mDrag_8(UIScrollView_t1973404950 * value)
+	{
+		___mDrag_8 = value;
+		Il2CppCodeGenWriteBarrier((&___mDrag_8), value);
 	}
 };
 
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // UIBUTTONACTIVATE_T1184781629_H
-#ifndef UITWEENER_T260334902_H
-#define UITWEENER_T260334902_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UITweener
-struct  UITweener_t260334902  : public MonoBehaviour_t3962482529
+struct SpringPanel_t277350554_StaticFields
 {
 public:
-	// UITweener/Method UITweener::method
-	int32_t ___method_3;
-	// UITweener/Style UITweener::style
-	int32_t ___style_4;
-	// UnityEngine.AnimationCurve UITweener::animationCurve
-	AnimationCurve_t3046754366 * ___animationCurve_5;
-	// System.Boolean UITweener::ignoreTimeScale
-	bool ___ignoreTimeScale_6;
-	// System.Single UITweener::delay
-	float ___delay_7;
-	// System.Single UITweener::duration
-	float ___duration_8;
-	// System.Boolean UITweener::steeperCurves
-	bool ___steeperCurves_9;
-	// System.Int32 UITweener::tweenGroup
-	int32_t ___tweenGroup_10;
-	// System.Boolean UITweener::useFixedUpdate
-	bool ___useFixedUpdate_11;
-	// System.Collections.Generic.List`1<EventDelegate> UITweener::onFinished
-	List_1_t4210400802 * ___onFinished_12;
-	// UnityEngine.GameObject UITweener::eventReceiver
-	GameObject_t1113636619 * ___eventReceiver_13;
-	// System.String UITweener::callWhenFinished
-	String_t* ___callWhenFinished_14;
-	// System.Boolean UITweener::mStarted
-	bool ___mStarted_15;
-	// System.Single UITweener::mStartTime
-	float ___mStartTime_16;
-	// System.Single UITweener::mDuration
-	float ___mDuration_17;
-	// System.Single UITweener::mAmountPerDelta
-	float ___mAmountPerDelta_18;
-	// System.Single UITweener::mFactor
-	float ___mFactor_19;
-	// System.Collections.Generic.List`1<EventDelegate> UITweener::mTemp
-	List_1_t4210400802 * ___mTemp_20;
+	// SpringPanel SpringPanel::current
+	SpringPanel_t277350554 * ___current_2;
 
 public:
-	inline static int32_t get_offset_of_method_3() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___method_3)); }
-	inline int32_t get_method_3() const { return ___method_3; }
-	inline int32_t* get_address_of_method_3() { return &___method_3; }
-	inline void set_method_3(int32_t value)
-	{
-		___method_3 = value;
-	}
-
-	inline static int32_t get_offset_of_style_4() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___style_4)); }
-	inline int32_t get_style_4() const { return ___style_4; }
-	inline int32_t* get_address_of_style_4() { return &___style_4; }
-	inline void set_style_4(int32_t value)
-	{
-		___style_4 = value;
-	}
-
-	inline static int32_t get_offset_of_animationCurve_5() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___animationCurve_5)); }
-	inline AnimationCurve_t3046754366 * get_animationCurve_5() const { return ___animationCurve_5; }
-	inline AnimationCurve_t3046754366 ** get_address_of_animationCurve_5() { return &___animationCurve_5; }
-	inline void set_animationCurve_5(AnimationCurve_t3046754366 * value)
-	{
-		___animationCurve_5 = value;
-		Il2CppCodeGenWriteBarrier((&___animationCurve_5), value);
-	}
-
-	inline static int32_t get_offset_of_ignoreTimeScale_6() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___ignoreTimeScale_6)); }
-	inline bool get_ignoreTimeScale_6() const { return ___ignoreTimeScale_6; }
-	inline bool* get_address_of_ignoreTimeScale_6() { return &___ignoreTimeScale_6; }
-	inline void set_ignoreTimeScale_6(bool value)
-	{
-		___ignoreTimeScale_6 = value;
-	}
-
-	inline static int32_t get_offset_of_delay_7() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___delay_7)); }
-	inline float get_delay_7() const { return ___delay_7; }
-	inline float* get_address_of_delay_7() { return &___delay_7; }
-	inline void set_delay_7(float value)
-	{
-		___delay_7 = value;
-	}
-
-	inline static int32_t get_offset_of_duration_8() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___duration_8)); }
-	inline float get_duration_8() const { return ___duration_8; }
-	inline float* get_address_of_duration_8() { return &___duration_8; }
-	inline void set_duration_8(float value)
-	{
-		___duration_8 = value;
-	}
-
-	inline static int32_t get_offset_of_steeperCurves_9() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___steeperCurves_9)); }
-	inline bool get_steeperCurves_9() const { return ___steeperCurves_9; }
-	inline bool* get_address_of_steeperCurves_9() { return &___steeperCurves_9; }
-	inline void set_steeperCurves_9(bool value)
-	{
-		___steeperCurves_9 = value;
-	}
-
-	inline static int32_t get_offset_of_tweenGroup_10() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___tweenGroup_10)); }
-	inline int32_t get_tweenGroup_10() const { return ___tweenGroup_10; }
-	inline int32_t* get_address_of_tweenGroup_10() { return &___tweenGroup_10; }
-	inline void set_tweenGroup_10(int32_t value)
-	{
-		___tweenGroup_10 = value;
-	}
-
-	inline static int32_t get_offset_of_useFixedUpdate_11() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___useFixedUpdate_11)); }
-	inline bool get_useFixedUpdate_11() const { return ___useFixedUpdate_11; }
-	inline bool* get_address_of_useFixedUpdate_11() { return &___useFixedUpdate_11; }
-	inline void set_useFixedUpdate_11(bool value)
-	{
-		___useFixedUpdate_11 = value;
-	}
-
-	inline static int32_t get_offset_of_onFinished_12() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___onFinished_12)); }
-	inline List_1_t4210400802 * get_onFinished_12() const { return ___onFinished_12; }
-	inline List_1_t4210400802 ** get_address_of_onFinished_12() { return &___onFinished_12; }
-	inline void set_onFinished_12(List_1_t4210400802 * value)
-	{
-		___onFinished_12 = value;
-		Il2CppCodeGenWriteBarrier((&___onFinished_12), value);
-	}
-
-	inline static int32_t get_offset_of_eventReceiver_13() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___eventReceiver_13)); }
-	inline GameObject_t1113636619 * get_eventReceiver_13() const { return ___eventReceiver_13; }
-	inline GameObject_t1113636619 ** get_address_of_eventReceiver_13() { return &___eventReceiver_13; }
-	inline void set_eventReceiver_13(GameObject_t1113636619 * value)
-	{
-		___eventReceiver_13 = value;
-		Il2CppCodeGenWriteBarrier((&___eventReceiver_13), value);
-	}
-
-	inline static int32_t get_offset_of_callWhenFinished_14() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___callWhenFinished_14)); }
-	inline String_t* get_callWhenFinished_14() const { return ___callWhenFinished_14; }
-	inline String_t** get_address_of_callWhenFinished_14() { return &___callWhenFinished_14; }
-	inline void set_callWhenFinished_14(String_t* value)
-	{
-		___callWhenFinished_14 = value;
-		Il2CppCodeGenWriteBarrier((&___callWhenFinished_14), value);
-	}
-
-	inline static int32_t get_offset_of_mStarted_15() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___mStarted_15)); }
-	inline bool get_mStarted_15() const { return ___mStarted_15; }
-	inline bool* get_address_of_mStarted_15() { return &___mStarted_15; }
-	inline void set_mStarted_15(bool value)
-	{
-		___mStarted_15 = value;
-	}
-
-	inline static int32_t get_offset_of_mStartTime_16() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___mStartTime_16)); }
-	inline float get_mStartTime_16() const { return ___mStartTime_16; }
-	inline float* get_address_of_mStartTime_16() { return &___mStartTime_16; }
-	inline void set_mStartTime_16(float value)
-	{
-		___mStartTime_16 = value;
-	}
-
-	inline static int32_t get_offset_of_mDuration_17() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___mDuration_17)); }
-	inline float get_mDuration_17() const { return ___mDuration_17; }
-	inline float* get_address_of_mDuration_17() { return &___mDuration_17; }
-	inline void set_mDuration_17(float value)
-	{
-		___mDuration_17 = value;
-	}
-
-	inline static int32_t get_offset_of_mAmountPerDelta_18() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___mAmountPerDelta_18)); }
-	inline float get_mAmountPerDelta_18() const { return ___mAmountPerDelta_18; }
-	inline float* get_address_of_mAmountPerDelta_18() { return &___mAmountPerDelta_18; }
-	inline void set_mAmountPerDelta_18(float value)
-	{
-		___mAmountPerDelta_18 = value;
-	}
-
-	inline static int32_t get_offset_of_mFactor_19() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___mFactor_19)); }
-	inline float get_mFactor_19() const { return ___mFactor_19; }
-	inline float* get_address_of_mFactor_19() { return &___mFactor_19; }
-	inline void set_mFactor_19(float value)
-	{
-		___mFactor_19 = value;
-	}
-
-	inline static int32_t get_offset_of_mTemp_20() { return static_cast<int32_t>(offsetof(UITweener_t260334902, ___mTemp_20)); }
-	inline List_1_t4210400802 * get_mTemp_20() const { return ___mTemp_20; }
-	inline List_1_t4210400802 ** get_address_of_mTemp_20() { return &___mTemp_20; }
-	inline void set_mTemp_20(List_1_t4210400802 * value)
-	{
-		___mTemp_20 = value;
-		Il2CppCodeGenWriteBarrier((&___mTemp_20), value);
-	}
-};
-
-struct UITweener_t260334902_StaticFields
-{
-public:
-	// UITweener UITweener::current
-	UITweener_t260334902 * ___current_2;
-
-public:
-	inline static int32_t get_offset_of_current_2() { return static_cast<int32_t>(offsetof(UITweener_t260334902_StaticFields, ___current_2)); }
-	inline UITweener_t260334902 * get_current_2() const { return ___current_2; }
-	inline UITweener_t260334902 ** get_address_of_current_2() { return &___current_2; }
-	inline void set_current_2(UITweener_t260334902 * value)
+	inline static int32_t get_offset_of_current_2() { return static_cast<int32_t>(offsetof(SpringPanel_t277350554_StaticFields, ___current_2)); }
+	inline SpringPanel_t277350554 * get_current_2() const { return ___current_2; }
+	inline SpringPanel_t277350554 ** get_address_of_current_2() { return &___current_2; }
+	inline void set_current_2(SpringPanel_t277350554 * value)
 	{
 		___current_2 = value;
 		Il2CppCodeGenWriteBarrier((&___current_2), value);
@@ -9087,27 +9568,809 @@ public:
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // UITWEENER_T260334902_H
-#ifndef UIWIDGETCONTAINER_T30162560_H
-#define UIWIDGETCONTAINER_T30162560_H
+#endif // SPRINGPANEL_T277350554_H
+#ifndef UIWRAPCONTENT_T1188558554_H
+#define UIWRAPCONTENT_T1188558554_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// UIWidgetContainer
-struct  UIWidgetContainer_t30162560  : public MonoBehaviour_t3962482529
+// UIWrapContent
+struct  UIWrapContent_t1188558554  : public MonoBehaviour_t3962482529
 {
 public:
+	// System.Int32 UIWrapContent::itemSize
+	int32_t ___itemSize_2;
+	// System.Boolean UIWrapContent::cullContent
+	bool ___cullContent_3;
+	// System.Int32 UIWrapContent::minIndex
+	int32_t ___minIndex_4;
+	// System.Int32 UIWrapContent::maxIndex
+	int32_t ___maxIndex_5;
+	// System.Boolean UIWrapContent::hideInactive
+	bool ___hideInactive_6;
+	// UIWrapContent/OnInitializeItem UIWrapContent::onInitializeItem
+	OnInitializeItem_t992046894 * ___onInitializeItem_7;
+	// UnityEngine.Transform UIWrapContent::mTrans
+	Transform_t3600365921 * ___mTrans_8;
+	// UIPanel UIWrapContent::mPanel
+	UIPanel_t1716472341 * ___mPanel_9;
+	// UIScrollView UIWrapContent::mScroll
+	UIScrollView_t1973404950 * ___mScroll_10;
+	// System.Boolean UIWrapContent::mHorizontal
+	bool ___mHorizontal_11;
+	// System.Boolean UIWrapContent::mFirstTime
+	bool ___mFirstTime_12;
+	// System.Collections.Generic.List`1<UnityEngine.Transform> UIWrapContent::mChildren
+	List_1_t777473367 * ___mChildren_13;
 
 public:
+	inline static int32_t get_offset_of_itemSize_2() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___itemSize_2)); }
+	inline int32_t get_itemSize_2() const { return ___itemSize_2; }
+	inline int32_t* get_address_of_itemSize_2() { return &___itemSize_2; }
+	inline void set_itemSize_2(int32_t value)
+	{
+		___itemSize_2 = value;
+	}
+
+	inline static int32_t get_offset_of_cullContent_3() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___cullContent_3)); }
+	inline bool get_cullContent_3() const { return ___cullContent_3; }
+	inline bool* get_address_of_cullContent_3() { return &___cullContent_3; }
+	inline void set_cullContent_3(bool value)
+	{
+		___cullContent_3 = value;
+	}
+
+	inline static int32_t get_offset_of_minIndex_4() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___minIndex_4)); }
+	inline int32_t get_minIndex_4() const { return ___minIndex_4; }
+	inline int32_t* get_address_of_minIndex_4() { return &___minIndex_4; }
+	inline void set_minIndex_4(int32_t value)
+	{
+		___minIndex_4 = value;
+	}
+
+	inline static int32_t get_offset_of_maxIndex_5() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___maxIndex_5)); }
+	inline int32_t get_maxIndex_5() const { return ___maxIndex_5; }
+	inline int32_t* get_address_of_maxIndex_5() { return &___maxIndex_5; }
+	inline void set_maxIndex_5(int32_t value)
+	{
+		___maxIndex_5 = value;
+	}
+
+	inline static int32_t get_offset_of_hideInactive_6() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___hideInactive_6)); }
+	inline bool get_hideInactive_6() const { return ___hideInactive_6; }
+	inline bool* get_address_of_hideInactive_6() { return &___hideInactive_6; }
+	inline void set_hideInactive_6(bool value)
+	{
+		___hideInactive_6 = value;
+	}
+
+	inline static int32_t get_offset_of_onInitializeItem_7() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___onInitializeItem_7)); }
+	inline OnInitializeItem_t992046894 * get_onInitializeItem_7() const { return ___onInitializeItem_7; }
+	inline OnInitializeItem_t992046894 ** get_address_of_onInitializeItem_7() { return &___onInitializeItem_7; }
+	inline void set_onInitializeItem_7(OnInitializeItem_t992046894 * value)
+	{
+		___onInitializeItem_7 = value;
+		Il2CppCodeGenWriteBarrier((&___onInitializeItem_7), value);
+	}
+
+	inline static int32_t get_offset_of_mTrans_8() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___mTrans_8)); }
+	inline Transform_t3600365921 * get_mTrans_8() const { return ___mTrans_8; }
+	inline Transform_t3600365921 ** get_address_of_mTrans_8() { return &___mTrans_8; }
+	inline void set_mTrans_8(Transform_t3600365921 * value)
+	{
+		___mTrans_8 = value;
+		Il2CppCodeGenWriteBarrier((&___mTrans_8), value);
+	}
+
+	inline static int32_t get_offset_of_mPanel_9() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___mPanel_9)); }
+	inline UIPanel_t1716472341 * get_mPanel_9() const { return ___mPanel_9; }
+	inline UIPanel_t1716472341 ** get_address_of_mPanel_9() { return &___mPanel_9; }
+	inline void set_mPanel_9(UIPanel_t1716472341 * value)
+	{
+		___mPanel_9 = value;
+		Il2CppCodeGenWriteBarrier((&___mPanel_9), value);
+	}
+
+	inline static int32_t get_offset_of_mScroll_10() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___mScroll_10)); }
+	inline UIScrollView_t1973404950 * get_mScroll_10() const { return ___mScroll_10; }
+	inline UIScrollView_t1973404950 ** get_address_of_mScroll_10() { return &___mScroll_10; }
+	inline void set_mScroll_10(UIScrollView_t1973404950 * value)
+	{
+		___mScroll_10 = value;
+		Il2CppCodeGenWriteBarrier((&___mScroll_10), value);
+	}
+
+	inline static int32_t get_offset_of_mHorizontal_11() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___mHorizontal_11)); }
+	inline bool get_mHorizontal_11() const { return ___mHorizontal_11; }
+	inline bool* get_address_of_mHorizontal_11() { return &___mHorizontal_11; }
+	inline void set_mHorizontal_11(bool value)
+	{
+		___mHorizontal_11 = value;
+	}
+
+	inline static int32_t get_offset_of_mFirstTime_12() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___mFirstTime_12)); }
+	inline bool get_mFirstTime_12() const { return ___mFirstTime_12; }
+	inline bool* get_address_of_mFirstTime_12() { return &___mFirstTime_12; }
+	inline void set_mFirstTime_12(bool value)
+	{
+		___mFirstTime_12 = value;
+	}
+
+	inline static int32_t get_offset_of_mChildren_13() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___mChildren_13)); }
+	inline List_1_t777473367 * get_mChildren_13() const { return ___mChildren_13; }
+	inline List_1_t777473367 ** get_address_of_mChildren_13() { return &___mChildren_13; }
+	inline void set_mChildren_13(List_1_t777473367 * value)
+	{
+		___mChildren_13 = value;
+		Il2CppCodeGenWriteBarrier((&___mChildren_13), value);
+	}
+};
+
+struct UIWrapContent_t1188558554_StaticFields
+{
+public:
+	// System.Comparison`1<UnityEngine.Transform> UIWrapContent::<>f__mg$cache0
+	Comparison_1_t3375297100 * ___U3CU3Ef__mgU24cache0_14;
+	// System.Comparison`1<UnityEngine.Transform> UIWrapContent::<>f__mg$cache1
+	Comparison_1_t3375297100 * ___U3CU3Ef__mgU24cache1_15;
+	// System.Comparison`1<UnityEngine.Transform> UIWrapContent::<>f__mg$cache2
+	Comparison_1_t3375297100 * ___U3CU3Ef__mgU24cache2_16;
+
+public:
+	inline static int32_t get_offset_of_U3CU3Ef__mgU24cache0_14() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554_StaticFields, ___U3CU3Ef__mgU24cache0_14)); }
+	inline Comparison_1_t3375297100 * get_U3CU3Ef__mgU24cache0_14() const { return ___U3CU3Ef__mgU24cache0_14; }
+	inline Comparison_1_t3375297100 ** get_address_of_U3CU3Ef__mgU24cache0_14() { return &___U3CU3Ef__mgU24cache0_14; }
+	inline void set_U3CU3Ef__mgU24cache0_14(Comparison_1_t3375297100 * value)
+	{
+		___U3CU3Ef__mgU24cache0_14 = value;
+		Il2CppCodeGenWriteBarrier((&___U3CU3Ef__mgU24cache0_14), value);
+	}
+
+	inline static int32_t get_offset_of_U3CU3Ef__mgU24cache1_15() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554_StaticFields, ___U3CU3Ef__mgU24cache1_15)); }
+	inline Comparison_1_t3375297100 * get_U3CU3Ef__mgU24cache1_15() const { return ___U3CU3Ef__mgU24cache1_15; }
+	inline Comparison_1_t3375297100 ** get_address_of_U3CU3Ef__mgU24cache1_15() { return &___U3CU3Ef__mgU24cache1_15; }
+	inline void set_U3CU3Ef__mgU24cache1_15(Comparison_1_t3375297100 * value)
+	{
+		___U3CU3Ef__mgU24cache1_15 = value;
+		Il2CppCodeGenWriteBarrier((&___U3CU3Ef__mgU24cache1_15), value);
+	}
+
+	inline static int32_t get_offset_of_U3CU3Ef__mgU24cache2_16() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554_StaticFields, ___U3CU3Ef__mgU24cache2_16)); }
+	inline Comparison_1_t3375297100 * get_U3CU3Ef__mgU24cache2_16() const { return ___U3CU3Ef__mgU24cache2_16; }
+	inline Comparison_1_t3375297100 ** get_address_of_U3CU3Ef__mgU24cache2_16() { return &___U3CU3Ef__mgU24cache2_16; }
+	inline void set_U3CU3Ef__mgU24cache2_16(Comparison_1_t3375297100 * value)
+	{
+		___U3CU3Ef__mgU24cache2_16 = value;
+		Il2CppCodeGenWriteBarrier((&___U3CU3Ef__mgU24cache2_16), value);
+	}
 };
 
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // UIWIDGETCONTAINER_T30162560_H
+#endif // UIWRAPCONTENT_T1188558554_H
+#ifndef UIROOT_T4022971450_H
+#define UIROOT_T4022971450_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UIRoot
+struct  UIRoot_t4022971450  : public MonoBehaviour_t3962482529
+{
+public:
+	// UIRoot/Scaling UIRoot::scalingStyle
+	int32_t ___scalingStyle_3;
+	// System.Int32 UIRoot::manualWidth
+	int32_t ___manualWidth_4;
+	// System.Int32 UIRoot::manualHeight
+	int32_t ___manualHeight_5;
+	// System.Int32 UIRoot::minimumHeight
+	int32_t ___minimumHeight_6;
+	// System.Int32 UIRoot::maximumHeight
+	int32_t ___maximumHeight_7;
+	// System.Boolean UIRoot::fitWidth
+	bool ___fitWidth_8;
+	// System.Boolean UIRoot::fitHeight
+	bool ___fitHeight_9;
+	// System.Boolean UIRoot::adjustByDPI
+	bool ___adjustByDPI_10;
+	// System.Boolean UIRoot::shrinkPortraitUI
+	bool ___shrinkPortraitUI_11;
+	// UnityEngine.Transform UIRoot::mTrans
+	Transform_t3600365921 * ___mTrans_12;
+
+public:
+	inline static int32_t get_offset_of_scalingStyle_3() { return static_cast<int32_t>(offsetof(UIRoot_t4022971450, ___scalingStyle_3)); }
+	inline int32_t get_scalingStyle_3() const { return ___scalingStyle_3; }
+	inline int32_t* get_address_of_scalingStyle_3() { return &___scalingStyle_3; }
+	inline void set_scalingStyle_3(int32_t value)
+	{
+		___scalingStyle_3 = value;
+	}
+
+	inline static int32_t get_offset_of_manualWidth_4() { return static_cast<int32_t>(offsetof(UIRoot_t4022971450, ___manualWidth_4)); }
+	inline int32_t get_manualWidth_4() const { return ___manualWidth_4; }
+	inline int32_t* get_address_of_manualWidth_4() { return &___manualWidth_4; }
+	inline void set_manualWidth_4(int32_t value)
+	{
+		___manualWidth_4 = value;
+	}
+
+	inline static int32_t get_offset_of_manualHeight_5() { return static_cast<int32_t>(offsetof(UIRoot_t4022971450, ___manualHeight_5)); }
+	inline int32_t get_manualHeight_5() const { return ___manualHeight_5; }
+	inline int32_t* get_address_of_manualHeight_5() { return &___manualHeight_5; }
+	inline void set_manualHeight_5(int32_t value)
+	{
+		___manualHeight_5 = value;
+	}
+
+	inline static int32_t get_offset_of_minimumHeight_6() { return static_cast<int32_t>(offsetof(UIRoot_t4022971450, ___minimumHeight_6)); }
+	inline int32_t get_minimumHeight_6() const { return ___minimumHeight_6; }
+	inline int32_t* get_address_of_minimumHeight_6() { return &___minimumHeight_6; }
+	inline void set_minimumHeight_6(int32_t value)
+	{
+		___minimumHeight_6 = value;
+	}
+
+	inline static int32_t get_offset_of_maximumHeight_7() { return static_cast<int32_t>(offsetof(UIRoot_t4022971450, ___maximumHeight_7)); }
+	inline int32_t get_maximumHeight_7() const { return ___maximumHeight_7; }
+	inline int32_t* get_address_of_maximumHeight_7() { return &___maximumHeight_7; }
+	inline void set_maximumHeight_7(int32_t value)
+	{
+		___maximumHeight_7 = value;
+	}
+
+	inline static int32_t get_offset_of_fitWidth_8() { return static_cast<int32_t>(offsetof(UIRoot_t4022971450, ___fitWidth_8)); }
+	inline bool get_fitWidth_8() const { return ___fitWidth_8; }
+	inline bool* get_address_of_fitWidth_8() { return &___fitWidth_8; }
+	inline void set_fitWidth_8(bool value)
+	{
+		___fitWidth_8 = value;
+	}
+
+	inline static int32_t get_offset_of_fitHeight_9() { return static_cast<int32_t>(offsetof(UIRoot_t4022971450, ___fitHeight_9)); }
+	inline bool get_fitHeight_9() const { return ___fitHeight_9; }
+	inline bool* get_address_of_fitHeight_9() { return &___fitHeight_9; }
+	inline void set_fitHeight_9(bool value)
+	{
+		___fitHeight_9 = value;
+	}
+
+	inline static int32_t get_offset_of_adjustByDPI_10() { return static_cast<int32_t>(offsetof(UIRoot_t4022971450, ___adjustByDPI_10)); }
+	inline bool get_adjustByDPI_10() const { return ___adjustByDPI_10; }
+	inline bool* get_address_of_adjustByDPI_10() { return &___adjustByDPI_10; }
+	inline void set_adjustByDPI_10(bool value)
+	{
+		___adjustByDPI_10 = value;
+	}
+
+	inline static int32_t get_offset_of_shrinkPortraitUI_11() { return static_cast<int32_t>(offsetof(UIRoot_t4022971450, ___shrinkPortraitUI_11)); }
+	inline bool get_shrinkPortraitUI_11() const { return ___shrinkPortraitUI_11; }
+	inline bool* get_address_of_shrinkPortraitUI_11() { return &___shrinkPortraitUI_11; }
+	inline void set_shrinkPortraitUI_11(bool value)
+	{
+		___shrinkPortraitUI_11 = value;
+	}
+
+	inline static int32_t get_offset_of_mTrans_12() { return static_cast<int32_t>(offsetof(UIRoot_t4022971450, ___mTrans_12)); }
+	inline Transform_t3600365921 * get_mTrans_12() const { return ___mTrans_12; }
+	inline Transform_t3600365921 ** get_address_of_mTrans_12() { return &___mTrans_12; }
+	inline void set_mTrans_12(Transform_t3600365921 * value)
+	{
+		___mTrans_12 = value;
+		Il2CppCodeGenWriteBarrier((&___mTrans_12), value);
+	}
+};
+
+struct UIRoot_t4022971450_StaticFields
+{
+public:
+	// System.Collections.Generic.List`1<UIRoot> UIRoot::list
+	List_1_t1200078896 * ___list_2;
+
+public:
+	inline static int32_t get_offset_of_list_2() { return static_cast<int32_t>(offsetof(UIRoot_t4022971450_StaticFields, ___list_2)); }
+	inline List_1_t1200078896 * get_list_2() const { return ___list_2; }
+	inline List_1_t1200078896 ** get_address_of_list_2() { return &___list_2; }
+	inline void set_list_2(List_1_t1200078896 * value)
+	{
+		___list_2 = value;
+		Il2CppCodeGenWriteBarrier((&___list_2), value);
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // UIROOT_T4022971450_H
+#ifndef UIINPUT_T421821618_H
+#define UIINPUT_T421821618_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UIInput
+struct  UIInput_t421821618  : public MonoBehaviour_t3962482529
+{
+public:
+	// UILabel UIInput::label
+	UILabel_t3248798549 * ___label_4;
+	// UIInput/InputType UIInput::inputType
+	int32_t ___inputType_5;
+	// UIInput/OnReturnKey UIInput::onReturnKey
+	int32_t ___onReturnKey_6;
+	// UIInput/KeyboardType UIInput::keyboardType
+	int32_t ___keyboardType_7;
+	// System.Boolean UIInput::hideInput
+	bool ___hideInput_8;
+	// System.Boolean UIInput::selectAllTextOnFocus
+	bool ___selectAllTextOnFocus_9;
+	// System.Boolean UIInput::submitOnUnselect
+	bool ___submitOnUnselect_10;
+	// UIInput/Validation UIInput::validation
+	int32_t ___validation_11;
+	// System.Int32 UIInput::characterLimit
+	int32_t ___characterLimit_12;
+	// System.String UIInput::savedAs
+	String_t* ___savedAs_13;
+	// UnityEngine.GameObject UIInput::selectOnTab
+	GameObject_t1113636619 * ___selectOnTab_14;
+	// UnityEngine.Color UIInput::activeTextColor
+	Color_t2555686324  ___activeTextColor_15;
+	// UnityEngine.Color UIInput::caretColor
+	Color_t2555686324  ___caretColor_16;
+	// UnityEngine.Color UIInput::selectionColor
+	Color_t2555686324  ___selectionColor_17;
+	// System.Collections.Generic.List`1<EventDelegate> UIInput::onSubmit
+	List_1_t4210400802 * ___onSubmit_18;
+	// System.Collections.Generic.List`1<EventDelegate> UIInput::onChange
+	List_1_t4210400802 * ___onChange_19;
+	// UIInput/OnValidate UIInput::onValidate
+	OnValidate_t1246632601 * ___onValidate_20;
+	// System.String UIInput::mValue
+	String_t* ___mValue_21;
+	// System.String UIInput::mDefaultText
+	String_t* ___mDefaultText_22;
+	// UnityEngine.Color UIInput::mDefaultColor
+	Color_t2555686324  ___mDefaultColor_23;
+	// System.Single UIInput::mPosition
+	float ___mPosition_24;
+	// System.Boolean UIInput::mDoInit
+	bool ___mDoInit_25;
+	// NGUIText/Alignment UIInput::mAlignment
+	int32_t ___mAlignment_26;
+	// System.Boolean UIInput::mLoadSavedValue
+	bool ___mLoadSavedValue_27;
+	// System.Int32 UIInput::mSelectionStart
+	int32_t ___mSelectionStart_32;
+	// System.Int32 UIInput::mSelectionEnd
+	int32_t ___mSelectionEnd_33;
+	// UITexture UIInput::mHighlight
+	UITexture_t3471168817 * ___mHighlight_34;
+	// UITexture UIInput::mCaret
+	UITexture_t3471168817 * ___mCaret_35;
+	// UnityEngine.Texture2D UIInput::mBlankTex
+	Texture2D_t3840446185 * ___mBlankTex_36;
+	// System.Single UIInput::mNextBlink
+	float ___mNextBlink_37;
+	// System.Single UIInput::mLastAlpha
+	float ___mLastAlpha_38;
+	// System.String UIInput::mCached
+	String_t* ___mCached_39;
+	// System.Int32 UIInput::mSelectMe
+	int32_t ___mSelectMe_40;
+	// System.Int32 UIInput::mSelectTime
+	int32_t ___mSelectTime_41;
+	// System.Boolean UIInput::mStarted
+	bool ___mStarted_42;
+	// UICamera UIInput::mCam
+	UICamera_t1356438871 * ___mCam_43;
+	// System.Boolean UIInput::mEllipsis
+	bool ___mEllipsis_44;
+
+public:
+	inline static int32_t get_offset_of_label_4() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___label_4)); }
+	inline UILabel_t3248798549 * get_label_4() const { return ___label_4; }
+	inline UILabel_t3248798549 ** get_address_of_label_4() { return &___label_4; }
+	inline void set_label_4(UILabel_t3248798549 * value)
+	{
+		___label_4 = value;
+		Il2CppCodeGenWriteBarrier((&___label_4), value);
+	}
+
+	inline static int32_t get_offset_of_inputType_5() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___inputType_5)); }
+	inline int32_t get_inputType_5() const { return ___inputType_5; }
+	inline int32_t* get_address_of_inputType_5() { return &___inputType_5; }
+	inline void set_inputType_5(int32_t value)
+	{
+		___inputType_5 = value;
+	}
+
+	inline static int32_t get_offset_of_onReturnKey_6() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___onReturnKey_6)); }
+	inline int32_t get_onReturnKey_6() const { return ___onReturnKey_6; }
+	inline int32_t* get_address_of_onReturnKey_6() { return &___onReturnKey_6; }
+	inline void set_onReturnKey_6(int32_t value)
+	{
+		___onReturnKey_6 = value;
+	}
+
+	inline static int32_t get_offset_of_keyboardType_7() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___keyboardType_7)); }
+	inline int32_t get_keyboardType_7() const { return ___keyboardType_7; }
+	inline int32_t* get_address_of_keyboardType_7() { return &___keyboardType_7; }
+	inline void set_keyboardType_7(int32_t value)
+	{
+		___keyboardType_7 = value;
+	}
+
+	inline static int32_t get_offset_of_hideInput_8() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___hideInput_8)); }
+	inline bool get_hideInput_8() const { return ___hideInput_8; }
+	inline bool* get_address_of_hideInput_8() { return &___hideInput_8; }
+	inline void set_hideInput_8(bool value)
+	{
+		___hideInput_8 = value;
+	}
+
+	inline static int32_t get_offset_of_selectAllTextOnFocus_9() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___selectAllTextOnFocus_9)); }
+	inline bool get_selectAllTextOnFocus_9() const { return ___selectAllTextOnFocus_9; }
+	inline bool* get_address_of_selectAllTextOnFocus_9() { return &___selectAllTextOnFocus_9; }
+	inline void set_selectAllTextOnFocus_9(bool value)
+	{
+		___selectAllTextOnFocus_9 = value;
+	}
+
+	inline static int32_t get_offset_of_submitOnUnselect_10() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___submitOnUnselect_10)); }
+	inline bool get_submitOnUnselect_10() const { return ___submitOnUnselect_10; }
+	inline bool* get_address_of_submitOnUnselect_10() { return &___submitOnUnselect_10; }
+	inline void set_submitOnUnselect_10(bool value)
+	{
+		___submitOnUnselect_10 = value;
+	}
+
+	inline static int32_t get_offset_of_validation_11() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___validation_11)); }
+	inline int32_t get_validation_11() const { return ___validation_11; }
+	inline int32_t* get_address_of_validation_11() { return &___validation_11; }
+	inline void set_validation_11(int32_t value)
+	{
+		___validation_11 = value;
+	}
+
+	inline static int32_t get_offset_of_characterLimit_12() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___characterLimit_12)); }
+	inline int32_t get_characterLimit_12() const { return ___characterLimit_12; }
+	inline int32_t* get_address_of_characterLimit_12() { return &___characterLimit_12; }
+	inline void set_characterLimit_12(int32_t value)
+	{
+		___characterLimit_12 = value;
+	}
+
+	inline static int32_t get_offset_of_savedAs_13() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___savedAs_13)); }
+	inline String_t* get_savedAs_13() const { return ___savedAs_13; }
+	inline String_t** get_address_of_savedAs_13() { return &___savedAs_13; }
+	inline void set_savedAs_13(String_t* value)
+	{
+		___savedAs_13 = value;
+		Il2CppCodeGenWriteBarrier((&___savedAs_13), value);
+	}
+
+	inline static int32_t get_offset_of_selectOnTab_14() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___selectOnTab_14)); }
+	inline GameObject_t1113636619 * get_selectOnTab_14() const { return ___selectOnTab_14; }
+	inline GameObject_t1113636619 ** get_address_of_selectOnTab_14() { return &___selectOnTab_14; }
+	inline void set_selectOnTab_14(GameObject_t1113636619 * value)
+	{
+		___selectOnTab_14 = value;
+		Il2CppCodeGenWriteBarrier((&___selectOnTab_14), value);
+	}
+
+	inline static int32_t get_offset_of_activeTextColor_15() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___activeTextColor_15)); }
+	inline Color_t2555686324  get_activeTextColor_15() const { return ___activeTextColor_15; }
+	inline Color_t2555686324 * get_address_of_activeTextColor_15() { return &___activeTextColor_15; }
+	inline void set_activeTextColor_15(Color_t2555686324  value)
+	{
+		___activeTextColor_15 = value;
+	}
+
+	inline static int32_t get_offset_of_caretColor_16() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___caretColor_16)); }
+	inline Color_t2555686324  get_caretColor_16() const { return ___caretColor_16; }
+	inline Color_t2555686324 * get_address_of_caretColor_16() { return &___caretColor_16; }
+	inline void set_caretColor_16(Color_t2555686324  value)
+	{
+		___caretColor_16 = value;
+	}
+
+	inline static int32_t get_offset_of_selectionColor_17() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___selectionColor_17)); }
+	inline Color_t2555686324  get_selectionColor_17() const { return ___selectionColor_17; }
+	inline Color_t2555686324 * get_address_of_selectionColor_17() { return &___selectionColor_17; }
+	inline void set_selectionColor_17(Color_t2555686324  value)
+	{
+		___selectionColor_17 = value;
+	}
+
+	inline static int32_t get_offset_of_onSubmit_18() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___onSubmit_18)); }
+	inline List_1_t4210400802 * get_onSubmit_18() const { return ___onSubmit_18; }
+	inline List_1_t4210400802 ** get_address_of_onSubmit_18() { return &___onSubmit_18; }
+	inline void set_onSubmit_18(List_1_t4210400802 * value)
+	{
+		___onSubmit_18 = value;
+		Il2CppCodeGenWriteBarrier((&___onSubmit_18), value);
+	}
+
+	inline static int32_t get_offset_of_onChange_19() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___onChange_19)); }
+	inline List_1_t4210400802 * get_onChange_19() const { return ___onChange_19; }
+	inline List_1_t4210400802 ** get_address_of_onChange_19() { return &___onChange_19; }
+	inline void set_onChange_19(List_1_t4210400802 * value)
+	{
+		___onChange_19 = value;
+		Il2CppCodeGenWriteBarrier((&___onChange_19), value);
+	}
+
+	inline static int32_t get_offset_of_onValidate_20() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___onValidate_20)); }
+	inline OnValidate_t1246632601 * get_onValidate_20() const { return ___onValidate_20; }
+	inline OnValidate_t1246632601 ** get_address_of_onValidate_20() { return &___onValidate_20; }
+	inline void set_onValidate_20(OnValidate_t1246632601 * value)
+	{
+		___onValidate_20 = value;
+		Il2CppCodeGenWriteBarrier((&___onValidate_20), value);
+	}
+
+	inline static int32_t get_offset_of_mValue_21() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mValue_21)); }
+	inline String_t* get_mValue_21() const { return ___mValue_21; }
+	inline String_t** get_address_of_mValue_21() { return &___mValue_21; }
+	inline void set_mValue_21(String_t* value)
+	{
+		___mValue_21 = value;
+		Il2CppCodeGenWriteBarrier((&___mValue_21), value);
+	}
+
+	inline static int32_t get_offset_of_mDefaultText_22() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mDefaultText_22)); }
+	inline String_t* get_mDefaultText_22() const { return ___mDefaultText_22; }
+	inline String_t** get_address_of_mDefaultText_22() { return &___mDefaultText_22; }
+	inline void set_mDefaultText_22(String_t* value)
+	{
+		___mDefaultText_22 = value;
+		Il2CppCodeGenWriteBarrier((&___mDefaultText_22), value);
+	}
+
+	inline static int32_t get_offset_of_mDefaultColor_23() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mDefaultColor_23)); }
+	inline Color_t2555686324  get_mDefaultColor_23() const { return ___mDefaultColor_23; }
+	inline Color_t2555686324 * get_address_of_mDefaultColor_23() { return &___mDefaultColor_23; }
+	inline void set_mDefaultColor_23(Color_t2555686324  value)
+	{
+		___mDefaultColor_23 = value;
+	}
+
+	inline static int32_t get_offset_of_mPosition_24() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mPosition_24)); }
+	inline float get_mPosition_24() const { return ___mPosition_24; }
+	inline float* get_address_of_mPosition_24() { return &___mPosition_24; }
+	inline void set_mPosition_24(float value)
+	{
+		___mPosition_24 = value;
+	}
+
+	inline static int32_t get_offset_of_mDoInit_25() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mDoInit_25)); }
+	inline bool get_mDoInit_25() const { return ___mDoInit_25; }
+	inline bool* get_address_of_mDoInit_25() { return &___mDoInit_25; }
+	inline void set_mDoInit_25(bool value)
+	{
+		___mDoInit_25 = value;
+	}
+
+	inline static int32_t get_offset_of_mAlignment_26() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mAlignment_26)); }
+	inline int32_t get_mAlignment_26() const { return ___mAlignment_26; }
+	inline int32_t* get_address_of_mAlignment_26() { return &___mAlignment_26; }
+	inline void set_mAlignment_26(int32_t value)
+	{
+		___mAlignment_26 = value;
+	}
+
+	inline static int32_t get_offset_of_mLoadSavedValue_27() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mLoadSavedValue_27)); }
+	inline bool get_mLoadSavedValue_27() const { return ___mLoadSavedValue_27; }
+	inline bool* get_address_of_mLoadSavedValue_27() { return &___mLoadSavedValue_27; }
+	inline void set_mLoadSavedValue_27(bool value)
+	{
+		___mLoadSavedValue_27 = value;
+	}
+
+	inline static int32_t get_offset_of_mSelectionStart_32() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mSelectionStart_32)); }
+	inline int32_t get_mSelectionStart_32() const { return ___mSelectionStart_32; }
+	inline int32_t* get_address_of_mSelectionStart_32() { return &___mSelectionStart_32; }
+	inline void set_mSelectionStart_32(int32_t value)
+	{
+		___mSelectionStart_32 = value;
+	}
+
+	inline static int32_t get_offset_of_mSelectionEnd_33() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mSelectionEnd_33)); }
+	inline int32_t get_mSelectionEnd_33() const { return ___mSelectionEnd_33; }
+	inline int32_t* get_address_of_mSelectionEnd_33() { return &___mSelectionEnd_33; }
+	inline void set_mSelectionEnd_33(int32_t value)
+	{
+		___mSelectionEnd_33 = value;
+	}
+
+	inline static int32_t get_offset_of_mHighlight_34() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mHighlight_34)); }
+	inline UITexture_t3471168817 * get_mHighlight_34() const { return ___mHighlight_34; }
+	inline UITexture_t3471168817 ** get_address_of_mHighlight_34() { return &___mHighlight_34; }
+	inline void set_mHighlight_34(UITexture_t3471168817 * value)
+	{
+		___mHighlight_34 = value;
+		Il2CppCodeGenWriteBarrier((&___mHighlight_34), value);
+	}
+
+	inline static int32_t get_offset_of_mCaret_35() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mCaret_35)); }
+	inline UITexture_t3471168817 * get_mCaret_35() const { return ___mCaret_35; }
+	inline UITexture_t3471168817 ** get_address_of_mCaret_35() { return &___mCaret_35; }
+	inline void set_mCaret_35(UITexture_t3471168817 * value)
+	{
+		___mCaret_35 = value;
+		Il2CppCodeGenWriteBarrier((&___mCaret_35), value);
+	}
+
+	inline static int32_t get_offset_of_mBlankTex_36() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mBlankTex_36)); }
+	inline Texture2D_t3840446185 * get_mBlankTex_36() const { return ___mBlankTex_36; }
+	inline Texture2D_t3840446185 ** get_address_of_mBlankTex_36() { return &___mBlankTex_36; }
+	inline void set_mBlankTex_36(Texture2D_t3840446185 * value)
+	{
+		___mBlankTex_36 = value;
+		Il2CppCodeGenWriteBarrier((&___mBlankTex_36), value);
+	}
+
+	inline static int32_t get_offset_of_mNextBlink_37() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mNextBlink_37)); }
+	inline float get_mNextBlink_37() const { return ___mNextBlink_37; }
+	inline float* get_address_of_mNextBlink_37() { return &___mNextBlink_37; }
+	inline void set_mNextBlink_37(float value)
+	{
+		___mNextBlink_37 = value;
+	}
+
+	inline static int32_t get_offset_of_mLastAlpha_38() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mLastAlpha_38)); }
+	inline float get_mLastAlpha_38() const { return ___mLastAlpha_38; }
+	inline float* get_address_of_mLastAlpha_38() { return &___mLastAlpha_38; }
+	inline void set_mLastAlpha_38(float value)
+	{
+		___mLastAlpha_38 = value;
+	}
+
+	inline static int32_t get_offset_of_mCached_39() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mCached_39)); }
+	inline String_t* get_mCached_39() const { return ___mCached_39; }
+	inline String_t** get_address_of_mCached_39() { return &___mCached_39; }
+	inline void set_mCached_39(String_t* value)
+	{
+		___mCached_39 = value;
+		Il2CppCodeGenWriteBarrier((&___mCached_39), value);
+	}
+
+	inline static int32_t get_offset_of_mSelectMe_40() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mSelectMe_40)); }
+	inline int32_t get_mSelectMe_40() const { return ___mSelectMe_40; }
+	inline int32_t* get_address_of_mSelectMe_40() { return &___mSelectMe_40; }
+	inline void set_mSelectMe_40(int32_t value)
+	{
+		___mSelectMe_40 = value;
+	}
+
+	inline static int32_t get_offset_of_mSelectTime_41() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mSelectTime_41)); }
+	inline int32_t get_mSelectTime_41() const { return ___mSelectTime_41; }
+	inline int32_t* get_address_of_mSelectTime_41() { return &___mSelectTime_41; }
+	inline void set_mSelectTime_41(int32_t value)
+	{
+		___mSelectTime_41 = value;
+	}
+
+	inline static int32_t get_offset_of_mStarted_42() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mStarted_42)); }
+	inline bool get_mStarted_42() const { return ___mStarted_42; }
+	inline bool* get_address_of_mStarted_42() { return &___mStarted_42; }
+	inline void set_mStarted_42(bool value)
+	{
+		___mStarted_42 = value;
+	}
+
+	inline static int32_t get_offset_of_mCam_43() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mCam_43)); }
+	inline UICamera_t1356438871 * get_mCam_43() const { return ___mCam_43; }
+	inline UICamera_t1356438871 ** get_address_of_mCam_43() { return &___mCam_43; }
+	inline void set_mCam_43(UICamera_t1356438871 * value)
+	{
+		___mCam_43 = value;
+		Il2CppCodeGenWriteBarrier((&___mCam_43), value);
+	}
+
+	inline static int32_t get_offset_of_mEllipsis_44() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mEllipsis_44)); }
+	inline bool get_mEllipsis_44() const { return ___mEllipsis_44; }
+	inline bool* get_address_of_mEllipsis_44() { return &___mEllipsis_44; }
+	inline void set_mEllipsis_44(bool value)
+	{
+		___mEllipsis_44 = value;
+	}
+};
+
+struct UIInput_t421821618_StaticFields
+{
+public:
+	// UIInput UIInput::current
+	UIInput_t421821618 * ___current_2;
+	// UIInput UIInput::selection
+	UIInput_t421821618 * ___selection_3;
+	// System.Int32 UIInput::mDrawStart
+	int32_t ___mDrawStart_28;
+	// System.String UIInput::mLastIME
+	String_t* ___mLastIME_29;
+	// UnityEngine.TouchScreenKeyboard UIInput::mKeyboard
+	TouchScreenKeyboard_t731888065 * ___mKeyboard_30;
+	// System.Boolean UIInput::mWaitForKeyboard
+	bool ___mWaitForKeyboard_31;
+	// System.Int32 UIInput::mIgnoreKey
+	int32_t ___mIgnoreKey_45;
+
+public:
+	inline static int32_t get_offset_of_current_2() { return static_cast<int32_t>(offsetof(UIInput_t421821618_StaticFields, ___current_2)); }
+	inline UIInput_t421821618 * get_current_2() const { return ___current_2; }
+	inline UIInput_t421821618 ** get_address_of_current_2() { return &___current_2; }
+	inline void set_current_2(UIInput_t421821618 * value)
+	{
+		___current_2 = value;
+		Il2CppCodeGenWriteBarrier((&___current_2), value);
+	}
+
+	inline static int32_t get_offset_of_selection_3() { return static_cast<int32_t>(offsetof(UIInput_t421821618_StaticFields, ___selection_3)); }
+	inline UIInput_t421821618 * get_selection_3() const { return ___selection_3; }
+	inline UIInput_t421821618 ** get_address_of_selection_3() { return &___selection_3; }
+	inline void set_selection_3(UIInput_t421821618 * value)
+	{
+		___selection_3 = value;
+		Il2CppCodeGenWriteBarrier((&___selection_3), value);
+	}
+
+	inline static int32_t get_offset_of_mDrawStart_28() { return static_cast<int32_t>(offsetof(UIInput_t421821618_StaticFields, ___mDrawStart_28)); }
+	inline int32_t get_mDrawStart_28() const { return ___mDrawStart_28; }
+	inline int32_t* get_address_of_mDrawStart_28() { return &___mDrawStart_28; }
+	inline void set_mDrawStart_28(int32_t value)
+	{
+		___mDrawStart_28 = value;
+	}
+
+	inline static int32_t get_offset_of_mLastIME_29() { return static_cast<int32_t>(offsetof(UIInput_t421821618_StaticFields, ___mLastIME_29)); }
+	inline String_t* get_mLastIME_29() const { return ___mLastIME_29; }
+	inline String_t** get_address_of_mLastIME_29() { return &___mLastIME_29; }
+	inline void set_mLastIME_29(String_t* value)
+	{
+		___mLastIME_29 = value;
+		Il2CppCodeGenWriteBarrier((&___mLastIME_29), value);
+	}
+
+	inline static int32_t get_offset_of_mKeyboard_30() { return static_cast<int32_t>(offsetof(UIInput_t421821618_StaticFields, ___mKeyboard_30)); }
+	inline TouchScreenKeyboard_t731888065 * get_mKeyboard_30() const { return ___mKeyboard_30; }
+	inline TouchScreenKeyboard_t731888065 ** get_address_of_mKeyboard_30() { return &___mKeyboard_30; }
+	inline void set_mKeyboard_30(TouchScreenKeyboard_t731888065 * value)
+	{
+		___mKeyboard_30 = value;
+		Il2CppCodeGenWriteBarrier((&___mKeyboard_30), value);
+	}
+
+	inline static int32_t get_offset_of_mWaitForKeyboard_31() { return static_cast<int32_t>(offsetof(UIInput_t421821618_StaticFields, ___mWaitForKeyboard_31)); }
+	inline bool get_mWaitForKeyboard_31() const { return ___mWaitForKeyboard_31; }
+	inline bool* get_address_of_mWaitForKeyboard_31() { return &___mWaitForKeyboard_31; }
+	inline void set_mWaitForKeyboard_31(bool value)
+	{
+		___mWaitForKeyboard_31 = value;
+	}
+
+	inline static int32_t get_offset_of_mIgnoreKey_45() { return static_cast<int32_t>(offsetof(UIInput_t421821618_StaticFields, ___mIgnoreKey_45)); }
+	inline int32_t get_mIgnoreKey_45() const { return ___mIgnoreKey_45; }
+	inline int32_t* get_address_of_mIgnoreKey_45() { return &___mIgnoreKey_45; }
+	inline void set_mIgnoreKey_45(int32_t value)
+	{
+		___mIgnoreKey_45 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // UIINPUT_T421821618_H
 #ifndef UICAMERA_T1356438871_H
 #define UICAMERA_T1356438871_H
 #ifdef __clang__
@@ -10280,870 +11543,454 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // UICAMERA_T1356438871_H
-#ifndef UIFONT_T2766063701_H
-#define UIFONT_T2766063701_H
+#ifndef UICENTERONCHILD_T253063637_H
+#define UICENTERONCHILD_T253063637_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// UIFont
-struct  UIFont_t2766063701  : public MonoBehaviour_t3962482529
+// UICenterOnChild
+struct  UICenterOnChild_t253063637  : public MonoBehaviour_t3962482529
 {
 public:
-	// UnityEngine.Material UIFont::mMat
-	Material_t340375123 * ___mMat_2;
-	// UnityEngine.Rect UIFont::mUVRect
-	Rect_t2360479859  ___mUVRect_3;
-	// BMFont UIFont::mFont
-	BMFont_t2757936676 * ___mFont_4;
-	// UIAtlas UIFont::mAtlas
-	UIAtlas_t3195533529 * ___mAtlas_5;
-	// UIFont UIFont::mReplacement
-	UIFont_t2766063701 * ___mReplacement_6;
-	// System.Collections.Generic.List`1<BMSymbol> UIFont::mSymbols
-	List_1_t3058133583 * ___mSymbols_7;
-	// UnityEngine.Font UIFont::mDynamicFont
-	Font_t1956802104 * ___mDynamicFont_8;
-	// System.Int32 UIFont::mDynamicFontSize
-	int32_t ___mDynamicFontSize_9;
-	// UnityEngine.FontStyle UIFont::mDynamicFontStyle
-	int32_t ___mDynamicFontStyle_10;
-	// UISpriteData UIFont::mSprite
-	UISpriteData_t900308526 * ___mSprite_11;
-	// System.Int32 UIFont::mPMA
-	int32_t ___mPMA_12;
-	// System.Int32 UIFont::mPacked
-	int32_t ___mPacked_13;
+	// System.Single UICenterOnChild::springStrength
+	float ___springStrength_2;
+	// System.Single UICenterOnChild::nextPageThreshold
+	float ___nextPageThreshold_3;
+	// SpringPanel/OnFinished UICenterOnChild::onFinished
+	OnFinished_t3778785451 * ___onFinished_4;
+	// UICenterOnChild/OnCenterCallback UICenterOnChild::onCenter
+	OnCenterCallback_t2077531662 * ___onCenter_5;
+	// UIScrollView UICenterOnChild::mScrollView
+	UIScrollView_t1973404950 * ___mScrollView_6;
+	// UnityEngine.GameObject UICenterOnChild::mCenteredObject
+	GameObject_t1113636619 * ___mCenteredObject_7;
 
 public:
-	inline static int32_t get_offset_of_mMat_2() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mMat_2)); }
-	inline Material_t340375123 * get_mMat_2() const { return ___mMat_2; }
-	inline Material_t340375123 ** get_address_of_mMat_2() { return &___mMat_2; }
-	inline void set_mMat_2(Material_t340375123 * value)
+	inline static int32_t get_offset_of_springStrength_2() { return static_cast<int32_t>(offsetof(UICenterOnChild_t253063637, ___springStrength_2)); }
+	inline float get_springStrength_2() const { return ___springStrength_2; }
+	inline float* get_address_of_springStrength_2() { return &___springStrength_2; }
+	inline void set_springStrength_2(float value)
 	{
-		___mMat_2 = value;
-		Il2CppCodeGenWriteBarrier((&___mMat_2), value);
+		___springStrength_2 = value;
 	}
 
-	inline static int32_t get_offset_of_mUVRect_3() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mUVRect_3)); }
-	inline Rect_t2360479859  get_mUVRect_3() const { return ___mUVRect_3; }
-	inline Rect_t2360479859 * get_address_of_mUVRect_3() { return &___mUVRect_3; }
-	inline void set_mUVRect_3(Rect_t2360479859  value)
+	inline static int32_t get_offset_of_nextPageThreshold_3() { return static_cast<int32_t>(offsetof(UICenterOnChild_t253063637, ___nextPageThreshold_3)); }
+	inline float get_nextPageThreshold_3() const { return ___nextPageThreshold_3; }
+	inline float* get_address_of_nextPageThreshold_3() { return &___nextPageThreshold_3; }
+	inline void set_nextPageThreshold_3(float value)
 	{
-		___mUVRect_3 = value;
+		___nextPageThreshold_3 = value;
 	}
 
-	inline static int32_t get_offset_of_mFont_4() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mFont_4)); }
-	inline BMFont_t2757936676 * get_mFont_4() const { return ___mFont_4; }
-	inline BMFont_t2757936676 ** get_address_of_mFont_4() { return &___mFont_4; }
-	inline void set_mFont_4(BMFont_t2757936676 * value)
+	inline static int32_t get_offset_of_onFinished_4() { return static_cast<int32_t>(offsetof(UICenterOnChild_t253063637, ___onFinished_4)); }
+	inline OnFinished_t3778785451 * get_onFinished_4() const { return ___onFinished_4; }
+	inline OnFinished_t3778785451 ** get_address_of_onFinished_4() { return &___onFinished_4; }
+	inline void set_onFinished_4(OnFinished_t3778785451 * value)
 	{
-		___mFont_4 = value;
-		Il2CppCodeGenWriteBarrier((&___mFont_4), value);
+		___onFinished_4 = value;
+		Il2CppCodeGenWriteBarrier((&___onFinished_4), value);
 	}
 
-	inline static int32_t get_offset_of_mAtlas_5() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mAtlas_5)); }
-	inline UIAtlas_t3195533529 * get_mAtlas_5() const { return ___mAtlas_5; }
-	inline UIAtlas_t3195533529 ** get_address_of_mAtlas_5() { return &___mAtlas_5; }
-	inline void set_mAtlas_5(UIAtlas_t3195533529 * value)
+	inline static int32_t get_offset_of_onCenter_5() { return static_cast<int32_t>(offsetof(UICenterOnChild_t253063637, ___onCenter_5)); }
+	inline OnCenterCallback_t2077531662 * get_onCenter_5() const { return ___onCenter_5; }
+	inline OnCenterCallback_t2077531662 ** get_address_of_onCenter_5() { return &___onCenter_5; }
+	inline void set_onCenter_5(OnCenterCallback_t2077531662 * value)
 	{
-		___mAtlas_5 = value;
-		Il2CppCodeGenWriteBarrier((&___mAtlas_5), value);
+		___onCenter_5 = value;
+		Il2CppCodeGenWriteBarrier((&___onCenter_5), value);
 	}
 
-	inline static int32_t get_offset_of_mReplacement_6() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mReplacement_6)); }
-	inline UIFont_t2766063701 * get_mReplacement_6() const { return ___mReplacement_6; }
-	inline UIFont_t2766063701 ** get_address_of_mReplacement_6() { return &___mReplacement_6; }
-	inline void set_mReplacement_6(UIFont_t2766063701 * value)
+	inline static int32_t get_offset_of_mScrollView_6() { return static_cast<int32_t>(offsetof(UICenterOnChild_t253063637, ___mScrollView_6)); }
+	inline UIScrollView_t1973404950 * get_mScrollView_6() const { return ___mScrollView_6; }
+	inline UIScrollView_t1973404950 ** get_address_of_mScrollView_6() { return &___mScrollView_6; }
+	inline void set_mScrollView_6(UIScrollView_t1973404950 * value)
 	{
-		___mReplacement_6 = value;
-		Il2CppCodeGenWriteBarrier((&___mReplacement_6), value);
+		___mScrollView_6 = value;
+		Il2CppCodeGenWriteBarrier((&___mScrollView_6), value);
 	}
 
-	inline static int32_t get_offset_of_mSymbols_7() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mSymbols_7)); }
-	inline List_1_t3058133583 * get_mSymbols_7() const { return ___mSymbols_7; }
-	inline List_1_t3058133583 ** get_address_of_mSymbols_7() { return &___mSymbols_7; }
-	inline void set_mSymbols_7(List_1_t3058133583 * value)
+	inline static int32_t get_offset_of_mCenteredObject_7() { return static_cast<int32_t>(offsetof(UICenterOnChild_t253063637, ___mCenteredObject_7)); }
+	inline GameObject_t1113636619 * get_mCenteredObject_7() const { return ___mCenteredObject_7; }
+	inline GameObject_t1113636619 ** get_address_of_mCenteredObject_7() { return &___mCenteredObject_7; }
+	inline void set_mCenteredObject_7(GameObject_t1113636619 * value)
 	{
-		___mSymbols_7 = value;
-		Il2CppCodeGenWriteBarrier((&___mSymbols_7), value);
-	}
-
-	inline static int32_t get_offset_of_mDynamicFont_8() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mDynamicFont_8)); }
-	inline Font_t1956802104 * get_mDynamicFont_8() const { return ___mDynamicFont_8; }
-	inline Font_t1956802104 ** get_address_of_mDynamicFont_8() { return &___mDynamicFont_8; }
-	inline void set_mDynamicFont_8(Font_t1956802104 * value)
-	{
-		___mDynamicFont_8 = value;
-		Il2CppCodeGenWriteBarrier((&___mDynamicFont_8), value);
-	}
-
-	inline static int32_t get_offset_of_mDynamicFontSize_9() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mDynamicFontSize_9)); }
-	inline int32_t get_mDynamicFontSize_9() const { return ___mDynamicFontSize_9; }
-	inline int32_t* get_address_of_mDynamicFontSize_9() { return &___mDynamicFontSize_9; }
-	inline void set_mDynamicFontSize_9(int32_t value)
-	{
-		___mDynamicFontSize_9 = value;
-	}
-
-	inline static int32_t get_offset_of_mDynamicFontStyle_10() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mDynamicFontStyle_10)); }
-	inline int32_t get_mDynamicFontStyle_10() const { return ___mDynamicFontStyle_10; }
-	inline int32_t* get_address_of_mDynamicFontStyle_10() { return &___mDynamicFontStyle_10; }
-	inline void set_mDynamicFontStyle_10(int32_t value)
-	{
-		___mDynamicFontStyle_10 = value;
-	}
-
-	inline static int32_t get_offset_of_mSprite_11() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mSprite_11)); }
-	inline UISpriteData_t900308526 * get_mSprite_11() const { return ___mSprite_11; }
-	inline UISpriteData_t900308526 ** get_address_of_mSprite_11() { return &___mSprite_11; }
-	inline void set_mSprite_11(UISpriteData_t900308526 * value)
-	{
-		___mSprite_11 = value;
-		Il2CppCodeGenWriteBarrier((&___mSprite_11), value);
-	}
-
-	inline static int32_t get_offset_of_mPMA_12() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mPMA_12)); }
-	inline int32_t get_mPMA_12() const { return ___mPMA_12; }
-	inline int32_t* get_address_of_mPMA_12() { return &___mPMA_12; }
-	inline void set_mPMA_12(int32_t value)
-	{
-		___mPMA_12 = value;
-	}
-
-	inline static int32_t get_offset_of_mPacked_13() { return static_cast<int32_t>(offsetof(UIFont_t2766063701, ___mPacked_13)); }
-	inline int32_t get_mPacked_13() const { return ___mPacked_13; }
-	inline int32_t* get_address_of_mPacked_13() { return &___mPacked_13; }
-	inline void set_mPacked_13(int32_t value)
-	{
-		___mPacked_13 = value;
+		___mCenteredObject_7 = value;
+		Il2CppCodeGenWriteBarrier((&___mCenteredObject_7), value);
 	}
 };
 
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // UIFONT_T2766063701_H
-#ifndef UIRECT_T2875960382_H
-#define UIRECT_T2875960382_H
+#endif // UICENTERONCHILD_T253063637_H
+#ifndef UIKEYNAVIGATION_T4244956403_H
+#define UIKEYNAVIGATION_T4244956403_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// UIRect
-struct  UIRect_t2875960382  : public MonoBehaviour_t3962482529
+// UIKeyNavigation
+struct  UIKeyNavigation_t4244956403  : public MonoBehaviour_t3962482529
 {
 public:
-	// UIRect/AnchorPoint UIRect::leftAnchor
-	AnchorPoint_t1754718329 * ___leftAnchor_2;
-	// UIRect/AnchorPoint UIRect::rightAnchor
-	AnchorPoint_t1754718329 * ___rightAnchor_3;
-	// UIRect/AnchorPoint UIRect::bottomAnchor
-	AnchorPoint_t1754718329 * ___bottomAnchor_4;
-	// UIRect/AnchorPoint UIRect::topAnchor
-	AnchorPoint_t1754718329 * ___topAnchor_5;
-	// UIRect/AnchorUpdate UIRect::updateAnchors
-	int32_t ___updateAnchors_6;
-	// UnityEngine.GameObject UIRect::mGo
-	GameObject_t1113636619 * ___mGo_7;
-	// UnityEngine.Transform UIRect::mTrans
-	Transform_t3600365921 * ___mTrans_8;
-	// BetterList`1<UIRect> UIRect::mChildren
-	BetterList_1_t2030980700 * ___mChildren_9;
-	// System.Boolean UIRect::mChanged
-	bool ___mChanged_10;
-	// System.Boolean UIRect::mParentFound
-	bool ___mParentFound_11;
-	// System.Boolean UIRect::mUpdateAnchors
-	bool ___mUpdateAnchors_12;
-	// System.Int32 UIRect::mUpdateFrame
-	int32_t ___mUpdateFrame_13;
-	// System.Boolean UIRect::mAnchorsCached
-	bool ___mAnchorsCached_14;
-	// UIRoot UIRect::mRoot
-	UIRoot_t4022971450 * ___mRoot_15;
-	// UIRect UIRect::mParent
-	UIRect_t2875960382 * ___mParent_16;
-	// System.Boolean UIRect::mRootSet
-	bool ___mRootSet_17;
-	// UnityEngine.Camera UIRect::mCam
-	Camera_t4157153871 * ___mCam_18;
-	// System.Boolean UIRect::mStarted
-	bool ___mStarted_19;
-	// System.Single UIRect::finalAlpha
-	float ___finalAlpha_20;
+	// UIKeyNavigation/Constraint UIKeyNavigation::constraint
+	int32_t ___constraint_3;
+	// UnityEngine.GameObject UIKeyNavigation::onUp
+	GameObject_t1113636619 * ___onUp_4;
+	// UnityEngine.GameObject UIKeyNavigation::onDown
+	GameObject_t1113636619 * ___onDown_5;
+	// UnityEngine.GameObject UIKeyNavigation::onLeft
+	GameObject_t1113636619 * ___onLeft_6;
+	// UnityEngine.GameObject UIKeyNavigation::onRight
+	GameObject_t1113636619 * ___onRight_7;
+	// UnityEngine.GameObject UIKeyNavigation::onClick
+	GameObject_t1113636619 * ___onClick_8;
+	// UnityEngine.GameObject UIKeyNavigation::onTab
+	GameObject_t1113636619 * ___onTab_9;
+	// System.Boolean UIKeyNavigation::startsSelected
+	bool ___startsSelected_10;
+	// System.Boolean UIKeyNavigation::mStarted
+	bool ___mStarted_11;
 
 public:
-	inline static int32_t get_offset_of_leftAnchor_2() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___leftAnchor_2)); }
-	inline AnchorPoint_t1754718329 * get_leftAnchor_2() const { return ___leftAnchor_2; }
-	inline AnchorPoint_t1754718329 ** get_address_of_leftAnchor_2() { return &___leftAnchor_2; }
-	inline void set_leftAnchor_2(AnchorPoint_t1754718329 * value)
+	inline static int32_t get_offset_of_constraint_3() { return static_cast<int32_t>(offsetof(UIKeyNavigation_t4244956403, ___constraint_3)); }
+	inline int32_t get_constraint_3() const { return ___constraint_3; }
+	inline int32_t* get_address_of_constraint_3() { return &___constraint_3; }
+	inline void set_constraint_3(int32_t value)
 	{
-		___leftAnchor_2 = value;
-		Il2CppCodeGenWriteBarrier((&___leftAnchor_2), value);
+		___constraint_3 = value;
 	}
 
-	inline static int32_t get_offset_of_rightAnchor_3() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___rightAnchor_3)); }
-	inline AnchorPoint_t1754718329 * get_rightAnchor_3() const { return ___rightAnchor_3; }
-	inline AnchorPoint_t1754718329 ** get_address_of_rightAnchor_3() { return &___rightAnchor_3; }
-	inline void set_rightAnchor_3(AnchorPoint_t1754718329 * value)
+	inline static int32_t get_offset_of_onUp_4() { return static_cast<int32_t>(offsetof(UIKeyNavigation_t4244956403, ___onUp_4)); }
+	inline GameObject_t1113636619 * get_onUp_4() const { return ___onUp_4; }
+	inline GameObject_t1113636619 ** get_address_of_onUp_4() { return &___onUp_4; }
+	inline void set_onUp_4(GameObject_t1113636619 * value)
 	{
-		___rightAnchor_3 = value;
-		Il2CppCodeGenWriteBarrier((&___rightAnchor_3), value);
+		___onUp_4 = value;
+		Il2CppCodeGenWriteBarrier((&___onUp_4), value);
 	}
 
-	inline static int32_t get_offset_of_bottomAnchor_4() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___bottomAnchor_4)); }
-	inline AnchorPoint_t1754718329 * get_bottomAnchor_4() const { return ___bottomAnchor_4; }
-	inline AnchorPoint_t1754718329 ** get_address_of_bottomAnchor_4() { return &___bottomAnchor_4; }
-	inline void set_bottomAnchor_4(AnchorPoint_t1754718329 * value)
+	inline static int32_t get_offset_of_onDown_5() { return static_cast<int32_t>(offsetof(UIKeyNavigation_t4244956403, ___onDown_5)); }
+	inline GameObject_t1113636619 * get_onDown_5() const { return ___onDown_5; }
+	inline GameObject_t1113636619 ** get_address_of_onDown_5() { return &___onDown_5; }
+	inline void set_onDown_5(GameObject_t1113636619 * value)
 	{
-		___bottomAnchor_4 = value;
-		Il2CppCodeGenWriteBarrier((&___bottomAnchor_4), value);
+		___onDown_5 = value;
+		Il2CppCodeGenWriteBarrier((&___onDown_5), value);
 	}
 
-	inline static int32_t get_offset_of_topAnchor_5() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___topAnchor_5)); }
-	inline AnchorPoint_t1754718329 * get_topAnchor_5() const { return ___topAnchor_5; }
-	inline AnchorPoint_t1754718329 ** get_address_of_topAnchor_5() { return &___topAnchor_5; }
-	inline void set_topAnchor_5(AnchorPoint_t1754718329 * value)
+	inline static int32_t get_offset_of_onLeft_6() { return static_cast<int32_t>(offsetof(UIKeyNavigation_t4244956403, ___onLeft_6)); }
+	inline GameObject_t1113636619 * get_onLeft_6() const { return ___onLeft_6; }
+	inline GameObject_t1113636619 ** get_address_of_onLeft_6() { return &___onLeft_6; }
+	inline void set_onLeft_6(GameObject_t1113636619 * value)
 	{
-		___topAnchor_5 = value;
-		Il2CppCodeGenWriteBarrier((&___topAnchor_5), value);
+		___onLeft_6 = value;
+		Il2CppCodeGenWriteBarrier((&___onLeft_6), value);
 	}
 
-	inline static int32_t get_offset_of_updateAnchors_6() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___updateAnchors_6)); }
-	inline int32_t get_updateAnchors_6() const { return ___updateAnchors_6; }
-	inline int32_t* get_address_of_updateAnchors_6() { return &___updateAnchors_6; }
-	inline void set_updateAnchors_6(int32_t value)
+	inline static int32_t get_offset_of_onRight_7() { return static_cast<int32_t>(offsetof(UIKeyNavigation_t4244956403, ___onRight_7)); }
+	inline GameObject_t1113636619 * get_onRight_7() const { return ___onRight_7; }
+	inline GameObject_t1113636619 ** get_address_of_onRight_7() { return &___onRight_7; }
+	inline void set_onRight_7(GameObject_t1113636619 * value)
 	{
-		___updateAnchors_6 = value;
+		___onRight_7 = value;
+		Il2CppCodeGenWriteBarrier((&___onRight_7), value);
 	}
 
-	inline static int32_t get_offset_of_mGo_7() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mGo_7)); }
-	inline GameObject_t1113636619 * get_mGo_7() const { return ___mGo_7; }
-	inline GameObject_t1113636619 ** get_address_of_mGo_7() { return &___mGo_7; }
-	inline void set_mGo_7(GameObject_t1113636619 * value)
+	inline static int32_t get_offset_of_onClick_8() { return static_cast<int32_t>(offsetof(UIKeyNavigation_t4244956403, ___onClick_8)); }
+	inline GameObject_t1113636619 * get_onClick_8() const { return ___onClick_8; }
+	inline GameObject_t1113636619 ** get_address_of_onClick_8() { return &___onClick_8; }
+	inline void set_onClick_8(GameObject_t1113636619 * value)
 	{
-		___mGo_7 = value;
-		Il2CppCodeGenWriteBarrier((&___mGo_7), value);
+		___onClick_8 = value;
+		Il2CppCodeGenWriteBarrier((&___onClick_8), value);
 	}
 
-	inline static int32_t get_offset_of_mTrans_8() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mTrans_8)); }
-	inline Transform_t3600365921 * get_mTrans_8() const { return ___mTrans_8; }
-	inline Transform_t3600365921 ** get_address_of_mTrans_8() { return &___mTrans_8; }
-	inline void set_mTrans_8(Transform_t3600365921 * value)
+	inline static int32_t get_offset_of_onTab_9() { return static_cast<int32_t>(offsetof(UIKeyNavigation_t4244956403, ___onTab_9)); }
+	inline GameObject_t1113636619 * get_onTab_9() const { return ___onTab_9; }
+	inline GameObject_t1113636619 ** get_address_of_onTab_9() { return &___onTab_9; }
+	inline void set_onTab_9(GameObject_t1113636619 * value)
 	{
-		___mTrans_8 = value;
-		Il2CppCodeGenWriteBarrier((&___mTrans_8), value);
+		___onTab_9 = value;
+		Il2CppCodeGenWriteBarrier((&___onTab_9), value);
 	}
 
-	inline static int32_t get_offset_of_mChildren_9() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mChildren_9)); }
-	inline BetterList_1_t2030980700 * get_mChildren_9() const { return ___mChildren_9; }
-	inline BetterList_1_t2030980700 ** get_address_of_mChildren_9() { return &___mChildren_9; }
-	inline void set_mChildren_9(BetterList_1_t2030980700 * value)
+	inline static int32_t get_offset_of_startsSelected_10() { return static_cast<int32_t>(offsetof(UIKeyNavigation_t4244956403, ___startsSelected_10)); }
+	inline bool get_startsSelected_10() const { return ___startsSelected_10; }
+	inline bool* get_address_of_startsSelected_10() { return &___startsSelected_10; }
+	inline void set_startsSelected_10(bool value)
 	{
-		___mChildren_9 = value;
-		Il2CppCodeGenWriteBarrier((&___mChildren_9), value);
+		___startsSelected_10 = value;
 	}
 
-	inline static int32_t get_offset_of_mChanged_10() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mChanged_10)); }
-	inline bool get_mChanged_10() const { return ___mChanged_10; }
-	inline bool* get_address_of_mChanged_10() { return &___mChanged_10; }
-	inline void set_mChanged_10(bool value)
+	inline static int32_t get_offset_of_mStarted_11() { return static_cast<int32_t>(offsetof(UIKeyNavigation_t4244956403, ___mStarted_11)); }
+	inline bool get_mStarted_11() const { return ___mStarted_11; }
+	inline bool* get_address_of_mStarted_11() { return &___mStarted_11; }
+	inline void set_mStarted_11(bool value)
 	{
-		___mChanged_10 = value;
-	}
-
-	inline static int32_t get_offset_of_mParentFound_11() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mParentFound_11)); }
-	inline bool get_mParentFound_11() const { return ___mParentFound_11; }
-	inline bool* get_address_of_mParentFound_11() { return &___mParentFound_11; }
-	inline void set_mParentFound_11(bool value)
-	{
-		___mParentFound_11 = value;
-	}
-
-	inline static int32_t get_offset_of_mUpdateAnchors_12() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mUpdateAnchors_12)); }
-	inline bool get_mUpdateAnchors_12() const { return ___mUpdateAnchors_12; }
-	inline bool* get_address_of_mUpdateAnchors_12() { return &___mUpdateAnchors_12; }
-	inline void set_mUpdateAnchors_12(bool value)
-	{
-		___mUpdateAnchors_12 = value;
-	}
-
-	inline static int32_t get_offset_of_mUpdateFrame_13() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mUpdateFrame_13)); }
-	inline int32_t get_mUpdateFrame_13() const { return ___mUpdateFrame_13; }
-	inline int32_t* get_address_of_mUpdateFrame_13() { return &___mUpdateFrame_13; }
-	inline void set_mUpdateFrame_13(int32_t value)
-	{
-		___mUpdateFrame_13 = value;
-	}
-
-	inline static int32_t get_offset_of_mAnchorsCached_14() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mAnchorsCached_14)); }
-	inline bool get_mAnchorsCached_14() const { return ___mAnchorsCached_14; }
-	inline bool* get_address_of_mAnchorsCached_14() { return &___mAnchorsCached_14; }
-	inline void set_mAnchorsCached_14(bool value)
-	{
-		___mAnchorsCached_14 = value;
-	}
-
-	inline static int32_t get_offset_of_mRoot_15() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mRoot_15)); }
-	inline UIRoot_t4022971450 * get_mRoot_15() const { return ___mRoot_15; }
-	inline UIRoot_t4022971450 ** get_address_of_mRoot_15() { return &___mRoot_15; }
-	inline void set_mRoot_15(UIRoot_t4022971450 * value)
-	{
-		___mRoot_15 = value;
-		Il2CppCodeGenWriteBarrier((&___mRoot_15), value);
-	}
-
-	inline static int32_t get_offset_of_mParent_16() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mParent_16)); }
-	inline UIRect_t2875960382 * get_mParent_16() const { return ___mParent_16; }
-	inline UIRect_t2875960382 ** get_address_of_mParent_16() { return &___mParent_16; }
-	inline void set_mParent_16(UIRect_t2875960382 * value)
-	{
-		___mParent_16 = value;
-		Il2CppCodeGenWriteBarrier((&___mParent_16), value);
-	}
-
-	inline static int32_t get_offset_of_mRootSet_17() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mRootSet_17)); }
-	inline bool get_mRootSet_17() const { return ___mRootSet_17; }
-	inline bool* get_address_of_mRootSet_17() { return &___mRootSet_17; }
-	inline void set_mRootSet_17(bool value)
-	{
-		___mRootSet_17 = value;
-	}
-
-	inline static int32_t get_offset_of_mCam_18() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mCam_18)); }
-	inline Camera_t4157153871 * get_mCam_18() const { return ___mCam_18; }
-	inline Camera_t4157153871 ** get_address_of_mCam_18() { return &___mCam_18; }
-	inline void set_mCam_18(Camera_t4157153871 * value)
-	{
-		___mCam_18 = value;
-		Il2CppCodeGenWriteBarrier((&___mCam_18), value);
-	}
-
-	inline static int32_t get_offset_of_mStarted_19() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___mStarted_19)); }
-	inline bool get_mStarted_19() const { return ___mStarted_19; }
-	inline bool* get_address_of_mStarted_19() { return &___mStarted_19; }
-	inline void set_mStarted_19(bool value)
-	{
-		___mStarted_19 = value;
-	}
-
-	inline static int32_t get_offset_of_finalAlpha_20() { return static_cast<int32_t>(offsetof(UIRect_t2875960382, ___finalAlpha_20)); }
-	inline float get_finalAlpha_20() const { return ___finalAlpha_20; }
-	inline float* get_address_of_finalAlpha_20() { return &___finalAlpha_20; }
-	inline void set_finalAlpha_20(float value)
-	{
-		___finalAlpha_20 = value;
+		___mStarted_11 = value;
 	}
 };
 
-struct UIRect_t2875960382_StaticFields
+struct UIKeyNavigation_t4244956403_StaticFields
 {
 public:
-	// UnityEngine.Vector3[] UIRect::mSides
-	Vector3U5BU5D_t1718750761* ___mSides_21;
+	// BetterList`1<UIKeyNavigation> UIKeyNavigation::list
+	BetterList_1_t3399976721 * ___list_2;
+	// System.Int32 UIKeyNavigation::mLastFrame
+	int32_t ___mLastFrame_12;
 
 public:
-	inline static int32_t get_offset_of_mSides_21() { return static_cast<int32_t>(offsetof(UIRect_t2875960382_StaticFields, ___mSides_21)); }
-	inline Vector3U5BU5D_t1718750761* get_mSides_21() const { return ___mSides_21; }
-	inline Vector3U5BU5D_t1718750761** get_address_of_mSides_21() { return &___mSides_21; }
-	inline void set_mSides_21(Vector3U5BU5D_t1718750761* value)
+	inline static int32_t get_offset_of_list_2() { return static_cast<int32_t>(offsetof(UIKeyNavigation_t4244956403_StaticFields, ___list_2)); }
+	inline BetterList_1_t3399976721 * get_list_2() const { return ___list_2; }
+	inline BetterList_1_t3399976721 ** get_address_of_list_2() { return &___list_2; }
+	inline void set_list_2(BetterList_1_t3399976721 * value)
 	{
-		___mSides_21 = value;
-		Il2CppCodeGenWriteBarrier((&___mSides_21), value);
+		___list_2 = value;
+		Il2CppCodeGenWriteBarrier((&___list_2), value);
+	}
+
+	inline static int32_t get_offset_of_mLastFrame_12() { return static_cast<int32_t>(offsetof(UIKeyNavigation_t4244956403_StaticFields, ___mLastFrame_12)); }
+	inline int32_t get_mLastFrame_12() const { return ___mLastFrame_12; }
+	inline int32_t* get_address_of_mLastFrame_12() { return &___mLastFrame_12; }
+	inline void set_mLastFrame_12(int32_t value)
+	{
+		___mLastFrame_12 = value;
 	}
 };
 
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // UIRECT_T2875960382_H
-#ifndef UIINPUT_T421821618_H
-#define UIINPUT_T421821618_H
+#endif // UIKEYNAVIGATION_T4244956403_H
+#ifndef UIATLAS_T3195533529_H
+#define UIATLAS_T3195533529_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// UIInput
-struct  UIInput_t421821618  : public MonoBehaviour_t3962482529
+// UIAtlas
+struct  UIAtlas_t3195533529  : public MonoBehaviour_t3962482529
 {
 public:
-	// UILabel UIInput::label
-	UILabel_t3248798549 * ___label_4;
-	// UIInput/InputType UIInput::inputType
-	int32_t ___inputType_5;
-	// UIInput/OnReturnKey UIInput::onReturnKey
-	int32_t ___onReturnKey_6;
-	// UIInput/KeyboardType UIInput::keyboardType
-	int32_t ___keyboardType_7;
-	// System.Boolean UIInput::hideInput
-	bool ___hideInput_8;
-	// System.Boolean UIInput::selectAllTextOnFocus
-	bool ___selectAllTextOnFocus_9;
-	// System.Boolean UIInput::submitOnUnselect
-	bool ___submitOnUnselect_10;
-	// UIInput/Validation UIInput::validation
-	int32_t ___validation_11;
-	// System.Int32 UIInput::characterLimit
-	int32_t ___characterLimit_12;
-	// System.String UIInput::savedAs
-	String_t* ___savedAs_13;
-	// UnityEngine.GameObject UIInput::selectOnTab
-	GameObject_t1113636619 * ___selectOnTab_14;
-	// UnityEngine.Color UIInput::activeTextColor
-	Color_t2555686324  ___activeTextColor_15;
-	// UnityEngine.Color UIInput::caretColor
-	Color_t2555686324  ___caretColor_16;
-	// UnityEngine.Color UIInput::selectionColor
-	Color_t2555686324  ___selectionColor_17;
-	// System.Collections.Generic.List`1<EventDelegate> UIInput::onSubmit
-	List_1_t4210400802 * ___onSubmit_18;
-	// System.Collections.Generic.List`1<EventDelegate> UIInput::onChange
-	List_1_t4210400802 * ___onChange_19;
-	// UIInput/OnValidate UIInput::onValidate
-	OnValidate_t1246632601 * ___onValidate_20;
-	// System.String UIInput::mValue
-	String_t* ___mValue_21;
-	// System.String UIInput::mDefaultText
-	String_t* ___mDefaultText_22;
-	// UnityEngine.Color UIInput::mDefaultColor
-	Color_t2555686324  ___mDefaultColor_23;
-	// System.Single UIInput::mPosition
-	float ___mPosition_24;
-	// System.Boolean UIInput::mDoInit
-	bool ___mDoInit_25;
-	// NGUIText/Alignment UIInput::mAlignment
-	int32_t ___mAlignment_26;
-	// System.Boolean UIInput::mLoadSavedValue
-	bool ___mLoadSavedValue_27;
-	// System.Int32 UIInput::mSelectionStart
-	int32_t ___mSelectionStart_32;
-	// System.Int32 UIInput::mSelectionEnd
-	int32_t ___mSelectionEnd_33;
-	// UITexture UIInput::mHighlight
-	UITexture_t3471168817 * ___mHighlight_34;
-	// UITexture UIInput::mCaret
-	UITexture_t3471168817 * ___mCaret_35;
-	// UnityEngine.Texture2D UIInput::mBlankTex
-	Texture2D_t3840446185 * ___mBlankTex_36;
-	// System.Single UIInput::mNextBlink
-	float ___mNextBlink_37;
-	// System.Single UIInput::mLastAlpha
-	float ___mLastAlpha_38;
-	// System.String UIInput::mCached
-	String_t* ___mCached_39;
-	// System.Int32 UIInput::mSelectMe
-	int32_t ___mSelectMe_40;
-	// System.Int32 UIInput::mSelectTime
-	int32_t ___mSelectTime_41;
-	// System.Boolean UIInput::mStarted
-	bool ___mStarted_42;
-	// UICamera UIInput::mCam
-	UICamera_t1356438871 * ___mCam_43;
-	// System.Boolean UIInput::mEllipsis
-	bool ___mEllipsis_44;
+	// UnityEngine.Material UIAtlas::material
+	Material_t340375123 * ___material_2;
+	// System.Collections.Generic.List`1<UISpriteData> UIAtlas::mSprites
+	List_1_t2372383268 * ___mSprites_3;
+	// System.Single UIAtlas::mPixelSize
+	float ___mPixelSize_4;
+	// UIAtlas UIAtlas::mReplacement
+	UIAtlas_t3195533529 * ___mReplacement_5;
+	// UIAtlas/Coordinates UIAtlas::mCoordinates
+	int32_t ___mCoordinates_6;
+	// System.Collections.Generic.List`1<UIAtlas/Sprite> UIAtlas::sprites
+	List_1_t72704565 * ___sprites_7;
+	// System.Int32 UIAtlas::mPMA
+	int32_t ___mPMA_8;
+	// System.Collections.Generic.Dictionary`2<System.String,System.Int32> UIAtlas::mSpriteIndices
+	Dictionary_2_t2736202052 * ___mSpriteIndices_9;
 
 public:
-	inline static int32_t get_offset_of_label_4() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___label_4)); }
-	inline UILabel_t3248798549 * get_label_4() const { return ___label_4; }
-	inline UILabel_t3248798549 ** get_address_of_label_4() { return &___label_4; }
-	inline void set_label_4(UILabel_t3248798549 * value)
+	inline static int32_t get_offset_of_material_2() { return static_cast<int32_t>(offsetof(UIAtlas_t3195533529, ___material_2)); }
+	inline Material_t340375123 * get_material_2() const { return ___material_2; }
+	inline Material_t340375123 ** get_address_of_material_2() { return &___material_2; }
+	inline void set_material_2(Material_t340375123 * value)
 	{
-		___label_4 = value;
-		Il2CppCodeGenWriteBarrier((&___label_4), value);
+		___material_2 = value;
+		Il2CppCodeGenWriteBarrier((&___material_2), value);
 	}
 
-	inline static int32_t get_offset_of_inputType_5() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___inputType_5)); }
-	inline int32_t get_inputType_5() const { return ___inputType_5; }
-	inline int32_t* get_address_of_inputType_5() { return &___inputType_5; }
-	inline void set_inputType_5(int32_t value)
+	inline static int32_t get_offset_of_mSprites_3() { return static_cast<int32_t>(offsetof(UIAtlas_t3195533529, ___mSprites_3)); }
+	inline List_1_t2372383268 * get_mSprites_3() const { return ___mSprites_3; }
+	inline List_1_t2372383268 ** get_address_of_mSprites_3() { return &___mSprites_3; }
+	inline void set_mSprites_3(List_1_t2372383268 * value)
 	{
-		___inputType_5 = value;
+		___mSprites_3 = value;
+		Il2CppCodeGenWriteBarrier((&___mSprites_3), value);
 	}
 
-	inline static int32_t get_offset_of_onReturnKey_6() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___onReturnKey_6)); }
-	inline int32_t get_onReturnKey_6() const { return ___onReturnKey_6; }
-	inline int32_t* get_address_of_onReturnKey_6() { return &___onReturnKey_6; }
-	inline void set_onReturnKey_6(int32_t value)
+	inline static int32_t get_offset_of_mPixelSize_4() { return static_cast<int32_t>(offsetof(UIAtlas_t3195533529, ___mPixelSize_4)); }
+	inline float get_mPixelSize_4() const { return ___mPixelSize_4; }
+	inline float* get_address_of_mPixelSize_4() { return &___mPixelSize_4; }
+	inline void set_mPixelSize_4(float value)
 	{
-		___onReturnKey_6 = value;
+		___mPixelSize_4 = value;
 	}
 
-	inline static int32_t get_offset_of_keyboardType_7() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___keyboardType_7)); }
-	inline int32_t get_keyboardType_7() const { return ___keyboardType_7; }
-	inline int32_t* get_address_of_keyboardType_7() { return &___keyboardType_7; }
-	inline void set_keyboardType_7(int32_t value)
+	inline static int32_t get_offset_of_mReplacement_5() { return static_cast<int32_t>(offsetof(UIAtlas_t3195533529, ___mReplacement_5)); }
+	inline UIAtlas_t3195533529 * get_mReplacement_5() const { return ___mReplacement_5; }
+	inline UIAtlas_t3195533529 ** get_address_of_mReplacement_5() { return &___mReplacement_5; }
+	inline void set_mReplacement_5(UIAtlas_t3195533529 * value)
 	{
-		___keyboardType_7 = value;
+		___mReplacement_5 = value;
+		Il2CppCodeGenWriteBarrier((&___mReplacement_5), value);
 	}
 
-	inline static int32_t get_offset_of_hideInput_8() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___hideInput_8)); }
-	inline bool get_hideInput_8() const { return ___hideInput_8; }
-	inline bool* get_address_of_hideInput_8() { return &___hideInput_8; }
-	inline void set_hideInput_8(bool value)
+	inline static int32_t get_offset_of_mCoordinates_6() { return static_cast<int32_t>(offsetof(UIAtlas_t3195533529, ___mCoordinates_6)); }
+	inline int32_t get_mCoordinates_6() const { return ___mCoordinates_6; }
+	inline int32_t* get_address_of_mCoordinates_6() { return &___mCoordinates_6; }
+	inline void set_mCoordinates_6(int32_t value)
 	{
-		___hideInput_8 = value;
+		___mCoordinates_6 = value;
 	}
 
-	inline static int32_t get_offset_of_selectAllTextOnFocus_9() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___selectAllTextOnFocus_9)); }
-	inline bool get_selectAllTextOnFocus_9() const { return ___selectAllTextOnFocus_9; }
-	inline bool* get_address_of_selectAllTextOnFocus_9() { return &___selectAllTextOnFocus_9; }
-	inline void set_selectAllTextOnFocus_9(bool value)
+	inline static int32_t get_offset_of_sprites_7() { return static_cast<int32_t>(offsetof(UIAtlas_t3195533529, ___sprites_7)); }
+	inline List_1_t72704565 * get_sprites_7() const { return ___sprites_7; }
+	inline List_1_t72704565 ** get_address_of_sprites_7() { return &___sprites_7; }
+	inline void set_sprites_7(List_1_t72704565 * value)
 	{
-		___selectAllTextOnFocus_9 = value;
+		___sprites_7 = value;
+		Il2CppCodeGenWriteBarrier((&___sprites_7), value);
 	}
 
-	inline static int32_t get_offset_of_submitOnUnselect_10() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___submitOnUnselect_10)); }
-	inline bool get_submitOnUnselect_10() const { return ___submitOnUnselect_10; }
-	inline bool* get_address_of_submitOnUnselect_10() { return &___submitOnUnselect_10; }
-	inline void set_submitOnUnselect_10(bool value)
+	inline static int32_t get_offset_of_mPMA_8() { return static_cast<int32_t>(offsetof(UIAtlas_t3195533529, ___mPMA_8)); }
+	inline int32_t get_mPMA_8() const { return ___mPMA_8; }
+	inline int32_t* get_address_of_mPMA_8() { return &___mPMA_8; }
+	inline void set_mPMA_8(int32_t value)
 	{
-		___submitOnUnselect_10 = value;
+		___mPMA_8 = value;
 	}
 
-	inline static int32_t get_offset_of_validation_11() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___validation_11)); }
-	inline int32_t get_validation_11() const { return ___validation_11; }
-	inline int32_t* get_address_of_validation_11() { return &___validation_11; }
-	inline void set_validation_11(int32_t value)
+	inline static int32_t get_offset_of_mSpriteIndices_9() { return static_cast<int32_t>(offsetof(UIAtlas_t3195533529, ___mSpriteIndices_9)); }
+	inline Dictionary_2_t2736202052 * get_mSpriteIndices_9() const { return ___mSpriteIndices_9; }
+	inline Dictionary_2_t2736202052 ** get_address_of_mSpriteIndices_9() { return &___mSpriteIndices_9; }
+	inline void set_mSpriteIndices_9(Dictionary_2_t2736202052 * value)
 	{
-		___validation_11 = value;
-	}
-
-	inline static int32_t get_offset_of_characterLimit_12() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___characterLimit_12)); }
-	inline int32_t get_characterLimit_12() const { return ___characterLimit_12; }
-	inline int32_t* get_address_of_characterLimit_12() { return &___characterLimit_12; }
-	inline void set_characterLimit_12(int32_t value)
-	{
-		___characterLimit_12 = value;
-	}
-
-	inline static int32_t get_offset_of_savedAs_13() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___savedAs_13)); }
-	inline String_t* get_savedAs_13() const { return ___savedAs_13; }
-	inline String_t** get_address_of_savedAs_13() { return &___savedAs_13; }
-	inline void set_savedAs_13(String_t* value)
-	{
-		___savedAs_13 = value;
-		Il2CppCodeGenWriteBarrier((&___savedAs_13), value);
-	}
-
-	inline static int32_t get_offset_of_selectOnTab_14() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___selectOnTab_14)); }
-	inline GameObject_t1113636619 * get_selectOnTab_14() const { return ___selectOnTab_14; }
-	inline GameObject_t1113636619 ** get_address_of_selectOnTab_14() { return &___selectOnTab_14; }
-	inline void set_selectOnTab_14(GameObject_t1113636619 * value)
-	{
-		___selectOnTab_14 = value;
-		Il2CppCodeGenWriteBarrier((&___selectOnTab_14), value);
-	}
-
-	inline static int32_t get_offset_of_activeTextColor_15() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___activeTextColor_15)); }
-	inline Color_t2555686324  get_activeTextColor_15() const { return ___activeTextColor_15; }
-	inline Color_t2555686324 * get_address_of_activeTextColor_15() { return &___activeTextColor_15; }
-	inline void set_activeTextColor_15(Color_t2555686324  value)
-	{
-		___activeTextColor_15 = value;
-	}
-
-	inline static int32_t get_offset_of_caretColor_16() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___caretColor_16)); }
-	inline Color_t2555686324  get_caretColor_16() const { return ___caretColor_16; }
-	inline Color_t2555686324 * get_address_of_caretColor_16() { return &___caretColor_16; }
-	inline void set_caretColor_16(Color_t2555686324  value)
-	{
-		___caretColor_16 = value;
-	}
-
-	inline static int32_t get_offset_of_selectionColor_17() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___selectionColor_17)); }
-	inline Color_t2555686324  get_selectionColor_17() const { return ___selectionColor_17; }
-	inline Color_t2555686324 * get_address_of_selectionColor_17() { return &___selectionColor_17; }
-	inline void set_selectionColor_17(Color_t2555686324  value)
-	{
-		___selectionColor_17 = value;
-	}
-
-	inline static int32_t get_offset_of_onSubmit_18() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___onSubmit_18)); }
-	inline List_1_t4210400802 * get_onSubmit_18() const { return ___onSubmit_18; }
-	inline List_1_t4210400802 ** get_address_of_onSubmit_18() { return &___onSubmit_18; }
-	inline void set_onSubmit_18(List_1_t4210400802 * value)
-	{
-		___onSubmit_18 = value;
-		Il2CppCodeGenWriteBarrier((&___onSubmit_18), value);
-	}
-
-	inline static int32_t get_offset_of_onChange_19() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___onChange_19)); }
-	inline List_1_t4210400802 * get_onChange_19() const { return ___onChange_19; }
-	inline List_1_t4210400802 ** get_address_of_onChange_19() { return &___onChange_19; }
-	inline void set_onChange_19(List_1_t4210400802 * value)
-	{
-		___onChange_19 = value;
-		Il2CppCodeGenWriteBarrier((&___onChange_19), value);
-	}
-
-	inline static int32_t get_offset_of_onValidate_20() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___onValidate_20)); }
-	inline OnValidate_t1246632601 * get_onValidate_20() const { return ___onValidate_20; }
-	inline OnValidate_t1246632601 ** get_address_of_onValidate_20() { return &___onValidate_20; }
-	inline void set_onValidate_20(OnValidate_t1246632601 * value)
-	{
-		___onValidate_20 = value;
-		Il2CppCodeGenWriteBarrier((&___onValidate_20), value);
-	}
-
-	inline static int32_t get_offset_of_mValue_21() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mValue_21)); }
-	inline String_t* get_mValue_21() const { return ___mValue_21; }
-	inline String_t** get_address_of_mValue_21() { return &___mValue_21; }
-	inline void set_mValue_21(String_t* value)
-	{
-		___mValue_21 = value;
-		Il2CppCodeGenWriteBarrier((&___mValue_21), value);
-	}
-
-	inline static int32_t get_offset_of_mDefaultText_22() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mDefaultText_22)); }
-	inline String_t* get_mDefaultText_22() const { return ___mDefaultText_22; }
-	inline String_t** get_address_of_mDefaultText_22() { return &___mDefaultText_22; }
-	inline void set_mDefaultText_22(String_t* value)
-	{
-		___mDefaultText_22 = value;
-		Il2CppCodeGenWriteBarrier((&___mDefaultText_22), value);
-	}
-
-	inline static int32_t get_offset_of_mDefaultColor_23() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mDefaultColor_23)); }
-	inline Color_t2555686324  get_mDefaultColor_23() const { return ___mDefaultColor_23; }
-	inline Color_t2555686324 * get_address_of_mDefaultColor_23() { return &___mDefaultColor_23; }
-	inline void set_mDefaultColor_23(Color_t2555686324  value)
-	{
-		___mDefaultColor_23 = value;
-	}
-
-	inline static int32_t get_offset_of_mPosition_24() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mPosition_24)); }
-	inline float get_mPosition_24() const { return ___mPosition_24; }
-	inline float* get_address_of_mPosition_24() { return &___mPosition_24; }
-	inline void set_mPosition_24(float value)
-	{
-		___mPosition_24 = value;
-	}
-
-	inline static int32_t get_offset_of_mDoInit_25() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mDoInit_25)); }
-	inline bool get_mDoInit_25() const { return ___mDoInit_25; }
-	inline bool* get_address_of_mDoInit_25() { return &___mDoInit_25; }
-	inline void set_mDoInit_25(bool value)
-	{
-		___mDoInit_25 = value;
-	}
-
-	inline static int32_t get_offset_of_mAlignment_26() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mAlignment_26)); }
-	inline int32_t get_mAlignment_26() const { return ___mAlignment_26; }
-	inline int32_t* get_address_of_mAlignment_26() { return &___mAlignment_26; }
-	inline void set_mAlignment_26(int32_t value)
-	{
-		___mAlignment_26 = value;
-	}
-
-	inline static int32_t get_offset_of_mLoadSavedValue_27() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mLoadSavedValue_27)); }
-	inline bool get_mLoadSavedValue_27() const { return ___mLoadSavedValue_27; }
-	inline bool* get_address_of_mLoadSavedValue_27() { return &___mLoadSavedValue_27; }
-	inline void set_mLoadSavedValue_27(bool value)
-	{
-		___mLoadSavedValue_27 = value;
-	}
-
-	inline static int32_t get_offset_of_mSelectionStart_32() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mSelectionStart_32)); }
-	inline int32_t get_mSelectionStart_32() const { return ___mSelectionStart_32; }
-	inline int32_t* get_address_of_mSelectionStart_32() { return &___mSelectionStart_32; }
-	inline void set_mSelectionStart_32(int32_t value)
-	{
-		___mSelectionStart_32 = value;
-	}
-
-	inline static int32_t get_offset_of_mSelectionEnd_33() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mSelectionEnd_33)); }
-	inline int32_t get_mSelectionEnd_33() const { return ___mSelectionEnd_33; }
-	inline int32_t* get_address_of_mSelectionEnd_33() { return &___mSelectionEnd_33; }
-	inline void set_mSelectionEnd_33(int32_t value)
-	{
-		___mSelectionEnd_33 = value;
-	}
-
-	inline static int32_t get_offset_of_mHighlight_34() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mHighlight_34)); }
-	inline UITexture_t3471168817 * get_mHighlight_34() const { return ___mHighlight_34; }
-	inline UITexture_t3471168817 ** get_address_of_mHighlight_34() { return &___mHighlight_34; }
-	inline void set_mHighlight_34(UITexture_t3471168817 * value)
-	{
-		___mHighlight_34 = value;
-		Il2CppCodeGenWriteBarrier((&___mHighlight_34), value);
-	}
-
-	inline static int32_t get_offset_of_mCaret_35() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mCaret_35)); }
-	inline UITexture_t3471168817 * get_mCaret_35() const { return ___mCaret_35; }
-	inline UITexture_t3471168817 ** get_address_of_mCaret_35() { return &___mCaret_35; }
-	inline void set_mCaret_35(UITexture_t3471168817 * value)
-	{
-		___mCaret_35 = value;
-		Il2CppCodeGenWriteBarrier((&___mCaret_35), value);
-	}
-
-	inline static int32_t get_offset_of_mBlankTex_36() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mBlankTex_36)); }
-	inline Texture2D_t3840446185 * get_mBlankTex_36() const { return ___mBlankTex_36; }
-	inline Texture2D_t3840446185 ** get_address_of_mBlankTex_36() { return &___mBlankTex_36; }
-	inline void set_mBlankTex_36(Texture2D_t3840446185 * value)
-	{
-		___mBlankTex_36 = value;
-		Il2CppCodeGenWriteBarrier((&___mBlankTex_36), value);
-	}
-
-	inline static int32_t get_offset_of_mNextBlink_37() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mNextBlink_37)); }
-	inline float get_mNextBlink_37() const { return ___mNextBlink_37; }
-	inline float* get_address_of_mNextBlink_37() { return &___mNextBlink_37; }
-	inline void set_mNextBlink_37(float value)
-	{
-		___mNextBlink_37 = value;
-	}
-
-	inline static int32_t get_offset_of_mLastAlpha_38() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mLastAlpha_38)); }
-	inline float get_mLastAlpha_38() const { return ___mLastAlpha_38; }
-	inline float* get_address_of_mLastAlpha_38() { return &___mLastAlpha_38; }
-	inline void set_mLastAlpha_38(float value)
-	{
-		___mLastAlpha_38 = value;
-	}
-
-	inline static int32_t get_offset_of_mCached_39() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mCached_39)); }
-	inline String_t* get_mCached_39() const { return ___mCached_39; }
-	inline String_t** get_address_of_mCached_39() { return &___mCached_39; }
-	inline void set_mCached_39(String_t* value)
-	{
-		___mCached_39 = value;
-		Il2CppCodeGenWriteBarrier((&___mCached_39), value);
-	}
-
-	inline static int32_t get_offset_of_mSelectMe_40() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mSelectMe_40)); }
-	inline int32_t get_mSelectMe_40() const { return ___mSelectMe_40; }
-	inline int32_t* get_address_of_mSelectMe_40() { return &___mSelectMe_40; }
-	inline void set_mSelectMe_40(int32_t value)
-	{
-		___mSelectMe_40 = value;
-	}
-
-	inline static int32_t get_offset_of_mSelectTime_41() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mSelectTime_41)); }
-	inline int32_t get_mSelectTime_41() const { return ___mSelectTime_41; }
-	inline int32_t* get_address_of_mSelectTime_41() { return &___mSelectTime_41; }
-	inline void set_mSelectTime_41(int32_t value)
-	{
-		___mSelectTime_41 = value;
-	}
-
-	inline static int32_t get_offset_of_mStarted_42() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mStarted_42)); }
-	inline bool get_mStarted_42() const { return ___mStarted_42; }
-	inline bool* get_address_of_mStarted_42() { return &___mStarted_42; }
-	inline void set_mStarted_42(bool value)
-	{
-		___mStarted_42 = value;
-	}
-
-	inline static int32_t get_offset_of_mCam_43() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mCam_43)); }
-	inline UICamera_t1356438871 * get_mCam_43() const { return ___mCam_43; }
-	inline UICamera_t1356438871 ** get_address_of_mCam_43() { return &___mCam_43; }
-	inline void set_mCam_43(UICamera_t1356438871 * value)
-	{
-		___mCam_43 = value;
-		Il2CppCodeGenWriteBarrier((&___mCam_43), value);
-	}
-
-	inline static int32_t get_offset_of_mEllipsis_44() { return static_cast<int32_t>(offsetof(UIInput_t421821618, ___mEllipsis_44)); }
-	inline bool get_mEllipsis_44() const { return ___mEllipsis_44; }
-	inline bool* get_address_of_mEllipsis_44() { return &___mEllipsis_44; }
-	inline void set_mEllipsis_44(bool value)
-	{
-		___mEllipsis_44 = value;
+		___mSpriteIndices_9 = value;
+		Il2CppCodeGenWriteBarrier((&___mSpriteIndices_9), value);
 	}
 };
 
-struct UIInput_t421821618_StaticFields
+struct UIAtlas_t3195533529_StaticFields
 {
 public:
-	// UIInput UIInput::current
-	UIInput_t421821618 * ___current_2;
-	// UIInput UIInput::selection
-	UIInput_t421821618 * ___selection_3;
-	// System.Int32 UIInput::mDrawStart
-	int32_t ___mDrawStart_28;
-	// System.String UIInput::mLastIME
-	String_t* ___mLastIME_29;
-	// UnityEngine.TouchScreenKeyboard UIInput::mKeyboard
-	TouchScreenKeyboard_t731888065 * ___mKeyboard_30;
-	// System.Boolean UIInput::mWaitForKeyboard
-	bool ___mWaitForKeyboard_31;
-	// System.Int32 UIInput::mIgnoreKey
-	int32_t ___mIgnoreKey_45;
+	// System.Comparison`1<UISpriteData> UIAtlas::<>f__am$cache0
+	Comparison_1_t675239705 * ___U3CU3Ef__amU24cache0_10;
 
 public:
-	inline static int32_t get_offset_of_current_2() { return static_cast<int32_t>(offsetof(UIInput_t421821618_StaticFields, ___current_2)); }
-	inline UIInput_t421821618 * get_current_2() const { return ___current_2; }
-	inline UIInput_t421821618 ** get_address_of_current_2() { return &___current_2; }
-	inline void set_current_2(UIInput_t421821618 * value)
+	inline static int32_t get_offset_of_U3CU3Ef__amU24cache0_10() { return static_cast<int32_t>(offsetof(UIAtlas_t3195533529_StaticFields, ___U3CU3Ef__amU24cache0_10)); }
+	inline Comparison_1_t675239705 * get_U3CU3Ef__amU24cache0_10() const { return ___U3CU3Ef__amU24cache0_10; }
+	inline Comparison_1_t675239705 ** get_address_of_U3CU3Ef__amU24cache0_10() { return &___U3CU3Ef__amU24cache0_10; }
+	inline void set_U3CU3Ef__amU24cache0_10(Comparison_1_t675239705 * value)
 	{
-		___current_2 = value;
-		Il2CppCodeGenWriteBarrier((&___current_2), value);
-	}
-
-	inline static int32_t get_offset_of_selection_3() { return static_cast<int32_t>(offsetof(UIInput_t421821618_StaticFields, ___selection_3)); }
-	inline UIInput_t421821618 * get_selection_3() const { return ___selection_3; }
-	inline UIInput_t421821618 ** get_address_of_selection_3() { return &___selection_3; }
-	inline void set_selection_3(UIInput_t421821618 * value)
-	{
-		___selection_3 = value;
-		Il2CppCodeGenWriteBarrier((&___selection_3), value);
-	}
-
-	inline static int32_t get_offset_of_mDrawStart_28() { return static_cast<int32_t>(offsetof(UIInput_t421821618_StaticFields, ___mDrawStart_28)); }
-	inline int32_t get_mDrawStart_28() const { return ___mDrawStart_28; }
-	inline int32_t* get_address_of_mDrawStart_28() { return &___mDrawStart_28; }
-	inline void set_mDrawStart_28(int32_t value)
-	{
-		___mDrawStart_28 = value;
-	}
-
-	inline static int32_t get_offset_of_mLastIME_29() { return static_cast<int32_t>(offsetof(UIInput_t421821618_StaticFields, ___mLastIME_29)); }
-	inline String_t* get_mLastIME_29() const { return ___mLastIME_29; }
-	inline String_t** get_address_of_mLastIME_29() { return &___mLastIME_29; }
-	inline void set_mLastIME_29(String_t* value)
-	{
-		___mLastIME_29 = value;
-		Il2CppCodeGenWriteBarrier((&___mLastIME_29), value);
-	}
-
-	inline static int32_t get_offset_of_mKeyboard_30() { return static_cast<int32_t>(offsetof(UIInput_t421821618_StaticFields, ___mKeyboard_30)); }
-	inline TouchScreenKeyboard_t731888065 * get_mKeyboard_30() const { return ___mKeyboard_30; }
-	inline TouchScreenKeyboard_t731888065 ** get_address_of_mKeyboard_30() { return &___mKeyboard_30; }
-	inline void set_mKeyboard_30(TouchScreenKeyboard_t731888065 * value)
-	{
-		___mKeyboard_30 = value;
-		Il2CppCodeGenWriteBarrier((&___mKeyboard_30), value);
-	}
-
-	inline static int32_t get_offset_of_mWaitForKeyboard_31() { return static_cast<int32_t>(offsetof(UIInput_t421821618_StaticFields, ___mWaitForKeyboard_31)); }
-	inline bool get_mWaitForKeyboard_31() const { return ___mWaitForKeyboard_31; }
-	inline bool* get_address_of_mWaitForKeyboard_31() { return &___mWaitForKeyboard_31; }
-	inline void set_mWaitForKeyboard_31(bool value)
-	{
-		___mWaitForKeyboard_31 = value;
-	}
-
-	inline static int32_t get_offset_of_mIgnoreKey_45() { return static_cast<int32_t>(offsetof(UIInput_t421821618_StaticFields, ___mIgnoreKey_45)); }
-	inline int32_t get_mIgnoreKey_45() const { return ___mIgnoreKey_45; }
-	inline int32_t* get_address_of_mIgnoreKey_45() { return &___mIgnoreKey_45; }
-	inline void set_mIgnoreKey_45(int32_t value)
-	{
-		___mIgnoreKey_45 = value;
+		___U3CU3Ef__amU24cache0_10 = value;
+		Il2CppCodeGenWriteBarrier((&___U3CU3Ef__amU24cache0_10), value);
 	}
 };
 
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // UIINPUT_T421821618_H
+#endif // UIATLAS_T3195533529_H
+#ifndef UI2DSPRITEANIMATION_T3056508403_H
+#define UI2DSPRITEANIMATION_T3056508403_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UI2DSpriteAnimation
+struct  UI2DSpriteAnimation_t3056508403  : public MonoBehaviour_t3962482529
+{
+public:
+	// System.Int32 UI2DSpriteAnimation::frameIndex
+	int32_t ___frameIndex_2;
+	// System.Int32 UI2DSpriteAnimation::framerate
+	int32_t ___framerate_3;
+	// System.Boolean UI2DSpriteAnimation::ignoreTimeScale
+	bool ___ignoreTimeScale_4;
+	// System.Boolean UI2DSpriteAnimation::loop
+	bool ___loop_5;
+	// UnityEngine.Sprite[] UI2DSpriteAnimation::frames
+	SpriteU5BU5D_t2581906349* ___frames_6;
+	// UnityEngine.SpriteRenderer UI2DSpriteAnimation::mUnitySprite
+	SpriteRenderer_t3235626157 * ___mUnitySprite_7;
+	// UI2DSprite UI2DSpriteAnimation::mNguiSprite
+	UI2DSprite_t1366157572 * ___mNguiSprite_8;
+	// System.Single UI2DSpriteAnimation::mUpdate
+	float ___mUpdate_9;
+
+public:
+	inline static int32_t get_offset_of_frameIndex_2() { return static_cast<int32_t>(offsetof(UI2DSpriteAnimation_t3056508403, ___frameIndex_2)); }
+	inline int32_t get_frameIndex_2() const { return ___frameIndex_2; }
+	inline int32_t* get_address_of_frameIndex_2() { return &___frameIndex_2; }
+	inline void set_frameIndex_2(int32_t value)
+	{
+		___frameIndex_2 = value;
+	}
+
+	inline static int32_t get_offset_of_framerate_3() { return static_cast<int32_t>(offsetof(UI2DSpriteAnimation_t3056508403, ___framerate_3)); }
+	inline int32_t get_framerate_3() const { return ___framerate_3; }
+	inline int32_t* get_address_of_framerate_3() { return &___framerate_3; }
+	inline void set_framerate_3(int32_t value)
+	{
+		___framerate_3 = value;
+	}
+
+	inline static int32_t get_offset_of_ignoreTimeScale_4() { return static_cast<int32_t>(offsetof(UI2DSpriteAnimation_t3056508403, ___ignoreTimeScale_4)); }
+	inline bool get_ignoreTimeScale_4() const { return ___ignoreTimeScale_4; }
+	inline bool* get_address_of_ignoreTimeScale_4() { return &___ignoreTimeScale_4; }
+	inline void set_ignoreTimeScale_4(bool value)
+	{
+		___ignoreTimeScale_4 = value;
+	}
+
+	inline static int32_t get_offset_of_loop_5() { return static_cast<int32_t>(offsetof(UI2DSpriteAnimation_t3056508403, ___loop_5)); }
+	inline bool get_loop_5() const { return ___loop_5; }
+	inline bool* get_address_of_loop_5() { return &___loop_5; }
+	inline void set_loop_5(bool value)
+	{
+		___loop_5 = value;
+	}
+
+	inline static int32_t get_offset_of_frames_6() { return static_cast<int32_t>(offsetof(UI2DSpriteAnimation_t3056508403, ___frames_6)); }
+	inline SpriteU5BU5D_t2581906349* get_frames_6() const { return ___frames_6; }
+	inline SpriteU5BU5D_t2581906349** get_address_of_frames_6() { return &___frames_6; }
+	inline void set_frames_6(SpriteU5BU5D_t2581906349* value)
+	{
+		___frames_6 = value;
+		Il2CppCodeGenWriteBarrier((&___frames_6), value);
+	}
+
+	inline static int32_t get_offset_of_mUnitySprite_7() { return static_cast<int32_t>(offsetof(UI2DSpriteAnimation_t3056508403, ___mUnitySprite_7)); }
+	inline SpriteRenderer_t3235626157 * get_mUnitySprite_7() const { return ___mUnitySprite_7; }
+	inline SpriteRenderer_t3235626157 ** get_address_of_mUnitySprite_7() { return &___mUnitySprite_7; }
+	inline void set_mUnitySprite_7(SpriteRenderer_t3235626157 * value)
+	{
+		___mUnitySprite_7 = value;
+		Il2CppCodeGenWriteBarrier((&___mUnitySprite_7), value);
+	}
+
+	inline static int32_t get_offset_of_mNguiSprite_8() { return static_cast<int32_t>(offsetof(UI2DSpriteAnimation_t3056508403, ___mNguiSprite_8)); }
+	inline UI2DSprite_t1366157572 * get_mNguiSprite_8() const { return ___mNguiSprite_8; }
+	inline UI2DSprite_t1366157572 ** get_address_of_mNguiSprite_8() { return &___mNguiSprite_8; }
+	inline void set_mNguiSprite_8(UI2DSprite_t1366157572 * value)
+	{
+		___mNguiSprite_8 = value;
+		Il2CppCodeGenWriteBarrier((&___mNguiSprite_8), value);
+	}
+
+	inline static int32_t get_offset_of_mUpdate_9() { return static_cast<int32_t>(offsetof(UI2DSpriteAnimation_t3056508403, ___mUpdate_9)); }
+	inline float get_mUpdate_9() const { return ___mUpdate_9; }
+	inline float* get_address_of_mUpdate_9() { return &___mUpdate_9; }
+	inline void set_mUpdate_9(float value)
+	{
+		___mUpdate_9 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // UI2DSPRITEANIMATION_T3056508403_H
 #ifndef UIANCHOR_T2527798900_H
 #define UIANCHOR_T2527798900_H
 #ifdef __clang__
@@ -11464,309 +12311,6 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // UICOLORPICKER_T463494602_H
-#ifndef UIWRAPCONTENT_T1188558554_H
-#define UIWRAPCONTENT_T1188558554_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UIWrapContent
-struct  UIWrapContent_t1188558554  : public MonoBehaviour_t3962482529
-{
-public:
-	// System.Int32 UIWrapContent::itemSize
-	int32_t ___itemSize_2;
-	// System.Boolean UIWrapContent::cullContent
-	bool ___cullContent_3;
-	// System.Int32 UIWrapContent::minIndex
-	int32_t ___minIndex_4;
-	// System.Int32 UIWrapContent::maxIndex
-	int32_t ___maxIndex_5;
-	// System.Boolean UIWrapContent::hideInactive
-	bool ___hideInactive_6;
-	// UIWrapContent/OnInitializeItem UIWrapContent::onInitializeItem
-	OnInitializeItem_t992046894 * ___onInitializeItem_7;
-	// UnityEngine.Transform UIWrapContent::mTrans
-	Transform_t3600365921 * ___mTrans_8;
-	// UIPanel UIWrapContent::mPanel
-	UIPanel_t1716472341 * ___mPanel_9;
-	// UIScrollView UIWrapContent::mScroll
-	UIScrollView_t1973404950 * ___mScroll_10;
-	// System.Boolean UIWrapContent::mHorizontal
-	bool ___mHorizontal_11;
-	// System.Boolean UIWrapContent::mFirstTime
-	bool ___mFirstTime_12;
-	// System.Collections.Generic.List`1<UnityEngine.Transform> UIWrapContent::mChildren
-	List_1_t777473367 * ___mChildren_13;
-
-public:
-	inline static int32_t get_offset_of_itemSize_2() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___itemSize_2)); }
-	inline int32_t get_itemSize_2() const { return ___itemSize_2; }
-	inline int32_t* get_address_of_itemSize_2() { return &___itemSize_2; }
-	inline void set_itemSize_2(int32_t value)
-	{
-		___itemSize_2 = value;
-	}
-
-	inline static int32_t get_offset_of_cullContent_3() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___cullContent_3)); }
-	inline bool get_cullContent_3() const { return ___cullContent_3; }
-	inline bool* get_address_of_cullContent_3() { return &___cullContent_3; }
-	inline void set_cullContent_3(bool value)
-	{
-		___cullContent_3 = value;
-	}
-
-	inline static int32_t get_offset_of_minIndex_4() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___minIndex_4)); }
-	inline int32_t get_minIndex_4() const { return ___minIndex_4; }
-	inline int32_t* get_address_of_minIndex_4() { return &___minIndex_4; }
-	inline void set_minIndex_4(int32_t value)
-	{
-		___minIndex_4 = value;
-	}
-
-	inline static int32_t get_offset_of_maxIndex_5() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___maxIndex_5)); }
-	inline int32_t get_maxIndex_5() const { return ___maxIndex_5; }
-	inline int32_t* get_address_of_maxIndex_5() { return &___maxIndex_5; }
-	inline void set_maxIndex_5(int32_t value)
-	{
-		___maxIndex_5 = value;
-	}
-
-	inline static int32_t get_offset_of_hideInactive_6() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___hideInactive_6)); }
-	inline bool get_hideInactive_6() const { return ___hideInactive_6; }
-	inline bool* get_address_of_hideInactive_6() { return &___hideInactive_6; }
-	inline void set_hideInactive_6(bool value)
-	{
-		___hideInactive_6 = value;
-	}
-
-	inline static int32_t get_offset_of_onInitializeItem_7() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___onInitializeItem_7)); }
-	inline OnInitializeItem_t992046894 * get_onInitializeItem_7() const { return ___onInitializeItem_7; }
-	inline OnInitializeItem_t992046894 ** get_address_of_onInitializeItem_7() { return &___onInitializeItem_7; }
-	inline void set_onInitializeItem_7(OnInitializeItem_t992046894 * value)
-	{
-		___onInitializeItem_7 = value;
-		Il2CppCodeGenWriteBarrier((&___onInitializeItem_7), value);
-	}
-
-	inline static int32_t get_offset_of_mTrans_8() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___mTrans_8)); }
-	inline Transform_t3600365921 * get_mTrans_8() const { return ___mTrans_8; }
-	inline Transform_t3600365921 ** get_address_of_mTrans_8() { return &___mTrans_8; }
-	inline void set_mTrans_8(Transform_t3600365921 * value)
-	{
-		___mTrans_8 = value;
-		Il2CppCodeGenWriteBarrier((&___mTrans_8), value);
-	}
-
-	inline static int32_t get_offset_of_mPanel_9() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___mPanel_9)); }
-	inline UIPanel_t1716472341 * get_mPanel_9() const { return ___mPanel_9; }
-	inline UIPanel_t1716472341 ** get_address_of_mPanel_9() { return &___mPanel_9; }
-	inline void set_mPanel_9(UIPanel_t1716472341 * value)
-	{
-		___mPanel_9 = value;
-		Il2CppCodeGenWriteBarrier((&___mPanel_9), value);
-	}
-
-	inline static int32_t get_offset_of_mScroll_10() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___mScroll_10)); }
-	inline UIScrollView_t1973404950 * get_mScroll_10() const { return ___mScroll_10; }
-	inline UIScrollView_t1973404950 ** get_address_of_mScroll_10() { return &___mScroll_10; }
-	inline void set_mScroll_10(UIScrollView_t1973404950 * value)
-	{
-		___mScroll_10 = value;
-		Il2CppCodeGenWriteBarrier((&___mScroll_10), value);
-	}
-
-	inline static int32_t get_offset_of_mHorizontal_11() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___mHorizontal_11)); }
-	inline bool get_mHorizontal_11() const { return ___mHorizontal_11; }
-	inline bool* get_address_of_mHorizontal_11() { return &___mHorizontal_11; }
-	inline void set_mHorizontal_11(bool value)
-	{
-		___mHorizontal_11 = value;
-	}
-
-	inline static int32_t get_offset_of_mFirstTime_12() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___mFirstTime_12)); }
-	inline bool get_mFirstTime_12() const { return ___mFirstTime_12; }
-	inline bool* get_address_of_mFirstTime_12() { return &___mFirstTime_12; }
-	inline void set_mFirstTime_12(bool value)
-	{
-		___mFirstTime_12 = value;
-	}
-
-	inline static int32_t get_offset_of_mChildren_13() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554, ___mChildren_13)); }
-	inline List_1_t777473367 * get_mChildren_13() const { return ___mChildren_13; }
-	inline List_1_t777473367 ** get_address_of_mChildren_13() { return &___mChildren_13; }
-	inline void set_mChildren_13(List_1_t777473367 * value)
-	{
-		___mChildren_13 = value;
-		Il2CppCodeGenWriteBarrier((&___mChildren_13), value);
-	}
-};
-
-struct UIWrapContent_t1188558554_StaticFields
-{
-public:
-	// System.Comparison`1<UnityEngine.Transform> UIWrapContent::<>f__mg$cache0
-	Comparison_1_t3375297100 * ___U3CU3Ef__mgU24cache0_14;
-	// System.Comparison`1<UnityEngine.Transform> UIWrapContent::<>f__mg$cache1
-	Comparison_1_t3375297100 * ___U3CU3Ef__mgU24cache1_15;
-	// System.Comparison`1<UnityEngine.Transform> UIWrapContent::<>f__mg$cache2
-	Comparison_1_t3375297100 * ___U3CU3Ef__mgU24cache2_16;
-
-public:
-	inline static int32_t get_offset_of_U3CU3Ef__mgU24cache0_14() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554_StaticFields, ___U3CU3Ef__mgU24cache0_14)); }
-	inline Comparison_1_t3375297100 * get_U3CU3Ef__mgU24cache0_14() const { return ___U3CU3Ef__mgU24cache0_14; }
-	inline Comparison_1_t3375297100 ** get_address_of_U3CU3Ef__mgU24cache0_14() { return &___U3CU3Ef__mgU24cache0_14; }
-	inline void set_U3CU3Ef__mgU24cache0_14(Comparison_1_t3375297100 * value)
-	{
-		___U3CU3Ef__mgU24cache0_14 = value;
-		Il2CppCodeGenWriteBarrier((&___U3CU3Ef__mgU24cache0_14), value);
-	}
-
-	inline static int32_t get_offset_of_U3CU3Ef__mgU24cache1_15() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554_StaticFields, ___U3CU3Ef__mgU24cache1_15)); }
-	inline Comparison_1_t3375297100 * get_U3CU3Ef__mgU24cache1_15() const { return ___U3CU3Ef__mgU24cache1_15; }
-	inline Comparison_1_t3375297100 ** get_address_of_U3CU3Ef__mgU24cache1_15() { return &___U3CU3Ef__mgU24cache1_15; }
-	inline void set_U3CU3Ef__mgU24cache1_15(Comparison_1_t3375297100 * value)
-	{
-		___U3CU3Ef__mgU24cache1_15 = value;
-		Il2CppCodeGenWriteBarrier((&___U3CU3Ef__mgU24cache1_15), value);
-	}
-
-	inline static int32_t get_offset_of_U3CU3Ef__mgU24cache2_16() { return static_cast<int32_t>(offsetof(UIWrapContent_t1188558554_StaticFields, ___U3CU3Ef__mgU24cache2_16)); }
-	inline Comparison_1_t3375297100 * get_U3CU3Ef__mgU24cache2_16() const { return ___U3CU3Ef__mgU24cache2_16; }
-	inline Comparison_1_t3375297100 ** get_address_of_U3CU3Ef__mgU24cache2_16() { return &___U3CU3Ef__mgU24cache2_16; }
-	inline void set_U3CU3Ef__mgU24cache2_16(Comparison_1_t3375297100 * value)
-	{
-		___U3CU3Ef__mgU24cache2_16 = value;
-		Il2CppCodeGenWriteBarrier((&___U3CU3Ef__mgU24cache2_16), value);
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // UIWRAPCONTENT_T1188558554_H
-#ifndef UICENTERONCLICK_T4058804012_H
-#define UICENTERONCLICK_T4058804012_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UICenterOnClick
-struct  UICenterOnClick_t4058804012  : public MonoBehaviour_t3962482529
-{
-public:
-
-public:
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // UICENTERONCLICK_T4058804012_H
-#ifndef SPRINGPANEL_T277350554_H
-#define SPRINGPANEL_T277350554_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// SpringPanel
-struct  SpringPanel_t277350554  : public MonoBehaviour_t3962482529
-{
-public:
-	// UnityEngine.Vector3 SpringPanel::target
-	Vector3_t3722313464  ___target_3;
-	// System.Single SpringPanel::strength
-	float ___strength_4;
-	// SpringPanel/OnFinished SpringPanel::onFinished
-	OnFinished_t3778785451 * ___onFinished_5;
-	// UIPanel SpringPanel::mPanel
-	UIPanel_t1716472341 * ___mPanel_6;
-	// UnityEngine.Transform SpringPanel::mTrans
-	Transform_t3600365921 * ___mTrans_7;
-	// UIScrollView SpringPanel::mDrag
-	UIScrollView_t1973404950 * ___mDrag_8;
-
-public:
-	inline static int32_t get_offset_of_target_3() { return static_cast<int32_t>(offsetof(SpringPanel_t277350554, ___target_3)); }
-	inline Vector3_t3722313464  get_target_3() const { return ___target_3; }
-	inline Vector3_t3722313464 * get_address_of_target_3() { return &___target_3; }
-	inline void set_target_3(Vector3_t3722313464  value)
-	{
-		___target_3 = value;
-	}
-
-	inline static int32_t get_offset_of_strength_4() { return static_cast<int32_t>(offsetof(SpringPanel_t277350554, ___strength_4)); }
-	inline float get_strength_4() const { return ___strength_4; }
-	inline float* get_address_of_strength_4() { return &___strength_4; }
-	inline void set_strength_4(float value)
-	{
-		___strength_4 = value;
-	}
-
-	inline static int32_t get_offset_of_onFinished_5() { return static_cast<int32_t>(offsetof(SpringPanel_t277350554, ___onFinished_5)); }
-	inline OnFinished_t3778785451 * get_onFinished_5() const { return ___onFinished_5; }
-	inline OnFinished_t3778785451 ** get_address_of_onFinished_5() { return &___onFinished_5; }
-	inline void set_onFinished_5(OnFinished_t3778785451 * value)
-	{
-		___onFinished_5 = value;
-		Il2CppCodeGenWriteBarrier((&___onFinished_5), value);
-	}
-
-	inline static int32_t get_offset_of_mPanel_6() { return static_cast<int32_t>(offsetof(SpringPanel_t277350554, ___mPanel_6)); }
-	inline UIPanel_t1716472341 * get_mPanel_6() const { return ___mPanel_6; }
-	inline UIPanel_t1716472341 ** get_address_of_mPanel_6() { return &___mPanel_6; }
-	inline void set_mPanel_6(UIPanel_t1716472341 * value)
-	{
-		___mPanel_6 = value;
-		Il2CppCodeGenWriteBarrier((&___mPanel_6), value);
-	}
-
-	inline static int32_t get_offset_of_mTrans_7() { return static_cast<int32_t>(offsetof(SpringPanel_t277350554, ___mTrans_7)); }
-	inline Transform_t3600365921 * get_mTrans_7() const { return ___mTrans_7; }
-	inline Transform_t3600365921 ** get_address_of_mTrans_7() { return &___mTrans_7; }
-	inline void set_mTrans_7(Transform_t3600365921 * value)
-	{
-		___mTrans_7 = value;
-		Il2CppCodeGenWriteBarrier((&___mTrans_7), value);
-	}
-
-	inline static int32_t get_offset_of_mDrag_8() { return static_cast<int32_t>(offsetof(SpringPanel_t277350554, ___mDrag_8)); }
-	inline UIScrollView_t1973404950 * get_mDrag_8() const { return ___mDrag_8; }
-	inline UIScrollView_t1973404950 ** get_address_of_mDrag_8() { return &___mDrag_8; }
-	inline void set_mDrag_8(UIScrollView_t1973404950 * value)
-	{
-		___mDrag_8 = value;
-		Il2CppCodeGenWriteBarrier((&___mDrag_8), value);
-	}
-};
-
-struct SpringPanel_t277350554_StaticFields
-{
-public:
-	// SpringPanel SpringPanel::current
-	SpringPanel_t277350554 * ___current_2;
-
-public:
-	inline static int32_t get_offset_of_current_2() { return static_cast<int32_t>(offsetof(SpringPanel_t277350554_StaticFields, ___current_2)); }
-	inline SpringPanel_t277350554 * get_current_2() const { return ___current_2; }
-	inline SpringPanel_t277350554 ** get_address_of_current_2() { return &___current_2; }
-	inline void set_current_2(SpringPanel_t277350554 * value)
-	{
-		___current_2 = value;
-		Il2CppCodeGenWriteBarrier((&___current_2), value);
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // SPRINGPANEL_T277350554_H
 #ifndef UIBUTTONMESSAGE_T952534536_H
 #define UIBUTTONMESSAGE_T952534536_H
 #ifdef __clang__
@@ -11838,764 +12382,26 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // UIBUTTONMESSAGE_T952534536_H
-#ifndef UIKEYNAVIGATION_T4244956403_H
-#define UIKEYNAVIGATION_T4244956403_H
+#ifndef UICENTERONCLICK_T4058804012_H
+#define UICENTERONCLICK_T4058804012_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// UIKeyNavigation
-struct  UIKeyNavigation_t4244956403  : public MonoBehaviour_t3962482529
+// UICenterOnClick
+struct  UICenterOnClick_t4058804012  : public MonoBehaviour_t3962482529
 {
 public:
-	// UIKeyNavigation/Constraint UIKeyNavigation::constraint
-	int32_t ___constraint_3;
-	// UnityEngine.GameObject UIKeyNavigation::onUp
-	GameObject_t1113636619 * ___onUp_4;
-	// UnityEngine.GameObject UIKeyNavigation::onDown
-	GameObject_t1113636619 * ___onDown_5;
-	// UnityEngine.GameObject UIKeyNavigation::onLeft
-	GameObject_t1113636619 * ___onLeft_6;
-	// UnityEngine.GameObject UIKeyNavigation::onRight
-	GameObject_t1113636619 * ___onRight_7;
-	// UnityEngine.GameObject UIKeyNavigation::onClick
-	GameObject_t1113636619 * ___onClick_8;
-	// UnityEngine.GameObject UIKeyNavigation::onTab
-	GameObject_t1113636619 * ___onTab_9;
-	// System.Boolean UIKeyNavigation::startsSelected
-	bool ___startsSelected_10;
-	// System.Boolean UIKeyNavigation::mStarted
-	bool ___mStarted_11;
 
 public:
-	inline static int32_t get_offset_of_constraint_3() { return static_cast<int32_t>(offsetof(UIKeyNavigation_t4244956403, ___constraint_3)); }
-	inline int32_t get_constraint_3() const { return ___constraint_3; }
-	inline int32_t* get_address_of_constraint_3() { return &___constraint_3; }
-	inline void set_constraint_3(int32_t value)
-	{
-		___constraint_3 = value;
-	}
-
-	inline static int32_t get_offset_of_onUp_4() { return static_cast<int32_t>(offsetof(UIKeyNavigation_t4244956403, ___onUp_4)); }
-	inline GameObject_t1113636619 * get_onUp_4() const { return ___onUp_4; }
-	inline GameObject_t1113636619 ** get_address_of_onUp_4() { return &___onUp_4; }
-	inline void set_onUp_4(GameObject_t1113636619 * value)
-	{
-		___onUp_4 = value;
-		Il2CppCodeGenWriteBarrier((&___onUp_4), value);
-	}
-
-	inline static int32_t get_offset_of_onDown_5() { return static_cast<int32_t>(offsetof(UIKeyNavigation_t4244956403, ___onDown_5)); }
-	inline GameObject_t1113636619 * get_onDown_5() const { return ___onDown_5; }
-	inline GameObject_t1113636619 ** get_address_of_onDown_5() { return &___onDown_5; }
-	inline void set_onDown_5(GameObject_t1113636619 * value)
-	{
-		___onDown_5 = value;
-		Il2CppCodeGenWriteBarrier((&___onDown_5), value);
-	}
-
-	inline static int32_t get_offset_of_onLeft_6() { return static_cast<int32_t>(offsetof(UIKeyNavigation_t4244956403, ___onLeft_6)); }
-	inline GameObject_t1113636619 * get_onLeft_6() const { return ___onLeft_6; }
-	inline GameObject_t1113636619 ** get_address_of_onLeft_6() { return &___onLeft_6; }
-	inline void set_onLeft_6(GameObject_t1113636619 * value)
-	{
-		___onLeft_6 = value;
-		Il2CppCodeGenWriteBarrier((&___onLeft_6), value);
-	}
-
-	inline static int32_t get_offset_of_onRight_7() { return static_cast<int32_t>(offsetof(UIKeyNavigation_t4244956403, ___onRight_7)); }
-	inline GameObject_t1113636619 * get_onRight_7() const { return ___onRight_7; }
-	inline GameObject_t1113636619 ** get_address_of_onRight_7() { return &___onRight_7; }
-	inline void set_onRight_7(GameObject_t1113636619 * value)
-	{
-		___onRight_7 = value;
-		Il2CppCodeGenWriteBarrier((&___onRight_7), value);
-	}
-
-	inline static int32_t get_offset_of_onClick_8() { return static_cast<int32_t>(offsetof(UIKeyNavigation_t4244956403, ___onClick_8)); }
-	inline GameObject_t1113636619 * get_onClick_8() const { return ___onClick_8; }
-	inline GameObject_t1113636619 ** get_address_of_onClick_8() { return &___onClick_8; }
-	inline void set_onClick_8(GameObject_t1113636619 * value)
-	{
-		___onClick_8 = value;
-		Il2CppCodeGenWriteBarrier((&___onClick_8), value);
-	}
-
-	inline static int32_t get_offset_of_onTab_9() { return static_cast<int32_t>(offsetof(UIKeyNavigation_t4244956403, ___onTab_9)); }
-	inline GameObject_t1113636619 * get_onTab_9() const { return ___onTab_9; }
-	inline GameObject_t1113636619 ** get_address_of_onTab_9() { return &___onTab_9; }
-	inline void set_onTab_9(GameObject_t1113636619 * value)
-	{
-		___onTab_9 = value;
-		Il2CppCodeGenWriteBarrier((&___onTab_9), value);
-	}
-
-	inline static int32_t get_offset_of_startsSelected_10() { return static_cast<int32_t>(offsetof(UIKeyNavigation_t4244956403, ___startsSelected_10)); }
-	inline bool get_startsSelected_10() const { return ___startsSelected_10; }
-	inline bool* get_address_of_startsSelected_10() { return &___startsSelected_10; }
-	inline void set_startsSelected_10(bool value)
-	{
-		___startsSelected_10 = value;
-	}
-
-	inline static int32_t get_offset_of_mStarted_11() { return static_cast<int32_t>(offsetof(UIKeyNavigation_t4244956403, ___mStarted_11)); }
-	inline bool get_mStarted_11() const { return ___mStarted_11; }
-	inline bool* get_address_of_mStarted_11() { return &___mStarted_11; }
-	inline void set_mStarted_11(bool value)
-	{
-		___mStarted_11 = value;
-	}
-};
-
-struct UIKeyNavigation_t4244956403_StaticFields
-{
-public:
-	// BetterList`1<UIKeyNavigation> UIKeyNavigation::list
-	BetterList_1_t3399976721 * ___list_2;
-	// System.Int32 UIKeyNavigation::mLastFrame
-	int32_t ___mLastFrame_12;
-
-public:
-	inline static int32_t get_offset_of_list_2() { return static_cast<int32_t>(offsetof(UIKeyNavigation_t4244956403_StaticFields, ___list_2)); }
-	inline BetterList_1_t3399976721 * get_list_2() const { return ___list_2; }
-	inline BetterList_1_t3399976721 ** get_address_of_list_2() { return &___list_2; }
-	inline void set_list_2(BetterList_1_t3399976721 * value)
-	{
-		___list_2 = value;
-		Il2CppCodeGenWriteBarrier((&___list_2), value);
-	}
-
-	inline static int32_t get_offset_of_mLastFrame_12() { return static_cast<int32_t>(offsetof(UIKeyNavigation_t4244956403_StaticFields, ___mLastFrame_12)); }
-	inline int32_t get_mLastFrame_12() const { return ___mLastFrame_12; }
-	inline int32_t* get_address_of_mLastFrame_12() { return &___mLastFrame_12; }
-	inline void set_mLastFrame_12(int32_t value)
-	{
-		___mLastFrame_12 = value;
-	}
 };
 
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // UIKEYNAVIGATION_T4244956403_H
-#ifndef UIROOT_T4022971450_H
-#define UIROOT_T4022971450_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UIRoot
-struct  UIRoot_t4022971450  : public MonoBehaviour_t3962482529
-{
-public:
-	// UIRoot/Scaling UIRoot::scalingStyle
-	int32_t ___scalingStyle_3;
-	// System.Int32 UIRoot::manualWidth
-	int32_t ___manualWidth_4;
-	// System.Int32 UIRoot::manualHeight
-	int32_t ___manualHeight_5;
-	// System.Int32 UIRoot::minimumHeight
-	int32_t ___minimumHeight_6;
-	// System.Int32 UIRoot::maximumHeight
-	int32_t ___maximumHeight_7;
-	// System.Boolean UIRoot::fitWidth
-	bool ___fitWidth_8;
-	// System.Boolean UIRoot::fitHeight
-	bool ___fitHeight_9;
-	// System.Boolean UIRoot::adjustByDPI
-	bool ___adjustByDPI_10;
-	// System.Boolean UIRoot::shrinkPortraitUI
-	bool ___shrinkPortraitUI_11;
-	// UnityEngine.Transform UIRoot::mTrans
-	Transform_t3600365921 * ___mTrans_12;
-
-public:
-	inline static int32_t get_offset_of_scalingStyle_3() { return static_cast<int32_t>(offsetof(UIRoot_t4022971450, ___scalingStyle_3)); }
-	inline int32_t get_scalingStyle_3() const { return ___scalingStyle_3; }
-	inline int32_t* get_address_of_scalingStyle_3() { return &___scalingStyle_3; }
-	inline void set_scalingStyle_3(int32_t value)
-	{
-		___scalingStyle_3 = value;
-	}
-
-	inline static int32_t get_offset_of_manualWidth_4() { return static_cast<int32_t>(offsetof(UIRoot_t4022971450, ___manualWidth_4)); }
-	inline int32_t get_manualWidth_4() const { return ___manualWidth_4; }
-	inline int32_t* get_address_of_manualWidth_4() { return &___manualWidth_4; }
-	inline void set_manualWidth_4(int32_t value)
-	{
-		___manualWidth_4 = value;
-	}
-
-	inline static int32_t get_offset_of_manualHeight_5() { return static_cast<int32_t>(offsetof(UIRoot_t4022971450, ___manualHeight_5)); }
-	inline int32_t get_manualHeight_5() const { return ___manualHeight_5; }
-	inline int32_t* get_address_of_manualHeight_5() { return &___manualHeight_5; }
-	inline void set_manualHeight_5(int32_t value)
-	{
-		___manualHeight_5 = value;
-	}
-
-	inline static int32_t get_offset_of_minimumHeight_6() { return static_cast<int32_t>(offsetof(UIRoot_t4022971450, ___minimumHeight_6)); }
-	inline int32_t get_minimumHeight_6() const { return ___minimumHeight_6; }
-	inline int32_t* get_address_of_minimumHeight_6() { return &___minimumHeight_6; }
-	inline void set_minimumHeight_6(int32_t value)
-	{
-		___minimumHeight_6 = value;
-	}
-
-	inline static int32_t get_offset_of_maximumHeight_7() { return static_cast<int32_t>(offsetof(UIRoot_t4022971450, ___maximumHeight_7)); }
-	inline int32_t get_maximumHeight_7() const { return ___maximumHeight_7; }
-	inline int32_t* get_address_of_maximumHeight_7() { return &___maximumHeight_7; }
-	inline void set_maximumHeight_7(int32_t value)
-	{
-		___maximumHeight_7 = value;
-	}
-
-	inline static int32_t get_offset_of_fitWidth_8() { return static_cast<int32_t>(offsetof(UIRoot_t4022971450, ___fitWidth_8)); }
-	inline bool get_fitWidth_8() const { return ___fitWidth_8; }
-	inline bool* get_address_of_fitWidth_8() { return &___fitWidth_8; }
-	inline void set_fitWidth_8(bool value)
-	{
-		___fitWidth_8 = value;
-	}
-
-	inline static int32_t get_offset_of_fitHeight_9() { return static_cast<int32_t>(offsetof(UIRoot_t4022971450, ___fitHeight_9)); }
-	inline bool get_fitHeight_9() const { return ___fitHeight_9; }
-	inline bool* get_address_of_fitHeight_9() { return &___fitHeight_9; }
-	inline void set_fitHeight_9(bool value)
-	{
-		___fitHeight_9 = value;
-	}
-
-	inline static int32_t get_offset_of_adjustByDPI_10() { return static_cast<int32_t>(offsetof(UIRoot_t4022971450, ___adjustByDPI_10)); }
-	inline bool get_adjustByDPI_10() const { return ___adjustByDPI_10; }
-	inline bool* get_address_of_adjustByDPI_10() { return &___adjustByDPI_10; }
-	inline void set_adjustByDPI_10(bool value)
-	{
-		___adjustByDPI_10 = value;
-	}
-
-	inline static int32_t get_offset_of_shrinkPortraitUI_11() { return static_cast<int32_t>(offsetof(UIRoot_t4022971450, ___shrinkPortraitUI_11)); }
-	inline bool get_shrinkPortraitUI_11() const { return ___shrinkPortraitUI_11; }
-	inline bool* get_address_of_shrinkPortraitUI_11() { return &___shrinkPortraitUI_11; }
-	inline void set_shrinkPortraitUI_11(bool value)
-	{
-		___shrinkPortraitUI_11 = value;
-	}
-
-	inline static int32_t get_offset_of_mTrans_12() { return static_cast<int32_t>(offsetof(UIRoot_t4022971450, ___mTrans_12)); }
-	inline Transform_t3600365921 * get_mTrans_12() const { return ___mTrans_12; }
-	inline Transform_t3600365921 ** get_address_of_mTrans_12() { return &___mTrans_12; }
-	inline void set_mTrans_12(Transform_t3600365921 * value)
-	{
-		___mTrans_12 = value;
-		Il2CppCodeGenWriteBarrier((&___mTrans_12), value);
-	}
-};
-
-struct UIRoot_t4022971450_StaticFields
-{
-public:
-	// System.Collections.Generic.List`1<UIRoot> UIRoot::list
-	List_1_t1200078896 * ___list_2;
-
-public:
-	inline static int32_t get_offset_of_list_2() { return static_cast<int32_t>(offsetof(UIRoot_t4022971450_StaticFields, ___list_2)); }
-	inline List_1_t1200078896 * get_list_2() const { return ___list_2; }
-	inline List_1_t1200078896 ** get_address_of_list_2() { return &___list_2; }
-	inline void set_list_2(List_1_t1200078896 * value)
-	{
-		___list_2 = value;
-		Il2CppCodeGenWriteBarrier((&___list_2), value);
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // UIROOT_T4022971450_H
-#ifndef UICENTERONCHILD_T253063637_H
-#define UICENTERONCHILD_T253063637_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UICenterOnChild
-struct  UICenterOnChild_t253063637  : public MonoBehaviour_t3962482529
-{
-public:
-	// System.Single UICenterOnChild::springStrength
-	float ___springStrength_2;
-	// System.Single UICenterOnChild::nextPageThreshold
-	float ___nextPageThreshold_3;
-	// SpringPanel/OnFinished UICenterOnChild::onFinished
-	OnFinished_t3778785451 * ___onFinished_4;
-	// UICenterOnChild/OnCenterCallback UICenterOnChild::onCenter
-	OnCenterCallback_t2077531662 * ___onCenter_5;
-	// UIScrollView UICenterOnChild::mScrollView
-	UIScrollView_t1973404950 * ___mScrollView_6;
-	// UnityEngine.GameObject UICenterOnChild::mCenteredObject
-	GameObject_t1113636619 * ___mCenteredObject_7;
-
-public:
-	inline static int32_t get_offset_of_springStrength_2() { return static_cast<int32_t>(offsetof(UICenterOnChild_t253063637, ___springStrength_2)); }
-	inline float get_springStrength_2() const { return ___springStrength_2; }
-	inline float* get_address_of_springStrength_2() { return &___springStrength_2; }
-	inline void set_springStrength_2(float value)
-	{
-		___springStrength_2 = value;
-	}
-
-	inline static int32_t get_offset_of_nextPageThreshold_3() { return static_cast<int32_t>(offsetof(UICenterOnChild_t253063637, ___nextPageThreshold_3)); }
-	inline float get_nextPageThreshold_3() const { return ___nextPageThreshold_3; }
-	inline float* get_address_of_nextPageThreshold_3() { return &___nextPageThreshold_3; }
-	inline void set_nextPageThreshold_3(float value)
-	{
-		___nextPageThreshold_3 = value;
-	}
-
-	inline static int32_t get_offset_of_onFinished_4() { return static_cast<int32_t>(offsetof(UICenterOnChild_t253063637, ___onFinished_4)); }
-	inline OnFinished_t3778785451 * get_onFinished_4() const { return ___onFinished_4; }
-	inline OnFinished_t3778785451 ** get_address_of_onFinished_4() { return &___onFinished_4; }
-	inline void set_onFinished_4(OnFinished_t3778785451 * value)
-	{
-		___onFinished_4 = value;
-		Il2CppCodeGenWriteBarrier((&___onFinished_4), value);
-	}
-
-	inline static int32_t get_offset_of_onCenter_5() { return static_cast<int32_t>(offsetof(UICenterOnChild_t253063637, ___onCenter_5)); }
-	inline OnCenterCallback_t2077531662 * get_onCenter_5() const { return ___onCenter_5; }
-	inline OnCenterCallback_t2077531662 ** get_address_of_onCenter_5() { return &___onCenter_5; }
-	inline void set_onCenter_5(OnCenterCallback_t2077531662 * value)
-	{
-		___onCenter_5 = value;
-		Il2CppCodeGenWriteBarrier((&___onCenter_5), value);
-	}
-
-	inline static int32_t get_offset_of_mScrollView_6() { return static_cast<int32_t>(offsetof(UICenterOnChild_t253063637, ___mScrollView_6)); }
-	inline UIScrollView_t1973404950 * get_mScrollView_6() const { return ___mScrollView_6; }
-	inline UIScrollView_t1973404950 ** get_address_of_mScrollView_6() { return &___mScrollView_6; }
-	inline void set_mScrollView_6(UIScrollView_t1973404950 * value)
-	{
-		___mScrollView_6 = value;
-		Il2CppCodeGenWriteBarrier((&___mScrollView_6), value);
-	}
-
-	inline static int32_t get_offset_of_mCenteredObject_7() { return static_cast<int32_t>(offsetof(UICenterOnChild_t253063637, ___mCenteredObject_7)); }
-	inline GameObject_t1113636619 * get_mCenteredObject_7() const { return ___mCenteredObject_7; }
-	inline GameObject_t1113636619 ** get_address_of_mCenteredObject_7() { return &___mCenteredObject_7; }
-	inline void set_mCenteredObject_7(GameObject_t1113636619 * value)
-	{
-		___mCenteredObject_7 = value;
-		Il2CppCodeGenWriteBarrier((&___mCenteredObject_7), value);
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // UICENTERONCHILD_T253063637_H
-#ifndef UIATLAS_T3195533529_H
-#define UIATLAS_T3195533529_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UIAtlas
-struct  UIAtlas_t3195533529  : public MonoBehaviour_t3962482529
-{
-public:
-	// UnityEngine.Material UIAtlas::material
-	Material_t340375123 * ___material_2;
-	// System.Collections.Generic.List`1<UISpriteData> UIAtlas::mSprites
-	List_1_t2372383268 * ___mSprites_3;
-	// System.Single UIAtlas::mPixelSize
-	float ___mPixelSize_4;
-	// UIAtlas UIAtlas::mReplacement
-	UIAtlas_t3195533529 * ___mReplacement_5;
-	// UIAtlas/Coordinates UIAtlas::mCoordinates
-	int32_t ___mCoordinates_6;
-	// System.Collections.Generic.List`1<UIAtlas/Sprite> UIAtlas::sprites
-	List_1_t72704565 * ___sprites_7;
-	// System.Int32 UIAtlas::mPMA
-	int32_t ___mPMA_8;
-	// System.Collections.Generic.Dictionary`2<System.String,System.Int32> UIAtlas::mSpriteIndices
-	Dictionary_2_t2736202052 * ___mSpriteIndices_9;
-
-public:
-	inline static int32_t get_offset_of_material_2() { return static_cast<int32_t>(offsetof(UIAtlas_t3195533529, ___material_2)); }
-	inline Material_t340375123 * get_material_2() const { return ___material_2; }
-	inline Material_t340375123 ** get_address_of_material_2() { return &___material_2; }
-	inline void set_material_2(Material_t340375123 * value)
-	{
-		___material_2 = value;
-		Il2CppCodeGenWriteBarrier((&___material_2), value);
-	}
-
-	inline static int32_t get_offset_of_mSprites_3() { return static_cast<int32_t>(offsetof(UIAtlas_t3195533529, ___mSprites_3)); }
-	inline List_1_t2372383268 * get_mSprites_3() const { return ___mSprites_3; }
-	inline List_1_t2372383268 ** get_address_of_mSprites_3() { return &___mSprites_3; }
-	inline void set_mSprites_3(List_1_t2372383268 * value)
-	{
-		___mSprites_3 = value;
-		Il2CppCodeGenWriteBarrier((&___mSprites_3), value);
-	}
-
-	inline static int32_t get_offset_of_mPixelSize_4() { return static_cast<int32_t>(offsetof(UIAtlas_t3195533529, ___mPixelSize_4)); }
-	inline float get_mPixelSize_4() const { return ___mPixelSize_4; }
-	inline float* get_address_of_mPixelSize_4() { return &___mPixelSize_4; }
-	inline void set_mPixelSize_4(float value)
-	{
-		___mPixelSize_4 = value;
-	}
-
-	inline static int32_t get_offset_of_mReplacement_5() { return static_cast<int32_t>(offsetof(UIAtlas_t3195533529, ___mReplacement_5)); }
-	inline UIAtlas_t3195533529 * get_mReplacement_5() const { return ___mReplacement_5; }
-	inline UIAtlas_t3195533529 ** get_address_of_mReplacement_5() { return &___mReplacement_5; }
-	inline void set_mReplacement_5(UIAtlas_t3195533529 * value)
-	{
-		___mReplacement_5 = value;
-		Il2CppCodeGenWriteBarrier((&___mReplacement_5), value);
-	}
-
-	inline static int32_t get_offset_of_mCoordinates_6() { return static_cast<int32_t>(offsetof(UIAtlas_t3195533529, ___mCoordinates_6)); }
-	inline int32_t get_mCoordinates_6() const { return ___mCoordinates_6; }
-	inline int32_t* get_address_of_mCoordinates_6() { return &___mCoordinates_6; }
-	inline void set_mCoordinates_6(int32_t value)
-	{
-		___mCoordinates_6 = value;
-	}
-
-	inline static int32_t get_offset_of_sprites_7() { return static_cast<int32_t>(offsetof(UIAtlas_t3195533529, ___sprites_7)); }
-	inline List_1_t72704565 * get_sprites_7() const { return ___sprites_7; }
-	inline List_1_t72704565 ** get_address_of_sprites_7() { return &___sprites_7; }
-	inline void set_sprites_7(List_1_t72704565 * value)
-	{
-		___sprites_7 = value;
-		Il2CppCodeGenWriteBarrier((&___sprites_7), value);
-	}
-
-	inline static int32_t get_offset_of_mPMA_8() { return static_cast<int32_t>(offsetof(UIAtlas_t3195533529, ___mPMA_8)); }
-	inline int32_t get_mPMA_8() const { return ___mPMA_8; }
-	inline int32_t* get_address_of_mPMA_8() { return &___mPMA_8; }
-	inline void set_mPMA_8(int32_t value)
-	{
-		___mPMA_8 = value;
-	}
-
-	inline static int32_t get_offset_of_mSpriteIndices_9() { return static_cast<int32_t>(offsetof(UIAtlas_t3195533529, ___mSpriteIndices_9)); }
-	inline Dictionary_2_t2736202052 * get_mSpriteIndices_9() const { return ___mSpriteIndices_9; }
-	inline Dictionary_2_t2736202052 ** get_address_of_mSpriteIndices_9() { return &___mSpriteIndices_9; }
-	inline void set_mSpriteIndices_9(Dictionary_2_t2736202052 * value)
-	{
-		___mSpriteIndices_9 = value;
-		Il2CppCodeGenWriteBarrier((&___mSpriteIndices_9), value);
-	}
-};
-
-struct UIAtlas_t3195533529_StaticFields
-{
-public:
-	// System.Comparison`1<UISpriteData> UIAtlas::<>f__am$cache0
-	Comparison_1_t675239705 * ___U3CU3Ef__amU24cache0_10;
-
-public:
-	inline static int32_t get_offset_of_U3CU3Ef__amU24cache0_10() { return static_cast<int32_t>(offsetof(UIAtlas_t3195533529_StaticFields, ___U3CU3Ef__amU24cache0_10)); }
-	inline Comparison_1_t675239705 * get_U3CU3Ef__amU24cache0_10() const { return ___U3CU3Ef__amU24cache0_10; }
-	inline Comparison_1_t675239705 ** get_address_of_U3CU3Ef__amU24cache0_10() { return &___U3CU3Ef__amU24cache0_10; }
-	inline void set_U3CU3Ef__amU24cache0_10(Comparison_1_t675239705 * value)
-	{
-		___U3CU3Ef__amU24cache0_10 = value;
-		Il2CppCodeGenWriteBarrier((&___U3CU3Ef__amU24cache0_10), value);
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // UIATLAS_T3195533529_H
-#ifndef UI2DSPRITEANIMATION_T3056508403_H
-#define UI2DSPRITEANIMATION_T3056508403_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UI2DSpriteAnimation
-struct  UI2DSpriteAnimation_t3056508403  : public MonoBehaviour_t3962482529
-{
-public:
-	// System.Int32 UI2DSpriteAnimation::frameIndex
-	int32_t ___frameIndex_2;
-	// System.Int32 UI2DSpriteAnimation::framerate
-	int32_t ___framerate_3;
-	// System.Boolean UI2DSpriteAnimation::ignoreTimeScale
-	bool ___ignoreTimeScale_4;
-	// System.Boolean UI2DSpriteAnimation::loop
-	bool ___loop_5;
-	// UnityEngine.Sprite[] UI2DSpriteAnimation::frames
-	SpriteU5BU5D_t2581906349* ___frames_6;
-	// UnityEngine.SpriteRenderer UI2DSpriteAnimation::mUnitySprite
-	SpriteRenderer_t3235626157 * ___mUnitySprite_7;
-	// UI2DSprite UI2DSpriteAnimation::mNguiSprite
-	UI2DSprite_t1366157572 * ___mNguiSprite_8;
-	// System.Single UI2DSpriteAnimation::mUpdate
-	float ___mUpdate_9;
-
-public:
-	inline static int32_t get_offset_of_frameIndex_2() { return static_cast<int32_t>(offsetof(UI2DSpriteAnimation_t3056508403, ___frameIndex_2)); }
-	inline int32_t get_frameIndex_2() const { return ___frameIndex_2; }
-	inline int32_t* get_address_of_frameIndex_2() { return &___frameIndex_2; }
-	inline void set_frameIndex_2(int32_t value)
-	{
-		___frameIndex_2 = value;
-	}
-
-	inline static int32_t get_offset_of_framerate_3() { return static_cast<int32_t>(offsetof(UI2DSpriteAnimation_t3056508403, ___framerate_3)); }
-	inline int32_t get_framerate_3() const { return ___framerate_3; }
-	inline int32_t* get_address_of_framerate_3() { return &___framerate_3; }
-	inline void set_framerate_3(int32_t value)
-	{
-		___framerate_3 = value;
-	}
-
-	inline static int32_t get_offset_of_ignoreTimeScale_4() { return static_cast<int32_t>(offsetof(UI2DSpriteAnimation_t3056508403, ___ignoreTimeScale_4)); }
-	inline bool get_ignoreTimeScale_4() const { return ___ignoreTimeScale_4; }
-	inline bool* get_address_of_ignoreTimeScale_4() { return &___ignoreTimeScale_4; }
-	inline void set_ignoreTimeScale_4(bool value)
-	{
-		___ignoreTimeScale_4 = value;
-	}
-
-	inline static int32_t get_offset_of_loop_5() { return static_cast<int32_t>(offsetof(UI2DSpriteAnimation_t3056508403, ___loop_5)); }
-	inline bool get_loop_5() const { return ___loop_5; }
-	inline bool* get_address_of_loop_5() { return &___loop_5; }
-	inline void set_loop_5(bool value)
-	{
-		___loop_5 = value;
-	}
-
-	inline static int32_t get_offset_of_frames_6() { return static_cast<int32_t>(offsetof(UI2DSpriteAnimation_t3056508403, ___frames_6)); }
-	inline SpriteU5BU5D_t2581906349* get_frames_6() const { return ___frames_6; }
-	inline SpriteU5BU5D_t2581906349** get_address_of_frames_6() { return &___frames_6; }
-	inline void set_frames_6(SpriteU5BU5D_t2581906349* value)
-	{
-		___frames_6 = value;
-		Il2CppCodeGenWriteBarrier((&___frames_6), value);
-	}
-
-	inline static int32_t get_offset_of_mUnitySprite_7() { return static_cast<int32_t>(offsetof(UI2DSpriteAnimation_t3056508403, ___mUnitySprite_7)); }
-	inline SpriteRenderer_t3235626157 * get_mUnitySprite_7() const { return ___mUnitySprite_7; }
-	inline SpriteRenderer_t3235626157 ** get_address_of_mUnitySprite_7() { return &___mUnitySprite_7; }
-	inline void set_mUnitySprite_7(SpriteRenderer_t3235626157 * value)
-	{
-		___mUnitySprite_7 = value;
-		Il2CppCodeGenWriteBarrier((&___mUnitySprite_7), value);
-	}
-
-	inline static int32_t get_offset_of_mNguiSprite_8() { return static_cast<int32_t>(offsetof(UI2DSpriteAnimation_t3056508403, ___mNguiSprite_8)); }
-	inline UI2DSprite_t1366157572 * get_mNguiSprite_8() const { return ___mNguiSprite_8; }
-	inline UI2DSprite_t1366157572 ** get_address_of_mNguiSprite_8() { return &___mNguiSprite_8; }
-	inline void set_mNguiSprite_8(UI2DSprite_t1366157572 * value)
-	{
-		___mNguiSprite_8 = value;
-		Il2CppCodeGenWriteBarrier((&___mNguiSprite_8), value);
-	}
-
-	inline static int32_t get_offset_of_mUpdate_9() { return static_cast<int32_t>(offsetof(UI2DSpriteAnimation_t3056508403, ___mUpdate_9)); }
-	inline float get_mUpdate_9() const { return ___mUpdate_9; }
-	inline float* get_address_of_mUpdate_9() { return &___mUpdate_9; }
-	inline void set_mUpdate_9(float value)
-	{
-		___mUpdate_9 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // UI2DSPRITEANIMATION_T3056508403_H
-#ifndef UIPROGRESSBAR_T1222110469_H
-#define UIPROGRESSBAR_T1222110469_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UIProgressBar
-struct  UIProgressBar_t1222110469  : public UIWidgetContainer_t30162560
-{
-public:
-	// UIProgressBar/OnDragFinished UIProgressBar::onDragFinished
-	OnDragFinished_t3715779777 * ___onDragFinished_3;
-	// UnityEngine.Transform UIProgressBar::thumb
-	Transform_t3600365921 * ___thumb_4;
-	// UIWidget UIProgressBar::mBG
-	UIWidget_t3538521925 * ___mBG_5;
-	// UIWidget UIProgressBar::mFG
-	UIWidget_t3538521925 * ___mFG_6;
-	// System.Single UIProgressBar::mValue
-	float ___mValue_7;
-	// UIProgressBar/FillDirection UIProgressBar::mFill
-	int32_t ___mFill_8;
-	// System.Boolean UIProgressBar::mStarted
-	bool ___mStarted_9;
-	// UnityEngine.Transform UIProgressBar::mTrans
-	Transform_t3600365921 * ___mTrans_10;
-	// System.Boolean UIProgressBar::mIsDirty
-	bool ___mIsDirty_11;
-	// UnityEngine.Camera UIProgressBar::mCam
-	Camera_t4157153871 * ___mCam_12;
-	// System.Single UIProgressBar::mOffset
-	float ___mOffset_13;
-	// System.Int32 UIProgressBar::numberOfSteps
-	int32_t ___numberOfSteps_14;
-	// System.Collections.Generic.List`1<EventDelegate> UIProgressBar::onChange
-	List_1_t4210400802 * ___onChange_15;
-
-public:
-	inline static int32_t get_offset_of_onDragFinished_3() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___onDragFinished_3)); }
-	inline OnDragFinished_t3715779777 * get_onDragFinished_3() const { return ___onDragFinished_3; }
-	inline OnDragFinished_t3715779777 ** get_address_of_onDragFinished_3() { return &___onDragFinished_3; }
-	inline void set_onDragFinished_3(OnDragFinished_t3715779777 * value)
-	{
-		___onDragFinished_3 = value;
-		Il2CppCodeGenWriteBarrier((&___onDragFinished_3), value);
-	}
-
-	inline static int32_t get_offset_of_thumb_4() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___thumb_4)); }
-	inline Transform_t3600365921 * get_thumb_4() const { return ___thumb_4; }
-	inline Transform_t3600365921 ** get_address_of_thumb_4() { return &___thumb_4; }
-	inline void set_thumb_4(Transform_t3600365921 * value)
-	{
-		___thumb_4 = value;
-		Il2CppCodeGenWriteBarrier((&___thumb_4), value);
-	}
-
-	inline static int32_t get_offset_of_mBG_5() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___mBG_5)); }
-	inline UIWidget_t3538521925 * get_mBG_5() const { return ___mBG_5; }
-	inline UIWidget_t3538521925 ** get_address_of_mBG_5() { return &___mBG_5; }
-	inline void set_mBG_5(UIWidget_t3538521925 * value)
-	{
-		___mBG_5 = value;
-		Il2CppCodeGenWriteBarrier((&___mBG_5), value);
-	}
-
-	inline static int32_t get_offset_of_mFG_6() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___mFG_6)); }
-	inline UIWidget_t3538521925 * get_mFG_6() const { return ___mFG_6; }
-	inline UIWidget_t3538521925 ** get_address_of_mFG_6() { return &___mFG_6; }
-	inline void set_mFG_6(UIWidget_t3538521925 * value)
-	{
-		___mFG_6 = value;
-		Il2CppCodeGenWriteBarrier((&___mFG_6), value);
-	}
-
-	inline static int32_t get_offset_of_mValue_7() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___mValue_7)); }
-	inline float get_mValue_7() const { return ___mValue_7; }
-	inline float* get_address_of_mValue_7() { return &___mValue_7; }
-	inline void set_mValue_7(float value)
-	{
-		___mValue_7 = value;
-	}
-
-	inline static int32_t get_offset_of_mFill_8() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___mFill_8)); }
-	inline int32_t get_mFill_8() const { return ___mFill_8; }
-	inline int32_t* get_address_of_mFill_8() { return &___mFill_8; }
-	inline void set_mFill_8(int32_t value)
-	{
-		___mFill_8 = value;
-	}
-
-	inline static int32_t get_offset_of_mStarted_9() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___mStarted_9)); }
-	inline bool get_mStarted_9() const { return ___mStarted_9; }
-	inline bool* get_address_of_mStarted_9() { return &___mStarted_9; }
-	inline void set_mStarted_9(bool value)
-	{
-		___mStarted_9 = value;
-	}
-
-	inline static int32_t get_offset_of_mTrans_10() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___mTrans_10)); }
-	inline Transform_t3600365921 * get_mTrans_10() const { return ___mTrans_10; }
-	inline Transform_t3600365921 ** get_address_of_mTrans_10() { return &___mTrans_10; }
-	inline void set_mTrans_10(Transform_t3600365921 * value)
-	{
-		___mTrans_10 = value;
-		Il2CppCodeGenWriteBarrier((&___mTrans_10), value);
-	}
-
-	inline static int32_t get_offset_of_mIsDirty_11() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___mIsDirty_11)); }
-	inline bool get_mIsDirty_11() const { return ___mIsDirty_11; }
-	inline bool* get_address_of_mIsDirty_11() { return &___mIsDirty_11; }
-	inline void set_mIsDirty_11(bool value)
-	{
-		___mIsDirty_11 = value;
-	}
-
-	inline static int32_t get_offset_of_mCam_12() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___mCam_12)); }
-	inline Camera_t4157153871 * get_mCam_12() const { return ___mCam_12; }
-	inline Camera_t4157153871 ** get_address_of_mCam_12() { return &___mCam_12; }
-	inline void set_mCam_12(Camera_t4157153871 * value)
-	{
-		___mCam_12 = value;
-		Il2CppCodeGenWriteBarrier((&___mCam_12), value);
-	}
-
-	inline static int32_t get_offset_of_mOffset_13() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___mOffset_13)); }
-	inline float get_mOffset_13() const { return ___mOffset_13; }
-	inline float* get_address_of_mOffset_13() { return &___mOffset_13; }
-	inline void set_mOffset_13(float value)
-	{
-		___mOffset_13 = value;
-	}
-
-	inline static int32_t get_offset_of_numberOfSteps_14() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___numberOfSteps_14)); }
-	inline int32_t get_numberOfSteps_14() const { return ___numberOfSteps_14; }
-	inline int32_t* get_address_of_numberOfSteps_14() { return &___numberOfSteps_14; }
-	inline void set_numberOfSteps_14(int32_t value)
-	{
-		___numberOfSteps_14 = value;
-	}
-
-	inline static int32_t get_offset_of_onChange_15() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___onChange_15)); }
-	inline List_1_t4210400802 * get_onChange_15() const { return ___onChange_15; }
-	inline List_1_t4210400802 ** get_address_of_onChange_15() { return &___onChange_15; }
-	inline void set_onChange_15(List_1_t4210400802 * value)
-	{
-		___onChange_15 = value;
-		Il2CppCodeGenWriteBarrier((&___onChange_15), value);
-	}
-};
-
-struct UIProgressBar_t1222110469_StaticFields
-{
-public:
-	// UIProgressBar UIProgressBar::current
-	UIProgressBar_t1222110469 * ___current_2;
-
-public:
-	inline static int32_t get_offset_of_current_2() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469_StaticFields, ___current_2)); }
-	inline UIProgressBar_t1222110469 * get_current_2() const { return ___current_2; }
-	inline UIProgressBar_t1222110469 ** get_address_of_current_2() { return &___current_2; }
-	inline void set_current_2(UIProgressBar_t1222110469 * value)
-	{
-		___current_2 = value;
-		Il2CppCodeGenWriteBarrier((&___current_2), value);
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // UIPROGRESSBAR_T1222110469_H
+#endif // UICENTERONCLICK_T4058804012_H
 #ifndef TWEENROTATION_T3072670746_H
 #define TWEENROTATION_T3072670746_H
 #ifdef __clang__
@@ -12656,6 +12462,201 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // TWEENROTATION_T3072670746_H
+#ifndef TWEENORTHOSIZE_T2102937296_H
+#define TWEENORTHOSIZE_T2102937296_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// TweenOrthoSize
+struct  TweenOrthoSize_t2102937296  : public UITweener_t260334902
+{
+public:
+	// System.Single TweenOrthoSize::from
+	float ___from_21;
+	// System.Single TweenOrthoSize::to
+	float ___to_22;
+	// UnityEngine.Camera TweenOrthoSize::mCam
+	Camera_t4157153871 * ___mCam_23;
+
+public:
+	inline static int32_t get_offset_of_from_21() { return static_cast<int32_t>(offsetof(TweenOrthoSize_t2102937296, ___from_21)); }
+	inline float get_from_21() const { return ___from_21; }
+	inline float* get_address_of_from_21() { return &___from_21; }
+	inline void set_from_21(float value)
+	{
+		___from_21 = value;
+	}
+
+	inline static int32_t get_offset_of_to_22() { return static_cast<int32_t>(offsetof(TweenOrthoSize_t2102937296, ___to_22)); }
+	inline float get_to_22() const { return ___to_22; }
+	inline float* get_address_of_to_22() { return &___to_22; }
+	inline void set_to_22(float value)
+	{
+		___to_22 = value;
+	}
+
+	inline static int32_t get_offset_of_mCam_23() { return static_cast<int32_t>(offsetof(TweenOrthoSize_t2102937296, ___mCam_23)); }
+	inline Camera_t4157153871 * get_mCam_23() const { return ___mCam_23; }
+	inline Camera_t4157153871 ** get_address_of_mCam_23() { return &___mCam_23; }
+	inline void set_mCam_23(Camera_t4157153871 * value)
+	{
+		___mCam_23 = value;
+		Il2CppCodeGenWriteBarrier((&___mCam_23), value);
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // TWEENORTHOSIZE_T2102937296_H
+#ifndef UIBUTTONKEYS_T486517330_H
+#define UIBUTTONKEYS_T486517330_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UIButtonKeys
+struct  UIButtonKeys_t486517330  : public UIKeyNavigation_t4244956403
+{
+public:
+	// UIButtonKeys UIButtonKeys::selectOnClick
+	UIButtonKeys_t486517330 * ___selectOnClick_13;
+	// UIButtonKeys UIButtonKeys::selectOnUp
+	UIButtonKeys_t486517330 * ___selectOnUp_14;
+	// UIButtonKeys UIButtonKeys::selectOnDown
+	UIButtonKeys_t486517330 * ___selectOnDown_15;
+	// UIButtonKeys UIButtonKeys::selectOnLeft
+	UIButtonKeys_t486517330 * ___selectOnLeft_16;
+	// UIButtonKeys UIButtonKeys::selectOnRight
+	UIButtonKeys_t486517330 * ___selectOnRight_17;
+
+public:
+	inline static int32_t get_offset_of_selectOnClick_13() { return static_cast<int32_t>(offsetof(UIButtonKeys_t486517330, ___selectOnClick_13)); }
+	inline UIButtonKeys_t486517330 * get_selectOnClick_13() const { return ___selectOnClick_13; }
+	inline UIButtonKeys_t486517330 ** get_address_of_selectOnClick_13() { return &___selectOnClick_13; }
+	inline void set_selectOnClick_13(UIButtonKeys_t486517330 * value)
+	{
+		___selectOnClick_13 = value;
+		Il2CppCodeGenWriteBarrier((&___selectOnClick_13), value);
+	}
+
+	inline static int32_t get_offset_of_selectOnUp_14() { return static_cast<int32_t>(offsetof(UIButtonKeys_t486517330, ___selectOnUp_14)); }
+	inline UIButtonKeys_t486517330 * get_selectOnUp_14() const { return ___selectOnUp_14; }
+	inline UIButtonKeys_t486517330 ** get_address_of_selectOnUp_14() { return &___selectOnUp_14; }
+	inline void set_selectOnUp_14(UIButtonKeys_t486517330 * value)
+	{
+		___selectOnUp_14 = value;
+		Il2CppCodeGenWriteBarrier((&___selectOnUp_14), value);
+	}
+
+	inline static int32_t get_offset_of_selectOnDown_15() { return static_cast<int32_t>(offsetof(UIButtonKeys_t486517330, ___selectOnDown_15)); }
+	inline UIButtonKeys_t486517330 * get_selectOnDown_15() const { return ___selectOnDown_15; }
+	inline UIButtonKeys_t486517330 ** get_address_of_selectOnDown_15() { return &___selectOnDown_15; }
+	inline void set_selectOnDown_15(UIButtonKeys_t486517330 * value)
+	{
+		___selectOnDown_15 = value;
+		Il2CppCodeGenWriteBarrier((&___selectOnDown_15), value);
+	}
+
+	inline static int32_t get_offset_of_selectOnLeft_16() { return static_cast<int32_t>(offsetof(UIButtonKeys_t486517330, ___selectOnLeft_16)); }
+	inline UIButtonKeys_t486517330 * get_selectOnLeft_16() const { return ___selectOnLeft_16; }
+	inline UIButtonKeys_t486517330 ** get_address_of_selectOnLeft_16() { return &___selectOnLeft_16; }
+	inline void set_selectOnLeft_16(UIButtonKeys_t486517330 * value)
+	{
+		___selectOnLeft_16 = value;
+		Il2CppCodeGenWriteBarrier((&___selectOnLeft_16), value);
+	}
+
+	inline static int32_t get_offset_of_selectOnRight_17() { return static_cast<int32_t>(offsetof(UIButtonKeys_t486517330, ___selectOnRight_17)); }
+	inline UIButtonKeys_t486517330 * get_selectOnRight_17() const { return ___selectOnRight_17; }
+	inline UIButtonKeys_t486517330 ** get_address_of_selectOnRight_17() { return &___selectOnRight_17; }
+	inline void set_selectOnRight_17(UIButtonKeys_t486517330 * value)
+	{
+		___selectOnRight_17 = value;
+		Il2CppCodeGenWriteBarrier((&___selectOnRight_17), value);
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // UIBUTTONKEYS_T486517330_H
+#ifndef TWEENPOSITION_T1378762002_H
+#define TWEENPOSITION_T1378762002_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// TweenPosition
+struct  TweenPosition_t1378762002  : public UITweener_t260334902
+{
+public:
+	// UnityEngine.Vector3 TweenPosition::from
+	Vector3_t3722313464  ___from_21;
+	// UnityEngine.Vector3 TweenPosition::to
+	Vector3_t3722313464  ___to_22;
+	// System.Boolean TweenPosition::worldSpace
+	bool ___worldSpace_23;
+	// UnityEngine.Transform TweenPosition::mTrans
+	Transform_t3600365921 * ___mTrans_24;
+	// UIRect TweenPosition::mRect
+	UIRect_t2875960382 * ___mRect_25;
+
+public:
+	inline static int32_t get_offset_of_from_21() { return static_cast<int32_t>(offsetof(TweenPosition_t1378762002, ___from_21)); }
+	inline Vector3_t3722313464  get_from_21() const { return ___from_21; }
+	inline Vector3_t3722313464 * get_address_of_from_21() { return &___from_21; }
+	inline void set_from_21(Vector3_t3722313464  value)
+	{
+		___from_21 = value;
+	}
+
+	inline static int32_t get_offset_of_to_22() { return static_cast<int32_t>(offsetof(TweenPosition_t1378762002, ___to_22)); }
+	inline Vector3_t3722313464  get_to_22() const { return ___to_22; }
+	inline Vector3_t3722313464 * get_address_of_to_22() { return &___to_22; }
+	inline void set_to_22(Vector3_t3722313464  value)
+	{
+		___to_22 = value;
+	}
+
+	inline static int32_t get_offset_of_worldSpace_23() { return static_cast<int32_t>(offsetof(TweenPosition_t1378762002, ___worldSpace_23)); }
+	inline bool get_worldSpace_23() const { return ___worldSpace_23; }
+	inline bool* get_address_of_worldSpace_23() { return &___worldSpace_23; }
+	inline void set_worldSpace_23(bool value)
+	{
+		___worldSpace_23 = value;
+	}
+
+	inline static int32_t get_offset_of_mTrans_24() { return static_cast<int32_t>(offsetof(TweenPosition_t1378762002, ___mTrans_24)); }
+	inline Transform_t3600365921 * get_mTrans_24() const { return ___mTrans_24; }
+	inline Transform_t3600365921 ** get_address_of_mTrans_24() { return &___mTrans_24; }
+	inline void set_mTrans_24(Transform_t3600365921 * value)
+	{
+		___mTrans_24 = value;
+		Il2CppCodeGenWriteBarrier((&___mTrans_24), value);
+	}
+
+	inline static int32_t get_offset_of_mRect_25() { return static_cast<int32_t>(offsetof(TweenPosition_t1378762002, ___mRect_25)); }
+	inline UIRect_t2875960382 * get_mRect_25() const { return ___mRect_25; }
+	inline UIRect_t2875960382 ** get_address_of_mRect_25() { return &___mRect_25; }
+	inline void set_mRect_25(UIRect_t2875960382 * value)
+	{
+		___mRect_25 = value;
+		Il2CppCodeGenWriteBarrier((&___mRect_25), value);
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // TWEENPOSITION_T1378762002_H
 #ifndef UIPOPUPLIST_T4167399471_H
 #define UIPOPUPLIST_T4167399471_H
 #ifdef __clang__
@@ -13206,201 +13207,6 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // UIPOPUPLIST_T4167399471_H
-#ifndef TWEENPOSITION_T1378762002_H
-#define TWEENPOSITION_T1378762002_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// TweenPosition
-struct  TweenPosition_t1378762002  : public UITweener_t260334902
-{
-public:
-	// UnityEngine.Vector3 TweenPosition::from
-	Vector3_t3722313464  ___from_21;
-	// UnityEngine.Vector3 TweenPosition::to
-	Vector3_t3722313464  ___to_22;
-	// System.Boolean TweenPosition::worldSpace
-	bool ___worldSpace_23;
-	// UnityEngine.Transform TweenPosition::mTrans
-	Transform_t3600365921 * ___mTrans_24;
-	// UIRect TweenPosition::mRect
-	UIRect_t2875960382 * ___mRect_25;
-
-public:
-	inline static int32_t get_offset_of_from_21() { return static_cast<int32_t>(offsetof(TweenPosition_t1378762002, ___from_21)); }
-	inline Vector3_t3722313464  get_from_21() const { return ___from_21; }
-	inline Vector3_t3722313464 * get_address_of_from_21() { return &___from_21; }
-	inline void set_from_21(Vector3_t3722313464  value)
-	{
-		___from_21 = value;
-	}
-
-	inline static int32_t get_offset_of_to_22() { return static_cast<int32_t>(offsetof(TweenPosition_t1378762002, ___to_22)); }
-	inline Vector3_t3722313464  get_to_22() const { return ___to_22; }
-	inline Vector3_t3722313464 * get_address_of_to_22() { return &___to_22; }
-	inline void set_to_22(Vector3_t3722313464  value)
-	{
-		___to_22 = value;
-	}
-
-	inline static int32_t get_offset_of_worldSpace_23() { return static_cast<int32_t>(offsetof(TweenPosition_t1378762002, ___worldSpace_23)); }
-	inline bool get_worldSpace_23() const { return ___worldSpace_23; }
-	inline bool* get_address_of_worldSpace_23() { return &___worldSpace_23; }
-	inline void set_worldSpace_23(bool value)
-	{
-		___worldSpace_23 = value;
-	}
-
-	inline static int32_t get_offset_of_mTrans_24() { return static_cast<int32_t>(offsetof(TweenPosition_t1378762002, ___mTrans_24)); }
-	inline Transform_t3600365921 * get_mTrans_24() const { return ___mTrans_24; }
-	inline Transform_t3600365921 ** get_address_of_mTrans_24() { return &___mTrans_24; }
-	inline void set_mTrans_24(Transform_t3600365921 * value)
-	{
-		___mTrans_24 = value;
-		Il2CppCodeGenWriteBarrier((&___mTrans_24), value);
-	}
-
-	inline static int32_t get_offset_of_mRect_25() { return static_cast<int32_t>(offsetof(TweenPosition_t1378762002, ___mRect_25)); }
-	inline UIRect_t2875960382 * get_mRect_25() const { return ___mRect_25; }
-	inline UIRect_t2875960382 ** get_address_of_mRect_25() { return &___mRect_25; }
-	inline void set_mRect_25(UIRect_t2875960382 * value)
-	{
-		___mRect_25 = value;
-		Il2CppCodeGenWriteBarrier((&___mRect_25), value);
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // TWEENPOSITION_T1378762002_H
-#ifndef UIBUTTONKEYS_T486517330_H
-#define UIBUTTONKEYS_T486517330_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UIButtonKeys
-struct  UIButtonKeys_t486517330  : public UIKeyNavigation_t4244956403
-{
-public:
-	// UIButtonKeys UIButtonKeys::selectOnClick
-	UIButtonKeys_t486517330 * ___selectOnClick_13;
-	// UIButtonKeys UIButtonKeys::selectOnUp
-	UIButtonKeys_t486517330 * ___selectOnUp_14;
-	// UIButtonKeys UIButtonKeys::selectOnDown
-	UIButtonKeys_t486517330 * ___selectOnDown_15;
-	// UIButtonKeys UIButtonKeys::selectOnLeft
-	UIButtonKeys_t486517330 * ___selectOnLeft_16;
-	// UIButtonKeys UIButtonKeys::selectOnRight
-	UIButtonKeys_t486517330 * ___selectOnRight_17;
-
-public:
-	inline static int32_t get_offset_of_selectOnClick_13() { return static_cast<int32_t>(offsetof(UIButtonKeys_t486517330, ___selectOnClick_13)); }
-	inline UIButtonKeys_t486517330 * get_selectOnClick_13() const { return ___selectOnClick_13; }
-	inline UIButtonKeys_t486517330 ** get_address_of_selectOnClick_13() { return &___selectOnClick_13; }
-	inline void set_selectOnClick_13(UIButtonKeys_t486517330 * value)
-	{
-		___selectOnClick_13 = value;
-		Il2CppCodeGenWriteBarrier((&___selectOnClick_13), value);
-	}
-
-	inline static int32_t get_offset_of_selectOnUp_14() { return static_cast<int32_t>(offsetof(UIButtonKeys_t486517330, ___selectOnUp_14)); }
-	inline UIButtonKeys_t486517330 * get_selectOnUp_14() const { return ___selectOnUp_14; }
-	inline UIButtonKeys_t486517330 ** get_address_of_selectOnUp_14() { return &___selectOnUp_14; }
-	inline void set_selectOnUp_14(UIButtonKeys_t486517330 * value)
-	{
-		___selectOnUp_14 = value;
-		Il2CppCodeGenWriteBarrier((&___selectOnUp_14), value);
-	}
-
-	inline static int32_t get_offset_of_selectOnDown_15() { return static_cast<int32_t>(offsetof(UIButtonKeys_t486517330, ___selectOnDown_15)); }
-	inline UIButtonKeys_t486517330 * get_selectOnDown_15() const { return ___selectOnDown_15; }
-	inline UIButtonKeys_t486517330 ** get_address_of_selectOnDown_15() { return &___selectOnDown_15; }
-	inline void set_selectOnDown_15(UIButtonKeys_t486517330 * value)
-	{
-		___selectOnDown_15 = value;
-		Il2CppCodeGenWriteBarrier((&___selectOnDown_15), value);
-	}
-
-	inline static int32_t get_offset_of_selectOnLeft_16() { return static_cast<int32_t>(offsetof(UIButtonKeys_t486517330, ___selectOnLeft_16)); }
-	inline UIButtonKeys_t486517330 * get_selectOnLeft_16() const { return ___selectOnLeft_16; }
-	inline UIButtonKeys_t486517330 ** get_address_of_selectOnLeft_16() { return &___selectOnLeft_16; }
-	inline void set_selectOnLeft_16(UIButtonKeys_t486517330 * value)
-	{
-		___selectOnLeft_16 = value;
-		Il2CppCodeGenWriteBarrier((&___selectOnLeft_16), value);
-	}
-
-	inline static int32_t get_offset_of_selectOnRight_17() { return static_cast<int32_t>(offsetof(UIButtonKeys_t486517330, ___selectOnRight_17)); }
-	inline UIButtonKeys_t486517330 * get_selectOnRight_17() const { return ___selectOnRight_17; }
-	inline UIButtonKeys_t486517330 ** get_address_of_selectOnRight_17() { return &___selectOnRight_17; }
-	inline void set_selectOnRight_17(UIButtonKeys_t486517330 * value)
-	{
-		___selectOnRight_17 = value;
-		Il2CppCodeGenWriteBarrier((&___selectOnRight_17), value);
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // UIBUTTONKEYS_T486517330_H
-#ifndef TWEENORTHOSIZE_T2102937296_H
-#define TWEENORTHOSIZE_T2102937296_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// TweenOrthoSize
-struct  TweenOrthoSize_t2102937296  : public UITweener_t260334902
-{
-public:
-	// System.Single TweenOrthoSize::from
-	float ___from_21;
-	// System.Single TweenOrthoSize::to
-	float ___to_22;
-	// UnityEngine.Camera TweenOrthoSize::mCam
-	Camera_t4157153871 * ___mCam_23;
-
-public:
-	inline static int32_t get_offset_of_from_21() { return static_cast<int32_t>(offsetof(TweenOrthoSize_t2102937296, ___from_21)); }
-	inline float get_from_21() const { return ___from_21; }
-	inline float* get_address_of_from_21() { return &___from_21; }
-	inline void set_from_21(float value)
-	{
-		___from_21 = value;
-	}
-
-	inline static int32_t get_offset_of_to_22() { return static_cast<int32_t>(offsetof(TweenOrthoSize_t2102937296, ___to_22)); }
-	inline float get_to_22() const { return ___to_22; }
-	inline float* get_address_of_to_22() { return &___to_22; }
-	inline void set_to_22(float value)
-	{
-		___to_22 = value;
-	}
-
-	inline static int32_t get_offset_of_mCam_23() { return static_cast<int32_t>(offsetof(TweenOrthoSize_t2102937296, ___mCam_23)); }
-	inline Camera_t4157153871 * get_mCam_23() const { return ___mCam_23; }
-	inline Camera_t4157153871 ** get_address_of_mCam_23() { return &___mCam_23; }
-	inline void set_mCam_23(Camera_t4157153871 * value)
-	{
-		___mCam_23 = value;
-		Il2CppCodeGenWriteBarrier((&___mCam_23), value);
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // TWEENORTHOSIZE_T2102937296_H
 #ifndef UIGRID_T1536638187_H
 #define UIGRID_T1536638187_H
 #ifdef __clang__
@@ -13612,127 +13418,6 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // UIGRID_T1536638187_H
-#ifndef UIBUTTONCOLOR_T2038074180_H
-#define UIBUTTONCOLOR_T2038074180_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UIButtonColor
-struct  UIButtonColor_t2038074180  : public UIWidgetContainer_t30162560
-{
-public:
-	// UnityEngine.GameObject UIButtonColor::tweenTarget
-	GameObject_t1113636619 * ___tweenTarget_2;
-	// UnityEngine.Color UIButtonColor::hover
-	Color_t2555686324  ___hover_3;
-	// UnityEngine.Color UIButtonColor::pressed
-	Color_t2555686324  ___pressed_4;
-	// UnityEngine.Color UIButtonColor::disabledColor
-	Color_t2555686324  ___disabledColor_5;
-	// System.Single UIButtonColor::duration
-	float ___duration_6;
-	// UnityEngine.Color UIButtonColor::mStartingColor
-	Color_t2555686324  ___mStartingColor_7;
-	// UnityEngine.Color UIButtonColor::mDefaultColor
-	Color_t2555686324  ___mDefaultColor_8;
-	// System.Boolean UIButtonColor::mInitDone
-	bool ___mInitDone_9;
-	// UIWidget UIButtonColor::mWidget
-	UIWidget_t3538521925 * ___mWidget_10;
-	// UIButtonColor/State UIButtonColor::mState
-	int32_t ___mState_11;
-
-public:
-	inline static int32_t get_offset_of_tweenTarget_2() { return static_cast<int32_t>(offsetof(UIButtonColor_t2038074180, ___tweenTarget_2)); }
-	inline GameObject_t1113636619 * get_tweenTarget_2() const { return ___tweenTarget_2; }
-	inline GameObject_t1113636619 ** get_address_of_tweenTarget_2() { return &___tweenTarget_2; }
-	inline void set_tweenTarget_2(GameObject_t1113636619 * value)
-	{
-		___tweenTarget_2 = value;
-		Il2CppCodeGenWriteBarrier((&___tweenTarget_2), value);
-	}
-
-	inline static int32_t get_offset_of_hover_3() { return static_cast<int32_t>(offsetof(UIButtonColor_t2038074180, ___hover_3)); }
-	inline Color_t2555686324  get_hover_3() const { return ___hover_3; }
-	inline Color_t2555686324 * get_address_of_hover_3() { return &___hover_3; }
-	inline void set_hover_3(Color_t2555686324  value)
-	{
-		___hover_3 = value;
-	}
-
-	inline static int32_t get_offset_of_pressed_4() { return static_cast<int32_t>(offsetof(UIButtonColor_t2038074180, ___pressed_4)); }
-	inline Color_t2555686324  get_pressed_4() const { return ___pressed_4; }
-	inline Color_t2555686324 * get_address_of_pressed_4() { return &___pressed_4; }
-	inline void set_pressed_4(Color_t2555686324  value)
-	{
-		___pressed_4 = value;
-	}
-
-	inline static int32_t get_offset_of_disabledColor_5() { return static_cast<int32_t>(offsetof(UIButtonColor_t2038074180, ___disabledColor_5)); }
-	inline Color_t2555686324  get_disabledColor_5() const { return ___disabledColor_5; }
-	inline Color_t2555686324 * get_address_of_disabledColor_5() { return &___disabledColor_5; }
-	inline void set_disabledColor_5(Color_t2555686324  value)
-	{
-		___disabledColor_5 = value;
-	}
-
-	inline static int32_t get_offset_of_duration_6() { return static_cast<int32_t>(offsetof(UIButtonColor_t2038074180, ___duration_6)); }
-	inline float get_duration_6() const { return ___duration_6; }
-	inline float* get_address_of_duration_6() { return &___duration_6; }
-	inline void set_duration_6(float value)
-	{
-		___duration_6 = value;
-	}
-
-	inline static int32_t get_offset_of_mStartingColor_7() { return static_cast<int32_t>(offsetof(UIButtonColor_t2038074180, ___mStartingColor_7)); }
-	inline Color_t2555686324  get_mStartingColor_7() const { return ___mStartingColor_7; }
-	inline Color_t2555686324 * get_address_of_mStartingColor_7() { return &___mStartingColor_7; }
-	inline void set_mStartingColor_7(Color_t2555686324  value)
-	{
-		___mStartingColor_7 = value;
-	}
-
-	inline static int32_t get_offset_of_mDefaultColor_8() { return static_cast<int32_t>(offsetof(UIButtonColor_t2038074180, ___mDefaultColor_8)); }
-	inline Color_t2555686324  get_mDefaultColor_8() const { return ___mDefaultColor_8; }
-	inline Color_t2555686324 * get_address_of_mDefaultColor_8() { return &___mDefaultColor_8; }
-	inline void set_mDefaultColor_8(Color_t2555686324  value)
-	{
-		___mDefaultColor_8 = value;
-	}
-
-	inline static int32_t get_offset_of_mInitDone_9() { return static_cast<int32_t>(offsetof(UIButtonColor_t2038074180, ___mInitDone_9)); }
-	inline bool get_mInitDone_9() const { return ___mInitDone_9; }
-	inline bool* get_address_of_mInitDone_9() { return &___mInitDone_9; }
-	inline void set_mInitDone_9(bool value)
-	{
-		___mInitDone_9 = value;
-	}
-
-	inline static int32_t get_offset_of_mWidget_10() { return static_cast<int32_t>(offsetof(UIButtonColor_t2038074180, ___mWidget_10)); }
-	inline UIWidget_t3538521925 * get_mWidget_10() const { return ___mWidget_10; }
-	inline UIWidget_t3538521925 ** get_address_of_mWidget_10() { return &___mWidget_10; }
-	inline void set_mWidget_10(UIWidget_t3538521925 * value)
-	{
-		___mWidget_10 = value;
-		Il2CppCodeGenWriteBarrier((&___mWidget_10), value);
-	}
-
-	inline static int32_t get_offset_of_mState_11() { return static_cast<int32_t>(offsetof(UIButtonColor_t2038074180, ___mState_11)); }
-	inline int32_t get_mState_11() const { return ___mState_11; }
-	inline int32_t* get_address_of_mState_11() { return &___mState_11; }
-	inline void set_mState_11(int32_t value)
-	{
-		___mState_11 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // UIBUTTONCOLOR_T2038074180_H
 #ifndef UIPANEL_T1716472341_H
 #define UIPANEL_T1716472341_H
 #ifdef __clang__
@@ -14264,6 +13949,179 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // UIPANEL_T1716472341_H
+#ifndef UIPROGRESSBAR_T1222110469_H
+#define UIPROGRESSBAR_T1222110469_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UIProgressBar
+struct  UIProgressBar_t1222110469  : public UIWidgetContainer_t30162560
+{
+public:
+	// UIProgressBar/OnDragFinished UIProgressBar::onDragFinished
+	OnDragFinished_t3715779777 * ___onDragFinished_3;
+	// UnityEngine.Transform UIProgressBar::thumb
+	Transform_t3600365921 * ___thumb_4;
+	// UIWidget UIProgressBar::mBG
+	UIWidget_t3538521925 * ___mBG_5;
+	// UIWidget UIProgressBar::mFG
+	UIWidget_t3538521925 * ___mFG_6;
+	// System.Single UIProgressBar::mValue
+	float ___mValue_7;
+	// UIProgressBar/FillDirection UIProgressBar::mFill
+	int32_t ___mFill_8;
+	// System.Boolean UIProgressBar::mStarted
+	bool ___mStarted_9;
+	// UnityEngine.Transform UIProgressBar::mTrans
+	Transform_t3600365921 * ___mTrans_10;
+	// System.Boolean UIProgressBar::mIsDirty
+	bool ___mIsDirty_11;
+	// UnityEngine.Camera UIProgressBar::mCam
+	Camera_t4157153871 * ___mCam_12;
+	// System.Single UIProgressBar::mOffset
+	float ___mOffset_13;
+	// System.Int32 UIProgressBar::numberOfSteps
+	int32_t ___numberOfSteps_14;
+	// System.Collections.Generic.List`1<EventDelegate> UIProgressBar::onChange
+	List_1_t4210400802 * ___onChange_15;
+
+public:
+	inline static int32_t get_offset_of_onDragFinished_3() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___onDragFinished_3)); }
+	inline OnDragFinished_t3715779777 * get_onDragFinished_3() const { return ___onDragFinished_3; }
+	inline OnDragFinished_t3715779777 ** get_address_of_onDragFinished_3() { return &___onDragFinished_3; }
+	inline void set_onDragFinished_3(OnDragFinished_t3715779777 * value)
+	{
+		___onDragFinished_3 = value;
+		Il2CppCodeGenWriteBarrier((&___onDragFinished_3), value);
+	}
+
+	inline static int32_t get_offset_of_thumb_4() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___thumb_4)); }
+	inline Transform_t3600365921 * get_thumb_4() const { return ___thumb_4; }
+	inline Transform_t3600365921 ** get_address_of_thumb_4() { return &___thumb_4; }
+	inline void set_thumb_4(Transform_t3600365921 * value)
+	{
+		___thumb_4 = value;
+		Il2CppCodeGenWriteBarrier((&___thumb_4), value);
+	}
+
+	inline static int32_t get_offset_of_mBG_5() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___mBG_5)); }
+	inline UIWidget_t3538521925 * get_mBG_5() const { return ___mBG_5; }
+	inline UIWidget_t3538521925 ** get_address_of_mBG_5() { return &___mBG_5; }
+	inline void set_mBG_5(UIWidget_t3538521925 * value)
+	{
+		___mBG_5 = value;
+		Il2CppCodeGenWriteBarrier((&___mBG_5), value);
+	}
+
+	inline static int32_t get_offset_of_mFG_6() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___mFG_6)); }
+	inline UIWidget_t3538521925 * get_mFG_6() const { return ___mFG_6; }
+	inline UIWidget_t3538521925 ** get_address_of_mFG_6() { return &___mFG_6; }
+	inline void set_mFG_6(UIWidget_t3538521925 * value)
+	{
+		___mFG_6 = value;
+		Il2CppCodeGenWriteBarrier((&___mFG_6), value);
+	}
+
+	inline static int32_t get_offset_of_mValue_7() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___mValue_7)); }
+	inline float get_mValue_7() const { return ___mValue_7; }
+	inline float* get_address_of_mValue_7() { return &___mValue_7; }
+	inline void set_mValue_7(float value)
+	{
+		___mValue_7 = value;
+	}
+
+	inline static int32_t get_offset_of_mFill_8() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___mFill_8)); }
+	inline int32_t get_mFill_8() const { return ___mFill_8; }
+	inline int32_t* get_address_of_mFill_8() { return &___mFill_8; }
+	inline void set_mFill_8(int32_t value)
+	{
+		___mFill_8 = value;
+	}
+
+	inline static int32_t get_offset_of_mStarted_9() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___mStarted_9)); }
+	inline bool get_mStarted_9() const { return ___mStarted_9; }
+	inline bool* get_address_of_mStarted_9() { return &___mStarted_9; }
+	inline void set_mStarted_9(bool value)
+	{
+		___mStarted_9 = value;
+	}
+
+	inline static int32_t get_offset_of_mTrans_10() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___mTrans_10)); }
+	inline Transform_t3600365921 * get_mTrans_10() const { return ___mTrans_10; }
+	inline Transform_t3600365921 ** get_address_of_mTrans_10() { return &___mTrans_10; }
+	inline void set_mTrans_10(Transform_t3600365921 * value)
+	{
+		___mTrans_10 = value;
+		Il2CppCodeGenWriteBarrier((&___mTrans_10), value);
+	}
+
+	inline static int32_t get_offset_of_mIsDirty_11() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___mIsDirty_11)); }
+	inline bool get_mIsDirty_11() const { return ___mIsDirty_11; }
+	inline bool* get_address_of_mIsDirty_11() { return &___mIsDirty_11; }
+	inline void set_mIsDirty_11(bool value)
+	{
+		___mIsDirty_11 = value;
+	}
+
+	inline static int32_t get_offset_of_mCam_12() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___mCam_12)); }
+	inline Camera_t4157153871 * get_mCam_12() const { return ___mCam_12; }
+	inline Camera_t4157153871 ** get_address_of_mCam_12() { return &___mCam_12; }
+	inline void set_mCam_12(Camera_t4157153871 * value)
+	{
+		___mCam_12 = value;
+		Il2CppCodeGenWriteBarrier((&___mCam_12), value);
+	}
+
+	inline static int32_t get_offset_of_mOffset_13() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___mOffset_13)); }
+	inline float get_mOffset_13() const { return ___mOffset_13; }
+	inline float* get_address_of_mOffset_13() { return &___mOffset_13; }
+	inline void set_mOffset_13(float value)
+	{
+		___mOffset_13 = value;
+	}
+
+	inline static int32_t get_offset_of_numberOfSteps_14() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___numberOfSteps_14)); }
+	inline int32_t get_numberOfSteps_14() const { return ___numberOfSteps_14; }
+	inline int32_t* get_address_of_numberOfSteps_14() { return &___numberOfSteps_14; }
+	inline void set_numberOfSteps_14(int32_t value)
+	{
+		___numberOfSteps_14 = value;
+	}
+
+	inline static int32_t get_offset_of_onChange_15() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469, ___onChange_15)); }
+	inline List_1_t4210400802 * get_onChange_15() const { return ___onChange_15; }
+	inline List_1_t4210400802 ** get_address_of_onChange_15() { return &___onChange_15; }
+	inline void set_onChange_15(List_1_t4210400802 * value)
+	{
+		___onChange_15 = value;
+		Il2CppCodeGenWriteBarrier((&___onChange_15), value);
+	}
+};
+
+struct UIProgressBar_t1222110469_StaticFields
+{
+public:
+	// UIProgressBar UIProgressBar::current
+	UIProgressBar_t1222110469 * ___current_2;
+
+public:
+	inline static int32_t get_offset_of_current_2() { return static_cast<int32_t>(offsetof(UIProgressBar_t1222110469_StaticFields, ___current_2)); }
+	inline UIProgressBar_t1222110469 * get_current_2() const { return ___current_2; }
+	inline UIProgressBar_t1222110469 ** get_address_of_current_2() { return &___current_2; }
+	inline void set_current_2(UIProgressBar_t1222110469 * value)
+	{
+		___current_2 = value;
+		Il2CppCodeGenWriteBarrier((&___current_2), value);
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // UIPROGRESSBAR_T1222110469_H
 #ifndef UIWIDGET_T3538521925_H
 #define UIWIDGET_T3538521925_H
 #ifdef __clang__
@@ -14837,148 +14695,6 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // TWEENSCALE_T2539309033_H
-#ifndef TWEENVOLUME_T3718612080_H
-#define TWEENVOLUME_T3718612080_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// TweenVolume
-struct  TweenVolume_t3718612080  : public UITweener_t260334902
-{
-public:
-	// System.Single TweenVolume::from
-	float ___from_21;
-	// System.Single TweenVolume::to
-	float ___to_22;
-	// UnityEngine.AudioSource TweenVolume::mSource
-	AudioSource_t3935305588 * ___mSource_23;
-
-public:
-	inline static int32_t get_offset_of_from_21() { return static_cast<int32_t>(offsetof(TweenVolume_t3718612080, ___from_21)); }
-	inline float get_from_21() const { return ___from_21; }
-	inline float* get_address_of_from_21() { return &___from_21; }
-	inline void set_from_21(float value)
-	{
-		___from_21 = value;
-	}
-
-	inline static int32_t get_offset_of_to_22() { return static_cast<int32_t>(offsetof(TweenVolume_t3718612080, ___to_22)); }
-	inline float get_to_22() const { return ___to_22; }
-	inline float* get_address_of_to_22() { return &___to_22; }
-	inline void set_to_22(float value)
-	{
-		___to_22 = value;
-	}
-
-	inline static int32_t get_offset_of_mSource_23() { return static_cast<int32_t>(offsetof(TweenVolume_t3718612080, ___mSource_23)); }
-	inline AudioSource_t3935305588 * get_mSource_23() const { return ___mSource_23; }
-	inline AudioSource_t3935305588 ** get_address_of_mSource_23() { return &___mSource_23; }
-	inline void set_mSource_23(AudioSource_t3935305588 * value)
-	{
-		___mSource_23 = value;
-		Il2CppCodeGenWriteBarrier((&___mSource_23), value);
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // TWEENVOLUME_T3718612080_H
-#ifndef TWEENTRANSFORM_T1195296467_H
-#define TWEENTRANSFORM_T1195296467_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// TweenTransform
-struct  TweenTransform_t1195296467  : public UITweener_t260334902
-{
-public:
-	// UnityEngine.Transform TweenTransform::from
-	Transform_t3600365921 * ___from_21;
-	// UnityEngine.Transform TweenTransform::to
-	Transform_t3600365921 * ___to_22;
-	// System.Boolean TweenTransform::parentWhenFinished
-	bool ___parentWhenFinished_23;
-	// UnityEngine.Transform TweenTransform::mTrans
-	Transform_t3600365921 * ___mTrans_24;
-	// UnityEngine.Vector3 TweenTransform::mPos
-	Vector3_t3722313464  ___mPos_25;
-	// UnityEngine.Quaternion TweenTransform::mRot
-	Quaternion_t2301928331  ___mRot_26;
-	// UnityEngine.Vector3 TweenTransform::mScale
-	Vector3_t3722313464  ___mScale_27;
-
-public:
-	inline static int32_t get_offset_of_from_21() { return static_cast<int32_t>(offsetof(TweenTransform_t1195296467, ___from_21)); }
-	inline Transform_t3600365921 * get_from_21() const { return ___from_21; }
-	inline Transform_t3600365921 ** get_address_of_from_21() { return &___from_21; }
-	inline void set_from_21(Transform_t3600365921 * value)
-	{
-		___from_21 = value;
-		Il2CppCodeGenWriteBarrier((&___from_21), value);
-	}
-
-	inline static int32_t get_offset_of_to_22() { return static_cast<int32_t>(offsetof(TweenTransform_t1195296467, ___to_22)); }
-	inline Transform_t3600365921 * get_to_22() const { return ___to_22; }
-	inline Transform_t3600365921 ** get_address_of_to_22() { return &___to_22; }
-	inline void set_to_22(Transform_t3600365921 * value)
-	{
-		___to_22 = value;
-		Il2CppCodeGenWriteBarrier((&___to_22), value);
-	}
-
-	inline static int32_t get_offset_of_parentWhenFinished_23() { return static_cast<int32_t>(offsetof(TweenTransform_t1195296467, ___parentWhenFinished_23)); }
-	inline bool get_parentWhenFinished_23() const { return ___parentWhenFinished_23; }
-	inline bool* get_address_of_parentWhenFinished_23() { return &___parentWhenFinished_23; }
-	inline void set_parentWhenFinished_23(bool value)
-	{
-		___parentWhenFinished_23 = value;
-	}
-
-	inline static int32_t get_offset_of_mTrans_24() { return static_cast<int32_t>(offsetof(TweenTransform_t1195296467, ___mTrans_24)); }
-	inline Transform_t3600365921 * get_mTrans_24() const { return ___mTrans_24; }
-	inline Transform_t3600365921 ** get_address_of_mTrans_24() { return &___mTrans_24; }
-	inline void set_mTrans_24(Transform_t3600365921 * value)
-	{
-		___mTrans_24 = value;
-		Il2CppCodeGenWriteBarrier((&___mTrans_24), value);
-	}
-
-	inline static int32_t get_offset_of_mPos_25() { return static_cast<int32_t>(offsetof(TweenTransform_t1195296467, ___mPos_25)); }
-	inline Vector3_t3722313464  get_mPos_25() const { return ___mPos_25; }
-	inline Vector3_t3722313464 * get_address_of_mPos_25() { return &___mPos_25; }
-	inline void set_mPos_25(Vector3_t3722313464  value)
-	{
-		___mPos_25 = value;
-	}
-
-	inline static int32_t get_offset_of_mRot_26() { return static_cast<int32_t>(offsetof(TweenTransform_t1195296467, ___mRot_26)); }
-	inline Quaternion_t2301928331  get_mRot_26() const { return ___mRot_26; }
-	inline Quaternion_t2301928331 * get_address_of_mRot_26() { return &___mRot_26; }
-	inline void set_mRot_26(Quaternion_t2301928331  value)
-	{
-		___mRot_26 = value;
-	}
-
-	inline static int32_t get_offset_of_mScale_27() { return static_cast<int32_t>(offsetof(TweenTransform_t1195296467, ___mScale_27)); }
-	inline Vector3_t3722313464  get_mScale_27() const { return ___mScale_27; }
-	inline Vector3_t3722313464 * get_address_of_mScale_27() { return &___mScale_27; }
-	inline void set_mScale_27(Vector3_t3722313464  value)
-	{
-		___mScale_27 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // TWEENTRANSFORM_T1195296467_H
 #ifndef UITABLE_T3168834800_H
 #define UITABLE_T3168834800_H
 #ifdef __clang__
@@ -15181,6 +14897,269 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // UITABLE_T3168834800_H
+#ifndef TWEENTRANSFORM_T1195296467_H
+#define TWEENTRANSFORM_T1195296467_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// TweenTransform
+struct  TweenTransform_t1195296467  : public UITweener_t260334902
+{
+public:
+	// UnityEngine.Transform TweenTransform::from
+	Transform_t3600365921 * ___from_21;
+	// UnityEngine.Transform TweenTransform::to
+	Transform_t3600365921 * ___to_22;
+	// System.Boolean TweenTransform::parentWhenFinished
+	bool ___parentWhenFinished_23;
+	// UnityEngine.Transform TweenTransform::mTrans
+	Transform_t3600365921 * ___mTrans_24;
+	// UnityEngine.Vector3 TweenTransform::mPos
+	Vector3_t3722313464  ___mPos_25;
+	// UnityEngine.Quaternion TweenTransform::mRot
+	Quaternion_t2301928331  ___mRot_26;
+	// UnityEngine.Vector3 TweenTransform::mScale
+	Vector3_t3722313464  ___mScale_27;
+
+public:
+	inline static int32_t get_offset_of_from_21() { return static_cast<int32_t>(offsetof(TweenTransform_t1195296467, ___from_21)); }
+	inline Transform_t3600365921 * get_from_21() const { return ___from_21; }
+	inline Transform_t3600365921 ** get_address_of_from_21() { return &___from_21; }
+	inline void set_from_21(Transform_t3600365921 * value)
+	{
+		___from_21 = value;
+		Il2CppCodeGenWriteBarrier((&___from_21), value);
+	}
+
+	inline static int32_t get_offset_of_to_22() { return static_cast<int32_t>(offsetof(TweenTransform_t1195296467, ___to_22)); }
+	inline Transform_t3600365921 * get_to_22() const { return ___to_22; }
+	inline Transform_t3600365921 ** get_address_of_to_22() { return &___to_22; }
+	inline void set_to_22(Transform_t3600365921 * value)
+	{
+		___to_22 = value;
+		Il2CppCodeGenWriteBarrier((&___to_22), value);
+	}
+
+	inline static int32_t get_offset_of_parentWhenFinished_23() { return static_cast<int32_t>(offsetof(TweenTransform_t1195296467, ___parentWhenFinished_23)); }
+	inline bool get_parentWhenFinished_23() const { return ___parentWhenFinished_23; }
+	inline bool* get_address_of_parentWhenFinished_23() { return &___parentWhenFinished_23; }
+	inline void set_parentWhenFinished_23(bool value)
+	{
+		___parentWhenFinished_23 = value;
+	}
+
+	inline static int32_t get_offset_of_mTrans_24() { return static_cast<int32_t>(offsetof(TweenTransform_t1195296467, ___mTrans_24)); }
+	inline Transform_t3600365921 * get_mTrans_24() const { return ___mTrans_24; }
+	inline Transform_t3600365921 ** get_address_of_mTrans_24() { return &___mTrans_24; }
+	inline void set_mTrans_24(Transform_t3600365921 * value)
+	{
+		___mTrans_24 = value;
+		Il2CppCodeGenWriteBarrier((&___mTrans_24), value);
+	}
+
+	inline static int32_t get_offset_of_mPos_25() { return static_cast<int32_t>(offsetof(TweenTransform_t1195296467, ___mPos_25)); }
+	inline Vector3_t3722313464  get_mPos_25() const { return ___mPos_25; }
+	inline Vector3_t3722313464 * get_address_of_mPos_25() { return &___mPos_25; }
+	inline void set_mPos_25(Vector3_t3722313464  value)
+	{
+		___mPos_25 = value;
+	}
+
+	inline static int32_t get_offset_of_mRot_26() { return static_cast<int32_t>(offsetof(TweenTransform_t1195296467, ___mRot_26)); }
+	inline Quaternion_t2301928331  get_mRot_26() const { return ___mRot_26; }
+	inline Quaternion_t2301928331 * get_address_of_mRot_26() { return &___mRot_26; }
+	inline void set_mRot_26(Quaternion_t2301928331  value)
+	{
+		___mRot_26 = value;
+	}
+
+	inline static int32_t get_offset_of_mScale_27() { return static_cast<int32_t>(offsetof(TweenTransform_t1195296467, ___mScale_27)); }
+	inline Vector3_t3722313464  get_mScale_27() const { return ___mScale_27; }
+	inline Vector3_t3722313464 * get_address_of_mScale_27() { return &___mScale_27; }
+	inline void set_mScale_27(Vector3_t3722313464  value)
+	{
+		___mScale_27 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // TWEENTRANSFORM_T1195296467_H
+#ifndef TWEENVOLUME_T3718612080_H
+#define TWEENVOLUME_T3718612080_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// TweenVolume
+struct  TweenVolume_t3718612080  : public UITweener_t260334902
+{
+public:
+	// System.Single TweenVolume::from
+	float ___from_21;
+	// System.Single TweenVolume::to
+	float ___to_22;
+	// UnityEngine.AudioSource TweenVolume::mSource
+	AudioSource_t3935305588 * ___mSource_23;
+
+public:
+	inline static int32_t get_offset_of_from_21() { return static_cast<int32_t>(offsetof(TweenVolume_t3718612080, ___from_21)); }
+	inline float get_from_21() const { return ___from_21; }
+	inline float* get_address_of_from_21() { return &___from_21; }
+	inline void set_from_21(float value)
+	{
+		___from_21 = value;
+	}
+
+	inline static int32_t get_offset_of_to_22() { return static_cast<int32_t>(offsetof(TweenVolume_t3718612080, ___to_22)); }
+	inline float get_to_22() const { return ___to_22; }
+	inline float* get_address_of_to_22() { return &___to_22; }
+	inline void set_to_22(float value)
+	{
+		___to_22 = value;
+	}
+
+	inline static int32_t get_offset_of_mSource_23() { return static_cast<int32_t>(offsetof(TweenVolume_t3718612080, ___mSource_23)); }
+	inline AudioSource_t3935305588 * get_mSource_23() const { return ___mSource_23; }
+	inline AudioSource_t3935305588 ** get_address_of_mSource_23() { return &___mSource_23; }
+	inline void set_mSource_23(AudioSource_t3935305588 * value)
+	{
+		___mSource_23 = value;
+		Il2CppCodeGenWriteBarrier((&___mSource_23), value);
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // TWEENVOLUME_T3718612080_H
+#ifndef UIBUTTONCOLOR_T2038074180_H
+#define UIBUTTONCOLOR_T2038074180_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UIButtonColor
+struct  UIButtonColor_t2038074180  : public UIWidgetContainer_t30162560
+{
+public:
+	// UnityEngine.GameObject UIButtonColor::tweenTarget
+	GameObject_t1113636619 * ___tweenTarget_2;
+	// UnityEngine.Color UIButtonColor::hover
+	Color_t2555686324  ___hover_3;
+	// UnityEngine.Color UIButtonColor::pressed
+	Color_t2555686324  ___pressed_4;
+	// UnityEngine.Color UIButtonColor::disabledColor
+	Color_t2555686324  ___disabledColor_5;
+	// System.Single UIButtonColor::duration
+	float ___duration_6;
+	// UnityEngine.Color UIButtonColor::mStartingColor
+	Color_t2555686324  ___mStartingColor_7;
+	// UnityEngine.Color UIButtonColor::mDefaultColor
+	Color_t2555686324  ___mDefaultColor_8;
+	// System.Boolean UIButtonColor::mInitDone
+	bool ___mInitDone_9;
+	// UIWidget UIButtonColor::mWidget
+	UIWidget_t3538521925 * ___mWidget_10;
+	// UIButtonColor/State UIButtonColor::mState
+	int32_t ___mState_11;
+
+public:
+	inline static int32_t get_offset_of_tweenTarget_2() { return static_cast<int32_t>(offsetof(UIButtonColor_t2038074180, ___tweenTarget_2)); }
+	inline GameObject_t1113636619 * get_tweenTarget_2() const { return ___tweenTarget_2; }
+	inline GameObject_t1113636619 ** get_address_of_tweenTarget_2() { return &___tweenTarget_2; }
+	inline void set_tweenTarget_2(GameObject_t1113636619 * value)
+	{
+		___tweenTarget_2 = value;
+		Il2CppCodeGenWriteBarrier((&___tweenTarget_2), value);
+	}
+
+	inline static int32_t get_offset_of_hover_3() { return static_cast<int32_t>(offsetof(UIButtonColor_t2038074180, ___hover_3)); }
+	inline Color_t2555686324  get_hover_3() const { return ___hover_3; }
+	inline Color_t2555686324 * get_address_of_hover_3() { return &___hover_3; }
+	inline void set_hover_3(Color_t2555686324  value)
+	{
+		___hover_3 = value;
+	}
+
+	inline static int32_t get_offset_of_pressed_4() { return static_cast<int32_t>(offsetof(UIButtonColor_t2038074180, ___pressed_4)); }
+	inline Color_t2555686324  get_pressed_4() const { return ___pressed_4; }
+	inline Color_t2555686324 * get_address_of_pressed_4() { return &___pressed_4; }
+	inline void set_pressed_4(Color_t2555686324  value)
+	{
+		___pressed_4 = value;
+	}
+
+	inline static int32_t get_offset_of_disabledColor_5() { return static_cast<int32_t>(offsetof(UIButtonColor_t2038074180, ___disabledColor_5)); }
+	inline Color_t2555686324  get_disabledColor_5() const { return ___disabledColor_5; }
+	inline Color_t2555686324 * get_address_of_disabledColor_5() { return &___disabledColor_5; }
+	inline void set_disabledColor_5(Color_t2555686324  value)
+	{
+		___disabledColor_5 = value;
+	}
+
+	inline static int32_t get_offset_of_duration_6() { return static_cast<int32_t>(offsetof(UIButtonColor_t2038074180, ___duration_6)); }
+	inline float get_duration_6() const { return ___duration_6; }
+	inline float* get_address_of_duration_6() { return &___duration_6; }
+	inline void set_duration_6(float value)
+	{
+		___duration_6 = value;
+	}
+
+	inline static int32_t get_offset_of_mStartingColor_7() { return static_cast<int32_t>(offsetof(UIButtonColor_t2038074180, ___mStartingColor_7)); }
+	inline Color_t2555686324  get_mStartingColor_7() const { return ___mStartingColor_7; }
+	inline Color_t2555686324 * get_address_of_mStartingColor_7() { return &___mStartingColor_7; }
+	inline void set_mStartingColor_7(Color_t2555686324  value)
+	{
+		___mStartingColor_7 = value;
+	}
+
+	inline static int32_t get_offset_of_mDefaultColor_8() { return static_cast<int32_t>(offsetof(UIButtonColor_t2038074180, ___mDefaultColor_8)); }
+	inline Color_t2555686324  get_mDefaultColor_8() const { return ___mDefaultColor_8; }
+	inline Color_t2555686324 * get_address_of_mDefaultColor_8() { return &___mDefaultColor_8; }
+	inline void set_mDefaultColor_8(Color_t2555686324  value)
+	{
+		___mDefaultColor_8 = value;
+	}
+
+	inline static int32_t get_offset_of_mInitDone_9() { return static_cast<int32_t>(offsetof(UIButtonColor_t2038074180, ___mInitDone_9)); }
+	inline bool get_mInitDone_9() const { return ___mInitDone_9; }
+	inline bool* get_address_of_mInitDone_9() { return &___mInitDone_9; }
+	inline void set_mInitDone_9(bool value)
+	{
+		___mInitDone_9 = value;
+	}
+
+	inline static int32_t get_offset_of_mWidget_10() { return static_cast<int32_t>(offsetof(UIButtonColor_t2038074180, ___mWidget_10)); }
+	inline UIWidget_t3538521925 * get_mWidget_10() const { return ___mWidget_10; }
+	inline UIWidget_t3538521925 ** get_address_of_mWidget_10() { return &___mWidget_10; }
+	inline void set_mWidget_10(UIWidget_t3538521925 * value)
+	{
+		___mWidget_10 = value;
+		Il2CppCodeGenWriteBarrier((&___mWidget_10), value);
+	}
+
+	inline static int32_t get_offset_of_mState_11() { return static_cast<int32_t>(offsetof(UIButtonColor_t2038074180, ___mState_11)); }
+	inline int32_t get_mState_11() const { return ___mState_11; }
+	inline int32_t* get_address_of_mState_11() { return &___mState_11; }
+	inline void set_mState_11(int32_t value)
+	{
+		___mState_11 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // UIBUTTONCOLOR_T2038074180_H
 #ifndef UIBASICSPRITE_T1521297657_H
 #define UIBASICSPRITE_T1521297657_H
 #ifdef __clang__
@@ -16072,6 +16051,78 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // UILABEL_T3248798549_H
+#ifndef UISPRITE_T194114938_H
+#define UISPRITE_T194114938_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UISprite
+struct  UISprite_t194114938  : public UIBasicSprite_t1521297657
+{
+public:
+	// UIAtlas UISprite::mAtlas
+	UIAtlas_t3195533529 * ___mAtlas_70;
+	// System.String UISprite::mSpriteName
+	String_t* ___mSpriteName_71;
+	// System.Boolean UISprite::mFillCenter
+	bool ___mFillCenter_72;
+	// UISpriteData UISprite::mSprite
+	UISpriteData_t900308526 * ___mSprite_73;
+	// System.Boolean UISprite::mSpriteSet
+	bool ___mSpriteSet_74;
+
+public:
+	inline static int32_t get_offset_of_mAtlas_70() { return static_cast<int32_t>(offsetof(UISprite_t194114938, ___mAtlas_70)); }
+	inline UIAtlas_t3195533529 * get_mAtlas_70() const { return ___mAtlas_70; }
+	inline UIAtlas_t3195533529 ** get_address_of_mAtlas_70() { return &___mAtlas_70; }
+	inline void set_mAtlas_70(UIAtlas_t3195533529 * value)
+	{
+		___mAtlas_70 = value;
+		Il2CppCodeGenWriteBarrier((&___mAtlas_70), value);
+	}
+
+	inline static int32_t get_offset_of_mSpriteName_71() { return static_cast<int32_t>(offsetof(UISprite_t194114938, ___mSpriteName_71)); }
+	inline String_t* get_mSpriteName_71() const { return ___mSpriteName_71; }
+	inline String_t** get_address_of_mSpriteName_71() { return &___mSpriteName_71; }
+	inline void set_mSpriteName_71(String_t* value)
+	{
+		___mSpriteName_71 = value;
+		Il2CppCodeGenWriteBarrier((&___mSpriteName_71), value);
+	}
+
+	inline static int32_t get_offset_of_mFillCenter_72() { return static_cast<int32_t>(offsetof(UISprite_t194114938, ___mFillCenter_72)); }
+	inline bool get_mFillCenter_72() const { return ___mFillCenter_72; }
+	inline bool* get_address_of_mFillCenter_72() { return &___mFillCenter_72; }
+	inline void set_mFillCenter_72(bool value)
+	{
+		___mFillCenter_72 = value;
+	}
+
+	inline static int32_t get_offset_of_mSprite_73() { return static_cast<int32_t>(offsetof(UISprite_t194114938, ___mSprite_73)); }
+	inline UISpriteData_t900308526 * get_mSprite_73() const { return ___mSprite_73; }
+	inline UISpriteData_t900308526 ** get_address_of_mSprite_73() { return &___mSprite_73; }
+	inline void set_mSprite_73(UISpriteData_t900308526 * value)
+	{
+		___mSprite_73 = value;
+		Il2CppCodeGenWriteBarrier((&___mSprite_73), value);
+	}
+
+	inline static int32_t get_offset_of_mSpriteSet_74() { return static_cast<int32_t>(offsetof(UISprite_t194114938, ___mSpriteSet_74)); }
+	inline bool get_mSpriteSet_74() const { return ___mSpriteSet_74; }
+	inline bool* get_address_of_mSpriteSet_74() { return &___mSpriteSet_74; }
+	inline void set_mSpriteSet_74(bool value)
+	{
+		___mSpriteSet_74 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // UISPRITE_T194114938_H
 #ifndef UITEXTURE_T3471168817_H
 #define UITEXTURE_T3471168817_H
 #ifdef __clang__
@@ -16153,78 +16204,6 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // UITEXTURE_T3471168817_H
-#ifndef UISPRITE_T194114938_H
-#define UISPRITE_T194114938_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UISprite
-struct  UISprite_t194114938  : public UIBasicSprite_t1521297657
-{
-public:
-	// UIAtlas UISprite::mAtlas
-	UIAtlas_t3195533529 * ___mAtlas_70;
-	// System.String UISprite::mSpriteName
-	String_t* ___mSpriteName_71;
-	// System.Boolean UISprite::mFillCenter
-	bool ___mFillCenter_72;
-	// UISpriteData UISprite::mSprite
-	UISpriteData_t900308526 * ___mSprite_73;
-	// System.Boolean UISprite::mSpriteSet
-	bool ___mSpriteSet_74;
-
-public:
-	inline static int32_t get_offset_of_mAtlas_70() { return static_cast<int32_t>(offsetof(UISprite_t194114938, ___mAtlas_70)); }
-	inline UIAtlas_t3195533529 * get_mAtlas_70() const { return ___mAtlas_70; }
-	inline UIAtlas_t3195533529 ** get_address_of_mAtlas_70() { return &___mAtlas_70; }
-	inline void set_mAtlas_70(UIAtlas_t3195533529 * value)
-	{
-		___mAtlas_70 = value;
-		Il2CppCodeGenWriteBarrier((&___mAtlas_70), value);
-	}
-
-	inline static int32_t get_offset_of_mSpriteName_71() { return static_cast<int32_t>(offsetof(UISprite_t194114938, ___mSpriteName_71)); }
-	inline String_t* get_mSpriteName_71() const { return ___mSpriteName_71; }
-	inline String_t** get_address_of_mSpriteName_71() { return &___mSpriteName_71; }
-	inline void set_mSpriteName_71(String_t* value)
-	{
-		___mSpriteName_71 = value;
-		Il2CppCodeGenWriteBarrier((&___mSpriteName_71), value);
-	}
-
-	inline static int32_t get_offset_of_mFillCenter_72() { return static_cast<int32_t>(offsetof(UISprite_t194114938, ___mFillCenter_72)); }
-	inline bool get_mFillCenter_72() const { return ___mFillCenter_72; }
-	inline bool* get_address_of_mFillCenter_72() { return &___mFillCenter_72; }
-	inline void set_mFillCenter_72(bool value)
-	{
-		___mFillCenter_72 = value;
-	}
-
-	inline static int32_t get_offset_of_mSprite_73() { return static_cast<int32_t>(offsetof(UISprite_t194114938, ___mSprite_73)); }
-	inline UISpriteData_t900308526 * get_mSprite_73() const { return ___mSprite_73; }
-	inline UISpriteData_t900308526 ** get_address_of_mSprite_73() { return &___mSprite_73; }
-	inline void set_mSprite_73(UISpriteData_t900308526 * value)
-	{
-		___mSprite_73 = value;
-		Il2CppCodeGenWriteBarrier((&___mSprite_73), value);
-	}
-
-	inline static int32_t get_offset_of_mSpriteSet_74() { return static_cast<int32_t>(offsetof(UISprite_t194114938, ___mSpriteSet_74)); }
-	inline bool get_mSpriteSet_74() const { return ___mSpriteSet_74; }
-	inline bool* get_address_of_mSpriteSet_74() { return &___mSpriteSet_74; }
-	inline void set_mSpriteSet_74(bool value)
-	{
-		___mSpriteSet_74 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // UISPRITE_T194114938_H
 #ifndef UI2DSPRITE_T1366157572_H
 #define UI2DSPRITE_T1366157572_H
 #ifdef __clang__
@@ -18128,8 +18107,6 @@ extern "C"  Type_t * Object_GetType_m88164663 (RuntimeObject * __this, const Run
 extern "C"  String_t* String_Concat_m2971454694 (RuntimeObject * __this /* static, unused */, ObjectU5BU5D_t2843939325* p0, const RuntimeMethod* method) IL2CPP_METHOD_ATTR;
 // System.Void UnityEngine.Debug::LogWarning(System.Object,UnityEngine.Object)
 extern "C"  void Debug_LogWarning_m831581295 (RuntimeObject * __this /* static, unused */, RuntimeObject * p0, Object_t631007953 * p1, const RuntimeMethod* method) IL2CPP_METHOD_ATTR;
-// System.Void UIScrollView/OnDragNotification::.ctor(System.Object,System.IntPtr)
-extern "C"  void OnDragNotification__ctor_m3079513146 (OnDragNotification_t1437737811 * __this, RuntimeObject * ___object0, intptr_t ___method1, const RuntimeMethod* method) IL2CPP_METHOD_ATTR;
 // System.Void UIProgressBar/OnDragFinished::.ctor(System.Object,System.IntPtr)
 extern "C"  void OnDragFinished__ctor_m59749711 (OnDragFinished_t3715779777 * __this, RuntimeObject * ___object0, intptr_t ___method1, const RuntimeMethod* method) IL2CPP_METHOD_ATTR;
 // UIPanel UIScrollView::get_panel()
@@ -45498,7 +45475,7 @@ extern "C"  void UICenterOnChild_Recenter_m2143222953 (UICenterOnChild_t25306363
 		bool L_1 = Object_op_Equality_m1810815630(NULL /*static, unused*/, L_0, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
 		if (!L_1)
 		{
-			goto IL_0139;
+			goto IL_0112;
 		}
 	}
 	{
@@ -45550,721 +45527,711 @@ IL_0072:
 		bool L_15 = Object_op_Implicit_m3574996620(NULL /*static, unused*/, L_14, /*hidden argument*/NULL);
 		if (!L_15)
 		{
-			goto IL_00b5;
+			goto IL_008e;
 		}
 	}
 	{
 		UIScrollView_t1973404950 * L_16 = __this->get_mScrollView_6();
 		NullCheck(L_16);
 		L_16->set_centerOnChild_39(__this);
+	}
+
+IL_008e:
+	{
 		UIScrollView_t1973404950 * L_17 = __this->get_mScrollView_6();
-		UIScrollView_t1973404950 * L_18 = L_17;
-		NullCheck(L_18);
-		OnDragNotification_t1437737811 * L_19 = L_18->get_onDragFinished_19();
-		intptr_t L_20 = (intptr_t)UICenterOnChild_OnDragFinished_m2738335918_RuntimeMethod_var;
-		OnDragNotification_t1437737811 * L_21 = (OnDragNotification_t1437737811 *)il2cpp_codegen_object_new(OnDragNotification_t1437737811_il2cpp_TypeInfo_var);
-		OnDragNotification__ctor_m3079513146(L_21, __this, L_20, /*hidden argument*/NULL);
-		Delegate_t1188392813 * L_22 = Delegate_Combine_m1859655160(NULL /*static, unused*/, L_19, L_21, /*hidden argument*/NULL);
-		NullCheck(L_18);
-		L_18->set_onDragFinished_19(((OnDragNotification_t1437737811 *)CastclassSealed((RuntimeObject*)L_22, OnDragNotification_t1437737811_il2cpp_TypeInfo_var)));
-	}
-
-IL_00b5:
-	{
-		UIScrollView_t1973404950 * L_23 = __this->get_mScrollView_6();
-		NullCheck(L_23);
-		UIProgressBar_t1222110469 * L_24 = L_23->get_horizontalScrollBar_13();
+		NullCheck(L_17);
+		UIProgressBar_t1222110469 * L_18 = L_17->get_horizontalScrollBar_13();
 		IL2CPP_RUNTIME_CLASS_INIT(Object_t631007953_il2cpp_TypeInfo_var);
-		bool L_25 = Object_op_Inequality_m4071470834(NULL /*static, unused*/, L_24, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
-		if (!L_25)
+		bool L_19 = Object_op_Inequality_m4071470834(NULL /*static, unused*/, L_18, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
+		if (!L_19)
 		{
-			goto IL_00f7;
+			goto IL_00d0;
 		}
 	}
 	{
-		UIScrollView_t1973404950 * L_26 = __this->get_mScrollView_6();
-		NullCheck(L_26);
-		UIProgressBar_t1222110469 * L_27 = L_26->get_horizontalScrollBar_13();
-		UIProgressBar_t1222110469 * L_28 = L_27;
-		NullCheck(L_28);
-		OnDragFinished_t3715779777 * L_29 = L_28->get_onDragFinished_3();
-		intptr_t L_30 = (intptr_t)UICenterOnChild_OnDragFinished_m2738335918_RuntimeMethod_var;
-		OnDragFinished_t3715779777 * L_31 = (OnDragFinished_t3715779777 *)il2cpp_codegen_object_new(OnDragFinished_t3715779777_il2cpp_TypeInfo_var);
-		OnDragFinished__ctor_m59749711(L_31, __this, L_30, /*hidden argument*/NULL);
-		Delegate_t1188392813 * L_32 = Delegate_Combine_m1859655160(NULL /*static, unused*/, L_29, L_31, /*hidden argument*/NULL);
-		NullCheck(L_28);
-		L_28->set_onDragFinished_3(((OnDragFinished_t3715779777 *)CastclassSealed((RuntimeObject*)L_32, OnDragFinished_t3715779777_il2cpp_TypeInfo_var)));
+		UIScrollView_t1973404950 * L_20 = __this->get_mScrollView_6();
+		NullCheck(L_20);
+		UIProgressBar_t1222110469 * L_21 = L_20->get_horizontalScrollBar_13();
+		UIProgressBar_t1222110469 * L_22 = L_21;
+		NullCheck(L_22);
+		OnDragFinished_t3715779777 * L_23 = L_22->get_onDragFinished_3();
+		intptr_t L_24 = (intptr_t)UICenterOnChild_OnDragFinished_m2738335918_RuntimeMethod_var;
+		OnDragFinished_t3715779777 * L_25 = (OnDragFinished_t3715779777 *)il2cpp_codegen_object_new(OnDragFinished_t3715779777_il2cpp_TypeInfo_var);
+		OnDragFinished__ctor_m59749711(L_25, __this, L_24, /*hidden argument*/NULL);
+		Delegate_t1188392813 * L_26 = Delegate_Combine_m1859655160(NULL /*static, unused*/, L_23, L_25, /*hidden argument*/NULL);
+		NullCheck(L_22);
+		L_22->set_onDragFinished_3(((OnDragFinished_t3715779777 *)CastclassSealed((RuntimeObject*)L_26, OnDragFinished_t3715779777_il2cpp_TypeInfo_var)));
 	}
 
-IL_00f7:
+IL_00d0:
 	{
-		UIScrollView_t1973404950 * L_33 = __this->get_mScrollView_6();
-		NullCheck(L_33);
-		UIProgressBar_t1222110469 * L_34 = L_33->get_verticalScrollBar_14();
+		UIScrollView_t1973404950 * L_27 = __this->get_mScrollView_6();
+		NullCheck(L_27);
+		UIProgressBar_t1222110469 * L_28 = L_27->get_verticalScrollBar_14();
 		IL2CPP_RUNTIME_CLASS_INIT(Object_t631007953_il2cpp_TypeInfo_var);
-		bool L_35 = Object_op_Inequality_m4071470834(NULL /*static, unused*/, L_34, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
-		if (!L_35)
+		bool L_29 = Object_op_Inequality_m4071470834(NULL /*static, unused*/, L_28, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
+		if (!L_29)
 		{
-			goto IL_0139;
+			goto IL_0112;
 		}
 	}
 	{
-		UIScrollView_t1973404950 * L_36 = __this->get_mScrollView_6();
-		NullCheck(L_36);
-		UIProgressBar_t1222110469 * L_37 = L_36->get_verticalScrollBar_14();
-		UIProgressBar_t1222110469 * L_38 = L_37;
-		NullCheck(L_38);
-		OnDragFinished_t3715779777 * L_39 = L_38->get_onDragFinished_3();
-		intptr_t L_40 = (intptr_t)UICenterOnChild_OnDragFinished_m2738335918_RuntimeMethod_var;
-		OnDragFinished_t3715779777 * L_41 = (OnDragFinished_t3715779777 *)il2cpp_codegen_object_new(OnDragFinished_t3715779777_il2cpp_TypeInfo_var);
-		OnDragFinished__ctor_m59749711(L_41, __this, L_40, /*hidden argument*/NULL);
-		Delegate_t1188392813 * L_42 = Delegate_Combine_m1859655160(NULL /*static, unused*/, L_39, L_41, /*hidden argument*/NULL);
-		NullCheck(L_38);
-		L_38->set_onDragFinished_3(((OnDragFinished_t3715779777 *)CastclassSealed((RuntimeObject*)L_42, OnDragFinished_t3715779777_il2cpp_TypeInfo_var)));
+		UIScrollView_t1973404950 * L_30 = __this->get_mScrollView_6();
+		NullCheck(L_30);
+		UIProgressBar_t1222110469 * L_31 = L_30->get_verticalScrollBar_14();
+		UIProgressBar_t1222110469 * L_32 = L_31;
+		NullCheck(L_32);
+		OnDragFinished_t3715779777 * L_33 = L_32->get_onDragFinished_3();
+		intptr_t L_34 = (intptr_t)UICenterOnChild_OnDragFinished_m2738335918_RuntimeMethod_var;
+		OnDragFinished_t3715779777 * L_35 = (OnDragFinished_t3715779777 *)il2cpp_codegen_object_new(OnDragFinished_t3715779777_il2cpp_TypeInfo_var);
+		OnDragFinished__ctor_m59749711(L_35, __this, L_34, /*hidden argument*/NULL);
+		Delegate_t1188392813 * L_36 = Delegate_Combine_m1859655160(NULL /*static, unused*/, L_33, L_35, /*hidden argument*/NULL);
+		NullCheck(L_32);
+		L_32->set_onDragFinished_3(((OnDragFinished_t3715779777 *)CastclassSealed((RuntimeObject*)L_36, OnDragFinished_t3715779777_il2cpp_TypeInfo_var)));
 	}
 
-IL_0139:
+IL_0112:
+	{
+		UIScrollView_t1973404950 * L_37 = __this->get_mScrollView_6();
+		NullCheck(L_37);
+		UIPanel_t1716472341 * L_38 = UIScrollView_get_panel_m2299845392(L_37, /*hidden argument*/NULL);
+		IL2CPP_RUNTIME_CLASS_INIT(Object_t631007953_il2cpp_TypeInfo_var);
+		bool L_39 = Object_op_Equality_m1810815630(NULL /*static, unused*/, L_38, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
+		if (!L_39)
+		{
+			goto IL_0129;
+		}
+	}
+	{
+		return;
+	}
+
+IL_0129:
+	{
+		Transform_t3600365921 * L_40 = Component_get_transform_m3162698980(__this, /*hidden argument*/NULL);
+		V_0 = L_40;
+		Transform_t3600365921 * L_41 = V_0;
+		NullCheck(L_41);
+		int32_t L_42 = Transform_get_childCount_m3145433196(L_41, /*hidden argument*/NULL);
+		if (L_42)
+		{
+			goto IL_013c;
+		}
+	}
+	{
+		return;
+	}
+
+IL_013c:
 	{
 		UIScrollView_t1973404950 * L_43 = __this->get_mScrollView_6();
 		NullCheck(L_43);
 		UIPanel_t1716472341 * L_44 = UIScrollView_get_panel_m2299845392(L_43, /*hidden argument*/NULL);
-		IL2CPP_RUNTIME_CLASS_INIT(Object_t631007953_il2cpp_TypeInfo_var);
-		bool L_45 = Object_op_Equality_m1810815630(NULL /*static, unused*/, L_44, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
-		if (!L_45)
-		{
-			goto IL_0150;
-		}
-	}
-	{
-		return;
-	}
-
-IL_0150:
-	{
-		Transform_t3600365921 * L_46 = Component_get_transform_m3162698980(__this, /*hidden argument*/NULL);
-		V_0 = L_46;
-		Transform_t3600365921 * L_47 = V_0;
+		NullCheck(L_44);
+		Vector3U5BU5D_t1718750761* L_45 = VirtFuncInvoker0< Vector3U5BU5D_t1718750761* >::Invoke(11 /* UnityEngine.Vector3[] UIRect::get_worldCorners() */, L_44);
+		V_1 = L_45;
+		Vector3U5BU5D_t1718750761* L_46 = V_1;
+		NullCheck(L_46);
+		Vector3U5BU5D_t1718750761* L_47 = V_1;
 		NullCheck(L_47);
-		int32_t L_48 = Transform_get_childCount_m3145433196(L_47, /*hidden argument*/NULL);
-		if (L_48)
-		{
-			goto IL_0163;
-		}
-	}
-	{
-		return;
-	}
-
-IL_0163:
-	{
-		UIScrollView_t1973404950 * L_49 = __this->get_mScrollView_6();
-		NullCheck(L_49);
-		UIPanel_t1716472341 * L_50 = UIScrollView_get_panel_m2299845392(L_49, /*hidden argument*/NULL);
-		NullCheck(L_50);
-		Vector3U5BU5D_t1718750761* L_51 = VirtFuncInvoker0< Vector3U5BU5D_t1718750761* >::Invoke(11 /* UnityEngine.Vector3[] UIRect::get_worldCorners() */, L_50);
-		V_1 = L_51;
-		Vector3U5BU5D_t1718750761* L_52 = V_1;
-		NullCheck(L_52);
-		Vector3U5BU5D_t1718750761* L_53 = V_1;
-		NullCheck(L_53);
 		IL2CPP_RUNTIME_CLASS_INIT(Vector3_t3722313464_il2cpp_TypeInfo_var);
-		Vector3_t3722313464  L_54 = Vector3_op_Addition_m779775034(NULL /*static, unused*/, (*(Vector3_t3722313464 *)((L_52)->GetAddressAt(static_cast<il2cpp_array_size_t>(2)))), (*(Vector3_t3722313464 *)((L_53)->GetAddressAt(static_cast<il2cpp_array_size_t>(0)))), /*hidden argument*/NULL);
-		Vector3_t3722313464  L_55 = Vector3_op_Multiply_m3376773913(NULL /*static, unused*/, L_54, (0.5f), /*hidden argument*/NULL);
-		V_2 = L_55;
-		UIScrollView_t1973404950 * L_56 = __this->get_mScrollView_6();
-		NullCheck(L_56);
-		Vector3_t3722313464  L_57 = UIScrollView_get_currentMomentum_m3829798869(L_56, /*hidden argument*/NULL);
-		UIScrollView_t1973404950 * L_58 = __this->get_mScrollView_6();
-		NullCheck(L_58);
-		float L_59 = L_58->get_momentumAmount_11();
-		Vector3_t3722313464  L_60 = Vector3_op_Multiply_m3376773913(NULL /*static, unused*/, L_57, L_59, /*hidden argument*/NULL);
-		V_3 = L_60;
-		Vector3_t3722313464  L_61 = NGUIMath_SpringDampen_m3891859194(NULL /*static, unused*/, (&V_3), (9.0f), (2.0f), /*hidden argument*/NULL);
-		V_4 = L_61;
-		Vector3_t3722313464  L_62 = V_2;
-		Vector3_t3722313464  L_63 = V_4;
-		Vector3_t3722313464  L_64 = Vector3_op_Multiply_m3376773913(NULL /*static, unused*/, L_63, (0.01f), /*hidden argument*/NULL);
-		Vector3_t3722313464  L_65 = Vector3_op_Subtraction_m3073674971(NULL /*static, unused*/, L_62, L_64, /*hidden argument*/NULL);
-		V_5 = L_65;
+		Vector3_t3722313464  L_48 = Vector3_op_Addition_m779775034(NULL /*static, unused*/, (*(Vector3_t3722313464 *)((L_46)->GetAddressAt(static_cast<il2cpp_array_size_t>(2)))), (*(Vector3_t3722313464 *)((L_47)->GetAddressAt(static_cast<il2cpp_array_size_t>(0)))), /*hidden argument*/NULL);
+		Vector3_t3722313464  L_49 = Vector3_op_Multiply_m3376773913(NULL /*static, unused*/, L_48, (0.5f), /*hidden argument*/NULL);
+		V_2 = L_49;
+		UIScrollView_t1973404950 * L_50 = __this->get_mScrollView_6();
+		NullCheck(L_50);
+		Vector3_t3722313464  L_51 = UIScrollView_get_currentMomentum_m3829798869(L_50, /*hidden argument*/NULL);
+		UIScrollView_t1973404950 * L_52 = __this->get_mScrollView_6();
+		NullCheck(L_52);
+		float L_53 = L_52->get_momentumAmount_11();
+		Vector3_t3722313464  L_54 = Vector3_op_Multiply_m3376773913(NULL /*static, unused*/, L_51, L_53, /*hidden argument*/NULL);
+		V_3 = L_54;
+		Vector3_t3722313464  L_55 = NGUIMath_SpringDampen_m3891859194(NULL /*static, unused*/, (&V_3), (9.0f), (2.0f), /*hidden argument*/NULL);
+		V_4 = L_55;
+		Vector3_t3722313464  L_56 = V_2;
+		Vector3_t3722313464  L_57 = V_4;
+		Vector3_t3722313464  L_58 = Vector3_op_Multiply_m3376773913(NULL /*static, unused*/, L_57, (0.01f), /*hidden argument*/NULL);
+		Vector3_t3722313464  L_59 = Vector3_op_Subtraction_m3073674971(NULL /*static, unused*/, L_56, L_58, /*hidden argument*/NULL);
+		V_5 = L_59;
 		V_6 = (std::numeric_limits<float>::max());
 		V_7 = (Transform_t3600365921 *)NULL;
 		V_8 = 0;
 		V_9 = 0;
-		UIGrid_t1536638187 * L_66 = Component_GetComponent_TisUIGrid_t1536638187_m1983720117(__this, /*hidden argument*/Component_GetComponent_TisUIGrid_t1536638187_m1983720117_RuntimeMethod_var);
-		V_10 = L_66;
+		UIGrid_t1536638187 * L_60 = Component_GetComponent_TisUIGrid_t1536638187_m1983720117(__this, /*hidden argument*/Component_GetComponent_TisUIGrid_t1536638187_m1983720117_RuntimeMethod_var);
+		V_10 = L_60;
 		V_11 = (List_1_t777473367 *)NULL;
-		UIGrid_t1536638187 * L_67 = V_10;
+		UIGrid_t1536638187 * L_61 = V_10;
 		IL2CPP_RUNTIME_CLASS_INIT(Object_t631007953_il2cpp_TypeInfo_var);
-		bool L_68 = Object_op_Inequality_m4071470834(NULL /*static, unused*/, L_67, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
-		if (!L_68)
+		bool L_62 = Object_op_Inequality_m4071470834(NULL /*static, unused*/, L_61, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
+		if (!L_62)
 		{
-			goto IL_028d;
+			goto IL_0266;
 		}
 	}
 	{
-		UIGrid_t1536638187 * L_69 = V_10;
-		NullCheck(L_69);
-		List_1_t777473367 * L_70 = UIGrid_GetChildList_m1674318415(L_69, /*hidden argument*/NULL);
-		V_11 = L_70;
+		UIGrid_t1536638187 * L_63 = V_10;
+		NullCheck(L_63);
+		List_1_t777473367 * L_64 = UIGrid_GetChildList_m1674318415(L_63, /*hidden argument*/NULL);
+		V_11 = L_64;
 		V_12 = 0;
-		List_1_t777473367 * L_71 = V_11;
-		NullCheck(L_71);
-		int32_t L_72 = List_1_get_Count_m3787308655(L_71, /*hidden argument*/List_1_get_Count_m3787308655_RuntimeMethod_var);
-		V_13 = L_72;
+		List_1_t777473367 * L_65 = V_11;
+		NullCheck(L_65);
+		int32_t L_66 = List_1_get_Count_m3787308655(L_65, /*hidden argument*/List_1_get_Count_m3787308655_RuntimeMethod_var);
+		V_13 = L_66;
 		V_14 = 0;
-		goto IL_027f;
+		goto IL_0258;
 	}
 
-IL_0224:
+IL_01fd:
 	{
-		List_1_t777473367 * L_73 = V_11;
-		int32_t L_74 = V_12;
+		List_1_t777473367 * L_67 = V_11;
+		int32_t L_68 = V_12;
+		NullCheck(L_67);
+		Transform_t3600365921 * L_69 = List_1_get_Item_m3022113929(L_67, L_68, /*hidden argument*/List_1_get_Item_m3022113929_RuntimeMethod_var);
+		V_15 = L_69;
+		Transform_t3600365921 * L_70 = V_15;
+		NullCheck(L_70);
+		GameObject_t1113636619 * L_71 = Component_get_gameObject_m442555142(L_70, /*hidden argument*/NULL);
+		NullCheck(L_71);
+		bool L_72 = GameObject_get_activeInHierarchy_m2006396688(L_71, /*hidden argument*/NULL);
+		if (L_72)
+		{
+			goto IL_021e;
+		}
+	}
+	{
+		goto IL_0252;
+	}
+
+IL_021e:
+	{
+		Transform_t3600365921 * L_73 = V_15;
 		NullCheck(L_73);
-		Transform_t3600365921 * L_75 = List_1_get_Item_m3022113929(L_73, L_74, /*hidden argument*/List_1_get_Item_m3022113929_RuntimeMethod_var);
-		V_15 = L_75;
-		Transform_t3600365921 * L_76 = V_15;
-		NullCheck(L_76);
-		GameObject_t1113636619 * L_77 = Component_get_gameObject_m442555142(L_76, /*hidden argument*/NULL);
-		NullCheck(L_77);
-		bool L_78 = GameObject_get_activeInHierarchy_m2006396688(L_77, /*hidden argument*/NULL);
-		if (L_78)
-		{
-			goto IL_0245;
-		}
-	}
-	{
-		goto IL_0279;
-	}
-
-IL_0245:
-	{
-		Transform_t3600365921 * L_79 = V_15;
-		NullCheck(L_79);
-		Vector3_t3722313464  L_80 = Transform_get_position_m36019626(L_79, /*hidden argument*/NULL);
-		Vector3_t3722313464  L_81 = V_5;
+		Vector3_t3722313464  L_74 = Transform_get_position_m36019626(L_73, /*hidden argument*/NULL);
+		Vector3_t3722313464  L_75 = V_5;
 		IL2CPP_RUNTIME_CLASS_INIT(Vector3_t3722313464_il2cpp_TypeInfo_var);
-		Vector3_t3722313464  L_82 = Vector3_op_Subtraction_m3073674971(NULL /*static, unused*/, L_80, L_81, /*hidden argument*/NULL);
-		float L_83 = Vector3_SqrMagnitude_m3025115945(NULL /*static, unused*/, L_82, /*hidden argument*/NULL);
-		V_16 = L_83;
-		float L_84 = V_16;
-		float L_85 = V_6;
-		if ((!(((float)L_84) < ((float)L_85))))
+		Vector3_t3722313464  L_76 = Vector3_op_Subtraction_m3073674971(NULL /*static, unused*/, L_74, L_75, /*hidden argument*/NULL);
+		float L_77 = Vector3_SqrMagnitude_m3025115945(NULL /*static, unused*/, L_76, /*hidden argument*/NULL);
+		V_16 = L_77;
+		float L_78 = V_16;
+		float L_79 = V_6;
+		if ((!(((float)L_78) < ((float)L_79))))
 		{
-			goto IL_0273;
+			goto IL_024c;
 		}
 	}
 	{
-		float L_86 = V_16;
-		V_6 = L_86;
-		Transform_t3600365921 * L_87 = V_15;
-		V_7 = L_87;
-		int32_t L_88 = V_12;
-		V_8 = L_88;
-		int32_t L_89 = V_14;
-		V_9 = L_89;
+		float L_80 = V_16;
+		V_6 = L_80;
+		Transform_t3600365921 * L_81 = V_15;
+		V_7 = L_81;
+		int32_t L_82 = V_12;
+		V_8 = L_82;
+		int32_t L_83 = V_14;
+		V_9 = L_83;
 	}
 
-IL_0273:
+IL_024c:
 	{
-		int32_t L_90 = V_14;
-		V_14 = ((int32_t)il2cpp_codegen_add((int32_t)L_90, (int32_t)1));
+		int32_t L_84 = V_14;
+		V_14 = ((int32_t)il2cpp_codegen_add((int32_t)L_84, (int32_t)1));
+	}
+
+IL_0252:
+	{
+		int32_t L_85 = V_12;
+		V_12 = ((int32_t)il2cpp_codegen_add((int32_t)L_85, (int32_t)1));
+	}
+
+IL_0258:
+	{
+		int32_t L_86 = V_12;
+		int32_t L_87 = V_13;
+		if ((((int32_t)L_86) < ((int32_t)L_87)))
+		{
+			goto IL_01fd;
+		}
+	}
+	{
+		goto IL_02dc;
+	}
+
+IL_0266:
+	{
+		V_17 = 0;
+		Transform_t3600365921 * L_88 = V_0;
+		NullCheck(L_88);
+		int32_t L_89 = Transform_get_childCount_m3145433196(L_88, /*hidden argument*/NULL);
+		V_18 = L_89;
+		V_19 = 0;
+		goto IL_02d3;
 	}
 
 IL_0279:
 	{
-		int32_t L_91 = V_12;
-		V_12 = ((int32_t)il2cpp_codegen_add((int32_t)L_91, (int32_t)1));
-	}
-
-IL_027f:
-	{
-		int32_t L_92 = V_12;
-		int32_t L_93 = V_13;
-		if ((((int32_t)L_92) < ((int32_t)L_93)))
-		{
-			goto IL_0224;
-		}
-	}
-	{
-		goto IL_0303;
-	}
-
-IL_028d:
-	{
-		V_17 = 0;
-		Transform_t3600365921 * L_94 = V_0;
+		Transform_t3600365921 * L_90 = V_0;
+		int32_t L_91 = V_17;
+		NullCheck(L_90);
+		Transform_t3600365921 * L_92 = Transform_GetChild_m1092972975(L_90, L_91, /*hidden argument*/NULL);
+		V_20 = L_92;
+		Transform_t3600365921 * L_93 = V_20;
+		NullCheck(L_93);
+		GameObject_t1113636619 * L_94 = Component_get_gameObject_m442555142(L_93, /*hidden argument*/NULL);
 		NullCheck(L_94);
-		int32_t L_95 = Transform_get_childCount_m3145433196(L_94, /*hidden argument*/NULL);
-		V_18 = L_95;
-		V_19 = 0;
-		goto IL_02fa;
+		bool L_95 = GameObject_get_activeInHierarchy_m2006396688(L_94, /*hidden argument*/NULL);
+		if (L_95)
+		{
+			goto IL_0299;
+		}
+	}
+	{
+		goto IL_02cd;
 	}
 
-IL_02a0:
+IL_0299:
 	{
-		Transform_t3600365921 * L_96 = V_0;
-		int32_t L_97 = V_17;
+		Transform_t3600365921 * L_96 = V_20;
 		NullCheck(L_96);
-		Transform_t3600365921 * L_98 = Transform_GetChild_m1092972975(L_96, L_97, /*hidden argument*/NULL);
-		V_20 = L_98;
-		Transform_t3600365921 * L_99 = V_20;
-		NullCheck(L_99);
-		GameObject_t1113636619 * L_100 = Component_get_gameObject_m442555142(L_99, /*hidden argument*/NULL);
-		NullCheck(L_100);
-		bool L_101 = GameObject_get_activeInHierarchy_m2006396688(L_100, /*hidden argument*/NULL);
-		if (L_101)
-		{
-			goto IL_02c0;
-		}
-	}
-	{
-		goto IL_02f4;
-	}
-
-IL_02c0:
-	{
-		Transform_t3600365921 * L_102 = V_20;
-		NullCheck(L_102);
-		Vector3_t3722313464  L_103 = Transform_get_position_m36019626(L_102, /*hidden argument*/NULL);
-		Vector3_t3722313464  L_104 = V_5;
+		Vector3_t3722313464  L_97 = Transform_get_position_m36019626(L_96, /*hidden argument*/NULL);
+		Vector3_t3722313464  L_98 = V_5;
 		IL2CPP_RUNTIME_CLASS_INIT(Vector3_t3722313464_il2cpp_TypeInfo_var);
-		Vector3_t3722313464  L_105 = Vector3_op_Subtraction_m3073674971(NULL /*static, unused*/, L_103, L_104, /*hidden argument*/NULL);
-		float L_106 = Vector3_SqrMagnitude_m3025115945(NULL /*static, unused*/, L_105, /*hidden argument*/NULL);
-		V_21 = L_106;
-		float L_107 = V_21;
-		float L_108 = V_6;
-		if ((!(((float)L_107) < ((float)L_108))))
+		Vector3_t3722313464  L_99 = Vector3_op_Subtraction_m3073674971(NULL /*static, unused*/, L_97, L_98, /*hidden argument*/NULL);
+		float L_100 = Vector3_SqrMagnitude_m3025115945(NULL /*static, unused*/, L_99, /*hidden argument*/NULL);
+		V_21 = L_100;
+		float L_101 = V_21;
+		float L_102 = V_6;
+		if ((!(((float)L_101) < ((float)L_102))))
 		{
-			goto IL_02ee;
+			goto IL_02c7;
 		}
 	}
 	{
-		float L_109 = V_21;
-		V_6 = L_109;
-		Transform_t3600365921 * L_110 = V_20;
-		V_7 = L_110;
-		int32_t L_111 = V_17;
-		V_8 = L_111;
-		int32_t L_112 = V_19;
-		V_9 = L_112;
+		float L_103 = V_21;
+		V_6 = L_103;
+		Transform_t3600365921 * L_104 = V_20;
+		V_7 = L_104;
+		int32_t L_105 = V_17;
+		V_8 = L_105;
+		int32_t L_106 = V_19;
+		V_9 = L_106;
 	}
 
-IL_02ee:
+IL_02c7:
 	{
-		int32_t L_113 = V_19;
-		V_19 = ((int32_t)il2cpp_codegen_add((int32_t)L_113, (int32_t)1));
+		int32_t L_107 = V_19;
+		V_19 = ((int32_t)il2cpp_codegen_add((int32_t)L_107, (int32_t)1));
 	}
 
-IL_02f4:
+IL_02cd:
 	{
-		int32_t L_114 = V_17;
-		V_17 = ((int32_t)il2cpp_codegen_add((int32_t)L_114, (int32_t)1));
+		int32_t L_108 = V_17;
+		V_17 = ((int32_t)il2cpp_codegen_add((int32_t)L_108, (int32_t)1));
 	}
 
-IL_02fa:
+IL_02d3:
 	{
-		int32_t L_115 = V_17;
-		int32_t L_116 = V_18;
-		if ((((int32_t)L_115) < ((int32_t)L_116)))
+		int32_t L_109 = V_17;
+		int32_t L_110 = V_18;
+		if ((((int32_t)L_109) < ((int32_t)L_110)))
 		{
-			goto IL_02a0;
+			goto IL_0279;
 		}
 	}
 
-IL_0303:
+IL_02dc:
 	{
-		float L_117 = __this->get_nextPageThreshold_3();
-		if ((!(((float)L_117) > ((float)(0.0f)))))
+		float L_111 = __this->get_nextPageThreshold_3();
+		if ((!(((float)L_111) > ((float)(0.0f)))))
 		{
-			goto IL_0551;
+			goto IL_052a;
 		}
 	}
 	{
 		IL2CPP_RUNTIME_CLASS_INIT(UICamera_t1356438871_il2cpp_TypeInfo_var);
-		MouseOrTouch_t3052596533 * L_118 = ((UICamera_t1356438871_StaticFields*)il2cpp_codegen_static_fields_for(UICamera_t1356438871_il2cpp_TypeInfo_var))->get_currentTouch_56();
-		if (!L_118)
+		MouseOrTouch_t3052596533 * L_112 = ((UICamera_t1356438871_StaticFields*)il2cpp_codegen_static_fields_for(UICamera_t1356438871_il2cpp_TypeInfo_var))->get_currentTouch_56();
+		if (!L_112)
 		{
-			goto IL_0551;
+			goto IL_052a;
 		}
 	}
 	{
-		GameObject_t1113636619 * L_119 = __this->get_mCenteredObject_7();
+		GameObject_t1113636619 * L_113 = __this->get_mCenteredObject_7();
 		IL2CPP_RUNTIME_CLASS_INIT(Object_t631007953_il2cpp_TypeInfo_var);
-		bool L_120 = Object_op_Inequality_m4071470834(NULL /*static, unused*/, L_119, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
-		if (!L_120)
+		bool L_114 = Object_op_Inequality_m4071470834(NULL /*static, unused*/, L_113, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
+		if (!L_114)
 		{
-			goto IL_0551;
+			goto IL_052a;
 		}
 	}
 	{
-		GameObject_t1113636619 * L_121 = __this->get_mCenteredObject_7();
-		NullCheck(L_121);
-		Transform_t3600365921 * L_122 = GameObject_get_transform_m1369836730(L_121, /*hidden argument*/NULL);
-		List_1_t777473367 * L_123 = V_11;
-		G_B35_0 = L_122;
-		if (!L_123)
+		GameObject_t1113636619 * L_115 = __this->get_mCenteredObject_7();
+		NullCheck(L_115);
+		Transform_t3600365921 * L_116 = GameObject_get_transform_m1369836730(L_115, /*hidden argument*/NULL);
+		List_1_t777473367 * L_117 = V_11;
+		G_B35_0 = L_116;
+		if (!L_117)
 		{
-			G_B36_0 = L_122;
-			goto IL_034e;
+			G_B36_0 = L_116;
+			goto IL_0327;
 		}
 	}
 	{
-		List_1_t777473367 * L_124 = V_11;
-		int32_t L_125 = V_8;
-		NullCheck(L_124);
-		Transform_t3600365921 * L_126 = List_1_get_Item_m3022113929(L_124, L_125, /*hidden argument*/List_1_get_Item_m3022113929_RuntimeMethod_var);
-		G_B37_0 = L_126;
+		List_1_t777473367 * L_118 = V_11;
+		int32_t L_119 = V_8;
+		NullCheck(L_118);
+		Transform_t3600365921 * L_120 = List_1_get_Item_m3022113929(L_118, L_119, /*hidden argument*/List_1_get_Item_m3022113929_RuntimeMethod_var);
+		G_B37_0 = L_120;
 		G_B37_1 = G_B35_0;
-		goto IL_0356;
+		goto IL_032f;
 	}
 
-IL_034e:
+IL_0327:
 	{
-		Transform_t3600365921 * L_127 = V_0;
-		int32_t L_128 = V_8;
-		NullCheck(L_127);
-		Transform_t3600365921 * L_129 = Transform_GetChild_m1092972975(L_127, L_128, /*hidden argument*/NULL);
-		G_B37_0 = L_129;
+		Transform_t3600365921 * L_121 = V_0;
+		int32_t L_122 = V_8;
+		NullCheck(L_121);
+		Transform_t3600365921 * L_123 = Transform_GetChild_m1092972975(L_121, L_122, /*hidden argument*/NULL);
+		G_B37_0 = L_123;
 		G_B37_1 = G_B36_0;
 	}
 
-IL_0356:
+IL_032f:
 	{
 		IL2CPP_RUNTIME_CLASS_INIT(Object_t631007953_il2cpp_TypeInfo_var);
-		bool L_130 = Object_op_Equality_m1810815630(NULL /*static, unused*/, G_B37_1, G_B37_0, /*hidden argument*/NULL);
-		if (!L_130)
+		bool L_124 = Object_op_Equality_m1810815630(NULL /*static, unused*/, G_B37_1, G_B37_0, /*hidden argument*/NULL);
+		if (!L_124)
 		{
-			goto IL_0551;
+			goto IL_052a;
 		}
 	}
 	{
 		IL2CPP_RUNTIME_CLASS_INIT(UICamera_t1356438871_il2cpp_TypeInfo_var);
-		MouseOrTouch_t3052596533 * L_131 = ((UICamera_t1356438871_StaticFields*)il2cpp_codegen_static_fields_for(UICamera_t1356438871_il2cpp_TypeInfo_var))->get_currentTouch_56();
-		NullCheck(L_131);
-		Vector2_t2156229523  L_132 = L_131->get_totalDelta_4();
+		MouseOrTouch_t3052596533 * L_125 = ((UICamera_t1356438871_StaticFields*)il2cpp_codegen_static_fields_for(UICamera_t1356438871_il2cpp_TypeInfo_var))->get_currentTouch_56();
+		NullCheck(L_125);
+		Vector2_t2156229523  L_126 = L_125->get_totalDelta_4();
 		IL2CPP_RUNTIME_CLASS_INIT(Vector2_t2156229523_il2cpp_TypeInfo_var);
-		Vector3_t3722313464  L_133 = Vector2_op_Implicit_m1860157806(NULL /*static, unused*/, L_132, /*hidden argument*/NULL);
-		V_22 = L_133;
-		Transform_t3600365921 * L_134 = Component_get_transform_m3162698980(__this, /*hidden argument*/NULL);
-		NullCheck(L_134);
-		Quaternion_t2301928331  L_135 = Transform_get_rotation_m3502953881(L_134, /*hidden argument*/NULL);
-		Vector3_t3722313464  L_136 = V_22;
+		Vector3_t3722313464  L_127 = Vector2_op_Implicit_m1860157806(NULL /*static, unused*/, L_126, /*hidden argument*/NULL);
+		V_22 = L_127;
+		Transform_t3600365921 * L_128 = Component_get_transform_m3162698980(__this, /*hidden argument*/NULL);
+		NullCheck(L_128);
+		Quaternion_t2301928331  L_129 = Transform_get_rotation_m3502953881(L_128, /*hidden argument*/NULL);
+		Vector3_t3722313464  L_130 = V_22;
 		IL2CPP_RUNTIME_CLASS_INIT(Quaternion_t2301928331_il2cpp_TypeInfo_var);
-		Vector3_t3722313464  L_137 = Quaternion_op_Multiply_m2607404835(NULL /*static, unused*/, L_135, L_136, /*hidden argument*/NULL);
-		V_22 = L_137;
+		Vector3_t3722313464  L_131 = Quaternion_op_Multiply_m2607404835(NULL /*static, unused*/, L_129, L_130, /*hidden argument*/NULL);
+		V_22 = L_131;
 		V_23 = (0.0f);
-		UIScrollView_t1973404950 * L_138 = __this->get_mScrollView_6();
-		NullCheck(L_138);
-		int32_t L_139 = L_138->get_movement_3();
-		V_24 = L_139;
-		int32_t L_140 = V_24;
-		if (!L_140)
+		UIScrollView_t1973404950 * L_132 = __this->get_mScrollView_6();
+		NullCheck(L_132);
+		int32_t L_133 = L_132->get_movement_3();
+		V_24 = L_133;
+		int32_t L_134 = V_24;
+		if (!L_134)
 		{
-			goto IL_03ad;
+			goto IL_0386;
 		}
 	}
 	{
-		int32_t L_141 = V_24;
-		if ((((int32_t)L_141) == ((int32_t)1)))
+		int32_t L_135 = V_24;
+		if ((((int32_t)L_135) == ((int32_t)1)))
 		{
-			goto IL_03bb;
+			goto IL_0394;
 		}
 	}
 	{
-		goto IL_03ca;
+		goto IL_03a3;
 	}
 
-IL_03ad:
+IL_0386:
 	{
-		float L_142 = (&V_22)->get_x_1();
-		V_23 = L_142;
-		goto IL_03d8;
+		float L_136 = (&V_22)->get_x_1();
+		V_23 = L_136;
+		goto IL_03b1;
 	}
 
-IL_03bb:
+IL_0394:
 	{
-		float L_143 = (&V_22)->get_y_2();
-		V_23 = ((-L_143));
-		goto IL_03d8;
+		float L_137 = (&V_22)->get_y_2();
+		V_23 = ((-L_137));
+		goto IL_03b1;
 	}
 
-IL_03ca:
+IL_03a3:
 	{
-		float L_144 = Vector3_get_magnitude_m27958459((&V_22), /*hidden argument*/NULL);
-		V_23 = L_144;
-		goto IL_03d8;
+		float L_138 = Vector3_get_magnitude_m27958459((&V_22), /*hidden argument*/NULL);
+		V_23 = L_138;
+		goto IL_03b1;
 	}
 
-IL_03d8:
+IL_03b1:
 	{
-		float L_145 = V_23;
+		float L_139 = V_23;
 		IL2CPP_RUNTIME_CLASS_INIT(Mathf_t3464937446_il2cpp_TypeInfo_var);
-		float L_146 = fabsf(L_145);
-		float L_147 = __this->get_nextPageThreshold_3();
-		if ((!(((float)L_146) > ((float)L_147))))
+		float L_140 = fabsf(L_139);
+		float L_141 = __this->get_nextPageThreshold_3();
+		if ((!(((float)L_140) > ((float)L_141))))
 		{
-			goto IL_0551;
+			goto IL_052a;
 		}
 	}
 	{
-		float L_148 = V_23;
-		float L_149 = __this->get_nextPageThreshold_3();
-		if ((!(((float)L_148) > ((float)L_149))))
+		float L_142 = V_23;
+		float L_143 = __this->get_nextPageThreshold_3();
+		if ((!(((float)L_142) > ((float)L_143))))
 		{
-			goto IL_0498;
+			goto IL_0471;
 		}
 	}
 	{
-		List_1_t777473367 * L_150 = V_11;
+		List_1_t777473367 * L_144 = V_11;
+		if (!L_144)
+		{
+			goto IL_0426;
+		}
+	}
+	{
+		int32_t L_145 = V_9;
+		if ((((int32_t)L_145) <= ((int32_t)0)))
+		{
+			goto IL_03f1;
+		}
+	}
+	{
+		List_1_t777473367 * L_146 = V_11;
+		int32_t L_147 = V_9;
+		NullCheck(L_146);
+		Transform_t3600365921 * L_148 = List_1_get_Item_m3022113929(L_146, ((int32_t)il2cpp_codegen_subtract((int32_t)L_147, (int32_t)1)), /*hidden argument*/List_1_get_Item_m3022113929_RuntimeMethod_var);
+		V_7 = L_148;
+		goto IL_0421;
+	}
+
+IL_03f1:
+	{
+		UIWrapContent_t1188558554 * L_149 = Component_GetComponent_TisUIWrapContent_t1188558554_m1198490768(__this, /*hidden argument*/Component_GetComponent_TisUIWrapContent_t1188558554_m1198490768_RuntimeMethod_var);
+		IL2CPP_RUNTIME_CLASS_INIT(Object_t631007953_il2cpp_TypeInfo_var);
+		bool L_150 = Object_op_Equality_m1810815630(NULL /*static, unused*/, L_149, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
 		if (!L_150)
 		{
-			goto IL_044d;
+			goto IL_040f;
 		}
 	}
 	{
-		int32_t L_151 = V_9;
-		if ((((int32_t)L_151) <= ((int32_t)0)))
-		{
-			goto IL_0418;
-		}
-	}
-	{
-		List_1_t777473367 * L_152 = V_11;
-		int32_t L_153 = V_9;
-		NullCheck(L_152);
-		Transform_t3600365921 * L_154 = List_1_get_Item_m3022113929(L_152, ((int32_t)il2cpp_codegen_subtract((int32_t)L_153, (int32_t)1)), /*hidden argument*/List_1_get_Item_m3022113929_RuntimeMethod_var);
-		V_7 = L_154;
-		goto IL_0448;
+		List_1_t777473367 * L_151 = V_11;
+		NullCheck(L_151);
+		Transform_t3600365921 * L_152 = List_1_get_Item_m3022113929(L_151, 0, /*hidden argument*/List_1_get_Item_m3022113929_RuntimeMethod_var);
+		G_B52_0 = L_152;
+		goto IL_041f;
 	}
 
-IL_0418:
+IL_040f:
 	{
-		UIWrapContent_t1188558554 * L_155 = Component_GetComponent_TisUIWrapContent_t1188558554_m1198490768(__this, /*hidden argument*/Component_GetComponent_TisUIWrapContent_t1188558554_m1198490768_RuntimeMethod_var);
-		IL2CPP_RUNTIME_CLASS_INIT(Object_t631007953_il2cpp_TypeInfo_var);
-		bool L_156 = Object_op_Equality_m1810815630(NULL /*static, unused*/, L_155, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
-		if (!L_156)
-		{
-			goto IL_0436;
-		}
-	}
-	{
-		List_1_t777473367 * L_157 = V_11;
-		NullCheck(L_157);
-		Transform_t3600365921 * L_158 = List_1_get_Item_m3022113929(L_157, 0, /*hidden argument*/List_1_get_Item_m3022113929_RuntimeMethod_var);
-		G_B52_0 = L_158;
-		goto IL_0446;
+		List_1_t777473367 * L_153 = V_11;
+		List_1_t777473367 * L_154 = V_11;
+		NullCheck(L_154);
+		int32_t L_155 = List_1_get_Count_m3787308655(L_154, /*hidden argument*/List_1_get_Count_m3787308655_RuntimeMethod_var);
+		NullCheck(L_153);
+		Transform_t3600365921 * L_156 = List_1_get_Item_m3022113929(L_153, ((int32_t)il2cpp_codegen_subtract((int32_t)L_155, (int32_t)1)), /*hidden argument*/List_1_get_Item_m3022113929_RuntimeMethod_var);
+		G_B52_0 = L_156;
 	}
 
-IL_0436:
-	{
-		List_1_t777473367 * L_159 = V_11;
-		List_1_t777473367 * L_160 = V_11;
-		NullCheck(L_160);
-		int32_t L_161 = List_1_get_Count_m3787308655(L_160, /*hidden argument*/List_1_get_Count_m3787308655_RuntimeMethod_var);
-		NullCheck(L_159);
-		Transform_t3600365921 * L_162 = List_1_get_Item_m3022113929(L_159, ((int32_t)il2cpp_codegen_subtract((int32_t)L_161, (int32_t)1)), /*hidden argument*/List_1_get_Item_m3022113929_RuntimeMethod_var);
-		G_B52_0 = L_162;
-	}
-
-IL_0446:
+IL_041f:
 	{
 		V_7 = G_B52_0;
 	}
 
-IL_0448:
+IL_0421:
 	{
-		goto IL_0493;
+		goto IL_046c;
 	}
 
-IL_044d:
+IL_0426:
 	{
-		int32_t L_163 = V_9;
-		if ((((int32_t)L_163) <= ((int32_t)0)))
+		int32_t L_157 = V_9;
+		if ((((int32_t)L_157) <= ((int32_t)0)))
 		{
-			goto IL_0466;
+			goto IL_043f;
 		}
 	}
 	{
-		Transform_t3600365921 * L_164 = V_0;
-		int32_t L_165 = V_9;
-		NullCheck(L_164);
-		Transform_t3600365921 * L_166 = Transform_GetChild_m1092972975(L_164, ((int32_t)il2cpp_codegen_subtract((int32_t)L_165, (int32_t)1)), /*hidden argument*/NULL);
-		V_7 = L_166;
-		goto IL_0493;
+		Transform_t3600365921 * L_158 = V_0;
+		int32_t L_159 = V_9;
+		NullCheck(L_158);
+		Transform_t3600365921 * L_160 = Transform_GetChild_m1092972975(L_158, ((int32_t)il2cpp_codegen_subtract((int32_t)L_159, (int32_t)1)), /*hidden argument*/NULL);
+		V_7 = L_160;
+		goto IL_046c;
 	}
 
-IL_0466:
+IL_043f:
 	{
-		UIWrapContent_t1188558554 * L_167 = Component_GetComponent_TisUIWrapContent_t1188558554_m1198490768(__this, /*hidden argument*/Component_GetComponent_TisUIWrapContent_t1188558554_m1198490768_RuntimeMethod_var);
+		UIWrapContent_t1188558554 * L_161 = Component_GetComponent_TisUIWrapContent_t1188558554_m1198490768(__this, /*hidden argument*/Component_GetComponent_TisUIWrapContent_t1188558554_m1198490768_RuntimeMethod_var);
 		IL2CPP_RUNTIME_CLASS_INIT(Object_t631007953_il2cpp_TypeInfo_var);
-		bool L_168 = Object_op_Equality_m1810815630(NULL /*static, unused*/, L_167, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
-		if (!L_168)
+		bool L_162 = Object_op_Equality_m1810815630(NULL /*static, unused*/, L_161, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
+		if (!L_162)
 		{
-			goto IL_0483;
+			goto IL_045c;
 		}
 	}
 	{
-		Transform_t3600365921 * L_169 = V_0;
-		NullCheck(L_169);
-		Transform_t3600365921 * L_170 = Transform_GetChild_m1092972975(L_169, 0, /*hidden argument*/NULL);
-		G_B59_0 = L_170;
-		goto IL_0491;
+		Transform_t3600365921 * L_163 = V_0;
+		NullCheck(L_163);
+		Transform_t3600365921 * L_164 = Transform_GetChild_m1092972975(L_163, 0, /*hidden argument*/NULL);
+		G_B59_0 = L_164;
+		goto IL_046a;
 	}
 
-IL_0483:
+IL_045c:
 	{
-		Transform_t3600365921 * L_171 = V_0;
-		Transform_t3600365921 * L_172 = V_0;
-		NullCheck(L_172);
-		int32_t L_173 = Transform_get_childCount_m3145433196(L_172, /*hidden argument*/NULL);
-		NullCheck(L_171);
-		Transform_t3600365921 * L_174 = Transform_GetChild_m1092972975(L_171, ((int32_t)il2cpp_codegen_subtract((int32_t)L_173, (int32_t)1)), /*hidden argument*/NULL);
-		G_B59_0 = L_174;
+		Transform_t3600365921 * L_165 = V_0;
+		Transform_t3600365921 * L_166 = V_0;
+		NullCheck(L_166);
+		int32_t L_167 = Transform_get_childCount_m3145433196(L_166, /*hidden argument*/NULL);
+		NullCheck(L_165);
+		Transform_t3600365921 * L_168 = Transform_GetChild_m1092972975(L_165, ((int32_t)il2cpp_codegen_subtract((int32_t)L_167, (int32_t)1)), /*hidden argument*/NULL);
+		G_B59_0 = L_168;
 	}
 
-IL_0491:
+IL_046a:
 	{
 		V_7 = G_B59_0;
 	}
 
-IL_0493:
+IL_046c:
 	{
-		goto IL_0551;
+		goto IL_052a;
 	}
 
-IL_0498:
+IL_0471:
 	{
-		float L_175 = V_23;
-		float L_176 = __this->get_nextPageThreshold_3();
-		if ((!(((float)L_175) < ((float)((-L_176))))))
+		float L_169 = V_23;
+		float L_170 = __this->get_nextPageThreshold_3();
+		if ((!(((float)L_169) < ((float)((-L_170))))))
 		{
-			goto IL_0551;
+			goto IL_052a;
 		}
 	}
 	{
-		List_1_t777473367 * L_177 = V_11;
-		if (!L_177)
+		List_1_t777473367 * L_171 = V_11;
+		if (!L_171)
 		{
-			goto IL_0504;
+			goto IL_04dd;
 		}
 	}
 	{
-		int32_t L_178 = V_9;
-		List_1_t777473367 * L_179 = V_11;
-		NullCheck(L_179);
-		int32_t L_180 = List_1_get_Count_m3787308655(L_179, /*hidden argument*/List_1_get_Count_m3787308655_RuntimeMethod_var);
-		if ((((int32_t)L_178) >= ((int32_t)((int32_t)il2cpp_codegen_subtract((int32_t)L_180, (int32_t)1)))))
+		int32_t L_172 = V_9;
+		List_1_t777473367 * L_173 = V_11;
+		NullCheck(L_173);
+		int32_t L_174 = List_1_get_Count_m3787308655(L_173, /*hidden argument*/List_1_get_Count_m3787308655_RuntimeMethod_var);
+		if ((((int32_t)L_172) >= ((int32_t)((int32_t)il2cpp_codegen_subtract((int32_t)L_174, (int32_t)1)))))
 		{
-			goto IL_04cf;
+			goto IL_04a8;
 		}
 	}
 	{
-		List_1_t777473367 * L_181 = V_11;
-		int32_t L_182 = V_9;
-		NullCheck(L_181);
-		Transform_t3600365921 * L_183 = List_1_get_Item_m3022113929(L_181, ((int32_t)il2cpp_codegen_add((int32_t)L_182, (int32_t)1)), /*hidden argument*/List_1_get_Item_m3022113929_RuntimeMethod_var);
-		V_7 = L_183;
-		goto IL_04ff;
+		List_1_t777473367 * L_175 = V_11;
+		int32_t L_176 = V_9;
+		NullCheck(L_175);
+		Transform_t3600365921 * L_177 = List_1_get_Item_m3022113929(L_175, ((int32_t)il2cpp_codegen_add((int32_t)L_176, (int32_t)1)), /*hidden argument*/List_1_get_Item_m3022113929_RuntimeMethod_var);
+		V_7 = L_177;
+		goto IL_04d8;
 	}
 
-IL_04cf:
+IL_04a8:
 	{
-		UIWrapContent_t1188558554 * L_184 = Component_GetComponent_TisUIWrapContent_t1188558554_m1198490768(__this, /*hidden argument*/Component_GetComponent_TisUIWrapContent_t1188558554_m1198490768_RuntimeMethod_var);
+		UIWrapContent_t1188558554 * L_178 = Component_GetComponent_TisUIWrapContent_t1188558554_m1198490768(__this, /*hidden argument*/Component_GetComponent_TisUIWrapContent_t1188558554_m1198490768_RuntimeMethod_var);
 		IL2CPP_RUNTIME_CLASS_INIT(Object_t631007953_il2cpp_TypeInfo_var);
-		bool L_185 = Object_op_Equality_m1810815630(NULL /*static, unused*/, L_184, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
-		if (!L_185)
+		bool L_179 = Object_op_Equality_m1810815630(NULL /*static, unused*/, L_178, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
+		if (!L_179)
 		{
-			goto IL_04f5;
+			goto IL_04ce;
 		}
 	}
 	{
-		List_1_t777473367 * L_186 = V_11;
-		List_1_t777473367 * L_187 = V_11;
-		NullCheck(L_187);
-		int32_t L_188 = List_1_get_Count_m3787308655(L_187, /*hidden argument*/List_1_get_Count_m3787308655_RuntimeMethod_var);
-		NullCheck(L_186);
-		Transform_t3600365921 * L_189 = List_1_get_Item_m3022113929(L_186, ((int32_t)il2cpp_codegen_subtract((int32_t)L_188, (int32_t)1)), /*hidden argument*/List_1_get_Item_m3022113929_RuntimeMethod_var);
-		G_B68_0 = L_189;
-		goto IL_04fd;
+		List_1_t777473367 * L_180 = V_11;
+		List_1_t777473367 * L_181 = V_11;
+		NullCheck(L_181);
+		int32_t L_182 = List_1_get_Count_m3787308655(L_181, /*hidden argument*/List_1_get_Count_m3787308655_RuntimeMethod_var);
+		NullCheck(L_180);
+		Transform_t3600365921 * L_183 = List_1_get_Item_m3022113929(L_180, ((int32_t)il2cpp_codegen_subtract((int32_t)L_182, (int32_t)1)), /*hidden argument*/List_1_get_Item_m3022113929_RuntimeMethod_var);
+		G_B68_0 = L_183;
+		goto IL_04d6;
 	}
 
-IL_04f5:
+IL_04ce:
 	{
-		List_1_t777473367 * L_190 = V_11;
-		NullCheck(L_190);
-		Transform_t3600365921 * L_191 = List_1_get_Item_m3022113929(L_190, 0, /*hidden argument*/List_1_get_Item_m3022113929_RuntimeMethod_var);
-		G_B68_0 = L_191;
+		List_1_t777473367 * L_184 = V_11;
+		NullCheck(L_184);
+		Transform_t3600365921 * L_185 = List_1_get_Item_m3022113929(L_184, 0, /*hidden argument*/List_1_get_Item_m3022113929_RuntimeMethod_var);
+		G_B68_0 = L_185;
 	}
 
-IL_04fd:
+IL_04d6:
 	{
 		V_7 = G_B68_0;
 	}
 
-IL_04ff:
+IL_04d8:
 	{
-		goto IL_0551;
+		goto IL_052a;
 	}
 
-IL_0504:
+IL_04dd:
 	{
-		int32_t L_192 = V_9;
-		Transform_t3600365921 * L_193 = V_0;
-		NullCheck(L_193);
-		int32_t L_194 = Transform_get_childCount_m3145433196(L_193, /*hidden argument*/NULL);
-		if ((((int32_t)L_192) >= ((int32_t)((int32_t)il2cpp_codegen_subtract((int32_t)L_194, (int32_t)1)))))
+		int32_t L_186 = V_9;
+		Transform_t3600365921 * L_187 = V_0;
+		NullCheck(L_187);
+		int32_t L_188 = Transform_get_childCount_m3145433196(L_187, /*hidden argument*/NULL);
+		if ((((int32_t)L_186) >= ((int32_t)((int32_t)il2cpp_codegen_subtract((int32_t)L_188, (int32_t)1)))))
 		{
-			goto IL_0524;
+			goto IL_04fd;
 		}
 	}
 	{
-		Transform_t3600365921 * L_195 = V_0;
-		int32_t L_196 = V_9;
-		NullCheck(L_195);
-		Transform_t3600365921 * L_197 = Transform_GetChild_m1092972975(L_195, ((int32_t)il2cpp_codegen_add((int32_t)L_196, (int32_t)1)), /*hidden argument*/NULL);
-		V_7 = L_197;
-		goto IL_0551;
+		Transform_t3600365921 * L_189 = V_0;
+		int32_t L_190 = V_9;
+		NullCheck(L_189);
+		Transform_t3600365921 * L_191 = Transform_GetChild_m1092972975(L_189, ((int32_t)il2cpp_codegen_add((int32_t)L_190, (int32_t)1)), /*hidden argument*/NULL);
+		V_7 = L_191;
+		goto IL_052a;
 	}
 
-IL_0524:
+IL_04fd:
 	{
-		UIWrapContent_t1188558554 * L_198 = Component_GetComponent_TisUIWrapContent_t1188558554_m1198490768(__this, /*hidden argument*/Component_GetComponent_TisUIWrapContent_t1188558554_m1198490768_RuntimeMethod_var);
+		UIWrapContent_t1188558554 * L_192 = Component_GetComponent_TisUIWrapContent_t1188558554_m1198490768(__this, /*hidden argument*/Component_GetComponent_TisUIWrapContent_t1188558554_m1198490768_RuntimeMethod_var);
 		IL2CPP_RUNTIME_CLASS_INIT(Object_t631007953_il2cpp_TypeInfo_var);
-		bool L_199 = Object_op_Equality_m1810815630(NULL /*static, unused*/, L_198, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
-		if (!L_199)
+		bool L_193 = Object_op_Equality_m1810815630(NULL /*static, unused*/, L_192, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
+		if (!L_193)
 		{
-			goto IL_0548;
+			goto IL_0521;
 		}
 	}
 	{
-		Transform_t3600365921 * L_200 = V_0;
-		Transform_t3600365921 * L_201 = V_0;
-		NullCheck(L_201);
-		int32_t L_202 = Transform_get_childCount_m3145433196(L_201, /*hidden argument*/NULL);
-		NullCheck(L_200);
-		Transform_t3600365921 * L_203 = Transform_GetChild_m1092972975(L_200, ((int32_t)il2cpp_codegen_subtract((int32_t)L_202, (int32_t)1)), /*hidden argument*/NULL);
-		G_B75_0 = L_203;
-		goto IL_054f;
+		Transform_t3600365921 * L_194 = V_0;
+		Transform_t3600365921 * L_195 = V_0;
+		NullCheck(L_195);
+		int32_t L_196 = Transform_get_childCount_m3145433196(L_195, /*hidden argument*/NULL);
+		NullCheck(L_194);
+		Transform_t3600365921 * L_197 = Transform_GetChild_m1092972975(L_194, ((int32_t)il2cpp_codegen_subtract((int32_t)L_196, (int32_t)1)), /*hidden argument*/NULL);
+		G_B75_0 = L_197;
+		goto IL_0528;
 	}
 
-IL_0548:
+IL_0521:
 	{
-		Transform_t3600365921 * L_204 = V_0;
-		NullCheck(L_204);
-		Transform_t3600365921 * L_205 = Transform_GetChild_m1092972975(L_204, 0, /*hidden argument*/NULL);
-		G_B75_0 = L_205;
+		Transform_t3600365921 * L_198 = V_0;
+		NullCheck(L_198);
+		Transform_t3600365921 * L_199 = Transform_GetChild_m1092972975(L_198, 0, /*hidden argument*/NULL);
+		G_B75_0 = L_199;
 	}
 
-IL_054f:
+IL_0528:
 	{
 		V_7 = G_B75_0;
 	}
 
-IL_0551:
+IL_052a:
 	{
-		Transform_t3600365921 * L_206 = V_7;
-		Vector3_t3722313464  L_207 = V_2;
-		UICenterOnChild_CenterOn_m496771149(__this, L_206, L_207, /*hidden argument*/NULL);
+		Transform_t3600365921 * L_200 = V_7;
+		Vector3_t3722313464  L_201 = V_2;
+		UICenterOnChild_CenterOn_m496771149(__this, L_200, L_201, /*hidden argument*/NULL);
 		return;
 	}
 }

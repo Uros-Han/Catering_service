@@ -31,8 +31,6 @@ public class GridMgr : Singleton<GridMgr>
 
 	void Start()
 	{
-		DontDestroyOnLoad (gameObject);
-
 		m_fBattleStartPos = new Vector2 ( -1 * (m_iBattleXcount * m_fXBattleSize) / 2 , (m_iBattleYcount * m_fYBattleSize) / 2 );
 		m_fWorldStartPos = new Vector2 ( -1 * (m_iWorldXcount * m_fXWorldSize) / 2 , (m_iWorldYcount * m_fYWorldSize) / 2 );
 	}

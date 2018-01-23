@@ -102,21 +102,21 @@ public class Caravan : Party {
 				
 				int iRandomRange = Random.Range (0, 100);
 				if (iRandomRange < 50) {
-					List<int> m_iListCity = WorldMapManager.getInstance.m_iListCity;
+					List<int> m_iListCity = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iListCity;
 					for (int i = 0; i < m_iListCity.Count; ++i) {
 						if (m_iListCity [i] == m_iGridIdx)
 							continue;
 						iDicDistance.Add (m_iListCity [i], aStar.AStarStart_World (m_iGridIdx, m_iListCity [i]).Count);
 					}
 				} else {
-					List<int> m_iListCastle = WorldMapManager.getInstance.m_iListCastle;
+					List<int> m_iListCastle = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iListCastle;
 					for (int i = 0; i < m_iListCastle.Count; ++i) {
 						iDicDistance.Add (m_iListCastle [i], aStar.AStarStart_World (m_iGridIdx, m_iListCastle [i]).Count);
 					}
 				}
 
 			}else{
-				List<int> iListCity = WorldMapManager.getInstance.m_iListCity;
+				List<int> iListCity = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iListCity;
 				for (int i = 0; i < iListCity.Count; ++i) {
 					iDicDistance.Add (iListCity [i], aStar.AStarStart_World (m_iGridIdx, iListCity [i]).Count);
 				}

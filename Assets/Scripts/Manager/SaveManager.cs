@@ -88,7 +88,7 @@ public class SaveManager : Singleton<SaveManager> {
 		}
 		ES3.Save <List<byte>> ("fogValues", fogList, "world.txt");
 
-		ES3.Save <List<int>> ("pollutedList", WorldMapManager.getInstance.m_iPollutedIdxList, "world.txt");
+		ES3.Save <List<int>> ("pollutedList", GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iPollutedIdxList, "world.txt");
 		ES3.Save<int> ("day", GameMgr.getInstance.m_iDay, "world.txt");
 	}
 
@@ -98,7 +98,7 @@ public class SaveManager : Singleton<SaveManager> {
 		GridMgr gridMgr = GridMgr.getInstance;
 
 		GameObject.Find ("Core").transform.position = ES3.Load<Vector3>("corePos", "world.txt");
-		WorldMapManager worldMapManager = WorldMapManager.getInstance;
+		WorldMapManager worldMapManager = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>();
 
 		List<int> iGeoList = new List<int> ();
 		iGeoList = ES3.Load<List<int>>("geoList", "world.txt");
@@ -124,8 +124,8 @@ public class SaveManager : Singleton<SaveManager> {
 		}
 		FoW.FogOfWar.GetFogOfWarTeam(0).fogValues = fogByte;
 
-		WorldMapManager.getInstance.m_iPollutedIdxList = ES3.Load <List<int>> ("pollutedList", "world.txt");
-		WorldMapManager.getInstance.Pollute (WorldMapManager.getInstance.m_iPollutedIdxList);
+		worldMapManager.m_iPollutedIdxList = ES3.Load <List<int>> ("pollutedList", "world.txt");
+		worldMapManager.Pollute (GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iPollutedIdxList);
 
 		GameObject.Find ("PC2DPanTarget").transform.position = GameObject.Find ("Core").transform.position;
 		GameObject.Find ("WorldTool").GetComponent<UIPanel> ().alpha = 0f;

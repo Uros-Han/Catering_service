@@ -57,11 +57,11 @@ public class PartyManager : MonoBehaviour {
 		int iRandom = Random.Range (0, 100);
 
 		if (iRandom < 33) {
-			m_iListLoc = WorldMapManager.getInstance.m_iListVillage;
+			m_iListLoc = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iListVillage;
 		} else if (iRandom < 66) {
-			m_iListLoc = WorldMapManager.getInstance.m_iListCity;
+			m_iListLoc = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iListCity;
 		} else {
-			m_iListLoc = WorldMapManager.getInstance.m_iListCastle;
+			m_iListLoc = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iListCastle;
 		}
 
 		return m_iListLoc[Random.Range(0, m_iListLoc.Count)];
@@ -79,13 +79,13 @@ public class PartyManager : MonoBehaviour {
 		string strLocKey = "";
 
 		if (iReward < 2000) {
-			m_iListLoc = WorldMapManager.getInstance.m_iListVillage;
+			m_iListLoc = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iListVillage;
 			strLocKey = "Icon_Village_name";
 		} else if (iReward < 4000) {
-			m_iListLoc = WorldMapManager.getInstance.m_iListCity;
+			m_iListLoc = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iListCity;
 			strLocKey = "Icon_City_name";
 		} else {
-			m_iListLoc = WorldMapManager.getInstance.m_iListCastle;
+			m_iListLoc = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iListCastle;
 			strLocKey = "Icon_Castle_name";
 		}
 

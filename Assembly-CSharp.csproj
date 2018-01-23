@@ -346,6 +346,7 @@
      <Compile Include="Assets\Scripts\UI\DeveloperTool.cs" />
      <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
      <Compile Include="Assets\Scripts\UI\Main\MainButtons.cs" />
+     <Compile Include="Assets\Scripts\UI\Main\MainManager.cs" />
      <Compile Include="Assets\Scripts\UI\MeatButton.cs" />
      <Compile Include="Assets\Scripts\UI\MeatState.cs" />
      <Compile Include="Assets\Scripts\UI\MessageBox.cs" />
@@ -425,6 +426,7 @@
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo20.txt" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\ShowAlphaChannel.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo14.txt" />
+     <None Include="Assets\Font\yunWebDesign.fnt" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\SunShaftsComposite.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 1.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored (TextureClip).shader" />

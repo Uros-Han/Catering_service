@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameMgr : Singleton<GameMgr> {
+public class GameMgr : MonoBehaviour {
 
 	public int m_iHunger = 100;
 	public bool m_bAssembleOnly = true;
@@ -13,15 +13,46 @@ public class GameMgr : Singleton<GameMgr> {
 	public int m_iReward;
 	public int m_iDay;
 
+	private static GameMgr instance;
+
+	public static GameMgr getInstance {
+		get {
+			if (instance == null) {
+				instance = FindObjectOfType (typeof(GameMgr)) as GameMgr;
+			}
+
+			if (instance == null) {
+				GameObject obj = new GameObject ("GameMgr");
+				instance = obj.AddComponent (typeof(GameMgr)) as GameMgr;
+			}
+
+			return instance;
+		}
+	}
+
+	void OnApplicationQuit()
+	{
+
+		instance = null;
+	}
+
 	// Use this for initialization
 	void Awake () {
+
+		if (instance == null)
+			instance = this;
+
+		else if (instance != this)
+			Destroy(gameObject);
+		
 		m_ilistCurEnemyList = new List<int> ();
 
 		DontDestroyOnLoad(gameObject);
-		DontDestroyOnLoad (GameObject.Find("Player"));
 
 		ObjectFactory.getInstance.ResourcesLoad ();
 		Localization.language = "Korean";
+
+		Application.targetFrameRate = 60;
 	}
 
 	public IEnumerator ContinueGame_Coroutine()
@@ -44,7 +75,7 @@ public class GameMgr : Singleton<GameMgr> {
 
 		yield return null;
 
-		WorldMapManager.getInstance.GenerateWorld ();
+		GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().GenerateWorld ();
 	}
 
 	public void CreateGame()

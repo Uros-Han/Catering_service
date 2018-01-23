@@ -104,11 +104,12 @@ public class Unit : MonoBehaviour {
 
 	public IEnumerator DestroyThis()
 	{
+		Destroy (GetComponent<FSM_Enemy> ().m_objHealthBar);
+
 		yield return null;
 		yield return null;
 
 		BattleSceneMgr.getInstance.EnemyEliminatedCheck ();
-		Destroy (GetComponent<FSM_Enemy> ().m_objHealthBar);
 		Destroy (gameObject);
 	}
 }

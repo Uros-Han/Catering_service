@@ -255,7 +255,7 @@ d818a55e6287fa9e961c2dc646c62e79 Assembly-CSharp.dll:.MiniPanel
 772256f45de638b3aa9bdad8f351d9c8 Assembly-CSharp.dll:.TimeMgr
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.RoomsEventsExample
 12bc5799a48e88313e25e6302ec35720 Assembly-CSharp.dll:.UICamera
-37c275d2024a508cb240d1bb727b1afc Assembly-CSharp.dll:.WorldMapManager
+8c92a20276ff16bdc0d0f2f0d7a05a72 Assembly-CSharp.dll:.WorldMapManager
 d000d514961969c4ee16e0cbf9632501 Assembly-CSharp.dll:Com.LuisPedroFonseca.ProCamera2D.ProCamera2DParallax
 905353bc65cd354da0eae1cd07db72e9 Assembly-CSharp.dll:.DamageUI
 6f3dded94558741cf5aab373145220f4 Assembly-CSharp.dll:FoW.FogOfWarEvents
@@ -435,3 +435,4 @@ eee89b3429db0942bfca88f85de80682 Assembly-CSharp.dll:SpriteParticleEmitter.Stati
 b5cfa8bf295fd7e3976dec31449318a2 Assembly-CSharp.dll:.MessageBox
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.RealTime
 18248c02757d2f02d46a3cce4166dbbf Assembly-CSharp.dll:SpriteParticleEmitter.DynamicEmitterUI
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MainManager

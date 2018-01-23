@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class WorldMapManager : Singleton<WorldMapManager> {
+public class WorldMapManager : MonoBehaviour {
 	
 	public int m_KingLocIdx;
 	public WORLDTURN_STATE m_worldTurnState;
@@ -16,6 +16,15 @@ public class WorldMapManager : Singleton<WorldMapManager> {
 	public List<int> m_iListCastle;
 
 	public List<GameObject> m_encountPartyList;
+
+	void Awake()
+	{
+		if(GameObject.Find("GameMgr") == null) //if gameMgr doesn't exist, make one.
+		{
+			GameObject gameMgr = Instantiate(Resources.Load("Prefabs/GameMgr") as GameObject) as GameObject;
+			gameMgr.name = gameMgr.name.Replace("(Clone)","");
+		}
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -59,7 +68,7 @@ public class WorldMapManager : Singleton<WorldMapManager> {
 				pollutedIcon.m_iRaided += 1;
 				pollutedIcon.m_list_enemyType.Clear ();
 
-				List<GameObject> elimatedPartyList = WorldMapManager.getInstance.m_encountPartyList;
+				List<GameObject> elimatedPartyList = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_encountPartyList;
 				for (int i = 0; i < elimatedPartyList.Count; ++i) {
 					elimatedPartyList [i].GetComponent<Party> ().DestroyThis ();
 					elimatedPartyList.Remove (elimatedPartyList [i]);
@@ -73,6 +82,11 @@ public class WorldMapManager : Singleton<WorldMapManager> {
 	public void GenerateWorld()
 	{
 		StartCoroutine(WorldGenerator.getInstance.GenerateWorldMap ());
+	}
+
+	public void LoadWorld()
+	{
+		SaveManager.getInstance.LocalLoad ();
 	}
 
 	public void Assembly()
@@ -104,6 +118,22 @@ public class WorldMapManager : Singleton<WorldMapManager> {
 		for (int i = 0; i < iPollutedList.Count; ++i) {
 			ObjectFactory.getInstance.Create_Polluted (iPollutedList [i]);
 		}
+	}
+
+	public bool bOn = true;
+	public bool bOff = false;
+	public void SettingBtn(bool bOn)
+	{
+		if (bOn) {
+			GameObject.Find ("SettingPanel").GetComponent<UIPanel> ().alpha = 1;
+		} else {
+			GameObject.Find ("SettingPanel").GetComponent<UIPanel> ().alpha = 0;
+		}
+	}
+
+	void ExitBtn()
+	{
+		Application.LoadLevel ("Main");
 	}
 
 	public void Wait()

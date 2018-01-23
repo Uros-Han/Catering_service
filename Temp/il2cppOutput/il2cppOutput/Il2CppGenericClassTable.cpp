@@ -3433,8 +3433,6 @@ extern Il2CppGenericClass Predicate_1_t3062740141_GenericClass;
 extern Il2CppGenericClass Action_1_t2409913612_GenericClass;
 extern Il2CppGenericClass Enumerator_t1303797340_GenericClass;
 extern Il2CppGenericClass Comparison_1_t2012377196_GenericClass;
-extern Il2CppGenericClass Singleton_1_t3921672312_GenericClass;
-extern Il2CppGenericClass Singleton_1_t4256952909_GenericClass;
 extern Il2CppGenericClass List_1_t3975138263_GenericClass;
 extern Il2CppGenericClass IEnumerator_1_t2935633989_GenericClass;
 extern Il2CppGenericClass InternalEnumerator_1_t3410127638_GenericClass;
@@ -4448,6 +4446,7 @@ extern Il2CppGenericClass OrderedSequence_2_t2986700734_GenericClass;
 extern Il2CppGenericClass OrderedEnumerable_1_t3230275581_GenericClass;
 extern Il2CppGenericClass SortContext_1_t1360417507_GenericClass;
 extern Il2CppGenericClass SortSequenceContext_2_t3244021970_GenericClass;
+extern Il2CppGenericClass Singleton_1_t4256952909_GenericClass;
 extern Il2CppGenericClass Singleton_1_t3124521232_GenericClass;
 extern Il2CppGenericClass List_1_t336630203_GenericClass;
 extern Il2CppGenericClass IEnumerator_1_t3592093225_GenericClass;
@@ -4474,7 +4473,6 @@ extern Il2CppGenericClass Singleton_1_t2834551634_GenericClass;
 extern Il2CppGenericClass Singleton_1_t714759371_GenericClass;
 extern Il2CppGenericClass Singleton_1_t3934780129_GenericClass;
 extern Il2CppGenericClass Singleton_1_t2229812138_GenericClass;
-extern Il2CppGenericClass Singleton_1_t3715446341_GenericClass;
 extern Il2CppGenericClass List_1_t195006843_GenericClass;
 extern Il2CppGenericClass ICollection_1_t1551084335_GenericClass;
 extern Il2CppGenericClass IEnumerator_1_t3450469865_GenericClass;
@@ -4592,7 +4590,6 @@ extern Il2CppGenericClass Predicate_1_t1959590500_GenericClass;
 extern Il2CppGenericClass Action_1_t1306763971_GenericClass;
 extern Il2CppGenericClass Comparison_1_t909227555_GenericClass;
 extern Il2CppGenericClass Singleton_1_t892329442_GenericClass;
-extern Il2CppGenericClass Singleton_1_t840836164_GenericClass;
 extern Il2CppGenericClass List_1_t2495173629_GenericClass;
 extern Il2CppGenericClass IEnumerator_1_t1455669355_GenericClass;
 extern Il2CppGenericClass InternalEnumerator_1_t1930163004_GenericClass;
@@ -6690,7 +6687,7 @@ extern Il2CppGenericClass IEnumerable_1_t740373987_GenericClass;
 
 
 
-extern Il2CppGenericClass* const s_Il2CppGenericTypes[6665] = 
+extern Il2CppGenericClass* const s_Il2CppGenericTypes[6662] = 
 {
 	&IEnumerator_1_t3512676632_GenericClass,
 	&InternalEnumerator_1_t3987170281_GenericClass,
@@ -10105,8 +10102,6 @@ extern Il2CppGenericClass* const s_Il2CppGenericTypes[6665] =
 	&Action_1_t2409913612_GenericClass,
 	&Enumerator_t1303797340_GenericClass,
 	&Comparison_1_t2012377196_GenericClass,
-	&Singleton_1_t3921672312_GenericClass,
-	&Singleton_1_t4256952909_GenericClass,
 	&List_1_t3975138263_GenericClass,
 	&IEnumerator_1_t2935633989_GenericClass,
 	&InternalEnumerator_1_t3410127638_GenericClass,
@@ -11120,6 +11115,7 @@ extern Il2CppGenericClass* const s_Il2CppGenericTypes[6665] =
 	&OrderedEnumerable_1_t3230275581_GenericClass,
 	&SortContext_1_t1360417507_GenericClass,
 	&SortSequenceContext_2_t3244021970_GenericClass,
+	&Singleton_1_t4256952909_GenericClass,
 	&Singleton_1_t3124521232_GenericClass,
 	&List_1_t336630203_GenericClass,
 	&IEnumerator_1_t3592093225_GenericClass,
@@ -11146,7 +11142,6 @@ extern Il2CppGenericClass* const s_Il2CppGenericTypes[6665] =
 	&Singleton_1_t714759371_GenericClass,
 	&Singleton_1_t3934780129_GenericClass,
 	&Singleton_1_t2229812138_GenericClass,
-	&Singleton_1_t3715446341_GenericClass,
 	&List_1_t195006843_GenericClass,
 	&ICollection_1_t1551084335_GenericClass,
 	&IEnumerator_1_t3450469865_GenericClass,
@@ -11264,7 +11259,6 @@ extern Il2CppGenericClass* const s_Il2CppGenericTypes[6665] =
 	&Action_1_t1306763971_GenericClass,
 	&Comparison_1_t909227555_GenericClass,
 	&Singleton_1_t892329442_GenericClass,
-	&Singleton_1_t840836164_GenericClass,
 	&List_1_t2495173629_GenericClass,
 	&IEnumerator_1_t1455669355_GenericClass,
 	&InternalEnumerator_1_t1930163004_GenericClass,

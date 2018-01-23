@@ -25361,6 +25361,8 @@ extern "C" void U3CState_IdleU3Ec__Iterator0_System_Collections_IEnumerator_get_
 extern "C" void U3CState_IdleU3Ec__Iterator0_Dispose_m4223705126 ();
 extern "C" void U3CState_IdleU3Ec__Iterator0_Reset_m1780673444 ();
 extern "C" void GameMgr__ctor_m343961995 ();
+extern "C" void GameMgr_get_getInstance_m984083684 ();
+extern "C" void GameMgr_OnApplicationQuit_m3109528070 ();
 extern "C" void GameMgr_Awake_m2959997107 ();
 extern "C" void GameMgr_ContinueGame_Coroutine_m956892383 ();
 extern "C" void GameMgr_ContinueGame_m4216996327 ();
@@ -25524,6 +25526,9 @@ extern "C" void MainButtons__ctor_m3281130450 ();
 extern "C" void MainButtons_Start_m1064075884 ();
 extern "C" void MainButtons_Update_m530010727 ();
 extern "C" void MainButtons_OnClick_m3496074915 ();
+extern "C" void MainButtons_SwitchPanel_m3140814836 ();
+extern "C" void MainManager__ctor_m1813599701 ();
+extern "C" void MainManager_Awake_m106624373 ();
 extern "C" void MeatButton__ctor_m1881950956 ();
 extern "C" void MeatButton_Start_m3466959528 ();
 extern "C" void MeatButton_OnClick_m1840532787 ();
@@ -25534,7 +25539,6 @@ extern "C" void MessageBox__ctor_m826123711 ();
 extern "C" void MessageBox_Function_0_m4002880416 ();
 extern "C" void MessageBox_Function_1_m4002814880 ();
 extern "C" void MessageButtonManager__ctor_m1725414462 ();
-extern "C" void MessageButtonManager_Start_m206266546 ();
 extern "C" void MessageButtonManager_HungerCheckerEnforcement_m3496313226 ();
 extern "C" void MessageButtonManager_DestroyMessageBox_m2611634943 ();
 extern "C" void MiniPanel__ctor_m1441142288 ();
@@ -28148,13 +28152,17 @@ extern "C" void WorldIcon_Init_m1909155360 ();
 extern "C" void WorldIcon_CheckAroundAmIAlone_m2030820258 ();
 extern "C" void WorldIcon_DestroyIfIsland_m1136529570 ();
 extern "C" void WorldMapManager__ctor_m4129481033 ();
+extern "C" void WorldMapManager_Awake_m2360670049 ();
 extern "C" void WorldMapManager_Start_m1381697079 ();
 extern "C" void WorldMapManager_OnEnable_m3974022958 ();
 extern "C" void WorldMapManager_GenerateWorld_m2859507721 ();
+extern "C" void WorldMapManager_LoadWorld_m1305537314 ();
 extern "C" void WorldMapManager_Assembly_m200040604 ();
 extern "C" void WorldMapManager_EncountEnemy_m2979061959 ();
 extern "C" void WorldMapManager_SceneToBattle_m3139004638 ();
 extern "C" void WorldMapManager_Pollute_m1308608209 ();
+extern "C" void WorldMapManager_SettingBtn_m863945218 ();
+extern "C" void WorldMapManager_ExitBtn_m543910505 ();
 extern "C" void WorldMapManager_Wait_m478221069 ();
 extern "C" void WorldMapManager_EnemyCheck_m1454253811 ();
 extern "C" void U3CEnemyCheckU3Ec__Iterator0__ctor_m1922461473 ();
@@ -28166,7 +28174,7 @@ extern "C" void U3CEnemyCheckU3Ec__Iterator0_Reset_m267626550 ();
 extern "C" void WorldOverView__ctor_m2182167814 ();
 extern "C" void WorldOverView_Start_m4044747356 ();
 extern "C" void WorldOverView_SelectWorldIcon_m873079078 ();
-extern const Il2CppMethodPointer g_MethodPointers[28148] = 
+extern const Il2CppMethodPointer g_MethodPointers[28156] = 
 {
 	U3CPrivateImplementationDetailsU3E__ctor_m1418335040,
 	Locale__ctor_m734557855,
@@ -53511,6 +53519,8 @@ extern const Il2CppMethodPointer g_MethodPointers[28148] =
 	U3CState_IdleU3Ec__Iterator0_Dispose_m4223705126,
 	U3CState_IdleU3Ec__Iterator0_Reset_m1780673444,
 	GameMgr__ctor_m343961995,
+	GameMgr_get_getInstance_m984083684,
+	GameMgr_OnApplicationQuit_m3109528070,
 	GameMgr_Awake_m2959997107,
 	GameMgr_ContinueGame_Coroutine_m956892383,
 	GameMgr_ContinueGame_m4216996327,
@@ -53674,6 +53684,9 @@ extern const Il2CppMethodPointer g_MethodPointers[28148] =
 	MainButtons_Start_m1064075884,
 	MainButtons_Update_m530010727,
 	MainButtons_OnClick_m3496074915,
+	MainButtons_SwitchPanel_m3140814836,
+	MainManager__ctor_m1813599701,
+	MainManager_Awake_m106624373,
 	MeatButton__ctor_m1881950956,
 	MeatButton_Start_m3466959528,
 	MeatButton_OnClick_m1840532787,
@@ -53684,7 +53697,6 @@ extern const Il2CppMethodPointer g_MethodPointers[28148] =
 	MessageBox_Function_0_m4002880416,
 	MessageBox_Function_1_m4002814880,
 	MessageButtonManager__ctor_m1725414462,
-	MessageButtonManager_Start_m206266546,
 	MessageButtonManager_HungerCheckerEnforcement_m3496313226,
 	MessageButtonManager_DestroyMessageBox_m2611634943,
 	MiniPanel__ctor_m1441142288,
@@ -56298,13 +56310,17 @@ extern const Il2CppMethodPointer g_MethodPointers[28148] =
 	WorldIcon_CheckAroundAmIAlone_m2030820258,
 	WorldIcon_DestroyIfIsland_m1136529570,
 	WorldMapManager__ctor_m4129481033,
+	WorldMapManager_Awake_m2360670049,
 	WorldMapManager_Start_m1381697079,
 	WorldMapManager_OnEnable_m3974022958,
 	WorldMapManager_GenerateWorld_m2859507721,
+	WorldMapManager_LoadWorld_m1305537314,
 	WorldMapManager_Assembly_m200040604,
 	WorldMapManager_EncountEnemy_m2979061959,
 	WorldMapManager_SceneToBattle_m3139004638,
 	WorldMapManager_Pollute_m1308608209,
+	WorldMapManager_SettingBtn_m863945218,
+	WorldMapManager_ExitBtn_m543910505,
 	WorldMapManager_Wait_m478221069,
 	WorldMapManager_EnemyCheck_m1454253811,
 	U3CEnemyCheckU3Ec__Iterator0__ctor_m1922461473,
