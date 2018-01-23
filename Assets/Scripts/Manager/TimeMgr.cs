@@ -43,7 +43,12 @@ public class TimeMgr : Singleton<TimeMgr> {
 		}
 	}
 
-	public IEnumerator Play()
+	public void Play()
+	{
+		StartCoroutine (Play_Coroutine ());
+	}
+
+	IEnumerator Play_Coroutine()
 	{
 		GameObject.Find ("Party").BroadcastMessage ("Idling", SendMessageOptions.DontRequireReceiver);
 		GameObject.Find ("Party").BroadcastMessage ("MoveOrder", SendMessageOptions.DontRequireReceiver);

@@ -42,31 +42,51 @@ public class GridMgr : Singleton<GridMgr>
 		Picking();
 	}
 
+	bool m_bWorldGrid = false;
+
 	public void ChgGridInfo()
 	{
-		Debug.Log (UnityEngine.SceneManagement.SceneManager.GetActiveScene ().name);
 		if (UnityEngine.SceneManagement.SceneManager.GetActiveScene ().name.Equals ("World")) {
 			m_iXcount = m_iWorldXcount;
 			m_iYcount = m_iWorldYcount;
 			m_fXsize = m_fXWorldSize;
 			m_fYsize = m_fYWorldSize;
+			m_bWorldGrid = true;
 		} else {
 			m_iXcount = m_iBattleXcount;
 			m_iYcount = m_iBattleYcount;
 			m_fXsize = m_fXBattleSize;
 			m_fYsize = m_fYBattleSize;
+			m_bWorldGrid = false;
 		}
 
 		m_fStartPos = new Vector2 ( -1 * (m_iXcount * m_fXsize) / 2 , (m_iYcount * m_fYsize) / 2 );
 
-		if (GameObject.Find ("Grids").transform.childCount.Equals (0)) {
-			LineMaking ();
+		if (m_bWorldGrid) {
+			if(GameObject.Find ("Grids").transform.childCount.Equals (0))
+				LineMaking ();
+		}else {
+			if (BattleSceneMgr.getInstance.m_transformGridParent == null)
+				LineMaking ();
 		}
+			
 	}
 
 	void LineMaking()
 	{
 		m_fStartPos = new Vector2 ( -1 * (m_iXcount * m_fXsize) / 2 , (m_iYcount * m_fYsize) / 2 );
+
+		GameObject tmpLinePref = Resources.Load ("Prefabs/Objects/Debug/DebugLine") as GameObject;
+		Transform gridParent;
+
+		if (!m_bWorldGrid) {
+			GameObject grid = new GameObject ();
+			grid.name = "Grids";
+			gridParent = grid.transform;
+			DontDestroyOnLoad (grid);
+			BattleSceneMgr.getInstance.m_transformGridParent = gridParent;
+		} else
+			gridParent = GameObject.Find ("Grids").transform;
 
 		int iTmpCounter = 0;
 		for (int i = 0; i < m_iXcount+m_iYcount+2; ++i) {
@@ -76,9 +96,8 @@ public class GridMgr : Singleton<GridMgr>
 				continue;
 			}
 
-			GameObject tmpLinePref = Resources.Load ("Prefabs/Objects/Debug/DebugLine") as GameObject;
 			GameObject tmpLine = Instantiate(tmpLinePref) as GameObject;
-			tmpLine.transform.parent = GameObject.Find ("Grids").transform;
+			tmpLine.transform.parent = gridParent;
 
 
 			float fStartXPos = ((m_iXcount-1)/2) * -1 * m_fXsize - m_fXsize/2;
@@ -89,10 +108,12 @@ public class GridMgr : Singleton<GridMgr>
 			else
 				tmpLine.GetComponent<DebugLine>().Init(new Vector3(0, fStartYPos - ( (i-m_iXcount) * m_fYsize)),false,m_fXsize,m_iXcount,m_iYcount);
 
-//			tmpLine.SetActive(false);
-
 			iTmpCounter += 1;
 		}
+
+		if(!m_bWorldGrid)
+			BattleSceneMgr.getInstance.m_transformGridParent.gameObject.SetActive(false);
+
 
 //		GameObject.Find ("GridLimit").GetComponent<BoxCollider2D> ().size = new Vector2 (m_fXsize * m_iXcount, m_fYsize * m_iYcount);
 	}

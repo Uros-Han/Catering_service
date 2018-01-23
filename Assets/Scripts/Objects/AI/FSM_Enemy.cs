@@ -180,6 +180,12 @@ public class FSM_Enemy : FSM {
 		do{
 			yield return null;
 
+			if(m_target == null)
+			{
+				m_AiState = AI_STATE.MOVE;
+				break;
+			}
+
 			if(Vector3.Distance(m_target.transform.position, transform.position) > 0.5f)
 			{
 				m_AiState = AI_STATE.MOVE;

@@ -21,7 +21,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	GameObject m_objChicken;
 	GameObject m_objGoat;
 	GameObject[] m_objHero;
-	GameObject m_objCivilian;
+	GameObject m_objHuman;
 
 	GameObject m_WorldIcon;
 	GameObject m_WorldGeo;
@@ -48,6 +48,13 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	public Sprite[] m_sheet_mercenary_arm;
 	public Sprite[] m_sheet_mercenary_arm_left;
 	public Sprite[][] m_sheet_mercenary_body;
+
+	int m_iKnight_body_count;
+	public Sprite[] m_sheet_knight_head;
+	public Sprite[] m_sheet_knight_leg;
+	public Sprite[] m_sheet_knight_arm;
+	public Sprite[] m_sheet_knight_arm_left;
+	public Sprite[][] m_sheet_knight_body;
 
 	public Sprite[] m_sheet_worldicon;
 	public Sprite[] m_sheet_worldGeo;
@@ -92,7 +99,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		for (int i = 0; i < m_iCivlian_body_count; ++i) {
 			m_sheet_civilian_body[i] = Resources.LoadAll<Sprite> (string.Format("Sprites/Sheets/Civilian/sheet_civ_body_{0}",i));
 		}
-		m_objCivilian = Resources.Load("Prefabs/Objects/Enemies/Civilian") as GameObject;
+		m_objHuman = Resources.Load("Prefabs/Objects/Enemies/Human") as GameObject;
 
 		///Mercenaries
 		m_sheet_mercenary_head = Resources.LoadAll<Sprite> ("Sprites/Sheets/Mercenary/sheet_mer_heads");
@@ -103,6 +110,17 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		m_sheet_mercenary_body = new Sprite[m_iMercenary_body_count][];
 		for (int i = 0; i < m_iMercenary_body_count; ++i) {
 			m_sheet_mercenary_body[i] = Resources.LoadAll<Sprite> (string.Format("Sprites/Sheets/Mercenary/sheet_mer_body_{0}",i));
+		}
+
+		//Knights
+		m_sheet_knight_head = Resources.LoadAll<Sprite> ("Sprites/Sheets/Knight/sheet_kni_heads");
+		m_sheet_knight_leg = Resources.LoadAll<Sprite> ("Sprites/Sheets/Knight/sheet_kni_legs");
+		m_sheet_knight_arm = Resources.LoadAll<Sprite> ("Sprites/Sheets/Knight/sheet_kni_arms");
+		m_sheet_knight_arm_left = Resources.LoadAll<Sprite> ("Sprites/Sheets/Knight/sheet_kni_arms_left");
+		m_iKnight_body_count = 1;
+		m_sheet_knight_body = new Sprite[m_iKnight_body_count][];
+		for (int i = 0; i < m_iKnight_body_count; ++i) {
+			m_sheet_knight_body[i] = Resources.LoadAll<Sprite> (string.Format("Sprites/Sheets/Knight/sheet_kni_body_{0}",i));
 		}
 
 		//WorldMap
@@ -222,10 +240,19 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 			break;
 
 		case ENEMY_TYPE.MERCENARY:
-			obj.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = m_sheet_mercenary_head[Random.Range (0, m_sheet_mercenary_head.Length)];
-			obj.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = m_sheet_mercenary_body[Random.Range (0, m_sheet_mercenary_body.Length)][0];
-			obj.transform.GetChild(2).GetComponent<SpriteRenderer>().sprite = m_sheet_mercenary_leg[Random.Range (0, m_sheet_mercenary_leg.Length)];
+			obj.transform.GetChild (0).GetComponent<SpriteRenderer> ().sprite = m_sheet_mercenary_head [Random.Range (0, m_sheet_mercenary_head.Length)];
+			obj.transform.GetChild (1).GetComponent<SpriteRenderer> ().sprite = m_sheet_mercenary_body [Random.Range (0, m_sheet_mercenary_body.Length)] [0];
+			obj.transform.GetChild (2).GetComponent<SpriteRenderer> ().sprite = m_sheet_mercenary_leg [Random.Range (0, m_sheet_mercenary_leg.Length)];
+			obj.transform.GetChild (3).GetComponent<SpriteRenderer> ().sprite = m_sheet_mercenary_arm_left [0];
 			obj.transform.GetChild(4).GetComponent<SpriteRenderer>().sprite = m_sheet_mercenary_arm[m_sheet_mercenary_arm.Length - 1];
+			break;
+
+		case ENEMY_TYPE.KNIGHT:
+			obj.transform.GetChild (0).GetComponent<SpriteRenderer> ().sprite = m_sheet_knight_head [Random.Range (0, m_sheet_knight_head.Length)];
+			obj.transform.GetChild (1).GetComponent<SpriteRenderer> ().sprite = m_sheet_knight_body [Random.Range (0, m_sheet_knight_body.Length)] [0];
+			obj.transform.GetChild (2).GetComponent<SpriteRenderer> ().sprite = m_sheet_knight_leg [Random.Range (0, m_sheet_knight_leg.Length)];
+			obj.transform.GetChild (3).GetComponent<SpriteRenderer> ().sprite = m_sheet_knight_arm_left [0];
+			obj.transform.GetChild(4).GetComponent<SpriteRenderer>().sprite = m_sheet_knight_arm[m_sheet_knight_arm.Length - 1];
 			break;
 		}
 
@@ -239,17 +266,21 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 			case ENEMY_TYPE.MERCENARY:
 				obj.transform.GetChild (4).GetComponent<SpriteRenderer> ().sprite = m_sheet_mercenary_arm_left [0];
 				break;
+
+			case ENEMY_TYPE.KNIGHT:
+				obj.transform.GetChild (4).GetComponent<SpriteRenderer> ().sprite = m_sheet_knight_arm_left [0];
+				break;
 			}
 			obj.transform.GetChild (4).GetComponent<SpriteRenderer> ().sortingOrder = 0;
 			obj.transform.GetChild (4).localScale = new Vector3 (-1, 1, 1);
 			obj.transform.GetChild (4).localPosition = new Vector2 (-0.13f, 0.08f);
 			obj.transform.Find ("Flag").gameObject.SetActive (false);
-
 			obj.AddComponent<Caravan> ();
 			break;
 
 		case PARTY_TYPE.RAID:
 			obj.transform.Find ("Wagon").gameObject.SetActive (false);
+			obj.transform.Find ("Flag").GetComponent<SpriteRenderer> ().sprite = m_sheet_flag [Random.Range (0, m_sheet_flag.Length)];
 			obj.AddComponent<Raider> ();
 			break;
 		}
@@ -305,6 +336,21 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 				obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_mercenary_arm_left [part.m_iSaveValue];
 			} else if (name.Contains ("Leg")) {
 				obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_mercenary_leg [part.m_iSaveValue];
+			}
+			break;
+
+		case (int)ENEMY_TYPE.KNIGHT:
+			if (name.Contains ("Head")) {
+				obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_knight_head [part.m_iSaveValue];
+			} else if (name.Contains ("Body")) {
+				obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_knight_body [part.m_iSaveValue][0];
+				obj.GetComponent<SpriteSheet> ().m_sheet_sprite = m_sheet_knight_body [part.m_iSaveValue];
+			} else if (name.Contains ("Hand_R")) {
+				obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_knight_arm [part.m_iSaveValue];
+			} else if (name.Contains ("Hand_L")) {
+				obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_knight_arm_left [part.m_iSaveValue];
+			} else if (name.Contains ("Leg")) {
+				obj.GetComponent<SpriteRenderer> ().sprite = m_sheet_knight_leg [part.m_iSaveValue];
 			}
 			break;
 
@@ -527,7 +573,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		float fRandom = 0f;
 
 		
-		obj = Instantiate (m_objCivilian) as GameObject;
+		obj = Instantiate (m_objHuman) as GameObject;
 		
 		obj.transform.parent = GameObject.Find ("Enemies").transform;
 		obj.transform.localPosition = RandomBornPos (obj);
@@ -715,7 +761,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		float fRandom = 0f;
 
 
-		obj = Instantiate (m_objCivilian) as GameObject;
+		obj = Instantiate (m_objHuman) as GameObject;
 
 		obj.transform.parent = GameObject.Find ("Enemies").transform;
 		obj.transform.localPosition = RandomBornPos (obj);
@@ -862,12 +908,15 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 			arm = obj.transform.Find ("Hand_L").gameObject;
 			armPart = arm.GetComponent<Part> ();
 			if (Random.Range (0, 100) < 70) {
+				arm.transform.localPosition = new Vector3 (0.09f, 0.06f);
+				arm.transform.localRotation = Quaternion.AngleAxis (-35f, Vector3.forward);
+				arm.GetComponent<SpriteRenderer> ().sortingOrder = 1;
 				armPart.m_strNameKey = "원형 방패";
 				fRandom = Random.Range (3, 5);
 				fSpeedRandom = Random.Range (7, 10);
-				iArmRandom = 0;
-			} else {
 				iArmRandom = 1;
+			} else {
+				iArmRandom = 0;
 			}
 			arm.GetComponent<SpriteRenderer> ().sprite = m_sheet_mercenary_arm_left [iArmRandom];
 			armPart.m_fHealth = fRandom;
@@ -901,6 +950,158 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		legPart.m_lstStrBuff.Add ("LegBuff");
 		legPart.m_iSaveValue = iLegRandom;
 		legPart.m_iEnemyType = (int)ENEMY_TYPE.MERCENARY;
+
+		return obj;
+	}
+
+	public GameObject Create_Knight(float fProsperity)
+	{
+		GameObject obj;
+		float fRandom = 0f;
+
+
+		obj = Instantiate (m_objHuman) as GameObject;
+
+		obj.transform.parent = GameObject.Find ("Enemies").transform;
+		obj.transform.localPosition = RandomBornPos (obj);
+
+		//Head Setting
+		float fRandomIQ = 0;
+		GameObject head = obj.transform.Find ("Head").gameObject;
+		Part headPart = head.GetComponent<Part> ();
+
+		int iHeadRandom = Random.Range (0, m_sheet_knight_head.Length);
+		head.GetComponent<SpriteRenderer>().sprite = m_sheet_knight_head[iHeadRandom];
+		headPart.m_strNameKey = "기사 머리";
+		fRandom = Random.Range (10,13);
+		fRandomIQ = Random.Range (90, 110);
+
+		headPart.m_fHealth = fRandom;
+		headPart.m_fCurHealth = fRandom;
+		headPart.m_dicStat.Add ("Health", fRandom);
+		headPart.m_dicStat.Add ("IQ", fRandomIQ);
+		headPart.m_iSaveValue = iHeadRandom;
+		headPart.m_iEnemyType = (int)ENEMY_TYPE.KNIGHT;
+
+		switch (Random.Range(0,3)) {
+		case 0:
+			break;
+		case 1:
+			headPart.m_lstStrBuff.Add ("HeadBuff_0");
+			if(headPart.m_dicStat["IQ"] < 80)
+				headPart.m_dicStatBuff["Attack"] = 1;
+			else
+				headPart.m_dicStatBuff["Attack"] = 2;
+			break;
+		case 2:
+			headPart.m_lstStrBuff.Add ("HeadBuff_1");
+			if(headPart.m_dicStat["IQ"] < 80)
+				headPart.m_dicStatBuff["AttackSpeed"] = 1;
+			else
+				headPart.m_dicStatBuff["AttackSpeed"] = 2;
+			break;
+		}
+
+		//Body Setting
+		GameObject body = obj.transform.Find ("Body").gameObject;
+		int iBodyRandom = Random.Range (0, m_iKnight_body_count);
+		body.GetComponent<SpriteRenderer>().sprite = m_sheet_knight_body[iBodyRandom][0];
+		body.GetComponent<SpriteSheet>().m_sheet_sprite = m_sheet_knight_body[iBodyRandom];
+
+		//		body.GetComponent<Part> ().m_dicStat = new Dictionary<string, float>();
+
+		fRandom = Random.Range (18,23);
+		Part bodyPart = body.GetComponent<Part> ();
+		bodyPart.m_fHealth = fRandom;
+		bodyPart.m_fCurHealth = fRandom;
+		bodyPart.m_dicStat.Add ("Health", fRandom);
+
+		fRandom = Random.Range (6,9);
+		bodyPart.m_dicStat.Add ("Defense", fRandom);
+		bodyPart.m_iSaveValue = iBodyRandom;
+		bodyPart.m_iEnemyType = (int)ENEMY_TYPE.KNIGHT;
+
+		//Arms Setting
+		GameObject arm = obj.transform.Find ("Hand_R").gameObject;
+		Part armPart = arm.GetComponent<Part> ();
+		int iArmRandom = Random.Range (0, m_sheet_knight_arm.Length - 1);
+		arm.GetComponent<SpriteRenderer>().sprite = m_sheet_knight_arm[iArmRandom];
+		float fSpeedRandom = 0f;
+		switch (iArmRandom) {
+		case 0:
+			armPart.m_strNameKey = "기사 검";
+			fRandom = Random.Range (6, 9);
+			fSpeedRandom = Random.Range (4, 6);
+			armPart.m_bUse32PixelHand = true;
+			break;
+		case 1:
+			armPart.m_strNameKey = "기사 도끼";
+			fRandom = Random.Range (6, 9);
+			fSpeedRandom = Random.Range (4, 6);
+			break;
+		}
+
+		//		arm.GetComponent<Part> ().m_dicStat = new Dictionary<string, float>();
+
+		armPart.m_dicStat.Add ("Attack", fRandom);
+		armPart.m_dicStat.Add ("AttackSpeed", fSpeedRandom);
+
+		fRandom = Random.Range (7,10);
+		armPart.m_fHealth = fRandom;
+		armPart.m_fCurHealth = fRandom;
+		armPart.m_dicStat.Add ("Health", fRandom);
+		armPart.m_iSaveValue = iArmRandom;
+		armPart.m_iEnemyType = (int)ENEMY_TYPE.KNIGHT;
+
+		if (obj.transform.Find ("Hand_L") != null) {
+			arm = obj.transform.Find ("Hand_L").gameObject;
+			arm.transform.localPosition = new Vector3 (0.09f, 0.06f);
+			arm.transform.localRotation = Quaternion.AngleAxis (-35f, Vector3.forward);
+			arm.GetComponent<SpriteRenderer> ().sortingOrder = 1;
+			armPart = arm.GetComponent<Part> ();
+			if (Random.Range (0, 100) < 50) {
+				armPart.m_strNameKey = "원형 방패";
+				fRandom = Random.Range (7, 10);
+				fSpeedRandom = Random.Range (10, 15);
+				iArmRandom = 1;
+			} else {
+				armPart.m_strNameKey = "연 방패";
+				fRandom = Random.Range (7, 10);
+				fSpeedRandom = Random.Range (12, 17);
+				iArmRandom = 2;
+			}
+			arm.GetComponent<SpriteRenderer> ().sprite = m_sheet_knight_arm_left [iArmRandom];
+			armPart.m_fHealth = fRandom;
+			armPart.m_fCurHealth = fRandom;
+			armPart.m_dicStat.Add ("Health", fRandom);
+			armPart.m_dicStat.Add ("Defense", fSpeedRandom);
+			armPart.m_iSaveValue = iArmRandom;
+			armPart.m_iEnemyType = (int)ENEMY_TYPE.KNIGHT;
+		}
+
+
+		//Legs Setting
+		float fRandomDodge = 0;
+		GameObject leg = obj.transform.Find ("Leg").gameObject;
+		Part legPart = leg.GetComponent<Part> ();
+		int iLegRandom = Random.Range (0, m_sheet_knight_leg.Length);
+		leg.GetComponent<SpriteRenderer>().sprite = m_sheet_knight_leg[iLegRandom];
+		legPart.m_strNameKey = "기사 다리";
+		fRandom = Random.Range (10,13);
+		fRandomDodge = Random.Range (7,9);
+
+		//		leg.GetComponent<Part> ().m_dicStat = new Dictionary<string, float>();
+
+		legPart.m_fHealth = fRandom;
+		legPart.m_fCurHealth = fRandom;
+		legPart.m_dicStat.Add ("Health", fRandom);
+		legPart.m_dicStat.Add ("Dodge", fRandomDodge);
+
+		legPart.m_dicStatBuff["Dodge"] = fRandomDodge;
+
+		legPart.m_lstStrBuff.Add ("LegBuff");
+		legPart.m_iSaveValue = iLegRandom;
+		legPart.m_iEnemyType = (int)ENEMY_TYPE.KNIGHT;
 
 		return obj;
 	}

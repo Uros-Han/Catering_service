@@ -108,7 +108,7 @@ public class WorldMapManager : Singleton<WorldMapManager> {
 
 	public void Wait()
 	{
-		StartCoroutine (TimeMgr.getInstance.Play ());
+		TimeMgr.getInstance.Play ();
 
 		GameObject.Find ("Core").GetComponent<Core_World> ().m_listMoveIdx.Clear ();
 

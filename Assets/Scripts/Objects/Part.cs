@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Com.LuisPedroFonseca.ProCamera2D;
 
 public class Part : MonoBehaviour {
 
@@ -167,7 +168,8 @@ public class Part : MonoBehaviour {
 			ClearBuffBeforeCheck();
 			GameObject.Find("Player").BroadcastMessage("BuffCheck");
 
-			m_objHealthBar = ObjectFactory.getInstance.Create_HealthBar (gameObject);
+			if(m_objHealthBar == null)
+				m_objHealthBar = ObjectFactory.getInstance.Create_HealthBar (gameObject);
 
 		} else {
 			m_fCurHealth = m_fHealth;
@@ -296,6 +298,8 @@ public class Part : MonoBehaviour {
 			{
 				OriginPos = transform.position;
 
+				Camera.main.GetComponent<ProCamera2DPanAndZoom>().enabled = false;
+
 				if(m_bNeedToStickHead)
 					GetComponent<BoxCollider2D>().offset = new Vector2(0f, 0f);
 
@@ -311,6 +315,12 @@ public class Part : MonoBehaviour {
 				if (!gameObject.name.Equals ("Core"))
 					PartBorder.GetComponent<SpriteRenderer>().enabled = false;
 				else{
+					if(transform.parent.name.Equals("Player"))
+					{
+						PartBorder.transform.parent = GameObject.Find("Objects").transform;
+					}else{
+						PartBorder.transform.parent = GameObject.Find("Main Camera").transform;
+					}
 					PartBorder.GetComponent<SpriteRenderer>().enabled = true;
 					PartBorder.transform.position = transform.position;
 				}
@@ -647,8 +657,16 @@ public class Part : MonoBehaviour {
 				
 				bFollowCursor = false;
 
+				if(transform.parent.name.Equals("Player"))
+				{
+					PartBorder.transform.parent = GameObject.Find("Objects").transform;
+				}else{
+					PartBorder.transform.parent = GameObject.Find("Main Camera").transform;
+				}
 				PartBorder.GetComponent<SpriteRenderer>().enabled = true;
-				PartBorder.transform.position = GridMgr.getInstance.GetPosOfIdx(GridMgr.getInstance.GetGridIdx(OriginPos));
+				PartBorder.transform.position = OriginPos;
+
+				Camera.main.GetComponent<ProCamera2DPanAndZoom>().enabled = true;
 			}
 			
 			yield return null;
@@ -909,6 +927,9 @@ public class Part : MonoBehaviour {
 
 	void DestroyPart_WhenPathBreaked()
 	{
+		if (m_objCurParentPart == null)
+			return;
+		
 		int iStart = GridMgr.getInstance.GetGridIdx (transform.position);
 		int iEnd = GridMgr.getInstance.GetGridIdx (GameObject.Find("Core").transform.position);
 
@@ -951,6 +972,8 @@ public class Part : MonoBehaviour {
 		GetComponent<SpriteRenderer>().color = new Color(160/255f,160/255f,160/255f);
 		
 		StartCoroutine(ChangeParentToField(gameObject));
+
+		Destroy (m_objHealthBar);
 
 		ClearBuffBeforeCheck();
 		GameObject.Find("Player").BroadcastMessage("BuffCheck");

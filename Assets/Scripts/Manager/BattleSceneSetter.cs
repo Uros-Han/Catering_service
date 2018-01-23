@@ -44,6 +44,9 @@ public class BattleSceneSetter : MonoBehaviour {
 		for (int i = 0; i < WorldTrans.childCount; ++i) {
 			WorldTrans.GetChild (i).gameObject.SetActive (true);
 		}
+
+		BattleSceneMgr.getInstance.m_transformGridParent.gameObject.SetActive (false);
+
 		UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("Battle");
 	}
 
@@ -54,7 +57,7 @@ public class BattleSceneSetter : MonoBehaviour {
 
 		for (int i = 0; i < PlayerTrans.childCount; ++i) {
 			if (PlayerTrans.GetChild (i).GetComponent<Part> ().m_objHealthBar == null) {
-				objFac.Create_HealthBar (PlayerTrans.GetChild (i).gameObject);
+				PlayerTrans.GetChild (i).GetComponent<Part> ().m_objHealthBar = objFac.Create_HealthBar (PlayerTrans.GetChild (i).gameObject);
 			}
 		}
 	}

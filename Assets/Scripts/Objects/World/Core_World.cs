@@ -62,7 +62,7 @@ public class Core_World : MonoBehaviour {
 				if(bOverviewOn && UICamera.hoveredObject != GameObject.Find("WorldOverview").gameObject)
 				{
 					bOverviewOn = false;
-					iTween.MoveTo(GameObject.Find("WorldOverview").transform.GetChild(0).gameObject, iTween.Hash("x", 150f, "time", 0.5f,"isLocal", true,  "easetype", "easeInSine"));
+					iTween.MoveTo(GameObject.Find("WorldOverview").transform.GetChild(0).gameObject, iTween.Hash("x", 152f, "time", 0.5f,"isLocal", true,  "easetype", "easeInSine"));
 				}
 			}else if(Input.GetMouseButtonUp(0))
 			{
@@ -80,7 +80,7 @@ public class Core_World : MonoBehaviour {
 				}else if(Vector3.Distance(vecMouseClickedPos, mousePosition) < 0.025f){
 					m_listMoveIdx = AStar.getInstance.AStarStart_World(grid.GetGridIdx(gameObject.transform.position), grid.m_iGridIdx, true);
 					m_iDestinationIdx = grid.m_iGridIdx;
-//					DrawPath();
+					DrawPath();
 
 					if(m_listMoveIdx.Count != 0) // Select WorldIcon
 					{
@@ -124,7 +124,7 @@ public class Core_World : MonoBehaviour {
 		GameObject Dest = GameObject.Find("Destination").gameObject;
 		Dest.GetComponent<SpriteRenderer>().enabled = false;
 
-		iTween.MoveTo(GameObject.Find("WorldOverview").transform.GetChild(0).gameObject, iTween.Hash("x", 150f, "time", 0.5f,"isLocal", true,  "easetype", "easeInSine"));
+		iTween.MoveTo(GameObject.Find("WorldOverview").transform.GetChild(0).gameObject, iTween.Hash("x", 152f, "time", 0.5f,"isLocal", true,  "easetype", "easeInSine"));
 
 		Transform pathTrans = GameObject.Find ("Path").transform;
 		for (int i = 0; i < pathTrans.childCount; ++i) {
@@ -132,7 +132,7 @@ public class Core_World : MonoBehaviour {
 		}
 	}
 
-	IEnumerator Move()
+	IEnumerator Move(bool bWaitLittleMoment = false)
 	{
 		WorldMapManager world = WorldMapManager.getInstance;
 		GridMgr grid = GridMgr.getInstance;
@@ -142,9 +142,12 @@ public class Core_World : MonoBehaviour {
 			ProCamera2D.Instance.AdjustCameraTargetInfluence (ProCamera2D.Instance.CameraTargets [1], 0f, 0f);
 		}
 
+		if (bWaitLittleMoment)
+			yield return new WaitForSeconds (0.5f);
+
 		for(int i = 0; i < m_listMoveIdx.Count; ++i)
 		{
-			StartCoroutine (TimeMgr.getInstance.Play ());
+			TimeMgr.getInstance.Play ();
 
 			Vector3 destPos = grid.GetPosOfIdx(m_listMoveIdx[i]);
 			iTween.MoveTo(gameObject, iTween.Hash("x", destPos.x, "y", destPos.y, "time", 1f, "easetype", "easeInSine"));
@@ -218,7 +221,7 @@ public class Core_World : MonoBehaviour {
 	{
 		if (m_bWasMovingBeforeChgedScene) {
 			m_listMoveIdx = AStar.getInstance.AStarStart_World(GridMgr.getInstance.GetGridIdx(gameObject.transform.position), m_iDestinationIdx, true);
-			StartCoroutine (Move ());
+			StartCoroutine (Move (true));
 		} else {
 			ProCamera2D.Instance.AdjustCameraTargetInfluence (ProCamera2D.Instance.CameraTargets [0], 0f, 0f);
 			ProCamera2D.Instance.AdjustCameraTargetInfluence (ProCamera2D.Instance.CameraTargets [1], 1f, 1f);

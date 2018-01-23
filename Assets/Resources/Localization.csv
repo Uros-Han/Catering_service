@@ -106,7 +106,7 @@ Mbox_HungerChecker,HungerCheckerMsg,여행을 위한 허기가 부족합니다. 
 ,,
 ,,
 ALEART MESSAGE,,
-AleartMsg_Create_Raider,Msg_Create_Party_{0},가장 가까운 {0}에서 괴물을 사냥하기 위해 공격대를 파견하였습니다.
+AleartMsg_Create_Raider,Msg_Create_Party_{0},근처 {0}에서 괴물을 사냥하기 위해 공격대를 파견하였습니다.
 ,,
 ,,
 ,,

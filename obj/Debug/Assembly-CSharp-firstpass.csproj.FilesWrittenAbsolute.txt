@@ -45,3 +45,6 @@
 /Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/UnityEngine.StandardEvents.dll
 /Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/UnityEditor.iOS.Extensions.Xcode.dll
 /Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/UnityEditor.iOS.Extensions.Xcode.xml
+/Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/UnityEditor.iOS.Extensions.dll
+/Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/UnityEditor.iOS.Extensions.Common.dll
+/Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Temp/bin/Debug/UnityEditor.iOS.Extensions.Common.dll.mdb

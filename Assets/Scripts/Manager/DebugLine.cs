@@ -16,6 +16,11 @@ public class DebugLine : MonoBehaviour {
 			transform.localScale = new Vector2 (fSize * 10 *iCountX,0.1f);
 	}
 
+	void ToggleGrid()
+	{
+		StartCoroutine (AlphToggle(true));
+	}
+
 	public IEnumerator AlphToggle(bool bToWhite)
 	{
 		SpriteRenderer sprite = GetComponent<SpriteRenderer> ();

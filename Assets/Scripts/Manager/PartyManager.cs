@@ -104,7 +104,7 @@ public class PartyManager : MonoBehaviour {
 		);
 
 		for (int i = 0; i < iListCloseLoc.Count; ++i) {
-			if (!GeoTrans.GetChild (iListCloseLoc[i].Key).GetComponent<WorldGeo> ().m_bPolluted) {
+			if (!GeoTrans.GetChild (iListCloseLoc[i].Key).GetComponent<WorldGeo> ().m_bPolluted && iListCloseLoc [i].Value > 2) {
 				ObjectFactory.getInstance.Create_AleartMsg (string.Format(Localization.Get("AleartMsg_Create_Raider"), Localization.Get(strLocKey)));
 				return iListCloseLoc [i].Key;
 			}

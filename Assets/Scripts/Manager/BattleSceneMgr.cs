@@ -10,6 +10,8 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 	public TURN_STATE m_turnState = TURN_STATE.END;
 	public bool m_bBigSize = false;
 
+	public Transform m_transformGridParent;
+
 	// Use this for initialization
 	void Start () {
 
@@ -73,7 +75,7 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 		if (BattleSceneMgr.getInstance.m_turnState == TURN_STATE.NIGHT)
 			yield break;
 
-		GameObject.Find ("Field").BroadcastMessage ("HarvestPartInField");
+		GameObject.Find ("Field").BroadcastMessage ("HarvestPartInField", SendMessageOptions.DontRequireReceiver);
 
 		if (GridMgr.getInstance.GetWidthOrHeightOfMonster () > 5) {
 //			m_bBigSize = true;
@@ -179,7 +181,7 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 	public void ToggleMorgue(bool bOn)
 	{
 		Transform morgueTrans = GameObject.Find("Morgue").transform;
-		GameObject grids = GameObject.Find("Grids").gameObject;
+//		GameObject grids = GameObject.Find("Grids").gameObject;
 
 		if (bOn) {
 			GameObject.Find ("Core").transform.position = new Vector3(0,0);
@@ -188,14 +190,15 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 			GameObject.Find ("Morgue").BroadcastMessage ("Assemble", null, SendMessageOptions.DontRequireReceiver);
 			GameObject.Find ("Player").BroadcastMessage ("Assemble", null, SendMessageOptions.DontRequireReceiver);
 
-			StartCoroutine(GameObject.Find("glass").GetComponent<Glass>().ToggleColor(true));
-	
-			for(int i = 0 ; i < grids.transform.childCount; ++i)
-			{
-				grids.transform.GetChild(i).gameObject.SetActive(true);
-				StartCoroutine(grids.transform.GetChild(i).GetComponent<DebugLine>().AlphToggle(true));
-			}
-			StartCoroutine(CamOffset_XChg(true));
+			StartCoroutine(GameObject.Find("GEO").GetComponent<Battle_Geo>().ToggleColor(true));
+
+			m_transformGridParent.gameObject.SetActive (true);
+			m_transformGridParent.BroadcastMessage ("ToggleGrid", SendMessageOptions.DontRequireReceiver);
+
+			Camera.main.GetComponent<ProCamera2DNumericBoundaries> ().enabled = false;
+
+			Camera.main.GetComponent<ProCamera2D> ().CameraTargets [0].TargetTransform.position = Camera.main.ViewportToWorldPoint (new Vector3(0.75f, 0.5f));
+//			StartCoroutine(CamOffset_XChg(true));
 
 			if(!m_bBigSize)
 				iTween.MoveTo (morgueTrans.gameObject, iTween.Hash ("x",  0.52f, "y", 0f, "time", 0.25f, "easetype", "easeInSine", "islocal", true));
@@ -233,21 +236,24 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 	{
 		if(bMorgueOn)
 		{
-			if (!m_bBigSize) {
-				do {
-					ProCamera2D.Instance.OffsetX += 0.04f;
-					yield return null;
-				} while(ProCamera2D.Instance.OffsetX < 0.5f);
+//			if (!m_bBigSize) {
+//				do {
+//					ProCamera2D.Instance.OffsetX += 0.04f;
+//					yield return null;
+//				} while(ProCamera2D.Instance.OffsetX < 0.5f);
+//
+//				ProCamera2D.Instance.OffsetX = 0.5f;
+//			} else {
+//				do {
+//					ProCamera2D.Instance.OffsetX += 0.04f;
+//					yield return null;
+//				} while(ProCamera2D.Instance.OffsetX < 0.57f);
+//
+//				ProCamera2D.Instance.OffsetX = 0.57f;
+//			}
 
-				ProCamera2D.Instance.OffsetX = 0.5f;
-			} else {
-				do {
-					ProCamera2D.Instance.OffsetX += 0.04f;
-					yield return null;
-				} while(ProCamera2D.Instance.OffsetX < 0.57f);
+			Camera.main.GetComponent<ProCamera2D> ().CameraTargets [1].TargetTransform.position = Camera.main.ViewportToWorldPoint (new Vector3(Screen.width/2f, 0));
 
-				ProCamera2D.Instance.OffsetX = 0.57f;
-			}
 		}else{
 			do{
 				ProCamera2D.Instance.OffsetX -= 0.04f;
