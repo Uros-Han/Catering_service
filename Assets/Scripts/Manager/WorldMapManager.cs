@@ -41,6 +41,7 @@ public class WorldMapManager : MonoBehaviour {
 
 		if (!GameMgr.getInstance.m_bDeveloperMode)
 			GameObject.Find ("DeveloperTools").transform.GetChild (1).gameObject.SetActive (false);
+		
 	}
 
 	void OnEnable()
@@ -75,8 +76,10 @@ public class WorldMapManager : MonoBehaviour {
 				}
 			}
 
-			SaveManager.getInstance.LocalSave ();
+//			SaveManager.getInstance.LocalSave ();
 		}
+
+		SoundMgr.getInstance.SetAudioSources (true);
 	}
 
 	public void GenerateWorld()
@@ -133,6 +136,10 @@ public class WorldMapManager : MonoBehaviour {
 
 	void ExitBtn()
 	{
+		SaveManager.getInstance.LocalSave ();
+
+		Destroy (GameObject.Find ("Player").gameObject);
+
 		Application.LoadLevel ("Main");
 	}
 

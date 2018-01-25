@@ -16,6 +16,8 @@ public class BattleSceneSetter : MonoBehaviour {
 			StartCoroutine(BattleSceneMgr.getInstance.DayTurn());
 		}
 
+		SoundMgr.getInstance.SetAudioSources ();
+
 		HealthBarSet ();
 		InitLight ();
 	}

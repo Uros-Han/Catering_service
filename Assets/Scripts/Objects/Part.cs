@@ -343,7 +343,7 @@ public class Part : MonoBehaviour {
 					GetComponent<ParticleSystemRenderer>().sortingLayerName = "FrontObject_Particle";
 				}
 
-				GetComponent<SpriteParticleEmitter.DynamicEmitter>().enabled = false;
+//				GetComponent<SpriteParticleEmitter.DynamicEmitter>().enabled = false;
 				GetComponent<SpriteRenderer>().color = Color.white;
 
 				if (!gameObject.name.Equals ("Core"))
@@ -547,6 +547,7 @@ public class Part : MonoBehaviour {
 
 						ClearBuffBeforeCheck();
 						GameObject.Find("Player").BroadcastMessage("BuffCheck");
+						SoundMgr.getInstance.PlaySfx("core_place");
 					}
 				}
 
@@ -582,6 +583,7 @@ public class Part : MonoBehaviour {
 
 						ClearBuffBeforeCheck();
 						GameObject.Find("Player").BroadcastMessage("BuffCheck");
+						SoundMgr.getInstance.PlaySfx("morgue_place");
 					}
 				}
 
@@ -599,6 +601,7 @@ public class Part : MonoBehaviour {
 
 					ClearBuffBeforeCheck();
 					GameObject.Find("Player").BroadcastMessage("BuffCheck");
+					SoundMgr.getInstance.PlaySfx("morgue_digest");
 				}
 
 //				for(int i = 0; i < morgueIdxArr.Length; ++i) // get in morgue
@@ -934,14 +937,17 @@ public class Part : MonoBehaviour {
 		int iEnd = GridMgr.getInstance.GetGridIdx (GameObject.Find("Core").transform.position);
 
 		if (m_objCurParentPart.GetComponent<Part>().m_bDestroied || m_objCurParentPart.transform.parent.name.Equals("Field")) {//Breaked Path -> Disabled
-			transform.parent = GameObject.Find("Field").transform;
-			GetComponent<FSM_Freindly>().m_AiState = AI_STATE.DISABLED;
-			GetComponent<SpriteParticleEmitter.DynamicEmitter>().enabled = false;
-			GetComponent<SpriteRenderer>().color = Color.gray;
-			GetComponent<Rigidbody2D> ().isKinematic = false;
-			GetComponent<Rigidbody2D> ().AddTorque(Random.Range(-180f, 180f));
-			GetComponent<Rigidbody2D> ().AddForce (Vector3.Normalize(m_objCurParentPart.transform.position - transform.position) * -1f, ForceMode2D.Impulse);
 
+			if (!m_bEdgePart && AStar.getInstance.AStarStart_CoreFind (iStart, iEnd)) {
+			} else {
+				transform.parent = GameObject.Find ("Field").transform;
+				GetComponent<FSM_Freindly> ().m_AiState = AI_STATE.DISABLED;
+				GetComponent<SpriteParticleEmitter.DynamicEmitter> ().enabled = false;
+				GetComponent<SpriteRenderer> ().color = Color.gray;
+				GetComponent<Rigidbody2D> ().isKinematic = false;
+				GetComponent<Rigidbody2D> ().AddTorque (Random.Range (-180f, 180f));
+				GetComponent<Rigidbody2D> ().AddForce (Vector3.Normalize (m_objCurParentPart.transform.position - transform.position) * -1f, ForceMode2D.Impulse);
+			}
 		} else {//CoreSide
 
 

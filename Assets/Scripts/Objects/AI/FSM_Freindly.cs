@@ -67,6 +67,9 @@ public class FSM_Freindly : FSM {
 			iTween.RotateTo(gameObject, iTween.Hash("z",-100f,"time", fAttackSpeed * 0.2f));
 			yield return new WaitForSeconds((fAttackSpeed * 0.2f) + (fAttackSpeed * 0.1f));
 			iTween.RotateTo(gameObject, iTween.Hash("z",0f,"time", fAttackSpeed * 0.02f));
+
+			SoundMgr.getInstance.PlaySfx ("weapon_twohand");
+
 			yield return new WaitForSeconds(fAttackSpeed * 0.02f);
 			StartCoroutine(Attack(m_target, fDmg, true));
 			yield return new WaitForSeconds(fAttackSpeed * 0.1f); //Delay

@@ -11,5 +11,7 @@ public class MainManager : MonoBehaviour {
 			GameObject gameMgr = Instantiate(Resources.Load("Prefabs/GameMgr") as GameObject) as GameObject;
 			gameMgr.name = gameMgr.name.Replace("(Clone)","");
 		}
+
+		SoundMgr.getInstance.SetAudioSources ();
 	}
 }

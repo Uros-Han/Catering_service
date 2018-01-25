@@ -13,6 +13,9 @@ public class GameMgr : MonoBehaviour {
 	public int m_iReward;
 	public int m_iDay;
 
+	public bool m_bBGMMute;
+	public bool m_bSFXMute;
+
 	private static GameMgr instance;
 
 	public static GameMgr getInstance {

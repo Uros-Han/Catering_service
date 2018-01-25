@@ -72,6 +72,8 @@ public class FSM : MonoBehaviour {
 			
 			target.GetComponent<Unit>().m_fCurHealth -= fDamage;
 			ObjectFactory.getInstance.Create_DamageUI (target, fDamage, true);
+			SoundMgr.getInstance.PlaySfx ("impact_blade");
+			SoundMgr.getInstance.PlaySfx ("human_scream");
 
 			for (int i = 0; i < target.transform.childCount; ++i) {
 				target.transform.GetChild (i).GetComponent<Part>().AdjustEmissionRate();
@@ -91,6 +93,8 @@ public class FSM : MonoBehaviour {
 				fDodgePercent += targetPart.m_lstPartBuffed [i].m_dicStatBuff ["Dodge"];
 			}
 			fDodgePercent *= 10f;
+
+			SoundMgr.getInstance.PlaySfx ("impact_blade");
 
 			float fDealedDmg = fDamage - targetPart.m_dicStat["Defense"];
 

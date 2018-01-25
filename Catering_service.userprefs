@@ -1,16 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Manager/ObjectFactory.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Objects/Part.cs">
     <Files>
-      <File FileName="Assets/Scripts/Objects/Part.cs" Line="172" Column="48" />
-      <File FileName="Assets/Scripts/Objects/AI/FSM_Enemy.cs" Line="189" Column="8" />
-      <File FileName="Assets/Scripts/Objects/AI/FSM.cs" Line="111" Column="25" />
-      <File FileName="Assets/Scripts/Manager/BattleSceneMgr.cs" Line="177" Column="47" />
-      <File FileName="Assets/Scripts/UI/HealthBar.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="911" Column="32" />
-      <File FileName="Assets/Scripts/Manager/BattleSceneSetter.cs" Line="60" Column="12" />
-      <File FileName="Assets/Scripts/Objects/Battle/Core.cs" Line="158" Column="1" />
-      <File FileName="Assets/Scripts/Manager/LevelGenerator.cs" Line="24" Column="43" />
+      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="404" Column="20" />
+      <File FileName="Assets/Scripts/Objects/Part.cs" Line="346" Column="44" />
+      <File FileName="Assets/Scripts/Objects/AI/FSM.cs" Line="108" Column="32" />
+      <File FileName="Assets/Scripts/Objects/Battle/Tangled.cs" Line="5" Column="1" />
+      <File FileName="Assets/Scripts/Objects/Battle/Core.cs" Line="5" Column="13" />
+      <File FileName="Assets/Scripts/Objects/Battle/Unit.cs" Line="94" Column="5" />
+      <File FileName="Assets/Scripts/Manager/AStar.cs" Line="527" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -131,6 +131,8 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		m_Polluted = Resources.Load ("Prefabs/Objects/World/Polluted") as GameObject;
 
 		m_objParty = Resources.Load ("Prefabs/Objects/Enemies/World/Party") as GameObject;
+
+		SoundMgr.getInstance.AudioPoolSetting ();
 	}
 
 	public GameObject Create_Aleart(int iIdx)
@@ -434,6 +436,8 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 			msgBox.m_functionObject = GameObject.Find ("MessageButtonManager").gameObject;
 		msgBox.m_strFunction_0 = strFunctionName;
 
+		SoundMgr.getInstance.PlaySfx ("ui", 0);
+
 		return obj;
 	}
 
@@ -461,6 +465,8 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		msgBox.m_strFunction_0 = strFunctionName_0;
 		msgBox.m_strFunction_1 = strFunctionName_1;
 
+		SoundMgr.getInstance.PlaySfx ("ui", 0);
+
 		return obj;
 	}
 
@@ -475,6 +481,8 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		obj.transform.localScale = Vector3.one;
 		obj.transform.localPosition = Vector3.zero;
 		obj.transform.GetChild (0).GetComponent<UILabel> ().text = strMsg;
+
+		SoundMgr.getInstance.PlaySfx ("ui", 1);
 
 		return obj;
 	}

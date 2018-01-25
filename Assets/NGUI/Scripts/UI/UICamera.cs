@@ -2767,6 +2767,7 @@ public class UICamera : MonoBehaviour
 
 					if (onClick != null) onClick(currentTouch.pressed);
 					Notify(currentTouch.pressed, "OnClick", null);
+					SoundMgr.getInstance.PlaySfx ("ui", 2);
 
 					if (currentTouch.clickTime + 0.35f > time)
 					{

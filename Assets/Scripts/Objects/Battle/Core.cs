@@ -120,6 +120,8 @@ public class Core : Part {
 		m_EatenObject.SetActive (false);
 		iTween.ScaleTo(gameObject, iTween.Hash("x", 2f, "y", 2f, "time" , 1f, "easetype", "easeOutElastic"));
 		StartCoroutine (Digest ());
+
+		SoundMgr.getInstance.PlaySfx ("core", 0);
 	}
 
 	public IEnumerator Digest()

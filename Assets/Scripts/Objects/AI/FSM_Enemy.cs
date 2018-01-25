@@ -229,6 +229,13 @@ public class FSM_Enemy : FSM {
 			}
 			iTween.RotateTo(AttackPart, iTween.Hash("z",0f,"time",fAttackSpeed * 0.02f, "islocal", true));
 			iTween.MoveTo(AttackPart, iTween.Hash("x", originPos.x, "y", originPos.y, "time", fAttackSpeed * 0.02f, "islocal", true));
+
+			if (transform.Find ("Hand_L") == null) {
+				SoundMgr.getInstance.PlaySfx ("weapon_twohand");
+			} else {
+				SoundMgr.getInstance.PlaySfx ("weapon_onehand");
+			}
+
 			yield return new WaitForSeconds(fAttackSpeed * 0.02f);
 			if(targetPart.m_bDestroied)
 			{

@@ -264,6 +264,7 @@ cbe311702101a8fd2b4fe90072451a87 Assembly-CSharp.dll:.UIShowControlScheme
 30db6bf1abfbd17c6cdd1385b9eba6ca Assembly-CSharp.dll:UnityStandardAssets.ImageEffects.DepthOfField
 d232bda14ae70628e1472aa09ae256d1 Assembly-CSharp.dll:Com.LuisPedroFonseca.ProCamera2D.TopDownShooter.GameOver
 b3251d4c150a7d11ff89d89f2e755fa1 Assembly-CSharp.dll:.Core_World
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MainManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UIWidgetContainer
 7a616dbce92f73c40a3ca496077d8b39 Assembly-CSharp.dll:.ChatInput
 e1c8f9b417abd93cd99cdc384524141a Assembly-CSharp.dll:.Raider
@@ -431,8 +432,8 @@ f449ae6019dcabd2c14fe35870f7a170 Assembly-CSharp.dll:.RadialFillCursor
 fcffe9bbf1b7b7e4593e31031f78987b Assembly-CSharp.dll:.UISliderColors
 7cfdc1ec603e0fd5090ecc802f230df2 Assembly-CSharp.dll:.GridMgr
 eee89b3429db0942bfca88f85de80682 Assembly-CSharp.dll:SpriteParticleEmitter.StaticEmitterContinuous
-35b06c2668d3a77bd8c88234f8171799 Assembly-CSharp.dll:.GameMgr
+4f3a81844661462421b2d3ef67897445 Assembly-CSharp.dll:.GameMgr
 b5cfa8bf295fd7e3976dec31449318a2 Assembly-CSharp.dll:.MessageBox
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.RealTime
 18248c02757d2f02d46a3cce4166dbbf Assembly-CSharp.dll:SpriteParticleEmitter.DynamicEmitterUI
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MainManager
+69e041a5cb0ed75f2a15391174afdd63 Assembly-CSharp.dll:.SoundMgr

@@ -90,6 +90,10 @@ public class Unit : MonoBehaviour {
 
 				tangled.TangledAttack(transform);
 				m_fCurHealth -= GameObject.Find("Core").GetComponent<Core>().m_fAttackDmg;
+
+				SoundMgr.getInstance.PlaySfx ("impact_blade");
+				SoundMgr.getInstance.PlaySfx ("human_scream");
+
 				ObjectFactory.getInstance.Create_DamageUI (gameObject, GameObject.Find("Core").GetComponent<Core>().m_fAttackDmg, true);
 
 				if (m_fCurHealth <= 0) {

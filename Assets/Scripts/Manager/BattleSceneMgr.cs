@@ -187,6 +187,9 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 			GameObject.Find ("Core").transform.position = new Vector3(0,0);
 			GameObject.Find ("Core").GetComponent<Part>().m_iGridIdx = GridMgr.getInstance.GetGridIdx(new Vector2(0,0));
 
+			GameObject.Find ("Morgue").GetComponent<AudioSource> ().Play ();
+			GameObject.Find ("AMB").GetComponent<AudioSource>().volume = 0f;
+
 			GameObject.Find ("Morgue").BroadcastMessage ("Assemble", null, SendMessageOptions.DontRequireReceiver);
 			GameObject.Find ("Player").BroadcastMessage ("Assemble", null, SendMessageOptions.DontRequireReceiver);
 
