@@ -375,6 +375,7 @@ c8afcdf7f1c813179938c6f7097f4bd0 Assembly-CSharp.dll:.UIButtonActivate
 a4679245d992f9784666cfa4339d7268 Assembly-CSharp.dll:.TweenVolume
 bb614fa39b39c4954977762d0fc3e0b2 Assembly-CSharp.dll:.UIKeyNavigation
 83671be4916fc969d9f9c2c7460c65b4 Assembly-CSharp.dll:.UIButtonKeys
+69e041a5cb0ed75f2a15391174afdd63 Assembly-CSharp.dll:.SoundMgr
 478b543f7d4682ca29b204f39670c11b Assembly-CSharp.dll:Com.LuisPedroFonseca.ProCamera2D.ProCamera2DLimitSpeed
 27b2c1361910638612ca3873fce76fee Assembly-CSharp.dll:.UIToggledObjects
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UIEventListener
@@ -436,4 +437,3 @@ eee89b3429db0942bfca88f85de80682 Assembly-CSharp.dll:SpriteParticleEmitter.Stati
 b5cfa8bf295fd7e3976dec31449318a2 Assembly-CSharp.dll:.MessageBox
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.RealTime
 18248c02757d2f02d46a3cce4166dbbf Assembly-CSharp.dll:SpriteParticleEmitter.DynamicEmitterUI
-69e041a5cb0ed75f2a15391174afdd63 Assembly-CSharp.dll:.SoundMgr

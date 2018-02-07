@@ -64,12 +64,7 @@ public class Caravan : Party {
 
 				m_iWaitTurnCount = Random.Range (2, 5);
 				m_state = AI_WORLD_STATE.CAMP;
-				transform.GetChild(7).gameObject.SetActive(true);
-				for (int i = 0; i < 7; ++i) {
-					if (i == 5)
-						continue;
-					transform.GetChild(i).gameObject.SetActive(false);
-				}
+				m_sprite_partyStateIndicator.sprite = ObjectFactory.getInstance.m_sheet_PartyStateIndicator [(int)m_state];
 
 				m_bCargoLoaded = true;
 
@@ -80,13 +75,7 @@ public class Caravan : Party {
 		//Move
 		SetDestination ();
 		m_state = AI_WORLD_STATE.MOVE;
-
-		transform.GetChild(7).gameObject.SetActive(false);
-		for (int i = 0; i < 7; ++i) {
-			if (i == 5)
-				continue;
-			transform.GetChild(i).gameObject.SetActive(true);
-		}
+		m_sprite_partyStateIndicator.sprite = ObjectFactory.getInstance.m_sheet_PartyStateIndicator [(int)m_state];
 	}
 
 

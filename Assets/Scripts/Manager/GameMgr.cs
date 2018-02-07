@@ -7,6 +7,7 @@ public class GameMgr : MonoBehaviour {
 	public int m_iHunger = 100;
 	public bool m_bAssembleOnly = true;
 	public List<int> m_ilistCurEnemyList;
+	public List<int> m_ilistCurHeroList;
 
 	public bool m_bDeveloperMode;
 
@@ -49,6 +50,7 @@ public class GameMgr : MonoBehaviour {
 			Destroy(gameObject);
 		
 		m_ilistCurEnemyList = new List<int> ();
+		m_ilistCurHeroList = new List<int> ();
 
 		DontDestroyOnLoad(gameObject);
 

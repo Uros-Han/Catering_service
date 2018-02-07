@@ -91,11 +91,15 @@ public class LevelGenerator : Singleton<LevelGenerator> {
 
 	IEnumerator GenerateQueue(List<ENEMY_TYPE> list_enemyType/*, int iDay*/)
 	{
+		int iHeroCounter = 0;
+
 		for (int i=0; i<list_enemyType.Count; ++i) {
-			if(list_enemyType[i] != ENEMY_TYPE.HERO)
-				Generate(list_enemyType[i]);
-//			else
-//				Generate(list_enemyType[i], iDay/10 - 1);
+			if (list_enemyType [i] != ENEMY_TYPE.HERO)
+				Generate (list_enemyType [i]);
+			else {
+				Generate (list_enemyType [i], GameMgr.getInstance.m_ilistCurHeroList [iHeroCounter]);
+				iHeroCounter += 1;
+			}
 
 			yield return new WaitForSeconds(0.5f);
 		}

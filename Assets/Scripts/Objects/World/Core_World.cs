@@ -187,6 +187,9 @@ public class Core_World : MonoBehaviour {
 
 
 		GameMgr gMgr = GameMgr.getInstance;
+		gMgr.m_ilistCurEnemyList.Clear ();
+		gMgr.m_ilistCurHeroList.Clear ();
+
 		gMgr.m_ilistCurEnemyList = objIcon.m_list_enemyType;
 		Transform PartyTrans = GameObject.Find ("Party").transform;
 
@@ -200,7 +203,11 @@ public class Core_World : MonoBehaviour {
 				world.m_encountPartyList.Add (PartyTrans.GetChild (i).gameObject);
 
 				for (int j = 0; j < party.m_list_enemyType.Count; ++j) {
-					gMgr.m_ilistCurEnemyList.Add (party.m_list_enemyType[j]);	
+
+					gMgr.m_ilistCurEnemyList.Add (party.m_list_enemyType [j]);
+
+					if (party.m_list_enemyType [j] == (int)ENEMY_TYPE.HERO)
+						gMgr.m_ilistCurHeroList.Add (party.m_iHero);
 				}
 
 				strDebug += party.m_list_enemyType.Count + " enemies in " + party.m_strPartyName + ", ";

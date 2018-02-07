@@ -5,7 +5,7 @@ using UnityEngine;
 public class DeveloperTool : MonoBehaviour {
 
 	enum DEBUG_MOUSE_STATE { NORMAL, DEBUG, END };
-	enum DEBUG_STATE { CREATE_CARAVAN, CREATE_RAIDER, END };
+	enum DEBUG_STATE { CREATE_CARAVAN, CREATE_RAIDER, CREATE_HERO, END };
 
 	DEBUG_MOUSE_STATE debugMouseState = DEBUG_MOUSE_STATE.NORMAL;
 	DEBUG_STATE curDebug;
@@ -29,6 +29,10 @@ public class DeveloperTool : MonoBehaviour {
 
 				case DEBUG_STATE.CREATE_RAIDER:
 					ObjectFactory.getInstance.Create_Party (GridMgr.getInstance.GetGridIdx (Camera.main.ScreenToWorldPoint (Input.mousePosition)), PARTY_TYPE.RAID);
+					break;
+
+				case DEBUG_STATE.CREATE_HERO:
+					ObjectFactory.getInstance.Create_Party (GridMgr.getInstance.GetGridIdx (Camera.main.ScreenToWorldPoint (Input.mousePosition)), PARTY_TYPE.RAID, System.Convert.ToInt32(GameObject.Find("Dev_HeroNum").GetComponent<UILabel>().text));
 					break;
 				}
 
@@ -111,5 +115,12 @@ public class DeveloperTool : MonoBehaviour {
 		Debug_Escape ();
 		strCurDebugLabel = "Create Raider";
 		MouseDebugOn (true, DEBUG_STATE.CREATE_RAIDER);
+	}
+
+	void Debug_CreateHero()
+	{
+		Debug_Escape ();
+		strCurDebugLabel = "Create Hero\n" + (HERO)(System.Convert.ToInt32(GameObject.Find("Dev_HeroNum").GetComponent<UILabel>().text));
+		MouseDebugOn (true, DEBUG_STATE.CREATE_HERO);
 	}
 }

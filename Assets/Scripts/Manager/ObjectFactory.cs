@@ -28,6 +28,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	GameObject m_Polluted;
 
 	GameObject m_objParty;
+	GameObject[] m_objHeroParty;
 
 	public Sprite m_sprite_meat;
 	public Sprite[] m_sheet_core;
@@ -61,6 +62,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 
 	public Sprite[] m_sheet_flag;
 
+	public Sprite[] m_sheet_PartyStateIndicator;
 
 	// Use this for initialization
 	public void ResourcesLoad () {
@@ -131,6 +133,9 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		m_Polluted = Resources.Load ("Prefabs/Objects/World/Polluted") as GameObject;
 
 		m_objParty = Resources.Load ("Prefabs/Objects/Enemies/World/Party") as GameObject;
+		m_objHeroParty = Resources.LoadAll<GameObject> ("Prefabs/Objects/Enemies/World/Party_Hero");
+
+		m_sheet_PartyStateIndicator = Resources.LoadAll<Sprite> ("Sprites/UI/PartyStateIndicator");
 
 		SoundMgr.getInstance.AudioPoolSetting ();
 	}
@@ -221,7 +226,12 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 
 	public GameObject Create_Party(int iGrid, PARTY_TYPE partyType, int iHeroNum = -1)
 	{
-		GameObject obj = Instantiate (m_objParty) as GameObject;
+		GameObject obj;
+		if(iHeroNum == -1)
+			obj = Instantiate (m_objParty) as GameObject;
+		else
+			obj = Instantiate (m_objHeroParty[iHeroNum]) as GameObject;
+		
 		obj.transform.parent = GameObject.Find ("Party").transform;
 		obj.transform.position = GridMgr.getInstance.GetPosOfIdx(iGrid);
 
@@ -233,58 +243,63 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 				enemyType = (ENEMY_TYPE)enemyList [i];
 		}
 
-		//TODO : switch as Type
-		switch (enemyType) {
-		case ENEMY_TYPE.CIVILIAN:
-			obj.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = m_sheet_civilian_head[Random.Range (0, m_sheet_civilian_head.Length)];
-			obj.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = m_sheet_civilian_body[Random.Range (0, m_sheet_civilian_body.Length)][0];
-			obj.transform.GetChild(2).GetComponent<SpriteRenderer>().sprite = m_sheet_civilian_leg[Random.Range (0, m_sheet_civilian_leg.Length)];
-			break;
-
-		case ENEMY_TYPE.MERCENARY:
-			obj.transform.GetChild (0).GetComponent<SpriteRenderer> ().sprite = m_sheet_mercenary_head [Random.Range (0, m_sheet_mercenary_head.Length)];
-			obj.transform.GetChild (1).GetComponent<SpriteRenderer> ().sprite = m_sheet_mercenary_body [Random.Range (0, m_sheet_mercenary_body.Length)] [0];
-			obj.transform.GetChild (2).GetComponent<SpriteRenderer> ().sprite = m_sheet_mercenary_leg [Random.Range (0, m_sheet_mercenary_leg.Length)];
-			obj.transform.GetChild (3).GetComponent<SpriteRenderer> ().sprite = m_sheet_mercenary_arm_left [0];
-			obj.transform.GetChild(4).GetComponent<SpriteRenderer>().sprite = m_sheet_mercenary_arm[m_sheet_mercenary_arm.Length - 1];
-			break;
-
-		case ENEMY_TYPE.KNIGHT:
-			obj.transform.GetChild (0).GetComponent<SpriteRenderer> ().sprite = m_sheet_knight_head [Random.Range (0, m_sheet_knight_head.Length)];
-			obj.transform.GetChild (1).GetComponent<SpriteRenderer> ().sprite = m_sheet_knight_body [Random.Range (0, m_sheet_knight_body.Length)] [0];
-			obj.transform.GetChild (2).GetComponent<SpriteRenderer> ().sprite = m_sheet_knight_leg [Random.Range (0, m_sheet_knight_leg.Length)];
-			obj.transform.GetChild (3).GetComponent<SpriteRenderer> ().sprite = m_sheet_knight_arm_left [0];
-			obj.transform.GetChild(4).GetComponent<SpriteRenderer>().sprite = m_sheet_knight_arm[m_sheet_knight_arm.Length - 1];
-			break;
+		if (iHeroNum != -1) {
+			obj.GetComponent<Party> ().m_iHero = iHeroNum;
 		}
 
-		switch (partyType) {
-		case PARTY_TYPE.CARAVAN:
+		if (iHeroNum == -1) {
 			switch (enemyType) {
 			case ENEMY_TYPE.CIVILIAN:
-				obj.transform.GetChild (4).GetComponent<SpriteRenderer> ().sprite = m_civilian_arm_left;
+				obj.transform.GetChild (0).GetComponent<SpriteRenderer> ().sprite = m_sheet_civilian_head [Random.Range (0, m_sheet_civilian_head.Length)];
+				obj.transform.GetChild (1).GetComponent<SpriteRenderer> ().sprite = m_sheet_civilian_body [Random.Range (0, m_sheet_civilian_body.Length)] [0];
+				obj.transform.GetChild (2).GetComponent<SpriteRenderer> ().sprite = m_sheet_civilian_leg [Random.Range (0, m_sheet_civilian_leg.Length)];
 				break;
 
 			case ENEMY_TYPE.MERCENARY:
-				obj.transform.GetChild (4).GetComponent<SpriteRenderer> ().sprite = m_sheet_mercenary_arm_left [0];
+				obj.transform.GetChild (0).GetComponent<SpriteRenderer> ().sprite = m_sheet_mercenary_head [Random.Range (0, m_sheet_mercenary_head.Length)];
+				obj.transform.GetChild (1).GetComponent<SpriteRenderer> ().sprite = m_sheet_mercenary_body [Random.Range (0, m_sheet_mercenary_body.Length)] [0];
+				obj.transform.GetChild (2).GetComponent<SpriteRenderer> ().sprite = m_sheet_mercenary_leg [Random.Range (0, m_sheet_mercenary_leg.Length)];
+				obj.transform.GetChild (3).GetComponent<SpriteRenderer> ().sprite = m_sheet_mercenary_arm_left [0];
+				obj.transform.GetChild (4).GetComponent<SpriteRenderer> ().sprite = m_sheet_mercenary_arm [m_sheet_mercenary_arm.Length - 1];
 				break;
 
 			case ENEMY_TYPE.KNIGHT:
-				obj.transform.GetChild (4).GetComponent<SpriteRenderer> ().sprite = m_sheet_knight_arm_left [0];
+				obj.transform.GetChild (0).GetComponent<SpriteRenderer> ().sprite = m_sheet_knight_head [Random.Range (0, m_sheet_knight_head.Length)];
+				obj.transform.GetChild (1).GetComponent<SpriteRenderer> ().sprite = m_sheet_knight_body [Random.Range (0, m_sheet_knight_body.Length)] [0];
+				obj.transform.GetChild (2).GetComponent<SpriteRenderer> ().sprite = m_sheet_knight_leg [Random.Range (0, m_sheet_knight_leg.Length)];
+				obj.transform.GetChild (3).GetComponent<SpriteRenderer> ().sprite = m_sheet_knight_arm_left [0];
+				obj.transform.GetChild (4).GetComponent<SpriteRenderer> ().sprite = m_sheet_knight_arm [m_sheet_knight_arm.Length - 1];
 				break;
 			}
-			obj.transform.GetChild (4).GetComponent<SpriteRenderer> ().sortingOrder = 0;
-			obj.transform.GetChild (4).localScale = new Vector3 (-1, 1, 1);
-			obj.transform.GetChild (4).localPosition = new Vector2 (-0.13f, 0.08f);
-			obj.transform.Find ("Flag").gameObject.SetActive (false);
-			obj.AddComponent<Caravan> ();
-			break;
 
-		case PARTY_TYPE.RAID:
-			obj.transform.Find ("Wagon").gameObject.SetActive (false);
-			obj.transform.Find ("Flag").GetComponent<SpriteRenderer> ().sprite = m_sheet_flag [Random.Range (0, m_sheet_flag.Length)];
-			obj.AddComponent<Raider> ();
-			break;
+			switch (partyType) {
+			case PARTY_TYPE.CARAVAN:
+				switch (enemyType) {
+				case ENEMY_TYPE.CIVILIAN:
+					obj.transform.GetChild (4).GetComponent<SpriteRenderer> ().sprite = m_civilian_arm_left;
+					break;
+
+				case ENEMY_TYPE.MERCENARY:
+					obj.transform.GetChild (4).GetComponent<SpriteRenderer> ().sprite = m_sheet_mercenary_arm_left [0];
+					break;
+
+				case ENEMY_TYPE.KNIGHT:
+					obj.transform.GetChild (4).GetComponent<SpriteRenderer> ().sprite = m_sheet_knight_arm_left [0];
+					break;
+				}
+				obj.transform.GetChild (4).GetComponent<SpriteRenderer> ().sortingOrder = 0;
+				obj.transform.GetChild (4).localScale = new Vector3 (-1, 1, 1);
+				obj.transform.GetChild (4).localPosition = new Vector2 (-0.13f, 0.08f);
+				obj.transform.Find ("Flag").gameObject.SetActive (false);
+				obj.AddComponent<Caravan> ();
+				break;
+
+			case PARTY_TYPE.RAID:
+				obj.transform.Find ("Wagon").gameObject.SetActive (false);
+				obj.transform.Find ("Flag").GetComponent<SpriteRenderer> ().sprite = m_sheet_flag [Random.Range (0, m_sheet_flag.Length)];
+				obj.AddComponent<Raider> ();
+				break;
+			}
 		}
 
 

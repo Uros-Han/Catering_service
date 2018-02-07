@@ -8,6 +8,7 @@ public class Party : MonoBehaviour {
 	public int m_iDestinationIdx;
 	public List<int> m_listMoveIdx;
 	public List<int> m_list_enemyType;
+	public int m_iHero = -1;
 
 	public int m_iDepartureIdx;
 	public GameObject m_departureLoc;
@@ -21,6 +22,8 @@ public class Party : MonoBehaviour {
 	protected	bool m_bWasMovingBeforeChgedScene = false;
 
 	protected	bool bLoaded = false;
+
+	protected SpriteRenderer m_sprite_partyStateIndicator;
 
 	// Use this for initialization
 	protected virtual void Start () {
@@ -39,6 +42,8 @@ public class Party : MonoBehaviour {
 
 		if (!bLoaded)
 			SetEnemyList ();
+
+		m_sprite_partyStateIndicator = transform.Find ("PartyStateIndicator").GetComponent<SpriteRenderer>();
 	}
 
 	protected virtual void SetEnemyList()
@@ -46,6 +51,10 @@ public class Party : MonoBehaviour {
 		m_list_enemyType = new List<int> ();
 
 		m_list_enemyType = WorldGenerator.getInstance.DeployEnemyList (m_departureLoc.GetComponent<WorldIcon>().m_fPopulation / 2f, (WORLDICON_TYPE)m_departureLoc.GetComponent<WorldIcon>().m_iconType);
+	
+		if (m_iHero != -1) {
+			m_list_enemyType.Add ((int)ENEMY_TYPE.HERO);
+		}
 	}
 
 	protected void MoveOrder()
@@ -91,23 +100,11 @@ public class Party : MonoBehaviour {
 
 	protected void Camping()
 	{
- 		m_state = AI_WORLD_STATE.CAMP;
 		m_iWaitTurnCount = Random.Range (2, 4);
 		m_iFatigue = Random.Range (4, 8);
 
-		if (m_partyType == PARTY_TYPE.CARAVAN) {
-			transform.GetChild(7).gameObject.SetActive(true);
-			for (int i = 0; i < 7; ++i) {
-				if (i == 5)
-					continue;
-				transform.GetChild(i).gameObject.SetActive(false);
-			}
-		} else {
-			transform.GetChild(7).gameObject.SetActive(true);
-			for (int i = 0; i < 6; ++i) {
-				transform.GetChild(i).gameObject.SetActive(false);
-			}
-		}
+		m_state = AI_WORLD_STATE.CAMP;
+		m_sprite_partyStateIndicator.sprite = ObjectFactory.getInstance.m_sheet_PartyStateIndicator [(int)m_state];
 	}
 
 	protected virtual void ThinkWhatAreDoingNext()
@@ -115,30 +112,13 @@ public class Party : MonoBehaviour {
 		//Move
 		SetDestination ();
 		m_state = AI_WORLD_STATE.MOVE;
-
-		transform.GetChild(7).gameObject.SetActive(false);
-		for (int i = 0; i < 6; ++i) {
-			transform.GetChild(i).gameObject.SetActive(true);
-		}
+		m_sprite_partyStateIndicator.sprite = ObjectFactory.getInstance.m_sheet_PartyStateIndicator [(int)m_state];
 	}
 
 	protected virtual void SetDestination()
 	{
 		m_state = AI_WORLD_STATE.MOVE;
-
-		if (m_partyType == PARTY_TYPE.CARAVAN) {
-			transform.GetChild(7).gameObject.SetActive(false);
-			for (int i = 0; i < 7; ++i) {
-				if (i == 5)
-					continue;
-				transform.GetChild(i).gameObject.SetActive(true);
-			}
-		} else {
-			transform.GetChild(7).gameObject.SetActive(false);
-			for (int i = 0; i < 6; ++i) {
-				transform.GetChild(i).gameObject.SetActive(true);
-			}
-		}
+		m_sprite_partyStateIndicator.sprite = ObjectFactory.getInstance.m_sheet_PartyStateIndicator [(int)m_state];
 
 		DrawPath();
 	}

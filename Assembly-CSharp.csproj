@@ -353,6 +353,7 @@
      <Compile Include="Assets\Scripts\UI\MessageBox.cs" />
      <Compile Include="Assets\Scripts\UI\WantedReward.cs" />
      <Compile Include="Assets\Scripts\UI\World\AleartMsg.cs" />
+     <Compile Include="Assets\Scripts\UI\World\PartyStateIndicator.cs" />
      <Compile Include="Assets\Scripts\UI\World\TimeUI.cs" />
      <Compile Include="Assets\SpriteParticleEmitter\Code\Core\EmitterBase.cs" />
      <Compile Include="Assets\SpriteParticleEmitter\Code\Core\EmitterBaseUI.cs" />
