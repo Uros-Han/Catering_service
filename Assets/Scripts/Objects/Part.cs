@@ -33,6 +33,7 @@ public class Part : MonoBehaviour {
 	public GameObject m_objCurParentPart; // used in buff
 	public GameObject m_objLastParentPart; // used in buff
 	public int m_iLastParentPartIdx; //used in buff load data
+	public bool m_bHasChildPart;
 
 	Coroutine buffCoroutine;
 
@@ -134,6 +135,7 @@ public class Part : MonoBehaviour {
 
 			m_objLastParentPart = GridMgr.getInstance.FindObj(m_iLastParentPartIdx, GameObject.Find("Player").transform);
 			m_objCurParentPart = m_objLastParentPart;
+			m_objCurParentPart.GetComponent<Part> ().m_bHasChildPart = true;
 			Core core = GameObject.Find ("Core").GetComponent<Core> ();
 
 			if(m_bNeedToStickHead){
@@ -354,6 +356,7 @@ public class Part : MonoBehaviour {
 			{
 				transform.position = mousePosition;
 				curGridIdx = grid.GetGridIdx(transform.position);
+				m_objCurParentPart.GetComponent<Part> ().m_bHasChildPart = false;
 				m_objCurParentPart = null;
 
 				for(int i = 0 ; i < core.m_StickAvailableSeat.Count; ++i)
@@ -440,6 +443,7 @@ public class Part : MonoBehaviour {
 						}
 
 						m_objCurParentPart = ClosestPart;
+						m_objCurParentPart.GetComponent<Part> ().m_bHasChildPart = true;
 					}
 				}
 

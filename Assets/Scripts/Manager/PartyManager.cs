@@ -31,9 +31,22 @@ public class PartyManager : MonoBehaviour {
 		List<GameObject> listObjRaider = ListParty(PARTY_TYPE.RAID);
 
 		if (listObjRaider.Count < GameMgr.getInstance.m_iReward / 500) {
-			int iDepoleyIdx = CalculateDeployLocation_Raider();
+
+			bool bHeroIncluded = false;
+			int iHeroIdx = -1;
+
+			if (Random.Range (0, 100) < 100) {
+				bHeroIncluded = true;
+			}
+
+			if (bHeroIncluded)
+				iHeroIdx = Random.Range (0, (int)HERO.END);
+
+			int iDepoleyIdx = CalculateDeployLocation_Raider(bHeroIncluded, iHeroIdx);
 
 			if(iDepoleyIdx != -1)
+				DeployParty (iDepoleyIdx, PARTY_TYPE.RAID, iHeroIdx);
+			else
 				DeployParty (iDepoleyIdx, PARTY_TYPE.RAID);
 		}
 	}
@@ -67,7 +80,7 @@ public class PartyManager : MonoBehaviour {
 		return m_iListLoc[Random.Range(0, m_iListLoc.Count)];
 	}
 
-	int CalculateDeployLocation_Raider()
+	int CalculateDeployLocation_Raider(bool bHeroIncluded = false, int iHeroIdx = -1)
 	{
 		int iReward = GameMgr.getInstance.m_iReward;
 		Transform GeoTrans = GameObject.Find ("Geo").transform;
@@ -77,16 +90,20 @@ public class PartyManager : MonoBehaviour {
 		List<int> m_iListLoc;
 
 		string strLocKey = "";
+		string strEnemyTypeKey = "";
 
 		if (iReward < 2000) {
 			m_iListLoc = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iListVillage;
 			strLocKey = "Icon_Village_name";
-		} else if (iReward < 4000) {
+			strEnemyTypeKey = "EnemyType_Civilian_name";
+		} else if (iReward < 10000) {
 			m_iListLoc = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iListCity;
 			strLocKey = "Icon_City_name";
+			strEnemyTypeKey = "EnemyType_Mercenary_name";
 		} else {
 			m_iListLoc = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iListCastle;
 			strLocKey = "Icon_Castle_name";
+			strEnemyTypeKey = "EnemyType_Knight_name";
 		}
 
 		for (int i = 0; i < m_iListLoc.Count; ++i) {
@@ -105,7 +122,11 @@ public class PartyManager : MonoBehaviour {
 
 		for (int i = 0; i < iListCloseLoc.Count; ++i) {
 			if (!GeoTrans.GetChild (iListCloseLoc[i].Key).GetComponent<WorldGeo> ().m_bPolluted && iListCloseLoc [i].Value > 2) {
-				ObjectFactory.getInstance.Create_AleartMsg (string.Format(Localization.Get("AleartMsg_Create_Raider"), Localization.Get(strLocKey)));
+				if(!bHeroIncluded)
+					ObjectFactory.getInstance.Create_AleartMsg (string.Format(Localization.Get("AleartMsg_Create_Raider"), Localization.Get(strLocKey)));
+				else
+					ObjectFactory.getInstance.Create_AleartMsg (string.Format(Localization.Get("AleartMsg_Create_Raider_Hero"), Localization.Get(strLocKey), Localization.Get(string.Format("Hero_name_{0}", iHeroIdx)), Localization.Get(strEnemyTypeKey)));
+				
 				return iListCloseLoc [i].Key;
 			}
 		}
@@ -113,9 +134,13 @@ public class PartyManager : MonoBehaviour {
 		return -1;
 	}
 
-	void DeployParty(int iGrid, PARTY_TYPE partyType)
+	void DeployParty(int iGrid, PARTY_TYPE partyType, int iHeroIdx = -1)
 	{
-		ObjectFactory.getInstance.Create_Party (iGrid, partyType);
+		if (iHeroIdx != -1) {
+			ObjectFactory.getInstance.Create_Party (iGrid, partyType, iHeroIdx);
+
+		}else
+			ObjectFactory.getInstance.Create_Party (iGrid, partyType);
 	}
 
 

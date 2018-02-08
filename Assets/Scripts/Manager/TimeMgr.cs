@@ -22,8 +22,8 @@ public class TimeMgr : Singleton<TimeMgr> {
 	{
 		switch ((int)m_fHour) {
 		case 0:
-			m_sunLight.color = Color.white;
-			m_sunLight.intensity = 0f;
+			m_sunLight.color = new Color (218 / 255f, 226 / 255f, 255 / 255f);
+			m_sunLight.intensity = 0.15f;
 			break;
 
 		case 6:
@@ -84,8 +84,8 @@ public class TimeMgr : Singleton<TimeMgr> {
 			break;
 
 		case 24:
-			colorTarget = Color.white;
-			fIntensityTarget = 0f;
+			m_sunLight.color = new Color (218 / 255f, 226 / 255f, 255 / 255f);
+			m_sunLight.intensity = 0.15f;
 			break;
 		}
 

@@ -20,10 +20,11 @@ HeadBuff_2,+HeadBuff_2,+1해당 범위 공격 파츠의 공격력과 공격 속�
 ,,
 ,,
 ,,
-,,
-,,
-,,
-,,
+ENEMY_TYPE,,
+EnemyType_Livestock_name,Livestock,가축
+EnemyType_Civilian_name,Civilian,시민
+EnemyType_Mercenary_name,Mercenary,용병
+EnemyType_Knight_name,Knight,기사
 ,,
 PARTY,,
 Party_Raider,Raiders,공격대
@@ -83,8 +84,8 @@ Icon_Castle_desc_population_0,Castle_Description_population_0,성 안은 사람�
 Icon_Castle_desc_population_1,Castle_Description_population_1,"성 안 곳곳 병사들이 보입니다. 그리 큰 규모도, 작은 규모도 아닙니다."
 Icon_Castle_desc_population_2,Castle_Description_population_2,성 안은 훈련하는 많은 병사들과 사람들의 함성으로 가득합니다.
 ,,
-,,
-,,
+HERO,,
+Hero_name_0,Wallace,월레스
 ,,
 ,,
 ,,
@@ -107,7 +108,7 @@ Mbox_HungerChecker,HungerCheckerMsg,여행을 위한 허기가 부족합니다. 
 ,,
 ALEART MESSAGE,,
 AleartMsg_Create_Raider,Msg_Create_Party_{0},근처 {0}에서 괴물을 사냥하기 위해 공격대를 파견하였습니다.
-,,
+AleartMsg_Create_Raider_Hero,Msg_Create_Party_Hero_{0},근처 {0}에서 괴물을 사냥하기 위해 [9D40BDFF]영웅 {1}[-](이)가 {2}들을 모집했습니다.
 ,,
 ,,
 ,,

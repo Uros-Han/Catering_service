@@ -23,6 +23,7 @@ public class Core_World : MonoBehaviour {
 	{
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().Wait ();
+			StartCoroutine(EatMyPart ());
 		}
 
 		if (Input.GetKeyDown (KeyCode.Escape)) {
@@ -36,6 +37,33 @@ public class Core_World : MonoBehaviour {
 				Destroy (pathTrans.GetChild (i).gameObject);
 			}
 		}
+	}
+
+	public IEnumerator EatMyPart()
+	{
+		Transform playerTrans = GameObject.Find ("Player").transform;
+		List<GameObject> branchPartList = new List<GameObject> ();
+
+		for (int i = 1; i < playerTrans.childCount; ++i) {
+			if (!playerTrans.GetChild (i).GetComponent<Part> ().m_bHasChildPart) {
+				branchPartList.Add (playerTrans.GetChild (i).gameObject);
+			}
+		}
+
+		GameObject targetPart = branchPartList [Random.Range (0, branchPartList.Count)];
+		Destroy(targetPart.GetComponent<Part>());
+		targetPart.transform.position = UICamera.mainCamera.ViewportToWorldPoint (new Vector3 (0.5f, 0.5f, 10));
+		targetPart.GetComponent<SpriteRenderer> ().sortingLayerName = "FrontObject";
+		targetPart.transform.parent = UICamera.mainCamera.transform;
+		targetPart.layer = 5;
+		targetPart.SetActive (true);
+		iTween.MoveTo (targetPart, iTween.Hash("x",-205f, "y", 175f, "easetype", "easeInCubic", "time", 0.65f, "isLocal", true));
+
+		yield return new WaitForSeconds (0.65f);
+
+		iTween.ColorTo (targetPart, iTween.Hash("a", 0f, "time", 0.4f));
+
+		GameObject.Find ("Hunger").GetComponent<HungerUI> ().IncreaseHunger (100);
 	}
 
 	IEnumerator Idle()

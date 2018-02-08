@@ -70,8 +70,8 @@ public class BattleSceneSetter : MonoBehaviour {
 
 		switch ((int)TimeMgr.getInstance.m_fHour) {
 		case 0:
-			m_sunLight.color = Color.white;
-			m_sunLight.intensity = 0f;
+			m_sunLight.color = new Color (218 / 255f, 226 / 255f, 255 / 255f);
+			m_sunLight.intensity = 0.15f;
 			break;
 
 		case 6:
