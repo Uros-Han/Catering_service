@@ -29,6 +29,7 @@ namespace ES3Types
 			writer.WriteProperty<string> ("nameKey",instance.m_strNameKey);
 			writer.WriteProperty<List<string>> ("listStrBuff", instance.m_lstStrBuff);
 			writer.WriteProperty<int> ("lastParentPartIdx", instance.m_iLastParentPartIdx);
+			writer.WriteProperty<int> ("childPartCount", instance.m_iChildPartCount);
 		}
 
 		protected override void ReadObject<T>(ES3Reader reader, object obj)
@@ -90,6 +91,10 @@ namespace ES3Types
 
 				case "lastParentPartIdx":
 					instance.m_iLastParentPartIdx = reader.Read<int> ();
+					break;
+
+				case "childPartCount":
+					instance.m_iChildPartCount = reader.Read<int>();
 					break;
 
 				default:

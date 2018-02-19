@@ -23,7 +23,6 @@ public class Core_World : MonoBehaviour {
 	{
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().Wait ();
-			StartCoroutine(EatMyPart ());
 		}
 
 		if (Input.GetKeyDown (KeyCode.Escape)) {
@@ -45,25 +44,39 @@ public class Core_World : MonoBehaviour {
 		List<GameObject> branchPartList = new List<GameObject> ();
 
 		for (int i = 1; i < playerTrans.childCount; ++i) {
-			if (!playerTrans.GetChild (i).GetComponent<Part> ().m_bHasChildPart) {
+			if (playerTrans.GetChild (i).GetComponent<Part> ().m_iChildPartCount == 0) {
 				branchPartList.Add (playerTrans.GetChild (i).gameObject);
 			}
 		}
 
-		GameObject targetPart = branchPartList [Random.Range (0, branchPartList.Count)];
-		Destroy(targetPart.GetComponent<Part>());
-		targetPart.transform.position = UICamera.mainCamera.ViewportToWorldPoint (new Vector3 (0.5f, 0.5f, 10));
-		targetPart.GetComponent<SpriteRenderer> ().sortingLayerName = "FrontObject";
-		targetPart.transform.parent = UICamera.mainCamera.transform;
-		targetPart.layer = 5;
-		targetPart.SetActive (true);
-		iTween.MoveTo (targetPart, iTween.Hash("x",-205f, "y", 175f, "easetype", "easeInCubic", "time", 0.65f, "isLocal", true));
+		if (branchPartList.Count == 0) {
+			GameMgr.getInstance.GameOver ();
+			yield break;
+		}
+
+		int iRandom = Random.Range (0, branchPartList.Count);
+
+		GameObject objTargetPart = branchPartList [iRandom];
+		Part targetPart = objTargetPart.GetComponent<Part> ();
+
+		if(targetPart.m_objCurParentPart == null){
+			targetPart.m_objCurParentPart = GridMgr.getInstance.FindObj(targetPart.m_iLastParentPartIdx, GameObject.Find("Player").transform, GRID_STATE.BATTLE);
+		}
+		targetPart.m_objCurParentPart.GetComponent<Part>().m_iChildPartCount -= 1;
+
+		Destroy(objTargetPart.GetComponent<Part>());
+		objTargetPart.transform.position = UICamera.mainCamera.ViewportToWorldPoint (new Vector3 (0.5f, 0.5f, 10));
+		objTargetPart.GetComponent<SpriteRenderer> ().sortingLayerName = "FrontObject";
+		objTargetPart.transform.parent = UICamera.mainCamera.transform;
+		objTargetPart.layer = 5;
+		objTargetPart.SetActive (true);
+		iTween.MoveTo (objTargetPart, iTween.Hash("x",-205f, "y", 175f, "easetype", "easeInCubic", "time", 0.65f, "isLocal", true));
 
 		yield return new WaitForSeconds (0.65f);
 
-		iTween.ColorTo (targetPart, iTween.Hash("a", 0f, "time", 0.4f));
+		iTween.ColorTo (objTargetPart, iTween.Hash("a", 0f, "time", 0.4f));
 
-		GameObject.Find ("Hunger").GetComponent<HungerUI> ().IncreaseHunger (100);
+		GameObject.Find ("Hunger").GetComponent<HungerUI> ().ChangeHunger (100);
 	}
 
 	IEnumerator Idle()
@@ -139,7 +152,6 @@ public class Core_World : MonoBehaviour {
 	public void HungerCheck()
 	{
 		if (m_iNeedHunger > GameMgr.getInstance.m_iHunger) {
-			//TODO: HUNGER CHECKER
 			ObjectFactory.getInstance.Create_MessageBox_TwoButton(Localization.Get("Mbox_HungerChecker"), "HungerCheckerEnforcement", "DestroyMessageBox");
 		} else
 			MoveOrder ();
@@ -180,11 +192,12 @@ public class Core_World : MonoBehaviour {
 			Vector3 destPos = grid.GetPosOfIdx(m_listMoveIdx[i]);
 			iTween.MoveTo(gameObject, iTween.Hash("x", destPos.x, "y", destPos.y, "time", 1f, "easetype", "easeInSine"));
 
-			GameMgr.getInstance.m_iHunger -= 30;
-
-			if (GameMgr.getInstance.m_iHunger <= 0) {
-				GameMgr.getInstance.m_iHunger = 100;
-				//TODO: Eat Part
+			if (GameMgr.getInstance.m_iHunger - 30 > 0)
+				GameObject.Find ("Hunger").GetComponent<HungerUI> ().ChangeHunger (GameMgr.getInstance.m_iHunger - 30);
+			else {
+				GameObject.Find ("Hunger").GetComponent<HungerUI> ().ChangeHunger (0);
+				yield return new WaitForSeconds (0.5f);
+				yield return StartCoroutine(EatMyPart ());
 			}
 
 			yield return new WaitForSeconds(1f);

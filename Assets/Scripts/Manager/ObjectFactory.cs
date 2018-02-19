@@ -311,7 +311,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	{
 		GameObject obj = Instantiate (m_Part) as GameObject;
 		obj.transform.parent = GameObject.Find ("Player").transform;
-		obj.transform.position = GridMgr.getInstance.GetPosOfIdx_BattleGrid (part.m_iGridIdx);
+		obj.transform.position = GridMgr.getInstance.GetPosOfIdx (part.m_iGridIdx, GRID_STATE.BATTLE);
 		obj.transform.localRotation = Quaternion.AngleAxis (rotation, Vector3.forward);
 		obj.transform.localScale = new Vector3 (scaleX, 1, 1);
 		obj.gameObject.name = name;

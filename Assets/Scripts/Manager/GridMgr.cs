@@ -133,31 +133,38 @@ public class GridMgr : Singleton<GridMgr>
 
 	}
 
-	public int GetGridIdx(Vector2 vPosition)
+	public int GetGridIdx(Vector2 vPosition, GRID_STATE gridState = GRID_STATE.END)
 	{
-		m_fStartPos = new Vector2 ( -1 * (m_iXcount * m_fXsize) / 2 , (m_iYcount * m_fYsize) / 2 );
+		int tmpidx;
 
-		int tmpidx = (int)(System.Math.Round((vPosition.y-m_fStartPos.y + (m_fYsize/2)) / m_fYsize) * m_iXcount * -1)+ (int)(System.Math.Round((vPosition.x - m_fStartPos.x- (m_fXsize/2)) / m_fXsize));
+		if (gridState == GRID_STATE.END) {
+			tmpidx = (int)(System.Math.Round ((vPosition.y - m_fStartPos.y + (m_fYsize / 2)) / m_fYsize) * m_iXcount * -1) + (int)(System.Math.Round ((vPosition.x - m_fStartPos.x - (m_fXsize / 2)) / m_fXsize));
+		}else if(gridState == GRID_STATE.BATTLE)
+			tmpidx = (int)(System.Math.Round((vPosition.y-m_fBattleStartPos.y + (m_fYBattleSize/2)) / m_fYBattleSize) * m_iBattleXcount * -1)+ (int)(System.Math.Round((vPosition.x - m_fBattleStartPos.x- (m_fXBattleSize/2)) / m_fXBattleSize));
+		else
+			tmpidx = (int)(System.Math.Round((vPosition.y-m_fWorldStartPos.y + (m_fYWorldSize/2)) / m_fYWorldSize) * m_iWorldXcount * -1)+ (int)(System.Math.Round((vPosition.x - m_fWorldStartPos.x- (m_fXWorldSize/2)) / m_fXWorldSize));
+
 		return tmpidx;
 	}
 
-	public Vector3 GetPosOfIdx(int m_iIdx = -1)
+	public Vector3 GetPosOfIdx(int m_iIdx = -1, GRID_STATE gridState = GRID_STATE.END)
 	{
-		if(m_iIdx == -1) // This Grid
-			return new Vector3(((float)(m_iGridIdx % m_iXcount) * m_fXsize) + (m_fXsize/2) + m_fStartPos.x, (float)(m_iGridIdx / m_iXcount) * -1 * m_fXsize - (m_fYsize/2) + m_fStartPos.y);
-		else // Know to Want Grid
-			return new Vector3(((float)(m_iIdx % m_iXcount) * m_fXsize) + (m_fXsize/2) + m_fStartPos.x, (float)(m_iIdx / m_iXcount) * -1 * m_fXsize - (m_fYsize/2) + m_fStartPos.y);
-
-		return Vector3.zero;
-	}
-
-	public Vector3 GetPosOfIdx_BattleGrid(int m_iIdx = -1)
-	{
-		if(m_iIdx == -1) // This Grid
-			return new Vector3(((float)(m_iGridIdx % m_iBattleXcount) * m_fXBattleSize) + (m_fXBattleSize/2) + m_fBattleStartPos.x, (float)(m_iGridIdx / m_iBattleXcount) * -1 * m_fXBattleSize - (m_fYBattleSize/2) + m_fBattleStartPos.y);
-		else // Know to Want Grid
-			return new Vector3(((float)(m_iIdx % m_iBattleXcount) * m_fXBattleSize) + (m_fXBattleSize/2) + m_fBattleStartPos.x, (float)(m_iIdx / m_iBattleXcount) * -1 * m_fXBattleSize - (m_fYBattleSize/2) + m_fBattleStartPos.y);
-
+		if (gridState == GRID_STATE.END) {
+			if (m_iIdx == -1) // This Grid
+			return new Vector3 (((float)(m_iGridIdx % m_iXcount) * m_fXsize) + (m_fXsize / 2) + m_fStartPos.x, (float)(m_iGridIdx / m_iXcount) * -1 * m_fXsize - (m_fYsize / 2) + m_fStartPos.y);
+			else // Know to Want Grid
+			return new Vector3 (((float)(m_iIdx % m_iXcount) * m_fXsize) + (m_fXsize / 2) + m_fStartPos.x, (float)(m_iIdx / m_iXcount) * -1 * m_fXsize - (m_fYsize / 2) + m_fStartPos.y);
+		} else if (gridState == GRID_STATE.BATTLE) {
+			if(m_iIdx == -1) // This Grid
+				return new Vector3(((float)(m_iGridIdx % m_iBattleXcount) * m_fXBattleSize) + (m_fXBattleSize/2) + m_fBattleStartPos.x, (float)(m_iGridIdx / m_iBattleXcount) * -1 * m_fXBattleSize - (m_fYBattleSize/2) + m_fBattleStartPos.y);
+			else // Know to Want Grid
+				return new Vector3(((float)(m_iIdx % m_iBattleXcount) * m_fXBattleSize) + (m_fXBattleSize/2) + m_fBattleStartPos.x, (float)(m_iIdx / m_iBattleXcount) * -1 * m_fXBattleSize - (m_fYBattleSize/2) + m_fBattleStartPos.y);
+		} else {
+			if(m_iIdx == -1) // This Grid
+				return new Vector3(((float)(m_iGridIdx % m_iWorldXcount) * m_fXWorldSize) + (m_fXWorldSize/2) + m_fWorldStartPos.x, (float)(m_iGridIdx / m_iWorldXcount) * -1 * m_fXWorldSize - (m_fYWorldSize/2) + m_fWorldStartPos.y);
+			else // Know to Want Grid
+				return new Vector3(((float)(m_iIdx % m_iWorldXcount) * m_fXWorldSize) + (m_fXWorldSize/2) + m_fWorldStartPos.x, (float)(m_iIdx / m_iWorldXcount) * -1 * m_fXWorldSize - (m_fYWorldSize/2) + m_fWorldStartPos.y);
+		}
 		return Vector3.zero;
 	}
 
@@ -238,14 +245,29 @@ public class GridMgr : Singleton<GridMgr>
 		return ObjList;
 	}
 
-	public GameObject FindObj(int iIdx, Transform parent)
+	public GameObject FindObj(int iIdx, Transform parent, GRID_STATE gridState = GRID_STATE.END)
 	{
 		GameObject Obj = null;
-
-		for (int i = 0; i < parent.childCount; ++i) {
-			if (iIdx.Equals (GetGridIdx (parent.GetChild (i).position))) {
-				Obj = parent.GetChild (i).gameObject;
-				break;
+		if (gridState == GRID_STATE.END) {
+			for (int i = 0; i < parent.childCount; ++i) {
+				if (iIdx.Equals (GetGridIdx (parent.GetChild (i).position))) {
+					Obj = parent.GetChild (i).gameObject;
+					break;
+				}
+			}
+		} else if (gridState == GRID_STATE.BATTLE) {
+			for (int i = 0; i < parent.childCount; ++i) {
+				if (iIdx.Equals (GetGridIdx (parent.GetChild (i).position, GRID_STATE.BATTLE))) {
+					Obj = parent.GetChild (i).gameObject;
+					break;
+				}
+			}
+		} else {
+			for (int i = 0; i < parent.childCount; ++i) {
+				if (iIdx.Equals (GetGridIdx (parent.GetChild (i).position, GRID_STATE.WORLD))) {
+					Obj = parent.GetChild (i).gameObject;
+					break;
+				}
 			}
 		}
 

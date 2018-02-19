@@ -13,7 +13,7 @@ public class HungerUI : MonoBehaviour {
 		m_hungerCountLabel = transform.Find ("hungerCount").GetComponent<UILabel> ();
 	}
 
-	public void IncreaseHunger(int iTargetHunger)
+	public void ChangeHunger(int iTargetHunger)
 	{
 		iTween.ValueTo (gameObject, iTween.Hash ("from", gMgr.m_iHunger,"to", iTargetHunger, "Time", 0.5f, "onupdate", "TweenHunger", "easetype", "easeInSine"));
 	}

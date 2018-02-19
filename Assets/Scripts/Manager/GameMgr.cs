@@ -87,4 +87,9 @@ public class GameMgr : MonoBehaviour {
 	{
 		StartCoroutine (CreateGame_Coroutine ());
 	}
+
+	public void GameOver()
+	{
+		ObjectFactory.getInstance.Create_MessageBox_OneButton ("GameOver", "GameOver");
+	}
 }

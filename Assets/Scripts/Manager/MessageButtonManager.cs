@@ -14,4 +14,9 @@ public class MessageButtonManager : MonoBehaviour {
 	{
 		Destroy (GameObject.Find ("MessageBox(Clone)").gameObject);
 	}
+
+	void GameOver()
+	{
+		Application.LoadLevel ("Main");
+	}
 }

@@ -33,7 +33,7 @@ public class Part : MonoBehaviour {
 	public GameObject m_objCurParentPart; // used in buff
 	public GameObject m_objLastParentPart; // used in buff
 	public int m_iLastParentPartIdx; //used in buff load data
-	public bool m_bHasChildPart;
+	public int m_iChildPartCount;
 
 	Coroutine buffCoroutine;
 
@@ -45,6 +45,8 @@ public class Part : MonoBehaviour {
 
 	public bool m_bLoadedPart = false;
 	bool m_bTurnIntoMeat;
+
+	public bool m_bBreakedPath;
 
 	void Awake()
 	{
@@ -135,7 +137,7 @@ public class Part : MonoBehaviour {
 
 			m_objLastParentPart = GridMgr.getInstance.FindObj(m_iLastParentPartIdx, GameObject.Find("Player").transform);
 			m_objCurParentPart = m_objLastParentPart;
-			m_objCurParentPart.GetComponent<Part> ().m_bHasChildPart = true;
+			GameObject.Find("Player").BroadcastMessage("CheckCurParentPart", SendMessageOptions.DontRequireReceiver);
 			Core core = GameObject.Find ("Core").GetComponent<Core> ();
 
 			if(m_bNeedToStickHead){
@@ -165,7 +167,7 @@ public class Part : MonoBehaviour {
 
 			GetComponent<SpriteSheet>().CheckAround(false);
 			GetComponent<SpriteRenderer>().sortingLayerName = "Objects";
-			GetComponent<ParticleSystemRenderer>().sortingLayerName = "Object_Particle";
+//			GetComponent<ParticleSystemRenderer>().sortingLayerName = "Object_Particle";
 
 			ClearBuffBeforeCheck();
 			GameObject.Find("Player").BroadcastMessage("BuffCheck");
@@ -177,7 +179,7 @@ public class Part : MonoBehaviour {
 			m_fCurHealth = m_fHealth;
 		}
 
-		m_fOriginEmissionRate = GetComponent<SpriteParticleEmitter.DynamicEmitter> ().EmissionRate;
+//		m_fOriginEmissionRate = GetComponent<SpriteParticleEmitter.DynamicEmitter> ().EmissionRate;
 
 		StartCoroutine (Heal ());
 
@@ -193,23 +195,6 @@ public class Part : MonoBehaviour {
 			m_dicStat.Add ("AttackSpeed", 0);
 		if(m_partType.Equals(PART_TYPE.HEAD) && !m_dicStat.ContainsKey ("IQ"))
 			m_dicStat.Add ("IQ", 0);
-	}
-
-	public void SetDirection()
-	{
-		switch (m_headingDirection) {
-		case DIRECTION.UP:
-			transform.localRotation = Quaternion.AngleAxis(180f, Vector3.forward);
-			break;
-			
-		case DIRECTION.LEFT:
-			transform.localRotation = Quaternion.AngleAxis(270f, Vector3.forward);
-			break;
-			
-		case DIRECTION.RIGHT:
-			transform.localRotation = Quaternion.AngleAxis(90f, Vector3.forward);
-			break;
-		}
 	}
 
 	void OnDestroy()
@@ -272,6 +257,7 @@ public class Part : MonoBehaviour {
 		bool bWasPoop = false;
 		BoxCollider2D PoopColldier2D = GameObject.Find ("Poop").GetComponent<BoxCollider2D> ();
 		Vector3 OriginPos = transform.position;
+		Quaternion OriginRotate = transform.localRotation;
 		
 		Core core = GameObject.Find ("Core").GetComponent<Core> ();
 		core.CalculateStickableSeat (false);
@@ -299,6 +285,7 @@ public class Part : MonoBehaviour {
 			if(Input.GetMouseButtonDown(0) && collider2D.OverlapPoint(mousePosition))
 			{
 				OriginPos = transform.position;
+				OriginRotate = transform.localRotation;
 
 				Camera.main.GetComponent<ProCamera2DPanAndZoom>().enabled = false;
 
@@ -342,7 +329,7 @@ public class Part : MonoBehaviour {
 				}
 				if (!gameObject.name.Equals ("Core")){
 					GetComponent<SpriteRenderer>().sortingLayerName = "FrontObject";
-					GetComponent<ParticleSystemRenderer>().sortingLayerName = "FrontObject_Particle";
+//					GetComponent<ParticleSystemRenderer>().sortingLayerName = "FrontObject_Particle";
 				}
 
 //				GetComponent<SpriteParticleEmitter.DynamicEmitter>().enabled = false;
@@ -356,8 +343,9 @@ public class Part : MonoBehaviour {
 			{
 				transform.position = mousePosition;
 				curGridIdx = grid.GetGridIdx(transform.position);
-				m_objCurParentPart.GetComponent<Part> ().m_bHasChildPart = false;
 				m_objCurParentPart = null;
+				GameObject.Find("Player").BroadcastMessage("AmI_InCoreSide");
+				GameObject.Find("Player").BroadcastMessage("CheckCurParentPart", SendMessageOptions.DontRequireReceiver);
 
 				for(int i = 0 ; i < core.m_StickAvailableSeat.Count; ++i)
 				{
@@ -373,6 +361,9 @@ public class Part : MonoBehaviour {
 						{
 							GameObject target;
 							target = PlayerTrans.GetChild(j).gameObject;
+
+							if(target.GetComponent<Part>().m_bBreakedPath)
+								continue;
 
 							if(ClosestPart == null)
 								ClosestPart = target;
@@ -443,7 +434,6 @@ public class Part : MonoBehaviour {
 						}
 
 						m_objCurParentPart = ClosestPart;
-						m_objCurParentPart.GetComponent<Part> ().m_bHasChildPart = true;
 					}
 				}
 
@@ -541,17 +531,20 @@ public class Part : MonoBehaviour {
 
 						GetComponent<SpriteSheet>().CheckAround(false);
 						GetComponent<SpriteRenderer>().sortingLayerName = "Objects";
-						GetComponent<ParticleSystemRenderer>().sortingLayerName = "Object_Particle";
+//						GetComponent<ParticleSystemRenderer>().sortingLayerName = "Object_Particle";
 
 						OriginPos = transform.position;
+						OriginRotate = transform.localRotation;
 
 						GetComponent<SpriteRenderer>().color = Color.white;
-						GetComponent<SpriteParticleEmitter.DynamicEmitter>().enabled = true;
+//						GetComponent<SpriteParticleEmitter.DynamicEmitter>().enabled = true;
 
 
 						ClearBuffBeforeCheck();
 						GameObject.Find("Player").BroadcastMessage("BuffCheck");
 						SoundMgr.getInstance.PlaySfx("core_place");
+
+						GameObject.Find("Player").BroadcastMessage("CheckCurParentPart", SendMessageOptions.DontRequireReceiver);
 					}
 				}
 
@@ -578,11 +571,12 @@ public class Part : MonoBehaviour {
 						morgue.AddBody(true, gameObject, curGridIdx);
 
 						GetComponent<SpriteRenderer>().sortingLayerName = "DeadBodies";
-						GetComponent<ParticleSystemRenderer>().sortingLayerName = "DeadBodies_Particle";
+//						GetComponent<ParticleSystemRenderer>().sortingLayerName = "DeadBodies_Particle";
 
 
 
 						OriginPos = transform.position;
+						OriginRotate = transform.localRotation;
 						transform.parent = GameObject.Find("Morgue").transform;
 
 						ClearBuffBeforeCheck();
@@ -643,21 +637,30 @@ public class Part : MonoBehaviour {
 					if(!bParentWasCore) iTween.RotateTo(gameObject, iTween.Hash ("z", 0f, "time", 0.1f));
 					yield return new WaitForSeconds(0.12f);
 
+					m_headingDirection = m_BeforeheadingDirection;
+					GetComponent<SpriteSheet>().CheckAround(false);
+
 					if(bParentWasCore)
 					{
 						transform.parent = GameObject.Find("Player").transform;
 						transform.parent.BroadcastMessage("AmI_InCoreSide");
 						GetComponent<SpriteRenderer>().sortingLayerName = "Objects";
-						GetComponent<ParticleSystemRenderer>().sortingLayerName = "Objects_Particle";
+//						GetComponent<ParticleSystemRenderer>().sortingLayerName = "Objects_Particle";
 
 						if(m_lstStrBuff.Count > 0)
 							StartCoroutine(Buff(true));
+
+						transform.localRotation = OriginRotate;
+
+						SoundMgr.getInstance.PlaySfx("core_place");
+						m_objCurParentPart = m_objLastParentPart;
+						GameObject.Find("Player").BroadcastMessage("CheckCurParentPart", SendMessageOptions.DontRequireReceiver);
+
 					}else
 						GetComponent<SpriteRenderer>().sortingLayerName = "DeadBodies";
-					GetComponent<ParticleSystemRenderer>().sortingLayerName = "DeadBodies_Particle";
+//					GetComponent<ParticleSystemRenderer>().sortingLayerName = "DeadBodies_Particle";
 
-					m_headingDirection = m_BeforeheadingDirection;
-					GetComponent<SpriteSheet>().CheckAround(false);
+			
 				}
 				
 				core.CalculateStickableSeat (false);
@@ -924,10 +927,15 @@ public class Part : MonoBehaviour {
 			if(m_objAleart == null)
 				m_objAleart = ObjectFactory.getInstance.Create_Aleart (iStart);
 			else
-				m_objAleart.transform.position = transform.position;
+				m_objAleart.transform.position = GridMgr.getInstance.GetPosOfIdx(iStart);
+
+			m_bBreakedPath = true;
+
 		} else {
 			if(m_objAleart != null)
 				Destroy(m_objAleart);
+
+			m_bBreakedPath = false;
 		}
 
 	}
@@ -946,7 +954,7 @@ public class Part : MonoBehaviour {
 			} else {
 				transform.parent = GameObject.Find ("Field").transform;
 				GetComponent<FSM_Freindly> ().m_AiState = AI_STATE.DISABLED;
-				GetComponent<SpriteParticleEmitter.DynamicEmitter> ().enabled = false;
+//				GetComponent<SpriteParticleEmitter.DynamicEmitter> ().enabled = false;
 				GetComponent<SpriteRenderer> ().color = Color.gray;
 				GetComponent<Rigidbody2D> ().isKinematic = false;
 				GetComponent<Rigidbody2D> ().AddTorque (Random.Range (-180f, 180f));
@@ -956,6 +964,30 @@ public class Part : MonoBehaviour {
 
 
 		}
+	}
+
+	void CheckCurParentPart()
+	{
+		Transform PlayerTrans = GameObject.Find ("Player").transform;
+
+		bool bHasParent = false;
+		m_iChildPartCount = 0;
+
+		for (int i = 0; i < PlayerTrans.childCount; ++i) {
+			Part targetPart = PlayerTrans.GetChild (i).GetComponent<Part> ();
+
+			if (targetPart.m_iGridIdx == m_iLastParentPartIdx) {
+				m_objCurParentPart = PlayerTrans.GetChild (i).gameObject;
+				m_objLastParentPart = m_objCurParentPart;
+				bHasParent = true;
+			}
+			if (targetPart.m_objCurParentPart == gameObject) {
+				m_iChildPartCount += 1;
+			}
+		}
+
+		if (!bHasParent)
+			m_objCurParentPart = null;
 	}
 
 	public void DestroyThis()

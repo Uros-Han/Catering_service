@@ -1,3 +1,5 @@
+public enum GRID_STATE { WORLD, BATTLE, END };
+
 public enum TURN_STATE { DAY, NIGHT, END };
 
 public enum DIRECTION { LEFT, UP, DOWN, RIGHT, EVERYWHERE };

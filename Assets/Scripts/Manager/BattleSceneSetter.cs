@@ -24,6 +24,15 @@ public class BattleSceneSetter : MonoBehaviour {
 
 	public void ToWorldMap()
 	{
+		Transform PlayerTrans = GameObject.Find ("Player").transform;
+
+		for (int i = 0; i < PlayerTrans.childCount; ++i) {
+			if (PlayerTrans.GetChild (i).GetComponent<Part> ().m_bBreakedPath) {
+				ObjectFactory.getInstance.Create_MessageBox_OneButton (Localization.Get("Mbox_BreakedPath"),"DestroyMessageBox");
+				return;
+			}
+		}
+
 		StartCoroutine (ToWorldMap_Coroutine ());
 	}
 
