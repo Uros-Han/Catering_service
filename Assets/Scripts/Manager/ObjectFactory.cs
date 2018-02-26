@@ -673,6 +673,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		float fSpeedRandom = 0f;
 		switch (iArmRandom) {
 		case 0:
+			armPart.m_weaponType = WEAPON_TYPE.TWO_HAND;
 			armPart.m_strNameKey = "큰 낫";
 			fRandom = Random.Range (3, 5);
 			fSpeedRandom = Random.Range (1, 3);
@@ -680,21 +681,25 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 			armPart.m_bUse32PixelHand = true;
 			break;
 		case 1:
+			armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
 			armPart.m_strNameKey = "낫";
 			fRandom = Random.Range (1,3);
 			fSpeedRandom = Random.Range (4, 7);
 			break;
 		case 2:
+			armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
 			armPart.m_strNameKey = "원형 낫";
 			fRandom = Random.Range (1,3);
 			fSpeedRandom = Random.Range (4, 7);
 			break;
 		case 3:
+			armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
 			armPart.m_strNameKey = "도끼";
 			fRandom = Random.Range (2,4);
 			fSpeedRandom = Random.Range (2, 5);
 			break;
 		case 4:
+			armPart.m_weaponType = WEAPON_TYPE.TWO_HAND;
 			armPart.m_strNameKey = "곡괭이";
 			fRandom = Random.Range (2,4);
 			fSpeedRandom = Random.Range (1, 3);
@@ -702,6 +707,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 			armPart.m_bUse32PixelHand = true;
 			break;
 		case 5:
+			armPart.m_weaponType = WEAPON_TYPE.POLE;
 			armPart.m_strNameKey = "쇠스랑";
 			fRandom = Random.Range (1,3);
 			fSpeedRandom = Random.Range (1, 3);
@@ -709,6 +715,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 			armPart.m_bUse32PixelHand = true;
 			break;
 		case 6:
+			armPart.m_weaponType = WEAPON_TYPE.TWO_HAND;
 			armPart.m_strNameKey = "삽";
 			fRandom = Random.Range (1,3);
 			fSpeedRandom = Random.Range (1, 3);
@@ -716,16 +723,19 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 			armPart.m_bUse32PixelHand = true;
 			break;
 		case 7:
+			armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
 			armPart.m_strNameKey = "망치";
 			fRandom = Random.Range (2,4);
 			fSpeedRandom = Random.Range (2, 5);
 			break;
 		case 8:
+			armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
 			armPart.m_strNameKey = "식칼";
 			fRandom = Random.Range (1,3);
 			fSpeedRandom = Random.Range (4, 7);
 			break;
 		case 9:
+			armPart.m_weaponType = WEAPON_TYPE.TWO_HAND;
 			armPart.m_strNameKey = "오함마";
 			fRandom = Random.Range (3, 5);
 			fSpeedRandom = Random.Range (1, 3);
@@ -848,28 +858,32 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		//Arms Setting
 		GameObject arm = obj.transform.Find ("Hand_R").gameObject;
 		Part armPart = arm.GetComponent<Part> ();
-		int iArmRandom = Random.Range (0, m_sheet_mercenary_arm.Length);
+		int iArmRandom = 6;//Random.Range (0, m_sheet_mercenary_arm.Length);
 		arm.GetComponent<SpriteRenderer>().sprite = m_sheet_mercenary_arm[iArmRandom];
 		float fSpeedRandom = 0f;
 		switch (iArmRandom) {
 		case 0:
+			armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
 			armPart.m_strNameKey = "메이스";
 			fRandom = Random.Range (4, 6);
 			fSpeedRandom = Random.Range (2, 4);
 			armPart.m_bUse32PixelHand = true;
 			break;
 		case 1:
+			armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
 			armPart.m_strNameKey = "단검";
 			fRandom = Random.Range (2,4);
 			fSpeedRandom = Random.Range (7, 10);
 			break;
 		case 2:
+			armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
 			armPart.m_strNameKey = "검";
 			fRandom = Random.Range (3,6);
 			fSpeedRandom = Random.Range (4, 7);
 			armPart.m_bUse32PixelHand = true;
 			break;
 		case 3:
+			armPart.m_weaponType = WEAPON_TYPE.POLE;
 			armPart.m_strNameKey = "폴암";
 			fRandom = Random.Range (4,8);
 			fSpeedRandom = Random.Range (1, 3);
@@ -877,6 +891,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 			armPart.m_bUse32PixelHand = true;
 			break;
 		case 4:
+			armPart.m_weaponType = WEAPON_TYPE.TWO_HAND;
 			armPart.m_strNameKey = "빌훅";
 			fRandom = Random.Range (4,8);
 			fSpeedRandom = Random.Range (1, 3);
@@ -884,23 +899,29 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 			armPart.m_bUse32PixelHand = true;
 			break;
 		case 5:
+			armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
 			armPart.m_strNameKey = "전투 도끼";
 			fRandom = Random.Range (3,6);
 			fSpeedRandom = Random.Range (2, 4);
 			break;
 		case 6:
+			armPart.m_weaponType = WEAPON_TYPE.BOW;
 			armPart.m_strNameKey = "활";
-			fRandom = Random.Range (3,6);
+			fRandom = Random.Range (3, 6);
 			fSpeedRandom = Random.Range (4, 7);
 			Destroy (obj.transform.Find ("Hand_L").gameObject);
+			Animator anim = armPart.gameObject.AddComponent<Animator> ();
+			anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/bow");
 			break;
 		case 7:
+			armPart.m_weaponType = WEAPON_TYPE.CROSSBOW;
 			armPart.m_strNameKey = "석궁";
 			fRandom = Random.Range (4,8);
 			fSpeedRandom = Random.Range (1, 3);
 			Destroy (obj.transform.Find ("Hand_L").gameObject);
 			break;
 		case 8:
+			armPart.m_weaponType = WEAPON_TYPE.TWO_HAND;
 			armPart.m_strNameKey = "양손 도끼";
 			fRandom = Random.Range (5,8);
 			fSpeedRandom = Random.Range (1, 2);
@@ -908,6 +929,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 			armPart.m_bUse32PixelHand = true;
 			break;
 		case 9:
+			armPart.m_weaponType = WEAPON_TYPE.POLE;
 			armPart.m_strNameKey = "창";
 			fRandom = Random.Range (3, 6);
 			fSpeedRandom = Random.Range (4, 7);
@@ -1052,12 +1074,14 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		float fSpeedRandom = 0f;
 		switch (iArmRandom) {
 		case 0:
+			armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
 			armPart.m_strNameKey = "기사 검";
 			fRandom = Random.Range (6, 9);
 			fSpeedRandom = Random.Range (4, 6);
 			armPart.m_bUse32PixelHand = true;
 			break;
 		case 1:
+			armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
 			armPart.m_strNameKey = "기사 도끼";
 			fRandom = Random.Range (6, 9);
 			fSpeedRandom = Random.Range (4, 6);

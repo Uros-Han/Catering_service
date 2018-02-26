@@ -30,6 +30,7 @@ namespace ES3Types
 			writer.WriteProperty<List<string>> ("listStrBuff", instance.m_lstStrBuff);
 			writer.WriteProperty<int> ("lastParentPartIdx", instance.m_iLastParentPartIdx);
 			writer.WriteProperty<int> ("childPartCount", instance.m_iChildPartCount);
+			writer.WriteProperty<int> ("weaponType", (int)instance.m_weaponType);
 		}
 
 		protected override void ReadObject<T>(ES3Reader reader, object obj)
@@ -95,6 +96,10 @@ namespace ES3Types
 
 				case "childPartCount":
 					instance.m_iChildPartCount = reader.Read<int>();
+					break;
+
+				case "weaponType":
+					instance.m_weaponType = (WEAPON_TYPE)reader.Read<int>();
 					break;
 
 				default:

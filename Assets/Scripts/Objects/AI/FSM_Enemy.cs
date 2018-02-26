@@ -213,41 +213,49 @@ public class FSM_Enemy : FSM {
 			fAttackSpeed = 1;
 
 		while(m_AiState == AI_STATE.ATTACK){
-			if(!m_bBornAtLeft)
-				iTween.RotateTo(AttackPart, iTween.Hash("z",-100f,"time", fAttackSpeed * 0.2f, "islocal", true));
-			else
-				iTween.RotateTo(AttackPart, iTween.Hash("z",100f,"time", fAttackSpeed * 0.2f, "islocal", true));
-			
-			iTween.MoveTo(AttackPart, iTween.Hash("x", -0.005f, "y", 0.206f, "time", fAttackSpeed * 0.2f, "islocal", true));
-			yield return new WaitForSeconds((fAttackSpeed * 0.2f) + (fAttackSpeed * 0.1f));
+			if (attackPart.m_weaponType == WEAPON_TYPE.BOW) {
 
-			if(targetPart.m_bDestroied)
-			{
-				AttackPart.transform.localRotation = originRotate;
-				AttackPart.transform.localPosition = originPos;
-				continue;
-			}
-			iTween.RotateTo(AttackPart, iTween.Hash("z",0f,"time",fAttackSpeed * 0.02f, "islocal", true));
-			iTween.MoveTo(AttackPart, iTween.Hash("x", originPos.x, "y", originPos.y, "time", fAttackSpeed * 0.02f, "islocal", true));
+				AttackPart.GetComponent<Animator> ().Play ("bow_attack");
 
-			if (transform.Find ("Hand_L") == null) {
-				SoundMgr.getInstance.PlaySfx ("weapon_twohand");
+				yield return new WaitForSeconds (1f);
+
 			} else {
-				SoundMgr.getInstance.PlaySfx ("weapon_onehand");
+				if (!m_bBornAtLeft)
+					iTween.RotateTo (AttackPart, iTween.Hash ("z", -100f, "time", fAttackSpeed * 0.2f, "islocal", true));
+				else
+					iTween.RotateTo (AttackPart, iTween.Hash ("z", 100f, "time", fAttackSpeed * 0.2f, "islocal", true));
+			
+				iTween.MoveTo (AttackPart, iTween.Hash ("x", -0.005f, "y", 0.206f, "time", fAttackSpeed * 0.2f, "islocal", true));
+				yield return new WaitForSeconds ((fAttackSpeed * 0.2f) + (fAttackSpeed * 0.1f));
+
+				if (targetPart.m_bDestroied) {
+					AttackPart.transform.localRotation = originRotate;
+					AttackPart.transform.localPosition = originPos;
+					continue;
+				}
+				iTween.RotateTo (AttackPart, iTween.Hash ("z", 0f, "time", fAttackSpeed * 0.02f, "islocal", true));
+				iTween.MoveTo (AttackPart, iTween.Hash ("x", originPos.x, "y", originPos.y, "time", fAttackSpeed * 0.02f, "islocal", true));
+
+				if (transform.Find ("Hand_L") == null) {
+					SoundMgr.getInstance.PlaySfx ("weapon_twohand");
+				} else {
+					SoundMgr.getInstance.PlaySfx ("weapon_onehand");
+				}
+
+				yield return new WaitForSeconds (fAttackSpeed * 0.02f);
+				if (targetPart.m_bDestroied) {
+					AttackPart.transform.localRotation = originRotate;
+					AttackPart.transform.localPosition = originPos;
+					continue;
+				}
+
+				StartCoroutine (Attack (m_target, fDamage, false));
+				yield return new WaitForSeconds (fAttackSpeed * 0.1f);
 			}
-
-			yield return new WaitForSeconds(fAttackSpeed * 0.02f);
-			if(targetPart.m_bDestroied)
-			{
-				AttackPart.transform.localRotation = originRotate;
-				AttackPart.transform.localPosition = originPos;
-				continue;
-			}
-
-			StartCoroutine(Attack(m_target, fDamage, false));
-			yield return new WaitForSeconds(fAttackSpeed * 0.1f);
-
 		};
+
+		if(attackPart.m_weaponType == WEAPON_TYPE.BOW)
+			AttackPart.GetComponent<Animator> ().Play ("bow_idle");
 	}
 
 	IEnumerator SpriteFlip(){

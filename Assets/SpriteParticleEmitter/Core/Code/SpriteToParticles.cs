@@ -1,21 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions.Comparers;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace SpriteToParticlesAsset
 {
-    public delegate void SimpleEvent();
-    public enum RenderSystemUsing
-    {
-        SpriteRenderer,
-        ImageRenderer,
-    }
-    public enum SpriteMode
-    {
-        Dynamic,
-        Static,
-    }
 [ExecuteInEditMode]
 public class SpriteToParticles : MonoBehaviour
 {
@@ -101,13 +91,15 @@ public class SpriteToParticles : MonoBehaviour
     //! Should the system cache sprites data? (Refer to manual for further explanation)
     public bool CacheSprites = true;
 
-    [Tooltip("Should the transform match target Image Renderer Position? (StP Object must have same parent as the target’s Image component Transform.)")]
-    //! Should the transform match target Image Renderer Position? (StP Object must have same parent as the target’s Image component Transform.)
-    public bool matchImageRendererPostionData;
+    [Tooltip("Should the transform match target Renderer GameObject Position? (For Image Component(UI) StP Object must have same parent as the Renderer Image component Transform)")]
+    //! Should the transform match target Renderer GameObject Position? (For Image Component(UI) StP Object must have same parent as the Renderer Image component Transform)
+    [FormerlySerializedAs("matchImageRendererPostionData")]
+    public bool matchTargetGOPostionData;
 
-    [Tooltip("Should the transform match target Image Renderer Scale? (StP Object must have same parent as the target’s Image component Transform.)")]
-    //! Should the RectTransform match target Image Renderer Scale? (StP Object must have same parent as the target’s Image component Transform.)
-    public bool matchImageRendererScale;
+    [Tooltip("Should the transform match target Renderer Renderer Scale? (For Image Component(UI) StP Object must have same parent as the Image component Transform. For Sprite Component it will match local scale data)")]
+    //! Should the transform match target Renderer Renderer Scale? (For Image Component(UI) StP Object must have same parent as the Image component Transform. For Sprite Component it will match local scale data)
+    [FormerlySerializedAs("matchImageRendererScale")]
+    public bool matchTargetGOScale;
 
 
     //! Must match Particle System's same option
@@ -130,6 +122,7 @@ public class SpriteToParticles : MonoBehaviour
     //! Save last position to be able to interpolate particle emission position between last and current frame. (Refer to manual for further explanation)
     private Vector3 lastTransformPosition;
 
+    //! Save Sprite component transform reference in case it's in a different GO than the StP component.
     private Transform spriteTransformReference;
 
     #region Dynamic mode Specifics
@@ -244,18 +237,32 @@ public class SpriteToParticles : MonoBehaviour
 
         //Set base varibles in the system for this emitter work as expected
         #if UNITY_5_5_OR_NEWER
-        mainModule = particlesSystem.main;
-        mainModule.loop = false;
-        mainModule.playOnAwake = false;
-        particlesSystem.Stop();
-        //validate simulation Space
-        SimulationSpace = mainModule.simulationSpace;
+            mainModule = particlesSystem.main;
+            #if UNITY_2017_2_OR_NEWER
+                //Hack needed beyond Unity 2017.2 to be sure all things are properly initialized
+                mainModule.loop = true;
+                mainModule.playOnAwake = true;
+            #else
+                mainModule.loop = false;
+                mainModule.playOnAwake = false;
+            #endif
+            particlesSystem.Stop();
+            //validate simulation Space
+            SimulationSpace = mainModule.simulationSpace;
         #else
-        SimulationSpace = particlesSystem.simulationSpace;
+            SimulationSpace = particlesSystem.simulationSpace;
         #endif
 
         if (PlayOnAwake)
+        {
             isPlaying = true;
+            particlesSystem.Emit(1);
+            particlesSystem.Clear();
+#if UNITY_2017_2_OR_NEWER
+            if (Application.isPlaying)
+                particlesSystem.Play();
+#endif
+        }
 
         if (renderSystemType == RenderSystemUsing.ImageRenderer)
         {
@@ -264,12 +271,12 @@ public class SpriteToParticles : MonoBehaviour
         }
 
         #if UNITY_5_5_OR_NEWER
-        // Set particle system's emission to at least the amount expected by the system
-        if (mainModule.maxParticles < EmissionRate)
-            mainModule.maxParticles = Mathf.CeilToInt(EmissionRate);
+            // Set particle system's emission to at least the amount expected by the system
+            if (mainModule.maxParticles < EmissionRate)
+                mainModule.maxParticles = Mathf.CeilToInt(EmissionRate);
         #else
-        if (particlesSystem.maxParticles < EmissionRate)
-            particlesSystem.maxParticles = Mathf.CeilToInt(EmissionRate);
+            if (particlesSystem.maxParticles < EmissionRate)
+                particlesSystem.maxParticles = Mathf.CeilToInt(EmissionRate);
         #endif
 
         // Make sure to cache sprite data before emitting (Only in static mode)
@@ -289,17 +296,18 @@ public class SpriteToParticles : MonoBehaviour
     /// </summary>
     public void Update()
     {
-#if UNITY_EDITOR
-        if (mode == SpriteMode.Static && cachedSprite != GetSprite())
-            EditorInvalidate();
-#endif
-
         bool mustEmit = isPlaying;
         if (mode == SpriteMode.Static)
             mustEmit = isPlaying && hasCachingEnded;
 
         if (!mustEmit)
             return;
+
+#if UNITY_EDITOR
+        //if cached sprite is different than the one beign used, remake all initial definitions
+        if (mode == SpriteMode.Static && cachedSprite != GetSprite())
+            EditorInvalidate();
+#endif
 
         // handle further calculations when dealing with UI render mode.
         if (renderSystemType == RenderSystemUsing.ImageRenderer)
@@ -308,6 +316,10 @@ public class SpriteToParticles : MonoBehaviour
             // stop here if something has gone wrong
             if (!isPlaying)
                 return;
+        }
+        else
+        {
+            HandlePosition();
         }
 
         ParticlesToEmitThisFrame += EmissionRate * Time.deltaTime;
@@ -334,15 +346,12 @@ public class SpriteToParticles : MonoBehaviour
     /// <param name="emitCount">Amount of particles to emit</param>
     public void Emit(int emitCount)
     {
-			if (mode == SpriteMode.Dynamic) {
-				if (!particlesSystem.isEmitting)
-				{
-					particlesSystem.Emit(1);
-					particlesSystem.Clear();
-				}
-				EmitDynamic (emitCount);
-			}else
-        		EmitStatic(emitCount);
+        HackUnityCrash2017();
+
+        if (mode == SpriteMode.Dynamic)
+            EmitDynamic(emitCount);
+        else
+            EmitStatic(emitCount);
     }
 
     /// <summary>
@@ -439,6 +448,17 @@ public class SpriteToParticles : MonoBehaviour
             ProcessPositionAndScaleStatic();
     }
 
+    /// <summary>
+    /// Set expected position based on options.
+    /// </summary>
+    void HandlePosition()
+    {
+        if (matchTargetGOPostionData && spriteRenderer!=null)
+            transform.position = spriteRenderer.transform.position;
+        if (matchTargetGOScale && spriteRenderer != null)
+            transform.localScale = spriteRenderer.transform.lossyScale;
+    }
+
     #region Dynamic
 
     /// <summary>
@@ -463,11 +483,11 @@ public class SpriteToParticles : MonoBehaviour
 #endif
 
         //match current RectTransform's data with target RectTransform
-        if (matchImageRendererPostionData)
+        if (matchTargetGOPostionData)
             currentRectTransform.position = new Vector3(targetRectTransform.position.x,
                 targetRectTransform.position.y, targetRectTransform.position.z);
         currentRectTransform.pivot = targetRectTransform.pivot;
-        if (matchImageRendererPostionData)
+        if (matchTargetGOPostionData)
         {
             currentRectTransform.anchoredPosition = targetRectTransform.anchoredPosition;
             currentRectTransform.anchorMin = targetRectTransform.anchorMin;
@@ -475,7 +495,7 @@ public class SpriteToParticles : MonoBehaviour
             currentRectTransform.offsetMin = targetRectTransform.offsetMin;
             currentRectTransform.offsetMax = targetRectTransform.offsetMax;
         }
-        if (matchImageRendererScale)
+        if (matchTargetGOScale)
             currentRectTransform.localScale = targetRectTransform.localScale;
         currentRectTransform.rotation = targetRectTransform.rotation;
         currentRectTransform.sizeDelta = new Vector2(targetRectTransform.rect.width, targetRectTransform.rect.height);
@@ -1100,11 +1120,11 @@ public class SpriteToParticles : MonoBehaviour
     void ProcessPositionAndScaleStatic()
     {
         //match current RectTransform's data with target RectTransform
-        if (matchImageRendererPostionData)
+        if (matchTargetGOPostionData)
             currentRectTransform.position = new Vector3(targetRectTransform.position.x,
                 targetRectTransform.position.y, targetRectTransform.position.z);
         currentRectTransform.pivot = targetRectTransform.pivot;
-        if (matchImageRendererPostionData)
+        if (matchTargetGOPostionData)
         {
             currentRectTransform.anchoredPosition = targetRectTransform.anchoredPosition;
             currentRectTransform.anchorMin = targetRectTransform.anchorMin;
@@ -1112,7 +1132,7 @@ public class SpriteToParticles : MonoBehaviour
             currentRectTransform.offsetMin = targetRectTransform.offsetMin;
             currentRectTransform.offsetMax = targetRectTransform.offsetMax;
         }
-        if (matchImageRendererScale)
+        if (matchTargetGOScale)
             currentRectTransform.localScale = targetRectTransform.localScale;
         currentRectTransform.rotation = targetRectTransform.rotation;
 
@@ -1418,7 +1438,10 @@ public class SpriteToParticles : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-
+    void OnEnable()
+    {
+        ForceNextUseOfHack();
+    }
     void OnValidate()
     {
         EditorInvalidate();
@@ -1429,6 +1452,7 @@ public class SpriteToParticles : MonoBehaviour
     /// </summary>
     void EditorInvalidate()
     {
+        ForceNextUseOfHack();
         //Debug.Log("EditorInvalidate");
         if (particlesSystem)
             particlesSystem.Stop();
@@ -1437,7 +1461,39 @@ public class SpriteToParticles : MonoBehaviour
         if (mode == SpriteMode.Static)
             CacheSprite();
     }
+
+    /// <summary>
+    /// This will reset all information stored by the plugin (Only for Editor).
+    /// </summary>
+    public void ResetAllCache()
+    {
+        SpritesDataPool.ReleaseMemory();
+        cachedSprite = null;
+        spritesSoFar = new Dictionary<Sprite, Color[]>();
+        Awake();
+    }
 #endif
+
+    bool forceHack = true;
+    /// <summary>
+    /// This hack (provided with the unity dev team) fixes a bug which may crash the unity editor in some 2017.x Unity versions.
+    /// For more info: https://issuetracker.unity3d.com/issues/unity-crashes-when-particles-are-awaken-by-script
+    /// </summary>
+    void HackUnityCrash2017()
+    {
+        if (forceHack && !particlesSystem.isStopped)
+        {
+            particlesSystem.Emit(1);
+            particlesSystem.Clear();
+            //Debug.Log("Try fix Crash");
+            forceHack = false;
+        }
+    }
+
+    void ForceNextUseOfHack()
+    {
+        forceHack = true;
+    }
 }
 
 }

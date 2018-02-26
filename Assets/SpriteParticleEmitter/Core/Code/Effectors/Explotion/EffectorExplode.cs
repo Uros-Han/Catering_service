@@ -30,6 +30,8 @@ public class EffectorExplode : MonoBehaviour
         emitter = GetComponent<SpriteToParticles>();
         if (emitter && emitter.particlesSystem)
             ps = emitter.particlesSystem;
+
+        //Invoke("ExplodeTest", 2);
     }
 
     /// <summary>
@@ -107,6 +109,11 @@ public class EffectorExplode : MonoBehaviour
         //If this gameobject is set to autodestruct (destroyObjectAfterExplosionIn is negative) invoke Destroy.
         if (destroyObjectAfterExplosionIn >= 0)
             Destroy(gameObject, destroyObjectAfterExplosionIn);
+    }
+
+    public void ExplodeTest()
+    {
+        ExplodeAt(transform.position, 10, 360, 0, 2);
     }
 }
 }

@@ -48,6 +48,8 @@ public class Part : MonoBehaviour {
 
 	public bool m_bBreakedPath;
 
+	public WEAPON_TYPE m_weaponType = WEAPON_TYPE.END;
+
 	void Awake()
 	{
 		m_lstPartBuffed = new List<Part> ();

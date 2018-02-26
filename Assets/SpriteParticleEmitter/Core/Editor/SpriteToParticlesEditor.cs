@@ -39,8 +39,8 @@ public class SpriteToParticlesEditor : Editor
     SerializedProperty useBetweenFramesPrecision;
     SerializedProperty CacheSprites;
     SerializedProperty CacheOnAwake;
-    SerializedProperty matchImageRendererPostionData;
-    SerializedProperty matchImageRendererScale;
+    SerializedProperty matchTargetGOPostionData;
+    SerializedProperty matchTargetGOScale;
 
     /// <summary>
     /// Find all properties in selected StP
@@ -69,8 +69,8 @@ public class SpriteToParticlesEditor : Editor
         useBetweenFramesPrecision = serializedObject.FindProperty("useBetweenFramesPrecision");
         CacheSprites = serializedObject.FindProperty("CacheSprites");
         CacheOnAwake = serializedObject.FindProperty("CacheOnAwake");
-        matchImageRendererPostionData = serializedObject.FindProperty("matchImageRendererPostionData");
-        matchImageRendererScale = serializedObject.FindProperty("matchImageRendererScale");
+        matchTargetGOPostionData = serializedObject.FindProperty("matchTargetGOPostionData");
+        matchTargetGOScale = serializedObject.FindProperty("matchTargetGOScale");
     }
 
     /// <summary>
@@ -136,13 +136,13 @@ public class SpriteToParticlesEditor : Editor
         EditorGUI.indentLevel--;
         GUILayout.Space(5f);
 
-        if (renderType == RenderSystemUsing.ImageRenderer)
+        if (IsRendererInAnotherGameObject(StP))
         {
 
-            EditorGUILayout.LabelField("Image Render Specifics (UI)", Title);
+            EditorGUILayout.LabelField("Renderer in different GameObject specifics", Title);
             EditorGUI.indentLevel++;
-            EditorGUILayout.PropertyField(matchImageRendererPostionData);
-            EditorGUILayout.PropertyField(matchImageRendererScale);
+            EditorGUILayout.PropertyField(matchTargetGOPostionData);
+            EditorGUILayout.PropertyField(matchTargetGOScale);
             EditorGUI.indentLevel--;
             GUILayout.Space(5f);
         }
@@ -185,6 +185,11 @@ public class SpriteToParticlesEditor : Editor
         {
             StP.particlesSystem.Play();
             StP.EmitAll(false);
+        }
+
+        if (GUILayout.Button("Reset Cache"))
+        {
+            StP.ResetAllCache();
         }
 
         EditorGUI.indentLevel--;
@@ -287,7 +292,7 @@ public class SpriteToParticlesEditor : Editor
         stP.renderSystemType = RenderSystemUsing.ImageRenderer;
         stP.imageRenderer = image;
         stP.UsePixelSourceColor = true;
-        
+        stP.ResetAllCache();
     }
 
     [MenuItem("GameObject/2D Object/SpriteToParticles/Sprite", false, 10)]
@@ -324,7 +329,7 @@ public class SpriteToParticlesEditor : Editor
         psr.sortingOrder = 100;
 
         stP.UsePixelSourceColor = true;
-
+        stP.ResetAllCache();
     }
 
     [MenuItem("Edit/SpriteToParticles/Update Components in scene (Experimental)", false, 10)]
@@ -434,7 +439,23 @@ public class SpriteToParticlesEditor : Editor
         StP.BlueTolerance = eb.BlueTolerance;
 
         StP.useSpritesSharingPool = eb.useSpritesSharingCache;
-        StP.matchImageRendererPostionData = eb.matchImageRendererPostionData;
-        StP.matchImageRendererScale = eb.matchImageRendererScale;
+        StP.matchTargetGOPostionData = eb.matchImageRendererPostionData;
+        StP.matchTargetGOScale = eb.matchImageRendererScale;
+    }
+
+    bool IsRendererInAnotherGameObject(SpriteToParticles stP)
+    {
+        RenderSystemUsing renderType = (RenderSystemUsing)renderSystemType.intValue;
+
+        if (renderType == RenderSystemUsing.SpriteRenderer && stP.spriteRenderer!=null)
+        {
+            return stP.spriteRenderer.gameObject != stP.particlesSystem.gameObject;
+        }
+        if (renderType == RenderSystemUsing.ImageRenderer && stP.imageRenderer != null)
+        {
+            return stP.imageRenderer.gameObject != stP.particlesSystem.gameObject;
+        }
+
+        return true;
     }
 }

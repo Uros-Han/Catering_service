@@ -47,7 +47,7 @@ public class SpritesDataPool
     /// <summary>
     /// Will release all memory for the pool.
     /// </summary>
-    public void ReleaseMemory()
+    public static void ReleaseMemory()
     {
         spritesShared = null;
     }

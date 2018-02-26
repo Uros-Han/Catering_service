@@ -86,7 +86,7 @@ namespace UnityStandardAssets.ImageEffects
             Camera cam = (target as Bloom).GetComponent<Camera>();
             if (cam != null) {
                 #if UNITY_5_5_OR_NEWER
-                if (screenBlendMode.enumValueIndex==0 && ((cam.hdr && hdr.enumValueIndex==0) || (hdr.enumValueIndex==1))) {
+                if (screenBlendMode.enumValueIndex==0 && ((cam.allowHDR && hdr.enumValueIndex==0) || (hdr.enumValueIndex==1))) {
                     EditorGUILayout.HelpBox("Screen blend is not supported in HDR. Using 'Add' instead.", MessageType.Info);
                 }
                 #endif          
