@@ -1,14 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Objects/Part.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Objects/AI/FSM_Enemy.cs">
     <Files>
-      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/Part.cs" Line="346" Column="31" />
+      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="1084" Column="48" />
+      <File FileName="Assets/Scripts/Objects/Part.cs" Line="51" Column="51" />
       <File FileName="Assets/Scripts/Objects/AI/FSM.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Objects/Battle/Tangled.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Objects/Battle/Core.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Objects/Battle/Unit.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Manager/AStar.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Objects/AI/FSM_Enemy.cs" Line="231" Column="6" />
+      <File FileName="Assets/Scripts/Header/Enum.cs" Line="27" Column="24" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

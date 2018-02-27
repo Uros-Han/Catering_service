@@ -212,12 +212,30 @@ public class FSM_Enemy : FSM {
 		if (fAttackSpeed < 1)
 			fAttackSpeed = 1;
 
+		Animator anim = null;
+		if (attackPart.m_weaponType == WEAPON_TYPE.BOW) {
+			anim = AttackPart.GetComponent<Animator> ();
+			anim.SetFloat ("AttackSpeed", fAttackSpeed);
+			if (AttackPart.GetComponent<SpriteRenderer>().flipX)
+				anim.SetBool ("HeadingRight", true);
+		}
+
 		while(m_AiState == AI_STATE.ATTACK){
 			if (attackPart.m_weaponType == WEAPON_TYPE.BOW) {
 
-				AttackPart.GetComponent<Animator> ().Play ("bow_attack");
+				anim.SetBool ("LooseBow", false);
+				anim.SetBool ("Draw_Bow", true);
 
-				yield return new WaitForSeconds (1f);
+				float fTimer = 0f;
+
+				do{
+					fTimer += Time.deltaTime;
+					yield return null;
+					
+				}while(fTimer < 10f / fAttackSpeed);
+
+				anim.SetBool ("LooseBow", true);
+				yield return new WaitForSeconds (0.25f);
 
 			} else {
 				if (!m_bBornAtLeft)
@@ -254,8 +272,9 @@ public class FSM_Enemy : FSM {
 			}
 		};
 
-		if(attackPart.m_weaponType == WEAPON_TYPE.BOW)
-			AttackPart.GetComponent<Animator> ().Play ("bow_idle");
+		if (attackPart.m_weaponType == WEAPON_TYPE.BOW) {
+			anim.SetBool ("Draw_Bow", false);
+		}
 	}
 
 	IEnumerator SpriteFlip(){
@@ -265,6 +284,13 @@ public class FSM_Enemy : FSM {
 			transform.GetChild (i).localPosition = new Vector3(-transform.GetChild (i).localPosition.x, transform.GetChild (i).localPosition.y);
 			transform.GetChild (i).localRotation = Quaternion.AngleAxis(-transform.GetChild (i).localRotation.z, Vector3.forward);
 			transform.GetChild(i).GetComponent<SpriteRenderer> ().flipX = true;
+		}
+
+		for (int i = 0; i < m_AttackAvailableParts.Count; ++i) {
+			Part attackPart = m_AttackAvailableParts [i].GetComponent<Part> ();
+			if (attackPart.m_weaponType == WEAPON_TYPE.BOW) {
+				attackPart.GetComponent<Animator>().SetBool ("HeadingRight", true);
+			}
 		}
 	}
 }
