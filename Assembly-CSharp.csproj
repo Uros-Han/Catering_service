@@ -383,6 +383,19 @@
      <Compile Include="Assets\SpriteColorFX\Scripts\Shift\SpriteColorShiftRadial.cs" />
      <Compile Include="Assets\SpriteColorFX\Scripts\SpriteColorBase.cs" />
      <Compile Include="Assets\SpriteColorFX\Scripts\SpriteColorHelper.cs" />
+     <Compile Include="Assets\SpriteMask\Examples\Scripts\SpriteMaskExample05.cs" />
+     <Compile Include="Assets\SpriteMask\Examples\Scripts\SpriteMaskExample06.cs" />
+     <Compile Include="Assets\SpriteMask\Examples\Scripts\SpriteMaskExample06Rotator.cs" />
+     <Compile Include="Assets\SpriteMask\Examples\Scripts\SpriteMaskExample06Scaller.cs" />
+     <Compile Include="Assets\SpriteMask\Examples\Scripts\SpriteMaskExample06Translator.cs" />
+     <Compile Include="Assets\SpriteMask\Examples\Scripts\SpriteMaskExample07BloodController.cs" />
+     <Compile Include="Assets\SpriteMask\Examples\Scripts\SpriteMaskExample07DestroyBlood.cs" />
+     <Compile Include="Assets\SpriteMask\Examples\Scripts\SpriteMaskExample11BitesController.cs" />
+     <Compile Include="Assets\SpriteMask\Scripts\ClearStencilBufferComponent.cs" />
+     <Compile Include="Assets\SpriteMask\Scripts\SkipMasking.cs" />
+     <Compile Include="Assets\SpriteMask\Scripts\SpriteMask.cs" />
+     <Compile Include="Assets\SpriteMask\Scripts\SpriteMaskingComponent.cs" />
+     <Compile Include="Assets\SpriteMask\Scripts\SpriteMaskingPart.cs" />
      <Compile Include="Assets\SpriteParticleEmitter\Code\Core\EmitterBase.cs" />
      <Compile Include="Assets\SpriteParticleEmitter\Code\Core\EmitterBaseUI.cs" />
      <Compile Include="Assets\SpriteParticleEmitter\Code\Core\StaticSpriteEmitter.cs" />
@@ -515,6 +528,7 @@
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\DepthOfFieldScatter.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Blend\SpriteColorBlendSoftLight.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Dissolve\BumpLit\SpriteColorDissolveBorderTextureSolidBumpLit.shader" />
+     <None Include="Assets\SpriteMask\Readme.txt" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Blend\SpriteColorBlendHardMix.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Dissolve\SpriteColorDissolveBorderTextureDarker.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Dissolve\BumpLit\SpriteColorDissolveBorderTextureLightenBumpLit.shader" />
@@ -609,6 +623,7 @@
      <None Include="Assets\SpriteParticleEmitter\Demo\Others\Shaders\PriorityParticleAlpha.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\DepthOfField34.shader" />
      <None Include="Assets\SpriteParticleEmitter\UI Particles Shaders\UI Particle VertexLit Blended.shader" />
+     <None Include="Assets\SpriteMask\Resources\ClearStencil.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Dissolve\SpriteColorDissolveBorderTextureLighten.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Dissolve\BumpLit\SpriteColorDissolveBorderTextureDarkenBumpLit.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Dissolve\BumpLit\SpriteColorDissolveBorderColorDifferenceBumpLit.shader" />
@@ -629,6 +644,7 @@
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBlur.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\SSAOShader.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\ConvertDepth.shader" />
+     <None Include="Assets\SpriteMask\Resources\SpriteMask.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionCurvesSimple.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderYUV.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Blend\BumpLit\SpriteColorBlendDarkerBumpLit.shader" />
@@ -744,6 +760,7 @@
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Additive Colored.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Masks\BumpLit\SpriteColorMasks3MultiplyBumpLit.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAA2.shader" />
+     <None Include="Assets\SpriteMask\Resources\SpriteDefault.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Masks\SpriteColorMasks3Divide.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Dissolve\SpriteColorDissolveBorderColorBurn.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Dissolve\SpriteColorDissolveBorderColorSaturation.shader" />
@@ -760,6 +777,7 @@
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Blend\BumpLit\SpriteColorBlendPinLightBumpLit.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\PrepareSunShaftsBlur.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Dissolve\SpriteColorDissolveBorderTextureHardLight.shader" />
+     <None Include="Assets\SpriteMask\Resources\SpriteDiffuse.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\Blend.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text (TextureClip).shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />

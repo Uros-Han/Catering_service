@@ -104,6 +104,14 @@ public class Core_World : MonoBehaviour {
 				{
 					bOverviewOn = false;
 					iTween.MoveTo(GameObject.Find("WorldOverview").transform.GetChild(0).gameObject, iTween.Hash("x", 152f, "time", 0.5f,"isLocal", true,  "easetype", "easeInSine"));
+
+					Transform pathTrans = GameObject.Find ("Path").transform;
+					for (int i = 0; i < pathTrans.childCount; ++i) {
+						Destroy (pathTrans.GetChild (i).gameObject);
+					}
+
+					GameObject Dest = GameObject.Find("Destination").gameObject;
+					Dest.GetComponent<SpriteRenderer>().enabled = false;
 				}
 			}else if(Input.GetMouseButtonUp(0))
 			{

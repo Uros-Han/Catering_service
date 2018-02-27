@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FSM_Enemy : FSM {
 
-	public bool m_bBornAtLeft;
 	public GameObject m_objHealthBar;
 
 	List<GameObject> m_AttackAvailableParts;
@@ -24,10 +23,6 @@ public class FSM_Enemy : FSM {
 		}
 
 		fBornPosX = transform.position.x;
-
-		if (m_bBornAtLeft) {
-			StartCoroutine (SpriteFlip ());
-		}
 	}
 
 	public void SetState(AI_STATE state)
@@ -57,6 +52,11 @@ public class FSM_Enemy : FSM {
 		case AI_STATE.GROGGY:
 			StartCoroutine (State_Groggy ());
 			break;
+
+		case AI_STATE.PANIC:
+			StartCoroutine (State_Panic ());
+			break;
+
 		}
 	}
 
@@ -72,26 +72,33 @@ public class FSM_Enemy : FSM {
 
 	protected override IEnumerator State_Move()
 	{
+		Transform coreTrans = GameObject.Find ("Player").transform.GetChild(0);
 		Transform PlayerTrans = GameObject.Find ("Player").transform;
 		float fMoveSpeed = GetComponent<Unit> ().m_fMoveSpeed;
+		Unit thisUnit = GetComponent<Unit> ();
 
 		do{
 			yield return null;
 
 			if(m_AiState == AI_STATE.MOVE)
 			{
-				if(!m_bBornAtLeft)
+				if(thisUnit.m_bCatched){
+					m_AiState = AI_STATE.PANIC;
+					break;
+				}
+
+				if(coreTrans.position.x < transform.position.x)
 					transform.Translate(new Vector3(-1,0) * fMoveSpeed * Time.deltaTime);
 				else
 					transform.Translate(new Vector3(1,0) * fMoveSpeed * Time.deltaTime);
 			}
 
-			if((!m_bBornAtLeft && transform.position.x < -fBornPosX) || (m_bBornAtLeft && transform.position.x > -fBornPosX)) //Run Away
-			{
-				BattleSceneMgr.getInstance.EnemyEliminatedCheck ();
-				Destroy (m_objHealthBar);
-				Destroy (gameObject);
-			}
+//			if((!m_bBornAtLeft && transform.position.x < -fBornPosX) || (m_bBornAtLeft && transform.position.x > -fBornPosX)) //Run Away
+//			{
+//				BattleSceneMgr.getInstance.EnemyEliminatedCheck ();
+//				Destroy (m_objHealthBar);
+//				Destroy (gameObject);
+//			}
 
 			if(m_AttackAvailableParts.Count.Equals(0))
 				continue;
@@ -142,6 +149,17 @@ public class FSM_Enemy : FSM {
 
 	}
 
+	public IEnumerator State_Panic(){
+		
+		do {
+			
+			yield return null;
+
+		} while(m_AiState == AI_STATE.PANIC);
+
+		SetState (m_AiState);
+	}
+
 	IEnumerator Tremble()
 	{
 		yield return new WaitForSeconds(Random.Range(0.1f, 0.4f));
@@ -177,8 +195,16 @@ public class FSM_Enemy : FSM {
 
 	protected override IEnumerator State_Attack()
 	{
+		Unit thisUnit = GetComponent<Unit> ();
+
 		do{
 			yield return null;
+
+			if(thisUnit.m_bCatched)
+			{
+				m_AiState = AI_STATE.PANIC;
+				break;
+			}
 
 			if(m_target == null)
 			{
@@ -238,7 +264,7 @@ public class FSM_Enemy : FSM {
 				yield return new WaitForSeconds (0.25f);
 
 			} else {
-				if (!m_bBornAtLeft)
+				if (GetComponent<Unit>().m_bFlipped)
 					iTween.RotateTo (AttackPart, iTween.Hash ("z", -100f, "time", fAttackSpeed * 0.2f, "islocal", true));
 				else
 					iTween.RotateTo (AttackPart, iTween.Hash ("z", 100f, "time", fAttackSpeed * 0.2f, "islocal", true));
@@ -277,20 +303,4 @@ public class FSM_Enemy : FSM {
 		}
 	}
 
-	IEnumerator SpriteFlip(){
-		yield return new WaitForSeconds(0.1f);
-		
-		for(int i = 0 ; i < transform.childCount; ++i){
-			transform.GetChild (i).localPosition = new Vector3(-transform.GetChild (i).localPosition.x, transform.GetChild (i).localPosition.y);
-			transform.GetChild (i).localRotation = Quaternion.AngleAxis(-transform.GetChild (i).localRotation.z, Vector3.forward);
-			transform.GetChild(i).GetComponent<SpriteRenderer> ().flipX = true;
-		}
-
-		for (int i = 0; i < m_AttackAvailableParts.Count; ++i) {
-			Part attackPart = m_AttackAvailableParts [i].GetComponent<Part> ();
-			if (attackPart.m_weaponType == WEAPON_TYPE.BOW) {
-				attackPart.GetComponent<Animator>().SetBool ("HeadingRight", true);
-			}
-		}
-	}
 }

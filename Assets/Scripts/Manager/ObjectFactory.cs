@@ -1159,10 +1159,8 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 
 		if (Random.Range (0, 2) == 0) {
 			vecBornPos = new Vector3 (2f, vecBornPos.y);
-			obj.GetComponent<FSM_Enemy> ().m_bBornAtLeft = false;
 		} else {
 			vecBornPos = new Vector3 (-2f, vecBornPos.y);
-			obj.GetComponent<FSM_Enemy> ().m_bBornAtLeft = true;
 		}
 
 		obj.GetComponent<FSM_Enemy>().m_objHealthBar = Create_HealthBar (obj);
