@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Com.LuisPedroFonseca.ProCamera2D;
+using FoW;
 
 public class Core_World : MonoBehaviour {
 	
@@ -12,11 +13,13 @@ public class Core_World : MonoBehaviour {
 
 	public int m_iNeedHunger; // 여행에 필요한 허기 
 
+
 	// Use this for initialization
 	void Start()
 	{
 		m_listMoveIdx = new List<int> ();
 		StartCoroutine (Idle ());
+		StartCoroutine (PartStatusChecker ());
 	}
 
 	void Update()
@@ -36,6 +39,18 @@ public class Core_World : MonoBehaviour {
 				Destroy (pathTrans.GetChild (i).gameObject);
 			}
 		}
+	}
+
+	IEnumerator PartStatusChecker()
+	{
+		Transform PlayerTrans = GameObject.Find ("Player").transform;
+		PartStatus partStatus = GameObject.Find ("PartStatus").GetComponent<PartStatus> ();
+	
+		FogOfWarUnit fowUnit = GameObject.Find ("Core").GetComponent<FogOfWarUnit> ();
+
+		fowUnit.radius = 0.5f + ((float)partStatus.m_iSight * 0.1f);
+
+		yield return null;
 	}
 
 	public IEnumerator EatMyPart()
@@ -77,6 +92,8 @@ public class Core_World : MonoBehaviour {
 		iTween.ColorTo (objTargetPart, iTween.Hash("a", 0f, "time", 0.4f));
 
 		GameObject.Find ("Hunger").GetComponent<HungerUI> ().ChangeHunger (100);
+
+		StartCoroutine (PartStatusChecker ());
 	}
 
 	IEnumerator Idle()
@@ -286,6 +303,7 @@ public class Core_World : MonoBehaviour {
 
 			GameObject.Find ("WorldMapManager").GetComponent<WorldMapManager> ().m_worldTurnState = WORLDTURN_STATE.IDLE;
 			StartCoroutine (Idle ());
+			StartCoroutine (PartStatusChecker ());
 		}
 
 		StartCoroutine (AdjustCamOffset ());

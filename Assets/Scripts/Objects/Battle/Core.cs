@@ -7,10 +7,14 @@ public class Core : Part {
 	public int m_MoveCount = 1;
 	public bool[] m_bControl;
 
+
+	public IEnumerator[] m_Digest;
+
 	// Use this for initialization
 	void Start () {
 //		StartCoroutine (UserControl());
 
+		m_Digest = new IEnumerator[3];
 		m_bAttackAvailable = true;
 		m_StickAvailableSeat = new List<int> ();
 
@@ -101,69 +105,86 @@ public class Core : Part {
 		return iDistance;
 	}
 
-	public GameObject m_EatenObject = null;
 	public IEnumerator Eat(GameObject target)
 	{
-//		iTween.MoveTo(m_EatenObject, iTween.Hash("x", transform.position.x, "y", transform.position.y, "time" , 0.5f, "easetype", "easeInSine"));
-//		m_EatenObject.GetComponent<FSM_Enemy> ().m_AiState = AI_STATE.EATEN;
+		MouthPanel mouthPanel = GameObject.Find ("MouthPanel").GetComponent<MouthPanel> ();
+		if (mouthPanel.isMouthFull ())
+			yield break;
+
+		int iEmptyMouthIdx = mouthPanel.EmptyMouthIdx();
+
 		Tangled tangled = GameObject.Find ("Tangled").GetComponent<Tangled> ();
-		float fTime = 0;
-		yield return new WaitForSeconds (0.5f);
-		Destroy (m_EatenObject.GetComponent<FSM_Enemy> ().m_objHealthBar);
 
-		do {
-			m_EatenObject.transform.position = tangled.m_vecTangledEdge;
-			fTime += Time.deltaTime;
-			yield return null;
-		} while(fTime < 0.5f);
+		target.GetComponent<FSM_Enemy> ().m_objHealthBar.SetActive (false);
+		target.GetComponent<FSM_Enemy> ().m_AiState = AI_STATE.DISABLED;
 
-		m_EatenObject.SetActive (false);
-		iTween.ScaleTo(gameObject, iTween.Hash("x", 2f, "y", 2f, "time" , 1f, "easetype", "easeOutElastic"));
-		StartCoroutine (Digest ());
+		GameObject.Find ("MouthPanel").GetComponent<MouthPanel> ().AddEnemyInMouth (target);
+		yield return new WaitForSeconds(0.01f);
+		target.transform.localPosition = new Vector2(0, -63);
+		target.transform.localScale = new Vector3 (360, 360, 360);
+		target.layer = 5;
+		target.transform.SetChildLayer(5);
 
 		SoundMgr.getInstance.PlaySfx ("core", 0);
+
+		m_Digest [iEmptyMouthIdx] = Digest (target);
+		StartCoroutine (m_Digest [iEmptyMouthIdx]);
+
+		iTween.ScaleTo (target, iTween.Hash("x", 380f, "y", 380f, "time", 0.2f));
+		yield return new WaitForSeconds(0.1f);
+		iTween.ScaleTo (target, iTween.Hash("x", 360f, "y", 360f, "time", 0.2f));
+
+		yield return null;
 	}
 
-	public IEnumerator Digest()
+	public void StopDigest(int iIdx)
 	{
-		float fEatenEnemyHealth = m_EatenObject.GetComponent<Unit>().m_fHealth;
-		while(fEatenEnemyHealth > 0f){
+		StopCoroutine (m_Digest[iIdx]);
+	}
 
-			fEatenEnemyHealth -= 1f;
+	public IEnumerator Digest(GameObject target)
+	{
+		Unit targetUnit = target.GetComponent<Unit> ();
+		while(targetUnit.m_fCurHealth > 0f){
+
+			targetUnit.m_fCurHealth -= 1f;
 
 			yield return new WaitForSeconds(1f);
 		}
 
 		//Digest done!
 
-		m_EatenObject.GetComponent<Unit> ().m_fHealth = 0f;
+		target.GetComponent<Unit> ().m_fHealth = 0f;
 		iTween.ScaleTo(gameObject, iTween.Hash("x", 1f, "y", 1f, "time" , 1f, "easetype", "easeInElastic"));
 
 		Transform morgueTrans = GameObject.Find ("Morgue").transform;
-		for (int i =0; i< m_EatenObject.transform.childCount; ++i) {
+		for (int i =0; i< target.transform.childCount; ++i) {
 
-			if (m_EatenObject.transform.GetChild (i).GetComponent<Part> ().m_strNameKey.Equals ("시민 팔")) {
-				Destroy (m_EatenObject.transform.GetChild (i).gameObject);
+			if (target.transform.GetChild (i).GetComponent<Part> ().m_strNameKey.Equals ("시민 팔")) {
+				Destroy (target.transform.GetChild (i).gameObject);
 				continue;
-			}else if (Random.Range(0.0f,1.0f) < 0.3f && !m_EatenObject.GetComponent<Unit>().m_enemyType.Equals(ENEMY_TYPE.HERO)) {
-				Destroy (m_EatenObject.transform.GetChild (i).gameObject);
+			}else if (Random.Range(0.0f,1.0f) < 0.3f && !target.GetComponent<Unit>().m_enemyType.Equals(ENEMY_TYPE.HERO)) {
+				Destroy (target.transform.GetChild (i).gameObject);
 				continue;
 			}
 
-			if(m_EatenObject.transform.GetChild(i).GetComponent<SpriteModifier>() != null)
-				m_EatenObject.transform.GetChild(i).GetComponent<SpriteModifier>().SpriteModify();
+			target.transform.GetChild (i).gameObject.layer = 0;
+			target.transform.GetChild (i).GetComponent<SpriteRenderer> ().material = ObjectFactory.getInstance.m_material_diffuse;
 
-			if(m_EatenObject.transform.GetChild(i).GetComponent<SpriteRenderer>().flipX)
-				m_EatenObject.transform.GetChild(i).GetComponent<SpriteRenderer>().flipX = false;
+			if(target.transform.GetChild(i).GetComponent<SpriteModifier>() != null)
+				target.transform.GetChild(i).GetComponent<SpriteModifier>().SpriteModify();
 
-			morgueTrans.GetComponent<Morgue>().AddBody(false,m_EatenObject.transform.GetChild(i).gameObject);
+			if(target.transform.GetChild(i).GetComponent<SpriteRenderer>().flipX)
+				target.transform.GetChild(i).GetComponent<SpriteRenderer>().flipX = false;
 
-			if(m_EatenObject.transform.GetChild(i).gameObject.GetComponent<Part>().m_objHealthBar == null)
-				m_EatenObject.transform.GetChild(i).gameObject.GetComponent<Part>().m_objHealthBar = ObjectFactory.getInstance.Create_HealthBar (m_EatenObject.transform.GetChild(i).gameObject);
+			morgueTrans.GetComponent<Morgue>().AddBody(false,target.transform.GetChild(i).gameObject);
+
+			if(target.transform.GetChild(i).gameObject.GetComponent<Part>().m_objHealthBar == null)
+				target.transform.GetChild(i).gameObject.GetComponent<Part>().m_objHealthBar = ObjectFactory.getInstance.Create_HealthBar (target.transform.GetChild(i).gameObject);
 		}
 
-		StartCoroutine(m_EatenObject.GetComponent<Unit> ().DestroyThis ());
-		m_EatenObject = null;
+		StartCoroutine(target.GetComponent<Unit> ().DestroyThis ());
+		target = null;
 	}
 
 	public void CalculateStickableSeat(bool bDragPart)

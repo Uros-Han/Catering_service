@@ -9,9 +9,15 @@ public class HealthBar : MonoBehaviour {
 	UISlider m_slider;
 
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
+
 		if (!gameObject.name.Equals ("CoreHealthBar")) {
 			m_Target = GetComponent<UIFollowTarget> ().target;
+
+			if (m_Target == null) {
+				StartCoroutine (FindTarget ());
+				return;
+			}
 
 			m_slider = transform.GetChild(0).GetComponent<UISlider> ();
 
@@ -25,6 +31,18 @@ public class HealthBar : MonoBehaviour {
 		}
 		
 
+	}
+
+	IEnumerator FindTarget()
+	{
+		UIFollowTarget ft = GetComponent<UIFollowTarget> ();
+		WaitForSeconds wfs = new WaitForSeconds (0.01f);
+
+		do{
+			yield return wfs;
+		}while(ft.target == null);
+
+		OnEnable ();
 	}
 
 	IEnumerator CoreHealthBar()

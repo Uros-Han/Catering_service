@@ -307,6 +307,7 @@
      <Compile Include="Assets\Scripts\Manager\AStar.cs" />
      <Compile Include="Assets\Scripts\Manager\BattleSceneMgr.cs" />
      <Compile Include="Assets\Scripts\Manager\BattleSceneSetter.cs" />
+     <Compile Include="Assets\Scripts\Manager\CoreAbilityMgr.cs" />
      <Compile Include="Assets\Scripts\Manager\DebugLine.cs" />
      <Compile Include="Assets\Scripts\Manager\GameMgr.cs" />
      <Compile Include="Assets\Scripts\Manager\GridMgr.cs" />
@@ -342,6 +343,7 @@
      <Compile Include="Assets\Scripts\Objects\World\WorldGeo.cs" />
      <Compile Include="Assets\Scripts\Objects\World\WorldIcon.cs" />
      <Compile Include="Assets\Scripts\Objects\World\WorldOverView.cs" />
+     <Compile Include="Assets\Scripts\UI\Battle\MouthPanel.cs" />
      <Compile Include="Assets\Scripts\UI\ControlTap.cs" />
      <Compile Include="Assets\Scripts\UI\DamageUI.cs" />
      <Compile Include="Assets\Scripts\UI\DeveloperTool.cs" />
@@ -353,6 +355,7 @@
      <Compile Include="Assets\Scripts\UI\MessageBox.cs" />
      <Compile Include="Assets\Scripts\UI\WantedReward.cs" />
      <Compile Include="Assets\Scripts\UI\World\AleartMsg.cs" />
+     <Compile Include="Assets\Scripts\UI\World\PartStatus.cs" />
      <Compile Include="Assets\Scripts\UI\World\PartyStateIndicator.cs" />
      <Compile Include="Assets\Scripts\UI\World\TimeUI.cs" />
      <Compile Include="Assets\SpriteColorFX\Demos\Blend\Scripts\Blender.cs" />

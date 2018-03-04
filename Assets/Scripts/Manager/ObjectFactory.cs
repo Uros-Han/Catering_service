@@ -64,6 +64,8 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 
 	public Sprite[] m_sheet_PartyStateIndicator;
 
+	public Material m_material_diffuse;
+
 	// Use this for initialization
 	public void ResourcesLoad () {
 		m_objAleart = Resources.Load ("Prefabs/Objects/Aleart") as GameObject;
@@ -136,6 +138,8 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		m_objHeroParty = Resources.LoadAll<GameObject> ("Prefabs/Objects/Enemies/World/Party_Hero");
 
 		m_sheet_PartyStateIndicator = Resources.LoadAll<Sprite> ("Sprites/UI/PartyStateIndicator");
+
+		m_material_diffuse = Resources.Load<Material> ("Materials/Diffuse");
 
 		SoundMgr.getInstance.AudioPoolSetting ();
 	}

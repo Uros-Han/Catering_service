@@ -66,10 +66,12 @@ public class Tangled : MonoBehaviour {
 
 			if(coreCollider.OverlapPoint(target))
 			{
-				iTween.ScaleTo(targetTransform.gameObject, iTween.Hash("x", 1.5f, "y", 1.5f, "time" , 0.1f, "easetype", "easeInElastic"));
+				targetTransform.localScale = new Vector3(1.25f, 1.25f, 1f);
+//				iTween.ScaleTo(targetTransform.gameObject, iTween.Hash("x", 1.5f, "y", 1.5f, "time" , 0.1f, "easetype", "easeInElastic"));
 				bReadyToEat = true;
 			}else if(bReadyToEat && !coreCollider.OverlapPoint(target)){
-				iTween.ScaleTo(targetTransform.gameObject, iTween.Hash("x", 1f, "y", 1f, "time" , 0.1f, "easetype", "easeInElastic"));
+				targetTransform.localScale = Vector3.one;
+//				iTween.ScaleTo(targetTransform.gameObject, iTween.Hash("x", 1f, "y", 1f, "time" , 0.1f, "easetype", "easeInElastic"));
 				bReadyToEat = false;
 			}
 
@@ -111,7 +113,7 @@ public class Tangled : MonoBehaviour {
 
 					if(bReadyToEat){
 						targetTransform.localScale = Vector3.one;
-						GameObject.Find("Core").GetComponent<Core>().Eat(targetTransform.gameObject);
+						StartCoroutine(GameObject.Find("Core").GetComponent<Core>().Eat(targetTransform.gameObject));
 					}
 					break;
 				}

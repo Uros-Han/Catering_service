@@ -132,7 +132,7 @@ public class Unit : MonoBehaviour {
 	}
 
 	IEnumerator SpriteFlip(){
-		yield return new WaitForSeconds(0.1f);
+
 
 		if (!m_bFlipped) {
 			transform.localScale = new Vector3 (-1, 1, 1);
@@ -166,6 +166,7 @@ public class Unit : MonoBehaviour {
 			m_bFlipped = false;
 		}
 
+		yield return null;
 
 	}
 

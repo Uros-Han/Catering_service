@@ -57,6 +57,10 @@ public class FSM_Enemy : FSM {
 			StartCoroutine (State_Panic ());
 			break;
 
+		case AI_STATE.DISABLED:
+			StartCoroutine (State_Disabled ());
+			break;
+
 		}
 	}
 
@@ -156,6 +160,17 @@ public class FSM_Enemy : FSM {
 			yield return null;
 
 		} while(m_AiState == AI_STATE.PANIC);
+
+		SetState (m_AiState);
+	}
+
+	public IEnumerator State_Disabled(){
+
+		do {
+
+			yield return null;
+
+		} while(m_AiState == AI_STATE.DISABLED);
 
 		SetState (m_AiState);
 	}
