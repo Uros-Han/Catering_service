@@ -46,7 +46,7 @@ public class Core_World : MonoBehaviour {
 		Transform PlayerTrans = GameObject.Find ("Player").transform;
 		PartStatus partStatus = GameObject.Find ("PartStatus").GetComponent<PartStatus> ();
 	
-		FogOfWarUnit fowUnit = GameObject.Find ("Core").GetComponent<FogOfWarUnit> ();
+		FogOfWarUnit fowUnit = GetComponent<FogOfWarUnit> ();
 
 		fowUnit.radius = 0.5f + ((float)partStatus.m_iSight * 0.1f);
 
@@ -91,7 +91,7 @@ public class Core_World : MonoBehaviour {
 
 		iTween.ColorTo (objTargetPart, iTween.Hash("a", 0f, "time", 0.4f));
 
-		GameObject.Find ("Hunger").GetComponent<HungerUI> ().ChangeHunger (100);
+		GameObject.Find ("Hunger").GetComponent<TopBarUI> ().ChangeValue (100);
 
 		StartCoroutine (PartStatusChecker ());
 	}
@@ -218,9 +218,9 @@ public class Core_World : MonoBehaviour {
 			iTween.MoveTo(gameObject, iTween.Hash("x", destPos.x, "y", destPos.y, "time", 1f, "easetype", "easeInSine"));
 
 			if (GameMgr.getInstance.m_iHunger - 30 > 0)
-				GameObject.Find ("Hunger").GetComponent<HungerUI> ().ChangeHunger (GameMgr.getInstance.m_iHunger - 30);
+				GameObject.Find ("Hunger").GetComponent<TopBarUI> ().ChangeValue (GameMgr.getInstance.m_iHunger - 30);
 			else {
-				GameObject.Find ("Hunger").GetComponent<HungerUI> ().ChangeHunger (0);
+				GameObject.Find ("Hunger").GetComponent<TopBarUI> ().ChangeValue (0);
 				yield return new WaitForSeconds (0.5f);
 				yield return StartCoroutine(EatMyPart ());
 			}

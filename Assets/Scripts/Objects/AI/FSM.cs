@@ -102,7 +102,11 @@ public class FSM : MonoBehaviour {
 				ObjectFactory.getInstance.Create_DamageUI (target, 0, true, true);
 			} else {
 				if (fDealedDmg > 0) {
-					targetPart.m_fCurHealth -= fDealedDmg;
+					if (targetPart.gameObject.name.Equals ("Core")) {
+						GameObject.Find ("Health").GetComponent<TopBarUI> ().ChangeValue (targetPart.m_fCurHealth - fDealedDmg);
+					} else {
+						targetPart.m_fCurHealth -= fDealedDmg;
+					}
 					ObjectFactory.getInstance.Create_DamageUI (target, fDamage, true);
 				} else {
 					ObjectFactory.getInstance.Create_DamageUI (target, 0f, true);

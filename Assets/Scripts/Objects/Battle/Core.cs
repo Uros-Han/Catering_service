@@ -147,9 +147,10 @@ public class Core : Part {
 		Unit targetUnit = target.GetComponent<Unit> ();
 		while(targetUnit.m_fCurHealth > 0f){
 
-			targetUnit.m_fCurHealth -= 1f;
-
 			yield return new WaitForSeconds(1f);
+
+			targetUnit.m_fCurHealth -= 1f;
+		
 		}
 
 		//Digest done!
@@ -158,7 +159,13 @@ public class Core : Part {
 		iTween.ScaleTo(gameObject, iTween.Hash("x", 1f, "y", 1f, "time" , 1f, "easetype", "easeInElastic"));
 
 		Transform morgueTrans = GameObject.Find ("Morgue").transform;
+
+		for (int i = 0; i < target.transform.childCount; ++i) {
+			target.transform.GetChild (i).GetComponent<SpriteRenderer> ().enabled = false;
+		}
+
 		for (int i =0; i< target.transform.childCount; ++i) {
+			target.transform.GetChild (i).GetComponent<SpriteRenderer> ().enabled = true;
 
 			if (target.transform.GetChild (i).GetComponent<Part> ().m_strNameKey.Equals ("시민 팔")) {
 				Destroy (target.transform.GetChild (i).gameObject);
@@ -168,19 +175,25 @@ public class Core : Part {
 				continue;
 			}
 
-			target.transform.GetChild (i).gameObject.layer = 0;
+
 			target.transform.GetChild (i).GetComponent<SpriteRenderer> ().material = ObjectFactory.getInstance.m_material_diffuse;
 
 			if(target.transform.GetChild(i).GetComponent<SpriteModifier>() != null)
 				target.transform.GetChild(i).GetComponent<SpriteModifier>().SpriteModify();
 
-			if(target.transform.GetChild(i).GetComponent<SpriteRenderer>().flipX)
-				target.transform.GetChild(i).GetComponent<SpriteRenderer>().flipX = false;
+
+
+//			if(target.transform.GetChild(i).GetComponent<SpriteRenderer>().flipX)
+//				target.transform.GetChild(i).GetComponent<SpriteRenderer>().flipX = false;
 
 			morgueTrans.GetComponent<Morgue>().AddBody(false,target.transform.GetChild(i).gameObject);
+		
 
 			if(target.transform.GetChild(i).gameObject.GetComponent<Part>().m_objHealthBar == null)
 				target.transform.GetChild(i).gameObject.GetComponent<Part>().m_objHealthBar = ObjectFactory.getInstance.Create_HealthBar (target.transform.GetChild(i).gameObject);
+
+			yield return new WaitForSeconds (0.1f);
+		
 		}
 
 		StartCoroutine(target.GetComponent<Unit> ().DestroyThis ());

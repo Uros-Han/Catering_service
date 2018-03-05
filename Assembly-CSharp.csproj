@@ -338,8 +338,8 @@
      <Compile Include="Assets\Scripts\Objects\SpriteModifier.cs" />
      <Compile Include="Assets\Scripts\Objects\SpriteSheet.cs" />
      <Compile Include="Assets\Scripts\Objects\World\Core_World.cs" />
-     <Compile Include="Assets\Scripts\Objects\World\HungerUI.cs" />
      <Compile Include="Assets\Scripts\Objects\World\Player.cs" />
+     <Compile Include="Assets\Scripts\Objects\World\TopBarUI.cs" />
      <Compile Include="Assets\Scripts\Objects\World\WorldGeo.cs" />
      <Compile Include="Assets\Scripts\Objects\World\WorldIcon.cs" />
      <Compile Include="Assets\Scripts\Objects\World\WorldOverView.cs" />

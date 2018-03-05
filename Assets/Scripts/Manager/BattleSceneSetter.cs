@@ -66,7 +66,7 @@ public class BattleSceneSetter : MonoBehaviour {
 		Transform PlayerTrans = GameObject.Find ("Player").transform;
 		ObjectFactory objFac = ObjectFactory.getInstance;
 
-		for (int i = 0; i < PlayerTrans.childCount; ++i) {
+		for (int i = 1; i < PlayerTrans.childCount; ++i) {
 			if (PlayerTrans.GetChild (i).GetComponent<Part> ().m_objHealthBar == null) {
 				PlayerTrans.GetChild (i).GetComponent<Part> ().m_objHealthBar = objFac.Create_HealthBar (PlayerTrans.GetChild (i).gameObject);
 			}

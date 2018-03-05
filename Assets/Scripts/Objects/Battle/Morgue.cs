@@ -25,8 +25,12 @@ public class Morgue : MonoBehaviour {
 
 			if(iEmptyIdx != -1) // have space
 			{
+				movePart.layer = 0;
+				movePart.transform.position = GameObject.Find ("Core").transform.position;
+				iTween.MoveTo (movePart, iTween.Hash("x", GetIdxPos(iEmptyIdx).x, "y", GetIdxPos(iEmptyIdx).y, "easetype", "easeInCubic", "time", 0.5f));
+
 				movePart.GetComponent<SpriteRenderer>().sortingLayerName = "DeadBodies";
-				movePart.transform.position = GetIdxPos(iEmptyIdx);
+//				movePart.transform.position = GetIdxPos(iEmptyIdx);
 				movePart.transform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
 				m_bBodyArr[iEmptyIdx] = true;
 				movePart.GetComponent<SpriteRenderer>().color = Color.white;
@@ -53,7 +57,7 @@ public class Morgue : MonoBehaviour {
 
 		morguePanel.Find ("PartName").GetComponent<UILabel> ().text = part.m_strNameKey;  //TODO : Localize
 
-		morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text = "";
+		morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text = "[3D1E43FF]";
 		foreach (KeyValuePair<string, float> tmp in part.m_dicStat) {
 			float fBuffedStat = 0f;
 			for (int i = 0; i < part.m_lstPartBuffed.Count; ++i) {
@@ -62,9 +66,9 @@ public class Morgue : MonoBehaviour {
 
 			if ((tmp.Value != 0 || fBuffedStat != 0)) {
 				if (fBuffedStat > 0)
-					morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += string.Format ("{0} : {1}[00DA2EFF](+{2})[-]\n", Localization.Get (tmp.Key), tmp.Value, fBuffedStat);
+					morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += string.Format ("{0} : {1}[50B728FF](+{2})[-]\n", Localization.Get (tmp.Key), tmp.Value, fBuffedStat);
 				else if (fBuffedStat < 0)
-					morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += string.Format ("{0} : {1}[EC0E0E15](-{2})[-]\n", Localization.Get (tmp.Key), tmp.Value, fBuffedStat);
+					morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += string.Format ("{0} : {1}[B72848FF](-{2})[-]\n", Localization.Get (tmp.Key), tmp.Value, fBuffedStat);
 				else
 					morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += string.Format ("{0} : {1}", Localization.Get (tmp.Key), tmp.Value + "\n");
 			}
@@ -107,6 +111,7 @@ public class Morgue : MonoBehaviour {
 		movePart.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
 
 		movePart.GetComponent<Part> ().AdjustEmissionRate ();
+
 	}
 
 	public void ClearMorgue()
