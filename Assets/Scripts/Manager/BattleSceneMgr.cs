@@ -31,8 +31,17 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 		yield return new WaitForSeconds(1f);
 		
 		Transform EnemyParent = GameObject.Find ("Enemies").transform;
+
+		bool bMouthClear = true;
+		MouthPanel mp = GameObject.Find ("MouthPanel").GetComponent<MouthPanel> ();
+		for (int i = 0; i < mp.m_arrayEatenObjects.Length; ++i) {
+			if (mp.m_arrayEatenObjects [i] != null) {
+				bMouthClear = false;
+				break;
+			}
+		}
 		
-		if (EnemyParent.childCount == 0) { // All Enemies Dead. Turn to night
+		if (EnemyParent.childCount == 0 && bMouthClear) { // All Enemies Dead. Turn to night
 			StartCoroutine (NightTurn ());
 		}
 	}

@@ -66,6 +66,8 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 
 	public Material m_material_diffuse;
 
+	RuntimeAnimatorController[] m_weapon_anim_controller;
+
 	// Use this for initialization
 	public void ResourcesLoad () {
 		m_objAleart = Resources.Load ("Prefabs/Objects/Aleart") as GameObject;
@@ -140,6 +142,12 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		m_sheet_PartyStateIndicator = Resources.LoadAll<Sprite> ("Sprites/UI/PartyStateIndicator");
 
 		m_material_diffuse = Resources.Load<Material> ("Materials/Diffuse");
+
+		m_weapon_anim_controller = new RuntimeAnimatorController[5];
+		m_weapon_anim_controller[0] = Resources.Load<RuntimeAnimatorController> ("Animations/OneHand/oneHand");
+		m_weapon_anim_controller[1] = Resources.Load<RuntimeAnimatorController> ("Animations/TwoHand/twoHand");
+		m_weapon_anim_controller[2] = Resources.Load<RuntimeAnimatorController> ("Animations/Pole/pole");
+		m_weapon_anim_controller[3] = Resources.Load<RuntimeAnimatorController> ("Animations/Bow/bow");
 
 		SoundMgr.getInstance.AudioPoolSetting ();
 	}
@@ -672,7 +680,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		//Arms Setting
 		GameObject arm = obj.transform.Find ("Hand_R").gameObject;
 		Part armPart = arm.GetComponent<Part> ();
-		int iArmRandom = Random.Range (0, m_sheet_civilian_arm.Length);
+		int iArmRandom = 0;//Random.Range (0, m_sheet_civilian_arm.Length);
 		arm.GetComponent<SpriteRenderer>().sprite = m_sheet_civilian_arm[iArmRandom];
 		float fSpeedRandom = 0f;
 		switch (iArmRandom) {
@@ -749,7 +757,8 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		}
 
 //		arm.GetComponent<Part> ().m_dicStat = new Dictionary<string, float>();
-
+		Animator anim = armPart.gameObject.GetComponent<Animator> ();
+		anim.runtimeAnimatorController = m_weapon_anim_controller [(int)armPart.m_weaponType];
 		armPart.m_dicStat.Add ("Attack", fRandom);
 		armPart.m_dicStat.Add ("AttackSpeed", fSpeedRandom);
 
@@ -862,9 +871,10 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		//Arms Setting
 		GameObject arm = obj.transform.Find ("Hand_R").gameObject;
 		Part armPart = arm.GetComponent<Part> ();
-		int iArmRandom = 6;//Random.Range (0, m_sheet_mercenary_arm.Length);
+		int iArmRandom = 2;//Random.Range (0, m_sheet_mercenary_arm.Length);
 		arm.GetComponent<SpriteRenderer>().sprite = m_sheet_mercenary_arm[iArmRandom];
 		float fSpeedRandom = 0f;
+
 		switch (iArmRandom) {
 		case 0:
 			armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
@@ -914,8 +924,6 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 			fRandom = Random.Range (3, 6);
 			fSpeedRandom = Random.Range (4, 7);
 			Destroy (obj.transform.Find ("Hand_L").gameObject);
-			Animator anim = armPart.gameObject.AddComponent<Animator> ();
-			anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/bow");
 			break;
 		case 7:
 			armPart.m_weaponType = WEAPON_TYPE.CROSSBOW;
@@ -942,7 +950,8 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		}
 
 		//		arm.GetComponent<Part> ().m_dicStat = new Dictionary<string, float>();
-
+		Animator anim = armPart.gameObject.GetComponent<Animator> ();
+		anim.runtimeAnimatorController = m_weapon_anim_controller [(int)armPart.m_weaponType];
 		armPart.m_dicStat.Add ("Attack", fRandom);
 		armPart.m_dicStat.Add ("AttackSpeed", fSpeedRandom);
 
@@ -1093,7 +1102,8 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		}
 
 		//		arm.GetComponent<Part> ().m_dicStat = new Dictionary<string, float>();
-
+		Animator anim = armPart.gameObject.GetComponent<Animator> ();
+		anim.runtimeAnimatorController = m_weapon_anim_controller [(int)armPart.m_weaponType];
 		armPart.m_dicStat.Add ("Attack", fRandom);
 		armPart.m_dicStat.Add ("AttackSpeed", fSpeedRandom);
 

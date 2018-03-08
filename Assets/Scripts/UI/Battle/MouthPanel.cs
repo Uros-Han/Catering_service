@@ -80,6 +80,8 @@ public class MouthPanel : MonoBehaviour {
 
 		slider.value = 0f;
 		m_arrayEatenObjects[iIdx] = null;
+
+		m_DigestBar [iIdx] = DigestBar (iIdx);
 	}
 
 	public void MouthClickIdx_0()

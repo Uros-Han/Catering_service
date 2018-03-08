@@ -51,6 +51,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\DPSpritePalette\PaletteBuilder\Scripts\Editor\PaletteBuilderImporter.cs" />
+     <Compile Include="Assets\DPSpritePalette\PaletteBuilder\Scripts\Editor\PaletteBuilderPngWindow.cs" />
+     <Compile Include="Assets\DPSpritePalette\PaletteBuilder\Scripts\Editor\PaletteBuilderWindow.cs" />
+     <Compile Include="Assets\DPSpritePalette\Scripts\Editor\DPPaletteCombinerEditor.cs" />
+     <Compile Include="Assets\DPSpritePalette\Scripts\Editor\DPPaletteMultiCombinerEditor.cs" />
+     <Compile Include="Assets\DPSpritePalette\Scripts\Editor\DPSpritePaletteEditor.cs" />
+     <Compile Include="Assets\DPSpritePalette\Scripts\Editor\DPSpritePaletteEditorUI.cs" />
      <Compile Include="Assets\FogOfWar\Scripts\Editor\FogOfWarChunkManagerEditor.cs" />
      <Compile Include="Assets\FogOfWar\Scripts\Editor\Vector2iPropertyDrawer.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Editor\InvDatabaseInspector.cs" />

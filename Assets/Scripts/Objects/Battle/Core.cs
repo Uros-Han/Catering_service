@@ -161,6 +161,9 @@ public class Core : Part {
 		Transform morgueTrans = GameObject.Find ("Morgue").transform;
 
 		for (int i = 0; i < target.transform.childCount; ++i) {
+			if (target.transform.GetChild (i).GetComponent<Animator> () != null)
+				target.transform.GetChild (i).GetComponent<Animator> ().enabled = false;
+			
 			target.transform.GetChild (i).GetComponent<SpriteRenderer> ().enabled = false;
 		}
 

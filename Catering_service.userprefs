@@ -1,17 +1,18 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Manager/WorldGenerator.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Objects/Battle/Core.cs">
     <Files>
-      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="1163" Column="49" />
+      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Objects/Part.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Objects/AI/FSM.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/Battle/Core.cs" Line="123" Column="48" />
-      <File FileName="Assets/Scripts/Objects/Battle/Unit.cs" Line="61" Column="47" />
-      <File FileName="Assets/Scripts/Objects/AI/FSM_Enemy.cs" Line="267" Column="40" />
+      <File FileName="Assets/Scripts/Objects/Battle/Core.cs" Line="151" Column="4" />
+      <File FileName="Assets/Scripts/Objects/Battle/Morgue.cs" Line="30" Column="137" />
+      <File FileName="Assets/Scripts/Objects/Battle/Unit.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Objects/AI/FSM_Enemy.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Manager/AStar.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/World/Core_World.cs" Line="56" Column="2" />
-      <File FileName="Assets/Scripts/UI/World/PartStatus.cs" Line="5" Column="24" />
-      <File FileName="Assets/Scripts/Objects/Battle/Tangled.cs" Line="114" Column="68" />
+      <File FileName="Assets/Scripts/Objects/World/Core_World.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/UI/World/PartStatus.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Objects/Battle/Tangled.cs" Line="114" Column="22" />
       <File FileName="Assets/Scripts/Manager/WorldGenerator.cs" Line="118" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>

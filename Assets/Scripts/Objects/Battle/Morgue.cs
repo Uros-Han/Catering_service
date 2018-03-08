@@ -57,6 +57,26 @@ public class Morgue : MonoBehaviour {
 
 		morguePanel.Find ("PartName").GetComponent<UILabel> ().text = part.m_strNameKey;  //TODO : Localize
 
+		string strType = "";
+		switch (part.m_partType) {
+		case PART_TYPE.ARM:
+			strType = "PartType_arm";
+			break;
+
+		case PART_TYPE.HEAD:
+			strType = "PartType_head";
+			break;
+
+		case PART_TYPE.BODY:
+			strType = "PartType_body";
+			break;
+
+		case PART_TYPE.LEG:
+			strType = "PartType_leg";
+			break;
+		}
+		morguePanel.Find ("PartType").GetComponent<UILabel> ().text = Localization.Get (strType);
+
 		morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text = "[3D1E43FF]";
 		foreach (KeyValuePair<string, float> tmp in part.m_dicStat) {
 			float fBuffedStat = 0f;

@@ -37,6 +37,9 @@ public class Unit : MonoBehaviour {
 		GetComponent<FSM_Enemy> ().StopAllCoroutines ();
 		for(int i = 0 ; i < transform.childCount; ++i)
 		{
+			if (transform.GetChild (i).GetComponent<Animator> () != null)
+				transform.GetChild (i).GetComponent<Animator> ().enabled = false;
+			
 			transform.GetChild(i).GetComponent<SpriteRenderer>().color = Color.white;
 			transform.GetChild(i).GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sprite_meat;
 

@@ -17,6 +17,8 @@ public class Tangled : MonoBehaviour {
 
 	public Vector3 m_vecTangledEdge;
 
+	public GameObject m_DragingObject;
+
 	// Use this for initialization
 	void Start () {
 		m_fTangledDelay = 1f;
@@ -45,6 +47,10 @@ public class Tangled : MonoBehaviour {
 		int iJointCount = 5;
 		Vector3 target;
 
+		bool bExit = false;
+
+		m_DragingObject = targetTransform.gameObject;
+
 		targetTransform.GetComponent<Unit> ().m_bCatched = true;
 
 		Collider2D coreCollider = GameObject.Find ("Core").GetComponent<Collider2D> ();
@@ -62,25 +68,23 @@ public class Tangled : MonoBehaviour {
 			targetTransform.position = new Vector3(target.x, target.y);
 			Vector3 m_vecP1 = new Vector3 (m_fTangledPointX, m_fTangledPointY);
 
-			m_listCurve.Clear ();
-
 			if(coreCollider.OverlapPoint(target))
 			{
 				targetTransform.localScale = new Vector3(1.25f, 1.25f, 1f);
-//				iTween.ScaleTo(targetTransform.gameObject, iTween.Hash("x", 1.5f, "y", 1.5f, "time" , 0.1f, "easetype", "easeInElastic"));
 				bReadyToEat = true;
 			}else if(bReadyToEat && !coreCollider.OverlapPoint(target)){
 				targetTransform.localScale = Vector3.one;
-//				iTween.ScaleTo(targetTransform.gameObject, iTween.Hash("x", 1f, "y", 1f, "time" , 0.1f, "easetype", "easeInElastic"));
 				bReadyToEat = false;
 			}
 
+			m_listCurve.Clear ();
+
 			for (int i=0; i<iJointCount; ++i) {
-				m_listCurve.Add(BezierCurve((i / (float)(iJointCount-1)) * (fCurTime / fMaxReachTime), Vector3.zero, m_vecP1, target));
+				m_listCurve.Add(BezierCurve(((float)i / (float)(iJointCount-1)) * (fCurTime / fMaxReachTime), Vector3.zero, m_vecP1, target));
 
 				if(i == iJointCount-1)
 				{
-					m_vecTangledEdge = BezierCurve((i / (float)(iJointCount-1)) * (fCurTime / fMaxReachTime), Vector3.zero, m_vecP1, target);
+					m_vecTangledEdge = BezierCurve(((float)i / (float)(iJointCount-1)) * (fCurTime / fMaxReachTime), Vector3.zero, m_vecP1, target);
 				}
 			}
 
@@ -92,7 +96,6 @@ public class Tangled : MonoBehaviour {
 			}
 
 			m_vecBeforeP1 = m_vecP1;
-
 
 			if(!bDoneDrag){
 				if(fCurTime < fMaxReachTime){
@@ -119,12 +122,25 @@ public class Tangled : MonoBehaviour {
 				}
 			}
 
-			if(!Input.GetMouseButton(0))
+
+			if(!Input.GetMouseButton(0)){
 				bDoneDrag = true;
+				m_DragingObject = null;
+			}
 
 			yield return null;
 
 		}while(true);
+
+		Vector3 corePos = GameObject.Find ("Core").transform.position;
+		for (int i=0; i<iJointCount-1; ++i) {
+			if(i == iJointCount-2)
+				DrawLine(corePos, corePos, new Color(80/255f, 25/255f, 100/255f), i,true);
+			else
+				DrawLine(corePos, corePos, new Color(80/255f, 25/255f, 100/255f), i);
+		}
+
+
 	}
 
 	public void TangledDrag(Transform target)

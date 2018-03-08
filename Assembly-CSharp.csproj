@@ -51,6 +51,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\DPSpritePalette\Example\Scripts\TestPalette.cs" />
+     <Compile Include="Assets\DPSpritePalette\Example\Scripts\TestPalette2.cs" />
+     <Compile Include="Assets\DPSpritePalette\PaletteBuilder\Scripts\PaletteTexturePngSaveData.cs" />
+     <Compile Include="Assets\DPSpritePalette\PaletteBuilder\Scripts\PaletteTextureSaveData.cs" />
+     <Compile Include="Assets\DPSpritePalette\Scripts\DPPaletteCombiner.cs" />
+     <Compile Include="Assets\DPSpritePalette\Scripts\DPPaletteMultiCombiner.cs" />
+     <Compile Include="Assets\DPSpritePalette\Scripts\DPSpritePalette.cs" />
+     <Compile Include="Assets\DPSpritePalette\Scripts\DPSpritePaletteUI.cs" />
      <Compile Include="Assets\Easy Save 3\Types\ES3Type_Part.cs" />
      <Compile Include="Assets\Easy Save 3\Types\ES3Type_PartSaveForm.cs" />
      <Compile Include="Assets\Easy Save 3\Types\ES3Type_WorldIcon.cs" />
@@ -470,6 +478,7 @@
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Blend\BumpLit\SpriteColorBlendMultiplyBumpLit.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked 1.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
+     <None Include="Assets\DPSpritePalette\Shader\DPSpritePaletteLightingBilinearShader.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Masks\BumpLit\SpriteColorMasks3OverlayBumpLit.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Blend\BumpLit\SpriteColorBlendDarkenBumpLit.shader" />
      <None Include="Assets\SpriteParticleEmitter\UI Particles Shaders\UI Particle Premultiply Blend.shader" />
@@ -477,6 +486,7 @@
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Dissolve\SpriteColorDissolveBorderColorHue.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 2.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
+     <None Include="Assets\DPSpritePalette\Shader\DPSpritePaletteShader.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked 2.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Dissolve\BumpLit\SpriteColorDissolveBorderColorSaturationBumpLit.shader" />
      <None Include="Assets\NGUI\Examples\Models\Orc\Orc Skin.shader" />
@@ -484,6 +494,7 @@
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Outline\SpriteColorOutlineNoOverlapTextureMask.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Dissolve\BumpLit\SpriteColorDissolveBorderColorAdditiveBumpLit.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Shift\SpriteColorShiftLinear.shader" />
+     <None Include="Assets\DPSpritePalette\readme.txt" />
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo20.txt" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\ShowAlphaChannel.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo14.txt" />
@@ -499,6 +510,7 @@
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Dissolve\SpriteColorDissolveBorderColorSolid.shader" />
      <None Include="Assets\Font\yunWebDesign.fnt" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Blend\SpriteColorBlendDifference.shader" />
+     <None Include="Assets\DPSpritePalette\Shader\DPSpritePaletteBilinearShader.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Outline\SpriteColorOutlineMask.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Outline\SpriteColorOutlineGradientVertical.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\SunShaftsComposite.shader" />
@@ -509,6 +521,7 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (Packed) (TextureClip).shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Dissolve\BumpLit\SpriteColorDissolveBorderColorSoftLightBumpLit.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\ScreenSpaceAmbientObscurance.shader" />
+     <None Include="Assets\DPSpritePalette\Shader\DPSpritePaletteUIBilinearShader.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored 2.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Dissolve\SpriteColorDissolveBorderColorOverlay.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Dissolve\BumpLit\SpriteColorDissolveBorderTextureHueBumpLit.shader" />
@@ -525,6 +538,7 @@
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Masks\SpriteColorMasks3HardLight.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Blend\BumpLit\SpriteColorBlendLuminosityBumpLit.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo18.txt" />
+     <None Include="Assets\DPSpritePalette\Shader\DPSpritePaletteLightingShader.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Blend\BumpLit\SpriteColorBlendScreenBumpLit.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Ramp\SpriteColorRampMask.shader" />
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\VignetteShader.shader" />
@@ -652,6 +666,7 @@
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderYUV.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Blend\BumpLit\SpriteColorBlendDarkerBumpLit.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Outline\BumpLit\SpriteColorOutlineBumpLit.shader" />
+     <None Include="Assets\DPSpritePalette\Shader\DPSpritePalette.cginc" />
      <None Include="Assets\ProCamera2D\Code\Helpers\TransitionFX\Resources\PC2D_Wipe.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Dissolve\SpriteColorDissolveBorderColorVividLight.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Masks\SpriteColorMasks3Solid.shader" />
@@ -692,6 +707,7 @@
      <None Include="Assets\SpriteParticleEmitter\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\Bokeh34.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Outline\BumpLit\SpriteColorOutlineGradientVerticalMaskBumpLit.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Masks\BumpLit\SpriteColorMasks3HardMixBumpLit.shader" />
+     <None Include="Assets\DPSpritePalette\Shader\DPSpritePaletteUIShader.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Dissolve\BumpLit\SpriteColorDissolveBorderTextureScreenBumpLit.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Dissolve\BumpLit\SpriteColorDissolveBorderTextureSoftLightBumpLit.shader" />
      <None Include="Assets\SpriteColorFX\Resources\Shaders\Dissolve\BumpLit\SpriteColorDissolveBorderColorVividLightBumpLit.shader" />
