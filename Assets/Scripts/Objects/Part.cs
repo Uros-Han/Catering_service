@@ -1128,6 +1128,21 @@ public class Part : MonoBehaviour {
 		StartCoroutine (Assemble ());
 	}
 
+	void Weapon_Attack()
+	{
+		if (m_weaponType.Equals (WEAPON_TYPE.BOW) || m_weaponType.Equals (WEAPON_TYPE.CROSSBOW)) {
+
+			ObjectFactory.getInstance.Create_Arrow(transform.position, transform.parent.GetComponent<FSM_Enemy> ().m_target, m_dicStat["Attack"]);
+
+		} else {
+			if (transform.parent.name.Equals ("Player")) {
+			
+			} else {
+				transform.parent.GetComponent<FSM_Enemy> ().Weapon_Attack (this);
+			}
+		}
+	}
+
 
 //	void DrawLine(Vector3 start, Vector3 end, Color color, float duration = 0.2f)
 //	{

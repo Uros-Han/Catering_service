@@ -336,6 +336,7 @@
      <Compile Include="Assets\Scripts\Objects\Battle\Core.cs" />
      <Compile Include="Assets\Scripts\Objects\Battle\Morgue.cs" />
      <Compile Include="Assets\Scripts\Objects\Battle\Poop.cs" />
+     <Compile Include="Assets\Scripts\Objects\Battle\Projectile.cs" />
      <Compile Include="Assets\Scripts\Objects\Battle\Tangled.cs" />
      <Compile Include="Assets\Scripts\Objects\Battle\Unit.cs" />
      <Compile Include="Assets\Scripts\Objects\CameraScript.cs" />

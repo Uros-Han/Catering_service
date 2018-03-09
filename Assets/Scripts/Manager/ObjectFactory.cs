@@ -17,6 +17,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 	GameObject m_Part;
 	GameObject m_MessageBox;
 	GameObject m_AleartMsg;
+	GameObject m_objArrow;
 
 	GameObject m_objChicken;
 	GameObject m_objGoat;
@@ -78,6 +79,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		m_DamageUI = Resources.Load ("Prefabs/UI/DamageUI") as GameObject;
 		m_MessageBox = Resources.Load ("Prefabs/UI/MessageBox") as GameObject;
 		m_AleartMsg = Resources.Load ("Prefabs/UI/AleartMsg") as GameObject;
+		m_objArrow = Resources.Load ("Prefabs/Objects/Arrow") as GameObject;
 
 		m_sprite_meat = Resources.Load<Sprite> ("Sprites/Meat");
 		m_sheet_flag = Resources.LoadAll<Sprite>("Sprites/Sheets/sheet_flags");
@@ -150,6 +152,18 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		m_weapon_anim_controller[3] = Resources.Load<RuntimeAnimatorController> ("Animations/Bow/bow");
 
 		SoundMgr.getInstance.AudioPoolSetting ();
+	}
+
+	public GameObject Create_Arrow(Vector3 createPos, GameObject target, float fDamage)
+	{
+		GameObject obj = Instantiate (m_objArrow, createPos, Quaternion.AngleAxis(0,Vector3.forward)) as GameObject;
+		obj.transform.parent = GameObject.Find ("Projectiles").transform;
+
+		Projectile objProjectile = obj.GetComponent<Projectile> ();
+		objProjectile.m_fDamage = fDamage;
+		objProjectile.m_objTarget = target;
+
+		return obj;
 	}
 
 	public GameObject Create_Aleart(int iIdx)
@@ -871,7 +885,7 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		//Arms Setting
 		GameObject arm = obj.transform.Find ("Hand_R").gameObject;
 		Part armPart = arm.GetComponent<Part> ();
-		int iArmRandom = 2;//Random.Range (0, m_sheet_mercenary_arm.Length);
+		int iArmRandom = 6;//Random.Range (0, m_sheet_mercenary_arm.Length);
 		arm.GetComponent<SpriteRenderer>().sprite = m_sheet_mercenary_arm[iArmRandom];
 		float fSpeedRandom = 0f;
 

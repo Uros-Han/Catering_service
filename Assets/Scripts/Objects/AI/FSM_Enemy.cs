@@ -111,7 +111,7 @@ public class FSM_Enemy : FSM {
 
 			for(int i=0; i < PlayerTrans.childCount; ++i)
 			{
-				if((PlayerTrans.GetChild(i).gameObject.name.Equals("Body") || PlayerTrans.GetChild(i).gameObject.name.Equals("Core")) && Vector3.Distance(PlayerTrans.GetChild(i).transform.position, transform.position) < 0.5f)
+				if((PlayerTrans.GetChild(i).gameObject.name.Equals("Body") || PlayerTrans.GetChild(i).gameObject.name.Equals("Core")) && Vector3.Distance(PlayerTrans.GetChild(i).transform.position, transform.position) < 1f)
 				{
 					m_target = PlayerTrans.GetChild(i).gameObject;
 					m_AiState = AI_STATE.ATTACK;
@@ -121,7 +121,7 @@ public class FSM_Enemy : FSM {
 			if(!m_AiState.Equals(AI_STATE.ATTACK)){
 				for(int i=0; i < PlayerTrans.childCount; ++i)
 				{
-					if(Vector3.Distance(PlayerTrans.GetChild(i).transform.position, transform.position) < 0.3f)
+					if(Vector3.Distance(PlayerTrans.GetChild(i).transform.position, transform.position) < 1f)
 					{
 						m_target = PlayerTrans.GetChild(i).gameObject;
 						m_AiState = AI_STATE.ATTACK;
@@ -227,7 +227,7 @@ public class FSM_Enemy : FSM {
 				break;
 			}
 
-			if(Vector3.Distance(m_target.transform.position, transform.position) > 0.5f)
+			if(Vector3.Distance(m_target.transform.position, transform.position) >  1f)
 			{
 				m_AiState = AI_STATE.MOVE;
 				m_target = null;
@@ -236,6 +236,13 @@ public class FSM_Enemy : FSM {
 		}while(m_AiState == AI_STATE.ATTACK);
 
 		SetState (m_AiState);
+	}
+
+	public void Weapon_Attack(Part attackPart)
+	{
+		float fDamage = attackPart.m_dicStat ["Attack"];
+
+		StartCoroutine (Attack (m_target, fDamage, false));
 	}
 
 	IEnumerator AttackablePart(GameObject AttackPart, int iCount)
@@ -247,7 +254,6 @@ public class FSM_Enemy : FSM {
 		Vector3 originPos = AttackPart.transform.localPosition;
 
 		Part attackPart = AttackPart.GetComponent<Part>();
-		float fDamage = attackPart.m_dicStat ["Attack"];
 		float fAttackSpeed = attackPart.m_dicStat ["AttackSpeed"];
 		fAttackSpeed = 10f - fAttackSpeed;
 		if (fAttackSpeed < 1)
@@ -323,9 +329,7 @@ public class FSM_Enemy : FSM {
 //			}
 		};
 
-		if (attackPart.m_weaponType == WEAPON_TYPE.BOW) {
-			anim.SetBool ("Draw_Bow", false);
-		}
+		anim.SetBool ("Ready_Weapon", false);
 	}
 
 }
