@@ -335,6 +335,7 @@
      <Compile Include="Assets\Scripts\Objects\Battle\Battle_Geo.cs" />
      <Compile Include="Assets\Scripts\Objects\Battle\Core.cs" />
      <Compile Include="Assets\Scripts\Objects\Battle\Morgue.cs" />
+     <Compile Include="Assets\Scripts\Objects\Battle\PartAnimator.cs" />
      <Compile Include="Assets\Scripts\Objects\Battle\Poop.cs" />
      <Compile Include="Assets\Scripts\Objects\Battle\Projectile.cs" />
      <Compile Include="Assets\Scripts\Objects\Battle\Tangled.cs" />

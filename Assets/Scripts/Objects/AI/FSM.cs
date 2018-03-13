@@ -92,7 +92,7 @@ public class FSM : MonoBehaviour {
 			for (int i = 0; i < targetPart.m_lstPartBuffed.Count; ++i) {
 				fDodgePercent += targetPart.m_lstPartBuffed [i].m_dicStatBuff ["Dodge"];
 			}
-			fDodgePercent *= 10f;
+//			fDodgePercent *= 10f;
 
 			SoundMgr.getInstance.PlaySfx ("impact_blade");
 
@@ -144,5 +144,10 @@ public class FSM : MonoBehaviour {
 		}while(m_AiState == AI_STATE.DISABLED);
 		
 		SetState (m_AiState);
+	}
+
+	public void Weapon_Attack(float fDmg, GameObject target, bool bEnemy)
+	{
+		StartCoroutine (Attack (target, fDmg, bEnemy));
 	}
 }

@@ -69,6 +69,8 @@ public class Part : MonoBehaviour {
 			m_dicStatBuff.Add ("AttackSpeed", 0);
 		if(!m_dicStatBuff.ContainsKey ("IQ"))
 			m_dicStatBuff.Add ("IQ", 0);
+		if(!m_dicStatBuff.ContainsKey ("Range"))
+			m_dicStatBuff.Add ("Range", 0);
 	}
 
 	public void SetListBuff()
@@ -195,6 +197,8 @@ public class Part : MonoBehaviour {
 			m_dicStat.Add ("Attack", 0);
 		if(m_bAttackAvailable && !m_dicStat.ContainsKey ("AttackSpeed"))
 			m_dicStat.Add ("AttackSpeed", 0);
+		if(m_bAttackAvailable && !m_dicStat.ContainsKey ("Range"))
+			m_dicStat.Add ("Range", 0);
 		if(m_partType.Equals(PART_TYPE.HEAD) && !m_dicStat.ContainsKey ("IQ"))
 			m_dicStat.Add ("IQ", 0);
 	}
@@ -328,7 +332,13 @@ public class Part : MonoBehaviour {
 				{
 					m_BeforeheadingDirection = m_headingDirection;
 					GetComponent<SpriteSheet>().CheckAround(false, iBeforeSeatIdx);
+					if(m_bAttackAvailable)
+					{
+						GetComponent<SpriteRenderer>().enabled = true;
+						transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+					}
 				}
+
 				if (!gameObject.name.Equals ("Core")){
 					GetComponent<SpriteRenderer>().sortingLayerName = "FrontObject";
 //					GetComponent<ParticleSystemRenderer>().sortingLayerName = "FrontObject_Particle";
@@ -547,6 +557,13 @@ public class Part : MonoBehaviour {
 						SoundMgr.getInstance.PlaySfx("core_place");
 
 						GameObject.Find("Player").BroadcastMessage("CheckCurParentPart", SendMessageOptions.DontRequireReceiver);
+
+						if(m_bAttackAvailable)
+						{
+							GetComponent<SpriteRenderer>().enabled = false;
+							transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+							transform.GetChild(0).GetChild(0).GetComponent<Animator>().enabled = true;
+						}
 					}
 				}
 
@@ -954,6 +971,12 @@ public class Part : MonoBehaviour {
 
 			if (!m_bEdgePart && AStar.getInstance.AStarStart_CoreFind (iStart, iEnd)) {
 			} else {
+				if (m_bAttackAvailable) {
+					GetComponent<SpriteRenderer> ().enabled = true;
+					transform.GetChild (0).GetChild (0).GetComponent<SpriteRenderer> ().enabled = false;
+					transform.GetChild (0).GetChild (0).GetComponent<Animator> ().enabled = false;
+				}
+
 				transform.parent = GameObject.Find ("Field").transform;
 				GetComponent<FSM_Freindly> ().m_AiState = AI_STATE.DISABLED;
 //				GetComponent<SpriteParticleEmitter.DynamicEmitter> ().enabled = false;
@@ -1128,15 +1151,32 @@ public class Part : MonoBehaviour {
 		StartCoroutine (Assemble ());
 	}
 
-	void Weapon_Attack()
+	public void Weapon_Attack()
 	{
+		switch (m_weaponType) {
+		case WEAPON_TYPE.ONE_HAND:
+			SoundMgr.getInstance.PlaySfx ("weapon_onehand");
+			break;
+
+		case WEAPON_TYPE.TWO_HAND:
+			SoundMgr.getInstance.PlaySfx ("weapon_twohand");
+			break;
+
+		case WEAPON_TYPE.POLE:
+			SoundMgr.getInstance.PlaySfx ("weapon_twohand");
+			break;
+		}
+
+
 		if (m_weaponType.Equals (WEAPON_TYPE.BOW) || m_weaponType.Equals (WEAPON_TYPE.CROSSBOW)) {
-
-			ObjectFactory.getInstance.Create_Arrow(transform.position, transform.parent.GetComponent<FSM_Enemy> ().m_target, m_dicStat["Attack"]);
-
+			if (transform.parent.name.Equals ("Player")) {
+				ObjectFactory.getInstance.Create_Arrow(transform.position, GetComponent<FSM_Freindly> ().m_target, m_dicStat["Attack"]);
+			} else {
+				ObjectFactory.getInstance.Create_Arrow(transform.position, transform.parent.GetComponent<FSM_Enemy> ().m_target, m_dicStat["Attack"]);
+			}
 		} else {
 			if (transform.parent.name.Equals ("Player")) {
-			
+				transform.GetComponent<FSM_Freindly> ().Weapon_Attack (this);
 			} else {
 				transform.parent.GetComponent<FSM_Enemy> ().Weapon_Attack (this);
 			}

@@ -43,7 +43,7 @@ public class TopBarUI : MonoBehaviour {
 	void Update () {
 
 		if (m_bHealthBar) {
-			m_bar.value = core.m_fCurHealth / 100f;
+			m_bar.value = core.m_fCurHealth / 1000f;
 			m_countLabel.text = ((int)core.m_fCurHealth).ToString ();
 		} else {
 			m_bar.value = (float)gMgr.m_iHunger / 100f;

@@ -25,6 +25,7 @@ public class Morgue : MonoBehaviour {
 
 			if(iEmptyIdx != -1) // have space
 			{
+				Debug.Log (movePart.name);
 				movePart.layer = 0;
 				movePart.transform.position = GameObject.Find ("Core").transform.position;
 				iTween.MoveTo (movePart, iTween.Hash("x", GetIdxPos(iEmptyIdx).x, "y", GetIdxPos(iEmptyIdx).y, "easetype", "easeInCubic", "time", 0.5f));
@@ -125,12 +126,17 @@ public class Morgue : MonoBehaviour {
 
 	IEnumerator ChangeParentToMorgue(GameObject movePart)
 	{
-		yield return null;
+		
+		yield return new WaitForSeconds((float)movePart.transform.parent.childCount * 0.1f);
 
+		if (movePart.GetComponent<Part> ().m_bAttackAvailable) {
+			ObjectFactory.getInstance.Create_PartAnimator (movePart.transform);
+		}
+			
 		movePart.transform.parent = transform;
 		movePart.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
 
-		movePart.GetComponent<Part> ().AdjustEmissionRate ();
+//		movePart.GetComponent<Part> ().AdjustEmissionRate ();
 
 	}
 

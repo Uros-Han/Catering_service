@@ -12,7 +12,6 @@ public class FSM_Enemy : FSM {
 
 	// Use this for initialization
 	void Start () {
-		SetState (AI_STATE.MOVE);
 
 		m_AttackAvailableParts = new List<GameObject> ();
 
@@ -23,6 +22,8 @@ public class FSM_Enemy : FSM {
 		}
 
 		fBornPosX = transform.position.x;
+
+		SetState (AI_STATE.MOVE);
 	}
 
 	public void SetState(AI_STATE state)
@@ -79,10 +80,15 @@ public class FSM_Enemy : FSM {
 		Transform coreTrans = GameObject.Find ("Player").transform.GetChild(0);
 		Transform PlayerTrans = GameObject.Find ("Player").transform;
 		float fMoveSpeed = GetComponent<Unit> ().m_fMoveSpeed;
+
 		Unit thisUnit = GetComponent<Unit> ();
+
+		float fRange = (float)m_AttackAvailableParts [0].GetComponent<Part> ().m_dicStat ["Range"] / 100f;
 
 		do{
 			yield return null;
+
+			Vector3 CoreDirVec = Vector3.Normalize (coreTrans.position - transform.position);
 
 			if(m_AiState == AI_STATE.MOVE)
 			{
@@ -91,10 +97,7 @@ public class FSM_Enemy : FSM {
 					break;
 				}
 
-				if(coreTrans.position.x < transform.position.x)
-					transform.Translate(new Vector3(-1,0) * fMoveSpeed * Time.deltaTime);
-				else
-					transform.Translate(new Vector3(1,0) * fMoveSpeed * Time.deltaTime);
+				transform.Translate(CoreDirVec * fMoveSpeed * Time.deltaTime);
 			}
 
 //			if((!m_bBornAtLeft && transform.position.x < -fBornPosX) || (m_bBornAtLeft && transform.position.x > -fBornPosX)) //Run Away
@@ -111,23 +114,24 @@ public class FSM_Enemy : FSM {
 
 			for(int i=0; i < PlayerTrans.childCount; ++i)
 			{
-				if((PlayerTrans.GetChild(i).gameObject.name.Equals("Body") || PlayerTrans.GetChild(i).gameObject.name.Equals("Core")) && Vector3.Distance(PlayerTrans.GetChild(i).transform.position, transform.position) < 1f)
+				if((PlayerTrans.GetChild(i).gameObject.name.Equals("Body") || PlayerTrans.GetChild(i).gameObject.name.Equals("Core")) && Vector3.Distance(PlayerTrans.GetChild(i).transform.position, transform.position) < fRange)
 				{
 					m_target = PlayerTrans.GetChild(i).gameObject;
 					m_AiState = AI_STATE.ATTACK;
 				}
 			}
 
-			if(!m_AiState.Equals(AI_STATE.ATTACK)){
-				for(int i=0; i < PlayerTrans.childCount; ++i)
-				{
-					if(Vector3.Distance(PlayerTrans.GetChild(i).transform.position, transform.position) < 1f)
-					{
-						m_target = PlayerTrans.GetChild(i).gameObject;
-						m_AiState = AI_STATE.ATTACK;
-					}
-				}
-			}
+//			if(!m_AiState.Equals(AI_STATE.ATTACK)){
+//				for(int i=0; i < PlayerTrans.childCount; ++i)
+//				{
+//					if(Vector3.Distance(PlayerTrans.GetChild(i).transform.position, transform.position) < fRange)
+//					{
+//						m_target = PlayerTrans.GetChild(i).gameObject;
+//						m_AiState = AI_STATE.ATTACK;
+//					}
+//				}
+//			}
+
 			//////////////////////////////////
 
 		}while(m_AiState == AI_STATE.MOVE);
@@ -197,20 +201,20 @@ public class FSM_Enemy : FSM {
 
 			fCurJumpSpeed -= fJumpResistance;
 
-			if(transform.position.y < fOriginYPos)
+			if(fCurJumpSpeed < -fJumpPower)
 			{
-				transform.position = new Vector3(transform.position.x, fOriginYPos);
 				bOnGround = true;
 			}
 
 			yield return null;
 
-		}while(m_AiState == AI_STATE.MOVE || transform.position.y > fOriginYPos);
+		}while(m_AiState == AI_STATE.MOVE);
 	}
 
 	protected override IEnumerator State_Attack()
 	{
 		Unit thisUnit = GetComponent<Unit> ();
+		float fRange = (float)m_AttackAvailableParts [0].GetComponent<Part> ().m_dicStat ["Range"] / 100f;
 
 		do{
 			yield return null;
@@ -227,13 +231,15 @@ public class FSM_Enemy : FSM {
 				break;
 			}
 
-			if(Vector3.Distance(m_target.transform.position, transform.position) >  1f)
+			if(Vector3.Distance(m_target.transform.position, transform.position) > fRange)
 			{
 				m_AiState = AI_STATE.MOVE;
 				m_target = null;
 			}
 
 		}while(m_AiState == AI_STATE.ATTACK);
+
+		yield return null;
 
 		SetState (m_AiState);
 	}
@@ -245,19 +251,29 @@ public class FSM_Enemy : FSM {
 		StartCoroutine (Attack (m_target, fDamage, false));
 	}
 
+	void InitAttackAnim()
+	{
+		for (int i = 0; i < m_AttackAvailableParts.Count; ++i) {
+			Animator anim = m_AttackAvailableParts[i].GetComponent<Animator> ();
+
+			anim.SetBool ("Hit", false);
+			anim.SetBool ("Ready_Weapon", false);
+		}
+
+	}
+
 	IEnumerator AttackablePart(GameObject AttackPart, int iCount)
 	{
 		yield return new WaitForSeconds (iCount * 0.5f);
 
 		Part targetPart = m_target.GetComponent<Part> ();
-		Quaternion originRotate = AttackPart.transform.localRotation;
-		Vector3 originPos = AttackPart.transform.localPosition;
+//		Quaternion originRotate = AttackPart.transform.localRotation;
+//		Vector3 originPos = AttackPart.transform.localPosition;
 
 		Part attackPart = AttackPart.GetComponent<Part>();
 		float fAttackSpeed = attackPart.m_dicStat ["AttackSpeed"];
-		fAttackSpeed = 10f - fAttackSpeed;
-		if (fAttackSpeed < 1)
-			fAttackSpeed = 1;
+
+		fAttackSpeed /= 10f;
 
 		Animator anim = AttackPart.GetComponent<Animator> ();
 		anim.SetFloat ("AttackSpeed", fAttackSpeed);
@@ -266,17 +282,32 @@ public class FSM_Enemy : FSM {
 
 			anim.SetBool ("Hit", false);
 			anim.SetBool ("Ready_Weapon", true);
+			anim.SetBool ("Cancel_Attack", false);
 
 			float fTimer = 0f;
 
 			do{
-				fTimer += Time.deltaTime;
+				fTimer += Time.deltaTime * fAttackSpeed * 0.1f;
+				if(m_AiState != AI_STATE.ATTACK || targetPart.m_bDestroied)
+				{
+					anim.SetBool ("Cancel_Attack", true);
+					break;
+				}
 				yield return null;
 
-			}while(fTimer < 10f / fAttackSpeed);
+			}while(fTimer < 1f);
+
+			if (targetPart.m_bDestroied)
+				m_AiState = AI_STATE.MOVE;
+
+			if (anim.GetBool ("Cancel_Attack")) {
+				anim.SetBool ("Hit", false);
+				anim.SetBool ("Ready_Weapon", false);
+				break;
+			}
 
 			anim.SetBool ("Hit", true);
-			yield return new WaitForSeconds (0.25f);
+			yield return null;
 
 //			if (attackPart.m_weaponType == WEAPON_TYPE.BOW || attackPart.m_weaponType == WEAPON_TYPE.ONE_HAND) {
 //

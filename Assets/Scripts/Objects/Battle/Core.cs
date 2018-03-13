@@ -173,7 +173,8 @@ public class Core : Part {
 			if (target.transform.GetChild (i).GetComponent<Part> ().m_strNameKey.Equals ("시민 팔")) {
 				Destroy (target.transform.GetChild (i).gameObject);
 				continue;
-			}else if (Random.Range(0.0f,1.0f) < 0.3f && !target.GetComponent<Unit>().m_enemyType.Equals(ENEMY_TYPE.HERO)) {
+			}else if (Random.Range(0.0f,1.0f) < 0f//0.3f 
+				&& !target.GetComponent<Unit>().m_enemyType.Equals(ENEMY_TYPE.HERO)) {
 				Destroy (target.transform.GetChild (i).gameObject);
 				continue;
 			}
@@ -192,14 +193,14 @@ public class Core : Part {
 			morgueTrans.GetComponent<Morgue>().AddBody(false,target.transform.GetChild(i).gameObject);
 		
 
-			if(target.transform.GetChild(i).gameObject.GetComponent<Part>().m_objHealthBar == null)
-				target.transform.GetChild(i).gameObject.GetComponent<Part>().m_objHealthBar = ObjectFactory.getInstance.Create_HealthBar (target.transform.GetChild(i).gameObject);
+//			if(target.transform.GetChild(i).gameObject.GetComponent<Part>().m_objHealthBar == null)
+//				target.transform.GetChild(i).gameObject.GetComponent<Part>().m_objHealthBar = ObjectFactory.getInstance.Create_HealthBar (target.transform.GetChild(i).gameObject);
 
 			yield return new WaitForSeconds (0.1f);
 		
 		}
 
-		StartCoroutine(target.GetComponent<Unit> ().DestroyThis ());
+		StartCoroutine(target.GetComponent<Unit> ().DestroyThis (target.transform.childCount * 0.11f));
 		target = null;
 	}
 

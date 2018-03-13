@@ -173,12 +173,12 @@ public class Unit : MonoBehaviour {
 
 	}
 
-	public IEnumerator DestroyThis()
+	public IEnumerator DestroyThis(float fDelay = 0.01f)
 	{
+		transform.parent = GameObject.Find ("Field").transform;
 		Destroy (GetComponent<FSM_Enemy> ().m_objHealthBar);
 
-		yield return null;
-		yield return null;
+		yield return new WaitForSeconds (fDelay);
 
 		BattleSceneMgr.getInstance.EnemyEliminatedCheck ();
 		Destroy (gameObject);
