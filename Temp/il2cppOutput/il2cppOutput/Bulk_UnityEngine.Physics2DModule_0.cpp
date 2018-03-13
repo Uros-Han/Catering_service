@@ -3565,6 +3565,25 @@ extern "C"  bool Rigidbody2D_get_useAutoMass_m429812216 (Rigidbody2D_t939494601 
 	bool retVal = _il2cpp_icall_func(__this);
 	return retVal;
 }
+// System.Single UnityEngine.Rigidbody2D::get_gravityScale()
+extern "C"  float Rigidbody2D_get_gravityScale_m38081840 (Rigidbody2D_t939494601 * __this, const RuntimeMethod* method)
+{
+	typedef float (*Rigidbody2D_get_gravityScale_m38081840_ftn) (Rigidbody2D_t939494601 *);
+	static Rigidbody2D_get_gravityScale_m38081840_ftn _il2cpp_icall_func;
+	if (!_il2cpp_icall_func)
+	_il2cpp_icall_func = (Rigidbody2D_get_gravityScale_m38081840_ftn)il2cpp_codegen_resolve_icall ("UnityEngine.Rigidbody2D::get_gravityScale()");
+	float retVal = _il2cpp_icall_func(__this);
+	return retVal;
+}
+// System.Void UnityEngine.Rigidbody2D::set_gravityScale(System.Single)
+extern "C"  void Rigidbody2D_set_gravityScale_m4129954518 (Rigidbody2D_t939494601 * __this, float ___value0, const RuntimeMethod* method)
+{
+	typedef void (*Rigidbody2D_set_gravityScale_m4129954518_ftn) (Rigidbody2D_t939494601 *, float);
+	static Rigidbody2D_set_gravityScale_m4129954518_ftn _il2cpp_icall_func;
+	if (!_il2cpp_icall_func)
+	_il2cpp_icall_func = (Rigidbody2D_set_gravityScale_m4129954518_ftn)il2cpp_codegen_resolve_icall ("UnityEngine.Rigidbody2D::set_gravityScale(System.Single)");
+	_il2cpp_icall_func(__this, ___value0);
+}
 // System.Void UnityEngine.Rigidbody2D::set_bodyType(UnityEngine.RigidbodyType2D)
 extern "C"  void Rigidbody2D_set_bodyType_m1814100804 (Rigidbody2D_t939494601 * __this, int32_t ___value0, const RuntimeMethod* method)
 {

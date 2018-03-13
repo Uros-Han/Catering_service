@@ -21019,8 +21019,6 @@ public:
 	GameObject_t1113636619 * ___m_objHealthBar_4;
 	// System.Collections.Generic.List`1<UnityEngine.GameObject> FSM_Enemy::m_AttackAvailableParts
 	List_1_t2585711361 * ___m_AttackAvailableParts_5;
-	// System.Single FSM_Enemy::fBornPosX
-	float ___fBornPosX_6;
 
 public:
 	inline static int32_t get_offset_of_m_objHealthBar_4() { return static_cast<int32_t>(offsetof(FSM_Enemy_t3265134844, ___m_objHealthBar_4)); }
@@ -21039,14 +21037,6 @@ public:
 	{
 		___m_AttackAvailableParts_5 = value;
 		Il2CppCodeGenWriteBarrier((&___m_AttackAvailableParts_5), value);
-	}
-
-	inline static int32_t get_offset_of_fBornPosX_6() { return static_cast<int32_t>(offsetof(FSM_Enemy_t3265134844, ___fBornPosX_6)); }
-	inline float get_fBornPosX_6() const { return ___fBornPosX_6; }
-	inline float* get_address_of_fBornPosX_6() { return &___fBornPosX_6; }
-	inline void set_fBornPosX_6(float value)
-	{
-		___fBornPosX_6 = value;
 	}
 };
 
@@ -52537,7 +52527,7 @@ IL_01a5:
 IL_021a:
 	{
 		float L_70 = Random_Range_m2202990745(NULL /*static, unused*/, (0.0f), (1.0f), /*hidden argument*/NULL);
-		if ((!(((float)L_70) < ((float)(0.0f)))))
+		if ((!(((float)L_70) < ((float)(0.3f)))))
 		{
 			goto IL_027e;
 		}

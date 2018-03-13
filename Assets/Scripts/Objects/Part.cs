@@ -27,7 +27,7 @@ public class Part : MonoBehaviour {
 	public List<Part> m_lstPartBuffed; //자신에게 버프를 준 파츠 리스트
 
 	public float m_fOriginEmissionRate;
-	float m_fHandRotater;
+	public float m_fHandRotater;
 	public GameObject m_objHealthBar;
 
 	public GameObject m_objCurParentPart; // used in buff
@@ -185,7 +185,7 @@ public class Part : MonoBehaviour {
 
 //		m_fOriginEmissionRate = GetComponent<SpriteParticleEmitter.DynamicEmitter> ().EmissionRate;
 
-		StartCoroutine (Heal ());
+//		StartCoroutine (Heal ());
 
 		if(!m_dicStat.ContainsKey("Health"))
 			m_dicStat.Add ("Health", 0);

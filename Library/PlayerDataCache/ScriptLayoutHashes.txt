@@ -241,7 +241,7 @@ c8329e5c8ffe230b5c85446a42f20f01 Assembly-CSharp.dll:SpriteToParticlesAsset.Effe
 b2b7fe871a51c58a929bd270b5fb0041 Assembly-CSharp.dll:.UIPlayAnimation
 ef09686cacab03d94a8cc14711428c6b Assembly-CSharp.dll:.DownloadTexture
 0b1e5d4b98add5f7e238b6f6f3f3494a Assembly-CSharp.dll:.SpriteMaskExample06
-4f6981380033e089b1be53548c306b79 Assembly-CSharp.dll:.Core
+4b00918806ecd8d0903438b99f5fabf4 Assembly-CSharp.dll:.Core
 e0b6dad5cc2449a0b7dcef61e4f825f8 Assembly-CSharp.dll:Com.LuisPedroFonseca.ProCamera2D.ProCamera2DTriggerInfluence
 0ed5bc3d58c26257dfd7c50b3fcaafb7 Assembly-CSharp.dll:.UICenterOnChild
 22c1b1c0bb5dadba51de841323264576 Assembly-CSharp.dll:.FSM_Enemy
@@ -292,7 +292,7 @@ cbe311702101a8fd2b4fe90072451a87 Assembly-CSharp.dll:.UIShowControlScheme
 30db6bf1abfbd17c6cdd1385b9eba6ca Assembly-CSharp.dll:UnityStandardAssets.ImageEffects.DepthOfField
 d232bda14ae70628e1472aa09ae256d1 Assembly-CSharp.dll:Com.LuisPedroFonseca.ProCamera2D.TopDownShooter.GameOver
 b3251d4c150a7d11ff89d89f2e755fa1 Assembly-CSharp.dll:.Core_World
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MainManager
+000a9728fc19ef936e6b8ce2a98882fb Assembly-CSharp.dll:.MainManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UIWidgetContainer
 7a616dbce92f73c40a3ca496077d8b39 Assembly-CSharp.dll:.ChatInput
 4be47f20e77fc4e661ded10a7e0fb20e Assembly-CSharp.dll:.Raider
@@ -337,6 +337,7 @@ ada5ce9942ebdbc33f194ce2760d1421 Assembly-CSharp.dll:Com.LuisPedroFonseca.ProCam
 e568ac27d5617cc8aba0434496cfdd33 Assembly-CSharp.dll:.UIPopupList
 61535562ba06fcb8cf05f46d3fa1d012 Assembly-CSharp.dll:.SpriteMaskExample06Rotator
 da9f29ffd5c4f0ac8282bf265db79688 Assembly-CSharp.dll:.TypewriterEffect
+a162086d6e3ad65384c7e618da944ad8 Assembly-CSharp.dll:.FSM_MainScene_Core
 8d6598392e3c4b6fd32aa274c5f5cd60 Assembly-CSharp.dll:.SpriteMaskExample07BloodController
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TopBarUI
 87850b8e331cb17df6147150299d2208 Assembly-CSharp.dll:.UIColorPicker
@@ -422,6 +423,7 @@ bb614fa39b39c4954977762d0fc3e0b2 Assembly-CSharp.dll:.UIKeyNavigation
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UIEventListener
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.InvEquipment
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MeatState
+5e8d97924597a83dd8fbf85da491493d Assembly-CSharp.dll:.FSM_MainScene_Enemy
 bf0efa3a2b50052bc4430312d3cc0dad Assembly-CSharp.dll:.LagPosition
 f9ab08734ff0441703a923df780d4c90 Assembly-CSharp.dll:.UITextList
 e2319d5c19136bd8f000bdb0657ee5e8 Assembly-CSharp.dll:Com.LuisPedroFonseca.ProCamera2D.ProCamera2DRepeater
@@ -464,7 +466,7 @@ af3c0485a6cfbede261a88cc1b5f8384 Assembly-CSharp.dll:.UI2DSprite
 b29ff382b4595061baa58d28b878b933 Assembly-CSharp.dll:.Tangled
 a0eede1b5b36a25e94c81bef0c6bc660 Assembly-CSharp.dll:.UIImageButton
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Battle_Geo
-9c867f35dbcf37960adef820275295c4 Assembly-CSharp.dll:.Part
+de217f245bceb2c39365cd00e183756b Assembly-CSharp.dll:.Part
 e2a8fd4524fc2a3a236b7e7720b544a6 Assembly-CSharp.dll:UnityStandardAssets.ImageEffects.EdgeDetection
 a4eabebcf83f138d76a7d684d942ecc9 Assembly-CSharp.dll:.EquipItems
 57b7d6ed5d9ea7e5cd1b999d15ff4234 Assembly-CSharp.dll:Com.LuisPedroFonseca.ProCamera2D.TopDownShooter.RotateTowardsMouse

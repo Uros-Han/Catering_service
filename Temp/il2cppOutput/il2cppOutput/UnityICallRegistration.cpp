@@ -5446,6 +5446,10 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_Rigidbody2D_get_useAutoMass();
 		Register_UnityEngine_Rigidbody2D_get_useAutoMass();
 
+		//System.Single UnityEngine.Rigidbody2D::get_gravityScale()
+		void Register_UnityEngine_Rigidbody2D_get_gravityScale();
+		Register_UnityEngine_Rigidbody2D_get_gravityScale();
+
 		//System.Void UnityEngine.Rigidbody2D::AddForce_Injected(UnityEngine.Vector2&,UnityEngine.ForceMode2D)
 		void Register_UnityEngine_Rigidbody2D_AddForce_Injected();
 		Register_UnityEngine_Rigidbody2D_AddForce_Injected();
@@ -5461,6 +5465,10 @@ void RegisterAllStrippedInternalCalls()
 		//System.Void UnityEngine.Rigidbody2D::set_bodyType(UnityEngine.RigidbodyType2D)
 		void Register_UnityEngine_Rigidbody2D_set_bodyType();
 		Register_UnityEngine_Rigidbody2D_set_bodyType();
+
+		//System.Void UnityEngine.Rigidbody2D::set_gravityScale(System.Single)
+		void Register_UnityEngine_Rigidbody2D_set_gravityScale();
+		Register_UnityEngine_Rigidbody2D_set_gravityScale();
 
 		//System.Void UnityEngine.Rigidbody2D::set_velocity_Injected(UnityEngine.Vector2&)
 		void Register_UnityEngine_Rigidbody2D_set_velocity_Injected();

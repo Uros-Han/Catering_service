@@ -173,7 +173,7 @@ public class Core : Part {
 			if (target.transform.GetChild (i).GetComponent<Part> ().m_strNameKey.Equals ("시민 팔")) {
 				Destroy (target.transform.GetChild (i).gameObject);
 				continue;
-			}else if (Random.Range(0.0f,1.0f) < 0f//0.3f 
+			}else if (Random.Range(0.0f,1.0f) < 0.3f
 				&& !target.GetComponent<Unit>().m_enemyType.Equals(ENEMY_TYPE.HERO)) {
 				Destroy (target.transform.GetChild (i).gameObject);
 				continue;

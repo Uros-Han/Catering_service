@@ -18,7 +18,8 @@ public class Unit : MonoBehaviour {
 
 	void Start()
 	{
-		StartCoroutine (CoreTangleCheck ());
+		if(!Application.loadedLevelName.Equals("Main"))
+			StartCoroutine (CoreTangleCheck ());
 		m_fCurHealth = m_fHealth;
 
 		StartCoroutine (FlipCheck ());

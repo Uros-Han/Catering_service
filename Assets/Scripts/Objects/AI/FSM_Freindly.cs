@@ -161,6 +161,7 @@ public class FSM_Freindly : FSM {
 		SetState (m_AiState);
 	}
 
+	//FSM_MainScene_Core 에도 있음
 	IEnumerator AnimatorPosSet(WEAPON_TYPE weaponType)
 	{
 		yield return null;

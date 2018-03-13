@@ -154,6 +154,119 @@ public class Tangled : MonoBehaviour {
 		StartCoroutine(TangledAttack_Coroutine (target));
 	}
 
+	public void TangledMainScene(Transform target)
+	{
+		StartCoroutine (TangledMainScene_Coroutine (target));
+	}
+
+	IEnumerator TangledMainScene_Coroutine(Transform targetTransform)
+	{
+		m_bTangledReady = false;
+		bool bDoneDrag = false;
+		bool bReadyToEat = false;
+
+		float fCaptureTime = 0f;
+		float fCurTime = 0f;
+		float fMaxReachTime = 0.1f;
+		int iJointCount = 5;
+		Vector3 target;
+		Vector3 originTargetPos = targetTransform.position;
+		Vector3 corePos = GameObject.Find ("Core").transform.position;
+
+		bool bExit = false;
+
+		m_DragingObject = targetTransform.gameObject;
+
+		targetTransform.GetComponent<Unit> ().m_bCatched = true;
+
+		Collider2D coreCollider = GameObject.Find ("Core").GetComponent<Collider2D> ();
+
+
+		do{
+			if(targetTransform == null){
+				m_bTangledReady = true;
+				break;
+			}
+
+			fCaptureTime += Time.deltaTime;
+
+			target = Vector3.Lerp(originTargetPos, corePos, Mathf.SmoothStep(0.0f, 1.0f, Mathf.SmoothStep(0.0f, 1.0f, fCaptureTime)));
+			targetTransform.position = new Vector3(target.x, target.y);
+			Vector3 m_vecP1 = new Vector3 (m_fTangledPointX, m_fTangledPointY);
+
+			if(coreCollider.OverlapPoint(target))
+			{
+				targetTransform.localScale = new Vector3(1.25f, 1.25f, 1f);
+				bReadyToEat = true;
+			}else if(bReadyToEat && !coreCollider.OverlapPoint(target)){
+				targetTransform.localScale = Vector3.one;
+				bReadyToEat = false;
+			}
+
+			m_listCurve.Clear ();
+
+			for (int i=0; i<iJointCount; ++i) {
+				m_listCurve.Add(BezierCurve(((float)i / (float)(iJointCount-1)) * (fCurTime / fMaxReachTime), Vector3.zero, m_vecP1, target));
+
+				if(i == iJointCount-1)
+				{
+					m_vecTangledEdge = BezierCurve(((float)i / (float)(iJointCount-1)) * (fCurTime / fMaxReachTime), Vector3.zero, m_vecP1, target);
+				}
+			}
+
+			for (int i=0; i<iJointCount-1; ++i) {
+				if(i == iJointCount-2)
+					DrawLine(m_listCurve[i], m_listCurve[i+1], new Color(80/255f, 25/255f, 100/255f), i,true);
+				else
+					DrawLine(m_listCurve[i], m_listCurve[i+1], new Color(80/255f, 25/255f, 100/255f), i);
+			}
+
+			m_vecBeforeP1 = m_vecP1;
+
+			if(!bDoneDrag){
+				if(fCurTime < fMaxReachTime){
+					fCurTime += Time.deltaTime;
+				}else{
+					fCurTime = fMaxReachTime;
+				}
+			}else{
+				if(fCurTime > 0f){
+					fCurTime -= Time.deltaTime;
+				}else{
+					fCurTime = 0f;
+					m_bTangledReady = true;
+					targetTransform.GetComponent<Unit> ().m_bCatched = false;
+					if(targetTransform.GetComponent<FSM_MainScene_Enemy>().m_AiState == AI_STATE.PANIC)
+						targetTransform.GetComponent<FSM_MainScene_Enemy>().m_AiState = AI_STATE.MOVE;
+
+					if(bReadyToEat){
+						targetTransform.localScale = Vector3.one;
+						StartCoroutine(GameObject.Find("Core").GetComponent<FSM_MainScene_Core>().Eat(targetTransform.gameObject));
+					}
+					break;
+				}
+			}
+
+
+			if(fCaptureTime > 1f){
+				bDoneDrag = true;
+				m_DragingObject = null;
+			}
+
+			yield return null;
+
+		}while(true);
+
+		for (int i=0; i<iJointCount-1; ++i) {
+			if(i == iJointCount-2)
+				DrawLine(corePos, corePos, new Color(80/255f, 25/255f, 100/255f), i,true);
+			else
+				DrawLine(corePos, corePos, new Color(80/255f, 25/255f, 100/255f), i);
+		}
+
+
+	}
+
 	IEnumerator TangledAttack_Coroutine(Transform targetTrans)
 	{
 		float fTime = 0f;
@@ -244,7 +357,8 @@ public class Tangled : MonoBehaviour {
 			lr = myLine.GetComponent<LineRenderer> ();
 			lr.material = new Material (Shader.Find ("Sprites/Default"));
 			lr.SetColors (color, color);
-			lr.sortingLayerName = "Objects";
+			lr.sortingLayerName = "FrontObject";
+			lr.sortingOrder = -10;
 
 			if (bEdge)
 				lr.SetWidth (0.05f, 0f);

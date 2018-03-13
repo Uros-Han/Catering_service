@@ -754,6 +754,8 @@ extern const Il2CppType List_1_t3319525431_0_0_0;
 extern const Il2CppType ExampleDragDropSurface_t2709993285_0_0_0;
 extern const Il2CppType EffectorExplode_t1899589370_0_0_0;
 extern const Il2CppType BoxCollider2D_t3581341831_0_0_0;
+extern const Il2CppType MainManager_t729209856_0_0_0;
+extern const Il2CppType SpriteSheet_t799473704_0_0_0;
 extern const Il2CppType DebugLine_t2501625170_0_0_0;
 extern const Il2CppType UIFollowTarget_t2531637827_0_0_0;
 extern const Il2CppType UISlider_t886033014_0_0_0;
@@ -767,9 +769,9 @@ extern const Il2CppType UIAnchor_t2527798900_0_0_0;
 extern const Il2CppType Projectile_t1440994518_0_0_0;
 extern const Il2CppType Caravan_t495501935_0_0_0;
 extern const Il2CppType Raider_t4187058302_0_0_0;
-extern const Il2CppType SpriteSheet_t799473704_0_0_0;
 extern const Il2CppType DamageUI_t3814190385_0_0_0;
 extern const Il2CppType MessageBox_t3716418006_0_0_0;
+extern const Il2CppType FSM_MainScene_Enemy_t3013559955_0_0_0;
 extern const Il2CppType FSM_Freindly_t1623656886_0_0_0;
 extern const Il2CppType ProCamera2DPanAndZoom_t2153214696_0_0_0;
 extern const Il2CppType Animation_t3648466861_0_0_0;
@@ -796,6 +798,7 @@ extern const Il2CppType Flare_t3737099585_0_0_0;
 extern const Il2CppType SpriteMaskExample07DestroyBlood_t1705115555_0_0_0;
 extern const Il2CppType UIParticleRenderer_t2007507052_0_0_0;
 extern const Il2CppType ParticleSystemRenderer_t2065813411_0_0_0;
+extern const Il2CppType FSM_MainScene_Core_t2688572452_0_0_0;
 extern const Il2CppType PartyManager_t670908027_0_0_0;
 extern const Il2CppType TweenColor_t2112002648_0_0_0;
 extern const Il2CppType TweenFill_t1298028023_0_0_0;
@@ -3102,6 +3105,10 @@ static const RuntimeType* GenInst_EffectorExplode_t1899589370_0_0_0_Types[] = { 
 extern const Il2CppGenericInst GenInst_EffectorExplode_t1899589370_0_0_0 = { 1, GenInst_EffectorExplode_t1899589370_0_0_0_Types };
 static const RuntimeType* GenInst_BoxCollider2D_t3581341831_0_0_0_Types[] = { (&BoxCollider2D_t3581341831_0_0_0) };
 extern const Il2CppGenericInst GenInst_BoxCollider2D_t3581341831_0_0_0 = { 1, GenInst_BoxCollider2D_t3581341831_0_0_0_Types };
+static const RuntimeType* GenInst_MainManager_t729209856_0_0_0_Types[] = { (&MainManager_t729209856_0_0_0) };
+extern const Il2CppGenericInst GenInst_MainManager_t729209856_0_0_0 = { 1, GenInst_MainManager_t729209856_0_0_0_Types };
+static const RuntimeType* GenInst_SpriteSheet_t799473704_0_0_0_Types[] = { (&SpriteSheet_t799473704_0_0_0) };
+extern const Il2CppGenericInst GenInst_SpriteSheet_t799473704_0_0_0 = { 1, GenInst_SpriteSheet_t799473704_0_0_0_Types };
 static const RuntimeType* GenInst_DebugLine_t2501625170_0_0_0_Types[] = { (&DebugLine_t2501625170_0_0_0) };
 extern const Il2CppGenericInst GenInst_DebugLine_t2501625170_0_0_0 = { 1, GenInst_DebugLine_t2501625170_0_0_0_Types };
 static const RuntimeType* GenInst_UIFollowTarget_t2531637827_0_0_0_Types[] = { (&UIFollowTarget_t2531637827_0_0_0) };
@@ -3128,12 +3135,12 @@ static const RuntimeType* GenInst_Caravan_t495501935_0_0_0_Types[] = { (&Caravan
 extern const Il2CppGenericInst GenInst_Caravan_t495501935_0_0_0 = { 1, GenInst_Caravan_t495501935_0_0_0_Types };
 static const RuntimeType* GenInst_Raider_t4187058302_0_0_0_Types[] = { (&Raider_t4187058302_0_0_0) };
 extern const Il2CppGenericInst GenInst_Raider_t4187058302_0_0_0 = { 1, GenInst_Raider_t4187058302_0_0_0_Types };
-static const RuntimeType* GenInst_SpriteSheet_t799473704_0_0_0_Types[] = { (&SpriteSheet_t799473704_0_0_0) };
-extern const Il2CppGenericInst GenInst_SpriteSheet_t799473704_0_0_0 = { 1, GenInst_SpriteSheet_t799473704_0_0_0_Types };
 static const RuntimeType* GenInst_DamageUI_t3814190385_0_0_0_Types[] = { (&DamageUI_t3814190385_0_0_0) };
 extern const Il2CppGenericInst GenInst_DamageUI_t3814190385_0_0_0 = { 1, GenInst_DamageUI_t3814190385_0_0_0_Types };
 static const RuntimeType* GenInst_MessageBox_t3716418006_0_0_0_Types[] = { (&MessageBox_t3716418006_0_0_0) };
 extern const Il2CppGenericInst GenInst_MessageBox_t3716418006_0_0_0 = { 1, GenInst_MessageBox_t3716418006_0_0_0_Types };
+static const RuntimeType* GenInst_FSM_MainScene_Enemy_t3013559955_0_0_0_Types[] = { (&FSM_MainScene_Enemy_t3013559955_0_0_0) };
+extern const Il2CppGenericInst GenInst_FSM_MainScene_Enemy_t3013559955_0_0_0 = { 1, GenInst_FSM_MainScene_Enemy_t3013559955_0_0_0_Types };
 static const RuntimeType* GenInst_FSM_Freindly_t1623656886_0_0_0_Types[] = { (&FSM_Freindly_t1623656886_0_0_0) };
 extern const Il2CppGenericInst GenInst_FSM_Freindly_t1623656886_0_0_0 = { 1, GenInst_FSM_Freindly_t1623656886_0_0_0_Types };
 static const RuntimeType* GenInst_ProCamera2DPanAndZoom_t2153214696_0_0_0_Types[] = { (&ProCamera2DPanAndZoom_t2153214696_0_0_0) };
@@ -3186,6 +3193,8 @@ static const RuntimeType* GenInst_UIParticleRenderer_t2007507052_0_0_0_Types[] =
 extern const Il2CppGenericInst GenInst_UIParticleRenderer_t2007507052_0_0_0 = { 1, GenInst_UIParticleRenderer_t2007507052_0_0_0_Types };
 static const RuntimeType* GenInst_ParticleSystemRenderer_t2065813411_0_0_0_Types[] = { (&ParticleSystemRenderer_t2065813411_0_0_0) };
 extern const Il2CppGenericInst GenInst_ParticleSystemRenderer_t2065813411_0_0_0 = { 1, GenInst_ParticleSystemRenderer_t2065813411_0_0_0_Types };
+static const RuntimeType* GenInst_FSM_MainScene_Core_t2688572452_0_0_0_Types[] = { (&FSM_MainScene_Core_t2688572452_0_0_0) };
+extern const Il2CppGenericInst GenInst_FSM_MainScene_Core_t2688572452_0_0_0 = { 1, GenInst_FSM_MainScene_Core_t2688572452_0_0_0_Types };
 static const RuntimeType* GenInst_PartyManager_t670908027_0_0_0_Types[] = { (&PartyManager_t670908027_0_0_0) };
 extern const Il2CppGenericInst GenInst_PartyManager_t670908027_0_0_0 = { 1, GenInst_PartyManager_t670908027_0_0_0_Types };
 static const RuntimeType* GenInst_TweenColor_t2112002648_0_0_0_Types[] = { (&TweenColor_t2112002648_0_0_0) };
@@ -4186,7 +4195,7 @@ static const RuntimeType* GenInst_EditorPrefsX_GetValue_m573191127_gp_0_0_0_0_By
 extern const Il2CppGenericInst GenInst_EditorPrefsX_GetValue_m573191127_gp_0_0_0_0_ByteU5BU5D_t4116647657_0_0_0 = { 2, GenInst_EditorPrefsX_GetValue_m573191127_gp_0_0_0_0_ByteU5BU5D_t4116647657_0_0_0_Types };
 static const RuntimeType* GenInst_Singleton_1_t535200564_gp_0_0_0_0_Types[] = { (&Singleton_1_t535200564_gp_0_0_0_0) };
 extern const Il2CppGenericInst GenInst_Singleton_1_t535200564_gp_0_0_0_0 = { 1, GenInst_Singleton_1_t535200564_gp_0_0_0_0_Types };
-extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[1510] = 
+extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[1513] = 
 {
 	&GenInst_RuntimeObject_0_0_0,
 	&GenInst_Attribute_t861562559_0_0_0,
@@ -5156,6 +5165,8 @@ extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[1510] =
 	&GenInst_ExampleDragDropSurface_t2709993285_0_0_0,
 	&GenInst_EffectorExplode_t1899589370_0_0_0,
 	&GenInst_BoxCollider2D_t3581341831_0_0_0,
+	&GenInst_MainManager_t729209856_0_0_0,
+	&GenInst_SpriteSheet_t799473704_0_0_0,
 	&GenInst_DebugLine_t2501625170_0_0_0,
 	&GenInst_UIFollowTarget_t2531637827_0_0_0,
 	&GenInst_UISlider_t886033014_0_0_0,
@@ -5169,9 +5180,9 @@ extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[1510] =
 	&GenInst_Projectile_t1440994518_0_0_0,
 	&GenInst_Caravan_t495501935_0_0_0,
 	&GenInst_Raider_t4187058302_0_0_0,
-	&GenInst_SpriteSheet_t799473704_0_0_0,
 	&GenInst_DamageUI_t3814190385_0_0_0,
 	&GenInst_MessageBox_t3716418006_0_0_0,
+	&GenInst_FSM_MainScene_Enemy_t3013559955_0_0_0,
 	&GenInst_FSM_Freindly_t1623656886_0_0_0,
 	&GenInst_ProCamera2DPanAndZoom_t2153214696_0_0_0,
 	&GenInst_Animation_t3648466861_0_0_0,
@@ -5198,6 +5209,7 @@ extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[1510] =
 	&GenInst_SpriteMaskExample07DestroyBlood_t1705115555_0_0_0,
 	&GenInst_UIParticleRenderer_t2007507052_0_0_0,
 	&GenInst_ParticleSystemRenderer_t2065813411_0_0_0,
+	&GenInst_FSM_MainScene_Core_t2688572452_0_0_0,
 	&GenInst_PartyManager_t670908027_0_0_0,
 	&GenInst_TweenColor_t2112002648_0_0_0,
 	&GenInst_TweenFill_t1298028023_0_0_0,

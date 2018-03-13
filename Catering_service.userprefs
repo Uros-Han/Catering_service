@@ -1,23 +1,31 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Objects/Battle/Core.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UI/Main/MainManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/Part.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="736" Column="33" />
+      <File FileName="Assets/Scripts/Objects/Part.cs" Line="985" Column="5" />
       <File FileName="Assets/Scripts/Objects/AI/FSM.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/Battle/Core.cs" Line="151" Column="4" />
-      <File FileName="Assets/Scripts/Objects/Battle/Morgue.cs" Line="30" Column="137" />
+      <File FileName="Assets/Scripts/Objects/Battle/Core.cs" Line="176" Column="14" />
+      <File FileName="Assets/Scripts/Objects/Battle/Morgue.cs" Line="133" Column="71" />
       <File FileName="Assets/Scripts/Objects/Battle/Unit.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/AI/FSM_Enemy.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Objects/AI/FSM_Enemy.cs" Line="280" Column="3" />
+      <File FileName="Assets/Scripts/Objects/AI/FSM_Freindly.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Manager/AStar.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Objects/World/Core_World.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/UI/World/PartStatus.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Objects/Battle/Tangled.cs" Line="114" Column="22" />
-      <File FileName="Assets/Scripts/Manager/WorldGenerator.cs" Line="118" Column="4" />
+      <File FileName="Assets/Scripts/Objects/Battle/Tangled.cs" Line="361" Column="26" />
+      <File FileName="Assets/Scripts/Manager/WorldGenerator.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Objects/Battle/PartAnimator.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Objects/Battle/Projectile.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Objects/SpriteSheet.cs" Line="34" Column="23" />
+      <File FileName="Assets/Scripts/Objects/AI/FSM_MainScene_Core.cs" Line="60" Column="34" />
+      <File FileName="Assets/Scripts/UI/Main/MainManager.cs" Line="62" Column="40" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Assets/Scripts/Objects/SpriteSheet.cs" line="32" column="28" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

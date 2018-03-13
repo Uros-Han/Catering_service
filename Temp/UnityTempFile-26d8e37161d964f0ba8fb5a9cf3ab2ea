@@ -438,6 +438,8 @@
 'Assets/Scripts/Objects/AI/FSM.cs'
 'Assets/Scripts/Objects/AI/FSM_Enemy.cs'
 'Assets/Scripts/Objects/AI/FSM_Freindly.cs'
+'Assets/Scripts/Objects/AI/FSM_MainScene_Core.cs'
+'Assets/Scripts/Objects/AI/FSM_MainScene_Enemy.cs'
 'Assets/Scripts/Objects/Battle/Battle_Geo.cs'
 'Assets/Scripts/Objects/Battle/Core.cs'
 'Assets/Scripts/Objects/Battle/Morgue.cs'

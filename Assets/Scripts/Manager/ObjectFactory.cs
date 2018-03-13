@@ -640,6 +640,11 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 			break;
 		}
 
+		if(Application.loadedLevelName.Equals("Main")){
+			Destroy (obj.GetComponent<FSM_Enemy> ());
+			obj.AddComponent<FSM_MainScene_Enemy> ();
+		}
+
 		return obj;
 	}
 
@@ -850,6 +855,11 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		legPart.m_lstStrBuff.Add ("LegBuff");
 		legPart.m_iSaveValue = iLegRandom;
 		legPart.m_iEnemyType = (int)ENEMY_TYPE.CIVILIAN;
+
+		if(Application.loadedLevelName.Equals("Main")){
+			Destroy (obj.GetComponent<FSM_Enemy> ());
+			obj.AddComponent<FSM_MainScene_Enemy> ();
+		}
 
 		return obj;
 	}
@@ -1077,6 +1087,11 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		legPart.m_iSaveValue = iLegRandom;
 		legPart.m_iEnemyType = (int)ENEMY_TYPE.MERCENARY;
 
+		if(Application.loadedLevelName.Equals("Main")){
+			Destroy (obj.GetComponent<FSM_Enemy> ());
+			obj.AddComponent<FSM_MainScene_Enemy> ();
+		}
+
 		return obj;
 	}
 
@@ -1232,6 +1247,11 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		legPart.m_iSaveValue = iLegRandom;
 		legPart.m_iEnemyType = (int)ENEMY_TYPE.KNIGHT;
 
+		if(Application.loadedLevelName.Equals("Main")){
+			Destroy (obj.GetComponent<FSM_Enemy> ());
+			obj.AddComponent<FSM_MainScene_Enemy> ();
+		}
+
 		return obj;
 	}
 
@@ -1245,7 +1265,8 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 			vecBornPos = new Vector3 (-2f, vecBornPos.y);
 		}
 
-		obj.GetComponent<FSM_Enemy>().m_objHealthBar = Create_HealthBar (obj);
+		if(!Application.loadedLevelName.Equals("Main"))
+			obj.GetComponent<FSM_Enemy>().m_objHealthBar = Create_HealthBar (obj);
 
 		return vecBornPos;
 	}

@@ -8,8 +8,6 @@ public class FSM_Enemy : FSM {
 
 	List<GameObject> m_AttackAvailableParts;
 
-	float fBornPosX = 0;
-
 	// Use this for initialization
 	void Start () {
 
@@ -20,8 +18,6 @@ public class FSM_Enemy : FSM {
 			if (transform.GetChild (i).GetComponent<Part> ().m_bAttackAvailable)
 				m_AttackAvailableParts.Add (transform.GetChild (i).gameObject);
 		}
-
-		fBornPosX = transform.position.x;
 
 		SetState (AI_STATE.MOVE);
 	}
@@ -74,6 +70,7 @@ public class FSM_Enemy : FSM {
 
 		SetState (m_AiState);
 	}
+
 
 	protected override IEnumerator State_Move()
 	{

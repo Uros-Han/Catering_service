@@ -332,6 +332,8 @@
      <Compile Include="Assets\Scripts\Objects\AI\FSM.cs" />
      <Compile Include="Assets\Scripts\Objects\AI\FSM_Enemy.cs" />
      <Compile Include="Assets\Scripts\Objects\AI\FSM_Freindly.cs" />
+     <Compile Include="Assets\Scripts\Objects\AI\FSM_MainScene_Core.cs" />
+     <Compile Include="Assets\Scripts\Objects\AI\FSM_MainScene_Enemy.cs" />
      <Compile Include="Assets\Scripts\Objects\Battle\Battle_Geo.cs" />
      <Compile Include="Assets\Scripts\Objects\Battle\Core.cs" />
      <Compile Include="Assets\Scripts\Objects\Battle\Morgue.cs" />
