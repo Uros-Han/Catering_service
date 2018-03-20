@@ -7,6 +7,8 @@ public class Unit : MonoBehaviour {
 	public float m_fHealth;
 	public float m_fCurHealth;
 
+	public float m_fDefense;
+
 	public float m_fAttackDmg;
 	public float m_fMoveSpeed;
 	public ENEMY_TYPE m_enemyType;
@@ -20,6 +22,11 @@ public class Unit : MonoBehaviour {
 	{
 		if(!Application.loadedLevelName.Equals("Main"))
 			StartCoroutine (CoreTangleCheck ());
+
+		m_fDefense = transform.Find ("Body").GetComponent<Part> ().m_dicStat ["Defense"];
+
+		m_fHealth = transform.Find ("Body").GetComponent<Part> ().m_fHealth;
+
 		m_fCurHealth = m_fHealth;
 
 		StartCoroutine (FlipCheck ());

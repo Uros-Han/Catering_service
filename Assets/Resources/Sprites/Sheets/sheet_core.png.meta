@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 0b5925329a449412f92369b16e179781
-timeCreated: 1487163341
+timeCreated: 1521461040
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -119,8 +119,8 @@ TextureImporter:
       name: sheet_core_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 52
+        x: 0
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -133,8 +133,8 @@ TextureImporter:
       name: sheet_core_1
       rect:
         serializedVersion: 2
-        x: 18
-        y: 52
+        x: 16
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -147,8 +147,8 @@ TextureImporter:
       name: sheet_core_2
       rect:
         serializedVersion: 2
-        x: 35
-        y: 52
+        x: 32
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -161,8 +161,8 @@ TextureImporter:
       name: sheet_core_3
       rect:
         serializedVersion: 2
-        x: 52
-        y: 52
+        x: 48
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -175,8 +175,8 @@ TextureImporter:
       name: sheet_core_4
       rect:
         serializedVersion: 2
-        x: 1
-        y: 35
+        x: 0
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -189,8 +189,8 @@ TextureImporter:
       name: sheet_core_5
       rect:
         serializedVersion: 2
-        x: 18
-        y: 35
+        x: 16
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -203,8 +203,8 @@ TextureImporter:
       name: sheet_core_6
       rect:
         serializedVersion: 2
-        x: 35
-        y: 35
+        x: 32
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -217,8 +217,8 @@ TextureImporter:
       name: sheet_core_7
       rect:
         serializedVersion: 2
-        x: 52
-        y: 35
+        x: 48
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -231,8 +231,8 @@ TextureImporter:
       name: sheet_core_8
       rect:
         serializedVersion: 2
-        x: 1
-        y: 18
+        x: 0
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -245,8 +245,8 @@ TextureImporter:
       name: sheet_core_9
       rect:
         serializedVersion: 2
-        x: 18
-        y: 18
+        x: 16
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -259,8 +259,8 @@ TextureImporter:
       name: sheet_core_10
       rect:
         serializedVersion: 2
-        x: 35
-        y: 18
+        x: 32
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -273,8 +273,8 @@ TextureImporter:
       name: sheet_core_11
       rect:
         serializedVersion: 2
-        x: 52
-        y: 18
+        x: 48
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -287,8 +287,8 @@ TextureImporter:
       name: sheet_core_12
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
+        x: 0
+        y: 0
         width: 16
         height: 16
       alignment: 0
@@ -301,8 +301,8 @@ TextureImporter:
       name: sheet_core_13
       rect:
         serializedVersion: 2
-        x: 18
-        y: 1
+        x: 16
+        y: 0
         width: 16
         height: 16
       alignment: 0
@@ -315,8 +315,8 @@ TextureImporter:
       name: sheet_core_14
       rect:
         serializedVersion: 2
-        x: 35
-        y: 1
+        x: 32
+        y: 0
         width: 16
         height: 16
       alignment: 0
@@ -329,8 +329,8 @@ TextureImporter:
       name: sheet_core_15
       rect:
         serializedVersion: 2
-        x: 52
-        y: 1
+        x: 48
+        y: 0
         width: 16
         height: 16
       alignment: 0

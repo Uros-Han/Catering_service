@@ -24822,6 +24822,10 @@ extern const RuntimeType EffectorExplode_t1899589370_0_0_0 = { (void*)3805, 0, I
 extern const RuntimeType EffectorExplode_t1899589370_1_0_0 = { (void*)3805, 0, IL2CPP_TYPE_CLASS, 0, 1, 0 };
 extern const RuntimeType EffectorExplode_t1899589370_0_0_6 = { (void*)3805, 6, IL2CPP_TYPE_CLASS, 0, 0, 0 };
 
+extern const RuntimeType CircleCollider2D_t662546754_0_0_0 = { (void*)2637, 0, IL2CPP_TYPE_CLASS, 0, 0, 0 };
+extern const RuntimeType CircleCollider2D_t662546754_1_0_0 = { (void*)2637, 0, IL2CPP_TYPE_CLASS, 0, 1, 0 };
+extern const RuntimeType CircleCollider2D_t662546754_0_0_3 = { (void*)2637, 3, IL2CPP_TYPE_CLASS, 0, 0, 0 };
+
 extern const RuntimeType MainManager_t729209856_0_0_0 = { (void*)3724, 0, IL2CPP_TYPE_CLASS, 0, 0, 0 };
 extern const RuntimeType MainManager_t729209856_1_0_0 = { (void*)3724, 0, IL2CPP_TYPE_CLASS, 0, 1, 0 };
 extern const RuntimeType MainManager_t729209856_0_0_3 = { (void*)3724, 3, IL2CPP_TYPE_CLASS, 0, 0, 0 };
@@ -25075,10 +25079,6 @@ extern const RuntimeType UIProgressBar_t1222110469_0_0_1 = { (void*)3250, 1, IL2
 extern const RuntimeType UIProgressBar_t1222110469_1_0_0 = { (void*)3250, 0, IL2CPP_TYPE_CLASS, 0, 1, 0 };
 extern const RuntimeType UIProgressBar_t1222110469_0_0_22 = { (void*)3250, 22, IL2CPP_TYPE_CLASS, 0, 0, 0 };
 extern const RuntimeType UIProgressBar_t1222110469_0_0_6 = { (void*)3250, 6, IL2CPP_TYPE_CLASS, 0, 0, 0 };
-
-extern const RuntimeType CircleCollider2D_t662546754_0_0_0 = { (void*)2637, 0, IL2CPP_TYPE_CLASS, 0, 0, 0 };
-extern const RuntimeType CircleCollider2D_t662546754_1_0_0 = { (void*)2637, 0, IL2CPP_TYPE_CLASS, 0, 1, 0 };
-extern const RuntimeType CircleCollider2D_t662546754_0_0_3 = { (void*)2637, 3, IL2CPP_TYPE_CLASS, 0, 0, 0 };
 
 extern const RuntimeType ComponentU5BU5D_t3294940482_0_0_0 = { (void*)&Component_t1923634451_0_0_0, 0, IL2CPP_TYPE_SZARRAY, 0, 0, 0 };
 
@@ -45905,6 +45905,7 @@ extern const RuntimeType* const  g_Il2CppTypeTable[18818] =
 	&Callback_t3139336517_0_0_0,
 	&ExampleDragDropSurface_t2709993285_0_0_0,
 	&EffectorExplode_t1899589370_0_0_0,
+	&CircleCollider2D_t662546754_0_0_0,
 	&MainManager_t729209856_0_0_0,
 	&SpriteSheet_t799473704_0_0_0,
 	&GameMgr_t2744825567_0_0_0,
@@ -45972,7 +45973,6 @@ extern const RuntimeType* const  g_Il2CppTypeTable[18818] =
 	&Modifier_t1697911081_0_0_0,
 	&UIOrthoCamera_t1944225589_0_0_0,
 	&UIProgressBar_t1222110469_0_0_0,
-	&CircleCollider2D_t662546754_0_0_0,
 	&ComponentU5BU5D_t3294940482_0_0_0,
 	&TransformU5BU5D_t807237628_0_0_0,
 	&ParticleSystemSubEmitterPropertiesU5BU5D_t1329183894_0_0_0,

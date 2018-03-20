@@ -35,7 +35,7 @@ public class PartyManager : MonoBehaviour {
 			bool bHeroIncluded = false;
 			int iHeroIdx = -1;
 
-			if (Random.Range (0, 100) < 100) {
+			if (Random.Range (0, 100) < 0) {
 				bHeroIncluded = true;
 			}
 

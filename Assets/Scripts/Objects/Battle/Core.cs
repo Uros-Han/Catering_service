@@ -33,6 +33,13 @@ public class Core : Part {
 			m_dicStat.Add ("Attack", 1);
 
 		m_lstStrBuff.Add ("CoreBuff");
+
+	}
+
+	void OnEnable()
+	{
+		transform.position = new Vector3 (0.01f, 0f);
+		iTween.MoveTo(gameObject, iTween.Hash("x", 0.01f, "y", 0f, "time", 1f));
 	}
 
 	void OnDestroy()
@@ -149,7 +156,7 @@ public class Core : Part {
 
 			yield return new WaitForSeconds(1f);
 
-			targetUnit.m_fCurHealth -= 1f;
+			targetUnit.m_fCurHealth -= 10f;
 		
 		}
 
@@ -159,38 +166,45 @@ public class Core : Part {
 		iTween.ScaleTo(gameObject, iTween.Hash("x", 1f, "y", 1f, "time" , 1f, "easetype", "easeInElastic"));
 
 		Transform morgueTrans = GameObject.Find ("Morgue").transform;
+		Transform FieldTrans = GameObject.Find ("Field").transform;
 
-		for (int i = 0; i < target.transform.childCount; ++i) {
+		int iChildCount = target.transform.childCount;
+
+		for (int i = 0; i < iChildCount; ++i) {
 			if (target.transform.GetChild (i).GetComponent<Animator> () != null)
 				target.transform.GetChild (i).GetComponent<Animator> ().enabled = false;
 			
 			target.transform.GetChild (i).GetComponent<SpriteRenderer> ().enabled = false;
 		}
 
-		for (int i =0; i< target.transform.childCount; ++i) {
-			target.transform.GetChild (i).GetComponent<SpriteRenderer> ().enabled = true;
+		for (int i =0; i< iChildCount; ++i) {
+			target.transform.GetChild (0).GetComponent<SpriteRenderer> ().enabled = true;
 
-			if (target.transform.GetChild (i).GetComponent<Part> ().m_strNameKey.Equals ("시민 팔")) {
-				Destroy (target.transform.GetChild (i).gameObject);
+			if (target.transform.GetChild (0).GetComponent<Part> ().m_strNameKey.Equals ("시민 팔")) {
+				GameObject targetObj = target.transform.GetChild (0).gameObject;
+				targetObj.transform.parent = FieldTrans;
+				Destroy (targetObj);
 				continue;
 			}else if (Random.Range(0.0f,1.0f) < 0.3f
 				&& !target.GetComponent<Unit>().m_enemyType.Equals(ENEMY_TYPE.HERO)) {
-				Destroy (target.transform.GetChild (i).gameObject);
+				GameObject targetObj = target.transform.GetChild (0).gameObject;
+				targetObj.transform.parent = FieldTrans;
+				Destroy (targetObj);
 				continue;
 			}
 
 
-			target.transform.GetChild (i).GetComponent<SpriteRenderer> ().material = ObjectFactory.getInstance.m_material_diffuse;
+			target.transform.GetChild (0).GetComponent<SpriteRenderer> ().material = ObjectFactory.getInstance.m_material_diffuse;
 
-			if(target.transform.GetChild(i).GetComponent<SpriteModifier>() != null)
-				target.transform.GetChild(i).GetComponent<SpriteModifier>().SpriteModify();
+			if(target.transform.GetChild(0).GetComponent<SpriteModifier>() != null)
+				target.transform.GetChild(0).GetComponent<SpriteModifier>().SpriteModify();
 
 
 
 //			if(target.transform.GetChild(i).GetComponent<SpriteRenderer>().flipX)
 //				target.transform.GetChild(i).GetComponent<SpriteRenderer>().flipX = false;
 
-			morgueTrans.GetComponent<Morgue>().AddBody(false,target.transform.GetChild(i).gameObject);
+			morgueTrans.GetComponent<Morgue>().AddBody(false,target.transform.GetChild(0).gameObject);
 		
 
 //			if(target.transform.GetChild(i).gameObject.GetComponent<Part>().m_objHealthBar == null)

@@ -9,6 +9,12 @@ public class MessageButtonManager : MonoBehaviour {
 		GameObject.Find ("Core").GetComponent<Core_World> ().MoveOrder ();
 		Destroy (GameObject.Find ("MessageBox(Clone)").gameObject);
 	}
+
+	void HungerCheckerWait()
+	{
+		GameObject.Find ("WorldMapManager").GetComponent<WorldMapManager> ().Wait ();
+		Destroy (GameObject.Find ("MessageBox(Clone)").gameObject);
+	}
 	
 	void DestroyMessageBox()
 	{

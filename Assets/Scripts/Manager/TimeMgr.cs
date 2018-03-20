@@ -22,23 +22,29 @@ public class TimeMgr : Singleton<TimeMgr> {
 	{
 		switch ((int)m_fHour) {
 		case 0:
-			m_sunLight.color = new Color (218 / 255f, 226 / 255f, 255 / 255f);
-			m_sunLight.intensity = 0.15f;
+//			m_sunLight.color = new Color (218 / 255f, 226 / 255f, 255 / 255f);
+//			m_sunLight.intensity = 0.15f;
+			m_sunLight.color = Color.white;
+			m_sunLight.intensity = 1.1f;
 			break;
 
 		case 6:
+//			m_sunLight.color = Color.white;
+//			m_sunLight.intensity = 0.75f;
 			m_sunLight.color = Color.white;
-			m_sunLight.intensity = 0.75f;
+			m_sunLight.intensity = 1.1f;
 			break;
 
 		case 12:
 			m_sunLight.color = Color.white;
-			m_sunLight.intensity = 1.2f;
+			m_sunLight.intensity = 1.1f;
 			break;
 
 		case 18:
-			m_sunLight.color = new Color (255 / 255f, 168 / 255f, 0 / 255f);
-			m_sunLight.intensity = 1f;
+//			m_sunLight.color = new Color (255 / 255f, 168 / 255f, 0 / 255f);
+//			m_sunLight.intensity = 1f;
+			m_sunLight.color = Color.white;
+			m_sunLight.intensity = 1.1f;
 			break;
 		}
 	}
@@ -69,23 +75,29 @@ public class TimeMgr : Singleton<TimeMgr> {
 	
 		switch ((int)fTarget) {
 		case 6:
+//			colorTarget = Color.white;
+//			fIntensityTarget = 0.75f;
 			colorTarget = Color.white;
-			fIntensityTarget = 0.75f;
+			fIntensityTarget = 1.1f;
 			break;
 
 		case 12:
 			colorTarget = Color.white;
-			fIntensityTarget = 1.2f;
+			fIntensityTarget = 1.1f;
 			break;
 
 		case 18:
-			colorTarget = new Color (255 / 255f, 168 / 255f, 0 / 255f);
-			fIntensityTarget = 1f;
+//			colorTarget = new Color (255 / 255f, 168 / 255f, 0 / 255f);
+//			fIntensityTarget = 1f;
+			colorTarget = Color.white;
+			fIntensityTarget = 1.1f;
 			break;
 
 		case 24:
-			m_sunLight.color = new Color (218 / 255f, 226 / 255f, 255 / 255f);
-			m_sunLight.intensity = 0.15f;
+//			m_sunLight.color = new Color (218 / 255f, 226 / 255f, 255 / 255f);
+//			m_sunLight.intensity = 0.15f;
+			colorTarget = Color.white;
+			fIntensityTarget = 1.1f;
 			break;
 		}
 

@@ -8,9 +8,9 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 
 	public float m_fFarmPopulationStandard = 50f;
 	public float m_fRanchPopulationStandard = 50f;
-	public float m_fVillagePopulationStandard = 100f;
-	public float m_fCityPopulationStandard = 150f;
-	public float m_fCastlePopulationStandard = 250f;
+	public float m_fVillagePopulationStandard = 150f; // 1 man per 10
+	public float m_fCityPopulationStandard = 250f;
+	public float m_fCastlePopulationStandard = 500f;
 
 	float[] m_fTypeCost; // Cost per type
 
@@ -32,6 +32,10 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 
 	public IEnumerator GenerateWorldMap()
 	{
+		GameObject.Find ("TopLeftUI").GetComponent<UIPanel> ().alpha = 0f;
+		GameObject.Find ("BottomUI").GetComponent<UIPanel> ().alpha = 0f;
+		GameObject.Find ("WorldOverview").GetComponent<UIPanel> ().alpha = 0f;
+
 		GameObject.Find ("WorldTool").GetComponent<UIPanel> ().alpha = 0f;
 		GameObject.Find ("LoadingBar").GetComponent<UIPanel> ().alpha = 1f;
 
@@ -50,7 +54,7 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 			if (i % 100 == 0) {
 				float fProgress = (((float)i / ((float)grid.m_iXcount * (float)grid.m_iYcount)) * 0.3f);
 				LoadingProgress (fProgress, string.Format ("Create Geometry ({0}/{1})", i, grid.m_iXcount * grid.m_iYcount));
-				yield return new WaitForSeconds (0.001f);
+				yield return null;
 			}
 		}
 
@@ -132,7 +136,7 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 			if (i % 10 == 0) {
 				float fProgress = 0.5f + ((float)i / (float)icons.childCount * 0.2f);
 				LoadingProgress (fProgress, string.Format ("Check Unreachable Islands ({0}/{1})", i, icons.childCount));
-				yield return new WaitForSeconds (0.001f);
+				yield return null;
 			}
 		}
 
@@ -157,13 +161,19 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 			if (i % 100 == 0) {
 				float fProgress = 0.8f + ((float)i / (float)icons.childCount * 0.1f);
 				LoadingProgress (fProgress, string.Format ("Set World Property & Population ({0}/{1})", i, icons.childCount));
-				yield return new WaitForSeconds (0.001f);
+				yield return null;
 			}
 		}
 
-
 		LoadingProgress (1f , "Done");
-		yield return new WaitForSeconds (1f);
+		yield return new WaitForSeconds (0.5f);
+
+		GameObject.Find ("TopLeftUI").GetComponent<UIPanel> ().alpha = 1f;
+		GameObject.Find ("BottomUI").GetComponent<UIPanel> ().alpha = 1f;
+		GameObject.Find ("WorldOverview").GetComponent<UIPanel> ().alpha = 1f;
+		GameObject.Find ("Core").GetComponent<FoW.FogOfWarUnit> ().enabled = true;
+
+
 		GameObject.Find ("LoadingBar").GetComponent<UIPanel> ().alpha = 0f;
 		GameObject.Find ("WorldTool").GetComponent<UIPanel> ().alpha = 0f;
 
@@ -195,12 +205,12 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 			iCoreGrid = iRandomGrid;
 
 			WorldGeo RandomGeo = GameObject.Find ("Geo").transform.GetChild (iCoreGrid).GetComponent<WorldGeo> ();
-			if(!RandomGeo.m_geoStatus.Equals (WORLD_GEO.WATER))
+			if(!RandomGeo.m_geoStatus.Equals (WORLD_GEO.WATER) && RandomGeo.m_worldIcon != null)
 				bPosioningDone = true;
 
 		} while(!bPosioningDone);
 
-		GameObject.Find ("Core").transform.position = GridMgr.getInstance.GetPosOfIdx (iCoreGrid);
+		GameObject.Find("Player").transform.GetChild(0).position = GridMgr.getInstance.GetPosOfIdx (iCoreGrid);
 
 		GameObject coreIcon = GameObject.Find ("Geo").transform.GetChild (iCoreGrid).GetComponent<WorldGeo> ().m_worldIcon;
 		if (!coreIcon.GetComponent<WorldIcon> ().m_iconType.Equals (WORLDICON_TYPE.EMPTY)) {
@@ -210,7 +220,6 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 
 		GameObject.Find ("PC2DPanTarget").transform.position = GameObject.Find ("Core").transform.position;
 		Com.LuisPedroFonseca.ProCamera2D.ProCamera2D.Instance.MoveCameraInstantlyToPosition (GameObject.Find ("Core").transform.position);
-		GameObject.Find ("Core").GetComponent<FoW.FogOfWarUnit> ().enabled = true;
 
 		GameMgr.getInstance.m_iHunger = 100;
 	}
@@ -295,6 +304,14 @@ public class WorldGenerator : Singleton<WorldGenerator> {
 		if (iDistanceWithCore < 3) {
 			worldIcon.m_fProsperity = GenerateNormalRandom (20f, 10f);
 			worldIcon.m_fPopulation = GenerateNormalRandom (20f, 10f);
+
+			if (!worldIcon.m_iconType.Equals ((int)WORLDICON_TYPE.FARM)) {
+				GameObject newOne = ObjectFactory.getInstance.Create_WorldIcon (grid.GetPosOfIdx (iGridIdx), (int)WORLDICON_TYPE.FARM);
+				SetWorldPropertyAndPopulation (iGridIdx, newOne.GetComponent<WorldIcon>(), WORLDICON_TYPE.FARM);
+				Destroy (worldIcon.gameObject);
+				return;
+			}
+
 		}else{
 			worldIcon.m_fProsperity = Random.Range (40, 80f);
 			switch(type)

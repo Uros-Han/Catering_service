@@ -139,6 +139,8 @@ public class FSM_Enemy : FSM {
 	public IEnumerator State_Groggy(){
 		GetComponent<Unit>().m_bGroggy = true;
 
+		GetComponent<CircleCollider2D> ().enabled = false;
+
 		for (int i = 0; i < transform.childCount; ++i) {
 			transform.GetChild (i).GetComponent<SpriteRenderer> ().color = new Color(128/255f, 171/255f, 255/255f);
 		}

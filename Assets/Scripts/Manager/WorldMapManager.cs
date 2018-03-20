@@ -41,12 +41,14 @@ public class WorldMapManager : MonoBehaviour {
 
 		if (!GameMgr.getInstance.m_bDeveloperMode)
 			GameObject.Find ("DeveloperTools").transform.GetChild (1).gameObject.SetActive (false);
-		
+
+		GameObject.Find ("Player").SendMessage ("CameBackFromBattleScene");
 	}
 
 	void OnEnable()
 	{
 		if (m_bToBattleScene) {	
+//			GameObject.Find ("AleartMsg").BroadcastMessage ("ChgParent",SendMessageOptions.DontRequireReceiver);
 			SceneManager.SetActiveScene (SceneManager.GetSceneByName("World"));
 			GridMgr.getInstance.ChgGridInfo ();
 
@@ -143,17 +145,27 @@ public class WorldMapManager : MonoBehaviour {
 		Application.LoadLevel ("Main");
 	}
 
+	void WaitCheck()
+	{
+		if (GameMgr.getInstance.m_iHunger - 20 <= 0) {
+			ObjectFactory.getInstance.Create_MessageBox_TwoButton(Localization.Get("Mbox_HungerChecker"), "HungerCheckerWait", "DestroyMessageBox");
+		} else
+			Wait ();
+	}
+
 	public void Wait()
 	{
 		TimeMgr.getInstance.Play ();
 
-		GameObject.Find ("Core").GetComponent<Core_World> ().m_listMoveIdx.Clear ();
+		Core_World coreWorld = GameObject.Find ("Core").GetComponent<Core_World> ();
 
-		GameMgr.getInstance.m_iHunger -= 30;
+//		coreWorld.m_listMoveIdx.Clear ();
 
-		if (GameMgr.getInstance.m_iHunger <= 0) {
-			GameMgr.getInstance.m_iHunger = 100;
-			//TODO: Eat Part
+		if (GameMgr.getInstance.m_iHunger - 20 > 0)
+			GameObject.Find ("Hunger").GetComponent<TopBarUI> ().ChangeValue (GameMgr.getInstance.m_iHunger - 20);
+		else {
+			GameObject.Find ("Hunger").GetComponent<TopBarUI> ().ChangeValue (0);
+			StartCoroutine(coreWorld.EatMyPart ());
 		}
 
 		StartCoroutine (EnemyCheck ());

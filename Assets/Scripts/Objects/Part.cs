@@ -238,7 +238,7 @@ public class Part : MonoBehaviour {
 
 		ObjectFactory.getInstance.Create_DamageUI (GameObject.Find ("Core").gameObject, 1f, false);
 
-		CorePart.m_fCurHealth += 1f;
+		CorePart.m_fCurHealth += 3f;
 		if (CorePart.m_fCurHealth > CorePart.m_fHealth)
 			CorePart.m_fCurHealth = CorePart.m_fHealth;
 		

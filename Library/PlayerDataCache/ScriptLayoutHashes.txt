@@ -349,7 +349,7 @@ af4f7efba147aadc5eacde71e30a5ec1 Assembly-CSharp.dll:Com.LuisPedroFonseca.ProCam
 4aadab9e3e4d34f6e069833451e815bb Assembly-CSharp.dll:UnityStandardAssets.ImageEffects.CreaseShading
 e2b50e4e1e5006d87e7ebe8a724e8f6d Assembly-CSharp.dll:UnityStandardAssets.ImageEffects.ContrastEnhance
 7ca1636e7e886825ec115c3108a20538 Assembly-CSharp.dll:Com.LuisPedroFonseca.ProCamera2D.ProCamera2DPixelPerfectSprite
-44ddf1f51bba11afeb3996b22dbfdae4 Assembly-CSharp.dll:.Unit
+b4a08e3f7d03e400a0488a0d53419146 Assembly-CSharp.dll:.Unit
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Tutorial5
 907e0bfe97ab3869f77ab21249841702 Assembly-CSharp.dll:Com.LuisPedroFonseca.ProCamera2D.TopDownShooter.EnemyPatrol
 ed56d305d50e9cf8c0dabb8dd48bfa98 Assembly-CSharp.dll:Com.LuisPedroFonseca.ProCamera2D.TopDownShooter.ObjectMove

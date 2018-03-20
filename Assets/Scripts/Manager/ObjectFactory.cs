@@ -454,7 +454,8 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		GameObject obj = Instantiate (m_objPoop) as GameObject;
 		obj.transform.parent = GameObject.Find("Poops").transform;
 		obj.transform.position = GameObject.Find("Core").transform.position;
-		GameMgr.getInstance.m_iHunger += 10;
+		if(GameMgr.getInstance.m_iHunger + 10 <= 100)
+			GameObject.Find ("Hunger").GetComponent<TopBarUI> ().ChangeValue (GameMgr.getInstance.m_iHunger + 10);
 		
 		return obj;
 	}

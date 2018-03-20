@@ -55,6 +55,8 @@ public class Core_World : MonoBehaviour {
 
 	public IEnumerator EatMyPart()
 	{
+		yield return new WaitForSeconds (0.5f);
+
 		Transform playerTrans = GameObject.Find ("Player").transform;
 		List<GameObject> branchPartList = new List<GameObject> ();
 
@@ -150,7 +152,7 @@ public class Core_World : MonoBehaviour {
 
 					if(m_listMoveIdx.Count != 0) // Select WorldIcon
 					{
-						m_iNeedHunger = m_listMoveIdx.Count * 30;
+						m_iNeedHunger = m_listMoveIdx.Count * 20;
 						GameObject Dest = GameObject.Find("Destination").gameObject;
 						Dest.GetComponent<SpriteRenderer>().enabled = true;
 						Dest.transform.position = grid.GetPosOfIdx(grid.GetGridIdx(vecMouseClickedPos));
@@ -217,11 +219,10 @@ public class Core_World : MonoBehaviour {
 			Vector3 destPos = grid.GetPosOfIdx(m_listMoveIdx[i]);
 			iTween.MoveTo(gameObject, iTween.Hash("x", destPos.x, "y", destPos.y, "time", 1f, "easetype", "easeInSine"));
 
-			if (GameMgr.getInstance.m_iHunger - 30 > 0)
-				GameObject.Find ("Hunger").GetComponent<TopBarUI> ().ChangeValue (GameMgr.getInstance.m_iHunger - 30);
+			if (GameMgr.getInstance.m_iHunger - 20 > 0)
+				GameObject.Find ("Hunger").GetComponent<TopBarUI> ().ChangeValue (GameMgr.getInstance.m_iHunger - 20);
 			else {
 				GameObject.Find ("Hunger").GetComponent<TopBarUI> ().ChangeValue (0);
-				yield return new WaitForSeconds (0.5f);
 				yield return StartCoroutine(EatMyPart ());
 			}
 

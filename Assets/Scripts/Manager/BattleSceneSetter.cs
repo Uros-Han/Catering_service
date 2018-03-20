@@ -6,6 +6,7 @@ public class BattleSceneSetter : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+//		GameObject.Find ("AleartMsg").BroadcastMessage ("ChgParent",SendMessageOptions.DontRequireReceiver);
 		GameObject.Find ("Player").GetComponent<Player> ().BattleScene ();
 		UnityEngine.SceneManagement.SceneManager.SetActiveScene (UnityEngine.SceneManagement.SceneManager.GetSceneByName("Battle"));
 		GridMgr.getInstance.ChgGridInfo ();
@@ -79,23 +80,29 @@ public class BattleSceneSetter : MonoBehaviour {
 
 		switch ((int)TimeMgr.getInstance.m_fHour) {
 		case 0:
-			m_sunLight.color = new Color (218 / 255f, 226 / 255f, 255 / 255f);
-			m_sunLight.intensity = 0.15f;
+//			m_sunLight.color = new Color (218 / 255f, 226 / 255f, 255 / 255f);
+//			m_sunLight.intensity = 0.15f;
+			m_sunLight.color = Color.white;
+			m_sunLight.intensity = 1.1f;
 			break;
 
 		case 6:
+//			m_sunLight.color = Color.white;
+//			m_sunLight.intensity = 0.75f;
 			m_sunLight.color = Color.white;
-			m_sunLight.intensity = 0.75f;
+			m_sunLight.intensity = 1.1f;
 			break;
 
 		case 12:
 			m_sunLight.color = Color.white;
-			m_sunLight.intensity = 1.2f;
+			m_sunLight.intensity = 1.1f;
 			break;
 
 		case 18:
-			m_sunLight.color = new Color (255 / 255f, 168 / 255f, 0 / 255f);
-			m_sunLight.intensity = 1f;
+//			m_sunLight.color = new Color (255 / 255f, 168 / 255f, 0 / 255f);
+//			m_sunLight.intensity = 1f;
+			m_sunLight.color = Color.white;
+			m_sunLight.intensity = 1.1f;
 			break;
 		}
 	}

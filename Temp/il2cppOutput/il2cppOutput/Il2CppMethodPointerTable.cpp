@@ -18402,6 +18402,8 @@ extern "C" void SceneManager_MoveGameObjectToScene_m3079301016 ();
 extern "C" void SceneManager_INTERNAL_CALL_MoveGameObjectToScene_m3718828925 ();
 extern "C" void SceneManager_Internal_SceneLoaded_m2694652025 ();
 extern "C" void SceneManager_Internal_SceneUnloaded_m3247148570 ();
+extern "C" void SceneManager_add_activeSceneChanged_m1118944293 ();
+extern "C" void SceneManager_remove_activeSceneChanged_m1596723841 ();
 extern "C" void SceneManager_Internal_ActiveSceneChanged_m3676176255 ();
 extern "C" void Screen_get_width_m345039817 ();
 extern "C" void Screen_get_height_m1623532518 ();
@@ -23803,8 +23805,10 @@ extern "C" void AimController_Start_m3902267370 ();
 extern "C" void AimController_Update_m2110625425 ();
 extern "C" void AleartMsg__ctor_m4055218494 ();
 extern "C" void AleartMsg_Start_m1093231066 ();
+extern "C" void AleartMsg_OnEnable_m2314355585 ();
 extern "C" void AleartMsg_Destroier_m4254007928 ();
 extern "C" void AleartMsg_MoveUp_m3938456246 ();
+extern "C" void AleartMsg_ChgParent_m2570176664 ();
 extern "C" void U3CDestroierU3Ec__Iterator0__ctor_m3797850889 ();
 extern "C" void U3CDestroierU3Ec__Iterator0_MoveNext_m1168402084 ();
 extern "C" void U3CDestroierU3Ec__Iterator0_System_Collections_Generic_IEnumeratorU3CobjectU3E_get_Current_m3704218441 ();
@@ -24982,6 +24986,7 @@ extern "C" void ControlTap__ctor_m818291822 ();
 extern "C" void ControlTap_OnPress_m1364094532 ();
 extern "C" void Core__ctor_m3371230195 ();
 extern "C" void Core_Start_m3299922049 ();
+extern "C" void Core_OnEnable_m3940568931 ();
 extern "C" void Core_OnDestroy_m388853120 ();
 extern "C" void Core_UserControl_m1026416134 ();
 extern "C" void Core_MoveEnemies_m3427159922 ();
@@ -25870,6 +25875,7 @@ extern "C" void MessageBox_Function_0_m4002880416 ();
 extern "C" void MessageBox_Function_1_m4002814880 ();
 extern "C" void MessageButtonManager__ctor_m1725414462 ();
 extern "C" void MessageButtonManager_HungerCheckerEnforcement_m3496313226 ();
+extern "C" void MessageButtonManager_HungerCheckerWait_m1227650105 ();
 extern "C" void MessageButtonManager_DestroyMessageBox_m2611634943 ();
 extern "C" void MessageButtonManager_GameOver_m50123908 ();
 extern "C" void MiniPanel__ctor_m1441142288 ();
@@ -28834,6 +28840,7 @@ extern "C" void WorldMapManager_SceneToBattle_m3139004638 ();
 extern "C" void WorldMapManager_Pollute_m1308608209 ();
 extern "C" void WorldMapManager_SettingBtn_m863945218 ();
 extern "C" void WorldMapManager_ExitBtn_m543910505 ();
+extern "C" void WorldMapManager_WaitCheck_m470172136 ();
 extern "C" void WorldMapManager_Wait_m478221069 ();
 extern "C" void WorldMapManager_EnemyCheck_m1454253811 ();
 extern "C" void U3CEnemyCheckU3Ec__Iterator0__ctor_m1922461473 ();
@@ -28845,7 +28852,7 @@ extern "C" void U3CEnemyCheckU3Ec__Iterator0_Reset_m267626550 ();
 extern "C" void WorldOverView__ctor_m2182167814 ();
 extern "C" void WorldOverView_Start_m4044747356 ();
 extern "C" void WorldOverView_SelectWorldIcon_m873079078 ();
-extern const Il2CppMethodPointer g_MethodPointers[28827] = 
+extern const Il2CppMethodPointer g_MethodPointers[28834] = 
 {
 	U3CPrivateImplementationDetailsU3E__ctor_m1418335040,
 	Locale__ctor_m734557855,
@@ -47231,6 +47238,8 @@ extern const Il2CppMethodPointer g_MethodPointers[28827] =
 	SceneManager_INTERNAL_CALL_MoveGameObjectToScene_m3718828925,
 	SceneManager_Internal_SceneLoaded_m2694652025,
 	SceneManager_Internal_SceneUnloaded_m3247148570,
+	SceneManager_add_activeSceneChanged_m1118944293,
+	SceneManager_remove_activeSceneChanged_m1596723841,
 	SceneManager_Internal_ActiveSceneChanged_m3676176255,
 	Screen_get_width_m345039817,
 	Screen_get_height_m1623532518,
@@ -52632,8 +52641,10 @@ extern const Il2CppMethodPointer g_MethodPointers[28827] =
 	AimController_Update_m2110625425,
 	AleartMsg__ctor_m4055218494,
 	AleartMsg_Start_m1093231066,
+	AleartMsg_OnEnable_m2314355585,
 	AleartMsg_Destroier_m4254007928,
 	AleartMsg_MoveUp_m3938456246,
+	AleartMsg_ChgParent_m2570176664,
 	U3CDestroierU3Ec__Iterator0__ctor_m3797850889,
 	U3CDestroierU3Ec__Iterator0_MoveNext_m1168402084,
 	U3CDestroierU3Ec__Iterator0_System_Collections_Generic_IEnumeratorU3CobjectU3E_get_Current_m3704218441,
@@ -53811,6 +53822,7 @@ extern const Il2CppMethodPointer g_MethodPointers[28827] =
 	ControlTap_OnPress_m1364094532,
 	Core__ctor_m3371230195,
 	Core_Start_m3299922049,
+	Core_OnEnable_m3940568931,
 	Core_OnDestroy_m388853120,
 	Core_UserControl_m1026416134,
 	Core_MoveEnemies_m3427159922,
@@ -54699,6 +54711,7 @@ extern const Il2CppMethodPointer g_MethodPointers[28827] =
 	MessageBox_Function_1_m4002814880,
 	MessageButtonManager__ctor_m1725414462,
 	MessageButtonManager_HungerCheckerEnforcement_m3496313226,
+	MessageButtonManager_HungerCheckerWait_m1227650105,
 	MessageButtonManager_DestroyMessageBox_m2611634943,
 	MessageButtonManager_GameOver_m50123908,
 	MiniPanel__ctor_m1441142288,
@@ -57663,6 +57676,7 @@ extern const Il2CppMethodPointer g_MethodPointers[28827] =
 	WorldMapManager_Pollute_m1308608209,
 	WorldMapManager_SettingBtn_m863945218,
 	WorldMapManager_ExitBtn_m543910505,
+	WorldMapManager_WaitCheck_m470172136,
 	WorldMapManager_Wait_m478221069,
 	WorldMapManager_EnemyCheck_m1454253811,
 	U3CEnemyCheckU3Ec__Iterator0__ctor_m1922461473,

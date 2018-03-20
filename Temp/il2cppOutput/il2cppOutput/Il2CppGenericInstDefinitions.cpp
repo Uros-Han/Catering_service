@@ -754,6 +754,7 @@ extern const Il2CppType List_1_t3319525431_0_0_0;
 extern const Il2CppType ExampleDragDropSurface_t2709993285_0_0_0;
 extern const Il2CppType EffectorExplode_t1899589370_0_0_0;
 extern const Il2CppType BoxCollider2D_t3581341831_0_0_0;
+extern const Il2CppType CircleCollider2D_t662546754_0_0_0;
 extern const Il2CppType MainManager_t729209856_0_0_0;
 extern const Il2CppType SpriteSheet_t799473704_0_0_0;
 extern const Il2CppType DebugLine_t2501625170_0_0_0;
@@ -822,7 +823,6 @@ extern const Il2CppType UIEventListener_t1665237878_0_0_0;
 extern const Il2CppType UIStorageSlot_t392832716_0_0_0;
 extern const Il2CppType UIOrthoCamera_t1944225589_0_0_0;
 extern const Il2CppType UIProgressBar_t1222110469_0_0_0;
-extern const Il2CppType CircleCollider2D_t662546754_0_0_0;
 extern const Il2CppType Dictionary_2_t504239792_0_0_0;
 extern const Il2CppType AnimationCurve_t3046754366_0_0_0;
 extern const Il2CppType Gradient_t3067099924_0_0_0;
@@ -3105,6 +3105,8 @@ static const RuntimeType* GenInst_EffectorExplode_t1899589370_0_0_0_Types[] = { 
 extern const Il2CppGenericInst GenInst_EffectorExplode_t1899589370_0_0_0 = { 1, GenInst_EffectorExplode_t1899589370_0_0_0_Types };
 static const RuntimeType* GenInst_BoxCollider2D_t3581341831_0_0_0_Types[] = { (&BoxCollider2D_t3581341831_0_0_0) };
 extern const Il2CppGenericInst GenInst_BoxCollider2D_t3581341831_0_0_0 = { 1, GenInst_BoxCollider2D_t3581341831_0_0_0_Types };
+static const RuntimeType* GenInst_CircleCollider2D_t662546754_0_0_0_Types[] = { (&CircleCollider2D_t662546754_0_0_0) };
+extern const Il2CppGenericInst GenInst_CircleCollider2D_t662546754_0_0_0 = { 1, GenInst_CircleCollider2D_t662546754_0_0_0_Types };
 static const RuntimeType* GenInst_MainManager_t729209856_0_0_0_Types[] = { (&MainManager_t729209856_0_0_0) };
 extern const Il2CppGenericInst GenInst_MainManager_t729209856_0_0_0 = { 1, GenInst_MainManager_t729209856_0_0_0_Types };
 static const RuntimeType* GenInst_SpriteSheet_t799473704_0_0_0_Types[] = { (&SpriteSheet_t799473704_0_0_0) };
@@ -3241,8 +3243,6 @@ static const RuntimeType* GenInst_UIOrthoCamera_t1944225589_0_0_0_Types[] = { (&
 extern const Il2CppGenericInst GenInst_UIOrthoCamera_t1944225589_0_0_0 = { 1, GenInst_UIOrthoCamera_t1944225589_0_0_0_Types };
 static const RuntimeType* GenInst_UIProgressBar_t1222110469_0_0_0_Types[] = { (&UIProgressBar_t1222110469_0_0_0) };
 extern const Il2CppGenericInst GenInst_UIProgressBar_t1222110469_0_0_0 = { 1, GenInst_UIProgressBar_t1222110469_0_0_0_Types };
-static const RuntimeType* GenInst_CircleCollider2D_t662546754_0_0_0_Types[] = { (&CircleCollider2D_t662546754_0_0_0) };
-extern const Il2CppGenericInst GenInst_CircleCollider2D_t662546754_0_0_0 = { 1, GenInst_CircleCollider2D_t662546754_0_0_0_Types };
 static const RuntimeType* GenInst_Dictionary_2_t504239792_0_0_0_Types[] = { (&Dictionary_2_t504239792_0_0_0) };
 extern const Il2CppGenericInst GenInst_Dictionary_2_t504239792_0_0_0 = { 1, GenInst_Dictionary_2_t504239792_0_0_0_Types };
 static const RuntimeType* GenInst_AnimationCurve_t3046754366_0_0_0_Types[] = { (&AnimationCurve_t3046754366_0_0_0) };
@@ -5165,6 +5165,7 @@ extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[1513] =
 	&GenInst_ExampleDragDropSurface_t2709993285_0_0_0,
 	&GenInst_EffectorExplode_t1899589370_0_0_0,
 	&GenInst_BoxCollider2D_t3581341831_0_0_0,
+	&GenInst_CircleCollider2D_t662546754_0_0_0,
 	&GenInst_MainManager_t729209856_0_0_0,
 	&GenInst_SpriteSheet_t799473704_0_0_0,
 	&GenInst_DebugLine_t2501625170_0_0_0,
@@ -5233,7 +5234,6 @@ extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[1513] =
 	&GenInst_UIStorageSlot_t392832716_0_0_0,
 	&GenInst_UIOrthoCamera_t1944225589_0_0_0,
 	&GenInst_UIProgressBar_t1222110469_0_0_0,
-	&GenInst_CircleCollider2D_t662546754_0_0_0,
 	&GenInst_Dictionary_2_t504239792_0_0_0,
 	&GenInst_AnimationCurve_t3046754366_0_0_0,
 	&GenInst_Gradient_t3067099924_0_0_0,

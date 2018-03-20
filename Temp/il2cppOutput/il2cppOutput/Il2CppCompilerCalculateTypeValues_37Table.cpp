@@ -6815,8 +6815,17 @@ public:
 struct  AleartMsg_t1120126863  : public MonoBehaviour_t3962482529
 {
 public:
+	// System.Single AleartMsg::m_fTimer
+	float ___m_fTimer_2;
 
 public:
+	inline static int32_t get_offset_of_m_fTimer_2() { return static_cast<int32_t>(offsetof(AleartMsg_t1120126863, ___m_fTimer_2)); }
+	inline float get_m_fTimer_2() const { return ___m_fTimer_2; }
+	inline float* get_address_of_m_fTimer_2() { return &___m_fTimer_2; }
+	inline void set_m_fTimer_2(float value)
+	{
+		___m_fTimer_2 = value;
+	}
 };
 
 #ifdef __clang__
@@ -9342,6 +9351,10 @@ extern const int32_t g_FieldOffsetTable3731[5] =
 	U3CWantedPopU3Ec__Iterator0_t2179003050::get_offset_of_U24PC_4(),
 };
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize3732 = { sizeof (AleartMsg_t1120126863), -1, 0, 0 };
+extern const int32_t g_FieldOffsetTable3732[1] = 
+{
+	AleartMsg_t1120126863::get_offset_of_m_fTimer_2(),
+};
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize3733 = { sizeof (U3CDestroierU3Ec__Iterator0_t3007821720), -1, 0, 0 };
 extern const int32_t g_FieldOffsetTable3733[4] = 
 {

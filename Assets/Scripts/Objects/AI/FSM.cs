@@ -63,14 +63,17 @@ public class FSM : MonoBehaviour {
 		SetState (m_AiState);
 	}
 
+	float fDefenseFactor = 0.06f;
 	protected IEnumerator Attack(GameObject target, float fDamage, bool bEnemy)
 	{
 		if(target == null)
 			yield break;
 
 		if (bEnemy) { /// Attack Enemy
-			
-			target.GetComponent<Unit>().m_fCurHealth -= fDamage;
+			Unit targetUnit = target.GetComponent<Unit>();
+			float fDealedDmg = fDamage - (fDamage * ((targetUnit.m_fDefense * fDefenseFactor) / (1 + fDefenseFactor * targetUnit.m_fDefense)));
+				
+			targetUnit.m_fCurHealth -= fDealedDmg;
 			ObjectFactory.getInstance.Create_DamageUI (target, fDamage, true);
 			SoundMgr.getInstance.PlaySfx ("impact_blade");
 			SoundMgr.getInstance.PlaySfx ("human_scream");
@@ -96,7 +99,8 @@ public class FSM : MonoBehaviour {
 
 			SoundMgr.getInstance.PlaySfx ("impact_blade");
 
-			float fDealedDmg = fDamage - targetPart.m_dicStat["Defense"];
+			float fDefense = targetPart.m_dicStat ["Defense"];
+			float fDealedDmg = fDamage - (fDamage *((fDefense * fDefenseFactor) / ( 1 + fDefenseFactor * fDefense)));
 
 			if (Random.Range (0, 100) < (int)fDodgePercent) { // Dodge!!
 				ObjectFactory.getInstance.Create_DamageUI (target, 0, true, true);
