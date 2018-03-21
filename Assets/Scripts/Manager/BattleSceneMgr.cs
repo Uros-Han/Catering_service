@@ -8,7 +8,6 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 	public int m_iMeat = 0;
 	public MOUSE_STATE m_mouseState = MOUSE_STATE.NORMAL;
 	public TURN_STATE m_turnState = TURN_STATE.END;
-	public bool m_bBigSize = false;
 
 	public Transform m_transformGridParent;
 
@@ -86,19 +85,8 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 
 		GameObject.Find ("Field").BroadcastMessage ("HarvestPartInField", SendMessageOptions.DontRequireReceiver);
 
-		if (GridMgr.getInstance.GetWidthOrHeightOfMonster () > 5) {
-//			m_bBigSize = true;
-			GameObject.Find ("Morgue").transform.localPosition = new Vector3 (1.75f, 0.155f, 10f);
-		} else {
-			m_bBigSize = false;
-			GameObject.Find ("Morgue").transform.localPosition = new Vector3 (1.5f, 0, 10f);
-		}
+		GameObject.Find ("Morgue").transform.localPosition = new Vector3 (1.75f, 0.155f, 10f);
 
-		if (m_bBigSize)
-			iTween.ValueTo (gameObject, iTween.Hash ("from", Camera.main.orthographicSize, "to", 0.72f, "Time", 1f, "onupdate", "TweenCamOrtho", "easetype", "easeInOutBack"));
-		else
-			iTween.ValueTo (gameObject, iTween.Hash ("from", Camera.main.orthographicSize, "to", 0.56f, "Time", 1f, "onupdate", "TweenCamOrtho", "easetype", "easeInOutBack"));
-		
 		ToggleMorgue (true);
 		GameObject.Find ("MorgueToggle").GetComponent<UIPanel> ().alpha = 1;
 		BattleSceneMgr.getInstance.m_turnState = TURN_STATE.NIGHT;
@@ -196,10 +184,10 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 			GameObject.Find ("Core").transform.position = new Vector3(0,0);
 			GameObject.Find ("Core").GetComponent<Part>().m_iGridIdx = GridMgr.getInstance.GetGridIdx(new Vector2(0,0));
 
-			GameObject.Find ("Morgue").GetComponent<AudioSource> ().Play ();
+			morgueTrans.GetComponent<AudioSource> ().Play ();
 			GameObject.Find ("AMB").GetComponent<AudioSource>().volume = 0f;
 
-			GameObject.Find ("Morgue").BroadcastMessage ("Assemble", null, SendMessageOptions.DontRequireReceiver);
+			morgueTrans.BroadcastMessage ("Assemble", null, SendMessageOptions.DontRequireReceiver);
 			GameObject.Find ("Player").BroadcastMessage ("Assemble", null, SendMessageOptions.DontRequireReceiver);
 
 			StartCoroutine(GameObject.Find("GEO").GetComponent<Battle_Geo>().ToggleColor(true));
@@ -212,10 +200,8 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 			Camera.main.GetComponent<ProCamera2D> ().CameraTargets [0].TargetTransform.position = Camera.main.ViewportToWorldPoint (new Vector3(0.75f, 0.5f));
 //			StartCoroutine(CamOffset_XChg(true));
 
-			if(!m_bBigSize)
-				iTween.MoveTo (morgueTrans.gameObject, iTween.Hash ("x",  0.52f, "y", 0f, "time", 0.25f, "easetype", "easeInSine", "islocal", true));
-			else
-				iTween.MoveTo (morgueTrans.gameObject, iTween.Hash ("x",  0.765f, "y", 0.155f, "time", 0.25f, "easetype", "easeInSine", "islocal", true));
+			iTween.MoveTo (morgueTrans.parent.gameObject, iTween.Hash ("x",  -170f, "y", 0f, "time", 0.25f, "easetype", "easeInSine", "islocal", true));
+
 		} else {
 //			Transform WorldTrans = GameObject.Find ("World").transform;
 //			for (int i = 0; i < WorldTrans.childCount; ++i) {

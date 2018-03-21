@@ -248,6 +248,7 @@ public class Part : MonoBehaviour {
 		yield return null;
 	}
 
+//	Vector3 vecScaleFactor;
 	bool bStopAssemble = false;
 	GameObject m_StickedPart = null;
 	public IEnumerator Assemble()
@@ -263,6 +264,7 @@ public class Part : MonoBehaviour {
 		bool bWasPoop = false;
 		BoxCollider2D PoopColldier2D = GameObject.Find ("Poop").GetComponent<BoxCollider2D> ();
 		Vector3 OriginPos = transform.position;
+		Vector3 OriginScale = transform.localScale;
 		Quaternion OriginRotate = transform.localRotation;
 		
 		Core core = GameObject.Find ("Core").GetComponent<Core> ();
@@ -280,6 +282,10 @@ public class Part : MonoBehaviour {
 		DIRECTION m_BeforeheadingDirection = DIRECTION.EVERYWHERE;
 		BattleSceneMgr battleSceneMgr = BattleSceneMgr.getInstance;
 
+//		Vector3 uiScale = GameObject.Find ("UI Root").transform.localScale;
+//		vecScaleFactor = new Vector3 (1 / uiScale.x, 1 / uiScale.y, 1f);
+
+
 		do{
 			if(!battleSceneMgr.m_mouseState.Equals(MOUSE_STATE.NORMAL))
 			{
@@ -287,10 +293,18 @@ public class Part : MonoBehaviour {
 				continue;
 			}
 
-			mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			if(transform.parent.name.Equals("Player"))
+				mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			else
+				mousePosition = UICamera.mainCamera.ScreenToWorldPoint(Input.mousePosition);
+
+//			float vecOrthoScaled = UICamera.mainCamera.orthographicSize/Camera.main.orthographicSize;
+			
 			if(Input.GetMouseButtonDown(0) && collider2D.OverlapPoint(mousePosition))
 			{
+				mousePosition = UICamera.mainCamera.ScreenToWorldPoint(Input.mousePosition); // dont erase this!! init as uiCamera
 				OriginPos = transform.position;
+				OriginScale = transform.localScale;
 				OriginRotate = transform.localRotation;
 
 				Camera.main.GetComponent<ProCamera2DPanAndZoom>().enabled = false;
@@ -313,20 +327,27 @@ public class Part : MonoBehaviour {
 					if(transform.parent.name.Equals("Player"))
 					{
 						PartBorder.transform.parent = GameObject.Find("Objects").transform;
+						PartBorder.layer = 0;
 					}else{
-						PartBorder.transform.parent = GameObject.Find("Main Camera").transform;
+						PartBorder.transform.parent = GameObject.Find("MorguePanel").transform;
+						PartBorder.layer = 5;
 					}
+
 					PartBorder.GetComponent<SpriteRenderer>().enabled = true;
 					PartBorder.transform.position = transform.position;
 				}
-				transform.localScale = new Vector3(1f, 1f, 1f);
+//				transform.localScale = new Vector3(vecScaleFactor.x, vecScaleFactor.y, 1f);
 
 				if(transform.parent.name.Equals("Player") && !gameObject.name.Equals ("Core"))
 				{
-					transform.parent = GameObject.Find("Temp").transform;
+//					transform.localScale = new Vector3(vecScaleFactor.x, vecScaleFactor.y, 1f);
 					iBeforeSeatIdx = grid.GetGridIdx(transform.position);
 					bParentWasCore = true;
 				}
+				transform.localScale = Vector3.one;
+//				transform.localScale = new Vector3(vecOrthoScaled, vecOrthoScaled, 1f);
+				transform.parent = GameObject.Find("Temp").transform;
+				gameObject.layer = 5;
 
 				if(bParentWasCore)
 				{
@@ -344,9 +365,6 @@ public class Part : MonoBehaviour {
 //					GetComponent<ParticleSystemRenderer>().sortingLayerName = "FrontObject_Particle";
 				}
 
-//				GetComponent<SpriteParticleEmitter.DynamicEmitter>().enabled = false;
-				GetComponent<SpriteRenderer>().color = Color.white;
-
 				if (!gameObject.name.Equals ("Core"))
 					core.CalculateStickableSeat (true);
 			}
@@ -354,16 +372,21 @@ public class Part : MonoBehaviour {
 			if(bFollowCursor && Input.GetMouseButton(0)) //클릭시 따라다니게
 			{
 				transform.position = mousePosition;
-				curGridIdx = grid.GetGridIdx(transform.position);
+				curGridIdx = grid.GetGridIdx(UIScreenToWorldPoint(transform.position));
 				m_objCurParentPart = null;
 				GameObject.Find("Player").BroadcastMessage("AmI_InCoreSide");
 				GameObject.Find("Player").BroadcastMessage("CheckCurParentPart", SendMessageOptions.DontRequireReceiver);
+
+				Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+				gameObject.layer = 5;
 
 				for(int i = 0 ; i < core.m_StickAvailableSeat.Count; ++i)
 				{
 					if(core.m_StickAvailableSeat[i].Equals(curGridIdx)) //드래그 중 붙을 수 있는 지역안에 들어옴
 					{
-						transform.position = grid.GetPosOfIdx(core.m_StickAvailableSeat[i]);
+						transform.position = grid.GetPosOfIdx(curGridIdx);
+
+						gameObject.layer = 0;
 
 						//붙는방향으로 파츠 회전하도록
 						Transform PlayerTrans = GameObject.Find("Player").transform;
@@ -380,13 +403,12 @@ public class Part : MonoBehaviour {
 							if(ClosestPart == null)
 								ClosestPart = target;
 
-							if(!target.GetComponent<Part>().m_bEdgePart && Vector3.Distance(mousePosition , ClosestPart.transform.position) > Vector3.Distance(mousePosition, target.transform.position))
+							if(!target.GetComponent<Part>().m_bEdgePart && Vector3.Distance(worldPoint , ClosestPart.transform.position) > Vector3.Distance(worldPoint, target.transform.position))
 							{
 								ClosestPart = target;
 							}
 						}
 
-						Vector3 idxPos = transform.position;
 						int iIdx = grid.GetGridIdx(transform.position);
 						int iTargetIdx = grid.GetGridIdx(ClosestPart.transform.position);
 
@@ -395,26 +417,27 @@ public class Part : MonoBehaviour {
 							if(m_bEdgePart && gameObject.name != "Head" || m_bReverseBody){
 								if(m_partType.Equals(PART_TYPE.ARM))
 								{
-									iTween.ScaleTo(gameObject, iTween.Hash ("x", 1, "time", 0.2f));
+									iTween.ScaleTo(gameObject, iTween.Hash ("x", 1, "isLocal", true, "time", 0.2f));
 								}
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 270f + m_fHandRotater, "time", 0.2f));
 							}else{
 								if(m_bNeedToStickHead)
-									transform.position = new Vector3(transform.position.x + 0.02f, transform.position.y);
+									transform.localPosition = new Vector3(transform.localPosition.x + 0.05f, transform.localPosition.y);
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 90f, "time", 0.2f));
 							}
 						}else if(iIdx - 1 == iTargetIdx){
 							m_headingDirection = DIRECTION.RIGHT;
+
 							if(m_bEdgePart && gameObject.name != "Head" || m_bReverseBody){
 								if(m_partType.Equals(PART_TYPE.ARM))
 								{
-									iTween.ScaleTo(gameObject, iTween.Hash ("x", -1, "time", 0.2f));
+									iTween.ScaleTo(gameObject, iTween.Hash ("x", -1, "isLocal", true, "time", 0.2f));
 									iTween.RotateTo(gameObject, iTween.Hash ("z", -90f + m_fHandRotater, "time", 0.2f));
 								}else
 									iTween.RotateTo(gameObject, iTween.Hash ("z", 90f + m_fHandRotater, "time", 0.2f));
 							}else{
 								if(m_bNeedToStickHead)
-									transform.position = new Vector3(transform.position.x - 0.02f, transform.position.y);
+									transform.localPosition = new Vector3(transform.localPosition.x - 0.05f, transform.localPosition.y);
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 270f, "time", 0.2f));
 							}
 						}else if(iIdx - grid.m_iXcount == iTargetIdx){
@@ -422,12 +445,12 @@ public class Part : MonoBehaviour {
 							if(m_bEdgePart && gameObject.name != "Head" || m_bReverseBody){
 								if(m_partType.Equals(PART_TYPE.ARM))
 								{
-									iTween.ScaleTo(gameObject, iTween.Hash ("x", 1, "time", 0.2f));
+									iTween.ScaleTo(gameObject, iTween.Hash ("x", 1, "isLocal", true, "time", 0.2f));
 								}
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 0f + m_fHandRotater, "time", 0.2f));
 							}else{
 								if(m_bNeedToStickHead)
-									transform.position = new Vector3(transform.position.x, transform.position.y + 0.02f);
+									transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + 0.05f);
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 180f, "time", 0.2f));
 							}
 						}else if(iIdx + grid.m_iXcount == iTargetIdx){
@@ -435,12 +458,12 @@ public class Part : MonoBehaviour {
 							if(m_bEdgePart && gameObject.name != "Head" || m_bReverseBody){
 								if(m_partType.Equals(PART_TYPE.ARM))
 								{
-									iTween.ScaleTo(gameObject, iTween.Hash ("x", 1, "time", 0.2f));
+									iTween.ScaleTo(gameObject, iTween.Hash ("x", 1, "isLocal", true, "time", 0.2f));
 								}
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 180f + m_fHandRotater, "time", 0.2f));
 							}else{
 								if(m_bNeedToStickHead)
-									transform.position = new Vector3(transform.position.x, transform.position.y - 0.02f);
+									transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - 0.05f);
 								iTween.RotateTo(gameObject, iTween.Hash ("z", 0f, "time", 0.2f));
 							}
 						}
@@ -516,6 +539,13 @@ public class Part : MonoBehaviour {
 
 						bToOrigin = false;
 						transform.parent = GameObject.Find("Player").transform;
+
+//						if(transform.localScale.x < 0)
+//							transform.localScale = new Vector3(-1, 1, 1);
+//						else
+//							transform.localScale = Vector3.one;
+					
+						gameObject.layer = 0;
 						m_iGridIdx = core.m_StickAvailableSeat[i];
 						StartCoroutine(Debug_AStarLine());
 
@@ -546,6 +576,7 @@ public class Part : MonoBehaviour {
 //						GetComponent<ParticleSystemRenderer>().sortingLayerName = "Object_Particle";
 
 						OriginPos = transform.position;
+						OriginScale = transform.localScale;
 						OriginRotate = transform.localRotation;
 
 						GetComponent<SpriteRenderer>().color = Color.white;
@@ -592,9 +623,10 @@ public class Part : MonoBehaviour {
 						GetComponent<SpriteRenderer>().sortingLayerName = "DeadBodies";
 //						GetComponent<ParticleSystemRenderer>().sortingLayerName = "DeadBodies_Particle";
 
-
+						transform.localScale = new Vector3(0.8f, 0.8f, 1f);
 
 						OriginPos = transform.position;
+						OriginScale = transform.localScale;
 						OriginRotate = transform.localRotation;
 						transform.parent = GameObject.Find("Morgue").transform;
 
@@ -652,9 +684,11 @@ public class Part : MonoBehaviour {
 				
 				if(bToOrigin)
 				{
-					iTween.MoveTo (gameObject, iTween.Hash ("x", OriginPos.x, "y", OriginPos.y, "islocal", false, "time", 0.05f, "easetype", "easeInSine"));
-					if(!bParentWasCore) iTween.RotateTo(gameObject, iTween.Hash ("z", 0f, "time", 0.1f));
-					yield return new WaitForSeconds(0.12f);
+//					iTween.MoveTo (gameObject, iTween.Hash ("x", OriginUIPoint.x, "y", OriginUIPoint.y, "islocal", false, "time", 0.05f, "easetype", "easeInSine"));
+//					if(!bParentWasCore) iTween.RotateTo(gameObject, iTween.Hash ("z", 0f, "time", 0.1f));
+//					yield return new WaitForSeconds(0.12f);
+					transform.position = new Vector3(OriginPos.x, OriginPos.y);
+					if(!bParentWasCore) transform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
 
 					m_headingDirection = m_BeforeheadingDirection;
 					GetComponent<SpriteSheet>().CheckAround(false);
@@ -662,6 +696,8 @@ public class Part : MonoBehaviour {
 					if(bParentWasCore)
 					{
 						transform.parent = GameObject.Find("Player").transform;
+						gameObject.layer = 0;
+//						transform.localScale = Vector3.one;
 						transform.parent.BroadcastMessage("AmI_InCoreSide");
 						GetComponent<SpriteRenderer>().sortingLayerName = "Objects";
 //						GetComponent<ParticleSystemRenderer>().sortingLayerName = "Objects_Particle";
@@ -669,14 +705,24 @@ public class Part : MonoBehaviour {
 						if(m_lstStrBuff.Count > 0)
 							StartCoroutine(Buff(true));
 
+						transform.localScale = OriginScale;
 						transform.localRotation = OriginRotate;
+
+						if(m_bAttackAvailable)
+						{
+							GetComponent<SpriteRenderer>().enabled = false;
+							transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+						}
 
 						SoundMgr.getInstance.PlaySfx("core_place");
 						m_objCurParentPart = m_objLastParentPart;
 						GameObject.Find("Player").BroadcastMessage("CheckCurParentPart", SendMessageOptions.DontRequireReceiver);
 
-					}else
+					}else{
 						GetComponent<SpriteRenderer>().sortingLayerName = "DeadBodies";
+						transform.localScale = new Vector3(0.8f, 0.8f, 1f);
+						SoundMgr.getInstance.PlaySfx("morgue_place");
+					}
 //					GetComponent<ParticleSystemRenderer>().sortingLayerName = "DeadBodies_Particle";
 
 			
@@ -689,8 +735,10 @@ public class Part : MonoBehaviour {
 				if(transform.parent.name.Equals("Player"))
 				{
 					PartBorder.transform.parent = GameObject.Find("Objects").transform;
+					PartBorder.layer = 0;
 				}else{
-					PartBorder.transform.parent = GameObject.Find("Main Camera").transform;
+					PartBorder.transform.parent = GameObject.Find("MorguePanel").transform;
+					PartBorder.layer = 5;
 				}
 				PartBorder.GetComponent<SpriteRenderer>().enabled = true;
 				PartBorder.transform.position = OriginPos;
@@ -1182,6 +1230,27 @@ public class Part : MonoBehaviour {
 			}
 		}
 	}
+
+	bool ClickCheck()
+	{
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit2D hit = Physics2D.GetRayIntersection(ray,Mathf.Infinity);
+
+		if(hit.collider != null && hit.collider.transform == transform)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	Vector3 UIScreenToWorldPoint(Vector3 vecUIPoint)
+	{
+		Vector3 screenPoint = UICamera.mainCamera.WorldToScreenPoint (vecUIPoint);
+
+		return Camera.main.ScreenToWorldPoint (screenPoint);
+	}
+
 
 
 //	void DrawLine(Vector3 start, Vector3 end, Color color, float duration = 0.2f)

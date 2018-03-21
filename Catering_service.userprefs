@@ -1,22 +1,19 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Manager/WorldGenerator.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Objects/World/TopBarUI.cs">
     <Files>
-      <File FileName="Assets/Scripts/Manager/WorldGenerator.cs" Line="313" Column="12" />
-      <File FileName="Assets/Scripts/Objects/Battle/Unit.cs" Line="28" Column="47" />
-      <File FileName="Assets/Scripts/Objects/AI/FSM_Enemy.cs" Line="250" Column="23" />
-      <File FileName="Assets/Scripts/Objects/AI/FSM.cs" Line="82" Column="76" />
-      <File FileName="Assets/Scripts/Objects/Battle/Core.cs" Line="154" Column="33" />
-      <File FileName="Assets/Scripts/Objects/World/TopBarUI.cs" Line="46" Column="41" />
-      <File FileName="Assets/Scripts/Objects/World/WorldIcon.cs" Line="18" Column="2" />
-      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="211" Column="31" />
+      <File FileName="Assets/Scripts/Manager/WorldGenerator.cs" Line="308" Column="66" />
+      <File FileName="Assets/Scripts/Manager/AStar.cs" Line="786" Column="18" />
+      <File FileName="Assets/Scripts/Objects/Battle/Core.cs" Line="42" Column="75" />
+      <File FileName="Assets/Scripts/Objects/AI/FSM.cs" Line="87" Column="37" />
+      <File FileName="Assets/Scripts/Manager/BattleSceneMgr.cs" Line="186" Column="49" />
+      <File FileName="Assets/Scripts/Objects/Part.cs" Line="241" Column="29" />
+      <File FileName="Assets/Scripts/Manager/PartyManager.cs" Line="53" Column="2" />
+      <File FileName="Assets/Scripts/Objects/World/TopBarUI.cs" Line="19" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Assets/Scripts/Objects/AI/FSM.cs" line="105" column="18" />
-      <Breakpoint file="/Users/Uros/Projects/Catering_Service/Catering_Service/Catering_service/Assets/Scripts/Objects/AI/FSM.cs" line="76" column="28" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

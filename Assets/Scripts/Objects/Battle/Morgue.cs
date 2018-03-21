@@ -26,7 +26,7 @@ public class Morgue : MonoBehaviour {
 			if(iEmptyIdx != -1) // have space
 			{
 //				Debug.Log (movePart.name);
-				movePart.layer = 0;
+				movePart.layer = 5;
 				movePart.transform.position = GameObject.Find ("Core").transform.position;
 				iTween.MoveTo (movePart, iTween.Hash("x", GetIdxPos(iEmptyIdx).x, "y", GetIdxPos(iEmptyIdx).y, "easetype", "easeInCubic", "time", 0.5f));
 
@@ -39,7 +39,7 @@ public class Morgue : MonoBehaviour {
 			}
 
 		} else {
-			int iIdx = GetIdxFromPos(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+			int iIdx = GetIdxFromPos(UICamera.mainCamera.ScreenToWorldPoint(Input.mousePosition));
 
 			movePart.GetComponent<SpriteRenderer>().sortingLayerName = "DeadBodies";
 			m_bBodyArr[iIdx] = true;
@@ -56,7 +56,7 @@ public class Morgue : MonoBehaviour {
 		if (m_SelectedPart == null)
 			return;
 
-		morguePanel.Find ("PartName").GetComponent<UILabel> ().text = part.m_strNameKey;  //TODO : Localize
+		morguePanel.GetChild(0).Find ("PartName").GetComponent<UILabel> ().text = part.m_strNameKey;  //TODO : Localize
 
 		string strType = "";
 		switch (part.m_partType) {
@@ -76,9 +76,9 @@ public class Morgue : MonoBehaviour {
 			strType = "PartType_leg";
 			break;
 		}
-		morguePanel.Find ("PartType").GetComponent<UILabel> ().text = Localization.Get (strType);
+		morguePanel.GetChild(0).Find ("PartType").GetComponent<UILabel> ().text = Localization.Get (strType);
 
-		morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text = "[3D1E43FF]";
+		morguePanel.GetChild(0).Find ("PartDesc").GetComponent<UILabel> ().text = "[3D1E43FF]";
 		foreach (KeyValuePair<string, float> tmp in part.m_dicStat) {
 			float fBuffedStat = 0f;
 			for (int i = 0; i < part.m_lstPartBuffed.Count; ++i) {
@@ -87,11 +87,11 @@ public class Morgue : MonoBehaviour {
 
 			if ((tmp.Value != 0 || fBuffedStat != 0)) {
 				if (fBuffedStat > 0)
-					morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += string.Format ("{0} : {1}[50B728FF](+{2})[-]\n", Localization.Get (tmp.Key), tmp.Value, fBuffedStat);
+					morguePanel.GetChild(0).Find ("PartDesc").GetComponent<UILabel> ().text += string.Format ("{0} : {1}[50B728FF](+{2})[-]\n", Localization.Get (tmp.Key), tmp.Value, fBuffedStat);
 				else if (fBuffedStat < 0)
-					morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += string.Format ("{0} : {1}[B72848FF](-{2})[-]\n", Localization.Get (tmp.Key), tmp.Value, fBuffedStat);
+					morguePanel.GetChild(0).Find ("PartDesc").GetComponent<UILabel> ().text += string.Format ("{0} : {1}[B72848FF](-{2})[-]\n", Localization.Get (tmp.Key), tmp.Value, fBuffedStat);
 				else
-					morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += string.Format ("{0} : {1}", Localization.Get (tmp.Key), tmp.Value + "\n");
+					morguePanel.GetChild(0).Find ("PartDesc").GetComponent<UILabel> ().text += string.Format ("{0} : {1}", Localization.Get (tmp.Key), tmp.Value + "\n");
 			}
 		}
 		for (int i = 0; i < part.m_lstStrBuff.Count; ++i) {
@@ -109,9 +109,9 @@ public class Morgue : MonoBehaviour {
 			}
 
 			if (tmpBuff.Contains ("+"))
-				morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += "[00DA2EFF]" + tmpBuff.Substring (2) + "[-]";
+				morguePanel.GetChild(0).Find ("PartDesc").GetComponent<UILabel> ().text += "[00DA2EFF]" + tmpBuff.Substring (2) + "[-]";
 			else if (tmpBuff.Contains ("-"))
-				morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text += "[EC0E0E15]" + tmpBuff.Substring (2) + "[-]";
+				morguePanel.GetChild(0).Find ("PartDesc").GetComponent<UILabel> ().text += "[EC0E0E15]" + tmpBuff.Substring (2) + "[-]";
 		}
 	}
 
@@ -120,8 +120,8 @@ public class Morgue : MonoBehaviour {
 		m_SelectedPart = null;
 		Transform morguePanel = GameObject.Find ("MorguePanel").transform;
 		
-		morguePanel.Find ("PartName").GetComponent<UILabel> ().text = "";
-		morguePanel.Find ("PartDesc").GetComponent<UILabel> ().text = "";
+		morguePanel.GetChild(0).Find ("PartName").GetComponent<UILabel> ().text = "";
+		morguePanel.GetChild(0).Find ("PartDesc").GetComponent<UILabel> ().text = "";
 	}
 
 	IEnumerator ChangeParentToMorgue(GameObject movePart)

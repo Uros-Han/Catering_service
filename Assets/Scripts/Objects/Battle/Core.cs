@@ -163,7 +163,7 @@ public class Core : Part {
 		//Digest done!
 
 		target.GetComponent<Unit> ().m_fHealth = 0f;
-		iTween.ScaleTo(gameObject, iTween.Hash("x", 1f, "y", 1f, "time" , 1f, "easetype", "easeInElastic"));
+//		iTween.ScaleTo(gameObject, iTween.Hash("x", 1f, "y", 1f, "time" , 1f, "easetype", "easeInElastic"));
 
 		Transform morgueTrans = GameObject.Find ("Morgue").transform;
 		Transform FieldTrans = GameObject.Find ("Field").transform;
