@@ -7,7 +7,7 @@ SceneListEnd?
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SkipMasking
 333074b326eb3063376f9a7872d00016 Assembly-CSharp.dll:FoW.FogOfWarChunkManager
 eee89b3429db0942bfca88f85de80682 Assembly-CSharp.dll:SpriteParticleEmitter.StaticSpriteEmitter
-a8d86adacced5e3c83296b3dd69ecfce Assembly-CSharp.dll:.BattleSceneMgr
+83fa9846149a7dd5c0c30e0d4774ef06 Assembly-CSharp.dll:.BattleSceneMgr
 8c8e424198240cd5381e7765a781213f Assembly-CSharp.dll:.UIButtonMessage
 35f639ed0d563f90db94ac51f8db37da Assembly-CSharp.dll:.SpriteMaskExample07DestroyBlood
 f62d1e12c4ea2e5d19ca5a2c81b0bf32 Assembly-CSharp.dll:UnityStandardAssets.ImageEffects.TiltShift

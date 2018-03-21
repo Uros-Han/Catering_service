@@ -34,7 +34,8 @@ public class Morgue : MonoBehaviour {
 //				movePart.transform.position = GetIdxPos(iEmptyIdx);
 				movePart.transform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
 				m_bBodyArr[iEmptyIdx] = true;
-				movePart.GetComponent<SpriteRenderer>().color = Color.white;
+				//movePart.GetComponent<SpriteRenderer>().color = Color.white;
+                movePart.GetComponent<SpriteRenderer>().sortingOrder = 0;
 //				moveBody.GetComponent<SpriteSheet>().SetSprite(0);
 			}
 

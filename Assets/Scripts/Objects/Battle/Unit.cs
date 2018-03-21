@@ -30,6 +30,7 @@ public class Unit : MonoBehaviour {
 		m_fCurHealth = m_fHealth;
 
 		StartCoroutine (FlipCheck ());
+        StartCoroutine(layerOrderHandler());
 	}
 
 	public void Death()
@@ -141,6 +142,39 @@ public class Unit : MonoBehaviour {
 			yield return null;
 		}
 	}
+
+    IEnumerator layerOrderHandler()
+    {
+        int iSortingOrder = 0;
+        List<SpriteRenderer> listSpriteRenderer = new List<SpriteRenderer>();
+
+        for (int i = 0; i < transform.childCount; ++i)
+        {
+            listSpriteRenderer.Add(transform.GetChild(i).GetComponent<SpriteRenderer>());
+        }
+
+        do
+        {
+            iSortingOrder = (int)(-transform.localPosition.y * 1000f);
+
+            for (int i = 0; i < listSpriteRenderer.Count; ++i)
+            {
+                if(listSpriteRenderer[i] == null)
+                {
+                    listSpriteRenderer.RemoveAt(i);
+                    continue;
+                }
+
+                if(listSpriteRenderer[i].gameObject.name.Equals("Head") || listSpriteRenderer[i].gameObject.name.Contains("Hand"))
+                    listSpriteRenderer[i].sortingOrder = iSortingOrder + 1;
+                else
+                    listSpriteRenderer[i].sortingOrder = iSortingOrder;
+            }
+
+            yield return null;
+
+        } while (true);
+    }
 
 	IEnumerator SpriteFlip(){
 

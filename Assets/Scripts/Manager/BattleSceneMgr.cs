@@ -195,7 +195,8 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 			m_transformGridParent.gameObject.SetActive (true);
 			m_transformGridParent.BroadcastMessage ("ToggleGrid", SendMessageOptions.DontRequireReceiver);
 
-			Camera.main.GetComponent<ProCamera2DNumericBoundaries> ().enabled = false;
+			//Camera.main.GetComponent<ProCamera2DNumericBoundaries> ().enabled = false;
+            Camera.main.GetComponent<ProCamera2DNumericBoundaries>().RightBoundary = 2.45f;
 
 			Camera.main.GetComponent<ProCamera2D> ().CameraTargets [0].TargetTransform.position = Camera.main.ViewportToWorldPoint (new Vector3(0.75f, 0.5f));
 //			StartCoroutine(CamOffset_XChg(true));

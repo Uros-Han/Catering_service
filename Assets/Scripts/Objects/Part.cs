@@ -305,9 +305,7 @@ public class Part : MonoBehaviour {
 				mousePosition = UICamera.mainCamera.ScreenToWorldPoint(Input.mousePosition); // dont erase this!! init as uiCamera
 				OriginPos = transform.position;
 				OriginScale = transform.localScale;
-				OriginRotate = transform.localRotation;
-
-				Camera.main.GetComponent<ProCamera2DPanAndZoom>().enabled = false;
+                OriginRotate = transform.localRotation;
 
 				if(m_bNeedToStickHead)
 					GetComponent<BoxCollider2D>().offset = new Vector2(0f, 0f);
@@ -334,7 +332,7 @@ public class Part : MonoBehaviour {
 					}
 
 					PartBorder.GetComponent<SpriteRenderer>().enabled = true;
-					PartBorder.transform.position = transform.position;
+                    PartBorder.transform.position = grid.GetPosOfIdx(grid.GetGridIdx(OriginPos));
 				}
 //				transform.localScale = new Vector3(vecScaleFactor.x, vecScaleFactor.y, 1f);
 
@@ -344,10 +342,17 @@ public class Part : MonoBehaviour {
 					iBeforeSeatIdx = grid.GetGridIdx(transform.position);
 					bParentWasCore = true;
 				}
-				transform.localScale = Vector3.one;
-//				transform.localScale = new Vector3(vecOrthoScaled, vecOrthoScaled, 1f);
-				transform.parent = GameObject.Find("Temp").transform;
-				gameObject.layer = 5;
+
+                if(!gameObject.name.Equals("Core"))
+                {
+                    transform.localScale = Vector3.one;
+                    transform.parent = GameObject.Find("Temp").transform;
+                    gameObject.layer = 5;
+
+                    Camera.main.GetComponent<ProCamera2DPanAndZoom>().enabled = false;
+                    GetComponent<SpriteRenderer>().sortingOrder = 0;
+                }
+				
 
 				if(bParentWasCore)
 				{
@@ -511,92 +516,104 @@ public class Part : MonoBehaviour {
 
 				iTween.Stop(gameObject);
 
-				for(int i = 0 ; i < core.m_StickAvailableSeat.Count; ++i)
-				{
-					if(core.m_StickAvailableSeat[i].Equals(curGridIdx)) // Stick!!!!!
-					{
-						m_objLastParentPart = m_objCurParentPart;
-						m_iLastParentPartIdx = grid.GetGridIdx(m_objLastParentPart.transform.position);
-						transform.position = grid.GetPosOfIdx(core.m_StickAvailableSeat[i]);
-						if(m_bNeedToStickHead){
-							GetComponent<BoxCollider2D>().offset = new Vector2(0f, 0.04f);
+                for (int i = 0; i < core.m_StickAvailableSeat.Count; ++i)
+                {
+                    #region Stick!
+                    if (core.m_StickAvailableSeat[i].Equals(curGridIdx)) // Stick!!!!!
+                    {
+                        m_objLastParentPart = m_objCurParentPart;
+                        m_iLastParentPartIdx = grid.GetGridIdx(m_objLastParentPart.transform.position);
+                        transform.position = grid.GetPosOfIdx(core.m_StickAvailableSeat[i]);
+                        if (m_bNeedToStickHead)
+                        {
+                            GetComponent<BoxCollider2D>().offset = new Vector2(0f, 0.04f);
 
-							switch(m_headingDirection){
-							case DIRECTION.LEFT:
-								transform.position = new Vector3(transform.position.x + 0.04f, transform.position.y);
-								break;
-							case DIRECTION.RIGHT:
-								transform.position = new Vector3(transform.position.x - 0.04f, transform.position.y);
-								break;
-							case DIRECTION.DOWN:
-								transform.position = new Vector3(transform.position.x, transform.position.y + 0.04f);
-								break;
-							case DIRECTION.UP:
-								transform.position = new Vector3(transform.position.x, transform.position.y - 0.04f);
-								break;
-							}
-						}
+                            switch (m_headingDirection)
+                            {
+                                case DIRECTION.LEFT:
+                                    transform.position = new Vector3(transform.position.x + 0.04f, transform.position.y);
+                                    break;
+                                case DIRECTION.RIGHT:
+                                    transform.position = new Vector3(transform.position.x - 0.04f, transform.position.y);
+                                    break;
+                                case DIRECTION.DOWN:
+                                    transform.position = new Vector3(transform.position.x, transform.position.y + 0.04f);
+                                    break;
+                                case DIRECTION.UP:
+                                    transform.position = new Vector3(transform.position.x, transform.position.y - 0.04f);
+                                    break;
+                            }
+                        }
 
-						bToOrigin = false;
-						transform.parent = GameObject.Find("Player").transform;
+                        bToOrigin = false;
+                        transform.parent = GameObject.Find("Player").transform;
 
-//						if(transform.localScale.x < 0)
-//							transform.localScale = new Vector3(-1, 1, 1);
-//						else
-//							transform.localScale = Vector3.one;
-					
-						gameObject.layer = 0;
-						m_iGridIdx = core.m_StickAvailableSeat[i];
-						StartCoroutine(Debug_AStarLine());
+                        //						if(transform.localScale.x < 0)
+                        //							transform.localScale = new Vector3(-1, 1, 1);
+                        //						else
+                        //							transform.localScale = Vector3.one;
 
-						if(!m_bEdgePart)
-							transform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
+                        gameObject.layer = 0;
+                        m_iGridIdx = core.m_StickAvailableSeat[i];
+                        StartCoroutine(Debug_AStarLine());
 
-						if(GetComponent<FSM_Freindly>() == null)
-							gameObject.AddComponent<FSM_Freindly>();
+                        if (!m_bEdgePart)
+                            transform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
 
-						if(bParentWasCore)
-						{
-							m_iGridIdx = core.m_StickAvailableSeat[i];
+                        if (GetComponent<FSM_Freindly>() == null)
+                            gameObject.AddComponent<FSM_Freindly>();
 
-							if(!m_bEdgePart)
-								m_headingDirection = DIRECTION.EVERYWHERE;
+                        if (bParentWasCore)
+                        {
+                            m_iGridIdx = core.m_StickAvailableSeat[i];
 
-							GetComponent<SpriteSheet>().CheckAround(false, iBeforeSeatIdx);
-							iBeforeSeatIdx = -1;
-							bParentWasCore = false;
+                            if (!m_bEdgePart)
+                                m_headingDirection = DIRECTION.EVERYWHERE;
 
-							transform.parent.BroadcastMessage("AmI_InCoreSide");
-						}else{
-							morgue.RemoveBody(OriginPos);
-						}
+                            GetComponent<SpriteSheet>().CheckAround(false, iBeforeSeatIdx);
+                            iBeforeSeatIdx = -1;
+                            bParentWasCore = false;
 
-						GetComponent<SpriteSheet>().CheckAround(false);
-						GetComponent<SpriteRenderer>().sortingLayerName = "Objects";
-//						GetComponent<ParticleSystemRenderer>().sortingLayerName = "Object_Particle";
+                            transform.parent.BroadcastMessage("AmI_InCoreSide");
+                        }
+                        else
+                        {
+                            morgue.RemoveBody(OriginPos);
+                        }
 
-						OriginPos = transform.position;
-						OriginScale = transform.localScale;
-						OriginRotate = transform.localRotation;
+                        GetComponent<SpriteSheet>().CheckAround(false);
+                        GetComponent<SpriteRenderer>().sortingLayerName = "Objects";
+                        //						GetComponent<ParticleSystemRenderer>().sortingLayerName = "Object_Particle";
 
-						GetComponent<SpriteRenderer>().color = Color.white;
-//						GetComponent<SpriteParticleEmitter.DynamicEmitter>().enabled = true;
+                        OriginPos = transform.position;
+                        OriginScale = transform.localScale;
+                        OriginRotate = transform.localRotation;
+
+                        GetComponent<SpriteRenderer>().color = Color.white;
+                        //						GetComponent<SpriteParticleEmitter.DynamicEmitter>().enabled = true;
 
 
-						ClearBuffBeforeCheck();
-						GameObject.Find("Player").BroadcastMessage("BuffCheck");
-						SoundMgr.getInstance.PlaySfx("core_place");
+                        ClearBuffBeforeCheck();
+                        GameObject.Find("Player").BroadcastMessage("BuffCheck");
+                        SoundMgr.getInstance.PlaySfx("core_place");
 
-						GameObject.Find("Player").BroadcastMessage("CheckCurParentPart", SendMessageOptions.DontRequireReceiver);
+                        GameObject.Find("Player").BroadcastMessage("CheckCurParentPart", SendMessageOptions.DontRequireReceiver);
 
-						if(m_bAttackAvailable)
-						{
-							GetComponent<SpriteRenderer>().enabled = false;
-							transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
-							transform.GetChild(0).GetChild(0).GetComponent<Animator>().enabled = true;
-						}
-					}
-				}
+
+
+                        if (m_bAttackAvailable)
+                        {
+                            GetComponent<SpriteRenderer>().enabled = false;
+                            transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+                            transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = (int)(-transform.localPosition.y * 1000f);
+                            transform.GetChild(0).GetChild(0).GetComponent<Animator>().enabled = true;
+                        }else{
+                            GetComponent<SpriteRenderer>().sortingOrder = (int)(-transform.localPosition.y * 1000f);
+                        }
+
+                    }
+#endregion
+                }
 
 				if(morgueCollider2D.OverlapPoint(mousePosition)) // get in morgue
 				{
@@ -741,7 +758,7 @@ public class Part : MonoBehaviour {
 					PartBorder.layer = 5;
 				}
 				PartBorder.GetComponent<SpriteRenderer>().enabled = true;
-				PartBorder.transform.position = OriginPos;
+                PartBorder.transform.position = grid.GetPosOfIdx(grid.GetGridIdx(OriginPos));
 
 				Camera.main.GetComponent<ProCamera2DPanAndZoom>().enabled = true;
 			}
