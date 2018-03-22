@@ -113,32 +113,6 @@ public class Unit : MonoBehaviour {
 				tangled.TangledDrag(transform);
 			}
 
-//			if (m_bGroggy && tangled.m_bTangledReady && Input.GetMouseButton (0) && collider2D.OverlapPoint (mousePosition) && core.m_EatenObject == null) { //Eatten by core
-//
-//				GetComponent<FSM_Enemy> ().m_AiState = AI_STATE.EATEN;
-//
-//				m_bEaten = true;
-//				core.m_EatenObject = gameObject;
-//
-//				StartCoroutine(GameObject.Find("Core").GetComponent<Core>().Eat(gameObject));
-//				tangled.TangledAttack(transform);
-//
-//			} else if (!m_bGroggy && tangled.m_bTangledReady && Input.GetMouseButton (0) && collider2D.OverlapPoint (mousePosition)) { // Hit by core
-//
-//				tangled.TangledAttack(transform);
-//				m_fCurHealth -= GameObject.Find("Core").GetComponent<Core>().m_fAttackDmg;
-//
-//				SoundMgr.getInstance.PlaySfx ("impact_blade");
-//				SoundMgr.getInstance.PlaySfx ("human_scream");
-//
-//				ObjectFactory.getInstance.Create_DamageUI (gameObject, GameObject.Find("Core").GetComponent<Core>().m_fAttackDmg, true);
-//
-//				if (m_fCurHealth <= 0) {
-//					m_fCurHealth = 0;
-//					GetComponent<FSM_Enemy> ().SetState (AI_STATE.GROGGY);
-//				}
-//			}
-
 			yield return null;
 		}
 	}

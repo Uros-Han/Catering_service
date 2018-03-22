@@ -44,8 +44,11 @@ public class Tangled : MonoBehaviour {
 
 		float fCurTime = 0f;
 		float fMaxReachTime = 0.1f;
+
+        float fTangledDelay = 2f;
+
 		int iJointCount = 5;
-		Vector3 target;
+        Vector3 target = Vector3.zero;
 
 		bool bExit = false;
 
@@ -57,6 +60,11 @@ public class Tangled : MonoBehaviour {
 
 		Camera.main.GetComponent<ProCamera2DPanAndZoom>().enabled = false;
 
+        UISprite grabSprite = GameObject.Find("Abil_Grab").transform.Find("frontSprite").GetComponent<UISprite>();
+
+        grabSprite.fillAmount = 0f;
+        grabSprite.color = new Color(183f / 255f, 40f / 255f, 72f / 255f);
+
 		do{
 			if(targetTransform == null){
 				m_bTangledReady = true;
@@ -64,18 +72,26 @@ public class Tangled : MonoBehaviour {
 				break;
 			}
 
-			target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			targetTransform.position = new Vector3(target.x, target.y);
-			Vector3 m_vecP1 = new Vector3 (m_fTangledPointX, m_fTangledPointY);
 
-			if(coreCollider.OverlapPoint(target))
-			{
-				targetTransform.localScale = new Vector3(1.25f, 1.25f, 1f);
-				bReadyToEat = true;
-			}else if(bReadyToEat && !coreCollider.OverlapPoint(target)){
-				targetTransform.localScale = Vector3.one;
-				bReadyToEat = false;
-			}
+            if (!bDoneDrag)
+            {
+
+                target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                targetTransform.position = new Vector3(target.x, target.y);
+
+                if (coreCollider.OverlapPoint(target))
+                {
+                    targetTransform.localScale = new Vector3(1.25f, 1.25f, 1f);
+                    bReadyToEat = true;
+                }
+                else if (bReadyToEat && !coreCollider.OverlapPoint(target))
+                {
+                    targetTransform.localScale = Vector3.one;
+                    bReadyToEat = false;
+                }
+            }
+
+            Vector3 m_vecP1 = new Vector3(m_fTangledPointX, m_fTangledPointY);
 
 			m_listCurve.Clear ();
 
@@ -105,19 +121,16 @@ public class Tangled : MonoBehaviour {
 				}
 			}else{
 				if(fCurTime > 0f){
-					fCurTime -= Time.deltaTime;
+                    fCurTime -= Time.deltaTime * fMaxReachTime / fTangledDelay;
+
+                    grabSprite.fillAmount = 1f - (fCurTime * 10f);
+
 				}else{
 					fCurTime = 0f;
-					m_bTangledReady = true;
-					Camera.main.GetComponent<ProCamera2DPanAndZoom>().enabled = true;
-					targetTransform.GetComponent<Unit> ().m_bCatched = false;
-					if(targetTransform.GetComponent<FSM_Enemy>().m_AiState == AI_STATE.PANIC)
-						targetTransform.GetComponent<FSM_Enemy>().m_AiState = AI_STATE.MOVE;
 
-					if(bReadyToEat){
-						targetTransform.localScale = Vector3.one;
-						StartCoroutine(GameObject.Find("Core").GetComponent<Core>().Eat(targetTransform.gameObject));
-					}
+                    grabSprite.color = Color.white;
+					m_bTangledReady = true;
+					
 					break;
 				}
 			}
@@ -126,6 +139,17 @@ public class Tangled : MonoBehaviour {
 			if(!Input.GetMouseButton(0)){
 				bDoneDrag = true;
 				m_DragingObject = null;
+
+                Camera.main.GetComponent<ProCamera2DPanAndZoom>().enabled = true;
+                targetTransform.GetComponent<Unit>().m_bCatched = false;
+                if (targetTransform.GetComponent<FSM_Enemy>().m_AiState == AI_STATE.PANIC)
+                    targetTransform.GetComponent<FSM_Enemy>().m_AiState = AI_STATE.MOVE;
+
+                if (bReadyToEat)
+                {
+                    //targetTransform.localScale = Vector3.one;
+                    StartCoroutine(GameObject.Find("Core").GetComponent<Core>().Eat(targetTransform.gameObject));
+                }
 			}
 
 			yield return null;

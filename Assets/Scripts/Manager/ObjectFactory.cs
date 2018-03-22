@@ -470,15 +470,18 @@ public class ObjectFactory : Singleton<ObjectFactory> {
 		return obj;
 	}
 
-	public GameObject Create_DamageUI(GameObject target, float fDamage, bool bMinus, bool bDodge = false)
+	public GameObject Create_DamageUI(GameObject target, float fDamage, bool bMinus, float fBlkDmg = 0f, bool bDodge = false)
 	{
 		GameObject obj = Instantiate (m_DamageUI) as GameObject;
 		obj.transform.parent = GameObject.Find ("DamagePanel").transform;
 		obj.GetComponent<UIFollowTarget> ().target = target.transform;
 		obj.transform.localScale = Vector3.one;
-		obj.GetComponent<DamageUI> ().m_fDamage = fDamage;
-		obj.GetComponent<DamageUI> ().m_bMinus = bMinus;
-		obj.GetComponent<DamageUI> ().m_bDodge = bDodge;
+
+        DamageUI dmgUI = obj.GetComponent<DamageUI>();
+        dmgUI.m_fDamage = fDamage;
+        dmgUI.m_bMinus = bMinus;
+        dmgUI.m_bDodge = bDodge;
+        dmgUI.m_fBlockDmg = fBlkDmg;
 
 		return obj;
 	}

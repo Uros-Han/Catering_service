@@ -26,12 +26,13 @@ public class FSM_Enemy : FSM {
 	{
 		m_AiState = state;
 
-		StopAllCoroutines ();
+        if(m_CurStateCoroutine != null)
+            StopCoroutine (m_CurStateCoroutine);
 
 		switch(state)
 		{
 		case AI_STATE.MOVE:
-			StartCoroutine (State_Move ());
+            m_CurStateCoroutine = State_Move();
 			StartCoroutine(Tremble());
 			break;
 
@@ -39,27 +40,37 @@ public class FSM_Enemy : FSM {
 			for(int i = 0 ; i < m_AttackAvailableParts.Count; ++i)
 				StartCoroutine(AttackablePart(m_AttackAvailableParts[i], i));
 
-			StartCoroutine (State_Attack ());
+            m_CurStateCoroutine = State_Attack();
 			break;
 
 		case AI_STATE.EATEN:
-			StartCoroutine (State_Eaten ());
+            m_CurStateCoroutine = State_Eaten();
 			break;
 
 		case AI_STATE.GROGGY:
-			StartCoroutine (State_Groggy ());
+            m_CurStateCoroutine = State_Groggy();
 			break;
 
 		case AI_STATE.PANIC:
-			StartCoroutine (State_Panic ());
+            m_CurStateCoroutine = State_Panic();
 			break;
 
 		case AI_STATE.DISABLED:
-			StartCoroutine (State_Disabled ());
+            m_CurStateCoroutine = State_Disabled();
 			break;
 
 		}
+
+        StartCoroutine(m_CurStateCoroutine);
 	}
+
+    public void HitEffect()
+    {
+        for (int i = 0; i < transform.childCount; ++i)
+        {
+            StartCoroutine(base.HitEffect(transform.GetChild(i).GetComponent<SpriteRenderer>()));
+        }
+    }
 
 	public IEnumerator State_Eaten()
 	{

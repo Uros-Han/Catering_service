@@ -14,18 +14,21 @@ public class FSM_MainScene_Core : FSM {
 	{
 		m_AiState = state;
 
-		StopAllCoroutines ();
+        if(m_CurStateCoroutine != null)
+            StopCoroutine (m_CurStateCoroutine);
 
 		switch(state)
 		{
 		case AI_STATE.IDLE:
-			StartCoroutine (State_Idle ());
+            m_CurStateCoroutine = State_Idle();
 			break;
 
 		case AI_STATE.ATTACK:
-			StartCoroutine (State_Attack ());
+            m_CurStateCoroutine = State_Attack();
 			break;
 		}
+
+        StartCoroutine(m_CurStateCoroutine);
 	}
 
 	protected override IEnumerator State_Idle()

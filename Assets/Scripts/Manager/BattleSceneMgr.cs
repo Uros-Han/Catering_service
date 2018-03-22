@@ -188,6 +188,7 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr> {
 			GameObject.Find ("AMB").GetComponent<AudioSource>().volume = 0f;
 
 			morgueTrans.BroadcastMessage ("Assemble", null, SendMessageOptions.DontRequireReceiver);
+            StartCoroutine(morgueTrans.GetComponent<Morgue>().MorgueClickCheck());
 			GameObject.Find ("Player").BroadcastMessage ("Assemble", null, SendMessageOptions.DontRequireReceiver);
 
 			StartCoroutine(GameObject.Find("GEO").GetComponent<Battle_Geo>().ToggleColor(true));

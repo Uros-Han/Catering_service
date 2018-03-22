@@ -10,6 +10,11 @@ public class FSM_Freindly : FSM {
 		SetState (AI_STATE.IDLE);
 	}
 
+	public void HitEffect()
+	{
+        StartCoroutine(base.HitEffect(GetComponent<SpriteRenderer>()));
+	}
+
 	protected override IEnumerator State_Idle()
 	{
 		Transform EnemyTrans = GameObject.Find("Enemies").transform;

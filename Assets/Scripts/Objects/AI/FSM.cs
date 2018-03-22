@@ -6,32 +6,52 @@ public class FSM : MonoBehaviour {
 
 	public AI_STATE m_AiState;
 	public GameObject m_target;
+    protected IEnumerator m_CurStateCoroutine;
 
 	public void SetState(AI_STATE state)
 	{
-		StopAllCoroutines ();
+        if(m_CurStateCoroutine != null)
+            StopCoroutine(m_CurStateCoroutine);
 
 		m_AiState = state;
 		
 		switch(state)
 		{
 		case AI_STATE.IDLE:
-			StartCoroutine (State_Idle ());
+            m_CurStateCoroutine = State_Idle();
 			break;
 
 		case AI_STATE.MOVE:
-			StartCoroutine (State_Move ());
+            m_CurStateCoroutine = State_Move();
 			break;
 			
 		case AI_STATE.ATTACK:
-			StartCoroutine (State_Attack ());
+            m_CurStateCoroutine = State_Attack();
 			break;
 
 		case AI_STATE.DISABLED:
-			StartCoroutine (State_Disabled ());
+            m_CurStateCoroutine = State_Disabled();
 			break;
 		}
+
+        StartCoroutine(m_CurStateCoroutine);
 	}
+
+    protected IEnumerator HitEffect(SpriteRenderer targetSprite)
+    {
+        float fcurTime = 0f;
+        float fTime = 0.3f;
+
+        Color HitColor = new Color(183 / 255f, 40 / 255f, 72 / 255f);
+
+        do
+        {
+            targetSprite.color = Color.Lerp(HitColor, Color.white, fcurTime * (1/fTime));
+            fcurTime += Time.deltaTime;
+
+            yield return null;
+        } while (fcurTime < 1f);
+    }
 
 	protected virtual IEnumerator State_Idle()
 	{
@@ -71,10 +91,14 @@ public class FSM : MonoBehaviour {
 
 		if (bEnemy) { /// Attack Enemy
 			Unit targetUnit = target.GetComponent<Unit>();
-			float fDealedDmg = fDamage - (fDamage * ((targetUnit.m_fDefense * fDefenseFactor) / (1 + fDefenseFactor * targetUnit.m_fDefense)));
-				
+            fDamage = fDamage + (Random.Range(-2, 3));
+            float fBlockDmg = (fDamage * ((targetUnit.m_fDefense * fDefenseFactor) / (1 + fDefenseFactor * targetUnit.m_fDefense)));
+            float fDealedDmg = fDamage - fBlockDmg;
+
+            target.GetComponent<FSM_Enemy>().HitEffect();
+
 			targetUnit.m_fCurHealth -= fDealedDmg;
-			ObjectFactory.getInstance.Create_DamageUI (target, fDamage, true);
+            ObjectFactory.getInstance.Create_DamageUI (target, fDamage, true, fBlockDmg);
 			SoundMgr.getInstance.PlaySfx ("impact_blade");
 			SoundMgr.getInstance.PlaySfx ("human_scream");
 
@@ -100,10 +124,13 @@ public class FSM : MonoBehaviour {
 			SoundMgr.getInstance.PlaySfx ("impact_blade");
 
 			float fDefense = targetPart.m_dicStat ["Defense"];
-			float fDealedDmg = fDamage - (fDamage *((fDefense * fDefenseFactor) / ( 1 + fDefenseFactor * fDefense)));
+            fDamage = fDamage + (Random.Range(-2, 3));
+            float fBlockDmg = (fDamage * ((fDefense * fDefenseFactor) / (1 + fDefenseFactor * fDefense)));
+            float fDealedDmg = fDamage - fBlockDmg;
 
 			if (Random.Range (0, 100) < (int)fDodgePercent) { // Dodge!!
-				ObjectFactory.getInstance.Create_DamageUI (target, 0, true, true);
+				ObjectFactory.getInstance.Create_DamageUI (target, 0, true, 0f, true);
+                yield break;
 			} else {
 				if (fDealedDmg > 0) {
 					if (targetPart.gameObject.name.Equals ("Core")) {
@@ -111,13 +138,16 @@ public class FSM : MonoBehaviour {
 					} else {
 						targetPart.m_fCurHealth -= fDealedDmg;
 					}
-					ObjectFactory.getInstance.Create_DamageUI (target, fDamage, true);
+                    ObjectFactory.getInstance.Create_DamageUI (target, fDamage, true, fBlockDmg);
 				} else {
-					ObjectFactory.getInstance.Create_DamageUI (target, 0f, true);
+                    ObjectFactory.getInstance.Create_DamageUI (target, 0f, true, fBlockDmg);
 				}
+
+                if(target.GetComponent<FSM_Freindly>() != null)
+                    target.GetComponent<FSM_Freindly>().HitEffect();
 			}
 
-			targetPart.AdjustEmissionRate();
+			//targetPart.AdjustEmissionRate();
 			if(targetPart.m_fCurHealth <= 0)
 			{
 				targetPart.PartDestroyed();
@@ -154,4 +184,5 @@ public class FSM : MonoBehaviour {
 	{
 		StartCoroutine (Attack (target, fDmg, bEnemy));
 	}
+
 }

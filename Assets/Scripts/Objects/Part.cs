@@ -164,7 +164,7 @@ public class Part : MonoBehaviour {
 			}
 
 			transform.parent = GameObject.Find("Player").transform;
-			StartCoroutine(Debug_AStarLine());
+			//StartCoroutine(Debug_AStarLine());
 
 			if(!m_bEdgePart)
 				transform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
@@ -326,13 +326,14 @@ public class Part : MonoBehaviour {
 					{
 						PartBorder.transform.parent = GameObject.Find("Objects").transform;
 						PartBorder.layer = 0;
+                        PartBorder.transform.position = grid.GetPosOfIdx(grid.GetGridIdx(OriginPos));
 					}else{
 						PartBorder.transform.parent = GameObject.Find("MorguePanel").transform;
 						PartBorder.layer = 5;
+                        PartBorder.transform.position = morgue.GetIdxPos(morgue.GetIdxFromPos(OriginPos));
 					}
 
 					PartBorder.GetComponent<SpriteRenderer>().enabled = true;
-                    PartBorder.transform.position = grid.GetPosOfIdx(grid.GetGridIdx(OriginPos));
 				}
 //				transform.localScale = new Vector3(vecScaleFactor.x, vecScaleFactor.y, 1f);
 
@@ -555,7 +556,7 @@ public class Part : MonoBehaviour {
 
                         gameObject.layer = 0;
                         m_iGridIdx = core.m_StickAvailableSeat[i];
-                        StartCoroutine(Debug_AStarLine());
+                        //StartCoroutine(Debug_AStarLine());
 
                         if (!m_bEdgePart)
                             transform.localRotation = Quaternion.AngleAxis(0, Vector3.forward);
@@ -751,14 +752,17 @@ public class Part : MonoBehaviour {
 
 				if(transform.parent.name.Equals("Player"))
 				{
-					PartBorder.transform.parent = GameObject.Find("Objects").transform;
-					PartBorder.layer = 0;
-				}else{
-					PartBorder.transform.parent = GameObject.Find("MorguePanel").transform;
-					PartBorder.layer = 5;
+                    PartBorder.transform.parent = GameObject.Find("Objects").transform;
+                    PartBorder.layer = 0;
+                    PartBorder.transform.position = grid.GetPosOfIdx(grid.GetGridIdx(OriginPos));
+                }
+                else
+                {
+                    PartBorder.transform.parent = GameObject.Find("MorguePanel").transform;
+                    PartBorder.layer = 5;
+                    PartBorder.transform.position = morgue.GetIdxPos(morgue.GetIdxFromPos(OriginPos));
 				}
 				PartBorder.GetComponent<SpriteRenderer>().enabled = true;
-                PartBorder.transform.position = grid.GetPosOfIdx(grid.GetGridIdx(OriginPos));
 
 				Camera.main.GetComponent<ProCamera2DPanAndZoom>().enabled = true;
 			}

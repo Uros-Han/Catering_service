@@ -24,6 +24,9 @@ public class UISprite : UIBasicSprite
 	[System.NonSerialized] protected UISpriteData mSprite;
 	[System.NonSerialized] bool mSpriteSet = false;
 
+    [System.NonSerialized] bool isGray  = false; // 추가
+    [System.NonSerialized] bool isBright  = false; // 추가
+
 	/// <summary>
 	/// Main texture is assigned on the atlas.
 	/// </summary>
@@ -51,6 +54,12 @@ public class UISprite : UIBasicSprite
 		{
 			var mat = base.material;
 			if (mat != null) return mat;
+            if (isGray) {
+                return mAtlas.spriteMaterialGrayscale;
+            }
+            if (isBright){
+                return mAtlas.spriteMaterialBright;
+            }
 			return (mAtlas != null ? mAtlas.spriteMaterial : null);
 		}
 		set
@@ -58,6 +67,23 @@ public class UISprite : UIBasicSprite
 			base.material = value;
 		}
 	}
+
+    // 추가합니다.
+    public void GrayScale(bool gray) {
+        isGray = gray;
+        if (panel != null) {
+            panel.RebuildAllDrawCalls();
+        }
+    }
+
+    // 추가합니다.
+    void Bright(bool bright) {
+        isBright = bright;
+        if (panel != null) {
+            panel.RebuildAllDrawCalls();
+        }
+    }
+
 
 	/// <summary>
 	/// Atlas used by this widget.

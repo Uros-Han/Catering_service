@@ -44,6 +44,8 @@ public class UIAtlas : MonoBehaviour
 
 	// Material used by this atlas. Name is kept only for backwards compatibility, it used to be public.
 	[HideInInspector][SerializeField] Material material;
+    [HideInInspector][SerializeField] Material materialGray;
+    [HideInInspector][SerializeField] Material materialBright;
 
 	// List of all sprites inside the atlas. Name is kept only for backwards compatibility, it used to be public.
 	[HideInInspector][SerializeField] List<UISpriteData> mSprites = new List<UISpriteData>();
@@ -82,6 +84,8 @@ public class UIAtlas : MonoBehaviour
 			}
 			else
 			{
+                materialGray = null; // 추가됨
+                materialBright = null; // 추가됨
 				if (material == null)
 				{
 					mPMA = 0;
@@ -97,6 +101,29 @@ public class UIAtlas : MonoBehaviour
 			}
 		}
 	}
+
+    //추가
+    public Material spriteMaterialGrayscale {
+        get {
+            if (materialGray == null) {
+                materialGray = new Material(spriteMaterial);
+                materialGray.SetFloat("_EffectAmount", 1);
+            }
+            return materialGray;
+        }
+    }
+
+    //추가
+    public Material spriteMaterialBright {
+        get {
+            if (materialBright == null) {
+                materialBright = new Material(spriteMaterial);
+                materialBright.SetFloat("_Intensity", 3);
+            }
+            return materialBright;
+        }
+    }
+
 
 	/// <summary>
 	/// Whether the atlas is using a premultiplied alpha material.

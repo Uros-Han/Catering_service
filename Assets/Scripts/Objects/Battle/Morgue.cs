@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Com.LuisPedroFonseca.ProCamera2D;
 
 public class Morgue : MonoBehaviour {
 
@@ -16,6 +17,33 @@ public class Morgue : MonoBehaviour {
 		m_bBodyArr = new bool[m_iIdxCount];
 //		m_iMorgueIdxArr = new int[]{ 145, 146, 147, 148, 149, 150, 151, 156, 157, 158, 159, 160, 161, 162};
 		m_fBodyMoveTime = 0.25f;
+	}
+
+    public IEnumerator MorgueClickCheck()
+	{
+        
+        BoxCollider2D collider2D = GetComponent<BoxCollider2D>();
+        bool bClicked = false;
+
+        do
+        {
+            Vector3 mousePosition = UICamera.mainCamera.ScreenToWorldPoint(Input.mousePosition);
+
+            if (Input.GetMouseButtonDown(0) && collider2D.OverlapPoint(mousePosition))
+            {
+                bClicked = true;
+                Camera.main.GetComponent<ProCamera2DPanAndZoom>().enabled = false;
+            }
+
+            if (bClicked && Input.GetMouseButtonUp(0))
+            {
+                bClicked = false;
+                Camera.main.GetComponent<ProCamera2DPanAndZoom>().enabled = true;
+            }
+
+
+            yield return null;
+        } while (true);
 	}
 
 	public void AddBody(bool bWithDrag, GameObject movePart, int iGridIdx = -1)

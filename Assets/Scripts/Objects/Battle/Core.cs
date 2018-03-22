@@ -126,7 +126,7 @@ public class Core : Part {
 		target.GetComponent<FSM_Enemy> ().m_AiState = AI_STATE.DISABLED;
 
 		GameObject.Find ("MouthPanel").GetComponent<MouthPanel> ().AddEnemyInMouth (target);
-		yield return new WaitForSeconds(0.01f);
+		yield return new WaitForSeconds(0.1f);
 		target.transform.localPosition = new Vector2(0, -63);
 		target.transform.localScale = new Vector3 (360, 360, 360);
 		target.layer = 5;
