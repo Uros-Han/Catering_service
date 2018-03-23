@@ -283,7 +283,7 @@ d818a55e6287fa9e961c2dc646c62e79 Assembly-CSharp.dll:.MiniPanel
 9cc53808dcf5c956d505509ce196dc51 Assembly-CSharp.dll:SpriteColorFX.SpriteColorInstagram
 d000d514961969c4ee16e0cbf9632501 Assembly-CSharp.dll:Com.LuisPedroFonseca.ProCamera2D.ProCamera2DParallax
 0d593228d5dd9f919d2bee75d3264223 Assembly-CSharp.dll:.DPPaletteCombiner
-905353bc65cd354da0eae1cd07db72e9 Assembly-CSharp.dll:.DamageUI
+639f87ce06b954909f29ee90cec3e419 Assembly-CSharp.dll:.DamageUI
 6f3dded94558741cf5aab373145220f4 Assembly-CSharp.dll:FoW.FogOfWarEvents
 5ee6b3a9ddfd1b34a29e37bff36c7883 Assembly-CSharp.dll:.InvAttachmentPoint
 dd571fc6c95fd0e853d398b4605262ce Assembly-CSharp.dll:SpriteColorFX.DemoMasks3
@@ -385,7 +385,7 @@ fda8b9a542a950a49bd251e3dbf19cce Assembly-CSharp.dll:Com.LuisPedroFonseca.ProCam
 bc0b2557935880753a2ee452017eb0e7 Assembly-CSharp.dll:.PaletteTextureSaveData
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UIDragDropRoot
 f0d54179fe98107022c3ed2627a08a18 Assembly-CSharp.dll:.LookAtTarget
-54dd90a6359b2b57a10b0f9a1f0d173d Assembly-CSharp.dll:.UIAtlas
+cf2867809edea0c81f76624b59f43b50 Assembly-CSharp.dll:.UIAtlas
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule

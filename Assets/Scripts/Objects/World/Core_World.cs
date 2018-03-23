@@ -43,14 +43,16 @@ public class Core_World : MonoBehaviour {
 
 	IEnumerator PartStatusChecker()
 	{
+        yield return null;
+        yield return null;
+        yield return null;
+
 		Transform PlayerTrans = GameObject.Find ("Player").transform;
 		PartStatus partStatus = GameObject.Find ("PartStatus").GetComponent<PartStatus> ();
 	
 		FogOfWarUnit fowUnit = GetComponent<FogOfWarUnit> ();
 
 		fowUnit.radius = 0.5f + ((float)partStatus.m_iSight * 0.1f);
-
-		yield return null;
 	}
 
 	public IEnumerator EatMyPart()
@@ -93,7 +95,7 @@ public class Core_World : MonoBehaviour {
 
 		iTween.ColorTo (objTargetPart, iTween.Hash("a", 0f, "time", 0.4f));
 
-		GameObject.Find ("Hunger").GetComponent<TopBarUI> ().ChangeValue (100);
+        GameObject.Find ("Hunger").GetComponent<TopBarUI> ().ChangeValue (GameMgr.getInstance.m_iHunger + 30);
 
 		StartCoroutine (PartStatusChecker ());
 	}
@@ -161,6 +163,8 @@ public class Core_World : MonoBehaviour {
 
 						bOverviewOn = true;
 						iTween.MoveTo(GameObject.Find("WorldOverview").transform.GetChild(0).gameObject, iTween.Hash("x", -150f, "time", 0.5f,"isLocal", true,  "easetype", "easeInSine"));
+
+                        GameObject.Find("Party").BroadcastMessage("SetDestination", SendMessageOptions.DontRequireReceiver);
 
 					}else{
 						GameObject Dest = GameObject.Find("Destination").gameObject;
@@ -304,9 +308,9 @@ public class Core_World : MonoBehaviour {
 
 			GameObject.Find ("WorldMapManager").GetComponent<WorldMapManager> ().m_worldTurnState = WORLDTURN_STATE.IDLE;
 			StartCoroutine (Idle ());
-			StartCoroutine (PartStatusChecker ());
 		}
 
+        StartCoroutine(PartStatusChecker());
 		StartCoroutine (AdjustCamOffset ());
 	}
 

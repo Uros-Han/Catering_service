@@ -29,6 +29,9 @@ public class Morgue : MonoBehaviour {
         {
             Vector3 mousePosition = UICamera.mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
+            if (collider2D == null)
+                break;
+
             if (Input.GetMouseButtonDown(0) && collider2D.OverlapPoint(mousePosition))
             {
                 bClicked = true;

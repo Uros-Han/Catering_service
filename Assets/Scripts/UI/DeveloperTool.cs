@@ -22,6 +22,11 @@ public class DeveloperTool : MonoBehaviour {
 			if (Input.GetMouseButtonDown (0)) {
 				UICamera.selectedObject = GameObject.Find ("MouseFollower").gameObject;
 
+                List<int> enemyList = GameObject.Find("Geo").transform.GetChild(GridMgr.getInstance.GetGridIdx(Camera.main.ScreenToWorldPoint(Input.mousePosition))).GetComponent<WorldGeo>().m_worldIcon.GetComponent<WorldIcon>().m_list_enemyType;
+                if (enemyList.Count == 0)
+                    return;
+
+
 				switch (curDebug) {
 				case DEBUG_STATE.CREATE_CARAVAN:
 					ObjectFactory.getInstance.Create_Party (GridMgr.getInstance.GetGridIdx (Camera.main.ScreenToWorldPoint (Input.mousePosition)), PARTY_TYPE.CARAVAN);

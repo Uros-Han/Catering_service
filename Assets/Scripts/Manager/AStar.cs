@@ -384,7 +384,8 @@ public class AStar : Singleton<AStar>
 
 
 		for (int i = 0; i < PlayerTrans.childCount; ++i) {
-			m_listPart.Add(PlayerTrans.GetChild(i).GetComponent<Part>());
+            if(!PlayerTrans.GetChild(i).GetComponent<Part>().m_bDestroied)
+			    m_listPart.Add(PlayerTrans.GetChild(i).GetComponent<Part>());
 		}
 	}
 

@@ -3,179 +3,197 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class WorldMapManager : MonoBehaviour {
-	
-	public int m_KingLocIdx;
-	public WORLDTURN_STATE m_worldTurnState;
+public class WorldMapManager : MonoBehaviour
+{
 
-	bool m_bToBattleScene = false;
-	public List<int> m_iPollutedIdxList;
+    public int m_KingLocIdx;
+    public WORLDTURN_STATE m_worldTurnState;
 
-	public List<int> m_iListVillage;
-	public List<int> m_iListCity;
-	public List<int> m_iListCastle;
+    bool m_bToBattleScene = false;
+    public List<int> m_iPollutedIdxList;
 
-	public List<GameObject> m_encountPartyList;
+    public List<int> m_iListVillage;
+    public List<int> m_iListCity;
+    public List<int> m_iListCastle;
 
-	void Awake()
-	{
-		if(GameObject.Find("GameMgr") == null) //if gameMgr doesn't exist, make one.
-		{
-			GameObject gameMgr = Instantiate(Resources.Load("Prefabs/GameMgr") as GameObject) as GameObject;
-			gameMgr.name = gameMgr.name.Replace("(Clone)","");
-		}
-	}
+    public List<GameObject> m_encountPartyList;
 
-	// Use this for initialization
-	void Start () {
-		m_worldTurnState = WORLDTURN_STATE.IDLE;
-		GridMgr.getInstance.ChgGridInfo ();
+    void Awake()
+    {
+        if (GameObject.Find("GameMgr") == null) //if gameMgr doesn't exist, make one.
+        {
+            GameObject gameMgr = Instantiate(Resources.Load("Prefabs/GameMgr") as GameObject) as GameObject;
+            gameMgr.name = gameMgr.name.Replace("(Clone)", "");
+        }
+    }
 
-		m_iPollutedIdxList = new List<int> ();
+    // Use this for initialization
+    void Start()
+    {
+        m_worldTurnState = WORLDTURN_STATE.IDLE;
+        GridMgr.getInstance.ChgGridInfo();
 
-		m_iListVillage = new List<int> ();
-		m_iListCity = new List<int> ();
-		m_iListCastle = new List<int> ();
+        m_iPollutedIdxList = new List<int>();
 
-		m_encountPartyList = new List<GameObject> ();
+        m_iListVillage = new List<int>();
+        m_iListCity = new List<int>();
+        m_iListCastle = new List<int>();
 
-		if (!GameMgr.getInstance.m_bDeveloperMode)
-			GameObject.Find ("DeveloperTools").transform.GetChild (1).gameObject.SetActive (false);
+        m_encountPartyList = new List<GameObject>();
 
-		GameObject.Find ("Player").SendMessage ("CameBackFromBattleScene");
-	}
+        if (!GameMgr.getInstance.m_bDeveloperMode)
+            GameObject.Find("DeveloperTools").transform.GetChild(1).gameObject.SetActive(false);
 
-	void OnEnable()
-	{
-		if (m_bToBattleScene) {	
-//			GameObject.Find ("AleartMsg").BroadcastMessage ("ChgParent",SendMessageOptions.DontRequireReceiver);
-			SceneManager.SetActiveScene (SceneManager.GetSceneByName("World"));
-			GridMgr.getInstance.ChgGridInfo ();
+        GameObject.Find("Player").SendMessage("CameBackFromBattleScene");
+    }
 
-			GameObject.Find ("World").BroadcastMessage ("CameBackFromBattleScene");
-			GameObject.Find ("Player").SendMessage ("CameBackFromBattleScene");
-			m_bToBattleScene = false;
-			BattleSceneMgr.getInstance.m_turnState = TURN_STATE.DAY;
+    void OnEnable()
+    {
+        if (m_bToBattleScene)
+        {
+            //			GameObject.Find ("AleartMsg").BroadcastMessage ("ChgParent",SendMessageOptions.DontRequireReceiver);
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("World"));
+            GridMgr.getInstance.ChgGridInfo();
 
-			if (!GameMgr.getInstance.m_bAssembleOnly) { // 지역점령 
-				int iPollutedIdx = GridMgr.getInstance.GetGridIdx(GameObject.Find("Core").transform.position);
-				ObjectFactory.getInstance.Create_Polluted(iPollutedIdx);
-				m_iPollutedIdxList.Add (iPollutedIdx);
+            GameObject.Find("World").BroadcastMessage("CameBackFromBattleScene");
+            GameObject.Find("Player").SendMessage("CameBackFromBattleScene");
+            m_bToBattleScene = false;
+            BattleSceneMgr.getInstance.m_turnState = TURN_STATE.DAY;
 
-				WorldIcon pollutedIcon = GameObject.Find ("Geo").transform.GetChild (iPollutedIdx).GetComponent<WorldGeo> ().m_worldIcon.GetComponent<WorldIcon>();
+            if (!GameMgr.getInstance.m_bAssembleOnly)
+            { // 지역점령 
+                int iPollutedIdx = GridMgr.getInstance.GetGridIdx(GameObject.Find("Core").transform.position);
+                ObjectFactory.getInstance.Create_Polluted(iPollutedIdx);
+                m_iPollutedIdxList.Add(iPollutedIdx);
 
-				GameMgr.getInstance.m_iReward += (int)pollutedIcon.m_fPopulation * 10;
+                WorldIcon pollutedIcon = GameObject.Find("Geo").transform.GetChild(iPollutedIdx).GetComponent<WorldGeo>().m_worldIcon.GetComponent<WorldIcon>();
 
-				pollutedIcon.m_fPopulation = 0f;
-				pollutedIcon.m_fProsperity = 0f;
-				pollutedIcon.m_iRaided += 1;
-				pollutedIcon.m_list_enemyType.Clear ();
+                GameMgr.getInstance.m_iReward += (int)pollutedIcon.m_fPopulation * 10;
 
-				List<GameObject> elimatedPartyList = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_encountPartyList;
-				for (int i = 0; i < elimatedPartyList.Count; ++i) {
-					elimatedPartyList [i].GetComponent<Party> ().DestroyThis ();
-					elimatedPartyList.Remove (elimatedPartyList [i]);
-				}
-			}
+                pollutedIcon.m_fPopulation = 0f;
+                pollutedIcon.m_fProsperity = 0f;
+                pollutedIcon.m_iRaided += 1;
+                pollutedIcon.m_list_enemyType.Clear();
 
-//			SaveManager.getInstance.LocalSave ();
-		}
+                List<GameObject> elimatedPartyList = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_encountPartyList;
+                for (int i = 0; i < elimatedPartyList.Count; ++i)
+                {
+                    elimatedPartyList[i].GetComponent<Party>().DestroyThis();
+                    elimatedPartyList.Remove(elimatedPartyList[i]);
+                }
+            }
 
-		SoundMgr.getInstance.SetAudioSources (true);
-	}
+            //			SaveManager.getInstance.LocalSave ();
+        }
 
-	public void GenerateWorld()
-	{
-		StartCoroutine(WorldGenerator.getInstance.GenerateWorldMap ());
-	}
+        SoundMgr.getInstance.SetAudioSources(true);
+    }
 
-	public void LoadWorld()
-	{
-		SaveManager.getInstance.LocalLoad ();
-	}
+    public void GenerateWorld()
+    {
+        StartCoroutine(WorldGenerator.getInstance.GenerateWorldMap());
+    }
 
-	public void Assembly()
-	{
-		GameMgr.getInstance.m_bAssembleOnly = true;
-		SceneToBattle ();
-	}
+    public void TutorialWorld()
+    {
+        StartCoroutine(WorldGenerator.getInstance.GenerateTutorialMap());
+    }
 
-	public void EncountEnemy()
-	{
-		GameMgr.getInstance.m_bAssembleOnly = false;
-		SceneToBattle ();
-	}
+    public void LoadWorld()
+    {
+        SaveManager.getInstance.LocalLoad();
+    }
 
-	public void SceneToBattle()
-	{
-		SceneManager.LoadScene ("Battle", LoadSceneMode.Additive);
+    public void Assembly()
+    {
+        GameMgr.getInstance.m_bAssembleOnly = true;
+        SceneToBattle();
+    }
 
-		Transform WorldTrans = GameObject.Find ("World").transform;
-		for (int i = 0; i < 3; ++i) {
-			WorldTrans.GetChild (i).gameObject.SetActive (false);
-		}
+    public void EncountEnemy()
+    {
+        GameMgr.getInstance.m_bAssembleOnly = false;
+        SceneToBattle();
+    }
 
-		m_bToBattleScene = true;
-	}
+    public void SceneToBattle()
+    {
+        SceneManager.LoadScene("Battle", LoadSceneMode.Additive);
 
-	public void Pollute(List<int> iPollutedList)
-	{
-		for (int i = 0; i < iPollutedList.Count; ++i) {
-			ObjectFactory.getInstance.Create_Polluted (iPollutedList [i]);
-		}
-	}
+        Transform WorldTrans = GameObject.Find("World").transform;
+        for (int i = 0; i < 3; ++i)
+        {
+            WorldTrans.GetChild(i).gameObject.SetActive(false);
+        }
 
-	public bool bOn = true;
-	public bool bOff = false;
-	public void SettingBtn(bool bOn)
-	{
-		if (bOn) {
-			GameObject.Find ("SettingPanel").GetComponent<UIPanel> ().alpha = 1;
-		} else {
-			GameObject.Find ("SettingPanel").GetComponent<UIPanel> ().alpha = 0;
-		}
-	}
+        m_bToBattleScene = true;
+    }
 
-	void ExitBtn()
-	{
-		SaveManager.getInstance.LocalSave ();
+    public void Pollute(List<int> iPollutedList)
+    {
+        for (int i = 0; i < iPollutedList.Count; ++i)
+        {
+            ObjectFactory.getInstance.Create_Polluted(iPollutedList[i]);
+        }
+    }
 
-		Destroy (GameObject.Find ("Player").gameObject);
+    public bool bOn = true;
+    public bool bOff = false;
+    public void SettingBtn(bool bOn)
+    {
+        if (bOn)
+        {
+            GameObject.Find("SettingPanel").GetComponent<UIPanel>().alpha = 1;
+        }
+        else
+        {
+            GameObject.Find("SettingPanel").GetComponent<UIPanel>().alpha = 0;
+        }
+    }
 
-		Application.LoadLevel ("Main");
-	}
+    void ExitBtn()
+    {
+        SaveManager.getInstance.LocalSave();
 
-	void WaitCheck()
-	{
-		if (GameMgr.getInstance.m_iHunger - 20 <= 0) {
-			ObjectFactory.getInstance.Create_MessageBox_TwoButton(Localization.Get("Mbox_HungerChecker"), "HungerCheckerWait", "DestroyMessageBox");
-		} else
-			Wait ();
-	}
+        Destroy(GameObject.Find("Player").gameObject);
 
-	public void Wait()
-	{
-		TimeMgr.getInstance.Play ();
+        Application.LoadLevel("Main");
+    }
 
-		Core_World coreWorld = GameObject.Find ("Core").GetComponent<Core_World> ();
+    void WaitCheck()
+    {
+        if (GameMgr.getInstance.m_iHunger - 20 <= 0)
+        {
+            ObjectFactory.getInstance.Create_MessageBox_TwoButton(Localization.Get("Mbox_HungerChecker"), "HungerCheckerWait", "DestroyMessageBox");
+        }
+        else
+            Wait();
+    }
 
-//		coreWorld.m_listMoveIdx.Clear ();
+    public void Wait()
+    {
+        TimeMgr.getInstance.Play();
 
-		if (GameMgr.getInstance.m_iHunger - 20 > 0)
-			GameObject.Find ("Hunger").GetComponent<TopBarUI> ().ChangeValue (GameMgr.getInstance.m_iHunger - 20);
-		else {
-			GameObject.Find ("Hunger").GetComponent<TopBarUI> ().ChangeValue (0);
-			StartCoroutine(coreWorld.EatMyPart ());
-		}
+        Core_World coreWorld = GameObject.Find("Core").GetComponent<Core_World>();
 
-		StartCoroutine (EnemyCheck ());
-	}
+        //		coreWorld.m_listMoveIdx.Clear ();
 
-	IEnumerator EnemyCheck()
-	{
-		yield return new WaitForSeconds (1f);
+        if (GameMgr.getInstance.m_iHunger - 20 > 0)
+            GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(GameMgr.getInstance.m_iHunger - 20);
+        else
+        {
+            GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(0);
+            StartCoroutine(coreWorld.EatMyPart());
+        }
 
-		GameObject.Find ("Core").GetComponent<Core_World> ().CheckLocationBreak ();
-	}
+        StartCoroutine(EnemyCheck());
+    }
+
+    IEnumerator EnemyCheck()
+    {
+        yield return new WaitForSeconds(1f);
+
+        GameObject.Find("Core").GetComponent<Core_World>().CheckLocationBreak();
+    }
 
 }

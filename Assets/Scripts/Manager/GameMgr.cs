@@ -2,94 +2,118 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameMgr : MonoBehaviour {
+public class GameMgr : MonoBehaviour
+{
 
-	public int m_iHunger = 100;
-	public bool m_bAssembleOnly = true;
-	public List<int> m_ilistCurEnemyList;
-	public List<int> m_ilistCurHeroList;
+    public int m_iHunger = 100;
+    public bool m_bAssembleOnly = true;
+    public List<int> m_ilistCurEnemyList;
+    public List<int> m_ilistCurHeroList;
 
-	public bool m_bDeveloperMode;
+    public bool m_bDeveloperMode;
 
-	public int m_iReward;
-	public int m_iDay;
+    public int m_iReward;
+    public int m_iDay;
 
-	public bool m_bBGMMute;
-	public bool m_bSFXMute;
+    public bool m_bBGMMute;
+    public bool m_bSFXMute;
 
-	private static GameMgr instance;
+    public bool m_bIsTutorial;
 
-	public static GameMgr getInstance {
-		get {
-			if (instance == null) {
-				instance = FindObjectOfType (typeof(GameMgr)) as GameMgr;
-			}
+    private static GameMgr instance;
 
-			if (instance == null) {
-				GameObject obj = new GameObject ("GameMgr");
-				instance = obj.AddComponent (typeof(GameMgr)) as GameMgr;
-			}
+    public static GameMgr getInstance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType(typeof(GameMgr)) as GameMgr;
+            }
 
-			return instance;
-		}
-	}
+            if (instance == null)
+            {
+                GameObject obj = new GameObject("GameMgr");
+                instance = obj.AddComponent(typeof(GameMgr)) as GameMgr;
+            }
 
-	void OnApplicationQuit()
-	{
+            return instance;
+        }
+    }
 
-		instance = null;
-	}
+    void OnApplicationQuit()
+    {
 
-	// Use this for initialization
-	void Awake () {
+        instance = null;
+    }
 
-		if (instance == null)
-			instance = this;
+    // Use this for initialization
+    void Awake()
+    {
 
-		else if (instance != this)
-			Destroy(gameObject);
-		
-		m_ilistCurEnemyList = new List<int> ();
-		m_ilistCurHeroList = new List<int> ();
+        if (instance == null)
+            instance = this;
 
-		DontDestroyOnLoad(gameObject);
+        else if (instance != this)
+            Destroy(gameObject);
 
-		ObjectFactory.getInstance.ResourcesLoad ();
-		Localization.language = "Korean";
+        m_ilistCurEnemyList = new List<int>();
+        m_ilistCurHeroList = new List<int>();
 
-		Application.targetFrameRate = 60;
-	}
+        DontDestroyOnLoad(gameObject);
 
-	public IEnumerator ContinueGame_Coroutine()
-	{
-		Application.LoadLevel ("World");
+        ObjectFactory.getInstance.ResourcesLoad();
+        Localization.language = "Korean";
 
-		yield return null;
+        Application.targetFrameRate = 60;
+    }
 
-		SaveManager.getInstance.LocalLoad ();
-	}
+    public IEnumerator ContinueGame_Coroutine()
+    {
+        Application.LoadLevel("World");
 
-	public void ContinueGame()
-	{
-		StartCoroutine (ContinueGame_Coroutine ());
-	}
+        yield return null;
 
-	public IEnumerator CreateGame_Coroutine()
-	{
-		Application.LoadLevel ("World");
+        SaveManager.getInstance.LocalLoad();
+    }
 
-		yield return null;
+    public void ContinueGame()
+    {
+        StartCoroutine(ContinueGame_Coroutine());
+    }
 
-		GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().GenerateWorld ();
-	}
+    public IEnumerator CreateGame_Coroutine()
+    {
+        Application.LoadLevel("World");
 
-	public void CreateGame()
-	{
-		StartCoroutine (CreateGame_Coroutine ());
-	}
+        yield return null;
 
-	public void GameOver()
-	{
-		ObjectFactory.getInstance.Create_MessageBox_OneButton ("GameOver", "GameOver");
-	}
+        GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().GenerateWorld();
+    }
+
+    public void CreateGame()
+    {
+        StartCoroutine(CreateGame_Coroutine());
+    }
+
+    public IEnumerator TutorialGame_Coroutine()
+    {
+        Application.LoadLevel("World");
+
+        yield return null;
+
+        GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().TutorialWorld();
+    }
+
+    public void TutorialGame()
+    {
+        m_bIsTutorial = true;
+
+        StartCoroutine(TutorialGame_Coroutine());
+    }
+
+    public void GameOver()
+    {
+        ObjectFactory.getInstance.Create_MessageBox_OneButton("GameOver", "GameOver");
+    }
 }

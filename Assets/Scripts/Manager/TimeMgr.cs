@@ -137,7 +137,8 @@ public class TimeMgr : Singleton<TimeMgr> {
 
 		yield return new WaitForSeconds (0.25f);
 
-		GameObject.Find ("PartyManager").GetComponent<PartyManager>().CalculateDepolying();
+        if(GameObject.Find("PartyManager") != null) 
+            GameObject.Find ("PartyManager").GetComponent<PartyManager>().CalculateDepolying();
 	}
 
 

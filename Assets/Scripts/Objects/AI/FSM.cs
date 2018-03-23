@@ -127,6 +127,7 @@ public class FSM : MonoBehaviour {
             fDamage = fDamage + (Random.Range(-2, 3));
             float fBlockDmg = (fDamage * ((fDefense * fDefenseFactor) / (1 + fDefenseFactor * fDefense)));
             float fDealedDmg = fDamage - fBlockDmg;
+            bool bCoreDead = false;
 
 			if (Random.Range (0, 100) < (int)fDodgePercent) { // Dodge!!
 				ObjectFactory.getInstance.Create_DamageUI (target, 0, true, 0f, true);
@@ -134,7 +135,13 @@ public class FSM : MonoBehaviour {
 			} else {
 				if (fDealedDmg > 0) {
 					if (targetPart.gameObject.name.Equals ("Core")) {
-						GameObject.Find ("Health").GetComponent<TopBarUI> ().ChangeValue (targetPart.m_fCurHealth - fDealedDmg);
+                        if (targetPart.m_fCurHealth - fDealedDmg > 0f)
+                            GameObject.Find("Health").GetComponent<TopBarUI>().ChangeValue(targetPart.m_fCurHealth - fDealedDmg);
+                        else
+                        {
+                            GameObject.Find("Health").GetComponent<TopBarUI>().ChangeValue(0f);
+                            bCoreDead = true;
+                        }
 					} else {
 						targetPart.m_fCurHealth -= fDealedDmg;
 					}
@@ -148,9 +155,14 @@ public class FSM : MonoBehaviour {
 			}
 
 			//targetPart.AdjustEmissionRate();
-			if(targetPart.m_fCurHealth <= 0)
+            if(targetPart.m_fCurHealth <= 0 || bCoreDead)
 			{
 				targetPart.PartDestroyed();
+
+                if (targetPart.gameObject.name.Equals("Core"))
+                {
+                    ObjectFactory.getInstance.Create_MessageBox_OneButton("GameOver", "GameOver");
+                }
 				yield break;
 			}
 		}

@@ -154,9 +154,9 @@ public class Core : Part {
 		Unit targetUnit = target.GetComponent<Unit> ();
 		while(targetUnit.m_fCurHealth > 0f){
 
-			yield return new WaitForSeconds(1f);
+			yield return null;
 
-			targetUnit.m_fCurHealth -= 10f;
+            targetUnit.m_fCurHealth -= Time.deltaTime  * 10f;
 		
 		}
 
@@ -180,12 +180,24 @@ public class Core : Part {
 		for (int i =0; i< iChildCount; ++i) {
 			target.transform.GetChild (0).GetComponent<SpriteRenderer> ().enabled = true;
 
-			if (target.transform.GetChild (0).GetComponent<Part> ().m_strNameKey.Equals ("시민 팔")) {
+            string strNameKey = target.transform.GetChild(0).GetComponent<Part>().m_strNameKey;
+
+            if (strNameKey.Equals ("시민 팔")) {
 				GameObject targetObj = target.transform.GetChild (0).gameObject;
 				targetObj.transform.parent = FieldTrans;
 				Destroy (targetObj);
 				continue;
-			}else if (Random.Range(0.0f,1.0f) < 0.3f
+            }else if(target.transform.GetChild(0).GetComponent<Part>().m_partType.Equals(PART_TYPE.LEG)){
+
+                if (Random.Range(0.0f, 1.0f) < 0.7f)
+                {
+                    GameObject targetObj = target.transform.GetChild(0).gameObject;
+                    targetObj.transform.parent = FieldTrans;
+                    Destroy(targetObj);
+                    continue;
+                }
+                
+            }else if (Random.Range(0.0f,1.0f) < 0.4f
 				&& !target.GetComponent<Unit>().m_enemyType.Equals(ENEMY_TYPE.HERO)) {
 				GameObject targetObj = target.transform.GetChild (0).gameObject;
 				targetObj.transform.parent = FieldTrans;

@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorldOverView : MonoBehaviour {
+public class WorldOverView : MonoBehaviour
+{
 
-	public WorldIcon m_selectedWorldIcon = null;
-	public WorldGeo m_selectedWorldGeo = null;
+    public WorldIcon m_selectedWorldIcon = null;
+    public WorldGeo m_selectedWorldGeo = null;
 
-	List<Party> m_listSelectedParty;
+    List<Party> m_listSelectedParty;
 
-	// Use this for initialization
-	void Start () {
-		m_listSelectedParty = new List<Party> ();
-	}
+    // Use this for initialization
+    void Start()
+    {
+        m_listSelectedParty = new List<Party>();
+    }
 
     public void SelectWorldIcon(WorldGeo worldGeo)
     {
@@ -140,11 +142,11 @@ public class WorldOverView : MonoBehaviour {
         transform.Find("IconInfo").Find("Desc").GetComponent<UILabel>().text = Localization.Get(string.Format("Icon_{0}_desc", strIconType));
 
         if (m_selectedWorldIcon.m_iconType != (int)WORLDICON_TYPE.EMPTY)
-        { 
-            transform.Find("IconInfo").Find("Desc").GetComponent<UILabel>().text += "\n\n" + Localization.Get("Prosperity") + " : " + iProsperity.ToString() + "\n" + Localization.Get("Population") + " : " + iPopulation.ToString();
+        {
+            transform.Find("IconInfo").Find("Desc").GetComponent<UILabel>().text += "\n\n" + Localization.Get("Prosperity") + " : " + ((int)m_selectedWorldIcon.m_fProsperity).ToString() + "\n" + Localization.Get("Population") + " : " + ((int)m_selectedWorldIcon.m_fPopulation).ToString();
         }
-                                                                       
-                                                                        //+ " " + Localization.Get(string.Format("Icon_{0}_desc_population_{1}", strIconType, iPopulation));
+
+        //+ " " + Localization.Get(string.Format("Icon_{0}_desc_population_{1}", strIconType, iPopulation));
 
         #endregion
 

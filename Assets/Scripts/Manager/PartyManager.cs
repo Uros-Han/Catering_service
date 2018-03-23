@@ -68,6 +68,10 @@ public class PartyManager : MonoBehaviour {
 	{
 		List<int> m_iListLoc;
 		int iRandom = Random.Range (0, 100);
+        Transform GeoTrans = GameObject.Find("Geo").transform;
+        int iCoreIdx = GridMgr.getInstance.GetGridIdx(GameObject.Find("Core").transform.position);
+        Dictionary<int, int> iDicDistance = new Dictionary<int, int>();
+        AStar aStar = AStar.getInstance;
 
 		if (iRandom < 33) {
 			m_iListLoc = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iListVillage;
@@ -77,7 +81,31 @@ public class PartyManager : MonoBehaviour {
 			m_iListLoc = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iListCastle;
 		}
 
-		return m_iListLoc[Random.Range(0, m_iListLoc.Count)];
+        for (int i = 0; i < m_iListLoc.Count; ++i)
+        {
+            iDicDistance.Add(m_iListLoc[i], aStar.AStarStart_World(iCoreIdx, m_iListLoc[i]).Count);
+        }
+
+        //가까운 순서대로 gridIdx 정렬a
+        List<KeyValuePair<int, int>> iListCloseLoc = new List<KeyValuePair<int, int>>(iDicDistance);
+        iListCloseLoc.Sort(
+            delegate (KeyValuePair<int, int> firstPair,
+                KeyValuePair<int, int> nextPair)
+            {
+                return firstPair.Value.CompareTo(nextPair.Value);
+            }
+        );
+
+
+        for (int i = 0; i < iListCloseLoc.Count; ++i)
+        {
+            if (!GeoTrans.GetChild(iListCloseLoc[i].Key).GetComponent<WorldGeo>().m_bPolluted && iListCloseLoc[i].Value > 1)
+            {
+                return iListCloseLoc[i].Key;
+            }
+        }
+
+		return -1;
 	}
 
 	int CalculateDeployLocation_Raider(bool bHeroIncluded = false, int iHeroIdx = -1)

@@ -2,27 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageUI : MonoBehaviour {
-	public float m_fDamage;
-	public bool m_bMinus;
-	public bool m_bDodge;
-    public float m_fBlockDmg=0;
+public class DamageUI : MonoBehaviour
+{
+    public float m_fDamage;
+    public bool m_bMinus;
+    public bool m_bDodge;
+    public float m_fBlockDmg = 0;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
 
-		if (!m_bDodge) {
-			if (m_bMinus) {
-                transform.GetChild (0).GetComponent<UILabel> ().text = m_fDamage.ToString();
-			} else {
-                transform.GetChild (0).GetComponent<UILabel> ().text = m_fDamage.ToString();
-				transform.GetChild (0).GetComponent<UILabel> ().color = Color.green;
-			}
-		} else {
-			transform.GetChild (0).GetComponent<UILabel> ().text = Localization.Get("Dodge") + "!";
+        if (!m_bDodge)
+        {
+            if (m_bMinus)
+            {
+                transform.GetChild(0).GetComponent<UILabel>().text = m_fDamage.ToString();
+            }
+            else
+            {
+                transform.GetChild(0).GetComponent<UILabel>().text = m_fDamage.ToString();
+                transform.GetChild(0).GetComponent<UILabel>().color = Color.green;
+            }
+        }
+        else
+        {
+            transform.GetChild(0).GetComponent<UILabel>().text = Localization.Get("Dodge") + "!";
             transform.GetChild(0).GetComponent<UILabel>().effectColor = Color.white;
-			transform.GetChild (0).GetComponent<UILabel> ().color = Color.white;
-		}
+            transform.GetChild(0).GetComponent<UILabel>().color = Color.white;
+        }
+
+        int iRandomXPos = Random.Range(-15, 5);
+        TweenPosition labelTween = transform.GetChild(0).GetComponent<TweenPosition>();
+        labelTween.to = new Vector3(iRandomXPos, labelTween.to.y);
+        labelTween.from = new Vector3(iRandomXPos, labelTween.from.y);
+
+        TweenPosition shieldTween = transform.GetChild(1).GetComponent<TweenPosition>();
+        shieldTween.to = new Vector3(iRandomXPos, shieldTween.to.y);
+        shieldTween.from = new Vector3(iRandomXPos, shieldTween.from.y);
 
 
         int iBlkDmg = (int)m_fBlockDmg;
@@ -30,17 +47,18 @@ public class DamageUI : MonoBehaviour {
         {
             transform.GetChild(1).gameObject.SetActive(true);
             transform.GetChild(1).Find("DfsCount").GetComponent<UILabel>().text = iBlkDmg.ToString();
-        }else
+        }
+        else
             transform.GetChild(1).gameObject.SetActive(false);
 
-		StartCoroutine (DestroyThis ());
-	}
+        StartCoroutine(DestroyThis());
+    }
 
-	IEnumerator DestroyThis()
-	{
-		yield return new WaitForSeconds (1.5f);
+    IEnumerator DestroyThis()
+    {
+        yield return new WaitForSeconds(1.5f);
 
-		Destroy (gameObject);
-	}
+        Destroy(gameObject);
+    }
 
 }
