@@ -107,8 +107,6 @@ public class GameMgr : MonoBehaviour
 
     public void TutorialGame()
     {
-        m_bIsTutorial = true;
-
         StartCoroutine(TutorialGame_Coroutine());
     }
 

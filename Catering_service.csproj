@@ -596,6 +596,7 @@
     <Compile Include="Assets\Scripts\Manager\SaveManager.cs" />
     <Compile Include="Assets\Scripts\Manager\SoundMgr.cs" />
     <Compile Include="Assets\Scripts\Manager\TimeMgr.cs" />
+    <Compile Include="Assets\Scripts\Manager\TutorialMgr.cs" />
     <Compile Include="Assets\Scripts\Manager\UIFollowTarget.cs" />
     <Compile Include="Assets\Scripts\Manager\WorldGenerator.cs" />
     <Compile Include="Assets\Scripts\Manager\WorldMapManager.cs" />

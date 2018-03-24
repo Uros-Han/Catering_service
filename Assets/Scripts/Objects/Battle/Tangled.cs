@@ -38,6 +38,18 @@ public class Tangled : MonoBehaviour
         m_bTangledReady = true;
     }
 
+    public void ChangeEatAvailable(bool bCantEat)
+    {
+        this.bCantEat = bCantEat;
+    }
+
+    public void ChangeGrabAvailable(bool bCantGrab)
+    {
+        this.bCantGrab = bCantGrab;
+    }
+
+    bool bCantEat = false;
+    bool bCantGrab = false;
     IEnumerator TangledDrag_Coroutine(Transform targetTransform)
     {
         m_bTangledReady = false;
@@ -89,7 +101,7 @@ public class Tangled : MonoBehaviour
                 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 targetTransform.position = new Vector3(target.x, target.y);
 
-                if (coreCollider.OverlapPoint(target) && !mouthPanel.isMouthFull())
+                if (coreCollider.OverlapPoint(target) && !mouthPanel.isMouthFull() && !bCantEat)
                 {
                     targetTransform.localScale = new Vector3(1.25f, 1.25f, 1f);
                     bReadyToEat = true;
@@ -129,7 +141,7 @@ public class Tangled : MonoBehaviour
             {
                 if (fCurTime < fMaxReachTime)
                 {
-                    fCurTime += Time.deltaTime;
+                    fCurTime += Time.unscaledDeltaTime;
                 }
                 else
                 {
@@ -140,7 +152,7 @@ public class Tangled : MonoBehaviour
             {
                 if (fCurTime > 0f)
                 {
-                    fCurTime -= Time.deltaTime * fMaxReachTime / fTangledDelay;
+                    fCurTime -= Time.unscaledDeltaTime * fMaxReachTime / fTangledDelay;
 
                     grabSprite.fillAmount = 1f - (fCurTime * 10f);
 
@@ -159,24 +171,34 @@ public class Tangled : MonoBehaviour
 
             if (!Input.GetMouseButton(0))
             {
-                bDoneDrag = true;
-                m_DragingObject = null;
 
-                Camera.main.GetComponent<ProCamera2DPanAndZoom>().enabled = true;
-                targetTransform.GetComponent<Unit>().m_bCatched = false;
-                if (targetTransform.GetComponent<FSM_Enemy>().m_AiState == AI_STATE.PANIC)
-                    targetTransform.GetComponent<FSM_Enemy>().m_AiState = AI_STATE.MOVE;
+                if (!bDoneDrag)
+                {
+                    bDoneDrag = true;
+                    m_DragingObject = null;
+                    Camera.main.GetComponent<ProCamera2DPanAndZoom>().enabled = true;
+                    targetTransform.GetComponent<Unit>().m_bCatched = false;
+                    if (targetTransform.GetComponent<FSM_Enemy>().m_AiState == AI_STATE.PANIC)
+                        targetTransform.GetComponent<FSM_Enemy>().m_AiState = AI_STATE.MOVE;
+
+                    for (int i = 0; i < targetTransform.childCount; ++i)
+                    {
+                        targetTransform.GetChild(i).GetComponent<SpriteRenderer>().sortingLayerName = "Objects";
+                    }
+
+                    if (GameMgr.getInstance.m_bIsTutorial && TutorialMgr.getInstance.tutoState == TutorialMgr.TUTO_STATE.EAT_BATTLE_1)
+                        TutorialMgr.getInstance.SkipTutorial();
+                }
 
                 if (bReadyToEat)
                 {
                     //targetTransform.localScale = Vector3.one;
                     StartCoroutine(GameObject.Find("Core").GetComponent<Core>().Eat(targetTransform.gameObject));
+                    if (GameMgr.getInstance.m_bIsTutorial && TutorialMgr.getInstance.tutoState == TutorialMgr.TUTO_STATE.EAT_BATTLE_2)
+                        TutorialMgr.getInstance.SkipTutorial();
                 }
 
-                for (int i = 0; i < targetTransform.childCount; ++i)
-                {
-                    targetTransform.GetChild(i).GetComponent<SpriteRenderer>().sortingLayerName = "Objects";
-                }
+
             }
 
             yield return null;
@@ -197,6 +219,9 @@ public class Tangled : MonoBehaviour
 
     public void TangledDrag(Transform target)
     {
+        if (bCantGrab)
+            return;
+
         StartCoroutine(TangledDrag_Coroutine(target));
     }
 
@@ -303,8 +328,8 @@ public class Tangled : MonoBehaviour
                     fCurTime = 0f;
                     m_bTangledReady = true;
                     targetTransform.GetComponent<Unit>().m_bCatched = false;
-                    if (targetTransform.GetComponent<FSM_MainScene_Enemy>().m_AiState == AI_STATE.PANIC)
-                        targetTransform.GetComponent<FSM_MainScene_Enemy>().m_AiState = AI_STATE.MOVE;
+                    //if (targetTransform.GetComponent<FSM_MainScene_Enemy>().m_AiState == AI_STATE.PANIC)
+                    //targetTransform.GetComponent<FSM_MainScene_Enemy>().m_AiState = AI_STATE.MOVE;
 
                     if (bReadyToEat)
                     {

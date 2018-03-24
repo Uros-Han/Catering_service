@@ -2,65 +2,70 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainManager : MonoBehaviour {
+public class MainManager : MonoBehaviour
+{
 
-	public float m_fSpawnTime = 5f;
+    public float m_fSpawnTime = 5f;
 
-	void Awake()
-	{
-		if(GameObject.Find("GameMgr") == null) //if gameMgr doesn't exist, make one.
-		{
-			GameObject gameMgr = Instantiate(Resources.Load("Prefabs/GameMgr") as GameObject) as GameObject;
-			gameMgr.name = gameMgr.name.Replace("(Clone)","");
-		}
+    void Awake()
+    {
+        if (GameObject.Find("GameMgr") == null) //if gameMgr doesn't exist, make one.
+        {
+            GameObject gameMgr = Instantiate(Resources.Load("Prefabs/GameMgr") as GameObject) as GameObject;
+            gameMgr.name = gameMgr.name.Replace("(Clone)", "");
+        }
 
-		SoundMgr.getInstance.SetAudioSources ();
+        SoundMgr.getInstance.SetAudioSources();
 
-		StartCoroutine (Spawner ());
-		GridMgr.getInstance.ChgGridInfo ();
-	}
+        StartCoroutine(Spawner());
+        GridMgr.getInstance.ChgGridInfo();
+
+        GameMgr.getInstance.m_bIsTutorial = false;
+    }
 
 
-	IEnumerator Spawner()
-	{
-		ObjectFactory objFac = ObjectFactory.getInstance;
-		WaitForSeconds wfs = new WaitForSeconds (m_fSpawnTime);
-		do {
-			float fRand = Random.Range(0,100f);
-			if(fRand < 50f)
-				objFac.Create_Civilian(100f);
-			else
-				objFac.Create_Mercenary(100f);
-			
-			yield return wfs;
-		} while(true);
-	}
+    IEnumerator Spawner()
+    {
+        ObjectFactory objFac = ObjectFactory.getInstance;
+        WaitForSeconds wfs = new WaitForSeconds(m_fSpawnTime);
+        do
+        {
+            float fRand = Random.Range(0, 100f);
+            if (fRand < 50f)
+                objFac.Create_Civilian(100f);
+            else
+                objFac.Create_Mercenary(100f);
 
-	public void BlowPart(GameObject target)
-	{
-		StartCoroutine (BlowPart_Coroutine (target));
-	}
+            yield return wfs;
+        } while (true);
+    }
 
-	IEnumerator BlowPart_Coroutine(GameObject target)
-	{
-		yield return null;
+    public void BlowPart(GameObject target)
+    {
+        StartCoroutine(BlowPart_Coroutine(target));
+    }
 
-		target.transform.parent = GameObject.Find("Tangled").transform;
-		Rigidbody2D targetRigid = target.GetComponent<Rigidbody2D> ();
+    IEnumerator BlowPart_Coroutine(GameObject target)
+    {
+        yield return null;
 
-		targetRigid.isKinematic = false;
-		targetRigid.AddTorque (Random.Range (-180f, 180f));
-		targetRigid.AddForce (1f * Vector3.Normalize(target.transform.position), ForceMode2D.Impulse);
+        target.transform.parent = GameObject.Find("Tangled").transform;
+        Rigidbody2D targetRigid = target.GetComponent<Rigidbody2D>();
 
-		yield return new WaitForSeconds (0.25f);
+        targetRigid.isKinematic = false;
+        targetRigid.AddTorque(Random.Range(-180f, 180f));
+        targetRigid.AddForce(1f * Vector3.Normalize(target.transform.position), ForceMode2D.Impulse);
 
-		do{
-			targetRigid.gravityScale += Time.deltaTime * 4f;
-			yield return null;
-		}while(targetRigid.gravityScale < 4f);
+        yield return new WaitForSeconds(0.25f);
 
-		yield return new WaitForSeconds (1f);
+        do
+        {
+            targetRigid.gravityScale += Time.deltaTime * 4f;
+            yield return null;
+        } while (targetRigid.gravityScale < 4f);
 
-		Destroy (target);
-	}
+        yield return new WaitForSeconds(1f);
+
+        Destroy(target);
+    }
 }

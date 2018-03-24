@@ -25,18 +25,26 @@ public class FSM_Enemy : FSM
         SetState(AI_STATE.MOVE);
     }
 
+    IEnumerator tremble;
+
     public void SetState(AI_STATE state)
     {
         m_AiState = state;
 
         if (m_CurStateCoroutine != null)
+        {
             StopCoroutine(m_CurStateCoroutine);
+        }
+
+        if (tremble != null)
+            StopCoroutine(tremble);
 
         switch (state)
         {
             case AI_STATE.MOVE:
                 m_CurStateCoroutine = State_Move();
-                StartCoroutine(Tremble());
+                tremble = Tremble();
+                StartCoroutine(tremble);
                 break;
 
             case AI_STATE.ATTACK:
@@ -133,8 +141,36 @@ public class FSM_Enemy : FSM
             {
                 if ((PlayerTrans.GetChild(i).gameObject.name.Equals("Body") || PlayerTrans.GetChild(i).gameObject.name.Equals("Core")) && Vector3.Distance(PlayerTrans.GetChild(i).transform.position, transform.position) < fRange)
                 {
-                    m_target = PlayerTrans.GetChild(i).gameObject;
-                    m_AiState = AI_STATE.ATTACK;
+                    if (GameMgr.getInstance.m_bIsTutorial)
+                    {
+                        if (TutorialMgr.getInstance.tutoState != TutorialMgr.TUTO_STATE.FIGHT_BATTLE_0 && TutorialMgr.getInstance.tutoState != TutorialMgr.TUTO_STATE.FIGHT_BATTLE_1)
+                            m_AiState = AI_STATE.PANIC;
+                        else
+                        {
+                            if (PlayerTrans.Find("Body") != null && !PlayerTrans.Find("Body").GetComponent<Part>().m_bDestroied)
+                                m_target = PlayerTrans.Find("Body").gameObject;
+                            else
+                                m_target = PlayerTrans.GetChild(i).gameObject;
+
+                            m_AiState = AI_STATE.ATTACK;
+                        }
+
+                        if (TutorialMgr.getInstance.tutoState == TutorialMgr.TUTO_STATE.EAT_BATTLE_0)
+                        {
+                            TutorialMgr.getInstance.SkipTutorial();
+                        }
+                        else if (TutorialMgr.getInstance.tutoState == TutorialMgr.TUTO_STATE.FIGHT_BATTLE_0)
+                        {
+                            m_target = PlayerTrans.Find("Body").gameObject;
+                            m_AiState = AI_STATE.ATTACK;
+                            TutorialMgr.getInstance.SkipTutorial();
+                        }
+                    }
+                    else
+                    {
+                        m_target = PlayerTrans.GetChild(i).gameObject;
+                        m_AiState = AI_STATE.ATTACK;
+                    }
                 }
             }
 

@@ -500,7 +500,6 @@ public class ObjectFactory : Singleton<ObjectFactory>
         return obj;
     }
 
-
     public GameObject Create_Poop()
     {
         GameObject obj = Instantiate(m_objPoop) as GameObject;
@@ -715,6 +714,9 @@ public class ObjectFactory : Singleton<ObjectFactory>
         GameObject obj;
         float fRandom = 0f;
 
+        bool bIsTutorial = false;
+        if (GameMgr.getInstance.m_bIsTutorial)
+            bIsTutorial = true;
 
         obj = Instantiate(m_objHuman) as GameObject;
 
@@ -752,7 +754,15 @@ public class ObjectFactory : Singleton<ObjectFactory>
         headPart.m_iSaveValue = iHeadRandom;
         headPart.m_iEnemyType = (int)ENEMY_TYPE.CIVILIAN;
 
-        switch (Random.Range(0, 3))
+
+        int iRandomBuff = 0;
+
+        if (!bIsTutorial)
+            iRandomBuff = Random.Range(0, 3);
+        else
+            iRandomBuff = 1;
+
+        switch (iRandomBuff)
         {
             case 0:
                 break;
@@ -781,12 +791,16 @@ public class ObjectFactory : Singleton<ObjectFactory>
         //		body.GetComponent<Part> ().m_dicStat = new Dictionary<string, float>();
 
         fRandom = Random.Range(80, 130);
+        if (bIsTutorial)
+            fRandom = 80f;
         Part bodyPart = body.GetComponent<Part>();
         bodyPart.m_fHealth = fRandom;
         bodyPart.m_fCurHealth = fRandom;
         bodyPart.m_dicStat.Add("Health", fRandom);
 
         fRandom = Random.Range(0, 30);
+        if (bIsTutorial)
+            fRandom = 10f;
         bodyPart.m_dicStat.Add("Defense", fRandom);
         bodyPart.m_iSaveValue = iBodyRandom;
         bodyPart.m_iEnemyType = (int)ENEMY_TYPE.CIVILIAN;
@@ -795,9 +809,13 @@ public class ObjectFactory : Singleton<ObjectFactory>
         GameObject arm = obj.transform.Find("Hand_R").gameObject;
         Part armPart = arm.GetComponent<Part>();
         int iArmRandom = Random.Range(0, m_sheet_civilian_arm.Length);
+        if (bIsTutorial)
+            iArmRandom = 2;
+
         arm.GetComponent<SpriteRenderer>().sprite = m_sheet_civilian_arm[iArmRandom];
         float fSpeedRandom = 0f;
         float fRange = 0f;
+
         switch (iArmRandom)
         {
             case 0:
@@ -822,6 +840,12 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 fRange = Random.Range(30, 40);
                 fRandom = Random.Range(10, 30);
                 fSpeedRandom = Random.Range(40, 70);
+                if (bIsTutorial)
+                {
+                    fRange = 40;
+                    fRandom = 20;
+                    fSpeedRandom = 50;
+                }
                 break;
             case 3:
                 armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
@@ -994,7 +1018,15 @@ public class ObjectFactory : Singleton<ObjectFactory>
 
         //		body.GetComponent<Part> ().m_dicStat = new Dictionary<string, float>();
 
-        fRandom = Random.Range(130, 180);
+        bool bIsTutorial = false;
+        if (GameMgr.getInstance.m_bIsTutorial)
+            bIsTutorial = true;
+
+        if (!bIsTutorial)
+            fRandom = Random.Range(130, 180);
+        else
+            fRandom = 50f;
+
         Part bodyPart = body.GetComponent<Part>();
         bodyPart.m_fHealth = fRandom;
         bodyPart.m_fCurHealth = fRandom;
@@ -1013,6 +1045,9 @@ public class ObjectFactory : Singleton<ObjectFactory>
         int iArmRandom = Random.Range(0, m_sheet_mercenary_arm.Length - 1);
         if (iArmRandom == 7)
             iArmRandom = 6;
+        if (bIsTutorial)
+            iArmRandom = 2;
+
         arm.GetComponent<SpriteRenderer>().sprite = m_sheet_mercenary_arm[iArmRandom];
         float fSpeedRandom = 0f;
 
@@ -1040,6 +1075,13 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 fRandom = Random.Range(30, 60);
                 fSpeedRandom = Random.Range(40, 70);
                 armPart.m_bUse32PixelHand = true;
+
+                if (bIsTutorial)
+                {
+                    fRange = 30f;
+                    fRandom = 30f;
+                    fSpeedRandom = 50f;
+                }
                 break;
             case 3:
                 armPart.m_weaponType = WEAPON_TYPE.POLE;
@@ -1354,6 +1396,9 @@ public class ObjectFactory : Singleton<ObjectFactory>
         {
             vecBornPos = new Vector3(-2f, vecBornPos.y);
         }
+
+        if (GameMgr.getInstance.m_bIsTutorial)
+            vecBornPos = new Vector3(2f, 0.3f);
 
         if (!Application.loadedLevelName.Equals("Main"))
             obj.GetComponent<FSM_Enemy>().m_objHealthBar = Create_HealthBar(obj);

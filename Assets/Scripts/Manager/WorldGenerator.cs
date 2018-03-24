@@ -29,11 +29,12 @@ public class WorldGenerator : Singleton<WorldGenerator>
     void Start()
     {
         grid = GridMgr.getInstance;
-        m_geoTrans = GameObject.Find("Geo").transform;
     }
 
     public IEnumerator GenerateWorldMap()
     {
+        m_geoTrans = GameObject.Find("Geo").transform;
+
         GameObject.Find("TopLeftUI").GetComponent<UIPanel>().alpha = 0f;
         GameObject.Find("BottomUI").GetComponent<UIPanel>().alpha = 0f;
         GameObject.Find("WorldOverview").GetComponent<UIPanel>().alpha = 0f;
@@ -193,6 +194,8 @@ public class WorldGenerator : Singleton<WorldGenerator>
 
     public IEnumerator GenerateTutorialMap()
     {
+        m_geoTrans = GameObject.Find("Geo").transform;
+
         GameObject.Find("TopLeftUI").GetComponent<UIPanel>().alpha = 0f;
         GameObject.Find("BottomUI").GetComponent<UIPanel>().alpha = 0f;
         GameObject.Find("WorldOverview").GetComponent<UIPanel>().alpha = 0f;
@@ -225,9 +228,9 @@ public class WorldGenerator : Singleton<WorldGenerator>
 
         objFac.Create_WorldIcon(grid.GetPosOfIdx(iCenterIdx - grid.m_iXcount - 1), (int)WORLDICON_TYPE.EMPTY);
         objFac.Create_WorldIcon(grid.GetPosOfIdx(iCenterIdx - grid.m_iXcount), (int)WORLDICON_TYPE.EMPTY);
-        objFac.Create_WorldIcon(grid.GetPosOfIdx(iCenterIdx - grid.m_iXcount + 1), (int)WORLDICON_TYPE.FARM);
+        objFac.Create_WorldIcon(grid.GetPosOfIdx(iCenterIdx - grid.m_iXcount + 1), (int)WORLDICON_TYPE.EMPTY);
 
-        objFac.Create_WorldIcon(grid.GetPosOfIdx(iCenterIdx - 1), (int)WORLDICON_TYPE.EMPTY);
+        objFac.Create_WorldIcon(grid.GetPosOfIdx(iCenterIdx - 1), (int)WORLDICON_TYPE.VILLAGE);
         objFac.Create_WorldIcon(grid.GetPosOfIdx(iCenterIdx), (int)WORLDICON_TYPE.EMPTY);
         objFac.Create_WorldIcon(grid.GetPosOfIdx(iCenterIdx + 1), (int)WORLDICON_TYPE.FARM);
 
@@ -291,7 +294,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
         GameObject.Find("LoadingBar").GetComponent<UIPanel>().alpha = 0f;
         GameObject.Find("WorldTool").GetComponent<UIPanel>().alpha = 0f;
 
-        SaveManager.getInstance.LocalSave();
+        TutorialMgr.getInstance.Init();
     }
 
     float GenerateNormalRandom(float mean, float stdDev) //평균, 표준편차
@@ -349,7 +352,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
         GameObject.Find("ProgressLabel").GetComponent<UILabel>().text = strLabel;
     }
 
-    public List<int> DeployEnemyList(float fPopulation, WORLDICON_TYPE world_type) //번영도와 인구수에 맞는 적을 리스트로 뽑아준다. (번영도는 적 생성시 적용)
+    public List<int> DeployEnemyList(float fPopulation, WORLDICON_TYPE world_type, bool bIsTutorial = false) //번영도와 인구수에 맞는 적을 리스트로 뽑아준다. (번영도는 적 생성시 적용)
     {
         List<int> list_enemyType = new List<int>();
 
@@ -381,7 +384,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
                 case WORLDICON_TYPE.VILLAGE:
                     fRandom = Random.Range(0f, 100f);
 
-                    if (fRandom < 70)
+                    if (fRandom < 70 || bIsTutorial)
                     {
                         list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
                         fPopulation -= m_fTypeCost[(int)ENEMY_TYPE.MERCENARY];
@@ -450,7 +453,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
                     worldIcon.m_fPopulation = 10f;
             }
 
-            if (!worldIcon.m_iconType.Equals((int)WORLDICON_TYPE.FARM) && iCoreIdx != iGridIdx)
+            if (!worldIcon.m_iconType.Equals((int)WORLDICON_TYPE.FARM) && iCoreIdx != iGridIdx && !bIsTutorial)
             {
                 GameObject newOne = ObjectFactory.getInstance.Create_WorldIcon(grid.GetPosOfIdx(iGridIdx), (int)WORLDICON_TYPE.FARM);
                 SetWorldPropertyAndPopulation(iGridIdx, newOne.GetComponent<WorldIcon>(), WORLDICON_TYPE.FARM);
@@ -486,7 +489,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
             }
         }
 
-        worldIcon.m_list_enemyType = DeployEnemyList(worldIcon.m_fPopulation, type);
+        worldIcon.m_list_enemyType = DeployEnemyList(worldIcon.m_fPopulation, type, bIsTutorial);
     }
 
     void FloodFill(int iX, int iY, WORLD_GEO geoTarget)

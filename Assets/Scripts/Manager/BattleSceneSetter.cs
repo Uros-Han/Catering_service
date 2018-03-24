@@ -60,7 +60,8 @@ public class BattleSceneSetter : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(1.5f);
+        if (morgueTrans.childCount > 0)
+            yield return new WaitForSeconds(1.5f);
 
         morgueTrans.gameObject.BroadcastMessage("DestroyThis", SendMessageOptions.DontRequireReceiver);
         GameObject.Find("Morgue").GetComponent<Morgue>().ClearMorgue();
@@ -87,6 +88,11 @@ public class BattleSceneSetter : MonoBehaviour
                 PlayerTrans.GetChild(i).GetComponent<Part>().m_objHealthBar = objFac.Create_HealthBar(PlayerTrans.GetChild(i).gameObject);
             }
         }
+    }
+
+    public void SkipTutorial()
+    {
+        TutorialMgr.getInstance.SkipTutorial();
     }
 
     void InitLight()

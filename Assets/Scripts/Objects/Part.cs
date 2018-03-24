@@ -287,6 +287,13 @@ public class Part : MonoBehaviour
     }
 
     //	Vector3 vecScaleFactor;
+
+    public void ChgBlockAssembleDrag(bool block)
+    {
+        bBlockedAssembleDrag = block;
+    }
+
+    bool bBlockedAssembleDrag = false;
     bool bStopAssemble = false;
     GameObject m_StickedPart = null;
     public IEnumerator Assemble()
@@ -320,6 +327,8 @@ public class Part : MonoBehaviour
         DIRECTION m_BeforeheadingDirection = DIRECTION.EVERYWHERE;
         BattleSceneMgr battleSceneMgr = BattleSceneMgr.getInstance;
 
+        bool bIsTutorial = GameMgr.getInstance.m_bIsTutorial;
+
         //		Vector3 uiScale = GameObject.Find ("UI Root").transform.localScale;
         //		vecScaleFactor = new Vector3 (1 / uiScale.x, 1 / uiScale.y, 1f);
 
@@ -349,7 +358,7 @@ public class Part : MonoBehaviour
                 if (m_bNeedToStickHead)
                     GetComponent<BoxCollider2D>().offset = new Vector2(0f, 0f);
 
-                if (!gameObject.name.Equals("Core"))
+                if (!gameObject.name.Equals("Core") && !bBlockedAssembleDrag)
                     bFollowCursor = true;
 
                 morgue.SelectPart(this);
@@ -358,26 +367,19 @@ public class Part : MonoBehaviour
                     buffCoroutine = StartCoroutine(Buff());
                 }
 
-                if (!gameObject.name.Equals("Core"))
-                    PartBorder.GetComponent<SpriteRenderer>().enabled = false;
+                if (transform.parent.name.Equals("Player"))
+                {
+                    PartBorder.transform.parent = GameObject.Find("Objects").transform;
+                    PartBorder.layer = 0;
+                    PartBorder.transform.position = grid.GetPosOfIdx(grid.GetGridIdx(OriginPos));
+                }
                 else
                 {
-                    if (transform.parent.name.Equals("Player"))
-                    {
-                        PartBorder.transform.parent = GameObject.Find("Objects").transform;
-                        PartBorder.layer = 0;
-                        PartBorder.transform.position = grid.GetPosOfIdx(grid.GetGridIdx(OriginPos));
-                    }
-                    else
-                    {
-                        PartBorder.transform.parent = GameObject.Find("MorguePanel").transform;
-                        PartBorder.layer = 5;
-                        PartBorder.transform.position = morgue.GetIdxPos(morgue.GetIdxFromPos(OriginPos));
-                    }
-
-                    PartBorder.GetComponent<SpriteRenderer>().enabled = true;
+                    PartBorder.transform.parent = GameObject.Find("MorguePanel").transform;
+                    PartBorder.layer = 5;
+                    PartBorder.transform.position = morgue.GetIdxPos(morgue.GetIdxFromPos(OriginPos));
                 }
-                //				transform.localScale = new Vector3(vecScaleFactor.x, vecScaleFactor.y, 1f);
+                PartBorder.GetComponent<SpriteRenderer>().enabled = true;
 
                 if (transform.parent.name.Equals("Player") && !gameObject.name.Equals("Core"))
                 {
@@ -386,7 +388,7 @@ public class Part : MonoBehaviour
                     bParentWasCore = true;
                 }
 
-                if (!gameObject.name.Equals("Core"))
+                if (bFollowCursor)
                 {
                     transform.localScale = Vector3.one;
                     transform.parent = GameObject.Find("Temp").transform;
@@ -394,28 +396,23 @@ public class Part : MonoBehaviour
 
                     Camera.main.GetComponent<ProCamera2DPanAndZoom>().enabled = false;
                     GetComponent<SpriteRenderer>().sortingOrder = 0;
-                }
 
-
-                if (bParentWasCore)
-                {
-                    m_BeforeheadingDirection = m_headingDirection;
-                    GetComponent<SpriteSheet>().CheckAround(false, iBeforeSeatIdx);
-                    if (m_bAttackAvailable)
-                    {
-                        GetComponent<SpriteRenderer>().enabled = true;
-                        transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
-                    }
-                }
-
-                if (!gameObject.name.Equals("Core"))
-                {
                     GetComponent<SpriteRenderer>().sortingLayerName = "FrontObject";
-                    //					GetComponent<ParticleSystemRenderer>().sortingLayerName = "FrontObject_Particle";
+                    core.CalculateStickableSeat(true);
+
+                    if (bParentWasCore)
+                    {
+                        m_BeforeheadingDirection = m_headingDirection;
+                        GetComponent<SpriteSheet>().CheckAround(false, iBeforeSeatIdx);
+                        if (m_bAttackAvailable)
+                        {
+                            GetComponent<SpriteRenderer>().enabled = true;
+                            transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+                        }
+                    }
+
                 }
 
-                if (!gameObject.name.Equals("Core"))
-                    core.CalculateStickableSeat(true);
             }
 
             if (bFollowCursor && Input.GetMouseButton(0)) //클릭시 따라다니게
@@ -429,11 +426,21 @@ public class Part : MonoBehaviour
                 Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 gameObject.layer = 5;
 
+                if (bIsTutorial)
+                {
+                    TutorialMgr.getInstance.ChgHighLightCamera(true);
+                }
+
                 for (int i = 0; i < core.m_StickAvailableSeat.Count; ++i)
                 {
                     if (core.m_StickAvailableSeat[i].Equals(curGridIdx)) //드래그 중 붙을 수 있는 지역안에 들어옴
                     {
                         transform.position = grid.GetPosOfIdx(curGridIdx);
+
+                        if (bIsTutorial)
+                        {
+                            TutorialMgr.getInstance.ChgHighLightCamera(false);
+                        }
 
                         gameObject.layer = 0;
 
@@ -550,7 +557,7 @@ public class Part : MonoBehaviour
                     }
                 }
 
-                if (PoopColldier2D.OverlapPoint(mousePosition)) // get in poop
+                if (PoopColldier2D.OverlapPoint(mousePosition) && (!bIsTutorial || (bIsTutorial && TutorialMgr.getInstance.tutoState == TutorialMgr.TUTO_STATE.FIGHT_BATTLE_1))) // get in poop
                 {
                     GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 0.5f);
                     bWasPoop = true;
@@ -588,6 +595,9 @@ public class Part : MonoBehaviour
                     #region Stick!
                     if (core.m_StickAvailableSeat[i].Equals(curGridIdx)) // Stick!!!!!
                     {
+                        if (bIsTutorial)
+                            TutorialMgr.getInstance.SkipTutorial();
+
                         m_objLastParentPart = m_objCurParentPart;
                         m_iLastParentPartIdx = grid.GetGridIdx(m_objLastParentPart.transform.position);
                         transform.position = grid.GetPosOfIdx(core.m_StickAvailableSeat[i]);
@@ -727,8 +737,11 @@ public class Part : MonoBehaviour
                     }
                 }
 
-                if (PoopColldier2D.OverlapPoint(mousePosition)) // get in poop
+                if (PoopColldier2D.OverlapPoint(mousePosition) && (!bIsTutorial || (bIsTutorial && TutorialMgr.getInstance.tutoState == TutorialMgr.TUTO_STATE.FIGHT_BATTLE_1))) // get in poop
                 {
+                    if (bIsTutorial)
+                        TutorialMgr.getInstance.SkipTutorial();
+
                     morgue.DeselectPart();
                     if (!bParentWasCore)
                     {

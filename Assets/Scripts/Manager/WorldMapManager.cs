@@ -96,6 +96,7 @@ public class WorldMapManager : MonoBehaviour
 
     public void TutorialWorld()
     {
+        GameMgr.getInstance.m_bIsTutorial = true;
         StartCoroutine(WorldGenerator.getInstance.GenerateTutorialMap());
     }
 
@@ -114,6 +115,11 @@ public class WorldMapManager : MonoBehaviour
     {
         GameMgr.getInstance.m_bAssembleOnly = false;
         SceneToBattle();
+    }
+
+    public void SkipTutorial()
+    {
+        TutorialMgr.getInstance.SkipTutorial();
     }
 
     public void SceneToBattle()
@@ -153,7 +159,8 @@ public class WorldMapManager : MonoBehaviour
 
     void ExitBtn()
     {
-        SaveManager.getInstance.LocalSave();
+        if (!GameMgr.getInstance.m_bIsTutorial)
+            SaveManager.getInstance.LocalSave();
 
         Destroy(GameObject.Find("Player").gameObject);
 
