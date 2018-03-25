@@ -233,7 +233,6 @@ public class TutorialMgr : Singleton<TutorialMgr>
 
         yield return StartCoroutine(WaitUnilSkip());
 
-        Debug.Log(GameObject.Find("Morgue").transform.childCount);
         GameObject.Find("Morgue").BroadcastMessage("ChgBlockAssembleDrag", true, SendMessageOptions.DontRequireReceiver);
 
         //Digest Done
@@ -401,6 +400,8 @@ public class TutorialMgr : Singleton<TutorialMgr>
         highLight_0.alpha = 1f;
         highLight_0.depth = 3;
         highLight_0.gameObject.GetComponent<UIFollowTarget>().enabled = false;
+
+        yield return null;
         highLight_0.transform.position = GameObject.Find("Skip").transform.GetChild(1).position;
 
         yield return StartCoroutine(WaitUnilSkip());
@@ -529,12 +530,6 @@ public class TutorialMgr : Singleton<TutorialMgr>
 
         yield return StartCoroutine(WaitUnilSkip());
 
-        Time.timeScale = 1f;
-        skipPanel_battle.alpha = 0f;
-        highLight_0_battle.alpha = 0f;
-
-        yield return StartCoroutine(WaitUnilSkip());
-
         //TUTO_3
         FightBattleTrans.GetChild(2).GetComponent<UILabel>().enabled = false;
         FightBattleTrans.GetChild(3).GetComponent<UILabel>().enabled = true;
@@ -569,16 +564,21 @@ public class TutorialMgr : Singleton<TutorialMgr>
 
         Time.timeScale = 1f;
         skipPanel_battle.alpha = 0f;
-        highLight_0_battle.alpha = 0f;
-
-        yield return StartCoroutine(WaitUnilSkip());
 
         //TUTO_5
         FightBattleTrans.GetChild(4).GetComponent<UILabel>().enabled = false;
         FightBattleTrans.GetChild(5).GetComponent<UILabel>().enabled = true;
 
         skipPanel_battle.alpha = 0f;
-        highLight_0_battle.transform.position = GameObject.Find("Poop").transform.position;
+        highLight_0_battle.GetComponent<UIFollowTarget>().enabled = true;
+        highLight_0_battle.GetComponent<UIFollowTarget>().gameCamera = UICamera.mainCamera;
+        highLight_0_battle.GetComponent<UIFollowTarget>().target = GameObject.Find("Poop").transform;
+
+        Transform morgueTrans = GameObject.Find("Morgue").transform;
+        do
+        {
+            yield return null;
+        } while (morgueTrans.childCount == 1);
 
         highLight_1_battle.alpha = 1f;
         highLight_1_battle.depth = 3;
@@ -595,14 +595,16 @@ public class TutorialMgr : Singleton<TutorialMgr>
         FightBattleTrans.GetChild(6).GetComponent<UILabel>().enabled = true;
 
         skipPanel_battle.alpha = 1f;
-        highLight_0_battle.transform.position = GameObject.Find("Skip").transform.GetChild(1).position;
 
+        highLight_0_battle.GetComponent<UIFollowTarget>().enabled = false;
+        highLight_0_battle.transform.position = GameObject.Find("Skip").transform.GetChild(1).position;
         highLight_1_battle.alpha = 0f;
 
         yield return StartCoroutine(WaitUnilSkip());
         #endregion
 
         Destroy(GameObject.Find("Player").gameObject);
+        BattleSceneMgr.getInstance.m_transformGridParent.gameObject.SetActive(false);
         Application.LoadLevel("Main");
     }
 

@@ -1,29 +1,31 @@
 ﻿<Properties StartupConfiguration="{40AFACE8-085D-B8B9-0FA4-9FB35D719EE5}|">
   <MonoDevelop.Ide.ItemProperties.Catering__service PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Manager/UIFollowTarget.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Manager/GridMgr.cs">
     <Files>
       <File FileName="Assets/Scripts/Manager/WorldGenerator.cs" Line="392" Column="25" />
-      <File FileName="Assets/Scripts/Objects/Part.cs" Line="1244" Column="17" />
+      <File FileName="Assets/Scripts/Objects/Part.cs" Line="258" Column="24" />
       <File FileName="Assets/Scripts/Manager/BattleSceneSetter.cs" Line="63" Column="39" />
-      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="1083" Column="37" />
+      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="535" Column="12" />
       <File FileName="Assets/Scripts/Objects/World/TopBarUI.cs" Line="26" Column="14" />
       <File FileName="Assets/Scripts/Manager/SoundMgr.cs" Line="134" Column="23" />
       <File FileName="Assets/Scripts/UI/Main/MainButtons.cs" Line="42" Column="49" />
       <File FileName="Assets/Scripts/Objects/World/WorldOverView.cs" Line="146" Column="175" />
       <File FileName="Assets/Scripts/Manager/GameMgr.cs" Line="105" Column="83" />
       <File FileName="Assets/Scripts/Manager/WorldMapManager.cs" Line="167" Column="39" />
-      <File FileName="Assets/Scripts/Manager/TutorialMgr.cs" Line="514" Column="27" />
+      <File FileName="Assets/Scripts/Manager/TutorialMgr.cs" Line="598" Column="9" />
       <File FileName="Assets/Scripts/Objects/World/Core_World.cs" Line="142" Column="33" />
-      <File FileName="Assets/Scripts/Objects/AI/FSM_Enemy.cs" Line="153" Column="74" />
+      <File FileName="Assets/Scripts/Objects/AI/FSM_Enemy.cs" Line="213" Column="32" />
       <File FileName="Assets/Scripts/Objects/Battle/Tangled.cs" Line="197" Column="125" />
-      <File FileName="Assets/Scripts/Objects/Battle/Core.cs" Line="301" Column="52" />
-      <File FileName="Assets/Scripts/Objects/Battle/Unit.cs" Line="5" Column="14" />
+      <File FileName="Assets/Scripts/Objects/Battle/Core.cs" Line="36" Column="38" />
+      <File FileName="Assets/Scripts/Objects/Battle/Unit.cs" Line="90" Column="38" />
       <File FileName="Assets/Scripts/UI/Main/MainManager.cs" Line="23" Column="51" />
-      <File FileName="Assets/Scripts/Manager/BattleSceneMgr.cs" Line="58" Column="36" />
+      <File FileName="Assets/Scripts/Manager/BattleSceneMgr.cs" Line="182" Column="55" />
       <File FileName="Assets/Scripts/Manager/LevelGenerator.cs" Line="20" Column="38" />
       <File FileName="Assets/Scripts/Objects/Party/Party.cs" Line="53" Column="49" />
-      <File FileName="Assets/Scripts/Objects/AI/FSM.cs" Line="193" Column="36" />
-      <File FileName="Assets/Scripts/Manager/UIFollowTarget.cs" Line="87" Column="15" />
+      <File FileName="Assets/Scripts/Objects/AI/FSM.cs" Line="160" Column="51" />
+      <File FileName="Assets/Scripts/Manager/UIFollowTarget.cs" Line="90" Column="20" />
+      <File FileName="Assets/Scripts/UI/DamageUI.cs" Line="5" Column="14" />
+      <File FileName="Assets/Scripts/Manager/GridMgr.cs" Line="248" Column="72" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

@@ -150,13 +150,14 @@ public class FSM : MonoBehaviour
             {
                 if (fDealedDmg > 0)
                 {
+                    bool bTutorialDodge = false;
                     if (targetPart.gameObject.name.Equals("Core"))
                     {
                         if (targetPart.m_fCurHealth - fDealedDmg > 0f)
                             GameObject.Find("Health").GetComponent<TopBarUI>().ChangeValue(targetPart.m_fCurHealth - fDealedDmg);
                         else if (GameMgr.getInstance.m_bIsTutorial)
                         {
-                            ObjectFactory.getInstance.Create_DamageUI(target, 0, true, 0f, true);
+                            bTutorialDodge = true;
                         }
                         else
                         {
@@ -176,7 +177,11 @@ public class FSM : MonoBehaviour
                         else
                             targetPart.m_fCurHealth = 0f;
                     }
-                    ObjectFactory.getInstance.Create_DamageUI(target, fDamage, true, fBlockDmg);
+
+                    if (bTutorialDodge)
+                        ObjectFactory.getInstance.Create_DamageUI(target, 0, true, 0f, true);
+                    else
+                        ObjectFactory.getInstance.Create_DamageUI(target, fDamage, true, fBlockDmg);
                 }
                 else
                 {

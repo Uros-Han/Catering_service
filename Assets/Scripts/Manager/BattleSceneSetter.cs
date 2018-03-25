@@ -59,8 +59,8 @@ public class BattleSceneSetter : MonoBehaviour
                     yield return new WaitForSeconds(0.4f);
             }
         }
-
-        if (morgueTrans.childCount > 0)
+        Debug.Log(morgueTrans.childCount);
+        if (morgueTrans.childCount > 1)
             yield return new WaitForSeconds(1.5f);
 
         morgueTrans.gameObject.BroadcastMessage("DestroyThis", SendMessageOptions.DontRequireReceiver);
