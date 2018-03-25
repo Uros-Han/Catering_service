@@ -625,10 +625,10 @@ public class Part : MonoBehaviour
                         bToOrigin = false;
                         transform.parent = GameObject.Find("Player").transform;
 
-                        //						if(transform.localScale.x < 0)
-                        //							transform.localScale = new Vector3(-1, 1, 1);
-                        //						else
-                        //							transform.localScale = Vector3.one;
+                        if (transform.localScale.x < 0)
+                            transform.localScale = new Vector3(-1, 1, 1);
+                        else
+                            transform.localScale = Vector3.one;
 
                         gameObject.layer = 0;
                         m_iGridIdx = core.m_StickAvailableSeat[i];

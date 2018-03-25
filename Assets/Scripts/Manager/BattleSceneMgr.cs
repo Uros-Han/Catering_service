@@ -211,7 +211,7 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr>
             Camera.main.GetComponent<ProCamera2D>().CameraTargets[0].TargetTransform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.75f, 0.5f));
             //			StartCoroutine(CamOffset_XChg(true));
 
-            iTween.MoveTo(morgueTrans.parent.gameObject, iTween.Hash("x", -170f, "y", 0f, "time", 0.25f, "easetype", "easeInSine", "islocal", true));
+            iTween.MoveTo(morgueTrans.parent.gameObject, iTween.Hash("x", -170f, "time", 0.25f, "easetype", "easeInSine", "islocal", true));
 
         }
         else
