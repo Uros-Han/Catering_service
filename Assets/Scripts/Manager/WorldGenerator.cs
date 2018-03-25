@@ -42,7 +42,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
         GameObject.Find("WorldTool").GetComponent<UIPanel>().alpha = 0f;
         GameObject.Find("LoadingBar").GetComponent<UIPanel>().alpha = 1f;
 
-        LoadingProgress(0.01f, "Instantiate");
+        LoadingProgress(0.01f, "초기화 중");
         yield return new WaitForSeconds(0.3f);
 
         int iCityNum = 20;
@@ -58,7 +58,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
             if (i % 100 == 0)
             {
                 float fProgress = (((float)i / ((float)grid.m_iXcount * (float)grid.m_iYcount)) * 0.3f);
-                LoadingProgress(fProgress, string.Format("Create Geometry ({0}/{1})", i, grid.m_iXcount * grid.m_iYcount));
+                LoadingProgress(fProgress, string.Format("지형 만드는 중 ({0}/{1})", i, grid.m_iXcount * grid.m_iYcount));
                 yield return null;
             }
         }
@@ -101,7 +101,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
             idxList.Remove(iRandomIdx);
         }
 
-        LoadingProgress(0.3f, "Castle Instantiate");
+        LoadingProgress(0.3f, "성 초기화 중");
         yield return new WaitForSeconds(0.1f);
 
         for (int i = 0; i < iCityNum; ++i)
@@ -113,7 +113,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
             idxList.Remove(iRandomIdx);
         }
 
-        LoadingProgress(0.4f, "City Instantiate");
+        LoadingProgress(0.4f, "도시 초기화 중");
         yield return new WaitForSeconds(0.1f);
 
         for (int i = 0; i < idxList.Count; ++i)
@@ -134,7 +134,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
             //			m_geoTrans.GetChild (idxList[i]).GetComponent<WorldGeo> ().m_worldIcon = objIcon;
         }
 
-        LoadingProgress(0.5f, "Icons Instantiate");
+        LoadingProgress(0.5f, "지역 초기화 중");
         yield return new WaitForSeconds(0.1f);
 
         //		GameObject.Find ("WorldIcons").BroadcastMessage ("CheckAroundAmIAlone");
@@ -146,16 +146,16 @@ public class WorldGenerator : Singleton<WorldGenerator>
             if (i % 10 == 0)
             {
                 float fProgress = 0.5f + ((float)i / (float)icons.childCount * 0.2f);
-                LoadingProgress(fProgress, string.Format("Check Unreachable Islands ({0}/{1})", i, icons.childCount));
+                LoadingProgress(fProgress, string.Format("접근 불가 섬 확인중 ({0}/{1})", i, icons.childCount));
                 yield return null;
             }
         }
 
-        LoadingProgress(0.7f, "Destorying Unreachable Islands");
+        LoadingProgress(0.7f, "섬 파괴 중");
         icons.BroadcastMessage("DestroyIfIsland");
         yield return new WaitForSeconds(0.5f);
 
-        LoadingProgress(0.8f, "Pumping Ocean");
+        LoadingProgress(0.8f, "바닷물 퍼내는 중");
         FloodFill(0, 0, WORLD_GEO.WATER);
         FloodFill(grid.m_iXcount - 1, 0, WORLD_GEO.WATER);
         FloodFill(0, grid.m_iYcount - 1, WORLD_GEO.WATER);
@@ -172,12 +172,12 @@ public class WorldGenerator : Singleton<WorldGenerator>
             if (i % 100 == 0)
             {
                 float fProgress = 0.8f + ((float)i / (float)icons.childCount * 0.1f);
-                LoadingProgress(fProgress, string.Format("Set World Property & Population ({0}/{1})", i, icons.childCount));
+                LoadingProgress(fProgress, string.Format("세계 인구수 & 번영도 설정중 ({0}/{1})", i, icons.childCount));
                 yield return null;
             }
         }
 
-        LoadingProgress(1f, "Done");
+        LoadingProgress(1f, "완료!");
         yield return new WaitForSeconds(0.5f);
 
         GameObject.Find("TopLeftUI").GetComponent<UIPanel>().alpha = 1f;
@@ -203,7 +203,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
         GameObject.Find("WorldTool").GetComponent<UIPanel>().alpha = 0f;
         GameObject.Find("LoadingBar").GetComponent<UIPanel>().alpha = 1f;
 
-        LoadingProgress(0.01f, "Instantiate");
+        LoadingProgress(0.01f, "초기화 중");
         yield return new WaitForSeconds(0.3f);
 
         ObjectFactory objFac = ObjectFactory.getInstance;
@@ -216,7 +216,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
             if (i % 100 == 0)
             {
                 float fProgress = (((float)i / ((float)grid.m_iXcount * (float)grid.m_iYcount)) * 0.3f);
-                LoadingProgress(fProgress, string.Format("Create Geometry ({0}/{1})", i, grid.m_iXcount * grid.m_iYcount));
+                LoadingProgress(fProgress, string.Format("지형 만드는 중 ({0}/{1})", i, grid.m_iXcount * grid.m_iYcount));
                 yield return null;
             }
         }
@@ -239,7 +239,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
         objFac.Create_WorldIcon(grid.GetPosOfIdx(iCenterIdx + grid.m_iXcount + 1), (int)WORLDICON_TYPE.EMPTY);
 
 
-        LoadingProgress(0.5f, "Icons Instantiate");
+        LoadingProgress(0.5f, "지역 초기화 중");
         yield return new WaitForSeconds(0.1f);
 
         //      GameObject.Find ("WorldIcons").BroadcastMessage ("CheckAroundAmIAlone");
@@ -251,16 +251,16 @@ public class WorldGenerator : Singleton<WorldGenerator>
             if (i % 10 == 0)
             {
                 float fProgress = 0.5f + ((float)i / (float)icons.childCount * 0.2f);
-                LoadingProgress(fProgress, string.Format("Check Unreachable Islands ({0}/{1})", i, icons.childCount));
+                LoadingProgress(fProgress, string.Format("접근 불가 섬 확인중 ({0}/{1})", i, icons.childCount));
                 yield return null;
             }
         }
 
-        LoadingProgress(0.7f, "Destorying Unreachable Islands");
+        LoadingProgress(0.7f, "섬 파괴 중");
         icons.BroadcastMessage("DestroyIfIsland");
         yield return new WaitForSeconds(0.5f);
 
-        LoadingProgress(0.8f, "Pumping Ocean");
+        LoadingProgress(0.8f, "바닷물 퍼내는 중");
         FloodFill(0, 0, WORLD_GEO.WATER);
         FloodFill(grid.m_iXcount - 1, 0, WORLD_GEO.WATER);
         FloodFill(0, grid.m_iYcount - 1, WORLD_GEO.WATER);
@@ -277,12 +277,12 @@ public class WorldGenerator : Singleton<WorldGenerator>
             if (i % 100 == 0)
             {
                 float fProgress = 0.8f + ((float)i / (float)icons.childCount * 0.1f);
-                LoadingProgress(fProgress, string.Format("Set World Property & Population ({0}/{1})", i, icons.childCount));
+                LoadingProgress(fProgress, string.Format("세계 인구수 & 번영도 설정중 ({0}/{1})", i, icons.childCount));
                 yield return null;
             }
         }
 
-        LoadingProgress(1f, "Done");
+        LoadingProgress(1f, "완료!");
         yield return new WaitForSeconds(0.5f);
 
         GameObject.Find("TopLeftUI").GetComponent<UIPanel>().alpha = 1f;

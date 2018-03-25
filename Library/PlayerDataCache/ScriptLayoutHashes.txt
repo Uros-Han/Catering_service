@@ -1,4 +1,4 @@
-iOS
+Android
 SceneListBegin?
 Assets/Scenes/Main.unity
 Assets/Scenes/Battle.unity
@@ -485,8 +485,9 @@ dfd78d000f4a366511f19f57d8d80c76 Assembly-CSharp.dll:.CoreAbilityMgr
 fcffe9bbf1b7b7e4593e31031f78987b Assembly-CSharp.dll:.UISliderColors
 7cfdc1ec603e0fd5090ecc802f230df2 Assembly-CSharp.dll:.GridMgr
 eee89b3429db0942bfca88f85de80682 Assembly-CSharp.dll:SpriteParticleEmitter.StaticEmitterContinuous
-e0ce2962a0ea1addb8fd2703a55678f3 Assembly-CSharp.dll:.GameMgr
+ddefa0a7392ee867182bafb715520778 Assembly-CSharp.dll:.GameMgr
 b5cfa8bf295fd7e3976dec31449318a2 Assembly-CSharp.dll:.MessageBox
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.RealTime
 0ea7e3a1b65cd933d7a007e6774c4eaa Assembly-CSharp.dll:.SpriteMaskExample06Scaller
 18248c02757d2f02d46a3cce4166dbbf Assembly-CSharp.dll:SpriteParticleEmitter.DynamicEmitterUI
+b895b461ca9e97b68b1dddd14d286bd9 Assembly-CSharp.dll:.TutorialMgr
