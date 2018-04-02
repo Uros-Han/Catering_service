@@ -118,12 +118,10 @@ Shader "DP Shaders/Sprite Palette Bilinear"
 				return OUT;
 			}
 
-			
-
 			fixed4 SampleSpriteTexture (float2 uv, float index)
 			{
 				fixed4 color = DPBilinear(uv, index);
-
+			
 				#if ETC1_EXTERNAL_ALPHA
 				fixed4 alpha = tex2D(_AlphaTex, uv);
 				color.a = lerp(color.a, alpha.r, _EnableExternalAlpha);

@@ -15,7 +15,7 @@ public class PaletteBuilderImporter : AssetPostprocessor
         foreach (string asset in importedAssets)
         {
             // Process each act file and creates a copy with .bytes extension to use with unity as a text asset in binary mode.
-            if (asset.EndsWith(".act"))
+            if (asset.ToLower().EndsWith(".act"))
             {
                 string filePath = asset.Substring(0, asset.Length - Path.GetFileName(asset).Length) + "/";
                 string newFileName = filePath + Path.GetFileNameWithoutExtension(asset) + ".act.bytes";

@@ -79,8 +79,24 @@ public class DPPaletteMultiCombinerEditor : Editor
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
-        DPPaletteEditorList.Show(serializedObject.FindProperty("PaletteTextures"), false, dsp);
+        if (dsp.UsePalettesFrom == null)
+        {   
+            DPPaletteEditorList.Show(serializedObject.FindProperty("PaletteTextures"), false, dsp);
+        }
         serializedObject.ApplyModifiedProperties();
+
+        EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+        GUILayout.BeginHorizontal();
+        EditorGUILayout.PrefixLabel(new GUIContent("Use Palette Texture from", "Allows the reuse of the palette texture of ther Palette Multi Combine to reduce draw calls"));
+        DPPaletteMultiCombiner otherCombiner = dsp.UsePalettesFrom;
+        dsp.UsePalettesFrom = (DPPaletteMultiCombiner)EditorGUILayout.ObjectField(otherCombiner, typeof(DPPaletteMultiCombiner), true);
+        if (otherCombiner != dsp.UsePalettesFrom && otherCombiner != dsp)
+        {
+            dsp.UpdateTextures();
+            if (dsp.GetComponent<DPSpritePaletteUI>() != null) dsp.GetComponent<DPSpritePaletteUI>().Refresh();
+        }
+        GUILayout.EndHorizontal();
+        EditorGUILayout.EndVertical();
 
         Canvas.ForceUpdateCanvases();
         SceneView.RepaintAll();

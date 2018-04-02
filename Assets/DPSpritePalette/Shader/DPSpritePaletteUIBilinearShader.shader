@@ -103,11 +103,9 @@ Shader "DP Shaders/Sprite Palette UI Bilinear"
 				return OUT;
 			}
 
-			
-
 			fixed4 frag(v2f IN) : SV_Target
 			{
-				half4 color = (DPBilinear(IN.texcoord, IN.index) + _TextureSampleAdd) * IN.color;
+				half4 color = (DPBilinearUI(IN.texcoord, IN.index) + _TextureSampleAdd) * IN.color;
 				
 				color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
 				

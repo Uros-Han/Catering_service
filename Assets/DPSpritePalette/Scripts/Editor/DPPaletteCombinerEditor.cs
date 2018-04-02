@@ -14,17 +14,21 @@ public class DPPaletteCombinerEditor: Editor {
     public override void OnInspectorGUI()
     {
         EditorGUILayout.BeginVertical(EditorStyles.helpBox);
-        GUILayout.BeginHorizontal();
-        EditorGUILayout.PrefixLabel(new GUIContent("Palette Texture 1", "The texture with the palettes!\nCheck the readme.txt for the format.\n" +
-                                                   "For DPPaletteCombiner the palette textures must be Read/Write Enabled!!"));
-        Texture2D oldTex = dsp.paletteTexture1;
-        dsp.paletteTexture1 = (Texture2D)EditorGUILayout.ObjectField(dsp.paletteTexture1, typeof(Texture2D), false);
-        if (oldTex != dsp.paletteTexture1)
+
+        if (dsp.UsePalettesFrom == null)
         {
-            dsp.UpdateTextures();
-            if (dsp.GetComponent<DPSpritePaletteUI>() != null) dsp.GetComponent<DPSpritePaletteUI>().Refresh();
-        } 
-        GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+            EditorGUILayout.PrefixLabel(new GUIContent("Palette Texture 1", "The texture with the palettes!\nCheck the readme.txt for the format.\n" +
+                                                       "For DPPaletteCombiner the palette textures must be Read/Write Enabled!!"));
+            Texture2D oldTex = dsp.paletteTexture1;
+            dsp.paletteTexture1 = (Texture2D)EditorGUILayout.ObjectField(dsp.paletteTexture1, typeof(Texture2D), false);
+            if (oldTex != dsp.paletteTexture1)
+            {
+                dsp.UpdateTextures();
+                if (dsp.GetComponent<DPSpritePaletteUI>() != null) dsp.GetComponent<DPSpritePaletteUI>().Refresh();
+            }
+            GUILayout.EndHorizontal();
+        }
 
         GUILayout.BeginHorizontal();
         EditorGUILayout.PrefixLabel("Palette Index 1"); ;
@@ -47,17 +51,20 @@ public class DPPaletteCombinerEditor: Editor {
         EditorGUILayout.EndVertical();
 
         EditorGUILayout.BeginVertical(EditorStyles.helpBox);
-        GUILayout.BeginHorizontal();
-        EditorGUILayout.PrefixLabel(new GUIContent("Palette Texture 2", "The texture with the palettes!\nCheck the readme.txt for the format.\n" +
-                                                   "For DPPaletteCombiner the palette textures must be Read/Write Enabled!!"));
-        oldTex = dsp.paletteTexture2;
-        dsp.paletteTexture2 = (Texture2D)EditorGUILayout.ObjectField(dsp.paletteTexture2, typeof(Texture2D), false);
-        if (oldTex != dsp.paletteTexture2) {
-            dsp.UpdateTextures();
-            if (dsp.GetComponent<DPSpritePaletteUI>() != null) dsp.GetComponent<DPSpritePaletteUI>().Refresh();
+        if (dsp.UsePalettesFrom == null)
+        {
+            GUILayout.BeginHorizontal();
+            EditorGUILayout.PrefixLabel(new GUIContent("Palette Texture 2", "The texture with the palettes!\nCheck the readme.txt for the format.\n" +
+                                                       "For DPPaletteCombiner the palette textures must be Read/Write Enabled!!"));
+            Texture2D oldTex = dsp.paletteTexture2;
+            dsp.paletteTexture2 = (Texture2D)EditorGUILayout.ObjectField(dsp.paletteTexture2, typeof(Texture2D), false);
+            if (oldTex != dsp.paletteTexture2)
+            {
+                dsp.UpdateTextures();
+                if (dsp.GetComponent<DPSpritePaletteUI>() != null) dsp.GetComponent<DPSpritePaletteUI>().Refresh();
+            }
+            GUILayout.EndHorizontal();
         }
-        GUILayout.EndHorizontal();
-
 
         GUILayout.BeginHorizontal();
         EditorGUILayout.PrefixLabel("Palette Index 2");
@@ -80,6 +87,22 @@ public class DPPaletteCombinerEditor: Editor {
         EditorGUILayout.EndVertical();
 
         //if (GUILayout.Button("Update")) { dsp.UpdateTextures(); }
+
+        EditorGUILayout.Space();
+
+        EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+        GUILayout.BeginHorizontal();
+        EditorGUILayout.PrefixLabel(new GUIContent("Use Palette Texture from", "Allows the reuse of the palette texture of ther Palette Combine to reduce draw calls"));
+        DPPaletteCombiner otherCombiner = dsp.UsePalettesFrom;
+        dsp.UsePalettesFrom = (DPPaletteCombiner)EditorGUILayout.ObjectField(otherCombiner, typeof(DPPaletteCombiner), true);
+        if (otherCombiner != dsp.UsePalettesFrom && otherCombiner != dsp)
+        {
+            dsp.paletteTexture1 = dsp.paletteTexture2 = null;
+            dsp.UpdateTextures();
+            if (dsp.GetComponent<DPSpritePaletteUI>() != null) dsp.GetComponent<DPSpritePaletteUI>().Refresh();
+        }
+        GUILayout.EndHorizontal();
+        EditorGUILayout.EndVertical();
 
         Canvas.ForceUpdateCanvases();
         SceneView.RepaintAll();

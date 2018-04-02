@@ -36261,9 +36261,11 @@ extern const RuntimeType TextAssetU5BU5D_t2780361322_0_0_6 = { (void*)&TextAsset
 
 extern const RuntimeType DPPaletteCombiner_t3385381087_0_0_0 = { (void*)3119, 0, IL2CPP_TYPE_CLASS, 0, 0, 0 };
 extern const RuntimeType DPPaletteCombiner_t3385381087_1_0_0 = { (void*)3119, 0, IL2CPP_TYPE_CLASS, 0, 1, 0 };
+extern const RuntimeType DPPaletteCombiner_t3385381087_0_0_6 = { (void*)3119, 6, IL2CPP_TYPE_CLASS, 0, 0, 0 };
 
 extern const RuntimeType DPPaletteMultiCombiner_t597029426_0_0_0 = { (void*)3121, 0, IL2CPP_TYPE_CLASS, 0, 0, 0 };
 extern const RuntimeType DPPaletteMultiCombiner_t597029426_1_0_0 = { (void*)3121, 0, IL2CPP_TYPE_CLASS, 0, 1, 0 };
+extern const RuntimeType DPPaletteMultiCombiner_t597029426_0_0_6 = { (void*)3121, 6, IL2CPP_TYPE_CLASS, 0, 0, 0 };
 
 extern const RuntimeType DPPaletteTextureIndexU5BU5D_t1548169427_0_0_0 = { (void*)&DPPaletteTextureIndex_t454637078_0_0_0, 0, IL2CPP_TYPE_SZARRAY, 0, 0, 0 };
 extern const RuntimeType DPPaletteTextureIndexU5BU5D_t1548169427_0_0_1 = { (void*)&DPPaletteTextureIndex_t454637078_0_0_0, 1, IL2CPP_TYPE_SZARRAY, 0, 0, 0 };
@@ -38657,7 +38659,7 @@ Il2CppArrayType BoundsU5B0___U2C0___U5D_t3642494292_ArrayType =
 	NULL,
 };
 extern const RuntimeType BoundsU5B0___U2C0___U5D_t3642494292_0_0_0 = { &BoundsU5B0___U2C0___U5D_t3642494292_ArrayType, 0, IL2CPP_TYPE_ARRAY, 0, 0, 0 };
-extern const RuntimeType* const  g_Il2CppTypeTable[18853] = 
+extern const RuntimeType* const  g_Il2CppTypeTable[18855] = 
 {
 	&IEnumerator_1_t3512676632_0_0_0,
 	&RuntimeObject_0_0_0,
@@ -55044,11 +55046,13 @@ extern const RuntimeType* const  g_Il2CppTypeTable[18853] =
 	&DPPaletteCombiner_t3385381087_0_0_0,
 	&DPPaletteCombiner_t3385381087_1_0_0,
 	&DPSpritePaletteUI_t3549782763_0_0_1,
+	&DPPaletteCombiner_t3385381087_0_0_6,
 	&DPPaletteTextureIndex_t454637078_1_0_0,
 	&DPPaletteMultiCombiner_t597029426_0_0_0,
 	&DPPaletteMultiCombiner_t597029426_1_0_0,
 	&DPPaletteTextureIndexU5BU5D_t1548169427_0_0_0,
 	&DPPaletteTextureIndexU5BU5D_t1548169427_0_0_1,
+	&DPPaletteMultiCombiner_t597029426_0_0_6,
 	&DPSpritePalette_t326054672_1_0_0,
 	&SpriteRenderer_t3235626157_0_0_1,
 	&MaterialPropertyBlock_t3213117958_0_0_1,

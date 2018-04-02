@@ -1,4 +1,4 @@
-Android
+iOS
 SceneListBegin?
 Assets/Scenes/Main.unity
 Assets/Scenes/Battle.unity
@@ -45,7 +45,7 @@ ef642f3006e4ec30a3ef768c7ee96cb6 Assembly-CSharp.dll:.UIToggledComponents
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp-firstpass.dll:.SampleInfo
 a00e236478df394b90e86a0e24f20612 Assembly-CSharp-firstpass.dll:ES3Internal.ES3DefaultSettings
 23b50ef73e2c1a8a76860d35bcbbf8fc Assembly-CSharp.dll:UnityStandardAssets.ImageEffects.GlobalFog
-5700f54fe8529f06cabf6ef1e44997df Assembly-CSharp.dll:.ObjectFactory
+a0aafcd637e0b83f39fac63c769e7199 Assembly-CSharp.dll:.ObjectFactory
 b533a55bac6b0ef81fc95d63b2d4c3a9 Assembly-CSharp.dll:.UIButtonScale
 daabd8d8800a87cff11f866c4d06a232 Assembly-CSharp.dll:UnityStandardAssets.ImageEffects.ContrastStretch
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:SpriteColorFX.PredatorController
@@ -282,7 +282,7 @@ d818a55e6287fa9e961c2dc646c62e79 Assembly-CSharp.dll:.MiniPanel
 8c92a20276ff16bdc0d0f2f0d7a05a72 Assembly-CSharp.dll:.WorldMapManager
 9cc53808dcf5c956d505509ce196dc51 Assembly-CSharp.dll:SpriteColorFX.SpriteColorInstagram
 d000d514961969c4ee16e0cbf9632501 Assembly-CSharp.dll:Com.LuisPedroFonseca.ProCamera2D.ProCamera2DParallax
-0d593228d5dd9f919d2bee75d3264223 Assembly-CSharp.dll:.DPPaletteCombiner
+48cf1b36954cdc614ec9e00ff032c956 Assembly-CSharp.dll:.DPPaletteCombiner
 639f87ce06b954909f29ee90cec3e419 Assembly-CSharp.dll:.DamageUI
 6f3dded94558741cf5aab373145220f4 Assembly-CSharp.dll:FoW.FogOfWarEvents
 5ee6b3a9ddfd1b34a29e37bff36c7883 Assembly-CSharp.dll:.InvAttachmentPoint
@@ -445,7 +445,7 @@ e1465412638808687f77f1e8e2b8dc26 Assembly-CSharp.dll:Com.LuisPedroFonseca.ProCam
 3156205461bc2c7d2d642aeb21438224 Assembly-CSharp.dll:SpriteColorFX.SpriteColorShiftLinear
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.LanguageSelection
 53dbd7baa3c8da2f87828dd70d70dae4 Assembly-CSharp.dll:UnityStandardAssets.ImageEffects.DepthOfFieldDeprecated
-583e05023b62dc2d4baaf0497d612f4d Assembly-CSharp.dll:.DPPaletteMultiCombiner
+638da6a2a431ec6c6a815034630529ad Assembly-CSharp.dll:.DPPaletteMultiCombiner
 3aceed4c2a878381ad7c58aa4501898e Assembly-CSharp-firstpass.dll:.ES3InspectorInfo
 7fc3adfac7efbc0706567dbaca46f637 Assembly-CSharp.dll:UnityStandardAssets.ImageEffects.Fisheye
 b3cba89fce2bce22748b1a160499f98d Assembly-CSharp.dll:.WorldIcon

@@ -100,7 +100,11 @@ public class DPSpritePaletteUI : MonoBehaviour, UnityEngine.UI.IMaterialModifier
 	/// <param name="index">Index.</param>
 	public void SetPaletteIndex(int index) 
 	{
-		if(paletteTexture == null) return;
+        if (paletteTexture == null)
+        {
+            Debug.Log("palette texture is null on " + gameObject.name);
+            return;
+        }
 		
 		if(index >= paletteTexture.width) { 
 			Debug.LogError("Palette index out of range!");
@@ -178,7 +182,7 @@ public class DPSpritePaletteUI : MonoBehaviour, UnityEngine.UI.IMaterialModifier
 			_lastpaletteTexture = paletteTexture;
 		}
 		
-		float index = (_currentIndex+0.5f)/paletteTexture.width;
+		float index = (_currentIndex+0.7f)/paletteTexture.width;
 		sp.color = new Color(color.r, map(color.g, color.b), index, color.a);
     }
 
@@ -199,7 +203,7 @@ public class DPSpritePaletteUI : MonoBehaviour, UnityEngine.UI.IMaterialModifier
 			_lastpaletteTexture = paletteTexture;
 		}
 		
-		float index = (_currentIndex+0.5f)/paletteTexture.width;
+		float index = (_currentIndex+0.7f)/paletteTexture.width;
 		sp.color = new Color(color.r, map(color.g, color.b), index, color.a);
     }
 	

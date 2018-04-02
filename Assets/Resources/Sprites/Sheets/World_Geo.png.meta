@@ -1,11 +1,13 @@
 fileFormatVersion: 2
 guid: 2b59bec70e3cd4730afd6d503e4e53ad
-timeCreated: 1511432148
+timeCreated: 1522666548
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: World_Geo_0
     21300002: World_Geo_1
+    21300004: World_Geo_2
+    21300006: World_Geo_3
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -121,6 +123,34 @@ TextureImporter:
         serializedVersion: 2
         x: 24
         y: 264
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: World_Geo_2
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 264
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: World_Geo_3
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 144
         width: 24
         height: 24
       alignment: 0

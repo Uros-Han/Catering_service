@@ -25125,13 +25125,19 @@ extern "C" void DPPaletteCombiner_PrevPalette2_m3187526231 ();
 extern "C" void DPPaletteCombiner_SetPaletteIndex_m3009398522 ();
 extern "C" void DPPaletteCombiner_SetPalette1Index_m2077219413 ();
 extern "C" void DPPaletteCombiner_SetPalette2Index_m1056351430 ();
+extern "C" void DPPaletteCombiner_SetPaletteTexture1_m2227885615 ();
+extern "C" void DPPaletteCombiner_SetPaletteTexture2_m1889912604 ();
 extern "C" void DPPaletteCombiner_UpdateTextures_m2140173689 ();
+extern "C" void DPPaletteCombiner_UseOtherPaletteTex_m1744792202 ();
 extern "C" void DPPaletteCombiner_Awake_m2779123561 ();
+extern "C" void DPPaletteCombiner_Start_m1704601935 ();
+extern "C" void DPPaletteCombiner_GetDPS_m3765110378 ();
 extern "C" void DPPaletteCombiner_SetPaletteTexture_m2826387419 ();
 extern "C" void DPPaletteCombiner_GetIndex_m810054145 ();
 extern "C" void DPPaletteCombiner_CombineTextures_m1954974787 ();
 extern "C" void DPPaletteMultiCombiner__ctor_m1836067748 ();
 extern "C" void DPPaletteMultiCombiner_Awake_m3395137169 ();
+extern "C" void DPPaletteMultiCombiner_GetDPS_m441430594 ();
 extern "C" void DPPaletteMultiCombiner_Start_m50180272 ();
 extern "C" void DPPaletteMultiCombiner_SetPaletteIndex_m667773979 ();
 extern "C" void DPPaletteMultiCombiner_GetIndex_m636016127 ();
@@ -25141,6 +25147,7 @@ extern "C" void DPPaletteMultiCombiner_SetPaletteTexture_m4124736262 ();
 extern "C" void DPPaletteMultiCombiner_NextPalette_m1830342354 ();
 extern "C" void DPPaletteMultiCombiner_PrevPalette_m1653457301 ();
 extern "C" void DPPaletteMultiCombiner_UpdateTextures_m4047703169 ();
+extern "C" void DPPaletteMultiCombiner_UseOtherPaletteTex_m1612442559 ();
 extern "C" void DPPaletteMultiCombiner_SetPaletteIndex_m2813519435 ();
 extern "C" void DPPaletteMultiCombiner_SetPaletteTexture_m772924551 ();
 extern "C" void DPPaletteMultiCombiner_CombineTextures_m3004278424 ();
@@ -28934,7 +28941,7 @@ extern "C" void U3CEnemyCheckU3Ec__Iterator0_Reset_m267626550 ();
 extern "C" void WorldOverView__ctor_m2182167814 ();
 extern "C" void WorldOverView_Start_m4044747356 ();
 extern "C" void WorldOverView_SelectWorldIcon_m873079078 ();
-extern const Il2CppMethodPointer g_MethodPointers[28916] = 
+extern const Il2CppMethodPointer g_MethodPointers[28923] = 
 {
 	U3CPrivateImplementationDetailsU3E__ctor_m1418335040,
 	Locale__ctor_m734557855,
@@ -54043,13 +54050,19 @@ extern const Il2CppMethodPointer g_MethodPointers[28916] =
 	DPPaletteCombiner_SetPaletteIndex_m3009398522,
 	DPPaletteCombiner_SetPalette1Index_m2077219413,
 	DPPaletteCombiner_SetPalette2Index_m1056351430,
+	DPPaletteCombiner_SetPaletteTexture1_m2227885615,
+	DPPaletteCombiner_SetPaletteTexture2_m1889912604,
 	DPPaletteCombiner_UpdateTextures_m2140173689,
+	DPPaletteCombiner_UseOtherPaletteTex_m1744792202,
 	DPPaletteCombiner_Awake_m2779123561,
+	DPPaletteCombiner_Start_m1704601935,
+	DPPaletteCombiner_GetDPS_m3765110378,
 	DPPaletteCombiner_SetPaletteTexture_m2826387419,
 	DPPaletteCombiner_GetIndex_m810054145,
 	DPPaletteCombiner_CombineTextures_m1954974787,
 	DPPaletteMultiCombiner__ctor_m1836067748,
 	DPPaletteMultiCombiner_Awake_m3395137169,
+	DPPaletteMultiCombiner_GetDPS_m441430594,
 	DPPaletteMultiCombiner_Start_m50180272,
 	DPPaletteMultiCombiner_SetPaletteIndex_m667773979,
 	DPPaletteMultiCombiner_GetIndex_m636016127,
@@ -54059,6 +54072,7 @@ extern const Il2CppMethodPointer g_MethodPointers[28916] =
 	DPPaletteMultiCombiner_NextPalette_m1830342354,
 	DPPaletteMultiCombiner_PrevPalette_m1653457301,
 	DPPaletteMultiCombiner_UpdateTextures_m4047703169,
+	DPPaletteMultiCombiner_UseOtherPaletteTex_m1612442559,
 	DPPaletteMultiCombiner_SetPaletteIndex_m2813519435,
 	DPPaletteMultiCombiner_SetPaletteTexture_m772924551,
 	DPPaletteMultiCombiner_CombineTextures_m3004278424,

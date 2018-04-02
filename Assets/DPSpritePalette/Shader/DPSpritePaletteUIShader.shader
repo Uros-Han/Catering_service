@@ -103,8 +103,6 @@ Shader "DP Shaders/Sprite Palette UI"
 				return OUT;
 			}
 
-			
-
 			fixed4 frag(v2f IN) : SV_Target
 			{
 				half4 color = (DPSampleSpriteTexture(IN.texcoord, IN.index) + _TextureSampleAdd) * IN.color;

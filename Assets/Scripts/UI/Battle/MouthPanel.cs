@@ -2,116 +2,134 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MouthPanel : MonoBehaviour {
+public class MouthPanel : MonoBehaviour
+{
 
-	public GameObject[] m_arrayEatenObjects;
+    public GameObject[] m_arrayEatenObjects;
 
-	IEnumerator[] m_DigestBar;
+    IEnumerator[] m_DigestBar;
 
-	// Use this for initialization
-	void Start () {
-		m_arrayEatenObjects = new GameObject[3];
-		m_DigestBar = new IEnumerator[3];
+    // Use this for initialization
+    void Start()
+    {
+        m_arrayEatenObjects = new GameObject[3];
+        m_DigestBar = new IEnumerator[3];
 
-		for (int i = 0; i < m_DigestBar.Length; ++i) {
-			m_DigestBar [i] = DigestBar (i);
-		}
-	}
+        for (int i = 0; i < m_DigestBar.Length; ++i)
+        {
+            m_DigestBar[i] = DigestBar(i);
+        }
+    }
 
-	public int EmptyMouthIdx(){
-		
-		int iMouthNum = GameObject.Find ("Player").GetComponent<CoreAbilityMgr> ().m_iMouthNum;
+    public int EmptyMouthIdx()
+    {
 
-		for (int i = 0; i < iMouthNum; ++i) {
-			if (m_arrayEatenObjects [i] == null) {
-				return i;
-			}
-		}
+        int iMouthNum = GameObject.Find("Player").GetComponent<CoreAbilityMgr>().m_iMouthNum;
 
-		return -1;
-	}
+        for (int i = 0; i < iMouthNum; ++i)
+        {
+            if (m_arrayEatenObjects[i] == null)
+            {
+                return i;
+            }
+        }
 
-	public bool isMouthFull()
-	{
-		int iMouthNum = GameObject.Find ("Player").GetComponent<CoreAbilityMgr> ().m_iMouthNum;
+        return -1;
+    }
 
-		for (int i = 0; i < iMouthNum; ++i) {
-			if (m_arrayEatenObjects [i] == null) {
-				return false;
-			}
-		}
+    public bool isMouthFull()
+    {
+        int iMouthNum = GameObject.Find("Player").GetComponent<CoreAbilityMgr>().m_iMouthNum;
 
-		return true;
-	}
+        for (int i = 0; i < iMouthNum; ++i)
+        {
+            if (m_arrayEatenObjects[i] == null)
+            {
+                return false;
+            }
+        }
 
-	public void AddEnemyInMouth(GameObject objEnemy)
-	{
-		int iMouthNum = GameObject.Find ("Player").GetComponent<CoreAbilityMgr> ().m_iMouthNum;
-		bool bMouthFulled = true;
-		int iEmptyIdx = 0;
-		for (int i = 0; i < iMouthNum; ++i) {
-			if (m_arrayEatenObjects [i] == null) {
-				bMouthFulled = false;
-				iEmptyIdx = i;
-				break;
-			}
-		}
+        return true;
+    }
 
-		if (bMouthFulled)
-			return;
+    public void AddEnemyInMouth(GameObject objEnemy)
+    {
+        int iMouthNum = GameObject.Find("Player").GetComponent<CoreAbilityMgr>().m_iMouthNum;
+        bool bMouthFulled = true;
+        int iEmptyIdx = 0;
+        for (int i = 0; i < iMouthNum; ++i)
+        {
+            if (m_arrayEatenObjects[i] == null)
+            {
+                bMouthFulled = false;
+                iEmptyIdx = i;
+                break;
+            }
+        }
 
-		m_arrayEatenObjects [iEmptyIdx] = objEnemy;
+        if (bMouthFulled)
+            return;
 
-		objEnemy.transform.parent = GameObject.Find ("MouthList").transform.GetChild(iEmptyIdx);
-		objEnemy.transform.parent.GetComponent<SpriteMask> ().updateSprites (objEnemy.transform.parent);
+        m_arrayEatenObjects[iEmptyIdx] = objEnemy;
 
-		StartCoroutine (m_DigestBar[iEmptyIdx]);
-	}
+        objEnemy.transform.parent = GameObject.Find("MouthList").transform.GetChild(iEmptyIdx);
+        objEnemy.transform.parent.GetComponent<SpriteMask>().updateSprites(objEnemy.transform.parent);
 
-	IEnumerator DigestBar(int iIdx)
-	{
-		Unit targetUnit = m_arrayEatenObjects [iIdx].GetComponent<Unit>();
-		UISlider slider = GameObject.Find ("MouthList").transform.GetChild (iIdx).GetComponent<UISlider> ();
+        for (int i = 0; i < objEnemy.transform.childCount; ++i)
+        {
+            objEnemy.transform.GetChild(i).GetComponent<DPSpritePalette>().enabled = false;
+            objEnemy.transform.GetChild(i).GetComponent<SpriteRenderer>().color = Color.white;
+        }
 
-		do{
-			slider.value = targetUnit.m_fCurHealth / targetUnit.m_fHealth;
-			yield return null;
-		}while(targetUnit.m_fCurHealth > 0f);
+        StartCoroutine(m_DigestBar[iEmptyIdx]);
+    }
 
-		slider.value = 0f;
-		m_arrayEatenObjects[iIdx] = null;
+    IEnumerator DigestBar(int iIdx)
+    {
+        Unit targetUnit = m_arrayEatenObjects[iIdx].GetComponent<Unit>();
+        UISlider slider = GameObject.Find("MouthList").transform.GetChild(iIdx).GetComponent<UISlider>();
 
-		m_DigestBar [iIdx] = DigestBar (iIdx);
-	}
+        do
+        {
+            slider.value = targetUnit.m_fCurHealth / targetUnit.m_fHealth;
+            yield return null;
+        } while (targetUnit.m_fCurHealth > 0f);
 
-	public void MouthClickIdx_0()
-	{
-		if (m_arrayEatenObjects [0] == null)
-			return;
+        slider.value = 0f;
+        m_arrayEatenObjects[iIdx] = null;
 
-		StopCoroutine (m_DigestBar[0]);
-		GameObject.Find ("Core").GetComponent<Core> ().StopDigest (0);
+        m_DigestBar[iIdx] = DigestBar(iIdx);
+    }
 
-		GameObject.Find ("MouthList").transform.GetChild (0).GetComponent<UISlider> ().value = 0f;
+    public void MouthClickIdx_0()
+    {
+        if (m_arrayEatenObjects[0] == null)
+            return;
 
-		GameObject target = transform.Find ("MouthList").GetChild (0).GetChild (0).gameObject;
+        StopCoroutine(m_DigestBar[0]);
+        GameObject.Find("Core").GetComponent<Core>().StopDigest(0);
 
-		target.transform.parent = GameObject.Find ("Enemies").transform;
-		target.GetComponent<FSM_Enemy> ().m_objHealthBar.SetActive (true);
-		target.GetComponent<FSM_Enemy> ().m_objHealthBar.GetComponent<UIPanel> ();
-		target.transform.position = GameObject.Find ("Core").transform.position + new Vector3 (Random.Range(-0.15f, 0.15f), Random.Range(-0.15f, 0.15f));
-		target.transform.localScale = Vector3.one;
-		target.layer = 0;
-		target.transform.SetChildLayer(0);
-		target.GetComponent<FSM_Enemy> ().m_AiState = AI_STATE.MOVE;
+        GameObject.Find("MouthList").transform.GetChild(0).GetComponent<UISlider>().value = 0f;
 
-		Material diffuse = ObjectFactory.getInstance.m_material_diffuse;
-		for (int i = 0; i < target.transform.childCount; ++i) {
-			target.transform.GetChild (i).GetComponent<SpriteRenderer> ().material = diffuse;
-		}
+        GameObject target = transform.Find("MouthList").GetChild(0).GetChild(0).gameObject;
 
-		SoundMgr.getInstance.PlaySfx ("core", 0);
+        target.transform.parent = GameObject.Find("Enemies").transform;
+        target.GetComponent<FSM_Enemy>().m_objHealthBar.SetActive(true);
+        target.GetComponent<FSM_Enemy>().m_objHealthBar.GetComponent<UIPanel>();
+        target.transform.position = GameObject.Find("Core").transform.position + new Vector3(Random.Range(-0.15f, 0.15f), Random.Range(-0.15f, 0.15f));
+        target.transform.localScale = Vector3.one;
+        target.layer = 0;
+        target.transform.SetChildLayer(0);
+        target.GetComponent<FSM_Enemy>().m_AiState = AI_STATE.MOVE;
 
-		m_arrayEatenObjects [0] = null;
-	}
+        Material diffuse = ObjectFactory.getInstance.m_material_SpritePaletteLightingMaterial;
+        for (int i = 0; i < target.transform.childCount; ++i)
+        {
+            target.transform.GetChild(i).GetComponent<SpriteRenderer>().material = diffuse;
+        }
+
+        SoundMgr.getInstance.PlaySfx("core", 0);
+
+        m_arrayEatenObjects[0] = null;
+    }
 }

@@ -1,6 +1,6 @@
 -------------------------------------------------------------------------------------------------------
 DPSpritePalette
-v1.4
+v1.4.4
 -------------------------------------------------------------------------------------------------------
 
 Created by Davi Santos (davisan2@gmail.com)
@@ -26,6 +26,15 @@ DPSpritePalette is a set of scripts that allows palette swapping of pixel art st
 ---------
 Changelog
 ---------
+
+v1.4.4
+- Minor fixes
+
+v1.4.3 
+- Minor fixes
+
+v1.4.2
+- Fixed some bugs of the bilinear shader
 
 v1.4.1
 - Added PaletteMultiCombiner: combine any number of Palette Textures in one at run-time.
@@ -168,7 +177,8 @@ Changing the maximum number os colors in the palette
 By default, the color limit is hardcoded to 32 colors per palette.
 You can increase/decrease this value by changing two values:
 	1) In "DPSpritePalette.cs", change the variable "MAX_PALETTE_COLORS" (line 17)
-	2) In "Shader/DPSpritePalette.cginc", change the variable "maxColors" (line 19)
+	2) In "Shader/DPSpritePalette.cginc", change the variable "maxColors" (lines 19 and 49)
+	3) In "Shader/DPSpritePalette.cginc", change the number in "[unroll(32)]" (lines 29 and 60)
 
 
 ----------

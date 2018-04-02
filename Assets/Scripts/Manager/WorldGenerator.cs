@@ -121,7 +121,10 @@ public class WorldGenerator : Singleton<WorldGenerator>
             int iRandom = Random.Range(0, 100);
             GameObject objIcon = null;
 
-            if (iRandom < 60)
+            if (iRandom < 20)
+            {
+            }
+            else if (iRandom < 60)
                 objIcon = objFac.Create_WorldIcon(grid.GetPosOfIdx(idxList[i]), (int)WORLDICON_TYPE.EMPTY);
             else if (iRandom < 95)
                 objIcon = objFac.Create_WorldIcon(grid.GetPosOfIdx(idxList[i]), (int)WORLDICON_TYPE.FARM);
@@ -164,6 +167,17 @@ public class WorldGenerator : Singleton<WorldGenerator>
 
         CorePositioning();
 
+        LoadingProgress(0.9f, "산맥 생성 중");
+        for (int i = 0; i < m_geoTrans.childCount; ++i)
+        {
+            WorldGeo targetGeo = m_geoTrans.GetChild(i).GetComponent<WorldGeo>();
+            if (targetGeo.m_worldIcon == null && targetGeo.m_geoStatus == WORLD_GEO.GRASS)
+            {
+                targetGeo.m_geoStatus = WORLD_GEO.CLIFF;
+                targetGeo.gameObject.GetComponent<SpriteRenderer>().sprite = objFac.m_sheet_worldGeo[(int)WORLD_GEO.CLIFF];
+            }
+        }
+
         for (int i = 0; i < icons.childCount; ++i)
         {
             int iIdx = grid.GetGridIdx(icons.GetChild(i).position);
@@ -171,7 +185,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
             SetWorldPropertyAndPopulation(iIdx, icon, (WORLDICON_TYPE)icon.m_iconType);
             if (i % 100 == 0)
             {
-                float fProgress = 0.8f + ((float)i / (float)icons.childCount * 0.1f);
+                float fProgress = 0.9f + ((float)i / (float)icons.childCount * 0.1f);
                 LoadingProgress(fProgress, string.Format("세계 인구수 & 번영도 설정중 ({0}/{1})", i, icons.childCount));
                 yield return null;
             }

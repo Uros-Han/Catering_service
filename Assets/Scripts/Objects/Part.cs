@@ -625,6 +625,8 @@ public class Part : MonoBehaviour
                         bToOrigin = false;
                         transform.parent = GameObject.Find("Player").transform;
 
+                        GetComponent<DPSpritePalette>().PaletteIndex = 1;
+
                         if (transform.localScale.x < 0)
                             transform.localScale = new Vector3(-1, 1, 1);
                         else
@@ -684,6 +686,7 @@ public class Part : MonoBehaviour
                             transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
                             transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 1;
                             transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sortingLayerName = "Monster";
+                            transform.GetChild(0).GetChild(0).GetComponent<DPSpritePalette>().PaletteIndex = 1;
                             transform.GetChild(0).GetChild(0).GetComponent<Animator>().enabled = true;
                         }
                         else
@@ -734,6 +737,8 @@ public class Part : MonoBehaviour
                         ClearBuffBeforeCheck();
                         GameObject.Find("Player").BroadcastMessage("BuffCheck");
                         SoundMgr.getInstance.PlaySfx("morgue_place");
+
+                        GetComponent<DPSpritePalette>().PaletteIndex = 0;
                     }
                 }
 

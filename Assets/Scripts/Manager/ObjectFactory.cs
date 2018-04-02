@@ -46,6 +46,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
     public Sprite[] m_sheet_civilian_arm;
     public Sprite m_civilian_arm_left;
     public Sprite[][] m_sheet_civilian_body;
+    public Texture2D m_texture_civilian_palette;
 
     int m_iMercenary_body_count;
     public Sprite[] m_sheet_mercenary_head;
@@ -53,6 +54,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
     public Sprite[] m_sheet_mercenary_arm;
     public Sprite[] m_sheet_mercenary_arm_left;
     public Sprite[][] m_sheet_mercenary_body;
+    public Texture2D m_texture_mercenary_palette;
 
     int m_iKnight_body_count;
     public Sprite[] m_sheet_knight_head;
@@ -69,6 +71,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
     public Sprite[] m_sheet_PartyStateIndicator;
 
     public Material m_material_diffuse;
+    public Material m_material_SpritePaletteLightingMaterial;
 
     RuntimeAnimatorController[] m_weapon_anim_controller;
 
@@ -114,6 +117,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
             m_sheet_civilian_body[i] = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/Civilian/sheet_civ_body_{0}", i));
         }
         m_objHuman = Resources.Load("Prefabs/Objects/Enemies/Human") as GameObject;
+        m_texture_civilian_palette = Resources.Load<Texture2D>("Palette/Civilian/civilian.paltex");
 
         ///Mercenaries
         m_sheet_mercenary_head = Resources.LoadAll<Sprite>("Sprites/Sheets/Mercenary/sheet_mer_heads");
@@ -126,6 +130,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
         {
             m_sheet_mercenary_body[i] = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/Mercenary/sheet_mer_body_{0}", i));
         }
+        m_texture_mercenary_palette = Resources.Load<Texture2D>("Palette/Mercenary/mercenary.paltex");
 
         //Knights
         m_sheet_knight_head = Resources.LoadAll<Sprite>("Sprites/Sheets/Knight/sheet_kni_heads");
@@ -152,6 +157,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
         m_sheet_PartyStateIndicator = Resources.LoadAll<Sprite>("Sprites/UI/PartyStateIndicator");
 
         m_material_diffuse = Resources.Load<Material>("Materials/Diffuse");
+        m_material_SpritePaletteLightingMaterial = Resources.Load<Material>("Materials/SpritePaletteLightingMaterial");
 
         m_weapon_anim_controller = new RuntimeAnimatorController[5];
         m_weapon_anim_controller[0] = Resources.Load<RuntimeAnimatorController>("Animations/OneHand/oneHand");
@@ -250,6 +256,10 @@ public class ObjectFactory : Singleton<ObjectFactory>
             case (int)WORLD_GEO.WATER:
                 obj.GetComponent<WorldGeo>().m_geoStatus = WORLD_GEO.WATER;
                 obj.GetComponent<SpriteRenderer>().sprite = m_sheet_worldGeo[1];
+                break;
+            case (int)WORLD_GEO.CLIFF:
+                obj.GetComponent<WorldGeo>().m_geoStatus = WORLD_GEO.CLIFF;
+                obj.GetComponent<SpriteRenderer>().sprite = m_sheet_worldGeo[2];
                 break;
         }
 
@@ -364,6 +374,17 @@ public class ObjectFactory : Singleton<ObjectFactory>
         obj.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = parent.GetComponent<SpriteRenderer>().sprite;
         obj.transform.GetChild(0).GetComponent<Animator>().runtimeAnimatorController = m_weapon_anim_controller[(int)parent.GetComponent<Part>().m_weaponType];
 
+        switch (parent.GetComponent<Part>().m_iEnemyType)
+        {
+            case (int)ENEMY_TYPE.CIVILIAN:
+                obj.transform.GetChild(0).GetComponent<DPSpritePalette>().paletteTexture = m_texture_civilian_palette;
+                break;
+
+            case (int)ENEMY_TYPE.MERCENARY:
+                obj.transform.GetChild(0).GetComponent<DPSpritePalette>().paletteTexture = m_texture_mercenary_palette;
+                break;
+        }
+
         //		parent.GetComponent<SpriteRenderer> ().enabled = false;
 
         return obj;
@@ -408,6 +429,9 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 {
                     obj.GetComponent<SpriteRenderer>().sprite = m_sheet_civilian_leg[part.m_iSaveValue];
                 }
+
+                obj.GetComponent<DPSpritePalette>().paletteTexture = m_texture_civilian_palette;
+
                 break;
 
             case (int)ENEMY_TYPE.MERCENARY:
@@ -432,6 +456,9 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 {
                     obj.GetComponent<SpriteRenderer>().sprite = m_sheet_mercenary_leg[part.m_iSaveValue];
                 }
+
+                obj.GetComponent<DPSpritePalette>().paletteTexture = m_texture_mercenary_palette;
+
                 break;
 
             case (int)ENEMY_TYPE.KNIGHT:
@@ -495,7 +522,10 @@ public class ObjectFactory : Singleton<ObjectFactory>
             obj.GetComponent<SpriteRenderer>().enabled = false;
             obj.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
             obj.transform.GetChild(0).GetChild(0).GetComponent<Animator>().enabled = true;
+            obj.transform.GetChild(0).GetChild(0).GetComponent<DPSpritePalette>().PaletteIndex = 1;
         }
+
+        obj.GetComponent<DPSpritePalette>().PaletteIndex = 1;
 
         return obj;
     }
@@ -958,6 +988,11 @@ public class ObjectFactory : Singleton<ObjectFactory>
             obj.AddComponent<FSM_MainScene_Enemy>();
         }
 
+        for (int i = 0; i < obj.transform.childCount; ++i)
+        {
+            obj.transform.GetChild(i).GetComponent<DPSpritePalette>().paletteTexture = m_texture_civilian_palette;
+        }
+
         return obj;
     }
 
@@ -1212,6 +1247,11 @@ public class ObjectFactory : Singleton<ObjectFactory>
         {
             Destroy(obj.GetComponent<FSM_Enemy>());
             obj.AddComponent<FSM_MainScene_Enemy>();
+        }
+
+        for (int i = 0; i < obj.transform.childCount; ++i)
+        {
+            obj.transform.GetChild(i).GetComponent<DPSpritePalette>().paletteTexture = m_texture_mercenary_palette;
         }
 
         return obj;

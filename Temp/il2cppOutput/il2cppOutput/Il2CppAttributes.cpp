@@ -51972,6 +51972,13 @@ static void DPPaletteCombiner_t3385381087_CustomAttributesCacheGenerator_U3Cnumb
 		DebuggerBrowsableAttribute__ctor_m28117720(tmp, 0LL, NULL);
 	}
 }
+static void DPPaletteCombiner_t3385381087_CustomAttributesCacheGenerator_UsePalettesFrom(CustomAttributesCache* cache)
+{
+	{
+		HeaderAttribute_t618189647 * tmp = (HeaderAttribute_t618189647 *)cache->attributes[0];
+		HeaderAttribute__ctor_m1154052380(tmp, il2cpp_codegen_string_new_wrapper("Override "), NULL);
+	}
+}
 static void DPPaletteCombiner_t3385381087_CustomAttributesCacheGenerator_DPPaletteCombiner_get_numberOfPalettesTexture1_m2723746840(CustomAttributesCache* cache)
 {
 	{
@@ -68333,7 +68340,7 @@ static void U3CPrivateImplementationDetailsU3E_t3057255366_CustomAttributesCache
 		CompilerGeneratedAttribute__ctor_m3151881902(tmp, NULL);
 	}
 }
-extern const CustomAttributesCacheGenerator g_AttributeGenerators[7589] = 
+extern const CustomAttributesCacheGenerator g_AttributeGenerators[7590] = 
 {
 	NULL,
 	g_mscorlib_Assembly_CustomAttributesCacheGenerator,
@@ -73882,6 +73889,7 @@ extern const CustomAttributesCacheGenerator g_AttributeGenerators[7589] =
 	DPPaletteCombiner_t3385381087_CustomAttributesCacheGenerator_U3CnumberOfPalettesTexture2U3Ek__BackingField,
 	DPPaletteCombiner_t3385381087_CustomAttributesCacheGenerator_U3CnumberOfColorsTexture1U3Ek__BackingField,
 	DPPaletteCombiner_t3385381087_CustomAttributesCacheGenerator_U3CnumberOfColorsTexture2U3Ek__BackingField,
+	DPPaletteCombiner_t3385381087_CustomAttributesCacheGenerator_UsePalettesFrom,
 	DPPaletteCombiner_t3385381087_CustomAttributesCacheGenerator_DPPaletteCombiner_get_numberOfPalettesTexture1_m2723746840,
 	DPPaletteCombiner_t3385381087_CustomAttributesCacheGenerator_DPPaletteCombiner_set_numberOfPalettesTexture1_m1969382977,
 	DPPaletteCombiner_t3385381087_CustomAttributesCacheGenerator_DPPaletteCombiner_get_numberOfPalettesTexture2_m2757656,

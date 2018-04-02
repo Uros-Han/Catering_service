@@ -34,7 +34,9 @@ Shader "DP Shaders/Sprite Palette Lighting"
 		Blend One OneMinusSrcAlpha
 
 		CGPROGRAM
-		#pragma target 3.0
+		//#pragma target 3.0
+		#pragma exclude_renderers d3d11_9x
+		#pragma exclude_renderers d3d9
 		#pragma surface surf Lambert vertex:vert nofog nolightmap nodynlightmap keepalpha noinstancing
 		#pragma multi_compile _ PIXELSNAP_ON
 		#pragma multi_compile _ ETC1_EXTERNAL_ALPHA
@@ -48,7 +50,7 @@ Shader "DP Shaders/Sprite Palette Lighting"
 
 		#ifdef UNITY_INSTANCING_ENABLED
 		UNITY_INSTANCING_BUFFER_START(PerDrawSprite)
-			fixed4 unity_SpriteRendererColorArray[UNITY_INSTANCED_ARRAY_SIZE];
+		fixed4 unity_SpriteRendererColorArray[UNITY_INSTANCED_ARRAY_SIZE];
 		float4 unity_SpriteFlipArray[UNITY_INSTANCED_ARRAY_SIZE];
 		UNITY_INSTANCING_BUFFER_END(PerDrawSprite)
 

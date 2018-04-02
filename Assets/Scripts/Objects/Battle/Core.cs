@@ -221,7 +221,7 @@ public class Core : Part
             }
 
 
-            target.transform.GetChild(0).GetComponent<SpriteRenderer>().material = ObjectFactory.getInstance.m_material_diffuse;
+            target.transform.GetChild(0).GetComponent<SpriteRenderer>().material = ObjectFactory.getInstance.m_material_SpritePaletteLightingMaterial;
 
             if (target.transform.GetChild(0).GetComponent<SpriteModifier>() != null)
                 target.transform.GetChild(0).GetComponent<SpriteModifier>().SpriteModify();

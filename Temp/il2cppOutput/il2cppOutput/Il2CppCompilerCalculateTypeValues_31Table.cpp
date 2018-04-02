@@ -5655,10 +5655,14 @@ public:
 	int32_t ___U3CnumberOfColorsTexture1U3Ek__BackingField_9;
 	// System.Int32 DPPaletteCombiner::<numberOfColorsTexture2>k__BackingField
 	int32_t ___U3CnumberOfColorsTexture2U3Ek__BackingField_10;
+	// System.Boolean DPPaletteCombiner::isDirty
+	bool ___isDirty_11;
+	// DPPaletteCombiner DPPaletteCombiner::UsePalettesFrom
+	DPPaletteCombiner_t3385381087 * ___UsePalettesFrom_12;
 	// System.Int32 DPPaletteCombiner::_currentIndex1
-	int32_t ____currentIndex1_11;
+	int32_t ____currentIndex1_13;
 	// System.Int32 DPPaletteCombiner::_currentIndex2
-	int32_t ____currentIndex2_12;
+	int32_t ____currentIndex2_14;
 
 public:
 	inline static int32_t get_offset_of_dps_2() { return static_cast<int32_t>(offsetof(DPPaletteCombiner_t3385381087, ___dps_2)); }
@@ -5738,20 +5742,37 @@ public:
 		___U3CnumberOfColorsTexture2U3Ek__BackingField_10 = value;
 	}
 
-	inline static int32_t get_offset_of__currentIndex1_11() { return static_cast<int32_t>(offsetof(DPPaletteCombiner_t3385381087, ____currentIndex1_11)); }
-	inline int32_t get__currentIndex1_11() const { return ____currentIndex1_11; }
-	inline int32_t* get_address_of__currentIndex1_11() { return &____currentIndex1_11; }
-	inline void set__currentIndex1_11(int32_t value)
+	inline static int32_t get_offset_of_isDirty_11() { return static_cast<int32_t>(offsetof(DPPaletteCombiner_t3385381087, ___isDirty_11)); }
+	inline bool get_isDirty_11() const { return ___isDirty_11; }
+	inline bool* get_address_of_isDirty_11() { return &___isDirty_11; }
+	inline void set_isDirty_11(bool value)
 	{
-		____currentIndex1_11 = value;
+		___isDirty_11 = value;
 	}
 
-	inline static int32_t get_offset_of__currentIndex2_12() { return static_cast<int32_t>(offsetof(DPPaletteCombiner_t3385381087, ____currentIndex2_12)); }
-	inline int32_t get__currentIndex2_12() const { return ____currentIndex2_12; }
-	inline int32_t* get_address_of__currentIndex2_12() { return &____currentIndex2_12; }
-	inline void set__currentIndex2_12(int32_t value)
+	inline static int32_t get_offset_of_UsePalettesFrom_12() { return static_cast<int32_t>(offsetof(DPPaletteCombiner_t3385381087, ___UsePalettesFrom_12)); }
+	inline DPPaletteCombiner_t3385381087 * get_UsePalettesFrom_12() const { return ___UsePalettesFrom_12; }
+	inline DPPaletteCombiner_t3385381087 ** get_address_of_UsePalettesFrom_12() { return &___UsePalettesFrom_12; }
+	inline void set_UsePalettesFrom_12(DPPaletteCombiner_t3385381087 * value)
 	{
-		____currentIndex2_12 = value;
+		___UsePalettesFrom_12 = value;
+		Il2CppCodeGenWriteBarrier((&___UsePalettesFrom_12), value);
+	}
+
+	inline static int32_t get_offset_of__currentIndex1_13() { return static_cast<int32_t>(offsetof(DPPaletteCombiner_t3385381087, ____currentIndex1_13)); }
+	inline int32_t get__currentIndex1_13() const { return ____currentIndex1_13; }
+	inline int32_t* get_address_of__currentIndex1_13() { return &____currentIndex1_13; }
+	inline void set__currentIndex1_13(int32_t value)
+	{
+		____currentIndex1_13 = value;
+	}
+
+	inline static int32_t get_offset_of__currentIndex2_14() { return static_cast<int32_t>(offsetof(DPPaletteCombiner_t3385381087, ____currentIndex2_14)); }
+	inline int32_t get__currentIndex2_14() const { return ____currentIndex2_14; }
+	inline int32_t* get_address_of__currentIndex2_14() { return &____currentIndex2_14; }
+	inline void set__currentIndex2_14(int32_t value)
+	{
+		____currentIndex2_14 = value;
 	}
 };
 
@@ -5779,6 +5800,10 @@ public:
 	DPSpritePalette_t326054672 * ___dps_4;
 	// DPSpritePaletteUI DPPaletteMultiCombiner::dpsui
 	DPSpritePaletteUI_t3549782763 * ___dpsui_5;
+	// System.Boolean DPPaletteMultiCombiner::isDirty
+	bool ___isDirty_6;
+	// DPPaletteMultiCombiner DPPaletteMultiCombiner::UsePalettesFrom
+	DPPaletteMultiCombiner_t597029426 * ___UsePalettesFrom_7;
 
 public:
 	inline static int32_t get_offset_of_PaletteTextures_2() { return static_cast<int32_t>(offsetof(DPPaletteMultiCombiner_t597029426, ___PaletteTextures_2)); }
@@ -5815,6 +5840,23 @@ public:
 	{
 		___dpsui_5 = value;
 		Il2CppCodeGenWriteBarrier((&___dpsui_5), value);
+	}
+
+	inline static int32_t get_offset_of_isDirty_6() { return static_cast<int32_t>(offsetof(DPPaletteMultiCombiner_t597029426, ___isDirty_6)); }
+	inline bool get_isDirty_6() const { return ___isDirty_6; }
+	inline bool* get_address_of_isDirty_6() { return &___isDirty_6; }
+	inline void set_isDirty_6(bool value)
+	{
+		___isDirty_6 = value;
+	}
+
+	inline static int32_t get_offset_of_UsePalettesFrom_7() { return static_cast<int32_t>(offsetof(DPPaletteMultiCombiner_t597029426, ___UsePalettesFrom_7)); }
+	inline DPPaletteMultiCombiner_t597029426 * get_UsePalettesFrom_7() const { return ___UsePalettesFrom_7; }
+	inline DPPaletteMultiCombiner_t597029426 ** get_address_of_UsePalettesFrom_7() { return &___UsePalettesFrom_7; }
+	inline void set_UsePalettesFrom_7(DPPaletteMultiCombiner_t597029426 * value)
+	{
+		___UsePalettesFrom_7 = value;
+		Il2CppCodeGenWriteBarrier((&___UsePalettesFrom_7), value);
 	}
 };
 
@@ -7600,7 +7642,7 @@ extern const int32_t g_FieldOffsetTable3118[3] =
 	PaletteTextureSaveData_t1018781157::get_offset_of_Palettes_4(),
 };
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize3119 = { sizeof (DPPaletteCombiner_t3385381087), -1, 0, 0 };
-extern const int32_t g_FieldOffsetTable3119[11] = 
+extern const int32_t g_FieldOffsetTable3119[13] = 
 {
 	DPPaletteCombiner_t3385381087::get_offset_of_dps_2(),
 	DPPaletteCombiner_t3385381087::get_offset_of_dpsui_3(),
@@ -7611,8 +7653,10 @@ extern const int32_t g_FieldOffsetTable3119[11] =
 	DPPaletteCombiner_t3385381087::get_offset_of_U3CnumberOfPalettesTexture2U3Ek__BackingField_8(),
 	DPPaletteCombiner_t3385381087::get_offset_of_U3CnumberOfColorsTexture1U3Ek__BackingField_9(),
 	DPPaletteCombiner_t3385381087::get_offset_of_U3CnumberOfColorsTexture2U3Ek__BackingField_10(),
-	DPPaletteCombiner_t3385381087::get_offset_of__currentIndex1_11(),
-	DPPaletteCombiner_t3385381087::get_offset_of__currentIndex2_12(),
+	DPPaletteCombiner_t3385381087::get_offset_of_isDirty_11(),
+	DPPaletteCombiner_t3385381087::get_offset_of_UsePalettesFrom_12(),
+	DPPaletteCombiner_t3385381087::get_offset_of__currentIndex1_13(),
+	DPPaletteCombiner_t3385381087::get_offset_of__currentIndex2_14(),
 };
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize3120 = { sizeof (DPPaletteTextureIndex_t454637078), -1, 0, 0 };
 extern const int32_t g_FieldOffsetTable3120[2] = 
@@ -7621,12 +7665,14 @@ extern const int32_t g_FieldOffsetTable3120[2] =
 	DPPaletteTextureIndex_t454637078::get_offset_of_index_1(),
 };
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize3121 = { sizeof (DPPaletteMultiCombiner_t597029426), -1, 0, 0 };
-extern const int32_t g_FieldOffsetTable3121[4] = 
+extern const int32_t g_FieldOffsetTable3121[6] = 
 {
 	DPPaletteMultiCombiner_t597029426::get_offset_of_PaletteTextures_2(),
 	DPPaletteMultiCombiner_t597029426::get_offset_of_paletteTexture_3(),
 	DPPaletteMultiCombiner_t597029426::get_offset_of_dps_4(),
 	DPPaletteMultiCombiner_t597029426::get_offset_of_dpsui_5(),
+	DPPaletteMultiCombiner_t597029426::get_offset_of_isDirty_6(),
+	DPPaletteMultiCombiner_t597029426::get_offset_of_UsePalettesFrom_7(),
 };
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize3122 = { sizeof (DPSpritePalette_t326054672), -1, 0, 0 };
 extern const int32_t g_FieldOffsetTable3122[8] = 

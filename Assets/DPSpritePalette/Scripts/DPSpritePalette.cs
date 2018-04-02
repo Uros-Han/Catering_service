@@ -12,7 +12,7 @@ public class DPSpritePalette : MonoBehaviour
 {
     /// <summary>
     /// The maximum number of colors for a palette.
-    /// If you want to increase this value, you must change the variable "maxColors" (line 24) in the DPSpritePalette.cginc file! Beware! This will may decrease the performance.
+    /// If you want to increase this value, you must change the variable "maxColors" (line 19) and the [unroll()] value (line 29) in the DPSpritePalette.cginc file! Beware! This will may decrease the performance.
     /// </summary>
     public static int MAX_PALETTE_COLORS { get { return 32; } }
 

@@ -119,8 +119,6 @@ Shader "DP Shaders/Sprite Palette"
 				return OUT;
 			}
 
-			
-
 			fixed4 SampleSpriteTexture (float2 uv, float index)
 			{
 				fixed4 color = DPSampleSpriteTexture(uv, index);

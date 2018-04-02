@@ -22,6 +22,10 @@ public class DPPaletteCombiner : MonoBehaviour
     public int numberOfColorsTexture2 { get; private set; }
     public int numberOfColorsCombinedTexture { get { return (combinedPaletteTexture == null) ? 1 : combinedPaletteTexture.height; } }
     public int numberOfPalettesCombinedTexture { get { return (combinedPaletteTexture == null) ? 1 : combinedPaletteTexture.width; } }
+    bool isDirty = true;
+
+    [Header("Override ")]
+    public DPPaletteCombiner UsePalettesFrom = null;
 
     /// <summary>
     /// Set the index 1
@@ -89,6 +93,12 @@ public class DPPaletteCombiner : MonoBehaviour
     /// <param name="index2">Index of Palette 2</param>
     public void SetPaletteIndex(int index1, int index2)
     {
+        if (dps == null && dpsui == null)
+        {
+            GetDPS();
+            UpdateTextures();
+        }
+
         _currentIndex1 = Mathf.Clamp(index1, 0, numberOfPalettesTexture1 - 1);
         _currentIndex2 = Mathf.Clamp(index2, 0, numberOfPalettesTexture2 - 1);
         int index = GetIndex(_currentIndex1, _currentIndex2);
@@ -115,11 +125,62 @@ public class DPPaletteCombiner : MonoBehaviour
     }
 
     /// <summary>
+    /// Set The Palette Texture #1. You  must call UpdateTextures after this to apply the changes. 
+    /// </summary>
+    /// <param name="texture"></param>
+    public void SetPaletteTexture1(Texture2D texture)
+    {
+        paletteTexture1 = texture;
+        isDirty = true;
+    }
+
+    /// <summary>
+    /// Set The Palette Texture #2. You  must call UpdateTextures after this to apply the changes. 
+    /// </summary>
+    /// <param name="texture"></param>
+    public void SetPaletteTexture2(Texture2D texture)
+    {
+        paletteTexture2 = texture;
+        isDirty = true;
+    }
+
+    /// <summary>
     /// If you changed any palette textures in run-time, call this method to update the combined paletteTexture
     /// </summary>
     public void UpdateTextures()
     {
-        combinedPaletteTexture = CombineTextures(paletteTexture1, paletteTexture2);
+        if(UsePalettesFrom != null)
+        {
+            UseOtherPaletteTex();
+            return;
+        }
+        if (isDirty)
+        {
+            combinedPaletteTexture = CombineTextures(paletteTexture1, paletteTexture2);
+            isDirty = false;
+        }
+        SetPaletteTexture();
+        _currentIndex1 = Mathf.Clamp(_currentIndex1, 0, numberOfPalettesTexture1 - 1);
+        _currentIndex2 = Mathf.Clamp(_currentIndex2, 0, numberOfPalettesTexture2 - 1);
+    }
+
+    private void UseOtherPaletteTex()
+    {
+        if (UsePalettesFrom == null) return;
+        if (UsePalettesFrom == this)
+        {
+            Debug.LogError("Cyclic reference of DPPaletteCombiners is not allowed!");
+            return;
+        }
+        if (UsePalettesFrom.combinedPaletteTexture == null) UsePalettesFrom.UpdateTextures();
+        paletteTexture1 = UsePalettesFrom.paletteTexture1;
+        paletteTexture2 = UsePalettesFrom.paletteTexture2;
+        numberOfPalettesTexture1 = UsePalettesFrom.numberOfPalettesTexture1;
+        numberOfPalettesTexture2 = UsePalettesFrom.numberOfPalettesTexture2;
+        numberOfColorsTexture1 = UsePalettesFrom.numberOfColorsTexture1;
+        numberOfColorsTexture2 = UsePalettesFrom.numberOfColorsTexture2;
+        UsePalettesFrom.UpdateTextures();
+        combinedPaletteTexture = UsePalettesFrom.combinedPaletteTexture;
         SetPaletteTexture();
         _currentIndex1 = Mathf.Clamp(_currentIndex1, 0, numberOfPalettesTexture1 - 1);
         _currentIndex2 = Mathf.Clamp(_currentIndex2, 0, numberOfPalettesTexture2 - 1);
@@ -127,16 +188,26 @@ public class DPPaletteCombiner : MonoBehaviour
 
     private void Awake()
     {
+        GetDPS();
+        UpdateTextures();
+    }
+    private void Start()
+    {
+        UseOtherPaletteTex();
+    }
+
+    private void GetDPS()
+    {
         dps = GetComponent<DPSpritePalette>();
         dpsui = GetComponent<DPSpritePaletteUI>();
-        if (dps == null && dpsui == null)  Debug.LogError(string.Format("The game object {0} doesn't have a DPSpritePalette or DPSpritePaletteUI component attached. Please attach it then add this component!", gameObject.name));
-        UpdateTextures();
+        if (dps == null && dpsui == null) Debug.LogError(string.Format("The game object {0} doesn't have a DPSpritePalette or DPSpritePaletteUI component attached. Please attach it then add this component!", gameObject.name));
     }
 
     private void SetPaletteTexture()
     {
-        if (dps != null) dps.paletteTexture = combinedPaletteTexture;
-        if (dpsui != null) dpsui.paletteTexture = combinedPaletteTexture;
+        if (combinedPaletteTexture == null) return;
+        if (dps != null) dps.SetPalette(combinedPaletteTexture, false);
+        if (dpsui != null) dpsui.SetPalette(combinedPaletteTexture, false);
     }
 
     private int GetIndex(int index1, int index2)
@@ -205,6 +276,7 @@ public class DPPaletteCombiner : MonoBehaviour
 
         newTex.SetPixels(colors);
         newTex.Apply(true, true);
+        //newTex.Apply(true, false);
         newTex.name = string.Format("{0}_{1}",tex1.name,tex2.name);
         //byte[] bytes = newTex.EncodeToPNG();
         //System.IO.File.WriteAllBytes(Application.dataPath + "/../debug.png", bytes);

@@ -81,6 +81,8 @@ public class Morgue : MonoBehaviour
                 //movePart.GetComponent<SpriteRenderer>().color = Color.white;
                 movePart.GetComponent<SpriteRenderer>().sortingOrder = 0;
                 //				moveBody.GetComponent<SpriteSheet>().SetSprite(0);
+
+                movePart.GetComponent<DPSpritePalette>().enabled = true;
             }
 
         }

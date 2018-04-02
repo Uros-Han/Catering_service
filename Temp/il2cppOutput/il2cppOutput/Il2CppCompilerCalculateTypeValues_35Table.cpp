@@ -11686,9 +11686,10 @@ extern const int32_t g_FieldOffsetTable3588[4] =
 	0,
 };
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize3589 = { sizeof (WORLD_GEO_t531572613)+ sizeof (RuntimeObject), sizeof(int32_t), 0, 0 };
-extern const int32_t g_FieldOffsetTable3589[4] = 
+extern const int32_t g_FieldOffsetTable3589[5] = 
 {
 	WORLD_GEO_t531572613::get_offset_of_value___1() + static_cast<int32_t>(sizeof(RuntimeObject)),
+	0,
 	0,
 	0,
 	0,

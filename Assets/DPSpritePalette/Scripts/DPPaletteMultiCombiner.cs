@@ -35,7 +35,15 @@ public class DPPaletteMultiCombiner : MonoBehaviour
     DPSpritePalette dps;
     DPSpritePaletteUI dpsui;
 
+    bool isDirty = true;
+    public DPPaletteMultiCombiner UsePalettesFrom = null;
+
     private void Awake()
+    {
+        GetDPS();
+    }
+
+    private void GetDPS()
     {
         dps = GetComponent<DPSpritePalette>();
         dpsui = GetComponent<DPSpritePaletteUI>();
@@ -76,6 +84,7 @@ public class DPPaletteMultiCombiner : MonoBehaviour
     /// <returns>All the assigned Palettes Textures</returns>
     public DPPaletteTextureIndex[] GetPaletteTextures()
     {
+        isDirty = true;
         return PaletteTextures;
     }
 
@@ -86,6 +95,7 @@ public class DPPaletteMultiCombiner : MonoBehaviour
     public void SetPaletteTextures(DPPaletteTextureIndex[] PaletteTextures)
     {
         this.PaletteTextures = PaletteTextures;
+        isDirty = true;
         UpdateTextures();
     }
 
@@ -98,6 +108,7 @@ public class DPPaletteMultiCombiner : MonoBehaviour
     {
         if (PaletteTextures == null || paletteNumber >= PaletteTextures.Length || paletteNumber < 0) { Debug.LogError(string.Format("Palette Number {0} is out of range on {1}", paletteNumber, gameObject.name)); return; }
         PaletteTextures[paletteNumber].PaletteTexture = tex;
+        isDirty = true;
         UpdateTextures();
     }
 
@@ -124,10 +135,38 @@ public class DPPaletteMultiCombiner : MonoBehaviour
     /// </summary>
     public void UpdateTextures()
     {
-        paletteTexture = CombineTextures();
+        if(dps == null && dpsui == null) GetDPS();
+
+        if (UsePalettesFrom != null)
+        {
+            UseOtherPaletteTex();
+            return;
+        }
+        if (isDirty)
+        {
+            paletteTexture = CombineTextures();
+            isDirty = false;
+        }
         SetPaletteTexture();
         SetPaletteIndex();
     }
+
+    private void UseOtherPaletteTex()
+    {
+        if (UsePalettesFrom == null) return;
+        if (UsePalettesFrom == this)
+        {
+            Debug.LogError("Cyclic reference of DPPaletteCombiners is not allowed!");
+            return;
+        }
+        PaletteTextures = UsePalettesFrom.PaletteTextures;
+        if (UsePalettesFrom.paletteTexture == null) UsePalettesFrom.UpdateTextures();
+        UsePalettesFrom.UpdateTextures();
+        paletteTexture = UsePalettesFrom.paletteTexture;
+        SetPaletteTexture();
+        SetPaletteIndex();
+    }
+
 
     private void SetPaletteIndex()
     {
