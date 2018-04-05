@@ -61998,6 +61998,55 @@ static void U3CGenerateQueueU3Ec__Iterator0_t3920287276_CustomAttributesCacheGen
 		DebuggerHiddenAttribute__ctor_m2764625696(tmp, NULL);
 	}
 }
+static void ObjectFactory_t3832879922_CustomAttributesCacheGenerator_ObjectFactory_SetHairColor_m3896601703(CustomAttributesCache* cache)
+{
+	{
+		DebuggerHiddenAttribute_t587553342 * tmp = (DebuggerHiddenAttribute_t587553342 *)cache->attributes[0];
+		DebuggerHiddenAttribute__ctor_m2764625696(tmp, NULL);
+	}
+}
+static void U3CSetHairColorU3Ec__Iterator0_t1902537738_CustomAttributesCacheGenerator(CustomAttributesCache* cache)
+{
+	{
+		CompilerGeneratedAttribute_t23527886 * tmp = (CompilerGeneratedAttribute_t23527886 *)cache->attributes[0];
+		CompilerGeneratedAttribute__ctor_m3151881902(tmp, NULL);
+	}
+}
+static void U3CSetHairColorU3Ec__Iterator0_t1902537738_CustomAttributesCacheGenerator_U3CSetHairColorU3Ec__Iterator0__ctor_m1594382300(CustomAttributesCache* cache)
+{
+	{
+		DebuggerHiddenAttribute_t587553342 * tmp = (DebuggerHiddenAttribute_t587553342 *)cache->attributes[0];
+		DebuggerHiddenAttribute__ctor_m2764625696(tmp, NULL);
+	}
+}
+static void U3CSetHairColorU3Ec__Iterator0_t1902537738_CustomAttributesCacheGenerator_U3CSetHairColorU3Ec__Iterator0_System_Collections_Generic_IEnumeratorU3CobjectU3E_get_Current_m1390312866(CustomAttributesCache* cache)
+{
+	{
+		DebuggerHiddenAttribute_t587553342 * tmp = (DebuggerHiddenAttribute_t587553342 *)cache->attributes[0];
+		DebuggerHiddenAttribute__ctor_m2764625696(tmp, NULL);
+	}
+}
+static void U3CSetHairColorU3Ec__Iterator0_t1902537738_CustomAttributesCacheGenerator_U3CSetHairColorU3Ec__Iterator0_System_Collections_IEnumerator_get_Current_m4111068629(CustomAttributesCache* cache)
+{
+	{
+		DebuggerHiddenAttribute_t587553342 * tmp = (DebuggerHiddenAttribute_t587553342 *)cache->attributes[0];
+		DebuggerHiddenAttribute__ctor_m2764625696(tmp, NULL);
+	}
+}
+static void U3CSetHairColorU3Ec__Iterator0_t1902537738_CustomAttributesCacheGenerator_U3CSetHairColorU3Ec__Iterator0_Dispose_m1824112238(CustomAttributesCache* cache)
+{
+	{
+		DebuggerHiddenAttribute_t587553342 * tmp = (DebuggerHiddenAttribute_t587553342 *)cache->attributes[0];
+		DebuggerHiddenAttribute__ctor_m2764625696(tmp, NULL);
+	}
+}
+static void U3CSetHairColorU3Ec__Iterator0_t1902537738_CustomAttributesCacheGenerator_U3CSetHairColorU3Ec__Iterator0_Reset_m1021773647(CustomAttributesCache* cache)
+{
+	{
+		DebuggerHiddenAttribute_t587553342 * tmp = (DebuggerHiddenAttribute_t587553342 *)cache->attributes[0];
+		DebuggerHiddenAttribute__ctor_m2764625696(tmp, NULL);
+	}
+}
 static void PartyManager_t670908027_CustomAttributesCacheGenerator_U3CU3Ef__amU24cache0(CustomAttributesCache* cache)
 {
 	{
@@ -68340,7 +68389,7 @@ static void U3CPrivateImplementationDetailsU3E_t3057255366_CustomAttributesCache
 		CompilerGeneratedAttribute__ctor_m3151881902(tmp, NULL);
 	}
 }
-extern const CustomAttributesCacheGenerator g_AttributeGenerators[7590] = 
+extern const CustomAttributesCacheGenerator g_AttributeGenerators[7597] = 
 {
 	NULL,
 	g_mscorlib_Assembly_CustomAttributesCacheGenerator,
@@ -75138,6 +75187,13 @@ extern const CustomAttributesCacheGenerator g_AttributeGenerators[7590] =
 	U3CGenerateQueueU3Ec__Iterator0_t3920287276_CustomAttributesCacheGenerator_U3CGenerateQueueU3Ec__Iterator0_System_Collections_IEnumerator_get_Current_m1423914751,
 	U3CGenerateQueueU3Ec__Iterator0_t3920287276_CustomAttributesCacheGenerator_U3CGenerateQueueU3Ec__Iterator0_Dispose_m2770389300,
 	U3CGenerateQueueU3Ec__Iterator0_t3920287276_CustomAttributesCacheGenerator_U3CGenerateQueueU3Ec__Iterator0_Reset_m3591905182,
+	ObjectFactory_t3832879922_CustomAttributesCacheGenerator_ObjectFactory_SetHairColor_m3896601703,
+	U3CSetHairColorU3Ec__Iterator0_t1902537738_CustomAttributesCacheGenerator,
+	U3CSetHairColorU3Ec__Iterator0_t1902537738_CustomAttributesCacheGenerator_U3CSetHairColorU3Ec__Iterator0__ctor_m1594382300,
+	U3CSetHairColorU3Ec__Iterator0_t1902537738_CustomAttributesCacheGenerator_U3CSetHairColorU3Ec__Iterator0_System_Collections_Generic_IEnumeratorU3CobjectU3E_get_Current_m1390312866,
+	U3CSetHairColorU3Ec__Iterator0_t1902537738_CustomAttributesCacheGenerator_U3CSetHairColorU3Ec__Iterator0_System_Collections_IEnumerator_get_Current_m4111068629,
+	U3CSetHairColorU3Ec__Iterator0_t1902537738_CustomAttributesCacheGenerator_U3CSetHairColorU3Ec__Iterator0_Dispose_m1824112238,
+	U3CSetHairColorU3Ec__Iterator0_t1902537738_CustomAttributesCacheGenerator_U3CSetHairColorU3Ec__Iterator0_Reset_m1021773647,
 	PartyManager_t670908027_CustomAttributesCacheGenerator_U3CU3Ef__amU24cache0,
 	PartyManager_t670908027_CustomAttributesCacheGenerator_U3CU3Ef__amU24cache1,
 	PartyManager_t670908027_CustomAttributesCacheGenerator_PartyManager_U3CCalculateDeployLocation_CaravanU3Em__0_m603025554,

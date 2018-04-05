@@ -739,6 +739,7 @@ extern const Il2CppType PoolMember_t886060391_0_0_0;
 extern const Il2CppType Core_t1114734903_0_0_0;
 extern const Il2CppType DynamicEmitter_t3623051654_0_0_0;
 extern const Il2CppType Unit_t4139495810_0_0_0;
+extern const Il2CppType DPSpritePalette_t326054672_0_0_0;
 extern const Il2CppType SpriteModifier_t4180292912_0_0_0;
 extern const Il2CppType Tangled_t4181922870_0_0_0;
 extern const Il2CppType FSM_Enemy_t3265134844_0_0_0;
@@ -749,7 +750,6 @@ extern const Il2CppType PartStatus_t3711373658_0_0_0;
 extern const Il2CppType TweenPosition_t1378762002_0_0_0;
 extern const Il2CppType HideInFog_t591667357_0_0_0;
 extern const Il2CppType UITexture_t3471168817_0_0_0;
-extern const Il2CppType DPSpritePalette_t326054672_0_0_0;
 extern const Il2CppType DPSpritePaletteUI_t3549782763_0_0_0;
 extern const Il2CppType InvEquipment_t3413562611_0_0_0;
 extern const Il2CppType Dictionary_2_t1182523073_0_0_0;
@@ -761,6 +761,7 @@ extern const Il2CppType FSM_Freindly_t1623656886_0_0_0;
 extern const Il2CppType CircleCollider2D_t662546754_0_0_0;
 extern const Il2CppType MainManager_t729209856_0_0_0;
 extern const Il2CppType SpriteSheet_t799473704_0_0_0;
+extern const Il2CppType DPPaletteCombiner_t3385381087_0_0_0;
 extern const Il2CppType DebugLine_t2501625170_0_0_0;
 extern const Il2CppType UIFollowTarget_t2531637827_0_0_0;
 extern const Il2CppType UISlider_t886033014_0_0_0;
@@ -3076,6 +3077,8 @@ static const RuntimeType* GenInst_DynamicEmitter_t3623051654_0_0_0_Types[] = { (
 extern const Il2CppGenericInst GenInst_DynamicEmitter_t3623051654_0_0_0 = { 1, GenInst_DynamicEmitter_t3623051654_0_0_0_Types };
 static const RuntimeType* GenInst_Unit_t4139495810_0_0_0_Types[] = { (&Unit_t4139495810_0_0_0) };
 extern const Il2CppGenericInst GenInst_Unit_t4139495810_0_0_0 = { 1, GenInst_Unit_t4139495810_0_0_0_Types };
+static const RuntimeType* GenInst_DPSpritePalette_t326054672_0_0_0_Types[] = { (&DPSpritePalette_t326054672_0_0_0) };
+extern const Il2CppGenericInst GenInst_DPSpritePalette_t326054672_0_0_0 = { 1, GenInst_DPSpritePalette_t326054672_0_0_0_Types };
 static const RuntimeType* GenInst_SpriteModifier_t4180292912_0_0_0_Types[] = { (&SpriteModifier_t4180292912_0_0_0) };
 extern const Il2CppGenericInst GenInst_SpriteModifier_t4180292912_0_0_0 = { 1, GenInst_SpriteModifier_t4180292912_0_0_0_Types };
 static const RuntimeType* GenInst_Tangled_t4181922870_0_0_0_Types[] = { (&Tangled_t4181922870_0_0_0) };
@@ -3096,8 +3099,6 @@ static const RuntimeType* GenInst_HideInFog_t591667357_0_0_0_Types[] = { (&HideI
 extern const Il2CppGenericInst GenInst_HideInFog_t591667357_0_0_0 = { 1, GenInst_HideInFog_t591667357_0_0_0_Types };
 static const RuntimeType* GenInst_UITexture_t3471168817_0_0_0_Types[] = { (&UITexture_t3471168817_0_0_0) };
 extern const Il2CppGenericInst GenInst_UITexture_t3471168817_0_0_0 = { 1, GenInst_UITexture_t3471168817_0_0_0_Types };
-static const RuntimeType* GenInst_DPSpritePalette_t326054672_0_0_0_Types[] = { (&DPSpritePalette_t326054672_0_0_0) };
-extern const Il2CppGenericInst GenInst_DPSpritePalette_t326054672_0_0_0 = { 1, GenInst_DPSpritePalette_t326054672_0_0_0_Types };
 static const RuntimeType* GenInst_DPSpritePaletteUI_t3549782763_0_0_0_Types[] = { (&DPSpritePaletteUI_t3549782763_0_0_0) };
 extern const Il2CppGenericInst GenInst_DPSpritePaletteUI_t3549782763_0_0_0 = { 1, GenInst_DPSpritePaletteUI_t3549782763_0_0_0_Types };
 static const RuntimeType* GenInst_InvEquipment_t3413562611_0_0_0_Types[] = { (&InvEquipment_t3413562611_0_0_0) };
@@ -3120,6 +3121,8 @@ static const RuntimeType* GenInst_MainManager_t729209856_0_0_0_Types[] = { (&Mai
 extern const Il2CppGenericInst GenInst_MainManager_t729209856_0_0_0 = { 1, GenInst_MainManager_t729209856_0_0_0_Types };
 static const RuntimeType* GenInst_SpriteSheet_t799473704_0_0_0_Types[] = { (&SpriteSheet_t799473704_0_0_0) };
 extern const Il2CppGenericInst GenInst_SpriteSheet_t799473704_0_0_0 = { 1, GenInst_SpriteSheet_t799473704_0_0_0_Types };
+static const RuntimeType* GenInst_DPPaletteCombiner_t3385381087_0_0_0_Types[] = { (&DPPaletteCombiner_t3385381087_0_0_0) };
+extern const Il2CppGenericInst GenInst_DPPaletteCombiner_t3385381087_0_0_0 = { 1, GenInst_DPPaletteCombiner_t3385381087_0_0_0_Types };
 static const RuntimeType* GenInst_DebugLine_t2501625170_0_0_0_Types[] = { (&DebugLine_t2501625170_0_0_0) };
 extern const Il2CppGenericInst GenInst_DebugLine_t2501625170_0_0_0 = { 1, GenInst_DebugLine_t2501625170_0_0_0_Types };
 static const RuntimeType* GenInst_UIFollowTarget_t2531637827_0_0_0_Types[] = { (&UIFollowTarget_t2531637827_0_0_0) };
@@ -4198,7 +4201,7 @@ static const RuntimeType* GenInst_EditorPrefsX_GetValue_m573191127_gp_0_0_0_0_By
 extern const Il2CppGenericInst GenInst_EditorPrefsX_GetValue_m573191127_gp_0_0_0_0_ByteU5BU5D_t4116647657_0_0_0 = { 2, GenInst_EditorPrefsX_GetValue_m573191127_gp_0_0_0_0_ByteU5BU5D_t4116647657_0_0_0_Types };
 static const RuntimeType* GenInst_Singleton_1_t535200564_gp_0_0_0_0_Types[] = { (&Singleton_1_t535200564_gp_0_0_0_0) };
 extern const Il2CppGenericInst GenInst_Singleton_1_t535200564_gp_0_0_0_0 = { 1, GenInst_Singleton_1_t535200564_gp_0_0_0_0_Types };
-extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[1514] = 
+extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[1515] = 
 {
 	&GenInst_RuntimeObject_0_0_0,
 	&GenInst_Attribute_t861562559_0_0_0,
@@ -5153,6 +5156,7 @@ extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[1514] =
 	&GenInst_Core_t1114734903_0_0_0,
 	&GenInst_DynamicEmitter_t3623051654_0_0_0,
 	&GenInst_Unit_t4139495810_0_0_0,
+	&GenInst_DPSpritePalette_t326054672_0_0_0,
 	&GenInst_SpriteModifier_t4180292912_0_0_0,
 	&GenInst_Tangled_t4181922870_0_0_0,
 	&GenInst_FSM_Enemy_t3265134844_0_0_0,
@@ -5163,7 +5167,6 @@ extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[1514] =
 	&GenInst_TweenPosition_t1378762002_0_0_0,
 	&GenInst_HideInFog_t591667357_0_0_0,
 	&GenInst_UITexture_t3471168817_0_0_0,
-	&GenInst_DPSpritePalette_t326054672_0_0_0,
 	&GenInst_DPSpritePaletteUI_t3549782763_0_0_0,
 	&GenInst_InvEquipment_t3413562611_0_0_0,
 	&GenInst_Dictionary_2_t1182523073_0_0_0,
@@ -5175,6 +5178,7 @@ extern const Il2CppGenericInst* const g_Il2CppGenericInstTable[1514] =
 	&GenInst_CircleCollider2D_t662546754_0_0_0,
 	&GenInst_MainManager_t729209856_0_0_0,
 	&GenInst_SpriteSheet_t799473704_0_0_0,
+	&GenInst_DPPaletteCombiner_t3385381087_0_0_0,
 	&GenInst_DebugLine_t2501625170_0_0_0,
 	&GenInst_UIFollowTarget_t2531637827_0_0_0,
 	&GenInst_UISlider_t886033014_0_0_0,

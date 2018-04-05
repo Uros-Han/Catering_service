@@ -8,6 +8,8 @@ public class FSM_Enemy : FSM
     public GameObject m_objHealthBar;
 
     List<GameObject> m_AttackAvailableParts;
+    Vector3 attackSecondPartOriginPos;
+    Quaternion attackSecondPartOriginRot;
 
     // Use this for initialization
     void Start()
@@ -20,6 +22,12 @@ public class FSM_Enemy : FSM
         {
             if (transform.GetChild(i).GetComponent<Part>().m_bAttackAvailable)
                 m_AttackAvailableParts.Add(transform.GetChild(i).gameObject);
+        }
+
+        if (m_AttackAvailableParts.Count > 1)
+        {
+            attackSecondPartOriginPos = m_AttackAvailableParts[1].gameObject.transform.localPosition;
+            attackSecondPartOriginRot = m_AttackAvailableParts[1].gameObject.transform.localRotation;
         }
 
         SetState(AI_STATE.MOVE);
@@ -42,6 +50,7 @@ public class FSM_Enemy : FSM
         switch (state)
         {
             case AI_STATE.MOVE:
+
                 m_CurStateCoroutine = State_Move();
                 tremble = Tremble();
                 StartCoroutine(tremble);
@@ -304,6 +313,13 @@ public class FSM_Enemy : FSM
 
         yield return null;
 
+        if (m_AttackAvailableParts.Count > 1)
+        {
+            m_AttackAvailableParts[1].gameObject.GetComponent<Animator>().enabled = false;
+            m_AttackAvailableParts[1].gameObject.transform.localPosition = attackSecondPartOriginPos;
+            m_AttackAvailableParts[1].gameObject.transform.localRotation = attackSecondPartOriginRot;
+        }
+
         SetState(m_AiState);
     }
 
@@ -328,7 +344,10 @@ public class FSM_Enemy : FSM
 
     IEnumerator AttackablePart(GameObject AttackPart, int iCount)
     {
-        yield return new WaitForSeconds(iCount * 0.5f);
+        yield return new WaitForSeconds(iCount * 1f);
+
+        if (m_AttackAvailableParts.Count > 1 && !m_AttackAvailableParts[1].GetComponent<Animator>().enabled)
+            m_AttackAvailableParts[1].GetComponent<Animator>().enabled = true;
 
         Part targetPart = m_target.GetComponent<Part>();
         //		Quaternion originRotate = AttackPart.transform.localRotation;

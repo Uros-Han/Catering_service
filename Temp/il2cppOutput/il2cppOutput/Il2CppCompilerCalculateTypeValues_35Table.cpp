@@ -11703,9 +11703,11 @@ extern const int32_t g_FieldOffsetTable3590[4] =
 	0,
 };
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize3591 = { sizeof (HERO_t2660953570)+ sizeof (RuntimeObject), sizeof(int32_t), 0, 0 };
-extern const int32_t g_FieldOffsetTable3591[3] = 
+extern const int32_t g_FieldOffsetTable3591[5] = 
 {
 	HERO_t2660953570::get_offset_of_value___1() + static_cast<int32_t>(sizeof(RuntimeObject)),
+	0,
+	0,
 	0,
 	0,
 };

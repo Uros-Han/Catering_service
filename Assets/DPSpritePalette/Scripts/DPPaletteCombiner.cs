@@ -149,7 +149,7 @@ public class DPPaletteCombiner : MonoBehaviour
     /// </summary>
     public void UpdateTextures()
     {
-        if(UsePalettesFrom != null)
+        if (UsePalettesFrom != null)
         {
             UseOtherPaletteTex();
             return;
@@ -233,21 +233,22 @@ public class DPPaletteCombiner : MonoBehaviour
         Color32[] texColors1 = tex1.GetPixels32();
         Color32[] texColors2 = tex2.GetPixels32();
 
-        int numCombinedPalettes = numberOfPalettesTexture1 * numberOfPalettesTexture2 ;
-        int numCombinedColors = tex1.height + tex2.height;
+        int numCombinedPalettes = numberOfPalettesTexture1 * numberOfPalettesTexture2;
+        int numCombinedColors = tex1.height + tex2.height;
 
-        if ((dps != null && numCombinedColors > DPSpritePalette.MAX_PALETTE_COLORS) || (dpsui != null && numCombinedColors > DPSpritePaletteUI.MAX_PALETTE_COLORS)) {
+        if ((dps != null && numCombinedColors > DPSpritePalette.MAX_PALETTE_COLORS) || (dpsui != null && numCombinedColors > DPSpritePaletteUI.MAX_PALETTE_COLORS))
+        {
             Debug.LogError("The combined palette color number exceeds the MAX_PALETTE_COLORS value!");
             return null;
         }
 
-        int width = numCombinedPalettes; 
+        int width = numCombinedPalettes;
         int height = numCombinedColors;
         Texture2D newTex = new Texture2D(width, height, TextureFormat.RGBA32, false);
         newTex.filterMode = FilterMode.Point;
         Color[] colors = new Color[width * height];
 
-        for(int j=0; j < numberOfColorsTexture1; ++j)
+        for (int j = 0; j < numberOfColorsTexture1; ++j)
         {
             colors[j * width + 0] = texColors1[j * tex1.width + 0];
 
@@ -258,7 +259,7 @@ public class DPPaletteCombiner : MonoBehaviour
                     colors[j * width + (i) * numberOfPalettesTexture2 + k] = texColors1[j * tex1.width + i];
                 }
             }
-            
+
         }
 
         for (int j = 0; j < numberOfColorsTexture2; ++j)
@@ -269,7 +270,7 @@ public class DPPaletteCombiner : MonoBehaviour
             {
                 for (int i = 0; i < numberOfPalettesTexture2; ++i)
                 {
-                    colors[(j + tex1.height) * width + (i) + k*(numberOfPalettesTexture2)] = texColors2[j * tex2.width + i];
+                    colors[(j + tex1.height) * width + (i) + k * (numberOfPalettesTexture2)] = texColors2[j * tex2.width + i];
                 }
             }
         }
@@ -277,7 +278,7 @@ public class DPPaletteCombiner : MonoBehaviour
         newTex.SetPixels(colors);
         newTex.Apply(true, true);
         //newTex.Apply(true, false);
-        newTex.name = string.Format("{0}_{1}",tex1.name,tex2.name);
+        newTex.name = string.Format("{0}_{1}", tex1.name, tex2.name);
         //byte[] bytes = newTex.EncodeToPNG();
         //System.IO.File.WriteAllBytes(Application.dataPath + "/../debug.png", bytes);
         return newTex;

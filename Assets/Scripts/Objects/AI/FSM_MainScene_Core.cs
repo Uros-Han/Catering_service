@@ -128,7 +128,13 @@ public class FSM_MainScene_Core : FSM
             targetObj.transform.position = GridMgr.getInstance.GetPosOfIdx(iSeatIdx);
             targetObj.GetComponent<SpriteRenderer>().enabled = true;
             targetObj.GetComponent<SpriteRenderer>().sortingLayerName = "Objects";
-            targetObj.GetComponent<DPSpritePalette>().PaletteIndex = 1;
+
+            if (targetObj.GetComponent<DPPaletteCombiner>() != null)
+            {
+                targetObj.GetComponent<DPPaletteCombiner>().SetPalette1Index(1);
+            }
+            else
+                targetObj.GetComponent<DPSpritePalette>().PaletteIndex = 1;
 
             if (targetPart.m_bAttackAvailable)
             {

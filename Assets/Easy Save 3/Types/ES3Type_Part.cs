@@ -4,126 +4,141 @@ using System.Collections.Generic;
 
 namespace ES3Types
 {
-	[ES3PropertiesAttribute()]
-	public class ES3Type_Part : ES3ObjectType
-	{
-		public static ES3Type Instance = null;
+    [ES3PropertiesAttribute()]
+    public class ES3Type_Part : ES3ObjectType
+    {
+        public static ES3Type Instance = null;
 
-		public ES3Type_Part() : base(typeof(Part)){ Instance = this; }
+        public ES3Type_Part() : base(typeof(Part)) { Instance = this; }
 
-		protected override void WriteObject(object obj, ES3Writer writer)
-		{
-			var instance = (Part)obj;
+        protected override void WriteObject(object obj, ES3Writer writer)
+        {
+            var instance = (Part)obj;
 
-			writer.WriteProperty<bool> ("attackAvailable", instance.m_bAttackAvailable);
-			writer.WriteProperty<bool> ("edgePart", instance.m_bEdgePart);
-			writer.WriteProperty<bool> ("needToStickHead", instance.m_bNeedToStickHead);
-			writer.WriteProperty<bool> ("reverseBody", instance.m_bReverseBody);
-			writer.WriteProperty<bool> ("use32PixelHand", instance.m_bUse32PixelHand);
-			writer.WriteProperty<float> ("curHealth", instance.m_fCurHealth);
-			writer.WriteProperty<int> ("gridIdx", instance.m_iGridIdx);
-			writer.WriteProperty<Dictionary<string, float>> ("dicStat", instance.m_dicStat);
-			writer.WriteProperty<Dictionary<string, float>> ("dicStatBuff", instance.m_dicStatBuff);
-			writer.WriteProperty<int>("enemyType", instance.m_iEnemyType);
-			writer.WriteProperty<int>("saveValue", instance.m_iSaveValue);
-			writer.WriteProperty<string> ("nameKey",instance.m_strNameKey);
-			writer.WriteProperty<List<string>> ("listStrBuff", instance.m_lstStrBuff);
-			writer.WriteProperty<int> ("lastParentPartIdx", instance.m_iLastParentPartIdx);
-			writer.WriteProperty<int> ("childPartCount", instance.m_iChildPartCount);
-			writer.WriteProperty<int> ("weaponType", (int)instance.m_weaponType);
-		}
+            writer.WriteProperty<bool>("attackAvailable", instance.m_bAttackAvailable);
+            writer.WriteProperty<bool>("edgePart", instance.m_bEdgePart);
+            writer.WriteProperty<bool>("needToStickHead", instance.m_bNeedToStickHead);
+            writer.WriteProperty<bool>("reverseBody", instance.m_bReverseBody);
+            writer.WriteProperty<bool>("use32PixelHand", instance.m_bUse32PixelHand);
+            writer.WriteProperty<float>("curHealth", instance.m_fCurHealth);
+            writer.WriteProperty<int>("gridIdx", instance.m_iGridIdx);
+            writer.WriteProperty<Dictionary<string, float>>("dicStat", instance.m_dicStat);
+            writer.WriteProperty<Dictionary<string, float>>("dicStatBuff", instance.m_dicStatBuff);
+            writer.WriteProperty<int>("enemyType", instance.m_iEnemyType);
+            writer.WriteProperty<int>("saveValue", instance.m_iSaveValue);
+            writer.WriteProperty<int>("saveChildIdx", instance.m_iSaveChildIdx);
+            writer.WriteProperty<string>("nameKey", instance.m_strNameKey);
+            writer.WriteProperty<List<string>>("listStrBuff", instance.m_lstStrBuff);
+            writer.WriteProperty<int>("lastParentPartIdx", instance.m_iLastParentPartIdx);
+            writer.WriteProperty<int>("childPartCount", instance.m_iChildPartCount);
+            writer.WriteProperty<int>("weaponType", (int)instance.m_weaponType);
+            writer.WriteProperty<int>("paletteSkin", instance.m_iPaletteSkin);
+            writer.WriteProperty<int>("paletteCombiner", instance.m_iPaletteCombiner);
+        }
 
-		protected override void ReadObject<T>(ES3Reader reader, object obj)
-		{
-			var instance = (Part)obj;
-			foreach(string propertyName in reader.Properties)
-			{
-				switch(propertyName)
-				{
-				case "attackAvailable":
-					instance.m_bAttackAvailable = reader.Read<bool>();
-					break;
-				case "edgePart":
-					instance.m_bEdgePart = reader.Read<bool>();
-					break;
-				case "needToStickHead":
-					instance.m_bNeedToStickHead = reader.Read<bool>();
-					break;
+        protected override void ReadObject<T>(ES3Reader reader, object obj)
+        {
+            var instance = (Part)obj;
+            foreach (string propertyName in reader.Properties)
+            {
+                switch (propertyName)
+                {
+                    case "attackAvailable":
+                        instance.m_bAttackAvailable = reader.Read<bool>();
+                        break;
+                    case "edgePart":
+                        instance.m_bEdgePart = reader.Read<bool>();
+                        break;
+                    case "needToStickHead":
+                        instance.m_bNeedToStickHead = reader.Read<bool>();
+                        break;
 
-				case "reverseBody":
-					instance.m_bReverseBody = reader.Read<bool>();
-					break;
+                    case "reverseBody":
+                        instance.m_bReverseBody = reader.Read<bool>();
+                        break;
 
-				case "use32PixelHand":
-					instance.m_bUse32PixelHand = reader.Read<bool>();
-					break;
+                    case "use32PixelHand":
+                        instance.m_bUse32PixelHand = reader.Read<bool>();
+                        break;
 
-				case "curHealth":
-					instance.m_fCurHealth = reader.Read<float>();
-					break;
+                    case "curHealth":
+                        instance.m_fCurHealth = reader.Read<float>();
+                        break;
 
-				case "gridIdx":
-					instance.m_iGridIdx = reader.Read<int>();
-					break;
+                    case "gridIdx":
+                        instance.m_iGridIdx = reader.Read<int>();
+                        break;
 
-				case "dicStat":
-					instance.m_dicStat = reader.Read<Dictionary<string, float>>();
-					break;
+                    case "dicStat":
+                        instance.m_dicStat = reader.Read<Dictionary<string, float>>();
+                        break;
 
-				case "dicStatBuff":
-					instance.m_dicStatBuff = reader.Read<Dictionary<string, float>>();
-					break;
+                    case "dicStatBuff":
+                        instance.m_dicStatBuff = reader.Read<Dictionary<string, float>>();
+                        break;
 
-				case "enemyType":
-					instance.m_iEnemyType = reader.Read<int>();
-					break;
+                    case "enemyType":
+                        instance.m_iEnemyType = reader.Read<int>();
+                        break;
 
-				case "saveValue":
-					instance.m_iSaveValue = reader.Read<int>();
-					break;
+                    case "saveValue":
+                        instance.m_iSaveValue = reader.Read<int>();
+                        break;
 
-				case "nameKey":
-					instance.m_strNameKey = reader.Read<string> ();
-					break;
+                    case "saveChildIdx":
+                        instance.m_iSaveChildIdx = reader.Read<int>();
+                        break;
 
-				case "listStrBuff":
-					instance.m_lstStrBuff = reader.Read<List<string>> ();
-					break;
+                    case "nameKey":
+                        instance.m_strNameKey = reader.Read<string>();
+                        break;
 
-				case "lastParentPartIdx":
-					instance.m_iLastParentPartIdx = reader.Read<int> ();
-					break;
+                    case "listStrBuff":
+                        instance.m_lstStrBuff = reader.Read<List<string>>();
+                        break;
 
-				case "childPartCount":
-					instance.m_iChildPartCount = reader.Read<int>();
-					break;
+                    case "lastParentPartIdx":
+                        instance.m_iLastParentPartIdx = reader.Read<int>();
+                        break;
 
-				case "weaponType":
-					instance.m_weaponType = (WEAPON_TYPE)reader.Read<int>();
-					break;
+                    case "childPartCount":
+                        instance.m_iChildPartCount = reader.Read<int>();
+                        break;
 
-				default:
-					reader.Skip();
-					break;
-				}
-			}
-		}
+                    case "weaponType":
+                        instance.m_weaponType = (WEAPON_TYPE)reader.Read<int>();
+                        break;
 
-		protected override object ReadObject<T>(ES3Reader reader)
-		{
-			var instance = new Part();
-			ReadObject<T>(reader, instance);
-			return instance;
-		}
-	}
+                    case "paletteSkin":
+                        instance.m_iPaletteSkin = reader.Read<int>();
+                        break;
 
-	public class ES3Type_PartArray : ES3ArrayType
-	{
-		public static ES3Type Instance;
+                    case "paletteCombiner":
+                        instance.m_iPaletteCombiner = reader.Read<int>();
+                        break;
 
-		public ES3Type_PartArray() : base(typeof(Part[]), ES3Type_Part.Instance)
-		{
-			Instance = this;
-		}
-	}
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+        }
+
+        protected override object ReadObject<T>(ES3Reader reader)
+        {
+            var instance = new Part();
+            ReadObject<T>(reader, instance);
+            return instance;
+        }
+    }
+
+    public class ES3Type_PartArray : ES3ArrayType
+    {
+        public static ES3Type Instance;
+
+        public ES3Type_PartArray() : base(typeof(Part[]), ES3Type_Part.Instance)
+        {
+            Instance = this;
+        }
+    }
 }

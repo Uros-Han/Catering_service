@@ -22,6 +22,6 @@ public enum WORLD_GEO { GRASS, WATER, CLIFF, END };
 
 public enum PARTY_TYPE { CARAVAN, RAID, END };
 
-public enum HERO { WALLACE, END };
+public enum HERO { WALLACE, ROGER, ADAM, END };
 
 public enum WEAPON_TYPE { ONE_HAND, TWO_HAND, POLE, BOW, CROSSBOW, END };

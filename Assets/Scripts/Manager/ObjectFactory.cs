@@ -46,7 +46,9 @@ public class ObjectFactory : Singleton<ObjectFactory>
     public Sprite[] m_sheet_civilian_arm;
     public Sprite m_civilian_arm_left;
     public Sprite[][] m_sheet_civilian_body;
-    public Texture2D m_texture_civilian_palette;
+    public Texture2D m_texture_skin_palette;
+    public Texture2D m_texture_hair_palette;
+    public Texture2D m_texture_bow_palette;
 
     int m_iMercenary_body_count;
     public Sprite[] m_sheet_mercenary_head;
@@ -54,7 +56,6 @@ public class ObjectFactory : Singleton<ObjectFactory>
     public Sprite[] m_sheet_mercenary_arm;
     public Sprite[] m_sheet_mercenary_arm_left;
     public Sprite[][] m_sheet_mercenary_body;
-    public Texture2D m_texture_mercenary_palette;
 
     int m_iKnight_body_count;
     public Sprite[] m_sheet_knight_head;
@@ -117,7 +118,9 @@ public class ObjectFactory : Singleton<ObjectFactory>
             m_sheet_civilian_body[i] = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/Civilian/sheet_civ_body_{0}", i));
         }
         m_objHuman = Resources.Load("Prefabs/Objects/Enemies/Human") as GameObject;
-        m_texture_civilian_palette = Resources.Load<Texture2D>("Palette/Civilian/civilian.paltex");
+        m_texture_skin_palette = Resources.Load<Texture2D>("Palette/Skin/Skin.paltex");
+        m_texture_hair_palette = Resources.Load<Texture2D>("Palette/Hair/Hair.paltex");
+        m_texture_bow_palette = Resources.Load<Texture2D>("Palette/Bow/Bow.paltex");
 
         ///Mercenaries
         m_sheet_mercenary_head = Resources.LoadAll<Sprite>("Sprites/Sheets/Mercenary/sheet_mer_heads");
@@ -130,7 +133,6 @@ public class ObjectFactory : Singleton<ObjectFactory>
         {
             m_sheet_mercenary_body[i] = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/Mercenary/sheet_mer_body_{0}", i));
         }
-        m_texture_mercenary_palette = Resources.Load<Texture2D>("Palette/Mercenary/mercenary.paltex");
 
         //Knights
         m_sheet_knight_head = Resources.LoadAll<Sprite>("Sprites/Sheets/Knight/sheet_kni_heads");
@@ -374,17 +376,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
         obj.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = parent.GetComponent<SpriteRenderer>().sprite;
         obj.transform.GetChild(0).GetComponent<Animator>().runtimeAnimatorController = m_weapon_anim_controller[(int)parent.GetComponent<Part>().m_weaponType];
 
-        switch (parent.GetComponent<Part>().m_iEnemyType)
-        {
-            case (int)ENEMY_TYPE.CIVILIAN:
-                obj.transform.GetChild(0).GetComponent<DPSpritePalette>().paletteTexture = m_texture_civilian_palette;
-                break;
-
-            case (int)ENEMY_TYPE.MERCENARY:
-                obj.transform.GetChild(0).GetComponent<DPSpritePalette>().paletteTexture = m_texture_mercenary_palette;
-                break;
-        }
-
+        obj.transform.GetChild(0).GetComponent<DPSpritePalette>().paletteTexture = m_texture_skin_palette;
         //		parent.GetComponent<SpriteRenderer> ().enabled = false;
 
         return obj;
@@ -430,8 +422,6 @@ public class ObjectFactory : Singleton<ObjectFactory>
                     obj.GetComponent<SpriteRenderer>().sprite = m_sheet_civilian_leg[part.m_iSaveValue];
                 }
 
-                obj.GetComponent<DPSpritePalette>().paletteTexture = m_texture_civilian_palette;
-
                 break;
 
             case (int)ENEMY_TYPE.MERCENARY:
@@ -456,8 +446,6 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 {
                     obj.GetComponent<SpriteRenderer>().sprite = m_sheet_mercenary_leg[part.m_iSaveValue];
                 }
-
-                obj.GetComponent<DPSpritePalette>().paletteTexture = m_texture_mercenary_palette;
 
                 break;
 
@@ -489,28 +477,59 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 switch (part.m_iSaveValue)
                 { // used to hero index
                     case (int)HERO.WALLACE:
+                        #region wallace
                         if (name.Equals("Head"))
                         {
-                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Sheets/Heroes/Wallace/wallace_head_0");
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Sheets/Heroes/0.Wallace/wallace_head_0");
                         }
-                        else if (name.Equals("Body_0"))
+                        else if (name.Equals("Body"))
                         {
-                            obj.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>("Sprites/Sheets/Heroes/Wallace/sheet_wallace_body_0");
-                            obj.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteSheet>().m_sheet_sprite[0];
+                            switch (obj.GetComponent<Part>().m_iSaveChildIdx)
+                            {
+                                case 1:
+                                    obj.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>("Sprites/Sheets/Heroes/0.Wallace/sheet_wallace_body_0");
+                                    obj.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteSheet>().m_sheet_sprite[0];
+                                    break;
+
+                                case 2:
+                                    obj.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>("Sprites/Sheets/Heroes/0.Wallace/sheet_wallace_body_1");
+                                    obj.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteSheet>().m_sheet_sprite[0];
+                                    break;
+                            }
                         }
-                        else if (name.Equals("Body_1"))
+                        else if (name.Equals("Leg"))
                         {
-                            obj.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>("Sprites/Sheets/Heroes/Wallace/sheet_wallace_body_1");
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Sheets/Heroes/0.Wallace/wallace_legs_0");
+                        }
+                        else if (name.Equals("Hand_R"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Sheets/Heroes/0.Wallace/wallace_arms_0");
+                        }
+                        #endregion
+                        break;
+
+                    case (int)HERO.ROGER:
+                        #region roger
+                        if (name.Equals("Head"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Sheets/Heroes/1.Roger Godberd/roger_head_0");
+                        }
+                        else if (name.Equals("Body"))
+                        {
+                            obj.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>("Sprites/Sheets/Heroes/1.Roger Godberd/sheet_roger_body_0");
                             obj.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteSheet>().m_sheet_sprite[0];
                         }
                         else if (name.Equals("Leg"))
                         {
-                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Sheets/Heroes/Wallace/wallace_legs_0");
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Sheets/Heroes/1.Roger Godberd/roger_legs_0");
                         }
                         else if (name.Equals("Hand_R"))
                         {
-                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Sheets/Heroes/Wallace/wallace_arms_0");
+                            obj.transform.GetChild(0).GetChild(0).GetComponent<DPSpritePalette>().paletteTexture = m_texture_bow_palette;
+                            obj.transform.GetChild(0).GetChild(0).GetComponent<DPSpritePalette>().Refresh();
+                            obj.transform.GetChild(0).GetChild(0).GetComponent<DPSpritePalette>().PaletteIndex = 3;
                         }
+                        #endregion
                         break;
                 }
                 break;
@@ -525,6 +544,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
             obj.transform.GetChild(0).GetChild(0).GetComponent<DPSpritePalette>().PaletteIndex = 1;
         }
 
+        obj.GetComponent<DPSpritePalette>().paletteTexture = m_texture_skin_palette;
         obj.GetComponent<DPSpritePalette>().PaletteIndex = 1;
 
         return obj;
@@ -671,7 +691,8 @@ public class ObjectFactory : Singleton<ObjectFactory>
 
         switch (iHeroIdx)
         {
-            case 0: //wallace
+            case 0:
+                #region Wallace
                 GameObject head = obj.transform.Find("Head").gameObject;
                 Part headPart = head.GetComponent<Part>();
                 headPart.m_fHealth = Random.Range(15, 18);
@@ -705,8 +726,8 @@ public class ObjectFactory : Singleton<ObjectFactory>
 
                 GameObject arm = obj.transform.Find("Hand_R").gameObject;
                 Part armPart = arm.GetComponent<Part>();
-                fRandom = Random.Range(5, 9);
-                float fSpeedRandom = Random.Range(1, 3);
+                fRandom = Random.Range(50, 70);
+                float fSpeedRandom = Random.Range(20, 30);
                 armPart.m_bUse32PixelHand = true;
                 armPart.m_dicStat.Add("Attack", fRandom);
                 armPart.m_dicStat.Add("AttackSpeed", fSpeedRandom);
@@ -715,6 +736,10 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_fCurHealth = fRandom;
                 armPart.m_dicStat.Add("Health", fRandom);
                 armPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
+                armPart.m_weaponType = WEAPON_TYPE.TWO_HAND;
+                armPart.m_dicStat.Add("Range", 45f);
+                Animator anim = armPart.gameObject.GetComponent<Animator>();
+                anim.runtimeAnimatorController = m_weapon_anim_controller[(int)armPart.m_weaponType];
 
                 GameObject leg = obj.transform.Find("Leg").gameObject;
                 Part legPart = leg.GetComponent<Part>();
@@ -727,6 +752,132 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 legPart.m_dicStatBuff["Dodge"] = fRandomDodge;
                 legPart.m_lstStrBuff.Add("LegBuff");
                 legPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
+                #endregion
+                break;
+
+            case 1:
+                #region Roger Godberd
+                head = obj.transform.Find("Head").gameObject;
+                headPart = head.GetComponent<Part>();
+                headPart.m_fHealth = Random.Range(15, 18);
+                headPart.m_fCurHealth = fRandom;
+                headPart.m_dicStat.Add("Health", headPart.m_fHealth);
+                headPart.m_dicStat.Add("IQ", 100);
+                headPart.m_lstStrBuff.Add("HeadBuff_2");
+                headPart.m_dicStatBuff["Attack"] = 2;
+                headPart.m_dicStatBuff["AttackSpeed"] = 2;
+                headPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
+
+                GameObject Body = obj.transform.Find("Body").gameObject;
+                Part bodyPart = Body.GetComponent<Part>();
+                fRandom = Random.Range(25, 30);
+                bodyPart.m_fHealth = fRandom;
+                bodyPart.m_fCurHealth = fRandom;
+                bodyPart.m_dicStat.Add("Health", fRandom);
+                fRandom = Random.Range(5, 8);
+                bodyPart.m_dicStat.Add("Defense", fRandom);
+                bodyPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
+
+                arm = obj.transform.Find("Hand_R").gameObject;
+                armPart = arm.GetComponent<Part>();
+                fRandom = Random.Range(50, 70);
+                fSpeedRandom = Random.Range(20, 30);
+                armPart.m_bUse32PixelHand = true;
+                armPart.m_dicStat.Add("Attack", fRandom);
+                armPart.m_dicStat.Add("AttackSpeed", fSpeedRandom);
+                fRandom = Random.Range(15, 18);
+                armPart.m_fHealth = fRandom;
+                armPart.m_fCurHealth = fRandom;
+                armPart.m_dicStat.Add("Health", fRandom);
+                armPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
+                armPart.m_weaponType = WEAPON_TYPE.BOW;
+                armPart.m_dicStat.Add("Range", 80f);
+                anim = armPart.gameObject.GetComponent<Animator>();
+                anim.runtimeAnimatorController = m_weapon_anim_controller[(int)armPart.m_weaponType];
+
+                leg = obj.transform.Find("Leg").gameObject;
+                legPart = leg.GetComponent<Part>();
+                fRandom = Random.Range(15, 18);
+                fRandomDodge = Random.Range(5, 7);
+                legPart.m_fHealth = fRandom;
+                legPart.m_fCurHealth = fRandom;
+                legPart.m_dicStat.Add("Health", fRandom);
+                legPart.m_dicStat.Add("Dodge", fRandomDodge);
+                legPart.m_dicStatBuff["Dodge"] = fRandomDodge;
+                legPart.m_lstStrBuff.Add("LegBuff");
+                legPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
+                #endregion
+                break;
+
+            case 2:
+                #region Adam the Leper
+                head = obj.transform.Find("Head").gameObject;
+                headPart = head.GetComponent<Part>();
+                headPart.m_fHealth = Random.Range(15, 18);
+                headPart.m_fCurHealth = fRandom;
+                headPart.m_dicStat.Add("Health", headPart.m_fHealth);
+                headPart.m_dicStat.Add("IQ", 100);
+                headPart.m_lstStrBuff.Add("HeadBuff_2");
+                headPart.m_dicStatBuff["Attack"] = 2;
+                headPart.m_dicStatBuff["AttackSpeed"] = 2;
+                headPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
+
+                Body = obj.transform.Find("Body").gameObject;
+                bodyPart = Body.GetComponent<Part>();
+                fRandom = Random.Range(25, 30);
+                bodyPart.m_fHealth = fRandom;
+                bodyPart.m_fCurHealth = fRandom;
+                bodyPart.m_dicStat.Add("Health", fRandom);
+                fRandom = Random.Range(5, 8);
+                bodyPart.m_dicStat.Add("Defense", fRandom);
+                bodyPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
+
+                arm = obj.transform.Find("Hand_R").gameObject;
+                armPart = arm.GetComponent<Part>();
+                fRandom = Random.Range(5, 7);
+                fSpeedRandom = 75f;
+                armPart.m_bUse32PixelHand = true;
+                armPart.m_dicStat.Add("Attack", fRandom);
+                armPart.m_dicStat.Add("AttackSpeed", fSpeedRandom);
+                fRandom = Random.Range(15, 18);
+                armPart.m_fHealth = fRandom;
+                armPart.m_fCurHealth = fRandom;
+                armPart.m_dicStat.Add("Health", fRandom);
+                armPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
+                armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
+                armPart.m_dicStat.Add("Range", 45f);
+                anim = armPart.gameObject.GetComponent<Animator>();
+                anim.runtimeAnimatorController = m_weapon_anim_controller[(int)armPart.m_weaponType];
+
+                arm = obj.transform.Find("Hand_L").gameObject;
+                armPart = arm.GetComponent<Part>();
+                fRandom = Random.Range(5, 7);
+                fSpeedRandom = 75f;
+                armPart.m_bUse32PixelHand = true;
+                armPart.m_dicStat.Add("Attack", fRandom);
+                armPart.m_dicStat.Add("AttackSpeed", fSpeedRandom);
+                fRandom = Random.Range(15, 18);
+                armPart.m_fHealth = fRandom;
+                armPart.m_fCurHealth = fRandom;
+                armPart.m_dicStat.Add("Health", fRandom);
+                armPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
+                armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
+                armPart.m_dicStat.Add("Range", 45f);
+                anim = armPart.gameObject.GetComponent<Animator>();
+                anim.runtimeAnimatorController = m_weapon_anim_controller[(int)armPart.m_weaponType];
+
+                leg = obj.transform.Find("Leg").gameObject;
+                legPart = leg.GetComponent<Part>();
+                fRandom = Random.Range(15, 18);
+                fRandomDodge = Random.Range(5, 7);
+                legPart.m_fHealth = fRandom;
+                legPart.m_fCurHealth = fRandom;
+                legPart.m_dicStat.Add("Health", fRandom);
+                legPart.m_dicStat.Add("Dodge", fRandomDodge);
+                legPart.m_dicStatBuff["Dodge"] = fRandomDodge;
+                legPart.m_lstStrBuff.Add("LegBuff");
+                legPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
+                #endregion
                 break;
         }
 
@@ -988,9 +1139,24 @@ public class ObjectFactory : Singleton<ObjectFactory>
             obj.AddComponent<FSM_MainScene_Enemy>();
         }
 
+        int iRace = Random.Range(1, m_texture_skin_palette.width);
+        if (iRace == 1) iRace -= 1;
+
+        int iHair = Random.Range(0, m_texture_hair_palette.width);
+
         for (int i = 0; i < obj.transform.childCount; ++i)
         {
-            obj.transform.GetChild(i).GetComponent<DPSpritePalette>().paletteTexture = m_texture_civilian_palette;
+            DPSpritePalette palette = obj.transform.GetChild(i).GetComponent<DPSpritePalette>();
+
+            if (i == 0)
+            {
+                DPPaletteCombiner combiner = obj.transform.GetChild(i).GetComponent<DPPaletteCombiner>();
+                combiner.SetPaletteIndex(iRace, iHair);
+            }
+            else
+            {
+                palette.PaletteIndex = iRace;
+            }
         }
 
         return obj;
@@ -1249,9 +1415,24 @@ public class ObjectFactory : Singleton<ObjectFactory>
             obj.AddComponent<FSM_MainScene_Enemy>();
         }
 
+        int iRace = Random.Range(1, m_texture_skin_palette.width);
+        if (iRace == 1) iRace -= 1;
+
+        int iHair = Random.Range(0, m_texture_hair_palette.width);
+
         for (int i = 0; i < obj.transform.childCount; ++i)
         {
-            obj.transform.GetChild(i).GetComponent<DPSpritePalette>().paletteTexture = m_texture_mercenary_palette;
+            DPSpritePalette palette = obj.transform.GetChild(i).GetComponent<DPSpritePalette>();
+
+            if (i == 0)
+            {
+                DPPaletteCombiner combiner = obj.transform.GetChild(i).GetComponent<DPPaletteCombiner>();
+                combiner.SetPaletteIndex(iRace, iHair);
+            }
+            else
+            {
+                palette.PaletteIndex = iRace;
+            }
         }
 
         return obj;
@@ -1444,5 +1625,22 @@ public class ObjectFactory : Singleton<ObjectFactory>
             obj.GetComponent<FSM_Enemy>().m_objHealthBar = Create_HealthBar(obj);
 
         return vecBornPos;
+    }
+
+    IEnumerator SetHairColor(DPPaletteMultiCombiner combiner, int iHairIdx)
+    {
+        yield return null;
+
+        combiner.SetPaletteIndex(0, iHairIdx);
+
+        yield return null;
+        combiner.NextPalette(1);
+
+        do
+        {
+            yield return new WaitForSeconds(0.1f);
+            combiner.PrevPalette(1);
+            combiner.UpdateTextures();
+        } while (true);
     }
 }

@@ -77,8 +77,19 @@ public class MouthPanel : MonoBehaviour
 
         for (int i = 0; i < objEnemy.transform.childCount; ++i)
         {
-            objEnemy.transform.GetChild(i).GetComponent<DPSpritePalette>().enabled = false;
-            objEnemy.transform.GetChild(i).GetComponent<SpriteRenderer>().color = Color.white;
+            if (objEnemy.transform.GetChild(i).name == "Head")
+            {
+                objEnemy.transform.GetChild(i).GetComponent<SpriteRenderer>().material = ObjectFactory.getInstance.m_material_SpritePaletteLightingMaterial;
+            }
+            else if (objEnemy.transform.GetChild(i).name.Contains("Hand"))
+            {
+                objEnemy.transform.GetChild(i).GetComponent<SpriteRenderer>().enabled = false;
+            }
+            else
+            {
+                objEnemy.transform.GetChild(i).GetComponent<DPSpritePalette>().enabled = false;
+                objEnemy.transform.GetChild(i).GetComponent<SpriteRenderer>().color = Color.white;
+            }
         }
 
         StartCoroutine(m_DigestBar[iEmptyIdx]);

@@ -26177,6 +26177,13 @@ extern "C" void ObjectFactory_Create_Civilian_m3560642591 ();
 extern "C" void ObjectFactory_Create_Mercenary_m157761025 ();
 extern "C" void ObjectFactory_Create_Knight_m2924877694 ();
 extern "C" void ObjectFactory_RandomBornPos_m408851574 ();
+extern "C" void ObjectFactory_SetHairColor_m3896601703 ();
+extern "C" void U3CSetHairColorU3Ec__Iterator0__ctor_m1594382300 ();
+extern "C" void U3CSetHairColorU3Ec__Iterator0_MoveNext_m3707795948 ();
+extern "C" void U3CSetHairColorU3Ec__Iterator0_System_Collections_Generic_IEnumeratorU3CobjectU3E_get_Current_m1390312866 ();
+extern "C" void U3CSetHairColorU3Ec__Iterator0_System_Collections_IEnumerator_get_Current_m4111068629 ();
+extern "C" void U3CSetHairColorU3Ec__Iterator0_Dispose_m1824112238 ();
+extern "C" void U3CSetHairColorU3Ec__Iterator0_Reset_m1021773647 ();
 extern "C" void OpenURLOnClick__ctor_m2117996448 ();
 extern "C" void OpenURLOnClick_OnClick_m2198932822 ();
 extern "C" void PaletteTexturePngSaveData__ctor_m1969560031 ();
@@ -26213,6 +26220,7 @@ extern "C" void Part_HarvestPartInField_Coroutine_m3558368848 ();
 extern "C" void Part_Weapon_Attack_m1372429124 ();
 extern "C" void Part_ClickCheck_m1536229614 ();
 extern "C" void Part_UIScreenToWorldPoint_m924274647 ();
+extern "C" void Part_GetChildIdx_m468491482 ();
 extern "C" void U3CAssembleU3Ec__Iterator1__ctor_m3864734155 ();
 extern "C" void U3CAssembleU3Ec__Iterator1_MoveNext_m988749316 ();
 extern "C" void U3CAssembleU3Ec__Iterator1_System_Collections_Generic_IEnumeratorU3CobjectU3E_get_Current_m4016018980 ();
@@ -28941,7 +28949,7 @@ extern "C" void U3CEnemyCheckU3Ec__Iterator0_Reset_m267626550 ();
 extern "C" void WorldOverView__ctor_m2182167814 ();
 extern "C" void WorldOverView_Start_m4044747356 ();
 extern "C" void WorldOverView_SelectWorldIcon_m873079078 ();
-extern const Il2CppMethodPointer g_MethodPointers[28923] = 
+extern const Il2CppMethodPointer g_MethodPointers[28931] = 
 {
 	U3CPrivateImplementationDetailsU3E__ctor_m1418335040,
 	Locale__ctor_m734557855,
@@ -55102,6 +55110,13 @@ extern const Il2CppMethodPointer g_MethodPointers[28923] =
 	ObjectFactory_Create_Mercenary_m157761025,
 	ObjectFactory_Create_Knight_m2924877694,
 	ObjectFactory_RandomBornPos_m408851574,
+	ObjectFactory_SetHairColor_m3896601703,
+	U3CSetHairColorU3Ec__Iterator0__ctor_m1594382300,
+	U3CSetHairColorU3Ec__Iterator0_MoveNext_m3707795948,
+	U3CSetHairColorU3Ec__Iterator0_System_Collections_Generic_IEnumeratorU3CobjectU3E_get_Current_m1390312866,
+	U3CSetHairColorU3Ec__Iterator0_System_Collections_IEnumerator_get_Current_m4111068629,
+	U3CSetHairColorU3Ec__Iterator0_Dispose_m1824112238,
+	U3CSetHairColorU3Ec__Iterator0_Reset_m1021773647,
 	OpenURLOnClick__ctor_m2117996448,
 	OpenURLOnClick_OnClick_m2198932822,
 	PaletteTexturePngSaveData__ctor_m1969560031,
@@ -55138,6 +55153,7 @@ extern const Il2CppMethodPointer g_MethodPointers[28923] =
 	Part_Weapon_Attack_m1372429124,
 	Part_ClickCheck_m1536229614,
 	Part_UIScreenToWorldPoint_m924274647,
+	Part_GetChildIdx_m468491482,
 	U3CAssembleU3Ec__Iterator1__ctor_m3864734155,
 	U3CAssembleU3Ec__Iterator1_MoveNext_m988749316,
 	U3CAssembleU3Ec__Iterator1_System_Collections_Generic_IEnumeratorU3CobjectU3E_get_Current_m4016018980,

@@ -294,11 +294,14 @@ extern String_t* _stringLiteral1618693427;
 extern String_t* _stringLiteral3797402257;
 extern String_t* _stringLiteral4241448112;
 extern String_t* _stringLiteral2527784611;
+extern String_t* _stringLiteral1902969901;
 extern String_t* _stringLiteral4112522321;
 extern String_t* _stringLiteral3441737066;
 extern String_t* _stringLiteral4070104265;
 extern String_t* _stringLiteral2724324598;
 extern String_t* _stringLiteral3018756718;
+extern String_t* _stringLiteral2145771464;
+extern String_t* _stringLiteral3627450628;
 extern const uint32_t ES3Type_Part_ReadObject_TisRuntimeObject_m3766809413_MetadataUsageId;
 extern RuntimeClass* ParticleSystem_t1800779281_il2cpp_TypeInfo_var;
 extern RuntimeClass* ES3Type_ParticleSystem_t3529902104_il2cpp_TypeInfo_var;
@@ -4742,24 +4745,30 @@ public:
 	int32_t ___m_iEnemyType_27;
 	// System.Int32 Part::m_iSaveValue
 	int32_t ___m_iSaveValue_28;
+	// System.Int32 Part::m_iSaveChildIdx
+	int32_t ___m_iSaveChildIdx_29;
+	// System.Int32 Part::m_iPaletteSkin
+	int32_t ___m_iPaletteSkin_30;
+	// System.Int32 Part::m_iPaletteCombiner
+	int32_t ___m_iPaletteCombiner_31;
 	// System.Boolean Part::m_bLoadedPart
-	bool ___m_bLoadedPart_29;
+	bool ___m_bLoadedPart_32;
 	// System.Boolean Part::m_bTurnIntoMeat
-	bool ___m_bTurnIntoMeat_30;
+	bool ___m_bTurnIntoMeat_33;
 	// System.Boolean Part::m_bBreakedPath
-	bool ___m_bBreakedPath_31;
+	bool ___m_bBreakedPath_34;
 	// WEAPON_TYPE Part::m_weaponType
-	int32_t ___m_weaponType_32;
+	int32_t ___m_weaponType_35;
 	// UnityEngine.Coroutine Part::AssembleRoutine
-	Coroutine_t3829159415 * ___AssembleRoutine_33;
+	Coroutine_t3829159415 * ___AssembleRoutine_36;
 	// System.Boolean Part::bBlockedAssembleDrag
-	bool ___bBlockedAssembleDrag_34;
+	bool ___bBlockedAssembleDrag_37;
 	// System.Boolean Part::bStopAssemble
-	bool ___bStopAssemble_35;
+	bool ___bStopAssemble_38;
 	// UnityEngine.GameObject Part::m_StickedPart
-	GameObject_t1113636619 * ___m_StickedPart_36;
+	GameObject_t1113636619 * ___m_StickedPart_39;
 	// UnityEngine.GameObject Part::m_objAleart
-	GameObject_t1113636619 * ___m_objAleart_37;
+	GameObject_t1113636619 * ___m_objAleart_40;
 
 public:
 	inline static int32_t get_offset_of_m_partType_2() { return static_cast<int32_t>(offsetof(Part_t2216984906, ___m_partType_2)); }
@@ -4987,79 +4996,103 @@ public:
 		___m_iSaveValue_28 = value;
 	}
 
-	inline static int32_t get_offset_of_m_bLoadedPart_29() { return static_cast<int32_t>(offsetof(Part_t2216984906, ___m_bLoadedPart_29)); }
-	inline bool get_m_bLoadedPart_29() const { return ___m_bLoadedPart_29; }
-	inline bool* get_address_of_m_bLoadedPart_29() { return &___m_bLoadedPart_29; }
-	inline void set_m_bLoadedPart_29(bool value)
+	inline static int32_t get_offset_of_m_iSaveChildIdx_29() { return static_cast<int32_t>(offsetof(Part_t2216984906, ___m_iSaveChildIdx_29)); }
+	inline int32_t get_m_iSaveChildIdx_29() const { return ___m_iSaveChildIdx_29; }
+	inline int32_t* get_address_of_m_iSaveChildIdx_29() { return &___m_iSaveChildIdx_29; }
+	inline void set_m_iSaveChildIdx_29(int32_t value)
 	{
-		___m_bLoadedPart_29 = value;
+		___m_iSaveChildIdx_29 = value;
 	}
 
-	inline static int32_t get_offset_of_m_bTurnIntoMeat_30() { return static_cast<int32_t>(offsetof(Part_t2216984906, ___m_bTurnIntoMeat_30)); }
-	inline bool get_m_bTurnIntoMeat_30() const { return ___m_bTurnIntoMeat_30; }
-	inline bool* get_address_of_m_bTurnIntoMeat_30() { return &___m_bTurnIntoMeat_30; }
-	inline void set_m_bTurnIntoMeat_30(bool value)
+	inline static int32_t get_offset_of_m_iPaletteSkin_30() { return static_cast<int32_t>(offsetof(Part_t2216984906, ___m_iPaletteSkin_30)); }
+	inline int32_t get_m_iPaletteSkin_30() const { return ___m_iPaletteSkin_30; }
+	inline int32_t* get_address_of_m_iPaletteSkin_30() { return &___m_iPaletteSkin_30; }
+	inline void set_m_iPaletteSkin_30(int32_t value)
 	{
-		___m_bTurnIntoMeat_30 = value;
+		___m_iPaletteSkin_30 = value;
 	}
 
-	inline static int32_t get_offset_of_m_bBreakedPath_31() { return static_cast<int32_t>(offsetof(Part_t2216984906, ___m_bBreakedPath_31)); }
-	inline bool get_m_bBreakedPath_31() const { return ___m_bBreakedPath_31; }
-	inline bool* get_address_of_m_bBreakedPath_31() { return &___m_bBreakedPath_31; }
-	inline void set_m_bBreakedPath_31(bool value)
+	inline static int32_t get_offset_of_m_iPaletteCombiner_31() { return static_cast<int32_t>(offsetof(Part_t2216984906, ___m_iPaletteCombiner_31)); }
+	inline int32_t get_m_iPaletteCombiner_31() const { return ___m_iPaletteCombiner_31; }
+	inline int32_t* get_address_of_m_iPaletteCombiner_31() { return &___m_iPaletteCombiner_31; }
+	inline void set_m_iPaletteCombiner_31(int32_t value)
 	{
-		___m_bBreakedPath_31 = value;
+		___m_iPaletteCombiner_31 = value;
 	}
 
-	inline static int32_t get_offset_of_m_weaponType_32() { return static_cast<int32_t>(offsetof(Part_t2216984906, ___m_weaponType_32)); }
-	inline int32_t get_m_weaponType_32() const { return ___m_weaponType_32; }
-	inline int32_t* get_address_of_m_weaponType_32() { return &___m_weaponType_32; }
-	inline void set_m_weaponType_32(int32_t value)
+	inline static int32_t get_offset_of_m_bLoadedPart_32() { return static_cast<int32_t>(offsetof(Part_t2216984906, ___m_bLoadedPart_32)); }
+	inline bool get_m_bLoadedPart_32() const { return ___m_bLoadedPart_32; }
+	inline bool* get_address_of_m_bLoadedPart_32() { return &___m_bLoadedPart_32; }
+	inline void set_m_bLoadedPart_32(bool value)
 	{
-		___m_weaponType_32 = value;
+		___m_bLoadedPart_32 = value;
 	}
 
-	inline static int32_t get_offset_of_AssembleRoutine_33() { return static_cast<int32_t>(offsetof(Part_t2216984906, ___AssembleRoutine_33)); }
-	inline Coroutine_t3829159415 * get_AssembleRoutine_33() const { return ___AssembleRoutine_33; }
-	inline Coroutine_t3829159415 ** get_address_of_AssembleRoutine_33() { return &___AssembleRoutine_33; }
-	inline void set_AssembleRoutine_33(Coroutine_t3829159415 * value)
+	inline static int32_t get_offset_of_m_bTurnIntoMeat_33() { return static_cast<int32_t>(offsetof(Part_t2216984906, ___m_bTurnIntoMeat_33)); }
+	inline bool get_m_bTurnIntoMeat_33() const { return ___m_bTurnIntoMeat_33; }
+	inline bool* get_address_of_m_bTurnIntoMeat_33() { return &___m_bTurnIntoMeat_33; }
+	inline void set_m_bTurnIntoMeat_33(bool value)
 	{
-		___AssembleRoutine_33 = value;
-		Il2CppCodeGenWriteBarrier((&___AssembleRoutine_33), value);
+		___m_bTurnIntoMeat_33 = value;
 	}
 
-	inline static int32_t get_offset_of_bBlockedAssembleDrag_34() { return static_cast<int32_t>(offsetof(Part_t2216984906, ___bBlockedAssembleDrag_34)); }
-	inline bool get_bBlockedAssembleDrag_34() const { return ___bBlockedAssembleDrag_34; }
-	inline bool* get_address_of_bBlockedAssembleDrag_34() { return &___bBlockedAssembleDrag_34; }
-	inline void set_bBlockedAssembleDrag_34(bool value)
+	inline static int32_t get_offset_of_m_bBreakedPath_34() { return static_cast<int32_t>(offsetof(Part_t2216984906, ___m_bBreakedPath_34)); }
+	inline bool get_m_bBreakedPath_34() const { return ___m_bBreakedPath_34; }
+	inline bool* get_address_of_m_bBreakedPath_34() { return &___m_bBreakedPath_34; }
+	inline void set_m_bBreakedPath_34(bool value)
 	{
-		___bBlockedAssembleDrag_34 = value;
+		___m_bBreakedPath_34 = value;
 	}
 
-	inline static int32_t get_offset_of_bStopAssemble_35() { return static_cast<int32_t>(offsetof(Part_t2216984906, ___bStopAssemble_35)); }
-	inline bool get_bStopAssemble_35() const { return ___bStopAssemble_35; }
-	inline bool* get_address_of_bStopAssemble_35() { return &___bStopAssemble_35; }
-	inline void set_bStopAssemble_35(bool value)
+	inline static int32_t get_offset_of_m_weaponType_35() { return static_cast<int32_t>(offsetof(Part_t2216984906, ___m_weaponType_35)); }
+	inline int32_t get_m_weaponType_35() const { return ___m_weaponType_35; }
+	inline int32_t* get_address_of_m_weaponType_35() { return &___m_weaponType_35; }
+	inline void set_m_weaponType_35(int32_t value)
 	{
-		___bStopAssemble_35 = value;
+		___m_weaponType_35 = value;
 	}
 
-	inline static int32_t get_offset_of_m_StickedPart_36() { return static_cast<int32_t>(offsetof(Part_t2216984906, ___m_StickedPart_36)); }
-	inline GameObject_t1113636619 * get_m_StickedPart_36() const { return ___m_StickedPart_36; }
-	inline GameObject_t1113636619 ** get_address_of_m_StickedPart_36() { return &___m_StickedPart_36; }
-	inline void set_m_StickedPart_36(GameObject_t1113636619 * value)
+	inline static int32_t get_offset_of_AssembleRoutine_36() { return static_cast<int32_t>(offsetof(Part_t2216984906, ___AssembleRoutine_36)); }
+	inline Coroutine_t3829159415 * get_AssembleRoutine_36() const { return ___AssembleRoutine_36; }
+	inline Coroutine_t3829159415 ** get_address_of_AssembleRoutine_36() { return &___AssembleRoutine_36; }
+	inline void set_AssembleRoutine_36(Coroutine_t3829159415 * value)
 	{
-		___m_StickedPart_36 = value;
-		Il2CppCodeGenWriteBarrier((&___m_StickedPart_36), value);
+		___AssembleRoutine_36 = value;
+		Il2CppCodeGenWriteBarrier((&___AssembleRoutine_36), value);
 	}
 
-	inline static int32_t get_offset_of_m_objAleart_37() { return static_cast<int32_t>(offsetof(Part_t2216984906, ___m_objAleart_37)); }
-	inline GameObject_t1113636619 * get_m_objAleart_37() const { return ___m_objAleart_37; }
-	inline GameObject_t1113636619 ** get_address_of_m_objAleart_37() { return &___m_objAleart_37; }
-	inline void set_m_objAleart_37(GameObject_t1113636619 * value)
+	inline static int32_t get_offset_of_bBlockedAssembleDrag_37() { return static_cast<int32_t>(offsetof(Part_t2216984906, ___bBlockedAssembleDrag_37)); }
+	inline bool get_bBlockedAssembleDrag_37() const { return ___bBlockedAssembleDrag_37; }
+	inline bool* get_address_of_bBlockedAssembleDrag_37() { return &___bBlockedAssembleDrag_37; }
+	inline void set_bBlockedAssembleDrag_37(bool value)
 	{
-		___m_objAleart_37 = value;
-		Il2CppCodeGenWriteBarrier((&___m_objAleart_37), value);
+		___bBlockedAssembleDrag_37 = value;
+	}
+
+	inline static int32_t get_offset_of_bStopAssemble_38() { return static_cast<int32_t>(offsetof(Part_t2216984906, ___bStopAssemble_38)); }
+	inline bool get_bStopAssemble_38() const { return ___bStopAssemble_38; }
+	inline bool* get_address_of_bStopAssemble_38() { return &___bStopAssemble_38; }
+	inline void set_bStopAssemble_38(bool value)
+	{
+		___bStopAssemble_38 = value;
+	}
+
+	inline static int32_t get_offset_of_m_StickedPart_39() { return static_cast<int32_t>(offsetof(Part_t2216984906, ___m_StickedPart_39)); }
+	inline GameObject_t1113636619 * get_m_StickedPart_39() const { return ___m_StickedPart_39; }
+	inline GameObject_t1113636619 ** get_address_of_m_StickedPart_39() { return &___m_StickedPart_39; }
+	inline void set_m_StickedPart_39(GameObject_t1113636619 * value)
+	{
+		___m_StickedPart_39 = value;
+		Il2CppCodeGenWriteBarrier((&___m_StickedPart_39), value);
+	}
+
+	inline static int32_t get_offset_of_m_objAleart_40() { return static_cast<int32_t>(offsetof(Part_t2216984906, ___m_objAleart_40)); }
+	inline GameObject_t1113636619 * get_m_objAleart_40() const { return ___m_objAleart_40; }
+	inline GameObject_t1113636619 ** get_address_of_m_objAleart_40() { return &___m_objAleart_40; }
+	inline void set_m_objAleart_40(GameObject_t1113636619 * value)
+	{
+		___m_objAleart_40 = value;
+		Il2CppCodeGenWriteBarrier((&___m_objAleart_40), value);
 	}
 };
 
@@ -16621,7 +16654,7 @@ IL_0013:
 	try
 	{ // begin try (depth: 1)
 		{
-			goto IL_0286;
+			goto IL_02ec;
 		}
 
 IL_0018:
@@ -16633,7 +16666,7 @@ IL_0018:
 			String_t* L_6 = V_1;
 			if (!L_6)
 			{
-				goto IL_027b;
+				goto IL_02e1;
 			}
 		}
 
@@ -16643,14 +16676,14 @@ IL_002a:
 			Dictionary_2_t2736202052 * L_7 = ((ES3Type_Part_t3749745532_StaticFields*)il2cpp_codegen_static_fields_for(ES3Type_Part_t3749745532_il2cpp_TypeInfo_var))->get_U3CU3Ef__switchU24map0_10();
 			if (L_7)
 			{
-				goto IL_0109;
+				goto IL_0130;
 			}
 		}
 
 IL_0034:
 		{
 			Dictionary_2_t2736202052 * L_8 = (Dictionary_2_t2736202052 *)il2cpp_codegen_object_new(Dictionary_2_t2736202052_il2cpp_TypeInfo_var);
-			Dictionary_2__ctor_m2392909825(L_8, (int32_t)((int32_t)16), /*hidden argument*/Dictionary_2__ctor_m2392909825_RuntimeMethod_var);
+			Dictionary_2__ctor_m2392909825(L_8, (int32_t)((int32_t)19), /*hidden argument*/Dictionary_2__ctor_m2392909825_RuntimeMethod_var);
 			V_3 = (Dictionary_2_t2736202052 *)L_8;
 			Dictionary_2_t2736202052 * L_9 = V_3;
 			NullCheck((Dictionary_2_t2736202052 *)L_9);
@@ -16687,355 +16720,409 @@ IL_0034:
 			Dictionary_2_Add_m282647386((Dictionary_2_t2736202052 *)L_19, (String_t*)_stringLiteral2527784611, (int32_t)((int32_t)10), /*hidden argument*/Dictionary_2_Add_m282647386_RuntimeMethod_var);
 			Dictionary_2_t2736202052 * L_20 = V_3;
 			NullCheck((Dictionary_2_t2736202052 *)L_20);
-			Dictionary_2_Add_m282647386((Dictionary_2_t2736202052 *)L_20, (String_t*)_stringLiteral4112522321, (int32_t)((int32_t)11), /*hidden argument*/Dictionary_2_Add_m282647386_RuntimeMethod_var);
+			Dictionary_2_Add_m282647386((Dictionary_2_t2736202052 *)L_20, (String_t*)_stringLiteral1902969901, (int32_t)((int32_t)11), /*hidden argument*/Dictionary_2_Add_m282647386_RuntimeMethod_var);
 			Dictionary_2_t2736202052 * L_21 = V_3;
 			NullCheck((Dictionary_2_t2736202052 *)L_21);
-			Dictionary_2_Add_m282647386((Dictionary_2_t2736202052 *)L_21, (String_t*)_stringLiteral3441737066, (int32_t)((int32_t)12), /*hidden argument*/Dictionary_2_Add_m282647386_RuntimeMethod_var);
+			Dictionary_2_Add_m282647386((Dictionary_2_t2736202052 *)L_21, (String_t*)_stringLiteral4112522321, (int32_t)((int32_t)12), /*hidden argument*/Dictionary_2_Add_m282647386_RuntimeMethod_var);
 			Dictionary_2_t2736202052 * L_22 = V_3;
 			NullCheck((Dictionary_2_t2736202052 *)L_22);
-			Dictionary_2_Add_m282647386((Dictionary_2_t2736202052 *)L_22, (String_t*)_stringLiteral4070104265, (int32_t)((int32_t)13), /*hidden argument*/Dictionary_2_Add_m282647386_RuntimeMethod_var);
+			Dictionary_2_Add_m282647386((Dictionary_2_t2736202052 *)L_22, (String_t*)_stringLiteral3441737066, (int32_t)((int32_t)13), /*hidden argument*/Dictionary_2_Add_m282647386_RuntimeMethod_var);
 			Dictionary_2_t2736202052 * L_23 = V_3;
 			NullCheck((Dictionary_2_t2736202052 *)L_23);
-			Dictionary_2_Add_m282647386((Dictionary_2_t2736202052 *)L_23, (String_t*)_stringLiteral2724324598, (int32_t)((int32_t)14), /*hidden argument*/Dictionary_2_Add_m282647386_RuntimeMethod_var);
+			Dictionary_2_Add_m282647386((Dictionary_2_t2736202052 *)L_23, (String_t*)_stringLiteral4070104265, (int32_t)((int32_t)14), /*hidden argument*/Dictionary_2_Add_m282647386_RuntimeMethod_var);
 			Dictionary_2_t2736202052 * L_24 = V_3;
 			NullCheck((Dictionary_2_t2736202052 *)L_24);
-			Dictionary_2_Add_m282647386((Dictionary_2_t2736202052 *)L_24, (String_t*)_stringLiteral3018756718, (int32_t)((int32_t)15), /*hidden argument*/Dictionary_2_Add_m282647386_RuntimeMethod_var);
+			Dictionary_2_Add_m282647386((Dictionary_2_t2736202052 *)L_24, (String_t*)_stringLiteral2724324598, (int32_t)((int32_t)15), /*hidden argument*/Dictionary_2_Add_m282647386_RuntimeMethod_var);
 			Dictionary_2_t2736202052 * L_25 = V_3;
+			NullCheck((Dictionary_2_t2736202052 *)L_25);
+			Dictionary_2_Add_m282647386((Dictionary_2_t2736202052 *)L_25, (String_t*)_stringLiteral3018756718, (int32_t)((int32_t)16), /*hidden argument*/Dictionary_2_Add_m282647386_RuntimeMethod_var);
+			Dictionary_2_t2736202052 * L_26 = V_3;
+			NullCheck((Dictionary_2_t2736202052 *)L_26);
+			Dictionary_2_Add_m282647386((Dictionary_2_t2736202052 *)L_26, (String_t*)_stringLiteral2145771464, (int32_t)((int32_t)17), /*hidden argument*/Dictionary_2_Add_m282647386_RuntimeMethod_var);
+			Dictionary_2_t2736202052 * L_27 = V_3;
+			NullCheck((Dictionary_2_t2736202052 *)L_27);
+			Dictionary_2_Add_m282647386((Dictionary_2_t2736202052 *)L_27, (String_t*)_stringLiteral3627450628, (int32_t)((int32_t)18), /*hidden argument*/Dictionary_2_Add_m282647386_RuntimeMethod_var);
+			Dictionary_2_t2736202052 * L_28 = V_3;
 			IL2CPP_RUNTIME_CLASS_INIT(ES3Type_Part_t3749745532_il2cpp_TypeInfo_var);
-			((ES3Type_Part_t3749745532_StaticFields*)il2cpp_codegen_static_fields_for(ES3Type_Part_t3749745532_il2cpp_TypeInfo_var))->set_U3CU3Ef__switchU24map0_10(L_25);
+			((ES3Type_Part_t3749745532_StaticFields*)il2cpp_codegen_static_fields_for(ES3Type_Part_t3749745532_il2cpp_TypeInfo_var))->set_U3CU3Ef__switchU24map0_10(L_28);
 		}
 
-IL_0109:
+IL_0130:
 		{
 			IL2CPP_RUNTIME_CLASS_INIT(ES3Type_Part_t3749745532_il2cpp_TypeInfo_var);
-			Dictionary_2_t2736202052 * L_26 = ((ES3Type_Part_t3749745532_StaticFields*)il2cpp_codegen_static_fields_for(ES3Type_Part_t3749745532_il2cpp_TypeInfo_var))->get_U3CU3Ef__switchU24map0_10();
-			String_t* L_27 = V_1;
-			NullCheck((Dictionary_2_t2736202052 *)L_26);
-			bool L_28 = Dictionary_2_TryGetValue_m1013208020((Dictionary_2_t2736202052 *)L_26, (String_t*)L_27, (int32_t*)(&V_4), /*hidden argument*/Dictionary_2_TryGetValue_m1013208020_RuntimeMethod_var);
-			if (!L_28)
+			Dictionary_2_t2736202052 * L_29 = ((ES3Type_Part_t3749745532_StaticFields*)il2cpp_codegen_static_fields_for(ES3Type_Part_t3749745532_il2cpp_TypeInfo_var))->get_U3CU3Ef__switchU24map0_10();
+			String_t* L_30 = V_1;
+			NullCheck((Dictionary_2_t2736202052 *)L_29);
+			bool L_31 = Dictionary_2_TryGetValue_m1013208020((Dictionary_2_t2736202052 *)L_29, (String_t*)L_30, (int32_t*)(&V_4), /*hidden argument*/Dictionary_2_TryGetValue_m1013208020_RuntimeMethod_var);
+			if (!L_31)
 			{
-				goto IL_027b;
+				goto IL_02e1;
 			}
 		}
 
-IL_011b:
+IL_0142:
 		{
-			int32_t L_29 = V_4;
-			switch (L_29)
+			int32_t L_32 = V_4;
+			switch (L_32)
 			{
 				case 0:
 				{
-					goto IL_016b;
+					goto IL_019e;
 				}
 				case 1:
 				{
-					goto IL_017c;
+					goto IL_01af;
 				}
 				case 2:
 				{
-					goto IL_018d;
+					goto IL_01c0;
 				}
 				case 3:
 				{
-					goto IL_019e;
+					goto IL_01d1;
 				}
 				case 4:
 				{
-					goto IL_01af;
+					goto IL_01e2;
 				}
 				case 5:
 				{
-					goto IL_01c0;
+					goto IL_01f3;
 				}
 				case 6:
 				{
-					goto IL_01d1;
+					goto IL_0204;
 				}
 				case 7:
 				{
-					goto IL_01e2;
+					goto IL_0215;
 				}
 				case 8:
 				{
-					goto IL_01f3;
+					goto IL_0226;
 				}
 				case 9:
 				{
-					goto IL_0204;
+					goto IL_0237;
 				}
 				case 10:
 				{
-					goto IL_0215;
+					goto IL_0248;
 				}
 				case 11:
 				{
-					goto IL_0226;
+					goto IL_0259;
 				}
 				case 12:
 				{
-					goto IL_0237;
+					goto IL_026a;
 				}
 				case 13:
 				{
-					goto IL_0248;
+					goto IL_027b;
 				}
 				case 14:
 				{
-					goto IL_0259;
+					goto IL_028c;
 				}
 				case 15:
 				{
-					goto IL_026a;
+					goto IL_029d;
 				}
 				case 16:
 				{
-					goto IL_027b;
+					goto IL_02ae;
+				}
+				case 17:
+				{
+					goto IL_02bf;
+				}
+				case 18:
+				{
+					goto IL_02d0;
+				}
+				case 19:
+				{
+					goto IL_02e1;
 				}
 			}
 		}
 
-IL_0166:
+IL_0199:
 		{
-			goto IL_027b;
+			goto IL_02e1;
 		}
 
-IL_016b:
-		{
-			Part_t2216984906 * L_30 = V_0;
-			ES3Reader_t2568427273 * L_31 = ___reader0;
-			NullCheck((ES3Reader_t2568427273 *)L_31);
-			bool L_32 = GenericVirtFuncInvoker0< bool >::Invoke(ES3Reader_Read_TisBoolean_t97287965_m4136119920_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_31);
-			NullCheck(L_30);
-			L_30->set_m_bAttackAvailable_5(L_32);
-			goto IL_0286;
-		}
-
-IL_017c:
+IL_019e:
 		{
 			Part_t2216984906 * L_33 = V_0;
 			ES3Reader_t2568427273 * L_34 = ___reader0;
 			NullCheck((ES3Reader_t2568427273 *)L_34);
 			bool L_35 = GenericVirtFuncInvoker0< bool >::Invoke(ES3Reader_Read_TisBoolean_t97287965_m4136119920_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_34);
 			NullCheck(L_33);
-			L_33->set_m_bEdgePart_9(L_35);
-			goto IL_0286;
+			L_33->set_m_bAttackAvailable_5(L_35);
+			goto IL_02ec;
 		}
 
-IL_018d:
+IL_01af:
 		{
 			Part_t2216984906 * L_36 = V_0;
 			ES3Reader_t2568427273 * L_37 = ___reader0;
 			NullCheck((ES3Reader_t2568427273 *)L_37);
 			bool L_38 = GenericVirtFuncInvoker0< bool >::Invoke(ES3Reader_Read_TisBoolean_t97287965_m4136119920_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_37);
 			NullCheck(L_36);
-			L_36->set_m_bNeedToStickHead_25(L_38);
-			goto IL_0286;
+			L_36->set_m_bEdgePart_9(L_38);
+			goto IL_02ec;
 		}
 
-IL_019e:
+IL_01c0:
 		{
 			Part_t2216984906 * L_39 = V_0;
 			ES3Reader_t2568427273 * L_40 = ___reader0;
 			NullCheck((ES3Reader_t2568427273 *)L_40);
 			bool L_41 = GenericVirtFuncInvoker0< bool >::Invoke(ES3Reader_Read_TisBoolean_t97287965_m4136119920_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_40);
 			NullCheck(L_39);
-			L_39->set_m_bReverseBody_26(L_41);
-			goto IL_0286;
+			L_39->set_m_bNeedToStickHead_25(L_41);
+			goto IL_02ec;
 		}
 
-IL_01af:
+IL_01d1:
 		{
 			Part_t2216984906 * L_42 = V_0;
 			ES3Reader_t2568427273 * L_43 = ___reader0;
 			NullCheck((ES3Reader_t2568427273 *)L_43);
 			bool L_44 = GenericVirtFuncInvoker0< bool >::Invoke(ES3Reader_Read_TisBoolean_t97287965_m4136119920_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_43);
 			NullCheck(L_42);
-			L_42->set_m_bUse32PixelHand_7(L_44);
-			goto IL_0286;
-		}
-
-IL_01c0:
-		{
-			Part_t2216984906 * L_45 = V_0;
-			ES3Reader_t2568427273 * L_46 = ___reader0;
-			NullCheck((ES3Reader_t2568427273 *)L_46);
-			float L_47 = GenericVirtFuncInvoker0< float >::Invoke(ES3Reader_Read_TisSingle_t1397266774_m64005278_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_46);
-			NullCheck(L_45);
-			L_45->set_m_fCurHealth_4(L_47);
-			goto IL_0286;
-		}
-
-IL_01d1:
-		{
-			Part_t2216984906 * L_48 = V_0;
-			ES3Reader_t2568427273 * L_49 = ___reader0;
-			NullCheck((ES3Reader_t2568427273 *)L_49);
-			int32_t L_50 = GenericVirtFuncInvoker0< int32_t >::Invoke(ES3Reader_Read_TisInt32_t2950945753_m3916347513_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_49);
-			NullCheck(L_48);
-			L_48->set_m_iGridIdx_10(L_50);
-			goto IL_0286;
+			L_42->set_m_bReverseBody_26(L_44);
+			goto IL_02ec;
 		}
 
 IL_01e2:
 		{
-			Part_t2216984906 * L_51 = V_0;
-			ES3Reader_t2568427273 * L_52 = ___reader0;
-			NullCheck((ES3Reader_t2568427273 *)L_52);
-			Dictionary_2_t1182523073 * L_53 = GenericVirtFuncInvoker0< Dictionary_2_t1182523073 * >::Invoke(ES3Reader_Read_TisDictionary_2_t1182523073_m3039831997_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_52);
-			NullCheck(L_51);
-			L_51->set_m_dicStat_13(L_53);
-			goto IL_0286;
+			Part_t2216984906 * L_45 = V_0;
+			ES3Reader_t2568427273 * L_46 = ___reader0;
+			NullCheck((ES3Reader_t2568427273 *)L_46);
+			bool L_47 = GenericVirtFuncInvoker0< bool >::Invoke(ES3Reader_Read_TisBoolean_t97287965_m4136119920_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_46);
+			NullCheck(L_45);
+			L_45->set_m_bUse32PixelHand_7(L_47);
+			goto IL_02ec;
 		}
 
 IL_01f3:
+		{
+			Part_t2216984906 * L_48 = V_0;
+			ES3Reader_t2568427273 * L_49 = ___reader0;
+			NullCheck((ES3Reader_t2568427273 *)L_49);
+			float L_50 = GenericVirtFuncInvoker0< float >::Invoke(ES3Reader_Read_TisSingle_t1397266774_m64005278_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_49);
+			NullCheck(L_48);
+			L_48->set_m_fCurHealth_4(L_50);
+			goto IL_02ec;
+		}
+
+IL_0204:
+		{
+			Part_t2216984906 * L_51 = V_0;
+			ES3Reader_t2568427273 * L_52 = ___reader0;
+			NullCheck((ES3Reader_t2568427273 *)L_52);
+			int32_t L_53 = GenericVirtFuncInvoker0< int32_t >::Invoke(ES3Reader_Read_TisInt32_t2950945753_m3916347513_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_52);
+			NullCheck(L_51);
+			L_51->set_m_iGridIdx_10(L_53);
+			goto IL_02ec;
+		}
+
+IL_0215:
 		{
 			Part_t2216984906 * L_54 = V_0;
 			ES3Reader_t2568427273 * L_55 = ___reader0;
 			NullCheck((ES3Reader_t2568427273 *)L_55);
 			Dictionary_2_t1182523073 * L_56 = GenericVirtFuncInvoker0< Dictionary_2_t1182523073 * >::Invoke(ES3Reader_Read_TisDictionary_2_t1182523073_m3039831997_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_55);
 			NullCheck(L_54);
-			L_54->set_m_dicStatBuff_14(L_56);
-			goto IL_0286;
+			L_54->set_m_dicStat_13(L_56);
+			goto IL_02ec;
 		}
 
-IL_0204:
+IL_0226:
 		{
 			Part_t2216984906 * L_57 = V_0;
 			ES3Reader_t2568427273 * L_58 = ___reader0;
 			NullCheck((ES3Reader_t2568427273 *)L_58);
-			int32_t L_59 = GenericVirtFuncInvoker0< int32_t >::Invoke(ES3Reader_Read_TisInt32_t2950945753_m3916347513_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_58);
+			Dictionary_2_t1182523073 * L_59 = GenericVirtFuncInvoker0< Dictionary_2_t1182523073 * >::Invoke(ES3Reader_Read_TisDictionary_2_t1182523073_m3039831997_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_58);
 			NullCheck(L_57);
-			L_57->set_m_iEnemyType_27(L_59);
-			goto IL_0286;
+			L_57->set_m_dicStatBuff_14(L_59);
+			goto IL_02ec;
 		}
 
-IL_0215:
+IL_0237:
 		{
 			Part_t2216984906 * L_60 = V_0;
 			ES3Reader_t2568427273 * L_61 = ___reader0;
 			NullCheck((ES3Reader_t2568427273 *)L_61);
 			int32_t L_62 = GenericVirtFuncInvoker0< int32_t >::Invoke(ES3Reader_Read_TisInt32_t2950945753_m3916347513_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_61);
 			NullCheck(L_60);
-			L_60->set_m_iSaveValue_28(L_62);
-			goto IL_0286;
-		}
-
-IL_0226:
-		{
-			Part_t2216984906 * L_63 = V_0;
-			ES3Reader_t2568427273 * L_64 = ___reader0;
-			NullCheck((ES3Reader_t2568427273 *)L_64);
-			String_t* L_65 = GenericVirtFuncInvoker0< String_t* >::Invoke(ES3Reader_Read_TisString_t_m143424358_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_64);
-			NullCheck(L_63);
-			L_63->set_m_strNameKey_12(L_65);
-			goto IL_0286;
-		}
-
-IL_0237:
-		{
-			Part_t2216984906 * L_66 = V_0;
-			ES3Reader_t2568427273 * L_67 = ___reader0;
-			NullCheck((ES3Reader_t2568427273 *)L_67);
-			List_1_t3319525431 * L_68 = GenericVirtFuncInvoker0< List_1_t3319525431 * >::Invoke(ES3Reader_Read_TisList_1_t3319525431_m3033595151_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_67);
-			NullCheck(L_66);
-			L_66->set_m_lstStrBuff_15(L_68);
-			goto IL_0286;
+			L_60->set_m_iEnemyType_27(L_62);
+			goto IL_02ec;
 		}
 
 IL_0248:
 		{
-			Part_t2216984906 * L_69 = V_0;
-			ES3Reader_t2568427273 * L_70 = ___reader0;
-			NullCheck((ES3Reader_t2568427273 *)L_70);
-			int32_t L_71 = GenericVirtFuncInvoker0< int32_t >::Invoke(ES3Reader_Read_TisInt32_t2950945753_m3916347513_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_70);
-			NullCheck(L_69);
-			L_69->set_m_iLastParentPartIdx_22(L_71);
-			goto IL_0286;
+			Part_t2216984906 * L_63 = V_0;
+			ES3Reader_t2568427273 * L_64 = ___reader0;
+			NullCheck((ES3Reader_t2568427273 *)L_64);
+			int32_t L_65 = GenericVirtFuncInvoker0< int32_t >::Invoke(ES3Reader_Read_TisInt32_t2950945753_m3916347513_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_64);
+			NullCheck(L_63);
+			L_63->set_m_iSaveValue_28(L_65);
+			goto IL_02ec;
 		}
 
 IL_0259:
 		{
-			Part_t2216984906 * L_72 = V_0;
-			ES3Reader_t2568427273 * L_73 = ___reader0;
-			NullCheck((ES3Reader_t2568427273 *)L_73);
-			int32_t L_74 = GenericVirtFuncInvoker0< int32_t >::Invoke(ES3Reader_Read_TisInt32_t2950945753_m3916347513_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_73);
-			NullCheck(L_72);
-			L_72->set_m_iChildPartCount_23(L_74);
-			goto IL_0286;
+			Part_t2216984906 * L_66 = V_0;
+			ES3Reader_t2568427273 * L_67 = ___reader0;
+			NullCheck((ES3Reader_t2568427273 *)L_67);
+			int32_t L_68 = GenericVirtFuncInvoker0< int32_t >::Invoke(ES3Reader_Read_TisInt32_t2950945753_m3916347513_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_67);
+			NullCheck(L_66);
+			L_66->set_m_iSaveChildIdx_29(L_68);
+			goto IL_02ec;
 		}
 
 IL_026a:
+		{
+			Part_t2216984906 * L_69 = V_0;
+			ES3Reader_t2568427273 * L_70 = ___reader0;
+			NullCheck((ES3Reader_t2568427273 *)L_70);
+			String_t* L_71 = GenericVirtFuncInvoker0< String_t* >::Invoke(ES3Reader_Read_TisString_t_m143424358_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_70);
+			NullCheck(L_69);
+			L_69->set_m_strNameKey_12(L_71);
+			goto IL_02ec;
+		}
+
+IL_027b:
+		{
+			Part_t2216984906 * L_72 = V_0;
+			ES3Reader_t2568427273 * L_73 = ___reader0;
+			NullCheck((ES3Reader_t2568427273 *)L_73);
+			List_1_t3319525431 * L_74 = GenericVirtFuncInvoker0< List_1_t3319525431 * >::Invoke(ES3Reader_Read_TisList_1_t3319525431_m3033595151_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_73);
+			NullCheck(L_72);
+			L_72->set_m_lstStrBuff_15(L_74);
+			goto IL_02ec;
+		}
+
+IL_028c:
 		{
 			Part_t2216984906 * L_75 = V_0;
 			ES3Reader_t2568427273 * L_76 = ___reader0;
 			NullCheck((ES3Reader_t2568427273 *)L_76);
 			int32_t L_77 = GenericVirtFuncInvoker0< int32_t >::Invoke(ES3Reader_Read_TisInt32_t2950945753_m3916347513_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_76);
 			NullCheck(L_75);
-			L_75->set_m_weaponType_32(L_77);
-			goto IL_0286;
+			L_75->set_m_iLastParentPartIdx_22(L_77);
+			goto IL_02ec;
 		}
 
-IL_027b:
+IL_029d:
 		{
-			ES3Reader_t2568427273 * L_78 = ___reader0;
-			NullCheck((ES3Reader_t2568427273 *)L_78);
-			VirtActionInvoker0::Invoke(40 /* System.Void ES3Reader::Skip() */, (ES3Reader_t2568427273 *)L_78);
-			goto IL_0286;
+			Part_t2216984906 * L_78 = V_0;
+			ES3Reader_t2568427273 * L_79 = ___reader0;
+			NullCheck((ES3Reader_t2568427273 *)L_79);
+			int32_t L_80 = GenericVirtFuncInvoker0< int32_t >::Invoke(ES3Reader_Read_TisInt32_t2950945753_m3916347513_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_79);
+			NullCheck(L_78);
+			L_78->set_m_iChildPartCount_23(L_80);
+			goto IL_02ec;
 		}
 
-IL_0286:
+IL_02ae:
 		{
-			RuntimeObject* L_79 = V_2;
-			NullCheck((RuntimeObject*)L_79);
-			bool L_80 = InterfaceFuncInvoker0< bool >::Invoke(1 /* System.Boolean System.Collections.IEnumerator::MoveNext() */, IEnumerator_t1853284238_il2cpp_TypeInfo_var, (RuntimeObject*)L_79);
-			if (L_80)
+			Part_t2216984906 * L_81 = V_0;
+			ES3Reader_t2568427273 * L_82 = ___reader0;
+			NullCheck((ES3Reader_t2568427273 *)L_82);
+			int32_t L_83 = GenericVirtFuncInvoker0< int32_t >::Invoke(ES3Reader_Read_TisInt32_t2950945753_m3916347513_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_82);
+			NullCheck(L_81);
+			L_81->set_m_weaponType_35(L_83);
+			goto IL_02ec;
+		}
+
+IL_02bf:
+		{
+			Part_t2216984906 * L_84 = V_0;
+			ES3Reader_t2568427273 * L_85 = ___reader0;
+			NullCheck((ES3Reader_t2568427273 *)L_85);
+			int32_t L_86 = GenericVirtFuncInvoker0< int32_t >::Invoke(ES3Reader_Read_TisInt32_t2950945753_m3916347513_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_85);
+			NullCheck(L_84);
+			L_84->set_m_iPaletteSkin_30(L_86);
+			goto IL_02ec;
+		}
+
+IL_02d0:
+		{
+			Part_t2216984906 * L_87 = V_0;
+			ES3Reader_t2568427273 * L_88 = ___reader0;
+			NullCheck((ES3Reader_t2568427273 *)L_88);
+			int32_t L_89 = GenericVirtFuncInvoker0< int32_t >::Invoke(ES3Reader_Read_TisInt32_t2950945753_m3916347513_RuntimeMethod_var, (ES3Reader_t2568427273 *)L_88);
+			NullCheck(L_87);
+			L_87->set_m_iPaletteCombiner_31(L_89);
+			goto IL_02ec;
+		}
+
+IL_02e1:
+		{
+			ES3Reader_t2568427273 * L_90 = ___reader0;
+			NullCheck((ES3Reader_t2568427273 *)L_90);
+			VirtActionInvoker0::Invoke(40 /* System.Void ES3Reader::Skip() */, (ES3Reader_t2568427273 *)L_90);
+			goto IL_02ec;
+		}
+
+IL_02ec:
+		{
+			RuntimeObject* L_91 = V_2;
+			NullCheck((RuntimeObject*)L_91);
+			bool L_92 = InterfaceFuncInvoker0< bool >::Invoke(1 /* System.Boolean System.Collections.IEnumerator::MoveNext() */, IEnumerator_t1853284238_il2cpp_TypeInfo_var, (RuntimeObject*)L_91);
+			if (L_92)
 			{
 				goto IL_0018;
 			}
 		}
 
-IL_0291:
+IL_02f7:
 		{
-			IL2CPP_LEAVE(0x2AC, FINALLY_0296);
+			IL2CPP_LEAVE(0x312, FINALLY_02fc);
 		}
 	} // end try (depth: 1)
 	catch(Il2CppExceptionWrapper& e)
 	{
 		__last_unhandled_exception = (Exception_t *)e.ex;
-		goto FINALLY_0296;
+		goto FINALLY_02fc;
 	}
 
-FINALLY_0296:
+FINALLY_02fc:
 	{ // begin finally (depth: 1)
 		{
-			RuntimeObject* L_81 = V_2;
-			RuntimeObject* L_82 = (RuntimeObject*)((RuntimeObject*)IsInst((RuntimeObject*)L_81, IDisposable_t3640265483_il2cpp_TypeInfo_var));
-			V_5 = (RuntimeObject*)L_82;
-			if (!L_82)
+			RuntimeObject* L_93 = V_2;
+			RuntimeObject* L_94 = (RuntimeObject*)((RuntimeObject*)IsInst((RuntimeObject*)L_93, IDisposable_t3640265483_il2cpp_TypeInfo_var));
+			V_5 = (RuntimeObject*)L_94;
+			if (!L_94)
 			{
-				goto IL_02ab;
+				goto IL_0311;
 			}
 		}
 
-IL_02a4:
+IL_030a:
 		{
-			RuntimeObject* L_83 = V_5;
-			NullCheck((RuntimeObject*)L_83);
-			InterfaceActionInvoker0::Invoke(0 /* System.Void System.IDisposable::Dispose() */, IDisposable_t3640265483_il2cpp_TypeInfo_var, (RuntimeObject*)L_83);
+			RuntimeObject* L_95 = V_5;
+			NullCheck((RuntimeObject*)L_95);
+			InterfaceActionInvoker0::Invoke(0 /* System.Void System.IDisposable::Dispose() */, IDisposable_t3640265483_il2cpp_TypeInfo_var, (RuntimeObject*)L_95);
 		}
 
-IL_02ab:
+IL_0311:
 		{
-			IL2CPP_END_FINALLY(662)
+			IL2CPP_END_FINALLY(764)
 		}
 	} // end finally (depth: 1)
-	IL2CPP_CLEANUP(662)
+	IL2CPP_CLEANUP(764)
 	{
-		IL2CPP_JUMP_TBL(0x2AC, IL_02ac)
+		IL2CPP_JUMP_TBL(0x312, IL_0312)
 		IL2CPP_RETHROW_IF_UNHANDLED(Exception_t *)
 	}
 
-IL_02ac:
+IL_0312:
 	{
 		return;
 	}

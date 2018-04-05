@@ -131,11 +131,11 @@ public class Core : Part
         target.GetComponent<FSM_Enemy>().m_AiState = AI_STATE.DISABLED;
 
         GameObject.Find("MouthPanel").GetComponent<MouthPanel>().AddEnemyInMouth(target);
-        yield return new WaitForSeconds(0.1f);
         target.transform.localPosition = new Vector2(0, -63);
-        target.transform.localScale = new Vector3(360, 360, 360);
         target.layer = 5;
         target.transform.SetChildLayer(5);
+        yield return new WaitForSeconds(0.1f);
+        target.transform.localScale = new Vector3(360, 360, 360);
 
         SoundMgr.getInstance.PlaySfx("core", 0);
 
@@ -220,7 +220,8 @@ public class Core : Part
                 continue;
             }
 
-
+            target.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+            target.transform.GetChild(0).GetComponent<DPSpritePalette>().enabled = true;
             target.transform.GetChild(0).GetComponent<SpriteRenderer>().material = ObjectFactory.getInstance.m_material_SpritePaletteLightingMaterial;
 
             if (target.transform.GetChild(0).GetComponent<SpriteModifier>() != null)

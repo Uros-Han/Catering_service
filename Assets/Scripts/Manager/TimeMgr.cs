@@ -2,144 +2,150 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeMgr : Singleton<TimeMgr> {
+public class TimeMgr : Singleton<TimeMgr>
+{
 
-	public float m_fHour;
-	public float m_fMinute;
+    public float m_fHour;
+    public float m_fMinute;
 
-	Light m_sunLight;
+    Light m_sunLight;
 
-	// Use this for initialization
-	void Start () {
-		m_sunLight = GameObject.Find ("Light").GetComponent<Light> ();
+    // Use this for initialization
+    void Start()
+    {
+        m_sunLight = GameObject.Find("Sun").GetComponent<Light>();
 
-		m_fHour = 6;
+        m_fHour = 6;
 
-		InitLight ();
-	}
+        InitLight();
+    }
 
-	void InitLight()
-	{
-		switch ((int)m_fHour) {
-		case 0:
-//			m_sunLight.color = new Color (218 / 255f, 226 / 255f, 255 / 255f);
-//			m_sunLight.intensity = 0.15f;
-			m_sunLight.color = Color.white;
-			m_sunLight.intensity = 1.1f;
-			break;
+    void InitLight()
+    {
+        switch ((int)m_fHour)
+        {
+            case 0:
+                //			m_sunLight.color = new Color (218 / 255f, 226 / 255f, 255 / 255f);
+                //			m_sunLight.intensity = 0.15f;
+                m_sunLight.color = Color.white;
+                m_sunLight.intensity = 1.1f;
+                break;
 
-		case 6:
-//			m_sunLight.color = Color.white;
-//			m_sunLight.intensity = 0.75f;
-			m_sunLight.color = Color.white;
-			m_sunLight.intensity = 1.1f;
-			break;
+            case 6:
+                //			m_sunLight.color = Color.white;
+                //			m_sunLight.intensity = 0.75f;
+                m_sunLight.color = Color.white;
+                m_sunLight.intensity = 1.1f;
+                break;
 
-		case 12:
-			m_sunLight.color = Color.white;
-			m_sunLight.intensity = 1.1f;
-			break;
+            case 12:
+                m_sunLight.color = Color.white;
+                m_sunLight.intensity = 1.1f;
+                break;
 
-		case 18:
-//			m_sunLight.color = new Color (255 / 255f, 168 / 255f, 0 / 255f);
-//			m_sunLight.intensity = 1f;
-			m_sunLight.color = Color.white;
-			m_sunLight.intensity = 1.1f;
-			break;
-		}
-	}
+            case 18:
+                //			m_sunLight.color = new Color (255 / 255f, 168 / 255f, 0 / 255f);
+                //			m_sunLight.intensity = 1f;
+                m_sunLight.color = Color.white;
+                m_sunLight.intensity = 1.1f;
+                break;
+        }
+    }
 
-	public void Play()
-	{
-		if(m_sunLight == null)
-			m_sunLight = GameObject.Find ("Light").GetComponent<Light> ();
+    public void Play()
+    {
+        if (m_sunLight == null)
+            m_sunLight = GameObject.Find("Sun").GetComponent<Light>();
 
-		StartCoroutine (Play_Coroutine ());
-	}
+        StartCoroutine(Play_Coroutine());
+    }
 
-	IEnumerator Play_Coroutine()
-	{
-		GameObject.Find ("Party").BroadcastMessage ("Idling", SendMessageOptions.DontRequireReceiver);
-		GameObject.Find ("Party").BroadcastMessage ("MoveOrder", SendMessageOptions.DontRequireReceiver);
+    IEnumerator Play_Coroutine()
+    {
+        GameObject.Find("Party").BroadcastMessage("Idling", SendMessageOptions.DontRequireReceiver);
+        GameObject.Find("Party").BroadcastMessage("MoveOrder", SendMessageOptions.DontRequireReceiver);
 
-		float fValue = 0f;
-		float fTime = 1f;
+        float fValue = 0f;
+        float fTime = 1f;
 
-		float fStart = m_fHour;
-		float fTarget = m_fHour + 6f;
+        float fStart = m_fHour;
+        float fTarget = m_fHour + 6f;
 
-		Color colorStart = m_sunLight.color;
-		Color colorTarget = Color.white;
-		float fIntensityStart = m_sunLight.intensity;
-		float fIntensityTarget = 0f;
-	
-		switch ((int)fTarget) {
-		case 6:
-//			colorTarget = Color.white;
-//			fIntensityTarget = 0.75f;
-			colorTarget = Color.white;
-			fIntensityTarget = 1.1f;
-			break;
+        Color colorStart = m_sunLight.color;
+        Color colorTarget = Color.white;
+        float fIntensityStart = m_sunLight.intensity;
+        float fIntensityTarget = 0f;
 
-		case 12:
-			colorTarget = Color.white;
-			fIntensityTarget = 1.1f;
-			break;
+        switch ((int)fTarget)
+        {
+            case 6:
+                //			colorTarget = Color.white;
+                //			fIntensityTarget = 0.75f;
+                colorTarget = Color.white;
+                fIntensityTarget = 1.1f;
+                break;
 
-		case 18:
-//			colorTarget = new Color (255 / 255f, 168 / 255f, 0 / 255f);
-//			fIntensityTarget = 1f;
-			colorTarget = Color.white;
-			fIntensityTarget = 1.1f;
-			break;
+            case 12:
+                colorTarget = Color.white;
+                fIntensityTarget = 1.1f;
+                break;
 
-		case 24:
-//			m_sunLight.color = new Color (218 / 255f, 226 / 255f, 255 / 255f);
-//			m_sunLight.intensity = 0.15f;
-			colorTarget = Color.white;
-			fIntensityTarget = 1.1f;
-			break;
-		}
+            case 18:
+                //			colorTarget = new Color (255 / 255f, 168 / 255f, 0 / 255f);
+                //			fIntensityTarget = 1f;
+                colorTarget = Color.white;
+                fIntensityTarget = 1.1f;
+                break;
 
-		do{
-			yield return null;
+            case 24:
+                //			m_sunLight.color = new Color (218 / 255f, 226 / 255f, 255 / 255f);
+                //			m_sunLight.intensity = 0.15f;
+                colorTarget = Color.white;
+                fIntensityTarget = 1.1f;
+                break;
+        }
 
-			fValue += (Time.unscaledDeltaTime / fTime);
+        do
+        {
+            yield return null;
 
-			if(fValue > 1f)
-				fValue = 1f;
+            fValue += (Time.unscaledDeltaTime / fTime);
 
-			float fSmoothStep = Mathf.SmoothStep(0.0f, 1.0f, Mathf.SmoothStep(0.0f, 1.0f, fValue));
-			m_fHour = Mathf.Lerp(fStart, fTarget, fSmoothStep);
-			m_sunLight.color = Color.Lerp(colorStart, colorTarget, fSmoothStep);
-			m_sunLight.intensity = Mathf.Lerp(fIntensityStart, fIntensityTarget, fSmoothStep);
+            if (fValue > 1f)
+                fValue = 1f;
 
-			m_fMinute = (m_fHour - (int)m_fHour) * 60f;
+            float fSmoothStep = Mathf.SmoothStep(0.0f, 1.0f, Mathf.SmoothStep(0.0f, 1.0f, fValue));
+            m_fHour = Mathf.Lerp(fStart, fTarget, fSmoothStep);
+            m_sunLight.color = Color.Lerp(colorStart, colorTarget, fSmoothStep);
+            m_sunLight.intensity = Mathf.Lerp(fIntensityStart, fIntensityTarget, fSmoothStep);
 
-			if(m_fHour >= 24f)
-			{
-				m_fHour -= 24f;
-			}
+            m_fMinute = (m_fHour - (int)m_fHour) * 60f;
 
-			if(m_fMinute >= 60f)
-				m_fMinute -= 60f;
+            if (m_fHour >= 24f)
+            {
+                m_fHour -= 24f;
+            }
 
-		}while(fValue != 1);
+            if (m_fMinute >= 60f)
+                m_fMinute -= 60f;
 
-		if (fTarget == 24f)
-			GameMgr.getInstance.m_iDay += 1;
+        } while (fValue != 1);
 
-		yield return new WaitForSeconds (0.1f);
+        if (fTarget == 24f)
+            GameMgr.getInstance.m_iDay += 1;
 
-		do{
-			yield return null;
-		}while(Application.loadedLevelName.Equals("Battle"));
+        yield return new WaitForSeconds(0.1f);
 
-		yield return new WaitForSeconds (0.25f);
+        do
+        {
+            yield return null;
+        } while (Application.loadedLevelName.Equals("Battle"));
 
-        if(GameObject.Find("PartyManager") != null) 
-            GameObject.Find ("PartyManager").GetComponent<PartyManager>().CalculateDepolying();
-	}
+        yield return new WaitForSeconds(0.25f);
+
+        if (GameObject.Find("PartyManager") != null)
+            GameObject.Find("PartyManager").GetComponent<PartyManager>().CalculateDepolying();
+    }
 
 
 }

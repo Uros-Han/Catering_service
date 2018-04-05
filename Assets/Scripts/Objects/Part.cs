@@ -43,6 +43,10 @@ public class Part : MonoBehaviour
 
     public int m_iEnemyType; // use to cast enemytype
     public int m_iSaveValue;
+    public int m_iSaveChildIdx; // 몸통이 여러개 잇거나 같은 종류의 파츠가 여러개 있을때, 이 변수로 판단. 영웅에 쓰임.
+
+    public int m_iPaletteSkin;
+    public int m_iPaletteCombiner; // head-> Hair
 
     public bool m_bLoadedPart = false;
     bool m_bTurnIntoMeat;
@@ -196,6 +200,19 @@ public class Part : MonoBehaviour
                         transform.position = new Vector3(transform.position.x, transform.position.y - 0.04f);
                         break;
                 }
+
+            }
+
+            if (m_iPaletteCombiner != 0)
+            {
+                gameObject.AddComponent<DPPaletteCombiner>();
+                DPPaletteCombiner combiner = GetComponent<DPPaletteCombiner>();
+
+                combiner.SetPaletteTexture1(ObjectFactory.getInstance.m_texture_skin_palette);
+                combiner.SetPaletteTexture2(ObjectFactory.getInstance.m_texture_hair_palette);
+                combiner.UpdateTextures();
+                combiner.SetPaletteIndex(1, m_iPaletteCombiner);
+
             }
 
             transform.parent = GameObject.Find("Player").transform;
@@ -218,6 +235,15 @@ public class Part : MonoBehaviour
         else
         {
             m_fCurHealth = m_fHealth;
+            m_iSaveChildIdx = GetChildIdx();
+
+            if (GetComponent<DPPaletteCombiner>() != null)
+            {
+                m_iPaletteSkin = GetComponent<DPPaletteCombiner>().currentIndex1;
+                m_iPaletteCombiner = GetComponent<DPPaletteCombiner>().currentIndex2;
+            }
+            else
+                m_iPaletteSkin = GetComponent<DPSpritePalette>().PaletteIndex;
         }
 
         //		m_fOriginEmissionRate = GetComponent<SpriteParticleEmitter.DynamicEmitter> ().EmissionRate;
@@ -625,7 +651,12 @@ public class Part : MonoBehaviour
                         bToOrigin = false;
                         transform.parent = GameObject.Find("Player").transform;
 
-                        GetComponent<DPSpritePalette>().PaletteIndex = 1;
+                        if (GetComponent<DPPaletteCombiner>() != null)
+                        {
+                            GetComponent<DPPaletteCombiner>().SetPalette1Index(1);
+                        }
+                        else
+                            GetComponent<DPSpritePalette>().PaletteIndex = 1;
 
                         if (transform.localScale.x < 0)
                             transform.localScale = new Vector3(-1, 1, 1);
@@ -738,7 +769,13 @@ public class Part : MonoBehaviour
                         GameObject.Find("Player").BroadcastMessage("BuffCheck");
                         SoundMgr.getInstance.PlaySfx("morgue_place");
 
-                        GetComponent<DPSpritePalette>().PaletteIndex = 0;
+                        if (GetComponent<DPPaletteCombiner>() != null)
+                        {
+                            GetComponent<DPPaletteCombiner>().SetPalette1Index(m_iPaletteSkin);
+                        }
+                        else
+                            GetComponent<DPSpritePalette>().PaletteIndex = m_iPaletteSkin;
+
                     }
                 }
 
@@ -1418,6 +1455,18 @@ public class Part : MonoBehaviour
         Vector3 screenPoint = UICamera.mainCamera.WorldToScreenPoint(vecUIPoint);
 
         return Camera.main.ScreenToWorldPoint(screenPoint);
+    }
+
+    int GetChildIdx()
+    {
+        for (int i = 0; i < transform.parent.childCount; ++i)
+        {
+            if (transform.parent.GetChild(i) == transform)
+                return i;
+        }
+
+        Debug.LogError("Unknown child index");
+        return -1;
     }
 
 
