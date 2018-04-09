@@ -656,7 +656,10 @@ public class Part : MonoBehaviour
                             GetComponent<DPPaletteCombiner>().SetPalette1Index(1);
                         }
                         else
-                            GetComponent<DPSpritePalette>().PaletteIndex = 1;
+                        {
+                            if (m_weaponType != WEAPON_TYPE.BOW)
+                                GetComponent<DPSpritePalette>().PaletteIndex = 1;
+                        }
 
                         if (transform.localScale.x < 0)
                             transform.localScale = new Vector3(-1, 1, 1);
@@ -717,7 +720,8 @@ public class Part : MonoBehaviour
                             transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
                             transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 1;
                             transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sortingLayerName = "Monster";
-                            transform.GetChild(0).GetChild(0).GetComponent<DPSpritePalette>().PaletteIndex = 1;
+                            if (m_weaponType != WEAPON_TYPE.BOW)
+                                transform.GetChild(0).GetChild(0).GetComponent<DPSpritePalette>().PaletteIndex = 1;
                             transform.GetChild(0).GetChild(0).GetComponent<Animator>().enabled = true;
                         }
                         else

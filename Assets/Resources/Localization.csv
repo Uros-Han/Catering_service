@@ -12,9 +12,88 @@ IQ,IQ,IQ
 ,,
 PART_TYPE,,
 PartType_arm,Arm,팔
-PartType_body,Body,몸통
+PartType_body,Torso,몸통
 PartType_head,Head,머리
 PartType_leg,Leg,다리
+,,
+PART_NAME_CIV,,
+PartName_civ_head_0,Young civilian head,어린 시민 머리
+PartName_civ_head_1,Civilian head,시민 머리
+PartName_civ_head_2,Old civilian head,늙은 시민 머리
+PartName_civ_body_0,Civilian torso,시민 몸통
+PartName_civ_legs_0,Civilian legs,시민 다리
+PartName_civ_legs_1,,가녀린 시민 다리
+PART_NAME_MERC,,
+PartName_mer_head_0,Mercenary head,용병 머리
+PartName_mer_body_0,Mercenary torso,용병 몸통
+PartName_mer_legs_0,Mercenary legs,용병 다리
+PART_NAME_KNT,,
+PartName_kni_head_0,Knight head,기사 머리
+PartName_kni_body_0,Knight torso,기사 몸통
+PartName_kni_legs_0,Knight legs,기사 다리
+,,
+WEAPON_TYPE,,
+WeaponType_onehand,One hand,한손 검
+WeaponType_twohand,Two hand,양손 검
+WeaponType_pole,Pole,창
+WeaponType_bow,Bow,활
+WeaponType_crossbow,Crossbow,석궁
+WeaponType_shield,Shield,방패
+,,
+WEAPON_ONEHAND,,
+WeaponName_oneHand_00,Scythe sickle,낫
+WeaponName_oneHand_01,Sickle,원형 낫
+WeaponName_oneHand_02,Axe,도끼
+WeaponName_oneHand_03,Hammer,망치
+WeaponName_oneHand_04,Kitchen knife,식칼
+WeaponName_oneHand_05,Mace,메이스
+WeaponName_oneHand_06,Dagger,단검
+WeaponName_oneHand_07,Sword,검
+WeaponName_oneHand_08,War axe,전투 도끼
+WeaponName_oneHand_09,Knight sword,기사 검
+WeaponName_oneHand_10,Knight axe,기사 도끼
+WEAPON_TWOHAND,,
+WeaponName_twoHand_00,Scythe,큰 낫
+WeaponName_twoHand_01,Pickaxe,곡괭이
+WeaponName_twoHand_02,Shovel,삽
+WeaponName_twoHand_03,Sledge hammer,오함마
+WeaponName_twoHand_04,Billhook,빌훅
+WeaponName_twoHand_05,Battle axe,양손 도끼
+WEAPON_POLE,,
+WeaponName_pole_00,Rake,쇠스랑
+WeaponName_pole_01,Polearm,폴암
+WeaponName_pole_02,Spear,창
+WEAPON_BOW,,
+WeaponName_bow_00,Bow,활
+WEAPON_CROSSBOW,,
+WeaponName_crossbow_00,Crossbow,석궁
+WEAPON_SHIELD,,
+WeaponName_shield_00,Round shield,원형 방패
+WeaponName_shield_01,Kite shield,연 방패
+,,
+HERO,,
+Hero_name_0,William the Brave,‘용감한’ 윌리엄
+Hero_name_1,Robin the Hood,‘망토’ 로빈
+Hero_name_2,Adam the Leper,‘나병환자’ 아담
+,,
+,,
+HERO_PART_NAME,,
+Wallace_Part,,
+wallace_head_0,William the Brave’s head,‘용감한’ 윌리엄의 머리
+wallace_body_0,William the Brave’s chest,‘용감한’ 윌리엄의 상반신
+wallace_body_1,William the Brave’s waist,‘용감한’ 윌리엄의 하반신
+wallace_legs_0,William the Brave’s legs,‘용감한’ 윌리엄의 다리
+wallace_arms_0,William the Brave’s claymore,‘용감한’ 윌리엄의 클레이모어
+Robin_Part,,
+Robin_head_0,Robin the Hood’s head,‘망토’ 로빈의 머리
+Robin_body_0,Robin the Hood’s torso,'망토’ 로빈의 몸통
+Robin_legs_0,Robin the Hood’s legs,‘망토’ 로빈의 다리
+Robin_arms_0,Robin the Hood’s Bow,‘망토’ 로빈의 활
+Adam_Part,,
+Adam_head_0,Adam the Leper’s head,‘나병환자’ 아담의 머리
+Adam_body_0,Adam the Leper’s torso,‘나병환자’ 아담의 몸통
+Adam_legs_0,Adam the Leper’s legs,'나병환자’ 아담의 다리
+Adam_arms_0,Adam the Leper’s Dagger,‘나병환자’ 아담의 단검
 ,,
 ,,
 BuffStr,,"+,- > 긍정적/부정적 버프 | 숫자>Argument 숫자"
@@ -103,8 +182,8 @@ Icon_Castle_desc_population_0,Castle_Description_population_0,성 안은 사람�
 Icon_Castle_desc_population_1,Castle_Description_population_1,"성 안 곳곳 병사들이 보입니다. 그리 큰 규모도, 작은 규모도 아닙니다."
 Icon_Castle_desc_population_2,Castle_Description_population_2,성 안은 훈련하는 많은 병사들과 사람들의 함성으로 가득합니다.
 ,,
-HERO,,
-Hero_name_0,Wallace,월레스
+,,
+,,
 ,,
 ,,
 ,,

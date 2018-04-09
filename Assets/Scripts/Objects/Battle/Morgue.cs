@@ -105,7 +105,10 @@ public class Morgue : MonoBehaviour
         if (m_SelectedPart == null)
             return;
 
-        morguePanel.GetChild(0).Find("PartName").GetComponent<UILabel>().text = part.m_strNameKey;  //TODO : Localize
+        if (part.m_iEnemyType == (int)ENEMY_TYPE.HERO)
+            morguePanel.GetChild(0).Find("PartName").GetComponent<UILabel>().text = "[FF4E1AFF]" + Localization.Get(part.m_strNameKey);
+        else
+            morguePanel.GetChild(0).Find("PartName").GetComponent<UILabel>().text = "[3D1E43FF]" + Localization.Get(part.m_strNameKey);
 
         string strType = "";
         switch (part.m_partType)
@@ -186,7 +189,7 @@ public class Morgue : MonoBehaviour
 
     IEnumerator ChangeParentToMorgue(GameObject movePart)
     {
-        if (movePart.GetComponent<Part>().m_bAttackAvailable)
+        if (movePart.GetComponent<Part>().m_bAttackAvailable && movePart.transform.childCount == 0)
         {
             ObjectFactory.getInstance.Create_PartAnimator(movePart.transform);
         }

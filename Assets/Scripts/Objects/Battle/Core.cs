@@ -192,7 +192,7 @@ public class Core : Part
 
             string strNameKey = target.transform.GetChild(0).GetComponent<Part>().m_strNameKey;
 
-            if (strNameKey.Equals("시민 팔"))
+            if (strNameKey.Equals("unArm"))
             {
                 GameObject targetObj = target.transform.GetChild(0).gameObject;
                 targetObj.transform.parent = FieldTrans;
@@ -211,8 +211,7 @@ public class Core : Part
                 }
 
             }
-            else if (!bIsTuto && Random.Range(0.0f, 1.0f) < 0.4f
-               && !target.GetComponent<Unit>().m_enemyType.Equals(ENEMY_TYPE.HERO))
+            else if (!bIsTuto && Random.Range(0.0f, 1.0f) < 0.4f && !target.GetComponent<Unit>().m_enemyType.Equals(ENEMY_TYPE.HERO))
             {
                 GameObject targetObj = target.transform.GetChild(0).gameObject;
                 targetObj.transform.parent = FieldTrans;
