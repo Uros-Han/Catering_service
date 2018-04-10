@@ -10,6 +10,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
     {
         DontDestroyOnLoad(gameObject);
     }
+
     GameObject m_objAleart;
     GameObject m_objBuff;
     GameObject m_objStickableDot;

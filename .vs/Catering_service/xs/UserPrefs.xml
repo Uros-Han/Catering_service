@@ -1,12 +1,12 @@
 ﻿<Properties StartupConfiguration="{40AFACE8-085D-B8B9-0FA4-9FB35D719EE5}|">
   <MonoDevelop.Ide.ItemProperties.Catering__service PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Header/Enum.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Objects/Battle/Morgue.cs">
     <Files>
-      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="1300" Column="46" />
-      <File FileName="Assets/Scripts/Objects/Battle/Morgue.cs" Line="108" Column="86" />
+      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="521" Column="121" />
+      <File FileName="Assets/Scripts/Objects/Battle/Morgue.cs" Line="109" Column="95" />
       <File FileName="Assets/Scripts/Objects/Battle/Core.cs" Line="192" Column="13" />
       <File FileName="Assets/Scripts/Objects/Part.cs" Line="56" Column="24" />
-      <File FileName="Assets/Scripts/Header/Enum.cs" Line="27" Column="13" />
+      <File FileName="Assets/Scripts/Header/Enum.cs" Line="25" Column="34" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
