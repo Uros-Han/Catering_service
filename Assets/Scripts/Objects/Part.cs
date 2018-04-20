@@ -85,7 +85,7 @@ public class Part : MonoBehaviour
 
     void Start()
     {
-        if (gameObject.name.Equals("Hand_R"))
+        if (gameObject.name.Contains("Hand"))
         {
             m_fHandRotater = 90;
         }
@@ -1463,10 +1463,19 @@ public class Part : MonoBehaviour
 
     int GetChildIdx()
     {
+        int iCounter = 0;
+
         for (int i = 0; i < transform.parent.childCount; ++i)
         {
             if (transform.parent.GetChild(i) == transform)
-                return i;
+            {
+                return iCounter;
+            }
+
+            if (transform.parent.GetChild(i).GetComponent<Part>().m_partType == m_partType)
+            {
+                iCounter += 1;
+            }
         }
 
         Debug.LogError("Unknown child index");

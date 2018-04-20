@@ -336,6 +336,7 @@
     <Compile Include="Assets\DPSpritePalette\Scripts\Editor\DPPaletteMultiCombinerEditor.cs" />
     <Compile Include="Assets\DPSpritePalette\Scripts\Editor\DPSpritePaletteEditor.cs" />
     <Compile Include="Assets\DPSpritePalette\Scripts\Editor\DPSpritePaletteEditorUI.cs" />
+    <Compile Include="Assets\Editor\CustomAssetImporter.cs" />
     <Compile Include="Assets\FogOfWar\Scripts\Editor\FogOfWarChunkManagerEditor.cs" />
     <Compile Include="Assets\FogOfWar\Scripts\Editor\Vector2iPropertyDrawer.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Editor\InvDatabaseInspector.cs" />

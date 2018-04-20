@@ -71,29 +71,38 @@ WEAPON_SHIELD,,
 WeaponName_shield_00,Round shield,원형 방패
 WeaponName_shield_01,Kite shield,연 방패
 ,,
+,,
+,,
+,,
+,,
+,,
 HERO,,
 Hero_name_0,William the Brave,‘용감한' 윌리엄
 Hero_name_1,Robin the Hood,‘망토’ 로빈
 Hero_name_2,Adam the Leper,‘나병환자’ 아담
+Hero_name_3,Hank the Hairy,‘털보’ 행크
+,,
+HERO_PART_ARM,,
+Hero_0_arms_0,William the Brave’s claymore,‘용감한’ 윌리엄의 클레이모어
+Hero_1_arms_0,Robin the Hood’s Bow,‘망토’ 로빈의 활
+Hero_2_arms_0,Adam the Leper’s Dagger,‘나병환자’ 아담의 단검
+Hero_3_arms_0,Hank the Hairy’s Battle axe,‘털보’ 행크의 양손 도끼
+,,
+HERO_PART,,
+Hero_PartType_head,{0}’s head,{0}의 머리
+Hero_PartType_body,{0}’s torso,{0}의 몸통
+Hero_PartType_arm,{0}’s arm,{0}의 팔
+Hero_PartType_leg,{0}’s legs,{0}의 다리
 ,,
 ,,
-HERO_PART_NAME,,
-Wallace_Part,,
-wallace_head_0,William the Brave’s head,‘용감한’ 윌리엄의 머리
-wallace_body_0,William the Brave’s chest,‘용감한’ 윌리엄의 상반신
-wallace_body_1,William the Brave’s waist,‘용감한’ 윌리엄의 하반신
-wallace_legs_0,William the Brave’s legs,‘용감한’ 윌리엄의 다리
-wallace_arms_0,William the Brave’s claymore,‘용감한’ 윌리엄의 클레이모어
-Robin_Part,,
-Robin_head_0,Robin the Hood’s head,‘망토’ 로빈의 머리
-Robin_body_0,Robin the Hood’s torso,‘망토’ 로빈의 몸통
-Robin_legs_0,Robin the Hood’s legs,‘망토’ 로빈의 다리
-Robin_arms_0,Robin the Hood’s Bow,‘망토’ 로빈의 활
-Adam_Part,,
-Adam_head_0,Adam the Leper’s head,‘나병환자’ 아담의 머리
-Adam_body_0,Adam the Leper’s torso,‘나병환자’ 아담의 몸통
-Adam_legs_0,Adam the Leper’s legs,‘나병환자’ 아담의 다리
-Adam_arms_0,Adam the Leper’s Dagger,‘나병환자’ 아담의 단검
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
 ,,
 ,,
 BuffStr,,"+,- > 긍정적/부정적 버프 | 숫자>Argument 숫자"

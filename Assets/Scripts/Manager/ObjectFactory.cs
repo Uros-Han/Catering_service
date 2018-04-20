@@ -374,6 +374,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
         obj.transform.parent = parent;
         obj.transform.localPosition = Vector3.zero;
         obj.transform.localScale = Vector3.one;
+        obj.transform.localRotation = Quaternion.AngleAxis(0f, Vector3.forward);
         obj.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = parent.GetComponent<SpriteRenderer>().sprite;
         obj.transform.GetChild(0).GetComponent<Animator>().runtimeAnimatorController = m_weapon_anim_controller[(int)parent.GetComponent<Part>().m_weaponType];
 
@@ -481,6 +482,9 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 break;
 
             case (int)ENEMY_TYPE.HERO:
+
+                string strDirectoryName = "";
+
                 switch (part.m_iSaveValue)
                 { // used to hero index
                     case (int)HERO.WALLACE:
@@ -493,12 +497,12 @@ public class ObjectFactory : Singleton<ObjectFactory>
                         {
                             switch (obj.GetComponent<Part>().m_iSaveChildIdx)
                             {
-                                case 1:
+                                case 0:
                                     obj.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>("Sprites/Sheets/Heroes/0.Wallace/sheet_wallace_body_0");
                                     obj.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteSheet>().m_sheet_sprite[0];
                                     break;
 
-                                case 2:
+                                case 1:
                                     obj.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>("Sprites/Sheets/Heroes/0.Wallace/sheet_wallace_body_1");
                                     obj.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteSheet>().m_sheet_sprite[0];
                                     break;
@@ -542,6 +546,58 @@ public class ObjectFactory : Singleton<ObjectFactory>
 
                             obj.GetComponent<DPSpritePalette>().paletteTexture = m_texture_bow_palette;
                             obj.GetComponent<DPSpritePalette>().PaletteIndex = 3;
+                        }
+                        #endregion
+                        break;
+
+                    case (int)HERO.ADAM:
+                        #region adam
+                        if (name.Equals("Head"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Sheets/Heroes/2.Adam/adam_head_0");
+                        }
+                        else if (name.Equals("Body"))
+                        {
+                            obj.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>("Sprites/Sheets/Heroes/2.Adam/sheet_adam_body_0");
+                            obj.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteSheet>().m_sheet_sprite[0];
+                        }
+                        else if (name.Equals("Leg"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Sheets/Heroes/2.Adam/adam_legs_0");
+                        }
+                        else if (name.Equals("Hand_R"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Sheets/Heroes/2.Adam/adam_arms_0");
+                        }
+                        else if (name.Equals("Hand_L"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Sheets/Heroes/2.Adam/adam_arms_0");
+                        }
+                        #endregion
+                        break;
+
+                    case (int)HERO.HANK:
+                        #region hank
+
+                        strDirectoryName = "3.Hank";
+
+                        if (name.Equals("Head"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/head_0", strDirectoryName));
+                        }
+                        else if (name.Equals("Body"))
+                        {
+                            obj.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/sheet_body_0", strDirectoryName));
+                            obj.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteSheet>().m_sheet_sprite[0];
+                            break;
+                        }
+                        else if (name.Equals("Leg"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/legs_0", strDirectoryName));
+                        }
+                        else if (name.Equals("Hand_R"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/arms_0", strDirectoryName));
                         }
                         #endregion
                         break;
@@ -699,7 +755,13 @@ public class ObjectFactory : Singleton<ObjectFactory>
     public GameObject Create_Hero(int iHeroIdx)
     {
         GameObject obj;
-        float fRandom = 0f;
+        float fHealth = 0f;
+        float fAttackSpeed = Random.Range(20, 30);
+        float fAttack = 0f;
+        float fRange = 0f;
+        float fDefense = 0f;
+        float fIQ = 0f;
+        string strDirectoryName = "";
 
         obj = Instantiate(m_objHero[iHeroIdx]) as GameObject;
 
@@ -714,46 +776,44 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 GameObject head = obj.transform.Find("Head").gameObject;
                 Part headPart = head.GetComponent<Part>();
                 headPart.m_fHealth = Random.Range(15, 18);
-                headPart.m_fCurHealth = fRandom;
+                headPart.m_fCurHealth = fHealth;
                 headPart.m_dicStat.Add("Health", headPart.m_fHealth);
                 headPart.m_dicStat.Add("IQ", 100);
                 headPart.m_lstStrBuff.Add("HeadBuff_2");
                 headPart.m_dicStatBuff["Attack"] = 2;
                 headPart.m_dicStatBuff["AttackSpeed"] = 2;
-                headPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
 
                 GameObject Upbody = obj.transform.GetChild(1).gameObject;
                 Part UpbodyPart = Upbody.GetComponent<Part>();
-                fRandom = Random.Range(25, 30);
-                UpbodyPart.m_fHealth = fRandom;
-                UpbodyPart.m_fCurHealth = fRandom;
-                UpbodyPart.m_dicStat.Add("Health", fRandom);
-                fRandom = Random.Range(5, 8);
-                UpbodyPart.m_dicStat.Add("Defense", fRandom);
-                UpbodyPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
+                fHealth = Random.Range(25, 30);
+                UpbodyPart.m_fHealth = fHealth;
+                UpbodyPart.m_fCurHealth = fHealth;
+                UpbodyPart.m_dicStat.Add("Health", fHealth);
+                fHealth = Random.Range(5, 8);
+                UpbodyPart.m_dicStat.Add("Defense", fHealth);
 
                 GameObject Downbody = obj.transform.GetChild(2).gameObject;
                 Part DownbodyPart = Downbody.GetComponent<Part>();
-                fRandom = Random.Range(25, 30);
-                DownbodyPart.m_fHealth = fRandom;
-                DownbodyPart.m_fCurHealth = fRandom;
-                DownbodyPart.m_dicStat.Add("Health", fRandom);
-                fRandom = Random.Range(5, 8);
-                DownbodyPart.m_dicStat.Add("Defense", fRandom);
-                DownbodyPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
+                fHealth = Random.Range(25, 30);
+                DownbodyPart.m_fHealth = fHealth;
+                DownbodyPart.m_fCurHealth = fHealth;
+                DownbodyPart.m_dicStat.Add("Health", fHealth);
+                fHealth = Random.Range(5, 8);
+                DownbodyPart.m_dicStat.Add("Defense", fHealth);
 
                 GameObject arm = obj.transform.Find("Hand_R").gameObject;
                 Part armPart = arm.GetComponent<Part>();
-                fRandom = Random.Range(50, 70);
-                float fSpeedRandom = Random.Range(20, 30);
+                fHealth = Random.Range(50, 70);
+                fAttackSpeed = Random.Range(20, 30);
+                fAttack = 0f;
+                fRange = 0f;
                 armPart.m_bUse32PixelHand = true;
-                armPart.m_dicStat.Add("Attack", fRandom);
-                armPart.m_dicStat.Add("AttackSpeed", fSpeedRandom);
-                fRandom = Random.Range(15, 18);
-                armPart.m_fHealth = fRandom;
-                armPart.m_fCurHealth = fRandom;
-                armPart.m_dicStat.Add("Health", fRandom);
-                armPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
+                armPart.m_dicStat.Add("Attack", fHealth);
+                armPart.m_dicStat.Add("AttackSpeed", fAttackSpeed);
+                fHealth = Random.Range(15, 18);
+                armPart.m_fHealth = fHealth;
+                armPart.m_fCurHealth = fHealth;
+                armPart.m_dicStat.Add("Health", fHealth);
                 armPart.m_weaponType = WEAPON_TYPE.TWO_HAND;
                 armPart.m_dicStat.Add("Range", 45f);
                 Animator anim = armPart.gameObject.GetComponent<Animator>();
@@ -761,20 +821,14 @@ public class ObjectFactory : Singleton<ObjectFactory>
 
                 GameObject leg = obj.transform.Find("Leg").gameObject;
                 Part legPart = leg.GetComponent<Part>();
-                fRandom = Random.Range(15, 18);
+                fHealth = Random.Range(15, 18);
                 float fRandomDodge = Random.Range(5, 7);
-                legPart.m_fHealth = fRandom;
-                legPart.m_fCurHealth = fRandom;
-                legPart.m_dicStat.Add("Health", fRandom);
+                legPart.m_fHealth = fHealth;
+                legPart.m_fCurHealth = fHealth;
+                legPart.m_dicStat.Add("Health", fHealth);
                 legPart.m_dicStat.Add("Dodge", fRandomDodge);
                 legPart.m_dicStatBuff["Dodge"] = fRandomDodge;
                 legPart.m_lstStrBuff.Add("LegBuff");
-                legPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
-
-                for (int i = 0; i < obj.transform.childCount; ++i)
-                {
-                    obj.transform.GetChild(i).GetComponent<Part>().m_iSaveValue = iHeroIdx;
-                }
                 #endregion
                 break;
 
@@ -783,37 +837,34 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 head = obj.transform.Find("Head").gameObject;
                 headPart = head.GetComponent<Part>();
                 headPart.m_fHealth = Random.Range(15, 18);
-                headPart.m_fCurHealth = fRandom;
+                headPart.m_fCurHealth = fHealth;
                 headPart.m_dicStat.Add("Health", headPart.m_fHealth);
                 headPart.m_dicStat.Add("IQ", 100);
                 headPart.m_lstStrBuff.Add("HeadBuff_2");
                 headPart.m_dicStatBuff["Attack"] = 2;
                 headPart.m_dicStatBuff["AttackSpeed"] = 2;
-                headPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
 
                 GameObject Body = obj.transform.Find("Body").gameObject;
                 Part bodyPart = Body.GetComponent<Part>();
-                fRandom = Random.Range(25, 30);
-                bodyPart.m_fHealth = fRandom;
-                bodyPart.m_fCurHealth = fRandom;
-                bodyPart.m_dicStat.Add("Health", fRandom);
-                fRandom = Random.Range(5, 8);
-                bodyPart.m_dicStat.Add("Defense", fRandom);
-                bodyPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
+                fHealth = Random.Range(25, 30);
+                bodyPart.m_fHealth = fHealth;
+                bodyPart.m_fCurHealth = fHealth;
+                bodyPart.m_dicStat.Add("Health", fHealth);
+                fHealth = Random.Range(5, 8);
+                bodyPart.m_dicStat.Add("Defense", fHealth);
                 Body.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>("Sprites/Sheets/Heroes/1.Robin/sheet_robin_body_0");
 
                 arm = obj.transform.Find("Hand_R").gameObject;
                 armPart = arm.GetComponent<Part>();
-                fRandom = Random.Range(50, 70);
-                fSpeedRandom = Random.Range(20, 30);
+                fHealth = Random.Range(50, 70);
+                fAttackSpeed = Random.Range(20, 30);
                 armPart.m_bUse32PixelHand = true;
-                armPart.m_dicStat.Add("Attack", fRandom);
-                armPart.m_dicStat.Add("AttackSpeed", fSpeedRandom);
-                fRandom = Random.Range(15, 18);
-                armPart.m_fHealth = fRandom;
-                armPart.m_fCurHealth = fRandom;
-                armPart.m_dicStat.Add("Health", fRandom);
-                armPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
+                armPart.m_dicStat.Add("Attack", fHealth);
+                armPart.m_dicStat.Add("AttackSpeed", fAttackSpeed);
+                fHealth = Random.Range(15, 18);
+                armPart.m_fHealth = fHealth;
+                armPart.m_fCurHealth = fHealth;
+                armPart.m_dicStat.Add("Health", fHealth);
                 armPart.m_weaponType = WEAPON_TYPE.BOW;
                 armPart.m_dicStat.Add("Range", 80f);
                 anim = armPart.gameObject.GetComponent<Animator>();
@@ -821,20 +872,14 @@ public class ObjectFactory : Singleton<ObjectFactory>
 
                 leg = obj.transform.Find("Leg").gameObject;
                 legPart = leg.GetComponent<Part>();
-                fRandom = Random.Range(15, 18);
+                fHealth = Random.Range(15, 18);
                 fRandomDodge = Random.Range(5, 7);
-                legPart.m_fHealth = fRandom;
-                legPart.m_fCurHealth = fRandom;
-                legPart.m_dicStat.Add("Health", fRandom);
+                legPart.m_fHealth = fHealth;
+                legPart.m_fCurHealth = fHealth;
+                legPart.m_dicStat.Add("Health", fHealth);
                 legPart.m_dicStat.Add("Dodge", fRandomDodge);
                 legPart.m_dicStatBuff["Dodge"] = fRandomDodge;
                 legPart.m_lstStrBuff.Add("LegBuff");
-                legPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
-
-                for (int i = 0; i < obj.transform.childCount; ++i)
-                {
-                    obj.transform.GetChild(i).GetComponent<Part>().m_iSaveValue = iHeroIdx;
-                }
                 #endregion
                 break;
 
@@ -843,37 +888,34 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 head = obj.transform.Find("Head").gameObject;
                 headPart = head.GetComponent<Part>();
                 headPart.m_fHealth = Random.Range(15, 18);
-                headPart.m_fCurHealth = fRandom;
+                headPart.m_fCurHealth = fHealth;
                 headPart.m_dicStat.Add("Health", headPart.m_fHealth);
                 headPart.m_dicStat.Add("IQ", 100);
                 headPart.m_lstStrBuff.Add("HeadBuff_2");
                 headPart.m_dicStatBuff["Attack"] = 2;
                 headPart.m_dicStatBuff["AttackSpeed"] = 2;
-                headPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
 
                 Body = obj.transform.Find("Body").gameObject;
                 bodyPart = Body.GetComponent<Part>();
-                fRandom = Random.Range(25, 30);
-                bodyPart.m_fHealth = fRandom;
-                bodyPart.m_fCurHealth = fRandom;
-                bodyPart.m_dicStat.Add("Health", fRandom);
-                fRandom = Random.Range(5, 8);
-                bodyPart.m_dicStat.Add("Defense", fRandom);
-                bodyPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
+                fHealth = Random.Range(25, 30);
+                bodyPart.m_fHealth = fHealth;
+                bodyPart.m_fCurHealth = fHealth;
+                bodyPart.m_dicStat.Add("Health", fHealth);
+                fHealth = Random.Range(5, 8);
+                bodyPart.m_dicStat.Add("Defense", fHealth);
                 Body.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>("Sprites/Sheets/Heroes/2.Adam/sheet_adam_body_0");
 
                 arm = obj.transform.Find("Hand_R").gameObject;
                 armPart = arm.GetComponent<Part>();
-                fRandom = Random.Range(5, 7);
-                fSpeedRandom = 75f;
+                fHealth = Random.Range(5, 7);
+                fAttackSpeed = 75f;
                 armPart.m_bUse32PixelHand = true;
-                armPart.m_dicStat.Add("Attack", fRandom);
-                armPart.m_dicStat.Add("AttackSpeed", fSpeedRandom);
-                fRandom = Random.Range(15, 18);
-                armPart.m_fHealth = fRandom;
-                armPart.m_fCurHealth = fRandom;
-                armPart.m_dicStat.Add("Health", fRandom);
-                armPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
+                armPart.m_dicStat.Add("Attack", fHealth);
+                armPart.m_dicStat.Add("AttackSpeed", fAttackSpeed);
+                fHealth = Random.Range(15, 18);
+                armPart.m_fHealth = fHealth;
+                armPart.m_fCurHealth = fHealth;
+                armPart.m_dicStat.Add("Health", fHealth);
                 armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
                 armPart.m_dicStat.Add("Range", 45f);
                 anim = armPart.gameObject.GetComponent<Animator>();
@@ -881,16 +923,15 @@ public class ObjectFactory : Singleton<ObjectFactory>
 
                 arm = obj.transform.Find("Hand_L").gameObject;
                 armPart = arm.GetComponent<Part>();
-                fRandom = Random.Range(5, 7);
-                fSpeedRandom = 75f;
+                fHealth = Random.Range(5, 7);
+                fAttackSpeed = 75f;
                 armPart.m_bUse32PixelHand = true;
-                armPart.m_dicStat.Add("Attack", fRandom);
-                armPart.m_dicStat.Add("AttackSpeed", fSpeedRandom);
-                fRandom = Random.Range(15, 18);
-                armPart.m_fHealth = fRandom;
-                armPart.m_fCurHealth = fRandom;
-                armPart.m_dicStat.Add("Health", fRandom);
-                armPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
+                armPart.m_dicStat.Add("Attack", fHealth);
+                armPart.m_dicStat.Add("AttackSpeed", fAttackSpeed);
+                fHealth = Random.Range(15, 18);
+                armPart.m_fHealth = fHealth;
+                armPart.m_fCurHealth = fHealth;
+                armPart.m_dicStat.Add("Health", fHealth);
                 armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
                 armPart.m_dicStat.Add("Range", 45f);
                 anim = armPart.gameObject.GetComponent<Animator>();
@@ -898,22 +939,139 @@ public class ObjectFactory : Singleton<ObjectFactory>
 
                 leg = obj.transform.Find("Leg").gameObject;
                 legPart = leg.GetComponent<Part>();
-                fRandom = Random.Range(15, 18);
+                fHealth = Random.Range(15, 18);
                 fRandomDodge = Random.Range(5, 7);
-                legPart.m_fHealth = fRandom;
-                legPart.m_fCurHealth = fRandom;
-                legPart.m_dicStat.Add("Health", fRandom);
+                legPart.m_fHealth = fHealth;
+                legPart.m_fCurHealth = fHealth;
+                legPart.m_dicStat.Add("Health", fHealth);
                 legPart.m_dicStat.Add("Dodge", fRandomDodge);
                 legPart.m_dicStatBuff["Dodge"] = fRandomDodge;
                 legPart.m_lstStrBuff.Add("LegBuff");
-                legPart.m_iEnemyType = (int)ENEMY_TYPE.HERO;
-
-                for (int i = 0; i < obj.transform.childCount; ++i)
-                {
-                    obj.transform.GetChild(i).GetComponent<Part>().m_iSaveValue = iHeroIdx;
-                }
                 #endregion
                 break;
+
+            case 3:
+                #region Hank the Hairy
+                head = obj.transform.Find("Head").gameObject;
+                headPart = head.GetComponent<Part>();
+                headPart.m_fHealth = Random.Range(15, 18);
+                headPart.m_fCurHealth = fHealth;
+                headPart.m_dicStat.Add("Health", headPart.m_fHealth);
+                headPart.m_dicStat.Add("IQ", 100);
+                headPart.m_lstStrBuff.Add("HeadBuff_2");
+                headPart.m_dicStatBuff["Attack"] = 2;
+                headPart.m_dicStatBuff["AttackSpeed"] = 2;
+
+                Body = obj.transform.Find("Body").gameObject;
+                bodyPart = Body.GetComponent<Part>();
+                fHealth = Random.Range(25, 30);
+                bodyPart.m_fHealth = fHealth;
+                bodyPart.m_fCurHealth = fHealth;
+                bodyPart.m_dicStat.Add("Health", fHealth);
+                fHealth = Random.Range(5, 8);
+                bodyPart.m_dicStat.Add("Defense", fHealth);
+                Body.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>("Sprites/Sheets/Heroes/3.Hank/sheet_body_0");
+
+                arm = obj.transform.Find("Hand_R").gameObject;
+                armPart = arm.GetComponent<Part>();
+                fHealth = Random.Range(5, 7);
+                fAttackSpeed = 75f;
+                armPart.m_bUse32PixelHand = true;
+                armPart.m_dicStat.Add("Attack", fHealth);
+                armPart.m_dicStat.Add("AttackSpeed", fAttackSpeed);
+                fHealth = Random.Range(15, 18);
+                armPart.m_fHealth = fHealth;
+                armPart.m_fCurHealth = fHealth;
+                armPart.m_dicStat.Add("Health", fHealth);
+                armPart.m_weaponType = WEAPON_TYPE.TWO_HAND;
+                armPart.m_dicStat.Add("Range", 45f);
+                anim = armPart.gameObject.GetComponent<Animator>();
+                anim.runtimeAnimatorController = m_weapon_anim_controller[(int)armPart.m_weaponType];
+
+                leg = obj.transform.Find("Leg").gameObject;
+                legPart = leg.GetComponent<Part>();
+                fHealth = Random.Range(15, 18);
+                fRandomDodge = Random.Range(5, 7);
+                legPart.m_fHealth = fHealth;
+                legPart.m_fCurHealth = fHealth;
+                legPart.m_dicStat.Add("Health", fHealth);
+                legPart.m_dicStat.Add("Dodge", fRandomDodge);
+                legPart.m_dicStatBuff["Dodge"] = fRandomDodge;
+                legPart.m_lstStrBuff.Add("LegBuff");
+                #endregion
+                break;
+
+            case 4:
+                #region Gawen the Knowledge
+                head = obj.transform.Find("Head").gameObject;
+                headPart = head.GetComponent<Part>();
+                fHealth = 20f;
+                fIQ = 130f;
+                headPart.m_lstStrBuff.Add("HeadBuff_2");
+                headPart.m_dicStatBuff["Attack"] = 2;
+                headPart.m_dicStatBuff["AttackSpeed"] = 2;
+                #region head_hide
+                headPart.m_fHealth = fHealth;
+                headPart.m_fCurHealth = fHealth;
+                headPart.m_dicStat.Add("Health", headPart.m_fHealth);
+                headPart.m_dicStat.Add("IQ", fIQ);
+                #endregion
+
+                Body = obj.transform.Find("Body").gameObject;
+                bodyPart = Body.GetComponent<Part>();
+                strDirectoryName = "3.Hank";
+                fHealth = 40f;
+                fDefense = 5f;
+                #region body_hide
+                bodyPart.m_fHealth = fHealth;
+                bodyPart.m_fCurHealth = fHealth;
+                bodyPart.m_dicStat.Add("Health", fHealth);
+                bodyPart.m_dicStat.Add("Defense", fDefense);
+                Body.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/sheet_body_0", strDirectoryName));
+                #endregion
+
+                arm = obj.transform.Find("Hand_R").gameObject;
+                armPart = arm.GetComponent<Part>();
+                armPart.m_bUse32PixelHand = false;
+                armPart.m_weaponType = WEAPON_TYPE.BOOK;
+                fHealth = 45f;
+                fAttackSpeed = 0f;
+                fAttack = 0f;
+                fRange = 0f;
+                #region arm_hide
+                armPart.m_fHealth = fHealth;
+                armPart.m_fCurHealth = fHealth;
+                armPart.m_dicStat.Add("Health", fHealth);
+                armPart.m_dicStat.Add("Range", fRange);
+                armPart.m_dicStat.Add("Attack", fAttack);
+                armPart.m_dicStat.Add("AttackSpeed", fAttackSpeed);
+                anim = armPart.gameObject.GetComponent<Animator>();
+                anim.runtimeAnimatorController = m_weapon_anim_controller[(int)armPart.m_weaponType];
+                #endregion
+
+                leg = obj.transform.Find("Leg").gameObject;
+                legPart = leg.GetComponent<Part>();
+                fHealth = 15f;
+                legPart.m_lstStrBuff.Add("LegBuff");
+                fRandomDodge = 5f;
+                #region leg_hide
+                legPart.m_fHealth = fHealth;
+                legPart.m_fCurHealth = fHealth;
+                legPart.m_dicStat.Add("Health", fHealth);
+                legPart.m_dicStat.Add("Dodge", fRandomDodge);
+                legPart.m_dicStatBuff["Dodge"] = fRandomDodge;
+                #endregion
+                #endregion
+                break;
+        }
+
+        for (int i = 0; i < obj.transform.childCount; ++i)
+        {
+            Part part = obj.transform.GetChild(i).GetComponent<Part>();
+            part.m_iSaveValue = iHeroIdx;
+            if (part.m_strNameKey != "unArm")
+                part.m_strNameKey = iHeroIdx.ToString();
+            part.m_iEnemyType = (int)ENEMY_TYPE.HERO;
         }
 
         if (Application.loadedLevelName.Equals("Main"))

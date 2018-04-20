@@ -106,7 +106,26 @@ public class Morgue : MonoBehaviour
             return;
 
         if (part.m_iEnemyType == (int)ENEMY_TYPE.HERO)
-            morguePanel.GetChild(0).Find("PartName").GetComponent<UILabel>().text = "[FF4E1AFF]" + Localization.Get(part.m_strNameKey);
+        {
+            switch (part.m_partType)
+            {
+                case PART_TYPE.HEAD:
+                    morguePanel.GetChild(0).Find("PartName").GetComponent<UILabel>().text = "[FF4E1AFF]" + string.Format(Localization.Get("Hero_PartType_head"), Localization.Get(string.Format("Hero_name_{0}", part.m_strNameKey)));
+                    break;
+
+                case PART_TYPE.BODY:
+                    morguePanel.GetChild(0).Find("PartName").GetComponent<UILabel>().text = "[FF4E1AFF]" + string.Format(Localization.Get("Hero_PartType_body"), Localization.Get(string.Format("Hero_name_{0}", part.m_strNameKey)));
+                    break;
+
+                case PART_TYPE.ARM:
+                    morguePanel.GetChild(0).Find("PartName").GetComponent<UILabel>().text = "[FF4E1AFF]" + Localization.Get(string.Format("Hero_{0}_arms_{1}", part.m_strNameKey, part.m_iSaveChildIdx));
+                    break;
+
+                case PART_TYPE.LEG:
+                    morguePanel.GetChild(0).Find("PartName").GetComponent<UILabel>().text = "[FF4E1AFF]" + string.Format(Localization.Get("Hero_PartType_leg"), Localization.Get(string.Format("Hero_name_{0}", part.m_strNameKey)));
+                    break;
+            }
+        }
         else
             morguePanel.GetChild(0).Find("PartName").GetComponent<UILabel>().text = "[3D1E43FF]" + Localization.Get(part.m_strNameKey);
 
