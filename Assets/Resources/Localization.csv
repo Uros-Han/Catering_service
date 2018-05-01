@@ -81,12 +81,30 @@ Hero_name_0,William the Brave,‘용감한' 윌리엄
 Hero_name_1,Robin the Hood,‘망토’ 로빈
 Hero_name_2,Adam the Leper,‘나병환자’ 아담
 Hero_name_3,Hank the Hairy,‘털보’ 행크
+Hero_name_4,Gawen the Knowledge,‘지식의’ 가웬
+Hero_name_5,Owin the Sew,‘꿰매는’ 오윈
+Hero_name_6,Gale the Agitator,‘선동가’ 게일
+Hero_name_7,Richard the Coin ,‘돈주머니’ 리처드
+Hero_name_8,Rolf the Alcoholic,‘주정뱅이’ 롤프
+Hero_name_9,Otis the Errander,‘심부름꾼’ 오티스
+Hero_name_10,Reynard the Honor,‘명예로운’ 레이널드
+Hero_name_11,Dump the Giant,‘거인’ 덤프
 ,,
 HERO_PART_ARM,,
 Hero_0_arms_0,William the Brave’s claymore,‘용감한’ 윌리엄의 클레이모어
 Hero_1_arms_0,Robin the Hood’s Bow,‘망토’ 로빈의 활
 Hero_2_arms_0,Adam the Leper’s Dagger,‘나병환자’ 아담의 단검
 Hero_3_arms_0,Hank the Hairy’s Battle axe,‘털보’ 행크의 양손 도끼
+Hero_4_arms_0,Gawen the Knowledge’s Book,‘지식의’ 가웬의 책
+Hero_5_arms_0,Owin the Sew’s Sewing needle,‘꿰매는’ 오윈의 바늘
+Hero_5_arms_1,Owin the Sew’s Book,‘꿰매는’ 오윈의 책
+Hero_8_arms_0,Rolf the Alcoholic’s Rusty sword,‘주정뱅이’ 롤프의 이빠진 칼
+Hero_8_arms_1,Rolf the Alcoholic’s Round shield,‘주정뱅이’ 롤프의 원형 방패
+Hero_9_arms_0,Otis the Errander’s War axe,‘심부름꾼’ 오티스의 전투 도끼
+Hero_9_arms_1,Otis the Errander’s Round shield,‘심부름꾼’ 오티스의 원형 방패
+Hero_10_arms_0,Reynard the Honor’s Long sword,‘명예로운’ 레이널드의 장검
+Hero_10_arms_1,Reynard the Honor’s Kite shield,‘명예로운’ 레이널드의 연 방패
+Hero_11_arms_0,Dump the Giant’s Battle Hammer,‘거인’ 덤프의 전투 망치
 ,,
 HERO_PART,,
 Hero_PartType_head,{0}’s head,{0}의 머리

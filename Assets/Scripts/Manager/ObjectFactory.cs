@@ -353,12 +353,14 @@ public class ObjectFactory : Singleton<ObjectFactory>
                     obj.transform.GetChild(4).localPosition = new Vector2(-0.13f, 0.08f);
                     obj.transform.Find("Flag").gameObject.SetActive(false);
                     obj.AddComponent<Caravan>();
+                    obj.GetComponent<Party>().m_iSpeed = Random.Range(0, 3);
                     break;
 
                 case PARTY_TYPE.RAID:
                     obj.transform.Find("Wagon").gameObject.SetActive(false);
                     obj.transform.Find("Flag").GetComponent<SpriteRenderer>().sprite = m_sheet_flag[Random.Range(0, m_sheet_flag.Length)];
                     obj.AddComponent<Raider>();
+                    obj.GetComponent<Party>().m_iSpeed = GameObject.Find("PartStatus").GetComponent<PartStatus>().m_iSpeed + Random.Range(-2, 2);
                     break;
             }
         }
@@ -601,6 +603,233 @@ public class ObjectFactory : Singleton<ObjectFactory>
                         }
                         #endregion
                         break;
+
+                    case (int)HERO.GAWEN:
+                        #region gawen
+
+                        strDirectoryName = "4.Gawen";
+
+                        if (name.Equals("Head"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/head_0", strDirectoryName));
+                        }
+                        else if (name.Equals("Body"))
+                        {
+                            obj.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/sheet_body_0", strDirectoryName));
+                            obj.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteSheet>().m_sheet_sprite[0];
+                            break;
+                        }
+                        else if (name.Equals("Leg"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/legs_0", strDirectoryName));
+                        }
+                        else if (name.Equals("Hand_R"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/arms_0", strDirectoryName));
+                        }
+                        #endregion
+                        break;
+
+                    case (int)HERO.OWIN:
+                        #region owin
+
+                        strDirectoryName = "5.Owin";
+
+                        if (name.Equals("Head"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/head_0", strDirectoryName));
+                        }
+                        else if (name.Equals("Body"))
+                        {
+                            obj.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/sheet_body_0", strDirectoryName));
+                            obj.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteSheet>().m_sheet_sprite[0];
+                            break;
+                        }
+                        else if (name.Equals("Leg"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/legs_0", strDirectoryName));
+                        }
+                        else if (name.Equals("Hand_R"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/arms_0", strDirectoryName));
+                        }
+                        else if (name.Equals("Hand_L"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/arms_1", strDirectoryName));
+                        }
+                        #endregion
+                        break;
+
+                    case (int)HERO.GALE:
+                        #region gale
+
+                        strDirectoryName = "6.Gale";
+
+                        if (name.Equals("Head"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/head_0", strDirectoryName));
+                        }
+                        else if (name.Equals("Body"))
+                        {
+                            obj.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/sheet_body_0", strDirectoryName));
+                            obj.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteSheet>().m_sheet_sprite[0];
+                            break;
+                        }
+                        else if (name.Equals("Leg"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/legs_0", strDirectoryName));
+                        }
+                        #endregion
+                        break;
+
+                    case (int)HERO.RICHARD:
+                        #region richard
+
+                        strDirectoryName = "7.Richard";
+
+                        if (name.Equals("Head"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/head_0", strDirectoryName));
+                        }
+                        else if (name.Equals("Body"))
+                        {
+                            obj.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/sheet_body_0", strDirectoryName));
+                            obj.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteSheet>().m_sheet_sprite[0];
+                            break;
+                        }
+                        else if (name.Equals("Leg"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/legs_0", strDirectoryName));
+                        }
+                        #endregion
+                        break;
+
+                    case (int)HERO.ROLF:
+                        #region Rolf
+
+                        strDirectoryName = "8.Rolf";
+
+                        if (name.Equals("Head"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/head_0", strDirectoryName));
+                        }
+                        else if (name.Equals("Body"))
+                        {
+                            obj.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/sheet_body_0", strDirectoryName));
+                            obj.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteSheet>().m_sheet_sprite[0];
+                            break;
+                        }
+                        else if (name.Equals("Leg"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/legs_0", strDirectoryName));
+                        }
+                        else if (name.Equals("Hand_R"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/arms_0", strDirectoryName));
+                        }
+                        else if (name.Equals("Hand_L"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/arms_1", strDirectoryName));
+                        }
+                        #endregion
+                        break;
+
+                    case (int)HERO.OTIS:
+                        #region OTIS
+
+                        strDirectoryName = "9.Otis";
+
+                        if (name.Equals("Head"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/head_0", strDirectoryName));
+                        }
+                        else if (name.Equals("Body"))
+                        {
+                            obj.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/sheet_body_0", strDirectoryName));
+                            obj.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteSheet>().m_sheet_sprite[0];
+                            break;
+                        }
+                        else if (name.Equals("Leg"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/legs_0", strDirectoryName));
+                        }
+                        else if (name.Equals("Hand_R"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/arms_0", strDirectoryName));
+                        }
+                        else if (name.Equals("Hand_L"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/arms_1", strDirectoryName));
+                        }
+                        #endregion
+                        break;
+
+                    case (int)HERO.REYNARD:
+                        #region Reynard
+
+                        strDirectoryName = "10.Reynard";
+
+                        if (name.Equals("Head"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/head_0", strDirectoryName));
+                        }
+                        else if (name.Equals("Body"))
+                        {
+                            obj.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/sheet_body_0", strDirectoryName));
+                            obj.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteSheet>().m_sheet_sprite[0];
+                            break;
+                        }
+                        else if (name.Equals("Leg"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/legs_0", strDirectoryName));
+                        }
+                        else if (name.Equals("Hand_R"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/arms_0", strDirectoryName));
+                        }
+                        else if (name.Equals("Hand_L"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/arms_1", strDirectoryName));
+                        }
+                        #endregion
+                        break;
+
+                    case (int)HERO.DUMP:
+                        #region Dump
+
+                        strDirectoryName = "11.Dump";
+
+                        if (name.Equals("Head"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/head_0", strDirectoryName));
+                        }
+                        else if (name.Equals("Body"))
+                        {
+                            switch (obj.GetComponent<Part>().m_iSaveChildIdx)
+                            {
+                                case 0:
+                                    obj.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/sheet_body_0", strDirectoryName));
+                                    obj.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteSheet>().m_sheet_sprite[0];
+                                    break;
+
+                                case 1:
+                                    obj.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/sheet_body_1", strDirectoryName));
+                                    obj.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteSheet>().m_sheet_sprite[0];
+                                    break;
+                            }
+                            break;
+                        }
+                        else if (name.Equals("Leg"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/legs_0", strDirectoryName));
+                        }
+                        else if (name.Equals("Hand_R"))
+                        {
+                            obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/arms_0", strDirectoryName));
+                        }
+                        #endregion
+                        break;
+
                 }
                 break;
         }
@@ -1019,7 +1248,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
 
                 Body = obj.transform.Find("Body").gameObject;
                 bodyPart = Body.GetComponent<Part>();
-                strDirectoryName = "3.Hank";
+                strDirectoryName = "4.Gawen";
                 fHealth = 40f;
                 fDefense = 5f;
                 #region body_hide
@@ -1033,11 +1262,15 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 arm = obj.transform.Find("Hand_R").gameObject;
                 armPart = arm.GetComponent<Part>();
                 armPart.m_bUse32PixelHand = false;
+                armPart.m_bAttackAvailable = false;
                 armPart.m_weaponType = WEAPON_TYPE.BOOK;
                 fHealth = 45f;
                 fAttackSpeed = 0f;
                 fAttack = 0f;
                 fRange = 0f;
+                armPart.m_lstStrBuff.Add("HeadBuff_2");
+                armPart.m_dicStatBuff["Attack"] = 2;
+                armPart.m_dicStatBuff["AttackSpeed"] = 2;
                 #region arm_hide
                 armPart.m_fHealth = fHealth;
                 armPart.m_fCurHealth = fHealth;
@@ -1045,8 +1278,559 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_dicStat.Add("Range", fRange);
                 armPart.m_dicStat.Add("Attack", fAttack);
                 armPart.m_dicStat.Add("AttackSpeed", fAttackSpeed);
-                anim = armPart.gameObject.GetComponent<Animator>();
-                anim.runtimeAnimatorController = m_weapon_anim_controller[(int)armPart.m_weaponType];
+                if (armPart.m_bAttackAvailable)
+                {
+                    anim = armPart.gameObject.GetComponent<Animator>();
+                    anim.runtimeAnimatorController = m_weapon_anim_controller[(int)armPart.m_weaponType];
+                }
+                #endregion
+
+                leg = obj.transform.Find("Leg").gameObject;
+                legPart = leg.GetComponent<Part>();
+                fHealth = 15f;
+                legPart.m_lstStrBuff.Add("LegBuff");
+                fRandomDodge = 5f;
+                #region leg_hide
+                legPart.m_fHealth = fHealth;
+                legPart.m_fCurHealth = fHealth;
+                legPart.m_dicStat.Add("Health", fHealth);
+                legPart.m_dicStat.Add("Dodge", fRandomDodge);
+                legPart.m_dicStatBuff["Dodge"] = fRandomDodge;
+                #endregion
+                #endregion
+                break;
+
+            case 5:
+                #region Owin the Sew
+                head = obj.transform.Find("Head").gameObject;
+                headPart = head.GetComponent<Part>();
+                fHealth = 20f;
+                fIQ = 130f;
+                headPart.m_lstStrBuff.Add("HeadBuff_2");
+                headPart.m_dicStatBuff["Attack"] = 2;
+                headPart.m_dicStatBuff["AttackSpeed"] = 2;
+                #region head_hide
+                headPart.m_fHealth = fHealth;
+                headPart.m_fCurHealth = fHealth;
+                headPart.m_dicStat.Add("Health", headPart.m_fHealth);
+                headPart.m_dicStat.Add("IQ", fIQ);
+                #endregion
+
+                Body = obj.transform.Find("Body").gameObject;
+                bodyPart = Body.GetComponent<Part>();
+                strDirectoryName = "5.Owin";
+                fHealth = 40f;
+                fDefense = 5f;
+                #region body_hide
+                bodyPart.m_fHealth = fHealth;
+                bodyPart.m_fCurHealth = fHealth;
+                bodyPart.m_dicStat.Add("Health", fHealth);
+                bodyPart.m_dicStat.Add("Defense", fDefense);
+                Body.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/sheet_body_0", strDirectoryName));
+                #endregion
+
+                arm = obj.transform.Find("Hand_R").gameObject;
+                armPart = arm.GetComponent<Part>();
+                armPart.m_bUse32PixelHand = false;
+                armPart.m_bAttackAvailable = false;
+                armPart.m_weaponType = WEAPON_TYPE.BOOK;
+                fHealth = 45f;
+                fAttackSpeed = 0f;
+                fAttack = 0f;
+                fRange = 0f;
+                armPart.m_lstStrBuff.Add("HeadBuff_2");
+                armPart.m_dicStatBuff["Attack"] = 2;
+                armPart.m_dicStatBuff["AttackSpeed"] = 2;
+                #region arm_hide
+                armPart.m_fHealth = fHealth;
+                armPart.m_fCurHealth = fHealth;
+                armPart.m_dicStat.Add("Health", fHealth);
+                armPart.m_dicStat.Add("Range", fRange);
+                armPart.m_dicStat.Add("Attack", fAttack);
+                armPart.m_dicStat.Add("AttackSpeed", fAttackSpeed);
+                if (armPart.m_bAttackAvailable)
+                {
+                    anim = armPart.gameObject.GetComponent<Animator>();
+                    anim.runtimeAnimatorController = m_weapon_anim_controller[(int)armPart.m_weaponType];
+                }
+                #endregion
+
+                arm = obj.transform.Find("Hand_L").gameObject;
+                armPart = arm.GetComponent<Part>();
+                armPart.m_bUse32PixelHand = false;
+                armPart.m_bAttackAvailable = false;
+                armPart.m_weaponType = WEAPON_TYPE.BOOK;
+                fHealth = 45f;
+                fAttackSpeed = 0f;
+                fAttack = 0f;
+                fRange = 0f;
+                armPart.m_lstStrBuff.Add("HeadBuff_2");
+                armPart.m_dicStatBuff["Attack"] = 2;
+                armPart.m_dicStatBuff["AttackSpeed"] = 2;
+                #region arm_hide
+                armPart.m_fHealth = fHealth;
+                armPart.m_fCurHealth = fHealth;
+                armPart.m_dicStat.Add("Health", fHealth);
+                armPart.m_dicStat.Add("Range", fRange);
+                armPart.m_dicStat.Add("Attack", fAttack);
+                armPart.m_dicStat.Add("AttackSpeed", fAttackSpeed);
+                if (armPart.m_bAttackAvailable)
+                {
+                    anim = armPart.gameObject.GetComponent<Animator>();
+                    anim.runtimeAnimatorController = m_weapon_anim_controller[(int)armPart.m_weaponType];
+                }
+                #endregion
+
+                leg = obj.transform.Find("Leg").gameObject;
+                legPart = leg.GetComponent<Part>();
+                fHealth = 15f;
+                legPart.m_lstStrBuff.Add("LegBuff");
+                fRandomDodge = 5f;
+                #region leg_hide
+                legPart.m_fHealth = fHealth;
+                legPart.m_fCurHealth = fHealth;
+                legPart.m_dicStat.Add("Health", fHealth);
+                legPart.m_dicStat.Add("Dodge", fRandomDodge);
+                legPart.m_dicStatBuff["Dodge"] = fRandomDodge;
+                #endregion
+                #endregion
+                break;
+
+            case 6:
+                #region Gale the Agitator
+                head = obj.transform.Find("Head").gameObject;
+                headPart = head.GetComponent<Part>();
+                fHealth = 20f;
+                fIQ = 130f;
+                headPart.m_lstStrBuff.Add("HeadBuff_2");
+                headPart.m_dicStatBuff["Attack"] = 2;
+                headPart.m_dicStatBuff["AttackSpeed"] = 2;
+                #region head_hide
+                headPart.m_fHealth = fHealth;
+                headPart.m_fCurHealth = fHealth;
+                headPart.m_dicStat.Add("Health", headPart.m_fHealth);
+                headPart.m_dicStat.Add("IQ", fIQ);
+                #endregion
+
+                Body = obj.transform.Find("Body").gameObject;
+                bodyPart = Body.GetComponent<Part>();
+                strDirectoryName = "6.Gale";
+                fHealth = 40f;
+                fDefense = 5f;
+                #region body_hide
+                bodyPart.m_fHealth = fHealth;
+                bodyPart.m_fCurHealth = fHealth;
+                bodyPart.m_dicStat.Add("Health", fHealth);
+                bodyPart.m_dicStat.Add("Defense", fDefense);
+                Body.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/sheet_body_0", strDirectoryName));
+                #endregion
+
+                leg = obj.transform.Find("Leg").gameObject;
+                legPart = leg.GetComponent<Part>();
+                fHealth = 15f;
+                legPart.m_lstStrBuff.Add("LegBuff");
+                fRandomDodge = 5f;
+                #region leg_hide
+                legPart.m_fHealth = fHealth;
+                legPart.m_fCurHealth = fHealth;
+                legPart.m_dicStat.Add("Health", fHealth);
+                legPart.m_dicStat.Add("Dodge", fRandomDodge);
+                legPart.m_dicStatBuff["Dodge"] = fRandomDodge;
+                #endregion
+                #endregion
+                break;
+
+            case 7:
+                #region Richard the Coin
+                head = obj.transform.Find("Head").gameObject;
+                headPart = head.GetComponent<Part>();
+                fHealth = 20f;
+                fIQ = 130f;
+                headPart.m_lstStrBuff.Add("HeadBuff_2");
+                headPart.m_dicStatBuff["Attack"] = 2;
+                headPart.m_dicStatBuff["AttackSpeed"] = 2;
+                #region head_hide
+                headPart.m_fHealth = fHealth;
+                headPart.m_fCurHealth = fHealth;
+                headPart.m_dicStat.Add("Health", headPart.m_fHealth);
+                headPart.m_dicStat.Add("IQ", fIQ);
+                #endregion
+
+                Body = obj.transform.Find("Body").gameObject;
+                bodyPart = Body.GetComponent<Part>();
+                strDirectoryName = "7.Richard";
+                fHealth = 40f;
+                fDefense = 5f;
+                #region body_hide
+                bodyPart.m_fHealth = fHealth;
+                bodyPart.m_fCurHealth = fHealth;
+                bodyPart.m_dicStat.Add("Health", fHealth);
+                bodyPart.m_dicStat.Add("Defense", fDefense);
+                Body.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/sheet_body_0", strDirectoryName));
+                #endregion
+
+                leg = obj.transform.Find("Leg").gameObject;
+                legPart = leg.GetComponent<Part>();
+                fHealth = 15f;
+                legPart.m_lstStrBuff.Add("LegBuff");
+                fRandomDodge = 5f;
+                #region leg_hide
+                legPart.m_fHealth = fHealth;
+                legPart.m_fCurHealth = fHealth;
+                legPart.m_dicStat.Add("Health", fHealth);
+                legPart.m_dicStat.Add("Dodge", fRandomDodge);
+                legPart.m_dicStatBuff["Dodge"] = fRandomDodge;
+                #endregion
+                #endregion
+                break;
+
+            case 8:
+                #region Rolf the Alcoholic
+                head = obj.transform.Find("Head").gameObject;
+                headPart = head.GetComponent<Part>();
+                fHealth = 20f;
+                fIQ = 130f;
+                headPart.m_lstStrBuff.Add("HeadBuff_2");
+                headPart.m_dicStatBuff["Attack"] = 2;
+                headPart.m_dicStatBuff["AttackSpeed"] = 2;
+                #region head_hide
+                headPart.m_fHealth = fHealth;
+                headPart.m_fCurHealth = fHealth;
+                headPart.m_dicStat.Add("Health", headPart.m_fHealth);
+                headPart.m_dicStat.Add("IQ", fIQ);
+                #endregion
+
+                Body = obj.transform.Find("Body").gameObject;
+                bodyPart = Body.GetComponent<Part>();
+                strDirectoryName = "8.Rolf";
+                fHealth = 40f;
+                fDefense = 5f;
+                #region body_hide
+                bodyPart.m_fHealth = fHealth;
+                bodyPart.m_fCurHealth = fHealth;
+                bodyPart.m_dicStat.Add("Health", fHealth);
+                bodyPart.m_dicStat.Add("Defense", fDefense);
+                Body.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/sheet_body_0", strDirectoryName));
+                #endregion
+
+                arm = obj.transform.Find("Hand_R").gameObject;
+                armPart = arm.GetComponent<Part>();
+                armPart.m_bUse32PixelHand = true;
+                armPart.m_bAttackAvailable = true;
+                armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
+                fHealth = 45f;
+                fAttackSpeed = 60f;
+                fAttack = 0f;
+                fRange = 40f;
+                armPart.m_dicStatBuff["Attack"] = 2;
+                armPart.m_dicStatBuff["AttackSpeed"] = 2;
+                #region arm_hide
+                armPart.m_fHealth = fHealth;
+                armPart.m_fCurHealth = fHealth;
+                armPart.m_dicStat.Add("Health", fHealth);
+                armPart.m_dicStat.Add("Range", fRange);
+                armPart.m_dicStat.Add("Attack", fAttack);
+                armPart.m_dicStat.Add("AttackSpeed", fAttackSpeed);
+                if (armPart.m_bAttackAvailable)
+                {
+                    anim = armPart.gameObject.GetComponent<Animator>();
+                    anim.runtimeAnimatorController = m_weapon_anim_controller[(int)armPart.m_weaponType];
+                }
+                #endregion
+
+                arm = obj.transform.Find("Hand_L").gameObject;
+                armPart = arm.GetComponent<Part>();
+                armPart.m_bUse32PixelHand = false;
+                armPart.m_bAttackAvailable = false;
+                armPart.m_weaponType = WEAPON_TYPE.SHIELD;
+                fHealth = 45f;
+                fAttackSpeed = 0f;
+                fAttack = 0f;
+                fRange = 0f;
+                armPart.m_dicStatBuff["Attack"] = 2;
+                armPart.m_dicStatBuff["AttackSpeed"] = 2;
+                #region arm_hide
+                armPart.m_fHealth = fHealth;
+                armPart.m_fCurHealth = fHealth;
+                armPart.m_dicStat.Add("Health", fHealth);
+                armPart.m_dicStat.Add("Range", fRange);
+                armPart.m_dicStat.Add("Attack", fAttack);
+                armPart.m_dicStat.Add("AttackSpeed", fAttackSpeed);
+                if (armPart.m_bAttackAvailable)
+                {
+                    anim = armPart.gameObject.GetComponent<Animator>();
+                    anim.runtimeAnimatorController = m_weapon_anim_controller[(int)armPart.m_weaponType];
+                }
+                #endregion
+
+                leg = obj.transform.Find("Leg").gameObject;
+                legPart = leg.GetComponent<Part>();
+                fHealth = 15f;
+                legPart.m_lstStrBuff.Add("LegBuff");
+                fRandomDodge = 5f;
+                #region leg_hide
+                legPart.m_fHealth = fHealth;
+                legPart.m_fCurHealth = fHealth;
+                legPart.m_dicStat.Add("Health", fHealth);
+                legPart.m_dicStat.Add("Dodge", fRandomDodge);
+                legPart.m_dicStatBuff["Dodge"] = fRandomDodge;
+                #endregion
+                #endregion
+                break;
+
+            case 9:
+                #region Otis the Errander
+                head = obj.transform.Find("Head").gameObject;
+                headPart = head.GetComponent<Part>();
+                fHealth = 20f;
+                fIQ = 130f;
+                headPart.m_lstStrBuff.Add("HeadBuff_2");
+                headPart.m_dicStatBuff["Attack"] = 2;
+                headPart.m_dicStatBuff["AttackSpeed"] = 2;
+                #region head_hide
+                headPart.m_fHealth = fHealth;
+                headPart.m_fCurHealth = fHealth;
+                headPart.m_dicStat.Add("Health", headPart.m_fHealth);
+                headPart.m_dicStat.Add("IQ", fIQ);
+                #endregion
+
+                Body = obj.transform.Find("Body").gameObject;
+                bodyPart = Body.GetComponent<Part>();
+                strDirectoryName = "9.Otis";
+                fHealth = 40f;
+                fDefense = 5f;
+                #region body_hide
+                bodyPart.m_fHealth = fHealth;
+                bodyPart.m_fCurHealth = fHealth;
+                bodyPart.m_dicStat.Add("Health", fHealth);
+                bodyPart.m_dicStat.Add("Defense", fDefense);
+                Body.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/sheet_body_0", strDirectoryName));
+                #endregion
+
+                arm = obj.transform.Find("Hand_R").gameObject;
+                armPart = arm.GetComponent<Part>();
+                armPart.m_bUse32PixelHand = false;
+                armPart.m_bAttackAvailable = true;
+                armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
+                fHealth = 45f;
+                fAttackSpeed = 60f;
+                fAttack = 40f;
+                fRange = 40f;
+                armPart.m_dicStatBuff["Attack"] = 2;
+                armPart.m_dicStatBuff["AttackSpeed"] = 2;
+                #region arm_hide
+                armPart.m_fHealth = fHealth;
+                armPart.m_fCurHealth = fHealth;
+                armPart.m_dicStat.Add("Health", fHealth);
+                armPart.m_dicStat.Add("Range", fRange);
+                armPart.m_dicStat.Add("Attack", fAttack);
+                armPart.m_dicStat.Add("AttackSpeed", fAttackSpeed);
+                if (armPart.m_bAttackAvailable)
+                {
+                    anim = armPart.gameObject.GetComponent<Animator>();
+                    anim.runtimeAnimatorController = m_weapon_anim_controller[(int)armPart.m_weaponType];
+                }
+                #endregion
+
+                arm = obj.transform.Find("Hand_L").gameObject;
+                armPart = arm.GetComponent<Part>();
+                armPart.m_bUse32PixelHand = false;
+                armPart.m_bAttackAvailable = false;
+                armPart.m_weaponType = WEAPON_TYPE.SHIELD;
+                fHealth = 45f;
+                fAttackSpeed = 0f;
+                fAttack = 0f;
+                fRange = 0f;
+                armPart.m_dicStatBuff["Attack"] = 2;
+                armPart.m_dicStatBuff["AttackSpeed"] = 2;
+                #region arm_hide
+                armPart.m_fHealth = fHealth;
+                armPart.m_fCurHealth = fHealth;
+                armPart.m_dicStat.Add("Health", fHealth);
+                armPart.m_dicStat.Add("Range", fRange);
+                armPart.m_dicStat.Add("Attack", fAttack);
+                armPart.m_dicStat.Add("AttackSpeed", fAttackSpeed);
+                if (armPart.m_bAttackAvailable)
+                {
+                    anim = armPart.gameObject.GetComponent<Animator>();
+                    anim.runtimeAnimatorController = m_weapon_anim_controller[(int)armPart.m_weaponType];
+                }
+                #endregion
+
+                leg = obj.transform.Find("Leg").gameObject;
+                legPart = leg.GetComponent<Part>();
+                fHealth = 15f;
+                legPart.m_lstStrBuff.Add("LegBuff");
+                fRandomDodge = 5f;
+                #region leg_hide
+                legPart.m_fHealth = fHealth;
+                legPart.m_fCurHealth = fHealth;
+                legPart.m_dicStat.Add("Health", fHealth);
+                legPart.m_dicStat.Add("Dodge", fRandomDodge);
+                legPart.m_dicStatBuff["Dodge"] = fRandomDodge;
+                #endregion
+                #endregion
+                break;
+
+            case 10:
+                #region Reynard the Honor
+                head = obj.transform.Find("Head").gameObject;
+                headPart = head.GetComponent<Part>();
+                fHealth = 20f;
+                fIQ = 130f;
+                headPart.m_lstStrBuff.Add("HeadBuff_2");
+                headPart.m_dicStatBuff["Attack"] = 2;
+                headPart.m_dicStatBuff["AttackSpeed"] = 2;
+                #region head_hide
+                headPart.m_fHealth = fHealth;
+                headPart.m_fCurHealth = fHealth;
+                headPart.m_dicStat.Add("Health", headPart.m_fHealth);
+                headPart.m_dicStat.Add("IQ", fIQ);
+                #endregion
+
+                Body = obj.transform.Find("Body").gameObject;
+                bodyPart = Body.GetComponent<Part>();
+                strDirectoryName = "10.Reynard";
+                fHealth = 40f;
+                fDefense = 5f;
+                #region body_hide
+                bodyPart.m_fHealth = fHealth;
+                bodyPart.m_fCurHealth = fHealth;
+                bodyPart.m_dicStat.Add("Health", fHealth);
+                bodyPart.m_dicStat.Add("Defense", fDefense);
+                Body.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/sheet_body_0", strDirectoryName));
+                #endregion
+
+                arm = obj.transform.Find("Hand_R").gameObject;
+                armPart = arm.GetComponent<Part>();
+                armPart.m_bUse32PixelHand = true;
+                armPart.m_bAttackAvailable = true;
+                armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
+                fHealth = 45f;
+                fAttackSpeed = 60f;
+                fAttack = 40f;
+                fRange = 40f;
+                armPart.m_dicStatBuff["Attack"] = 2;
+                armPart.m_dicStatBuff["AttackSpeed"] = 2;
+                #region arm_hide
+                armPart.m_fHealth = fHealth;
+                armPart.m_fCurHealth = fHealth;
+                armPart.m_dicStat.Add("Health", fHealth);
+                armPart.m_dicStat.Add("Range", fRange);
+                armPart.m_dicStat.Add("Attack", fAttack);
+                armPart.m_dicStat.Add("AttackSpeed", fAttackSpeed);
+                if (armPart.m_bAttackAvailable)
+                {
+                    anim = armPart.gameObject.GetComponent<Animator>();
+                    anim.runtimeAnimatorController = m_weapon_anim_controller[(int)armPart.m_weaponType];
+                }
+                #endregion
+
+                arm = obj.transform.Find("Hand_L").gameObject;
+                armPart = arm.GetComponent<Part>();
+                armPart.m_bUse32PixelHand = false;
+                armPart.m_bAttackAvailable = false;
+                armPart.m_weaponType = WEAPON_TYPE.SHIELD;
+                fHealth = 45f;
+                fAttackSpeed = 0f;
+                fAttack = 0f;
+                fRange = 0f;
+                armPart.m_dicStatBuff["Attack"] = 2;
+                armPart.m_dicStatBuff["AttackSpeed"] = 2;
+                #region arm_hide
+                armPart.m_fHealth = fHealth;
+                armPart.m_fCurHealth = fHealth;
+                armPart.m_dicStat.Add("Health", fHealth);
+                armPart.m_dicStat.Add("Range", fRange);
+                armPart.m_dicStat.Add("Attack", fAttack);
+                armPart.m_dicStat.Add("AttackSpeed", fAttackSpeed);
+                if (armPart.m_bAttackAvailable)
+                {
+                    anim = armPart.gameObject.GetComponent<Animator>();
+                    anim.runtimeAnimatorController = m_weapon_anim_controller[(int)armPart.m_weaponType];
+                }
+                #endregion
+
+                leg = obj.transform.Find("Leg").gameObject;
+                legPart = leg.GetComponent<Part>();
+                fHealth = 15f;
+                legPart.m_lstStrBuff.Add("LegBuff");
+                fRandomDodge = 5f;
+                #region leg_hide
+                legPart.m_fHealth = fHealth;
+                legPart.m_fCurHealth = fHealth;
+                legPart.m_dicStat.Add("Health", fHealth);
+                legPart.m_dicStat.Add("Dodge", fRandomDodge);
+                legPart.m_dicStatBuff["Dodge"] = fRandomDodge;
+                #endregion
+                #endregion
+                break;
+
+            case 11:
+                #region Dump the Giant
+                head = obj.transform.Find("Head").gameObject;
+                headPart = head.GetComponent<Part>();
+                fHealth = 20f;
+                fIQ = 130f;
+                headPart.m_lstStrBuff.Add("HeadBuff_2");
+                headPart.m_dicStatBuff["Attack"] = 2;
+                headPart.m_dicStatBuff["AttackSpeed"] = 2;
+                #region head_hide
+                headPart.m_fHealth = fHealth;
+                headPart.m_fCurHealth = fHealth;
+                headPart.m_dicStat.Add("Health", headPart.m_fHealth);
+                headPart.m_dicStat.Add("IQ", fIQ);
+                #endregion
+
+                Body = obj.transform.GetChild(1).gameObject;
+                bodyPart = Body.GetComponent<Part>();
+                strDirectoryName = "11.Dump";
+                fHealth = 40f;
+                fDefense = 5f;
+                #region body_hide
+                bodyPart.m_fHealth = fHealth;
+                bodyPart.m_fCurHealth = fHealth;
+                bodyPart.m_dicStat.Add("Health", fHealth);
+                bodyPart.m_dicStat.Add("Defense", fDefense);
+                Body.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/sheet_body_0", strDirectoryName));
+                #endregion
+
+                Body = obj.transform.GetChild(2).gameObject;
+                bodyPart = Body.GetComponent<Part>();
+                strDirectoryName = "11.Dump";
+                fHealth = 40f;
+                fDefense = 5f;
+                #region body_hide
+                bodyPart.m_fHealth = fHealth;
+                bodyPart.m_fCurHealth = fHealth;
+                bodyPart.m_dicStat.Add("Health", fHealth);
+                bodyPart.m_dicStat.Add("Defense", fDefense);
+                Body.GetComponent<SpriteSheet>().m_sheet_sprite = Resources.LoadAll<Sprite>(string.Format("Sprites/Sheets/Heroes/{0}/sheet_body_1", strDirectoryName));
+                #endregion
+
+                arm = obj.transform.Find("Hand_R").gameObject;
+                armPart = arm.GetComponent<Part>();
+                armPart.m_bUse32PixelHand = true;
+                armPart.m_bAttackAvailable = true;
+                armPart.m_weaponType = WEAPON_TYPE.TWO_HAND;
+                fHealth = 45f;
+                fAttackSpeed = 30f;
+                fAttack = 40f;
+                fRange = 40f;
+                armPart.m_dicStatBuff["Attack"] = 2;
+                armPart.m_dicStatBuff["AttackSpeed"] = 2;
+                #region arm_hide
+                armPart.m_fHealth = fHealth;
+                armPart.m_fCurHealth = fHealth;
+                armPart.m_dicStat.Add("Health", fHealth);
+                armPart.m_dicStat.Add("Range", fRange);
+                armPart.m_dicStat.Add("Attack", fAttack);
+                armPart.m_dicStat.Add("AttackSpeed", fAttackSpeed);
+                if (armPart.m_bAttackAvailable)
+                {
+                    anim = armPart.gameObject.GetComponent<Animator>();
+                    anim.runtimeAnimatorController = m_weapon_anim_controller[(int)armPart.m_weaponType];
+                }
                 #endregion
 
                 leg = obj.transform.Find("Leg").gameObject;

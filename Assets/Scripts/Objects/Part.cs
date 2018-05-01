@@ -146,9 +146,12 @@ public class Part : MonoBehaviour
                         m_headingDirection = DIRECTION.LEFT;
                     }
 
-                    if (m_partType.Equals(PART_TYPE.ARM) && transform.localScale.x < 0)
+                    if (m_partType.Equals(PART_TYPE.ARM))
                     {
-                        m_headingDirection = DIRECTION.RIGHT;
+                        if (!gameObject.name.Equals("Hand_L") && transform.localScale.x < 0)
+                            m_headingDirection = DIRECTION.RIGHT;
+                        else if (gameObject.name.Equals("Hand_L") && transform.localScale.x > 0)
+                            m_headingDirection = DIRECTION.RIGHT;
                     }
 
                 }
@@ -501,7 +504,10 @@ public class Part : MonoBehaviour
                             {
                                 if (m_partType.Equals(PART_TYPE.ARM))
                                 {
-                                    iTween.ScaleTo(gameObject, iTween.Hash("x", 1, "isLocal", true, "time", 0.2f));
+                                    if (!gameObject.name.Equals("Hand_L"))
+                                        iTween.ScaleTo(gameObject, iTween.Hash("x", 1, "isLocal", true, "time", 0.2f));
+                                    else
+                                        iTween.ScaleTo(gameObject, iTween.Hash("x", -1, "isLocal", true, "time", 0.2f));
                                 }
                                 iTween.RotateTo(gameObject, iTween.Hash("z", 270f + m_fHandRotater, "time", 0.2f));
                             }
@@ -520,7 +526,11 @@ public class Part : MonoBehaviour
                             {
                                 if (m_partType.Equals(PART_TYPE.ARM))
                                 {
-                                    iTween.ScaleTo(gameObject, iTween.Hash("x", -1, "isLocal", true, "time", 0.2f));
+                                    if (!gameObject.name.Equals("Hand_L"))
+                                        iTween.ScaleTo(gameObject, iTween.Hash("x", -1, "isLocal", true, "time", 0.2f));
+                                    else
+                                        iTween.ScaleTo(gameObject, iTween.Hash("x", 1, "isLocal", true, "time", 0.2f));
+
                                     iTween.RotateTo(gameObject, iTween.Hash("z", -90f + m_fHandRotater, "time", 0.2f));
                                 }
                                 else
@@ -540,7 +550,10 @@ public class Part : MonoBehaviour
                             {
                                 if (m_partType.Equals(PART_TYPE.ARM))
                                 {
-                                    iTween.ScaleTo(gameObject, iTween.Hash("x", 1, "isLocal", true, "time", 0.2f));
+                                    if (!gameObject.name.Equals("Hand_L"))
+                                        iTween.ScaleTo(gameObject, iTween.Hash("x", 1, "isLocal", true, "time", 0.2f));
+                                    else
+                                        iTween.ScaleTo(gameObject, iTween.Hash("x", -1, "isLocal", true, "time", 0.2f));
                                 }
                                 iTween.RotateTo(gameObject, iTween.Hash("z", 0f + m_fHandRotater, "time", 0.2f));
                             }
@@ -558,7 +571,10 @@ public class Part : MonoBehaviour
                             {
                                 if (m_partType.Equals(PART_TYPE.ARM))
                                 {
-                                    iTween.ScaleTo(gameObject, iTween.Hash("x", 1, "isLocal", true, "time", 0.2f));
+                                    if (!gameObject.name.Equals("Hand_L"))
+                                        iTween.ScaleTo(gameObject, iTween.Hash("x", 1, "isLocal", true, "time", 0.2f));
+                                    else
+                                        iTween.ScaleTo(gameObject, iTween.Hash("x", -1, "isLocal", true, "time", 0.2f));
                                 }
                                 iTween.RotateTo(gameObject, iTween.Hash("z", 180f + m_fHandRotater, "time", 0.2f));
                             }

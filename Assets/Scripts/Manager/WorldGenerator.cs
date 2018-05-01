@@ -45,8 +45,8 @@ public class WorldGenerator : Singleton<WorldGenerator>
         LoadingProgress(0.01f, "초기화 중");
         yield return new WaitForSeconds(0.3f);
 
-        int iCityNum = 20;
-        int iCastleNum = 10;
+        int iCityNum = 10;
+        int iCastleNum = 5;
 
         ObjectFactory objFac = ObjectFactory.getInstance;
         List<int> idxList = new List<int>();
@@ -124,7 +124,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
             if (iRandom < 20)
             {
             }
-            else if (iRandom < 60)
+            else if (iRandom < 80)
                 objIcon = objFac.Create_WorldIcon(grid.GetPosOfIdx(idxList[i]), (int)WORLDICON_TYPE.EMPTY);
             else if (iRandom < 95)
                 objIcon = objFac.Create_WorldIcon(grid.GetPosOfIdx(idxList[i]), (int)WORLDICON_TYPE.FARM);

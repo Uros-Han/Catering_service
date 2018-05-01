@@ -13,7 +13,9 @@ public class Core_World : MonoBehaviour
     bool m_bWasMovingBeforeChgedScene = false;
 
     public int m_iNeedHunger; // 여행에 필요한 허기 
+    public int m_iGridIdx;
 
+    GridMgr grid;
 
     // Use this for initialization
     void Start()
@@ -21,6 +23,7 @@ public class Core_World : MonoBehaviour
         m_listMoveIdx = new List<int>();
         StartCoroutine(Idle());
         StartCoroutine(PartStatusChecker());
+        grid = GridMgr.getInstance;
     }
 
     void Update()
@@ -43,6 +46,8 @@ public class Core_World : MonoBehaviour
                 Destroy(pathTrans.GetChild(i).gameObject);
             }
         }
+
+        m_iGridIdx = grid.GetGridIdx(transform.position);
     }
 
     IEnumerator PartStatusChecker()
@@ -189,7 +194,7 @@ public class Core_World : MonoBehaviour
                         bOverviewOn = true;
                         iTween.MoveTo(GameObject.Find("WorldOverview").transform.GetChild(0).gameObject, iTween.Hash("x", -150f, "time", 0.5f, "isLocal", true, "easetype", "easeInSine"));
 
-                        GameObject.Find("Party").BroadcastMessage("SetDestination", SendMessageOptions.DontRequireReceiver);
+                        //GameObject.Find("Party").BroadcastMessage("SetDestination", SendMessageOptions.DontRequireReceiver);
 
                     }
                     else
@@ -253,22 +258,31 @@ public class Core_World : MonoBehaviour
         if (bWaitLittleMoment)
             yield return new WaitForSeconds(0.5f);
 
+        float fSpeed = 0.15f + GameObject.Find("PartStatus").GetComponent<PartStatus>().m_iSpeed * 0.015f;
+
+        TimeMgr.getInstance.Play();
+
         for (int i = 0; i < m_listMoveIdx.Count; ++i)
         {
-            TimeMgr.getInstance.Play();
-
             Vector3 destPos = grid.GetPosOfIdx(m_listMoveIdx[i]);
-            iTween.MoveTo(gameObject, iTween.Hash("x", destPos.x, "y", destPos.y, "time", 1f, "easetype", "easeInSine"));
 
             if (GameMgr.getInstance.m_iHunger - 20 > 0)
-                GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(GameMgr.getInstance.m_iHunger - 20);
+            {
+                //GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(GameMgr.getInstance.m_iHunger - 20);
+            }
             else
             {
                 GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(0);
                 yield return StartCoroutine(EatMyPart());
             }
 
-            yield return new WaitForSeconds(1f);
+            while (Vector3.Distance(destPos, transform.position) > 0.001f)
+            {
+                transform.Translate(Vector3.Normalize(destPos - transform.position) * fSpeed * Time.deltaTime);
+                yield return null;
+            }
+
+            transform.position = destPos;
 
 
             if (i != m_listMoveIdx.Count - 1)
@@ -276,19 +290,37 @@ public class Core_World : MonoBehaviour
             else
                 m_bWasMovingBeforeChgedScene = false;
 
-            if (CheckLocationBreak())
-                yield break;
+            //if (CheckLocationBreak())
+            //yield break;
+        }
+
+        Transform PartyTrans = GameObject.Find("Party").transform;
+        for (int i = 0; i < PartyTrans.childCount; ++i)
+        {
+            Party party = PartyTrans.GetChild(i).GetComponent<Party>();
+            party.Halt();
         }
 
         ProCamera2D.Instance.AdjustCameraTargetInfluence(ProCamera2D.Instance.CameraTargets[0], 0f, 0f);
         ProCamera2D.Instance.AdjustCameraTargetInfluence(ProCamera2D.Instance.CameraTargets[1], 1f, 1f);
         GameObject.Find("PC2DPanTarget").transform.position = gameObject.transform.position;
 
+        if (CheckEnmeyInThisArea(false, true))
+        {
+            GameObject.Find("Stay").transform.GetChild(0).GetComponent<UISprite>().color = Color.red;
+            GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_bAttackAvailableArea = true;
+        }
+        else
+        {
+            GameObject.Find("Stay").transform.GetChild(0).GetComponent<UISprite>().color = Color.white;
+            GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_bAttackAvailableArea = false;
+        }
+
         world.m_worldTurnState = WORLDTURN_STATE.IDLE;
         StartCoroutine(Idle());
     }
 
-    public bool CheckLocationBreak()
+    public bool CheckEnmeyInThisArea(bool bBeingAttacked = false, bool bCheckOnlyLocation = false)
     {
         int iCoreIdx = GridMgr.getInstance.GetGridIdx(gameObject.transform.position);
         GameObject target = GameObject.Find("Geo").transform.GetChild(iCoreIdx).GetComponent<WorldGeo>().m_worldIcon;
@@ -299,42 +331,55 @@ public class Core_World : MonoBehaviour
         gMgr.m_ilistCurEnemyList.Clear();
         gMgr.m_ilistCurHeroList.Clear();
 
-        gMgr.m_ilistCurEnemyList = objIcon.m_list_enemyType;
-        Transform PartyTrans = GameObject.Find("Party").transform;
-
-        string strDebug = "Enemy Encount : " + objIcon.m_list_enemyType.Count + " enemies in Local, ";
-
-        WorldMapManager world = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>();
-        for (int i = 0; i < PartyTrans.childCount; ++i)
+        string strDebug = "";
+        if (!bBeingAttacked)
         {
-            Party party = PartyTrans.GetChild(i).GetComponent<Party>();
-            if (party.m_iGridIdx == objIcon.m_iGridIdx)
+            gMgr.m_ilistCurEnemyList = objIcon.m_list_enemyType;
+            strDebug = "Enemy Encount : " + objIcon.m_list_enemyType.Count + " enemies in Local, ";
+        }
+
+        if (!bCheckOnlyLocation)
+        {
+            Transform PartyTrans = GameObject.Find("Party").transform;
+            WorldMapManager world = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>();
+            for (int i = 0; i < PartyTrans.childCount; ++i)
             {
-                world.m_encountPartyList.Add(PartyTrans.GetChild(i).gameObject);
-
-                for (int j = 0; j < party.m_list_enemyType.Count; ++j)
+                Party party = PartyTrans.GetChild(i).GetComponent<Party>();
+                if (party.m_iGridIdx == objIcon.m_iGridIdx)
                 {
+                    world.m_encountPartyList.Add(PartyTrans.GetChild(i).gameObject);
 
-                    gMgr.m_ilistCurEnemyList.Add(party.m_list_enemyType[j]);
+                    for (int j = 0; j < party.m_list_enemyType.Count; ++j)
+                    {
 
-                    if (party.m_list_enemyType[j] == (int)ENEMY_TYPE.HERO)
-                        gMgr.m_ilistCurHeroList.Add(party.m_iHero);
+                        gMgr.m_ilistCurEnemyList.Add(party.m_list_enemyType[j]);
+
+                        if (party.m_list_enemyType[j] == (int)ENEMY_TYPE.HERO)
+                            gMgr.m_ilistCurHeroList.Add(party.m_iHero);
+                    }
+
+                    strDebug += party.m_list_enemyType.Count + " enemies in " + party.m_strPartyName + ", ";
+                    Debug.Log(strDebug);
                 }
-
-                strDebug += party.m_list_enemyType.Count + " enemies in " + party.m_strPartyName + ", ";
             }
         }
 
-
         if (gMgr.m_ilistCurEnemyList.Count != 0)
         {
-
-            GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().EncountEnemy();
-            Debug.Log(strDebug);
             return true;
         }
 
         return false;
+    }
+
+    public void EncountEnemy()
+    {
+        GameMgr gMgr = GameMgr.getInstance;
+
+        if (gMgr.m_ilistCurEnemyList.Count != 0)
+        {
+            GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().EncountEnemy();
+        }
     }
 
     void CameBackFromBattleScene()

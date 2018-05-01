@@ -115,7 +115,9 @@ public class FSM_Enemy : FSM
 
         Unit thisUnit = GetComponent<Unit>();
 
-        float fRange = (float)m_AttackAvailableParts[0].GetComponent<Part>().m_dicStat["Range"] / 100f;
+        float fRange = 0.9f;
+        if (m_AttackAvailableParts.Count > 0)
+            fRange = (float)m_AttackAvailableParts[0].GetComponent<Part>().m_dicStat["Range"] / 100f;
 
         do
         {
@@ -140,9 +142,6 @@ public class FSM_Enemy : FSM
             //				Destroy (m_objHealthBar);
             //				Destroy (gameObject);
             //			}
-
-            if (m_AttackAvailableParts.Count.Equals(0))
-                continue;
 
             //// TODO : Attack logic modify
 
@@ -285,7 +284,10 @@ public class FSM_Enemy : FSM
     protected override IEnumerator State_Attack()
     {
         Unit thisUnit = GetComponent<Unit>();
-        float fRange = (float)m_AttackAvailableParts[0].GetComponent<Part>().m_dicStat["Range"] / 100f;
+
+        float fRange = 0.9f;
+        if (m_AttackAvailableParts.Count > 0)
+            fRange = (float)m_AttackAvailableParts[0].GetComponent<Part>().m_dicStat["Range"] / 100f;
 
         do
         {

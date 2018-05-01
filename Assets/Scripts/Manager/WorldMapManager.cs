@@ -17,6 +17,7 @@ public class WorldMapManager : MonoBehaviour
     public List<int> m_iListCastle;
 
     public List<GameObject> m_encountPartyList;
+    public bool m_bAttackAvailableArea;
 
     void Awake()
     {
@@ -179,28 +180,37 @@ public class WorldMapManager : MonoBehaviour
 
     public void Wait()
     {
-        TimeMgr.getInstance.Play();
-
-        Core_World coreWorld = GameObject.Find("Core").GetComponent<Core_World>();
-
-        //		coreWorld.m_listMoveIdx.Clear ();
-
-        if (GameMgr.getInstance.m_iHunger - 20 > 0)
-            GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(GameMgr.getInstance.m_iHunger - 20);
+        if (m_bAttackAvailableArea)
+        {
+            GameObject.Find("Core").GetComponent<Core_World>().CheckEnmeyInThisArea();
+            GameObject.Find("Core").GetComponent<Core_World>().EncountEnemy();
+        }
         else
         {
-            GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(0);
-            StartCoroutine(coreWorld.EatMyPart());
+            TimeMgr.getInstance.Play();
+
+            Core_World coreWorld = GameObject.Find("Core").GetComponent<Core_World>();
+
+            //      coreWorld.m_listMoveIdx.Clear ();
+
+            if (GameMgr.getInstance.m_iHunger - 20 > 0)
+                GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(GameMgr.getInstance.m_iHunger - 20);
+            else
+            {
+                GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(0);
+                StartCoroutine(coreWorld.EatMyPart());
+            }
         }
 
-        StartCoroutine(EnemyCheck());
+
+        //StartCoroutine(EnemyCheck());
     }
 
-    IEnumerator EnemyCheck()
-    {
-        yield return new WaitForSeconds(1f);
+    //IEnumerator EnemyCheck()
+    //{
+    //    yield return new WaitForSeconds(1f);
 
-        GameObject.Find("Core").GetComponent<Core_World>().CheckLocationBreak();
-    }
+    //    GameObject.Find("Core").GetComponent<Core_World>().CheckEnmeyInThisArea();
+    //}
 
 }
