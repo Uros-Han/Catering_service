@@ -334,7 +334,10 @@ public class Core_World : MonoBehaviour
         string strDebug = "";
         if (!bBeingAttacked)
         {
-            gMgr.m_ilistCurEnemyList = objIcon.m_list_enemyType;
+            for (int i = 0; i < objIcon.m_list_enemyType.Count; ++i)
+            {
+                gMgr.m_ilistCurEnemyList.Add(objIcon.m_list_enemyType[i]);
+            }
             strDebug = "Enemy Encount : " + objIcon.m_list_enemyType.Count + " enemies in Local, ";
         }
 

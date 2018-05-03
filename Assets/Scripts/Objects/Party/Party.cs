@@ -160,8 +160,8 @@ public class Party : MonoBehaviour
 
     public void Halt()
     {
-        StopCoroutine(moveCoroutine);
-        Debug.Log("Lat");
+        if (moveCoroutine != null)
+            StopCoroutine(moveCoroutine);
         //m_listMoveIdx.Clear();
     }
 

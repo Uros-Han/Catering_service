@@ -28,12 +28,18 @@ internal sealed class CustomAssetImporter : AssetPostprocessor
     // This event is raised when a texture asset is imported
     private void OnPreprocessTexture()
     {
+        return;
         // I prefix my texture asset's file names with tex, following 3 lines say "if tex is not in the asset file name, do nothing"
         var fileNameIndex = assetPath.LastIndexOf('/');
         var fileName = assetPath.Substring(assetPath.LastIndexOf('/') + 1, assetPath.LastIndexOf('.') - assetPath.LastIndexOf('/') - 1);
 
         // Get the reference to the assetImporter (From the AssetPostProcessor class) and unbox it to a TextureImporter (Which is inherited and extends the AssetImporter with texture specific utilities)
         var importer = assetImporter as TextureImporter;
+
+        if (fileName.Contains("!"))
+        {
+            return;
+        }
 
         // The options for the platform string are "Web", "Standalone", "iPhone", "Android"
         // Unity API provides neat single function settings for the most import settings as SetPlatformTextureSettings
