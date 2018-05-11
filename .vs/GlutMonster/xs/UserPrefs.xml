@@ -1,7 +1,7 @@
 ﻿<Properties StartupConfiguration="{FF076191-5D6F-52A7-9104-DFDF5E824C59}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Manager/WorldGenerator.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Manager/UIFollowTarget.cs">
     <Files>
-      <File FileName="Assets/Scripts/Manager/WorldGenerator.cs" Line="163" Column="13" />
+      <File FileName="Assets/Scripts/Manager/WorldGenerator.cs" Line="312" Column="53" />
       <File FileName="Assets/Scripts/Objects/Battle/Core.cs" Line="37" Column="9" />
       <File FileName="Assets/Scripts/Objects/AI/FSM.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Manager/BattleSceneMgr.cs" Line="1" Column="1" />
@@ -10,10 +10,9 @@
       <File FileName="Assets/Scripts/Objects/World/TopBarUI.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Objects/Battle/Morgue.cs" Line="236" Column="34" />
       <File FileName="Assets/Scripts/Objects/Battle/Unit.cs" Line="21" Column="5" />
-      <File FileName="Assets/Editor/CustomAssetImporter.cs" Line="33" Column="56" />
+      <File FileName="Assets/Editor/CustomAssetImporter.cs" Line="57" Column="115" />
       <File FileName="Assets/Scripts/Objects/AI/FSM_Enemy.cs" Line="36" Column="16" />
       <File FileName="Assets/Scripts/Manager/GridMgr.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="244" Column="21" />
       <File FileName="Assets/Scripts/Objects/World/Core_World.cs" Line="340" Column="14" />
       <File FileName="Assets/Scripts/UI/World/PartStatus.cs" Line="5" Column="24" />
       <File FileName="Assets/Scripts/Objects/Party/Party.cs" Line="164" Column="42" />
@@ -24,9 +23,15 @@
       <File FileName="Assets/Scripts/Manager/TimeMgr.cs" Line="61" Column="1" />
       <File FileName="Assets/Scripts/Manager/MessageButtonManager.cs" Line="10" Column="60" />
       <File FileName="Assets/Scripts/Objects/Party/Caravan.cs" Line="230" Column="28" />
-      <File FileName="Assets/Scripts/Objects/World/WorldOverView.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Manager/AStar.cs" Line="699" Column="14" />
-      <File FileName="Assets/Scripts/Objects/World/WorldGeo.cs" Line="16" Column="6" />
+      <File FileName="Assets/Scripts/Manager/AStar.cs" Line="734" Column="42" />
+      <File FileName="Assets/Scripts/Objects/World/WorldGeo.cs" Line="102" Column="103" />
+      <File FileName="Assets/Scripts/Manager/SaveManager.cs" Line="106" Column="1" />
+      <File FileName="Assets/Scripts/Objects/World/WorldIcon.cs" Line="17" Column="19" />
+      <File FileName="Assets/Scripts/Objects/World/WorldOverView.cs" Line="44" Column="34" />
+      <File FileName="Assets/Scripts/UI/World/PartyStateIndicator.cs" Line="49" Column="47" />
+      <File FileName="Assets/Scripts/Manager/ObjectFactory.cs" Line="430" Column="48" />
+      <File FileName="Assets/Scripts/UI/SpriteText.cs" Line="18" Column="44" />
+      <File FileName="Assets/Scripts/Manager/UIFollowTarget.cs" Line="96" Column="43" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

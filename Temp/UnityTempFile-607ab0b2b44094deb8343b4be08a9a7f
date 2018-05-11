@@ -511,6 +511,7 @@
 'Assets/Scripts/UI/MeatButton.cs'
 'Assets/Scripts/UI/MeatState.cs'
 'Assets/Scripts/UI/MessageBox.cs'
+'Assets/Scripts/UI/SpriteText.cs'
 'Assets/Scripts/UI/WantedReward.cs'
 'Assets/Scripts/UI/World/AleartMsg.cs'
 'Assets/Scripts/UI/World/PartStatus.cs'

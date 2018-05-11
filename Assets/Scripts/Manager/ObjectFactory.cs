@@ -34,6 +34,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
 
     GameObject m_objParty;
     GameObject[] m_objHeroParty;
+    GameObject m_objPartyUI;
 
     public Sprite m_sprite_meat;
     public Sprite[] m_sheet_core;
@@ -71,6 +72,9 @@ public class ObjectFactory : Singleton<ObjectFactory>
     public Sprite[] m_sheet_flag;
 
     public Sprite[] m_sheet_PartyStateIndicator;
+
+    GameObject m_objRoad;
+    public Sprite[] m_sheet_Road;
 
     public Material m_material_diffuse;
     public Material m_material_SpritePaletteLightingMaterial;
@@ -156,8 +160,12 @@ public class ObjectFactory : Singleton<ObjectFactory>
 
         m_objParty = Resources.Load("Prefabs/Objects/Enemies/World/Party") as GameObject;
         m_objHeroParty = Resources.LoadAll<GameObject>("Prefabs/Objects/Enemies/World/Party_Hero");
+        m_objPartyUI = Resources.Load("Prefabs/UI/PartyUI") as GameObject;
 
         m_sheet_PartyStateIndicator = Resources.LoadAll<Sprite>("Sprites/UI/PartyStateIndicator");
+
+        m_objRoad = Resources.Load("Prefabs/Objects/World/Road") as GameObject;
+        m_sheet_Road = Resources.LoadAll<Sprite>("Sprites/Sheets/sheet_world_road");
 
         m_material_diffuse = Resources.Load<Material>("Materials/Diffuse");
         m_material_SpritePaletteLightingMaterial = Resources.Load<Material>("Materials/SpritePaletteLightingMaterial");
@@ -183,6 +191,22 @@ public class ObjectFactory : Singleton<ObjectFactory>
             objProjectile.m_bHeadingToEnemy = true;
         objProjectile.m_fDamage = fDamage;
         objProjectile.m_objTarget = target;
+
+        return obj;
+    }
+
+    /// int iDir
+    /// 0 -  1  - 2
+    /// 3 - (4) - 5
+    /// 6 -  7  - 8
+    public GameObject Create_Road(int iDir, Vector3 pos)
+    {
+        GameObject obj = Instantiate(m_objRoad) as GameObject;
+        obj.transform.parent = GameObject.Find("Roads").transform;
+        obj.transform.position = pos;
+        obj.GetComponent<SpriteRenderer>().sprite = m_sheet_Road[iDir];
+        obj.AddComponent<PolygonCollider2D>();
+        obj.GetComponent<PolygonCollider2D>().isTrigger = true;
 
         return obj;
     }
@@ -246,7 +270,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
         return obj;
     }
 
-    public GameObject Create_WorldGeo(Vector3 pos, int iType = 0)
+    public GameObject Create_WorldGeo(Vector3 pos, int iType = 1)
     {
         GameObject obj = Instantiate(m_WorldGeo) as GameObject;
         obj.transform.parent = GameObject.Find("Geo").transform;
@@ -255,7 +279,10 @@ public class ObjectFactory : Singleton<ObjectFactory>
         switch (iType)
         {
             case (int)WORLD_GEO.GRASS:
+                obj.GetComponent<WorldGeo>().m_geoStatus = WORLD_GEO.GRASS;
+                obj.GetComponent<SpriteRenderer>().sprite = m_sheet_worldGeo[0];
                 break;
+
             case (int)WORLD_GEO.WATER:
                 obj.GetComponent<WorldGeo>().m_geoStatus = WORLD_GEO.WATER;
                 obj.GetComponent<SpriteRenderer>().sprite = m_sheet_worldGeo[1];
@@ -263,6 +290,11 @@ public class ObjectFactory : Singleton<ObjectFactory>
             case (int)WORLD_GEO.CLIFF:
                 obj.GetComponent<WorldGeo>().m_geoStatus = WORLD_GEO.CLIFF;
                 obj.GetComponent<SpriteRenderer>().sprite = m_sheet_worldGeo[2];
+                break;
+
+            case (int)WORLD_GEO.FOREST:
+                obj.GetComponent<WorldGeo>().m_geoStatus = WORLD_GEO.FOREST;
+                obj.GetComponent<SpriteRenderer>().sprite = m_sheet_worldGeo[3];
                 break;
         }
 
@@ -388,6 +420,16 @@ public class ObjectFactory : Singleton<ObjectFactory>
         else
             obj.transform.GetChild(0).GetComponent<DPSpritePalette>().paletteTexture = m_texture_skin_palette;
         //		parent.GetComponent<SpriteRenderer> ().enabled = false;
+
+        return obj;
+    }
+
+    public GameObject Create_PartyUI(Transform ownerTrans)
+    {
+        GameObject obj = Instantiate(m_objPartyUI) as GameObject;
+        obj.transform.parent = GameObject.Find("PartyUI").transform;
+        obj.transform.GetComponent<UIFollowTarget>().target = ownerTrans;
+        obj.transform.localScale = Vector3.one;
 
         return obj;
     }

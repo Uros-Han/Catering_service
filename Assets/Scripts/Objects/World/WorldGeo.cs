@@ -7,6 +7,7 @@ public class WorldGeo : MonoBehaviour
     public WORLD_GEO m_geoStatus;
     public GameObject m_worldIcon;
     public bool m_bPolluted;
+    public bool m_bRoad;
 
     //public bool bIsThisIsland = false;
 
@@ -112,5 +113,88 @@ public class WorldGeo : MonoBehaviour
         }
 
         return iSurLand;
+    }
+
+    public void CreateRoad(int iTargetIdx)
+    {
+        /// int iDir
+        /// 0 -  1  - 2
+        /// 3 - (4) - 5
+        /// 6 -  7  - 8
+        /// 
+
+        GridMgr grid = GridMgr.getInstance;
+        int iGridIdx = grid.GetGridIdx(transform.position);
+        int m_iTileCountX = grid.m_iXcount;
+        int m_iTileCountY = grid.m_iYcount;
+        Transform geoTrans = GameObject.Find("Geo").transform;
+        ObjectFactory objFac = ObjectFactory.getInstance;
+
+        // 위
+        if (iGridIdx >= m_iTileCountX // up check
+            && iTargetIdx == iGridIdx - m_iTileCountX)
+        {
+            objFac.Create_Road(1, transform.position);
+        }
+
+        // 오위
+        else if (iGridIdx >= m_iTileCountX // up check
+            && (iGridIdx + 1) % m_iTileCountX != 0 // right check
+            && iTargetIdx == iGridIdx - m_iTileCountX + 1)
+        {
+            objFac.Create_Road(2, transform.position);
+        }
+
+        // 오
+        else if ((iGridIdx + 1) % m_iTileCountX != 0 // right check
+            && iTargetIdx == iGridIdx + 1)
+        {
+            objFac.Create_Road(5, transform.position);
+        }
+
+        // 오아
+        else if (iGridIdx < m_iTileCountX * m_iTileCountY - m_iTileCountX // down check
+            && (iGridIdx + 1) % m_iTileCountX != 0 // right check
+            && iTargetIdx == iGridIdx + m_iTileCountX + 1)
+        {
+            objFac.Create_Road(8, transform.position);
+        }
+
+        // 아
+        else if (iGridIdx < m_iTileCountX * m_iTileCountY - m_iTileCountX // down check
+            && iTargetIdx == iGridIdx + m_iTileCountX)
+        {
+            objFac.Create_Road(7, transform.position);
+        }
+
+        // 왼아
+        else if (iGridIdx % m_iTileCountX != 0 // left check
+            && iGridIdx < m_iTileCountX * m_iTileCountY - m_iTileCountX // down check
+            && iTargetIdx == iGridIdx + m_iTileCountX - 1)
+        {
+            objFac.Create_Road(6, transform.position);
+        }
+
+        // 왼
+        else if (iGridIdx % m_iTileCountX != 0 // left check
+            && iTargetIdx == iGridIdx - 1)
+        {
+            objFac.Create_Road(3, transform.position);
+        }
+
+        // 왼위
+        else if (iGridIdx >= m_iTileCountX // up check
+            && iGridIdx % m_iTileCountX != 0 // left check
+            && iTargetIdx == iGridIdx - m_iTileCountX - 1)
+        {
+            objFac.Create_Road(0, transform.position);
+        }
+
+        else
+        {
+            Debug.LogError("Unknown Index");
+        }
+
+        m_bRoad = true;
     }
 }

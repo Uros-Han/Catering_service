@@ -148,9 +148,13 @@ Party_Caravan,Caravan,상단
 WORLD_GEO,,
 WORLD_GEO_NAME,,
 Geo_Grass_name,Grass,평원
+Geo_Forest_name,Forest,숲
+Geo_Road_name,Road,길
 ,,
 WORLD_GEO_DESC,,
 Geo_Grass_desc,Grass_Description,드넓은 초원지대입니다. 전투 시 특별한 영향을 주지 않습니다.
+Geo_Forest_desc,Forest_Description,나무가 우거진 울창한 숲입니다. 원거리 무기의 정확도가 낮아집니다.
+,,
 ,,
 ,,
 WORLD_ICON,,

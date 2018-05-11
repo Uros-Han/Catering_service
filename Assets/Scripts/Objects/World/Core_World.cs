@@ -258,7 +258,10 @@ public class Core_World : MonoBehaviour
         if (bWaitLittleMoment)
             yield return new WaitForSeconds(0.5f);
 
+        Transform geoTrans = GameObject.Find("Geo").transform;
+        float fSpeedMultiplier = 0.06f;
         float fSpeed = 0.15f + GameObject.Find("PartStatus").GetComponent<PartStatus>().m_iSpeed * 0.015f;
+        float fSpeedAdjuster = 0f;
 
         TimeMgr.getInstance.Play();
 
@@ -278,7 +281,21 @@ public class Core_World : MonoBehaviour
 
             while (Vector3.Distance(destPos, transform.position) > 0.001f)
             {
-                transform.Translate(Vector3.Normalize(destPos - transform.position) * fSpeed * Time.deltaTime);
+                fSpeedAdjuster = 0f;
+                WorldGeo geo = geoTrans.GetChild(m_iGridIdx).GetComponent<WorldGeo>();
+                if (geo.m_geoStatus.Equals(WORLD_GEO.FOREST))
+                    fSpeedAdjuster -= fSpeedMultiplier;
+
+                if (isOnPath())
+                {
+                    fSpeedAdjuster += fSpeedMultiplier;
+                    GameObject.Find("Speed").transform.GetChild(2).GetComponent<UILabel>().color = Color.red;
+                }
+                else
+                    GameObject.Find("Speed").transform.GetChild(2).GetComponent<UILabel>().color = Color.black;
+
+                transform.Translate(Vector3.Normalize(destPos - transform.position) * (fSpeed + fSpeedAdjuster) * Time.deltaTime);
+
                 yield return null;
             }
 
@@ -413,6 +430,20 @@ public class Core_World : MonoBehaviour
 
         ProCamera2D.Instance.OffsetX = 0f;
         ProCamera2D.Instance.OffsetY = 0f;
+    }
+
+    bool isOnPath()
+    {
+        RaycastHit2D[] hit = Physics2D.RaycastAll(transform.position + new Vector3(0, 0, 1f), Vector3.forward); //edit in your raycast settings
+        for (int i = 0; i < hit.Length; ++i)
+        {
+            if (hit[i] && hit[i].transform.gameObject.name.Equals("Road(Clone)"))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     void DrawPath()

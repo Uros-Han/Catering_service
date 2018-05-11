@@ -45,13 +45,25 @@ public class WorldOverView : MonoBehaviour
                 strGeoDescKey = "Geo_Grass_desc";
                 break;
 
+            case WORLD_GEO.FOREST:
+                strGeoNameKey = "Geo_Forest_name";
+                strGeoDescKey = "Geo_Forest_desc";
+                break;
+
             default:
                 Debug.LogError("Unknown WORLD_GEO");
                 break;
         }
 
+
         transform.Find("GeoInfo").Find("Name").GetComponent<UILabel>().text = Localization.Get(strGeoNameKey);
         transform.Find("GeoInfo").Find("Desc").GetComponent<UILabel>().text = Localization.Get(strGeoDescKey);
+
+
+        if (m_selectedWorldGeo.m_bRoad)
+        {
+            transform.Find("GeoInfo").Find("Name").GetComponent<UILabel>().text += "(" + Localization.Get("Geo_Road_name") + ")";
+        }
 
         #endregion
 

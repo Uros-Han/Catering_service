@@ -606,7 +606,7 @@ public class AStar : Singleton<AStar>
                 && !geoTransform.GetChild(ParentNode.iIndex - m_iTileCountX).GetComponent<WorldGeo>().m_geoStatus.Equals(WORLD_GEO.WATER)
                 && CheckList(ParentNode.iIndex - m_iTileCountX))
             {
-                objNode = CreateNode(ParentNode, ParentNode.iIndex - m_iTileCountX, (int)DIR.SEQU);
+                objNode = CreateNode_World(ParentNode, ParentNode.iIndex - m_iTileCountX, (int)DIR.SEQU, geoTransform.GetChild(ParentNode.iIndex - m_iTileCountX).GetComponent<WorldGeo>());
                 //				if (objNode.fGCost < fStartGCost)
                 m_OpenList.Add(objNode);
 
@@ -618,7 +618,7 @@ public class AStar : Singleton<AStar>
                 && !geoTransform.GetChild(ParentNode.iIndex - m_iTileCountX + 1).GetComponent<WorldGeo>().m_geoStatus.Equals(WORLD_GEO.WATER)
                 && CheckList(ParentNode.iIndex - m_iTileCountX + 1))
             {
-                objNode = CreateNode(ParentNode, ParentNode.iIndex - m_iTileCountX + 1, (int)DIR.DAEGAK);
+                objNode = CreateNode_World(ParentNode, ParentNode.iIndex - m_iTileCountX + 1, (int)DIR.DAEGAK, geoTransform.GetChild(ParentNode.iIndex - m_iTileCountX + 1).GetComponent<WorldGeo>());
                 //				if (objNode.fGCost < fStartGCost)
                 m_OpenList.Add(objNode);
                 //
@@ -630,7 +630,7 @@ public class AStar : Singleton<AStar>
                 && !geoTransform.GetChild(ParentNode.iIndex + 1).GetComponent<WorldGeo>().m_geoStatus.Equals(WORLD_GEO.WATER)
                 && CheckList(ParentNode.iIndex + 1))
             {
-                objNode = CreateNode(ParentNode, ParentNode.iIndex + 1, (int)DIR.SEQU);
+                objNode = CreateNode_World(ParentNode, ParentNode.iIndex + 1, (int)DIR.SEQU, geoTransform.GetChild(ParentNode.iIndex + 1).GetComponent<WorldGeo>());
                 //				if (objNode.fGCost < fStartGCost)
                 m_OpenList.Add(objNode);
 
@@ -643,7 +643,7 @@ public class AStar : Singleton<AStar>
                 && !geoTransform.GetChild(ParentNode.iIndex + 1 + m_iTileCountX).GetComponent<WorldGeo>().m_geoStatus.Equals(WORLD_GEO.WATER)
                 && CheckList(ParentNode.iIndex + 1 + m_iTileCountX))
             {
-                objNode = CreateNode(ParentNode, ParentNode.iIndex + m_iTileCountX + 1, (int)DIR.DAEGAK);
+                objNode = CreateNode_World(ParentNode, ParentNode.iIndex + m_iTileCountX + 1, (int)DIR.DAEGAK, geoTransform.GetChild(ParentNode.iIndex + 1 + m_iTileCountX).GetComponent<WorldGeo>());
                 //				if (objNode.fGCost < fStartGCost)
                 m_OpenList.Add(objNode);
                 //
@@ -655,7 +655,7 @@ public class AStar : Singleton<AStar>
                 && !geoTransform.GetChild(ParentNode.iIndex + m_iTileCountX).GetComponent<WorldGeo>().m_geoStatus.Equals(WORLD_GEO.WATER)
                 && CheckList(ParentNode.iIndex + m_iTileCountX))
             {
-                objNode = CreateNode(ParentNode, ParentNode.iIndex + m_iTileCountX, (int)DIR.SEQU);
+                objNode = CreateNode_World(ParentNode, ParentNode.iIndex + m_iTileCountX, (int)DIR.SEQU, geoTransform.GetChild(ParentNode.iIndex + m_iTileCountX).GetComponent<WorldGeo>());
                 //				if (objNode.fGCost < fStartGCost)
                 m_OpenList.Add(objNode);
 
@@ -668,7 +668,7 @@ public class AStar : Singleton<AStar>
                 && !geoTransform.GetChild(ParentNode.iIndex + m_iTileCountX - 1).GetComponent<WorldGeo>().m_geoStatus.Equals(WORLD_GEO.WATER)
                 && CheckList(ParentNode.iIndex + m_iTileCountX - 1))
             {
-                objNode = CreateNode(ParentNode, ParentNode.iIndex + m_iTileCountX - 1, (int)DIR.DAEGAK);
+                objNode = CreateNode_World(ParentNode, ParentNode.iIndex + m_iTileCountX - 1, (int)DIR.DAEGAK, geoTransform.GetChild(ParentNode.iIndex + m_iTileCountX - 1).GetComponent<WorldGeo>());
                 //				if (objNode.fGCost < fStartGCost)
                 m_OpenList.Add(objNode);
                 //
@@ -680,7 +680,7 @@ public class AStar : Singleton<AStar>
                 && !geoTransform.GetChild(ParentNode.iIndex - 1).GetComponent<WorldGeo>().m_geoStatus.Equals(WORLD_GEO.WATER)
                 && CheckList(ParentNode.iIndex - 1))
             {
-                objNode = CreateNode(ParentNode, ParentNode.iIndex - 1, (int)DIR.SEQU);
+                objNode = CreateNode_World(ParentNode, ParentNode.iIndex - 1, (int)DIR.SEQU, geoTransform.GetChild(ParentNode.iIndex - 1).GetComponent<WorldGeo>());
                 //				if (objNode.fGCost < fStartGCost)
                 m_OpenList.Add(objNode);
 
@@ -693,7 +693,7 @@ public class AStar : Singleton<AStar>
                 && !geoTransform.GetChild(ParentNode.iIndex - 1 - m_iTileCountX).GetComponent<WorldGeo>().m_geoStatus.Equals(WORLD_GEO.WATER)
                 && CheckList(ParentNode.iIndex - 1 - m_iTileCountX))
             {
-                objNode = CreateNode(ParentNode, ParentNode.iIndex - m_iTileCountX - 1, (int)DIR.DAEGAK);
+                objNode = CreateNode_World(ParentNode, ParentNode.iIndex - m_iTileCountX - 1, (int)DIR.DAEGAK, geoTransform.GetChild(ParentNode.iIndex - 1 - m_iTileCountX).GetComponent<WorldGeo>());
                 //				if (objNode.fGCost < fStartGCost)
                 m_OpenList.Add(objNode);
             }
@@ -739,6 +739,41 @@ public class AStar : Singleton<AStar>
                 break;
             }
         }
+    }
+
+    Node CreateNode_World(Node pParent, int iIndex, int iDir, WorldGeo geo)
+    {
+        Node pNode = new Node();
+        pNode.ParentNode = pParent;
+        pNode.iIndex = iIndex;
+
+        float fCost = 0.0f;
+
+        if (iDir % 2 == 0)
+            fCost = 0.1f;
+        else
+            fCost = 0.1414f;
+
+        float fSpeedAdjuster = fCost * 4 / 10f; // 0.6 -> default speed, 0.06 is forest&road speed adjuster so 0.6 : 0.015 -> 0.4 per of default speed.
+
+        switch (geo.m_geoStatus)
+        {
+            case WORLD_GEO.GRASS:
+                break;
+
+            case WORLD_GEO.FOREST:
+                fCost += fSpeedAdjuster;
+                break;
+        }
+
+        if (geo.m_bRoad)
+            fCost -= fSpeedAdjuster;
+
+        pNode.fGCost = fCost;
+        pNode.fHCost = GetDisCost(m_iEndIndex, iIndex);
+        pNode.fFCost = pNode.fGCost + pNode.fHCost;
+
+        return pNode;
     }
 
     //	GameObject FindObjInList(int iIdx, List<GameObject> objList)

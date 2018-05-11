@@ -46,10 +46,6 @@ public class WorldGenerator : Singleton<WorldGenerator>
         LoadingProgress(0.01f, "초기화 중");
         yield return new WaitForSeconds(0.3f);
 
-        int iVilNum = 20;
-        int iCtyNum = 10;
-        int iCastleNum = 5;
-
         ObjectFactory objFac = ObjectFactory.getInstance;
         List<int> idxList = new List<int>();
 
@@ -287,6 +283,40 @@ public class WorldGenerator : Singleton<WorldGenerator>
         //    }
         //}
 
+
+        WorldMapManager worldMapManager = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>();
+        for (int i = 0; i < worldMapManager.m_iListCity.Count / 3; ++i)
+        {
+
+            int iTargetIdx = worldMapManager.m_iListCity[i + worldMapManager.m_iListCity.Count / 2];
+            if (Vector3.Distance(m_geoTrans.GetChild(iTargetIdx).transform.position, m_geoTrans.GetChild(i).transform.position) > 10f)
+                continue;
+
+            List<int> iRoadList = AStar.getInstance.AStarStart_World(worldMapManager.m_iListCity[i], iTargetIdx);
+            if (iRoadList.Count == 0)
+                continue;
+
+            iRoadList.Insert(0, worldMapManager.m_iListCity[i]);
+
+            for (int j = 0; j < iRoadList.Count; ++j)
+            {
+                WorldGeo wg = m_geoTrans.GetChild(iRoadList[j]).GetComponent<WorldGeo>();
+
+                if (j == 0)
+                {
+                    wg.CreateRoad(iRoadList[j + 1]);
+                }
+                else if (j != iRoadList.Count - 1)
+                {
+                    wg.CreateRoad(iRoadList[j - 1]);
+                    wg.CreateRoad(iRoadList[j + 1]);
+                }
+                else
+                {
+                    wg.CreateRoad(iRoadList[j - 1]);
+                }
+            }
+        }
 
         for (int i = 0; i < icons.childCount; ++i)
         {
