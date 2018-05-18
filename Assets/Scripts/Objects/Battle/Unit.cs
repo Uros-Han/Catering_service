@@ -7,6 +7,8 @@ public class Unit : MonoBehaviour
 
     public float m_fHealth;
     public float m_fCurHealth;
+    public float m_fMorale;
+    public float m_fCurMorale;
 
     public float m_fDefense;
 
@@ -26,12 +28,17 @@ public class Unit : MonoBehaviour
 
         m_fDefense = transform.Find("Body").GetComponent<Part>().m_dicStat["Defense"];
 
-        m_fHealth = transform.Find("Body").GetComponent<Part>().m_fHealth;
+        m_fHealth = transform.Find("Body").GetComponent<Part>().m_dicStat["Health"];
 
         m_fCurHealth = m_fHealth;
+        m_fMorale = m_fHealth;
+        m_fCurMorale = m_fMorale;
 
         StartCoroutine(FlipCheck());
         StartCoroutine(layerOrderHandler());
+
+        if (m_enemyType.Equals(ENEMY_TYPE.HERO))
+            ObjectFactory.getInstance.Create_HeroAura(gameObject);
     }
 
     public void Death()

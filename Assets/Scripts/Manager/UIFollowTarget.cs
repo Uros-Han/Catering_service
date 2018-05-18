@@ -90,6 +90,12 @@ public class UIFollowTarget : MonoBehaviour
             return;
         }
 
+        if (gameCamera == null)
+            gameCamera = Camera.main;
+
+        if (uiCamera == null)
+            uiCamera = UICamera.mainCamera;
+
         Vector3 pos = gameCamera.WorldToViewportPoint(target.position);
 
         // Determine the visibility and the target alpha

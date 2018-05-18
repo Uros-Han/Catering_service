@@ -8,7 +8,7 @@ public class Part : MonoBehaviour
 
     public PART_TYPE m_partType;
 
-    public float m_fHealth; // Health
+    //public float m_fHealth; // Health
     public float m_fCurHealth;
 
     public bool m_bAttackAvailable; //Can hit enemy?
@@ -95,7 +95,7 @@ public class Part : MonoBehaviour
             m_bLoadedPart = true;
 
             gameObject.AddComponent<FSM_Freindly>();
-            m_fHealth = m_dicStat["Health"];
+            //m_fHealth = m_dicStat["Health"];
 
             if (m_lstPartBuffed == null)
             {
@@ -237,7 +237,7 @@ public class Part : MonoBehaviour
         }
         else
         {
-            m_fCurHealth = m_fHealth;
+            //m_fCurHealth = m_fHealth;
             m_iSaveChildIdx = GetChildIdx();
 
             if (GetComponent<DPPaletteCombiner>() != null)
@@ -306,8 +306,8 @@ public class Part : MonoBehaviour
         ObjectFactory.getInstance.Create_DamageUI(GameObject.Find("Core").gameObject, 1f, false);
 
         CorePart.m_fCurHealth += 3f;
-        if (CorePart.m_fCurHealth > CorePart.m_fHealth)
-            CorePart.m_fCurHealth = CorePart.m_fHealth;
+        if (CorePart.m_fCurHealth > CorePart.m_dicStat["Health"] + CorePart.m_dicStatBuff["Health"])
+            CorePart.m_fCurHealth = CorePart.m_dicStat["Health"] + CorePart.m_dicStatBuff["Health"];
 
 
         Destroy(gameObject);
@@ -1009,6 +1009,7 @@ public class Part : MonoBehaviour
 
                 for (int i = 0; i < m_lstStrBuff.Count; ++i)
                 {
+                    //Buff Range
                     //버프 범위 정하는 곳
                     List<int> buffIdx = new List<int>();
 
@@ -1114,7 +1115,7 @@ public class Part : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0) && collider2D.OverlapPoint(mousePosition))
             {
-                if (m_fCurHealth < m_fHealth && CorePart.m_fCurHealth > 1)
+                if (m_fCurHealth < m_dicStat["Health"] && CorePart.m_fCurHealth > 1)
                 {
                     CorePart.m_fCurHealth -= 1;
                     m_fCurHealth += 1;
@@ -1433,15 +1434,15 @@ public class Part : MonoBehaviour
         }
 
 
-        if (m_weaponType.Equals(WEAPON_TYPE.BOW) || m_weaponType.Equals(WEAPON_TYPE.CROSSBOW))
+        if (m_weaponType.Equals(WEAPON_TYPE.BOW) || m_weaponType.Equals(WEAPON_TYPE.CROSSBOW) || m_weaponType.Equals(WEAPON_TYPE.JAVELIN))
         {
             if (transform.parent.name.Equals("Player"))
             {
-                ObjectFactory.getInstance.Create_Arrow(transform.position, GetComponent<FSM_Freindly>().m_target, m_dicStat["Attack"]);
+                ObjectFactory.getInstance.Create_Projectile(transform.position, m_weaponType, GetComponent<FSM_Freindly>().m_target, m_dicStat["Attack"]);
             }
             else
             {
-                ObjectFactory.getInstance.Create_Arrow(transform.position, transform.parent.GetComponent<FSM_Enemy>().m_target, m_dicStat["Attack"]);
+                ObjectFactory.getInstance.Create_Projectile(transform.position, m_weaponType, transform.parent.GetComponent<FSM_Enemy>().m_target, m_dicStat["Attack"]);
             }
         }
         else

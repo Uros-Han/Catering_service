@@ -17,6 +17,9 @@ public class Core_World : MonoBehaviour
 
     GridMgr grid;
 
+    [HideInInspector]
+    public float fPartEatHunger = 30f;
+
     // Use this for initialization
     void Start()
     {
@@ -64,7 +67,7 @@ public class Core_World : MonoBehaviour
         fowUnit.radius = 0.5f + ((float)partStatus.m_iSight * 0.1f);
     }
 
-    public IEnumerator EatMyPart()
+    public IEnumerator EatMyPart(float fGainHunger)
     {
         yield return new WaitForSeconds(0.5f);
 
@@ -108,7 +111,7 @@ public class Core_World : MonoBehaviour
 
         iTween.ColorTo(objTargetPart, iTween.Hash("a", 0f, "time", 0.4f));
 
-        GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(GameMgr.getInstance.m_iHunger + 30);
+        GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(fGainHunger);
 
         StartCoroutine(PartStatusChecker());
     }
@@ -184,7 +187,8 @@ public class Core_World : MonoBehaviour
 
                     if (m_listMoveIdx.Count != 0) // Select WorldIcon
                     {
-                        m_iNeedHunger = m_listMoveIdx.Count * 20;
+                        PartStatus partStatus = GameObject.Find("PartStatus").GetComponent<PartStatus>();
+                        m_iNeedHunger = m_listMoveIdx.Count * (20 + (1 * partStatus.m_iPartCount));
                         GameObject Dest = GameObject.Find("Destination").gameObject;
                         Dest.GetComponent<SpriteRenderer>().enabled = true;
                         Dest.transform.position = grid.GetPosOfIdx(grid.GetGridIdx(vecMouseClickedPos));
@@ -258,28 +262,30 @@ public class Core_World : MonoBehaviour
         if (bWaitLittleMoment)
             yield return new WaitForSeconds(0.5f);
 
+        PartStatus partStatus = GameObject.Find("PartStatus").GetComponent<PartStatus>();
         Transform geoTrans = GameObject.Find("Geo").transform;
         float fSpeedMultiplier = 0.06f;
-        float fSpeed = 0.15f + GameObject.Find("PartStatus").GetComponent<PartStatus>().m_iSpeed * 0.015f;
+        float fSpeed = 0.15f + partStatus.m_iSpeed * 0.015f;
         float fSpeedAdjuster = 0f;
-
-        TimeMgr.getInstance.Play();
 
         for (int i = 0; i < m_listMoveIdx.Count; ++i)
         {
             Vector3 destPos = grid.GetPosOfIdx(m_listMoveIdx[i]);
 
-            if (GameMgr.getInstance.m_iHunger - 20 > 0)
+            TimeMgr.getInstance.Play();
+
+            if (GameMgr.getInstance.m_iHunger - (20 + (1 * partStatus.m_iPartCount)) > 0)
             {
-                //GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(GameMgr.getInstance.m_iHunger - 20);
+                GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(GameMgr.getInstance.m_iHunger - (20 + (1 * partStatus.m_iPartCount)));
             }
             else
             {
+                float fGainHunger = fPartEatHunger + GameMgr.getInstance.m_iHunger - (20 + (1 * partStatus.m_iPartCount));
                 GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(0);
-                yield return StartCoroutine(EatMyPart());
+                yield return StartCoroutine(EatMyPart(fGainHunger));
             }
 
-            while (Vector3.Distance(destPos, transform.position) > 0.001f)
+            while (Vector3.Distance(destPos, transform.position) > 0.01f)
             {
                 fSpeedAdjuster = 0f;
                 WorldGeo geo = geoTrans.GetChild(m_iGridIdx).GetComponent<WorldGeo>();
@@ -289,10 +295,7 @@ public class Core_World : MonoBehaviour
                 if (isOnPath())
                 {
                     fSpeedAdjuster += fSpeedMultiplier;
-                    GameObject.Find("Speed").transform.GetChild(2).GetComponent<UILabel>().color = Color.red;
                 }
-                else
-                    GameObject.Find("Speed").transform.GetChild(2).GetComponent<UILabel>().color = Color.black;
 
                 transform.Translate(Vector3.Normalize(destPos - transform.position) * (fSpeed + fSpeedAdjuster) * Time.deltaTime);
 

@@ -170,7 +170,8 @@ public class WorldMapManager : MonoBehaviour
 
     void WaitCheck()
     {
-        if (GameMgr.getInstance.m_iHunger - 20 <= 0)
+        PartStatus partStatus = GameObject.Find("PartStatus").GetComponent<PartStatus>();
+        if (GameMgr.getInstance.m_iHunger - (20 + (1 * partStatus.m_iPartCount)) <= 0)
         {
             ObjectFactory.getInstance.Create_MessageBox_TwoButton(Localization.Get("Mbox_HungerChecker"), "HungerCheckerWait", "DestroyMessageBox");
         }
@@ -182,8 +183,17 @@ public class WorldMapManager : MonoBehaviour
     {
         if (m_bAttackAvailableArea)
         {
-            GameObject.Find("Core").GetComponent<Core_World>().CheckEnmeyInThisArea();
-            GameObject.Find("Core").GetComponent<Core_World>().EncountEnemy();
+            Core_World core = GameObject.Find("Core").GetComponent<Core_World>();
+            WorldIcon standingIcon = GameObject.Find("Geo").transform.GetChild(core.m_iGridIdx).GetComponent<WorldGeo>().m_worldIcon.GetComponent<WorldIcon>();
+
+            if (standingIcon.m_iconType.Equals((int)WORLDICON_TYPE.VILLAGE) || standingIcon.m_iconType.Equals((int)WORLDICON_TYPE.CITY) || standingIcon.m_iconType.Equals((int)WORLDICON_TYPE.CASTLE))
+            {
+                BattleSceneMgr.getInstance.m_bSiege = true;
+                BattleSceneMgr.getInstance.m_iSiegeWallIdx = standingIcon.m_iWallIdx;
+            }
+
+            core.CheckEnmeyInThisArea();
+            core.EncountEnemy();
         }
         else
         {
@@ -193,12 +203,14 @@ public class WorldMapManager : MonoBehaviour
 
             //      coreWorld.m_listMoveIdx.Clear ();
 
-            if (GameMgr.getInstance.m_iHunger - 20 > 0)
-                GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(GameMgr.getInstance.m_iHunger - 20);
+            PartStatus partStatus = GameObject.Find("PartStatus").GetComponent<PartStatus>();
+            if (GameMgr.getInstance.m_iHunger - (20 + (1 * partStatus.m_iPartCount)) > 0)
+                GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(GameMgr.getInstance.m_iHunger - (20 + (1 * partStatus.m_iPartCount)));
             else
             {
+                float fGainHunger = coreWorld.fPartEatHunger + GameMgr.getInstance.m_iHunger - (20 + (1 * partStatus.m_iPartCount));
                 GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(0);
-                StartCoroutine(coreWorld.EatMyPart());
+                StartCoroutine(coreWorld.EatMyPart(fGainHunger));
             }
         }
 

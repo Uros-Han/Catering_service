@@ -22,6 +22,11 @@ public class BattleSceneSetter : MonoBehaviour
 
         SoundMgr.getInstance.SetAudioSources();
 
+        if (BattleSceneMgr.getInstance.m_bSiege)
+        {
+            GameObject.Find("Player").transform.position = new Vector3(-0.64f, 0f, 0f);
+        }
+
         HealthBarSet();
         InitLight();
     }
@@ -38,6 +43,13 @@ public class BattleSceneSetter : MonoBehaviour
                 ObjectFactory.getInstance.Create_MessageBox_OneButton(Localization.Get("Mbox_BreakedPath"), "DestroyMessageBox");
                 return;
             }
+        }
+
+        if (BattleSceneMgr.getInstance.m_bSiege)
+        {
+            BattleSceneMgr.getInstance.m_bSiege = false;
+
+            GameObject.Find("Player").transform.position = new Vector3(0f, 0f, 0f);
         }
 
         StartCoroutine(ToWorldMap_Coroutine());

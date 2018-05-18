@@ -88,12 +88,31 @@ public class FSM : MonoBehaviour
     }
 
     float fDefenseFactor = 0.06f;
-    protected IEnumerator Attack(GameObject target, float fDamage, bool bEnemy)
+    protected IEnumerator Attack(GameObject target, float fDamage, bool bEnemy, bool bWall = false)
     {
         if (target == null)
             yield break;
+        if (bWall)
+        {
+            Wall wall = target.GetComponent<Wall>();
+            fDamage = fDamage + (Random.Range(-2, 3));
+            float fBlockDmg = (fDamage * ((wall.m_fDefense * fDefenseFactor) / (1 + fDefenseFactor * wall.m_fDefense)));
+            float fDealedDmg = fDamage - fBlockDmg;
 
-        if (bEnemy)
+            wall.HitEffect();
+
+            wall.m_fCurHealth -= fDealedDmg;
+
+            ObjectFactory.getInstance.Create_DamageUI(target, fDamage, true, fBlockDmg);
+            SoundMgr.getInstance.PlaySfx("impact_blade");
+
+            if (wall.m_fCurHealth <= 0)
+            {
+                wall.m_fCurHealth = 0;
+                wall.Destroied();
+            }
+        }
+        else if (bEnemy)
         { /// Attack Enemy
 			Unit targetUnit = target.GetComponent<Unit>();
             fDamage = fDamage + (Random.Range(-2, 3));
@@ -102,7 +121,20 @@ public class FSM : MonoBehaviour
 
             target.GetComponent<FSM_Enemy>().HitEffect();
 
-            targetUnit.m_fCurHealth -= fDealedDmg;
+            if (targetUnit.m_enemyType.Equals(ENEMY_TYPE.HERO))
+            {
+                if (targetUnit.m_fCurMorale > 0f)
+                {
+                    targetUnit.m_fCurHealth -= fDealedDmg * 0.25f;
+                    targetUnit.m_fCurMorale -= fDealedDmg * 0.75f;
+                }
+                else
+                {
+                    targetUnit.m_fCurHealth -= fDealedDmg;
+                }
+            }
+            else
+                targetUnit.m_fCurHealth -= fDealedDmg;
             ObjectFactory.getInstance.Create_DamageUI(target, fDamage, true, fBlockDmg);
             SoundMgr.getInstance.PlaySfx("impact_blade");
             SoundMgr.getInstance.PlaySfx("human_scream");
@@ -138,7 +170,8 @@ public class FSM : MonoBehaviour
             float fDefense = targetPart.m_dicStat["Defense"];
             fDamage = fDamage + (Random.Range(-2, 3));
             float fBlockDmg = (fDamage * ((fDefense * fDefenseFactor) / (1 + fDefenseFactor * fDefense)));
-            float fDealedDmg = fDamage - fBlockDmg;
+            //float fDealedDmg = fDamage - fBlockDmg;
+            float fDealedDmg = 0f;
             bool bCoreDead = false;
 
             if (Random.Range(0, 100) < (int)fDodgePercent && !GameMgr.getInstance.m_bIsTutorial)
@@ -205,22 +238,22 @@ public class FSM : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(0.15f);
+        //yield return new WaitForSeconds(0.15f);
 
-        if (target == null)
-            yield break;
+        //if (target == null)
+        //yield break;
 
-        if (bEnemy)
-        {
-            for (int i = 0; i < target.transform.childCount; ++i)
-            {
-                //				target.transform.GetChild (i).GetComponent<SpriteRenderer> ().color = Color.white;
-            }
-        }
-        else
-        {
-            //			target.GetComponent<SpriteRenderer> ().color = Color.white;
-        }
+        //if (bEnemy)
+        //{
+        //    for (int i = 0; i < target.transform.childCount; ++i)
+        //    {
+        //        //				target.transform.GetChild (i).GetComponent<SpriteRenderer> ().color = Color.white;
+        //    }
+        //}
+        //else
+        //{
+        //    //			target.GetComponent<SpriteRenderer> ().color = Color.white;
+        //}
 
     }
 

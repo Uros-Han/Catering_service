@@ -62,7 +62,7 @@ public class WorldOverView : MonoBehaviour
 
         if (m_selectedWorldGeo.m_bRoad)
         {
-            transform.Find("GeoInfo").Find("Name").GetComponent<UILabel>().text += "(" + Localization.Get("Geo_Road_name") + ")";
+            transform.Find("GeoInfo").Find("Name").GetComponent<UILabel>().text += " (" + Localization.Get("Geo_Road_name") + ")";
         }
 
         #endregion
@@ -156,6 +156,11 @@ public class WorldOverView : MonoBehaviour
         if (m_selectedWorldIcon.m_iconType != (int)WORLDICON_TYPE.EMPTY)
         {
             transform.Find("IconInfo").Find("Desc").GetComponent<UILabel>().text += "\n\n" + Localization.Get("Prosperity") + " : " + ((int)m_selectedWorldIcon.m_fProsperity).ToString() + "\n" + Localization.Get("Population") + " : " + ((int)m_selectedWorldIcon.m_fPopulation).ToString();
+        }
+
+        if (m_selectedWorldIcon.m_objWall != null)
+        {
+            transform.Find("IconInfo").Find("Name").GetComponent<UILabel>().text += " (" + Localization.Get(string.Format("Wall_name_{0}", m_selectedWorldIcon.m_iWallIdx)) + ")";
         }
 
         //+ " " + Localization.Get(string.Format("Icon_{0}_desc_population_{1}", strIconType, iPopulation));

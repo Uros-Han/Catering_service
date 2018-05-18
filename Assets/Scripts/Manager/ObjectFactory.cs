@@ -36,6 +36,8 @@ public class ObjectFactory : Singleton<ObjectFactory>
     GameObject[] m_objHeroParty;
     GameObject m_objPartyUI;
 
+    GameObject m_objHeroAura;
+
     public Sprite m_sprite_meat;
     public Sprite[] m_sheet_core;
 
@@ -73,8 +75,13 @@ public class ObjectFactory : Singleton<ObjectFactory>
 
     public Sprite[] m_sheet_PartyStateIndicator;
 
+    public Sprite[] m_sprites_Projectile;
+
     GameObject m_objRoad;
     public Sprite[] m_sheet_Road;
+
+    GameObject m_objWall;
+    public Sprite[] m_sheet_Wall;
 
     public Material m_material_diffuse;
     public Material m_material_SpritePaletteLightingMaterial;
@@ -166,20 +173,28 @@ public class ObjectFactory : Singleton<ObjectFactory>
 
         m_objRoad = Resources.Load("Prefabs/Objects/World/Road") as GameObject;
         m_sheet_Road = Resources.LoadAll<Sprite>("Sprites/Sheets/sheet_world_road");
+        m_objWall = Resources.Load("Prefabs/Objects/World/Wall") as GameObject;
+        m_sheet_Wall = Resources.LoadAll<Sprite>("Sprites/Sheets/sheet_world_wall");
 
         m_material_diffuse = Resources.Load<Material>("Materials/Diffuse");
         m_material_SpritePaletteLightingMaterial = Resources.Load<Material>("Materials/SpritePaletteLightingMaterial");
 
-        m_weapon_anim_controller = new RuntimeAnimatorController[5];
+        m_weapon_anim_controller = new RuntimeAnimatorController[6];
         m_weapon_anim_controller[0] = Resources.Load<RuntimeAnimatorController>("Animations/OneHand/oneHand");
         m_weapon_anim_controller[1] = Resources.Load<RuntimeAnimatorController>("Animations/TwoHand/twoHand");
         m_weapon_anim_controller[2] = Resources.Load<RuntimeAnimatorController>("Animations/Pole/pole");
-        m_weapon_anim_controller[3] = Resources.Load<RuntimeAnimatorController>("Animations/Bow/bow");
+        m_weapon_anim_controller[3] = Resources.Load<RuntimeAnimatorController>("Animations/Javelin/javelin");
+        m_weapon_anim_controller[4] = Resources.Load<RuntimeAnimatorController>("Animations/Bow/bow");
+        m_weapon_anim_controller[5] = Resources.Load<RuntimeAnimatorController>("Animations/CrossBow/crossBow");
+
+        m_objHeroAura = Resources.Load("Prefabs/Objects/Enemies/HeroAura") as GameObject;
+
+        m_sprites_Projectile = Resources.LoadAll<Sprite>("Sprites/Projectiles");
 
         SoundMgr.getInstance.AudioPoolSetting();
     }
 
-    public GameObject Create_Arrow(Vector3 createPos, GameObject target, float fDamage)
+    public GameObject Create_Projectile(Vector3 createPos, WEAPON_TYPE weaponType, GameObject target, float fDamage)
     {
         GameObject obj = Instantiate(m_objArrow, createPos, Quaternion.AngleAxis(0, Vector3.forward)) as GameObject;
         obj.transform.parent = GameObject.Find("Projectiles").transform;
@@ -189,6 +204,8 @@ public class ObjectFactory : Singleton<ObjectFactory>
             objProjectile.m_bHeadingToEnemy = false;
         else
             objProjectile.m_bHeadingToEnemy = true;
+
+        objProjectile.m_WeaponType = weaponType;
         objProjectile.m_fDamage = fDamage;
         objProjectile.m_objTarget = target;
 
@@ -207,6 +224,27 @@ public class ObjectFactory : Singleton<ObjectFactory>
         obj.GetComponent<SpriteRenderer>().sprite = m_sheet_Road[iDir];
         obj.AddComponent<PolygonCollider2D>();
         obj.GetComponent<PolygonCollider2D>().isTrigger = true;
+
+        return obj;
+    }
+
+    public GameObject Create_Wall(int iWallIdx, Vector3 pos, GameObject objIcon)
+    {
+        GameObject obj = Instantiate(m_objWall) as GameObject;
+        obj.transform.parent = GameObject.Find("Walls").transform;
+        obj.transform.position = pos;
+        obj.GetComponent<SpriteRenderer>().sprite = m_sheet_Wall[iWallIdx];
+        objIcon.GetComponent<WorldIcon>().m_objWall = obj;
+        objIcon.GetComponent<WorldIcon>().m_iWallIdx = iWallIdx;
+
+        return obj;
+    }
+
+    public GameObject Create_HeroAura(GameObject objHero)
+    {
+        GameObject obj = Instantiate(m_objHeroAura) as GameObject;
+        obj.transform.parent = GameObject.Find("Auras").transform;
+        obj.GetComponent<HeroAura>().m_objOwner = objHero;
 
         return obj;
     }
@@ -393,6 +431,8 @@ public class ObjectFactory : Singleton<ObjectFactory>
                     obj.transform.Find("Flag").GetComponent<SpriteRenderer>().sprite = m_sheet_flag[Random.Range(0, m_sheet_flag.Length)];
                     obj.AddComponent<Raider>();
                     obj.GetComponent<Party>().m_iSpeed = GameObject.Find("PartStatus").GetComponent<PartStatus>().m_iSpeed + Random.Range(-2, 2);
+                    if (obj.GetComponent<Party>().m_iSpeed < 0)
+                        obj.GetComponent<Party>().m_iSpeed = 0;
                     break;
             }
         }
@@ -1037,7 +1077,6 @@ public class ObjectFactory : Singleton<ObjectFactory>
         obj = Instantiate(m_objHero[iHeroIdx]) as GameObject;
 
         obj.transform.parent = GameObject.Find("Enemies").transform;
-        obj.transform.localPosition = RandomBornPos(obj);
         obj.GetComponent<Unit>().m_enemyType = ENEMY_TYPE.HERO;
 
         switch (iHeroIdx)
@@ -1046,9 +1085,9 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 #region Wallace
                 GameObject head = obj.transform.Find("Head").gameObject;
                 Part headPart = head.GetComponent<Part>();
-                headPart.m_fHealth = Random.Range(15, 18);
+                fHealth = 20f;
                 headPart.m_fCurHealth = fHealth;
-                headPart.m_dicStat.Add("Health", headPart.m_fHealth);
+                headPart.m_dicStat.Add("Health", fHealth);
                 headPart.m_dicStat.Add("IQ", 100);
                 headPart.m_lstStrBuff.Add("HeadBuff_2");
                 headPart.m_dicStatBuff["Attack"] = 2;
@@ -1057,7 +1096,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 GameObject Upbody = obj.transform.GetChild(1).gameObject;
                 Part UpbodyPart = Upbody.GetComponent<Part>();
                 fHealth = Random.Range(25, 30);
-                UpbodyPart.m_fHealth = fHealth;
+                //UpbodyPart.m_fHealth = fHealth;
                 UpbodyPart.m_fCurHealth = fHealth;
                 UpbodyPart.m_dicStat.Add("Health", fHealth);
                 fHealth = Random.Range(5, 8);
@@ -1066,7 +1105,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 GameObject Downbody = obj.transform.GetChild(2).gameObject;
                 Part DownbodyPart = Downbody.GetComponent<Part>();
                 fHealth = Random.Range(25, 30);
-                DownbodyPart.m_fHealth = fHealth;
+                //DownbodyPart.m_fHealth = fHealth;
                 DownbodyPart.m_fCurHealth = fHealth;
                 DownbodyPart.m_dicStat.Add("Health", fHealth);
                 fHealth = Random.Range(5, 8);
@@ -1082,7 +1121,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_dicStat.Add("Attack", fHealth);
                 armPart.m_dicStat.Add("AttackSpeed", fAttackSpeed);
                 fHealth = Random.Range(15, 18);
-                armPart.m_fHealth = fHealth;
+                //armPart.m_fHealth = fHealth;
                 armPart.m_fCurHealth = fHealth;
                 armPart.m_dicStat.Add("Health", fHealth);
                 armPart.m_weaponType = WEAPON_TYPE.TWO_HAND;
@@ -1094,7 +1133,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 Part legPart = leg.GetComponent<Part>();
                 fHealth = Random.Range(15, 18);
                 float fRandomDodge = Random.Range(5, 7);
-                legPart.m_fHealth = fHealth;
+                //legPart.m_fHealth = fHealth;
                 legPart.m_fCurHealth = fHealth;
                 legPart.m_dicStat.Add("Health", fHealth);
                 legPart.m_dicStat.Add("Dodge", fRandomDodge);
@@ -1107,9 +1146,10 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 #region Robin hood
                 head = obj.transform.Find("Head").gameObject;
                 headPart = head.GetComponent<Part>();
-                headPart.m_fHealth = Random.Range(15, 18);
+                //headPart.m_fHealth = Random.Range(15, 18);
+                fHealth = 20f;
                 headPart.m_fCurHealth = fHealth;
-                headPart.m_dicStat.Add("Health", headPart.m_fHealth);
+                headPart.m_dicStat.Add("Health", fHealth);
                 headPart.m_dicStat.Add("IQ", 100);
                 headPart.m_lstStrBuff.Add("HeadBuff_2");
                 headPart.m_dicStatBuff["Attack"] = 2;
@@ -1118,7 +1158,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 GameObject Body = obj.transform.Find("Body").gameObject;
                 Part bodyPart = Body.GetComponent<Part>();
                 fHealth = Random.Range(25, 30);
-                bodyPart.m_fHealth = fHealth;
+                //bodyPart.m_fHealth = fHealth;
                 bodyPart.m_fCurHealth = fHealth;
                 bodyPart.m_dicStat.Add("Health", fHealth);
                 fHealth = Random.Range(5, 8);
@@ -1133,7 +1173,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_dicStat.Add("Attack", fHealth);
                 armPart.m_dicStat.Add("AttackSpeed", fAttackSpeed);
                 fHealth = Random.Range(15, 18);
-                armPart.m_fHealth = fHealth;
+                //armPart.m_fHealth = fHealth;
                 armPart.m_fCurHealth = fHealth;
                 armPart.m_dicStat.Add("Health", fHealth);
                 armPart.m_weaponType = WEAPON_TYPE.BOW;
@@ -1145,7 +1185,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 legPart = leg.GetComponent<Part>();
                 fHealth = Random.Range(15, 18);
                 fRandomDodge = Random.Range(5, 7);
-                legPart.m_fHealth = fHealth;
+                //legPart.m_fHealth = fHealth;
                 legPart.m_fCurHealth = fHealth;
                 legPart.m_dicStat.Add("Health", fHealth);
                 legPart.m_dicStat.Add("Dodge", fRandomDodge);
@@ -1158,9 +1198,10 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 #region Adam the Leper
                 head = obj.transform.Find("Head").gameObject;
                 headPart = head.GetComponent<Part>();
-                headPart.m_fHealth = Random.Range(15, 18);
+                //headPart.m_fHealth = Random.Range(15, 18);
+                fHealth = 20f;
                 headPart.m_fCurHealth = fHealth;
-                headPart.m_dicStat.Add("Health", headPart.m_fHealth);
+                headPart.m_dicStat.Add("Health", fHealth);
                 headPart.m_dicStat.Add("IQ", 100);
                 headPart.m_lstStrBuff.Add("HeadBuff_2");
                 headPart.m_dicStatBuff["Attack"] = 2;
@@ -1169,7 +1210,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 Body = obj.transform.Find("Body").gameObject;
                 bodyPart = Body.GetComponent<Part>();
                 fHealth = Random.Range(25, 30);
-                bodyPart.m_fHealth = fHealth;
+                //bodyPart.m_fHealth = fHealth;
                 bodyPart.m_fCurHealth = fHealth;
                 bodyPart.m_dicStat.Add("Health", fHealth);
                 fHealth = Random.Range(5, 8);
@@ -1184,7 +1225,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_dicStat.Add("Attack", fHealth);
                 armPart.m_dicStat.Add("AttackSpeed", fAttackSpeed);
                 fHealth = Random.Range(15, 18);
-                armPart.m_fHealth = fHealth;
+                //armPart.m_fHealth = fHealth;
                 armPart.m_fCurHealth = fHealth;
                 armPart.m_dicStat.Add("Health", fHealth);
                 armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
@@ -1200,7 +1241,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_dicStat.Add("Attack", fHealth);
                 armPart.m_dicStat.Add("AttackSpeed", fAttackSpeed);
                 fHealth = Random.Range(15, 18);
-                armPart.m_fHealth = fHealth;
+                //armPart.m_fHealth = fHealth;
                 armPart.m_fCurHealth = fHealth;
                 armPart.m_dicStat.Add("Health", fHealth);
                 armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
@@ -1212,7 +1253,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 legPart = leg.GetComponent<Part>();
                 fHealth = Random.Range(15, 18);
                 fRandomDodge = Random.Range(5, 7);
-                legPart.m_fHealth = fHealth;
+                //legPart.m_fHealth = fHealth;
                 legPart.m_fCurHealth = fHealth;
                 legPart.m_dicStat.Add("Health", fHealth);
                 legPart.m_dicStat.Add("Dodge", fRandomDodge);
@@ -1225,9 +1266,10 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 #region Hank the Hairy
                 head = obj.transform.Find("Head").gameObject;
                 headPart = head.GetComponent<Part>();
-                headPart.m_fHealth = Random.Range(15, 18);
+                //headPart.m_fHealth = Random.Range(15, 18);
+                fHealth = 20f;
                 headPart.m_fCurHealth = fHealth;
-                headPart.m_dicStat.Add("Health", headPart.m_fHealth);
+                headPart.m_dicStat.Add("Health", fHealth);
                 headPart.m_dicStat.Add("IQ", 100);
                 headPart.m_lstStrBuff.Add("HeadBuff_2");
                 headPart.m_dicStatBuff["Attack"] = 2;
@@ -1236,7 +1278,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 Body = obj.transform.Find("Body").gameObject;
                 bodyPart = Body.GetComponent<Part>();
                 fHealth = Random.Range(25, 30);
-                bodyPart.m_fHealth = fHealth;
+                //bodyPart.m_fHealth = fHealth;
                 bodyPart.m_fCurHealth = fHealth;
                 bodyPart.m_dicStat.Add("Health", fHealth);
                 fHealth = Random.Range(5, 8);
@@ -1251,7 +1293,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_dicStat.Add("Attack", fHealth);
                 armPart.m_dicStat.Add("AttackSpeed", fAttackSpeed);
                 fHealth = Random.Range(15, 18);
-                armPart.m_fHealth = fHealth;
+                //armPart.m_fHealth = fHealth;
                 armPart.m_fCurHealth = fHealth;
                 armPart.m_dicStat.Add("Health", fHealth);
                 armPart.m_weaponType = WEAPON_TYPE.TWO_HAND;
@@ -1263,7 +1305,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 legPart = leg.GetComponent<Part>();
                 fHealth = Random.Range(15, 18);
                 fRandomDodge = Random.Range(5, 7);
-                legPart.m_fHealth = fHealth;
+                //legPart.m_fHealth = fHealth;
                 legPart.m_fCurHealth = fHealth;
                 legPart.m_dicStat.Add("Health", fHealth);
                 legPart.m_dicStat.Add("Dodge", fRandomDodge);
@@ -1282,9 +1324,9 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 headPart.m_dicStatBuff["Attack"] = 2;
                 headPart.m_dicStatBuff["AttackSpeed"] = 2;
                 #region head_hide
-                headPart.m_fHealth = fHealth;
+                //headPart.m_fHealth = fHealth;
                 headPart.m_fCurHealth = fHealth;
-                headPart.m_dicStat.Add("Health", headPart.m_fHealth);
+                headPart.m_dicStat.Add("Health", fHealth);
                 headPart.m_dicStat.Add("IQ", fIQ);
                 #endregion
 
@@ -1294,7 +1336,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 fHealth = 40f;
                 fDefense = 5f;
                 #region body_hide
-                bodyPart.m_fHealth = fHealth;
+                //bodyPart.m_fHealth = fHealth;
                 bodyPart.m_fCurHealth = fHealth;
                 bodyPart.m_dicStat.Add("Health", fHealth);
                 bodyPart.m_dicStat.Add("Defense", fDefense);
@@ -1314,7 +1356,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_dicStatBuff["Attack"] = 2;
                 armPart.m_dicStatBuff["AttackSpeed"] = 2;
                 #region arm_hide
-                armPart.m_fHealth = fHealth;
+                //armPart.m_fHealth = fHealth;
                 armPart.m_fCurHealth = fHealth;
                 armPart.m_dicStat.Add("Health", fHealth);
                 armPart.m_dicStat.Add("Range", fRange);
@@ -1333,7 +1375,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 legPart.m_lstStrBuff.Add("LegBuff");
                 fRandomDodge = 5f;
                 #region leg_hide
-                legPart.m_fHealth = fHealth;
+                //legPart.m_fHealth = fHealth;
                 legPart.m_fCurHealth = fHealth;
                 legPart.m_dicStat.Add("Health", fHealth);
                 legPart.m_dicStat.Add("Dodge", fRandomDodge);
@@ -1352,9 +1394,9 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 headPart.m_dicStatBuff["Attack"] = 2;
                 headPart.m_dicStatBuff["AttackSpeed"] = 2;
                 #region head_hide
-                headPart.m_fHealth = fHealth;
+                //headPart.m_fHealth = fHealth;
                 headPart.m_fCurHealth = fHealth;
-                headPart.m_dicStat.Add("Health", headPart.m_fHealth);
+                headPart.m_dicStat.Add("Health", fHealth);
                 headPart.m_dicStat.Add("IQ", fIQ);
                 #endregion
 
@@ -1364,7 +1406,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 fHealth = 40f;
                 fDefense = 5f;
                 #region body_hide
-                bodyPart.m_fHealth = fHealth;
+                //bodyPart.m_fHealth = fHealth;
                 bodyPart.m_fCurHealth = fHealth;
                 bodyPart.m_dicStat.Add("Health", fHealth);
                 bodyPart.m_dicStat.Add("Defense", fDefense);
@@ -1384,7 +1426,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_dicStatBuff["Attack"] = 2;
                 armPart.m_dicStatBuff["AttackSpeed"] = 2;
                 #region arm_hide
-                armPart.m_fHealth = fHealth;
+                //armPart.m_fHealth = fHealth;
                 armPart.m_fCurHealth = fHealth;
                 armPart.m_dicStat.Add("Health", fHealth);
                 armPart.m_dicStat.Add("Range", fRange);
@@ -1410,7 +1452,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_dicStatBuff["Attack"] = 2;
                 armPart.m_dicStatBuff["AttackSpeed"] = 2;
                 #region arm_hide
-                armPart.m_fHealth = fHealth;
+                //armPart.m_fHealth = fHealth;
                 armPart.m_fCurHealth = fHealth;
                 armPart.m_dicStat.Add("Health", fHealth);
                 armPart.m_dicStat.Add("Range", fRange);
@@ -1429,7 +1471,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 legPart.m_lstStrBuff.Add("LegBuff");
                 fRandomDodge = 5f;
                 #region leg_hide
-                legPart.m_fHealth = fHealth;
+                //legPart.m_fHealth = fHealth;
                 legPart.m_fCurHealth = fHealth;
                 legPart.m_dicStat.Add("Health", fHealth);
                 legPart.m_dicStat.Add("Dodge", fRandomDodge);
@@ -1448,9 +1490,9 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 headPart.m_dicStatBuff["Attack"] = 2;
                 headPart.m_dicStatBuff["AttackSpeed"] = 2;
                 #region head_hide
-                headPart.m_fHealth = fHealth;
+                //headPart.m_fHealth = fHealth;
                 headPart.m_fCurHealth = fHealth;
-                headPart.m_dicStat.Add("Health", headPart.m_fHealth);
+                headPart.m_dicStat.Add("Health", fHealth);
                 headPart.m_dicStat.Add("IQ", fIQ);
                 #endregion
 
@@ -1460,7 +1502,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 fHealth = 40f;
                 fDefense = 5f;
                 #region body_hide
-                bodyPart.m_fHealth = fHealth;
+                //bodyPart.m_fHealth = fHealth;
                 bodyPart.m_fCurHealth = fHealth;
                 bodyPart.m_dicStat.Add("Health", fHealth);
                 bodyPart.m_dicStat.Add("Defense", fDefense);
@@ -1473,7 +1515,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 legPart.m_lstStrBuff.Add("LegBuff");
                 fRandomDodge = 5f;
                 #region leg_hide
-                legPart.m_fHealth = fHealth;
+                //legPart.m_fHealth = fHealth;
                 legPart.m_fCurHealth = fHealth;
                 legPart.m_dicStat.Add("Health", fHealth);
                 legPart.m_dicStat.Add("Dodge", fRandomDodge);
@@ -1492,9 +1534,9 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 headPart.m_dicStatBuff["Attack"] = 2;
                 headPart.m_dicStatBuff["AttackSpeed"] = 2;
                 #region head_hide
-                headPart.m_fHealth = fHealth;
+                //headPart.m_fHealth = fHealth;
                 headPart.m_fCurHealth = fHealth;
-                headPart.m_dicStat.Add("Health", headPart.m_fHealth);
+                headPart.m_dicStat.Add("Health", fHealth);
                 headPart.m_dicStat.Add("IQ", fIQ);
                 #endregion
 
@@ -1504,7 +1546,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 fHealth = 40f;
                 fDefense = 5f;
                 #region body_hide
-                bodyPart.m_fHealth = fHealth;
+                //bodyPart.m_fHealth = fHealth;
                 bodyPart.m_fCurHealth = fHealth;
                 bodyPart.m_dicStat.Add("Health", fHealth);
                 bodyPart.m_dicStat.Add("Defense", fDefense);
@@ -1517,7 +1559,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 legPart.m_lstStrBuff.Add("LegBuff");
                 fRandomDodge = 5f;
                 #region leg_hide
-                legPart.m_fHealth = fHealth;
+                //legPart.m_fHealth = fHealth;
                 legPart.m_fCurHealth = fHealth;
                 legPart.m_dicStat.Add("Health", fHealth);
                 legPart.m_dicStat.Add("Dodge", fRandomDodge);
@@ -1536,9 +1578,9 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 headPart.m_dicStatBuff["Attack"] = 2;
                 headPart.m_dicStatBuff["AttackSpeed"] = 2;
                 #region head_hide
-                headPart.m_fHealth = fHealth;
+                //headPart.m_fHealth = fHealth;
                 headPart.m_fCurHealth = fHealth;
-                headPart.m_dicStat.Add("Health", headPart.m_fHealth);
+                headPart.m_dicStat.Add("Health", fHealth);
                 headPart.m_dicStat.Add("IQ", fIQ);
                 #endregion
 
@@ -1547,8 +1589,10 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 strDirectoryName = "8.Rolf";
                 fHealth = 40f;
                 fDefense = 5f;
+                bodyPart.m_lstStrBuff.Add("LegBuff");
+                bodyPart.m_dicStatBuff["Health"] = 20;
                 #region body_hide
-                bodyPart.m_fHealth = fHealth;
+                //bodyPart.m_fHealth = fHealth;
                 bodyPart.m_fCurHealth = fHealth;
                 bodyPart.m_dicStat.Add("Health", fHealth);
                 bodyPart.m_dicStat.Add("Defense", fDefense);
@@ -1567,7 +1611,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_dicStatBuff["Attack"] = 2;
                 armPart.m_dicStatBuff["AttackSpeed"] = 2;
                 #region arm_hide
-                armPart.m_fHealth = fHealth;
+                //armPart.m_fHealth = fHealth;
                 armPart.m_fCurHealth = fHealth;
                 armPart.m_dicStat.Add("Health", fHealth);
                 armPart.m_dicStat.Add("Range", fRange);
@@ -1592,7 +1636,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_dicStatBuff["Attack"] = 2;
                 armPart.m_dicStatBuff["AttackSpeed"] = 2;
                 #region arm_hide
-                armPart.m_fHealth = fHealth;
+                //armPart.m_fHealth = fHealth;
                 armPart.m_fCurHealth = fHealth;
                 armPart.m_dicStat.Add("Health", fHealth);
                 armPart.m_dicStat.Add("Range", fRange);
@@ -1611,7 +1655,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 legPart.m_lstStrBuff.Add("LegBuff");
                 fRandomDodge = 5f;
                 #region leg_hide
-                legPart.m_fHealth = fHealth;
+                //legPart.m_fHealth = fHealth;
                 legPart.m_fCurHealth = fHealth;
                 legPart.m_dicStat.Add("Health", fHealth);
                 legPart.m_dicStat.Add("Dodge", fRandomDodge);
@@ -1630,9 +1674,9 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 headPart.m_dicStatBuff["Attack"] = 2;
                 headPart.m_dicStatBuff["AttackSpeed"] = 2;
                 #region head_hide
-                headPart.m_fHealth = fHealth;
+                //headPart.m_fHealth = fHealth;
                 headPart.m_fCurHealth = fHealth;
-                headPart.m_dicStat.Add("Health", headPart.m_fHealth);
+                headPart.m_dicStat.Add("Health", fHealth);
                 headPart.m_dicStat.Add("IQ", fIQ);
                 #endregion
 
@@ -1642,7 +1686,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 fHealth = 40f;
                 fDefense = 5f;
                 #region body_hide
-                bodyPart.m_fHealth = fHealth;
+                //bodyPart.m_fHealth = fHealth;
                 bodyPart.m_fCurHealth = fHealth;
                 bodyPart.m_dicStat.Add("Health", fHealth);
                 bodyPart.m_dicStat.Add("Defense", fDefense);
@@ -1661,7 +1705,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_dicStatBuff["Attack"] = 2;
                 armPart.m_dicStatBuff["AttackSpeed"] = 2;
                 #region arm_hide
-                armPart.m_fHealth = fHealth;
+                //armPart.m_fHealth = fHealth;
                 armPart.m_fCurHealth = fHealth;
                 armPart.m_dicStat.Add("Health", fHealth);
                 armPart.m_dicStat.Add("Range", fRange);
@@ -1686,7 +1730,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_dicStatBuff["Attack"] = 2;
                 armPart.m_dicStatBuff["AttackSpeed"] = 2;
                 #region arm_hide
-                armPart.m_fHealth = fHealth;
+                //armPart.m_fHealth = fHealth;
                 armPart.m_fCurHealth = fHealth;
                 armPart.m_dicStat.Add("Health", fHealth);
                 armPart.m_dicStat.Add("Range", fRange);
@@ -1705,7 +1749,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 legPart.m_lstStrBuff.Add("LegBuff");
                 fRandomDodge = 5f;
                 #region leg_hide
-                legPart.m_fHealth = fHealth;
+                //legPart.m_fHealth = fHealth;
                 legPart.m_fCurHealth = fHealth;
                 legPart.m_dicStat.Add("Health", fHealth);
                 legPart.m_dicStat.Add("Dodge", fRandomDodge);
@@ -1724,9 +1768,9 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 headPart.m_dicStatBuff["Attack"] = 2;
                 headPart.m_dicStatBuff["AttackSpeed"] = 2;
                 #region head_hide
-                headPart.m_fHealth = fHealth;
+                //headPart.m_fHealth = fHealth;
                 headPart.m_fCurHealth = fHealth;
-                headPart.m_dicStat.Add("Health", headPart.m_fHealth);
+                headPart.m_dicStat.Add("Health", fHealth);
                 headPart.m_dicStat.Add("IQ", fIQ);
                 #endregion
 
@@ -1736,7 +1780,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 fHealth = 40f;
                 fDefense = 5f;
                 #region body_hide
-                bodyPart.m_fHealth = fHealth;
+                //bodyPart.m_fHealth = fHealth;
                 bodyPart.m_fCurHealth = fHealth;
                 bodyPart.m_dicStat.Add("Health", fHealth);
                 bodyPart.m_dicStat.Add("Defense", fDefense);
@@ -1755,7 +1799,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_dicStatBuff["Attack"] = 2;
                 armPart.m_dicStatBuff["AttackSpeed"] = 2;
                 #region arm_hide
-                armPart.m_fHealth = fHealth;
+                //armPart.m_fHealth = fHealth;
                 armPart.m_fCurHealth = fHealth;
                 armPart.m_dicStat.Add("Health", fHealth);
                 armPart.m_dicStat.Add("Range", fRange);
@@ -1780,7 +1824,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_dicStatBuff["Attack"] = 2;
                 armPart.m_dicStatBuff["AttackSpeed"] = 2;
                 #region arm_hide
-                armPart.m_fHealth = fHealth;
+                //armPart.m_fHealth = fHealth;
                 armPart.m_fCurHealth = fHealth;
                 armPart.m_dicStat.Add("Health", fHealth);
                 armPart.m_dicStat.Add("Range", fRange);
@@ -1799,7 +1843,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 legPart.m_lstStrBuff.Add("LegBuff");
                 fRandomDodge = 5f;
                 #region leg_hide
-                legPart.m_fHealth = fHealth;
+                //legPart.m_fHealth = fHealth;
                 legPart.m_fCurHealth = fHealth;
                 legPart.m_dicStat.Add("Health", fHealth);
                 legPart.m_dicStat.Add("Dodge", fRandomDodge);
@@ -1818,9 +1862,9 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 headPart.m_dicStatBuff["Attack"] = 2;
                 headPart.m_dicStatBuff["AttackSpeed"] = 2;
                 #region head_hide
-                headPart.m_fHealth = fHealth;
+                //headPart.m_fHealth = fHealth;
                 headPart.m_fCurHealth = fHealth;
-                headPart.m_dicStat.Add("Health", headPart.m_fHealth);
+                headPart.m_dicStat.Add("Health", fHealth);
                 headPart.m_dicStat.Add("IQ", fIQ);
                 #endregion
 
@@ -1830,7 +1874,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 fHealth = 40f;
                 fDefense = 5f;
                 #region body_hide
-                bodyPart.m_fHealth = fHealth;
+                //bodyPart.m_fHealth = fHealth;
                 bodyPart.m_fCurHealth = fHealth;
                 bodyPart.m_dicStat.Add("Health", fHealth);
                 bodyPart.m_dicStat.Add("Defense", fDefense);
@@ -1843,7 +1887,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 fHealth = 40f;
                 fDefense = 5f;
                 #region body_hide
-                bodyPart.m_fHealth = fHealth;
+                //bodyPart.m_fHealth = fHealth;
                 bodyPart.m_fCurHealth = fHealth;
                 bodyPart.m_dicStat.Add("Health", fHealth);
                 bodyPart.m_dicStat.Add("Defense", fDefense);
@@ -1862,7 +1906,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_dicStatBuff["Attack"] = 2;
                 armPart.m_dicStatBuff["AttackSpeed"] = 2;
                 #region arm_hide
-                armPart.m_fHealth = fHealth;
+                //armPart.m_fHealth = fHealth;
                 armPart.m_fCurHealth = fHealth;
                 armPart.m_dicStat.Add("Health", fHealth);
                 armPart.m_dicStat.Add("Range", fRange);
@@ -1881,7 +1925,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 legPart.m_lstStrBuff.Add("LegBuff");
                 fRandomDodge = 5f;
                 #region leg_hide
-                legPart.m_fHealth = fHealth;
+                //legPart.m_fHealth = fHealth;
                 legPart.m_fCurHealth = fHealth;
                 legPart.m_dicStat.Add("Health", fHealth);
                 legPart.m_dicStat.Add("Dodge", fRandomDodge);
@@ -1894,6 +1938,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
         for (int i = 0; i < obj.transform.childCount; ++i)
         {
             Part part = obj.transform.GetChild(i).GetComponent<Part>();
+
             part.m_iSaveValue = iHeroIdx;
             if (part.m_strNameKey != "unArm")
                 part.m_strNameKey = iHeroIdx.ToString();
@@ -1905,6 +1950,8 @@ public class ObjectFactory : Singleton<ObjectFactory>
             Destroy(obj.GetComponent<FSM_Enemy>());
             obj.AddComponent<FSM_MainScene_Enemy>();
         }
+
+        obj.transform.localPosition = RandomBornPos(obj);
 
         return obj;
     }
@@ -1921,7 +1968,6 @@ public class ObjectFactory : Singleton<ObjectFactory>
         obj = Instantiate(m_objHuman) as GameObject;
 
         obj.transform.parent = GameObject.Find("Enemies").transform;
-        obj.transform.localPosition = RandomBornPos(obj);
 
         //Head Setting
         float fRandomIQ = 0;
@@ -1947,7 +1993,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
         }
         fRandomIQ = Random.Range(70, 90);
 
-        headPart.m_fHealth = fRandom;
+        //headPart.m_fHealth = fRandom;
         headPart.m_fCurHealth = fRandom;
         headPart.m_dicStat.Add("Health", fRandom);
         headPart.m_dicStat.Add("IQ", fRandomIQ);
@@ -1994,7 +2040,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
         if (bIsTutorial)
             fRandom = 80f;
         Part bodyPart = body.GetComponent<Part>();
-        bodyPart.m_fHealth = fRandom;
+        //bodyPart.m_fHealth = fRandom;
         bodyPart.m_fCurHealth = fRandom;
         bodyPart.m_dicStat.Add("Health", fRandom);
         bodyPart.m_strNameKey = "PartName_civ_body_0";
@@ -2012,6 +2058,11 @@ public class ObjectFactory : Singleton<ObjectFactory>
         int iArmRandom = Random.Range(0, m_sheet_civilian_arm.Length);
         if (bIsTutorial)
             iArmRandom = 2;
+
+        if (BattleSceneMgr.getInstance.m_bSiege && Random.Range(0, 100) > 50) // siege range weapon
+        {
+            iArmRandom = 10;
+        }
 
         arm.GetComponent<SpriteRenderer>().sprite = m_sheet_civilian_arm[iArmRandom];
         float fSpeedRandom = 0f;
@@ -2105,6 +2156,14 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 Destroy(obj.transform.Find("Hand_L").gameObject);
                 armPart.m_bUse32PixelHand = true;
                 break;
+            case 10:
+                armPart.m_weaponType = WEAPON_TYPE.JAVELIN;
+                armPart.m_strNameKey = "WeaponName_javelin_00";
+                fRange = Random.Range(80, 90);
+                fRandom = Random.Range(30, 60);
+                fSpeedRandom = Random.Range(40, 70);
+                armPart.m_bUse32PixelHand = true;
+                break;
         }
 
         //		arm.GetComponent<Part> ().m_dicStat = new Dictionary<string, float>();
@@ -2115,7 +2174,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
         armPart.m_dicStat.Add("Range", fRange);
 
         fRandom = Random.Range(40, 70);
-        armPart.m_fHealth = fRandom;
+        //armPart.m_fHealth = fRandom;
         armPart.m_fCurHealth = fRandom;
         armPart.m_dicStat.Add("Health", fRandom);
         armPart.m_iSaveValue = iArmRandom;
@@ -2142,7 +2201,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
 
         //		leg.GetComponent<Part> ().m_dicStat = new Dictionary<string, float>();
 
-        legPart.m_fHealth = fRandom;
+        //legPart.m_fHealth = fRandom;
         legPart.m_fCurHealth = fRandom;
         legPart.m_dicStat.Add("Health", fRandom);
         legPart.m_dicStat.Add("Dodge", fRandomDodge);
@@ -2179,6 +2238,8 @@ public class ObjectFactory : Singleton<ObjectFactory>
             }
         }
 
+        obj.transform.localPosition = RandomBornPos(obj);
+
         return obj;
     }
 
@@ -2191,7 +2252,6 @@ public class ObjectFactory : Singleton<ObjectFactory>
         obj = Instantiate(m_objHuman) as GameObject;
 
         obj.transform.parent = GameObject.Find("Enemies").transform;
-        obj.transform.localPosition = RandomBornPos(obj);
 
         //Head Setting
         float fRandomIQ = 0;
@@ -2204,7 +2264,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
         fRandom = Random.Range(70, 100);
         fRandomIQ = Random.Range(80, 100);
 
-        headPart.m_fHealth = fRandom;
+        //headPart.m_fHealth = fRandom;
         headPart.m_fCurHealth = fRandom;
         headPart.m_dicStat.Add("Health", fRandom);
         headPart.m_dicStat.Add("IQ", fRandomIQ);
@@ -2249,7 +2309,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
             fRandom = 50f;
 
         Part bodyPart = body.GetComponent<Part>();
-        bodyPart.m_fHealth = fRandom;
+        //bodyPart.m_fHealth = fRandom;
         bodyPart.m_fCurHealth = fRandom;
         bodyPart.m_dicStat.Add("Health", fRandom);
 
@@ -2265,10 +2325,25 @@ public class ObjectFactory : Singleton<ObjectFactory>
         GameObject arm = obj.transform.Find("Hand_R").gameObject;
         Part armPart = arm.GetComponent<Part>();
         int iArmRandom = Random.Range(0, m_sheet_mercenary_arm.Length - 1);
-        if (iArmRandom == 7)
-            iArmRandom = 6;
+
         if (bIsTutorial)
             iArmRandom = 2;
+
+        if (BattleSceneMgr.getInstance.m_bSiege && Random.Range(0, 100) > 50) // siege range weapon
+        {
+            switch (Random.Range(0, 3))
+            {
+                case 0:
+                    iArmRandom = 6;
+                    break;
+                case 1:
+                    iArmRandom = 7;
+                    break;
+                case 2:
+                    iArmRandom = 9;
+                    break;
+            }
+        }
 
         arm.GetComponent<SpriteRenderer>().sprite = m_sheet_mercenary_arm[iArmRandom];
         float fSpeedRandom = 0f;
@@ -2356,9 +2431,9 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_bUse32PixelHand = true;
                 break;
             case 9:
-                armPart.m_weaponType = WEAPON_TYPE.POLE;
-                armPart.m_strNameKey = "WeaponName_pole_02";
-                fRange = Random.Range(50, 60);
+                armPart.m_weaponType = WEAPON_TYPE.JAVELIN;
+                armPart.m_strNameKey = "WeaponName_javelin_00";
+                fRange = Random.Range(80, 90);
                 fRandom = Random.Range(30, 60);
                 fSpeedRandom = Random.Range(40, 70);
                 armPart.m_bUse32PixelHand = true;
@@ -2373,7 +2448,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
         armPart.m_dicStat.Add("Range", fRange);
 
         fRandom = Random.Range(40, 70);
-        armPart.m_fHealth = fRandom;
+        //armPart.m_fHealth = fRandom;
         armPart.m_fCurHealth = fRandom;
         armPart.m_dicStat.Add("Health", fRandom);
         armPart.m_iSaveValue = iArmRandom;
@@ -2398,7 +2473,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 iArmRandom = 0;
             }
             arm.GetComponent<SpriteRenderer>().sprite = m_sheet_mercenary_arm_left[iArmRandom];
-            armPart.m_fHealth = fRandom;
+            //armPart.m_fHealth = fRandom;
             armPart.m_fCurHealth = fRandom;
             armPart.m_dicStat.Add("Health", fRandom);
             armPart.m_dicStat.Add("Defense", fSpeedRandom);
@@ -2419,7 +2494,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
 
         //		leg.GetComponent<Part> ().m_dicStat = new Dictionary<string, float>();
 
-        legPart.m_fHealth = fRandom;
+        //legPart.m_fHealth = fRandom;
         legPart.m_fCurHealth = fRandom;
         legPart.m_dicStat.Add("Health", fRandom);
         legPart.m_dicStat.Add("Dodge", fRandomDodge);
@@ -2456,6 +2531,8 @@ public class ObjectFactory : Singleton<ObjectFactory>
             }
         }
 
+        obj.transform.localPosition = RandomBornPos(obj);
+
         return obj;
     }
 
@@ -2468,7 +2545,6 @@ public class ObjectFactory : Singleton<ObjectFactory>
         obj = Instantiate(m_objHuman) as GameObject;
 
         obj.transform.parent = GameObject.Find("Enemies").transform;
-        obj.transform.localPosition = RandomBornPos(obj);
 
         //Head Setting
         float fRandomIQ = 0;
@@ -2481,7 +2557,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
         fRandom = Random.Range(10, 13);
         fRandomIQ = Random.Range(90, 110);
 
-        headPart.m_fHealth = fRandom;
+        //headPart.m_fHealth = fRandom;
         headPart.m_fCurHealth = fRandom;
         headPart.m_dicStat.Add("Health", fRandom);
         headPart.m_dicStat.Add("IQ", fRandomIQ);
@@ -2518,7 +2594,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
 
         fRandom = Random.Range(18, 23);
         Part bodyPart = body.GetComponent<Part>();
-        bodyPart.m_fHealth = fRandom;
+        //bodyPart.m_fHealth = fRandom;
         bodyPart.m_fCurHealth = fRandom;
         bodyPart.m_dicStat.Add("Health", fRandom);
 
@@ -2558,7 +2634,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
         armPart.m_dicStat.Add("AttackSpeed", fSpeedRandom);
 
         fRandom = Random.Range(7, 10);
-        armPart.m_fHealth = fRandom;
+        //armPart.m_fHealth = fRandom;
         armPart.m_fCurHealth = fRandom;
         armPart.m_dicStat.Add("Health", fRandom);
         armPart.m_iSaveValue = iArmRandom;
@@ -2586,7 +2662,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 iArmRandom = 2;
             }
             arm.GetComponent<SpriteRenderer>().sprite = m_sheet_knight_arm_left[iArmRandom];
-            armPart.m_fHealth = fRandom;
+            //armPart.m_fHealth = fRandom;
             armPart.m_fCurHealth = fRandom;
             armPart.m_dicStat.Add("Health", fRandom);
             armPart.m_dicStat.Add("Defense", fSpeedRandom);
@@ -2607,7 +2683,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
 
         //		leg.GetComponent<Part> ().m_dicStat = new Dictionary<string, float>();
 
-        legPart.m_fHealth = fRandom;
+        //legPart.m_fHealth = fRandom;
         legPart.m_fCurHealth = fRandom;
         legPart.m_dicStat.Add("Health", fRandom);
         legPart.m_dicStat.Add("Dodge", fRandomDodge);
@@ -2624,6 +2700,8 @@ public class ObjectFactory : Singleton<ObjectFactory>
             obj.AddComponent<FSM_MainScene_Enemy>();
         }
 
+        obj.transform.localPosition = RandomBornPos(obj);
+
         return obj;
     }
 
@@ -2631,7 +2709,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
     {
         Vector3 vecBornPos = new Vector3(0, Random.Range(-0.35f, 0.35f));
 
-        if (Random.Range(0, 2) == 0)
+        if (Random.Range(0, 2) == 0 || BattleSceneMgr.getInstance.m_bSiege)
         {
             vecBornPos = new Vector3(2f, vecBornPos.y);
         }

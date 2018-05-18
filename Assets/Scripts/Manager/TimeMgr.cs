@@ -105,6 +105,9 @@ public class TimeMgr : Singleton<TimeMgr>
                 break;
         }
 
+        if (GameObject.Find("PartyManager") != null)
+            GameObject.Find("PartyManager").GetComponent<PartyManager>().CalculateDepolying();
+
         do
         {
             yield return null;
@@ -134,17 +137,15 @@ public class TimeMgr : Singleton<TimeMgr>
         if (fTarget == 24f)
             GameMgr.getInstance.m_iDay += 1;
 
-        yield return new WaitForSeconds(0.1f);
+        //yield return new WaitForSeconds(0.1f);
 
-        do
-        {
-            yield return null;
-        } while (Application.loadedLevelName.Equals("Battle"));
+        //do
+        //{
+        //    yield return null;
+        //} while (Application.loadedLevelName.Equals("Battle"));
 
-        yield return new WaitForSeconds(0.25f);
+        //yield return new WaitForSeconds(0.25f);
 
-        if (GameObject.Find("PartyManager") != null)
-            GameObject.Find("PartyManager").GetComponent<PartyManager>().CalculateDepolying();
     }
 
 

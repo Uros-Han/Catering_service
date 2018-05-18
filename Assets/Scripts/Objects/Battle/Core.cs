@@ -22,16 +22,18 @@ public class Core : Part
         m_bControl = new bool[4];
 
         m_fOriginEmissionRate = GetComponent<SpriteParticleEmitter.DynamicEmitter>().EmissionRate;
-        m_fCurHealth = m_fHealth;
 
         if (!m_dicStat.ContainsKey("Health"))
-            m_dicStat.Add("Health", m_fHealth);
+            m_dicStat.Add("Health", 100);
         if (!m_dicStat.ContainsKey("Defense"))
             m_dicStat.Add("Defense", 0);
         if (!m_dicStat.ContainsKey("Dodge"))
             m_dicStat.Add("Dodge", 0);
         if (m_bAttackAvailable && !m_dicStat.ContainsKey("Attack"))
-            m_dicStat.Add("Attack", 1);
+            m_dicStat.Add("Attack", 0);
+
+        if (m_fCurHealth == 0f)
+            m_fCurHealth = m_dicStat["Health"];
 
         m_lstStrBuff.Add("CoreBuff");
 
@@ -39,8 +41,8 @@ public class Core : Part
 
     void OnEnable()
     {
-        transform.position = new Vector3(0.01f, 0f);
-        iTween.MoveTo(gameObject, iTween.Hash("x", 0.01f, "y", 0f, "time", 1f));
+        transform.localPosition = new Vector3(0.01f, 0f);
+        iTween.MoveTo(gameObject, iTween.Hash("x", 0.01f, "y", 0f, "time", 1f, "isLocal", true));
     }
 
     void OnDestroy()

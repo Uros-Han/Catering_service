@@ -161,12 +161,40 @@ public class Morgue : MonoBehaviour
 
             if ((tmp.Value != 0 || fBuffedStat != 0))
             {
-                if (fBuffedStat > 0)
-                    morguePanel.GetChild(0).Find("PartDesc").GetComponent<UILabel>().text += string.Format("{0} : {1}[50B728FF](+{2})[-]\n", Localization.Get(tmp.Key), tmp.Value, fBuffedStat);
-                else if (fBuffedStat < 0)
-                    morguePanel.GetChild(0).Find("PartDesc").GetComponent<UILabel>().text += string.Format("{0} : {1}[B72848FF](-{2})[-]\n", Localization.Get(tmp.Key), tmp.Value, fBuffedStat);
+                if (tmp.Key != "Health")
+                {
+                    if (fBuffedStat > 0)
+                        morguePanel.GetChild(0).Find("PartDesc").GetComponent<UILabel>().text += string.Format("{0} : [50B728FF]{1}(+{2})[-]\n", Localization.Get(tmp.Key), tmp.Value + fBuffedStat, fBuffedStat);
+                    else if (fBuffedStat < 0)
+                        morguePanel.GetChild(0).Find("PartDesc").GetComponent<UILabel>().text += string.Format("{0} : [B72848FF]{1}(-{2})[-]\n", Localization.Get(tmp.Key), tmp.Value + fBuffedStat, fBuffedStat);
+                    else
+                        morguePanel.GetChild(0).Find("PartDesc").GetComponent<UILabel>().text += string.Format("{0} : {1}", Localization.Get(tmp.Key), tmp.Value + "\n");
+                }
                 else
-                    morguePanel.GetChild(0).Find("PartDesc").GetComponent<UILabel>().text += string.Format("{0} : {1}", Localization.Get(tmp.Key), tmp.Value + "\n");
+                {
+                    int iCurHealth = (int)part.m_fCurHealth;
+                    if (fBuffedStat > 0)
+                    {
+                        if ((int)(tmp.Value + fBuffedStat) == iCurHealth)
+                            morguePanel.GetChild(0).Find("PartDesc").GetComponent<UILabel>().text += string.Format("{0} : {1}/[50B728FF]{2}(+{3})[-]\n", Localization.Get(tmp.Key), iCurHealth, tmp.Value + fBuffedStat, fBuffedStat);
+                        else
+                            morguePanel.GetChild(0).Find("PartDesc").GetComponent<UILabel>().text += string.Format("{0} : [B72848FF]{1}[-]/[50B728FF]{2}(+{3})[-]\n", Localization.Get(tmp.Key), iCurHealth, tmp.Value + fBuffedStat, fBuffedStat);
+                    }
+                    else if (fBuffedStat < 0)
+                    {
+                        if ((int)(tmp.Value + fBuffedStat) == iCurHealth)
+                            morguePanel.GetChild(0).Find("PartDesc").GetComponent<UILabel>().text += string.Format("{0} : {1}/[B72848FF]{2}(-{3})[-]\n", Localization.Get(tmp.Key), iCurHealth, tmp.Value + fBuffedStat, fBuffedStat);
+                        else
+                            morguePanel.GetChild(0).Find("PartDesc").GetComponent<UILabel>().text += string.Format("{0} : [B72848FF]{1}[-]/[B72848FF]{2}(+{3})[-]\n", Localization.Get(tmp.Key), iCurHealth, tmp.Value + fBuffedStat, fBuffedStat);
+                    }
+                    else
+                    {
+                        if ((int)(tmp.Value + fBuffedStat) == iCurHealth)
+                            morguePanel.GetChild(0).Find("PartDesc").GetComponent<UILabel>().text += string.Format("{0} : {1}/{2}\n", Localization.Get(tmp.Key), iCurHealth, tmp.Value);
+                        else
+                            morguePanel.GetChild(0).Find("PartDesc").GetComponent<UILabel>().text += string.Format("{0} : [B72848FF]{1}[-]/{2}\n", Localization.Get(tmp.Key), iCurHealth, tmp.Value);
+                    }
+                }
             }
         }
         for (int i = 0; i < part.m_lstStrBuff.Count; ++i)

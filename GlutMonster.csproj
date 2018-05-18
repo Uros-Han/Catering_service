@@ -614,7 +614,9 @@
     <Compile Include="Assets\Scripts\Objects\Battle\Projectile.cs" />
     <Compile Include="Assets\Scripts\Objects\Battle\Tangled.cs" />
     <Compile Include="Assets\Scripts\Objects\Battle\Unit.cs" />
+    <Compile Include="Assets\Scripts\Objects\Battle\Wall.cs" />
     <Compile Include="Assets\Scripts\Objects\CameraScript.cs" />
+    <Compile Include="Assets\Scripts\Objects\HeroAura.cs" />
     <Compile Include="Assets\Scripts\Objects\Part.cs" />
     <Compile Include="Assets\Scripts\Objects\Party\Caravan.cs" />
     <Compile Include="Assets\Scripts\Objects\Party\Party.cs" />

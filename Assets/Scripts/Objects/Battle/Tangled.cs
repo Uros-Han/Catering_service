@@ -68,7 +68,22 @@ public class Tangled : MonoBehaviour
 
         m_DragingObject = targetTransform.gameObject;
 
-        targetTransform.GetComponent<Unit>().m_bCatched = true;
+        Unit targetUnit = targetTransform.GetComponent<Unit>();
+        bool bCantGrab = false;
+        bool bGrabForceExit = false;
+
+        if (targetUnit.m_enemyType == ENEMY_TYPE.HERO)
+        {
+            if (targetUnit.m_fCurMorale > 0f)
+            {
+                targetUnit.m_bCatched = false;
+                bCantGrab = true;
+            }
+            else
+                targetUnit.m_bCatched = true;
+        }
+        else
+            targetUnit.m_bCatched = true;
 
         Collider2D coreCollider = GameObject.Find("Core").GetComponent<Collider2D>();
         MouthPanel mouthPanel = GameObject.Find("MouthPanel").GetComponent<MouthPanel>();
@@ -146,6 +161,10 @@ public class Tangled : MonoBehaviour
                 else
                 {
                     fCurTime = fMaxReachTime;
+                    if (bCantGrab)
+                    {
+                        bGrabForceExit = true;
+                    }
                 }
             }
             else
@@ -169,7 +188,7 @@ public class Tangled : MonoBehaviour
             }
 
 
-            if (!Input.GetMouseButton(0))
+            if (!Input.GetMouseButton(0) || bGrabForceExit)
             {
 
                 if (!bDoneDrag)
@@ -177,7 +196,7 @@ public class Tangled : MonoBehaviour
                     bDoneDrag = true;
                     m_DragingObject = null;
                     Camera.main.GetComponent<ProCamera2DPanAndZoom>().enabled = true;
-                    targetTransform.GetComponent<Unit>().m_bCatched = false;
+                    targetUnit.m_bCatched = false;
                     if (targetTransform.GetComponent<FSM_Enemy>().m_AiState == AI_STATE.PANIC)
                         targetTransform.GetComponent<FSM_Enemy>().m_AiState = AI_STATE.MOVE;
 

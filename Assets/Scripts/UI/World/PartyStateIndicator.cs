@@ -5,18 +5,26 @@ using UnityEngine;
 public class PartyStateIndicator : MonoBehaviour
 {
 
-    GameObject m_thisUI;
+    public GameObject m_thisUI;
     UILabel m_PartyUILabel;
     Party m_party;
+
+    private void Start()
+    {
+        m_thisUI = ObjectFactory.getInstance.Create_PartyUI(transform);
+        m_PartyUILabel = m_thisUI.transform.GetChild(0).GetComponent<UILabel>();
+        m_party = transform.parent.GetComponent<Party>();
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(m_thisUI.gameObject);
+    }
 
     // Use this for initialization
     void OnEnable()
     {
         StartCoroutine(Tweener());
-
-        m_thisUI = ObjectFactory.getInstance.Create_PartyUI(transform);
-        m_PartyUILabel = m_thisUI.transform.GetChild(0).GetComponent<UILabel>();
-        m_party = transform.parent.GetComponent<Party>();
     }
 
     IEnumerator Tweener()

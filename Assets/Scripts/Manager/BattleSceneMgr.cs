@@ -5,6 +5,8 @@ using Com.LuisPedroFonseca.ProCamera2D;
 
 public class BattleSceneMgr : Singleton<BattleSceneMgr>
 {
+    public bool m_bSiege;
+    public int m_iSiegeWallIdx;
 
     public int m_iMeat = 0;
     public MOUSE_STATE m_mouseState = MOUSE_STATE.NORMAL;

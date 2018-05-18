@@ -163,7 +163,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
         {
             int iRandomIdx = city_deployableIdx[Random.Range(0, city_deployableIdx.Count)];
             GameObject objIcon = objFac.Create_WorldIcon(grid.GetPosOfIdx(iRandomIdx), (int)WORLDICON_TYPE.CITY);
-            EraseDepolyableIdx(iRandomIdx, city_deployableIdx, 5);
+            EraseDepolyableIdx(iRandomIdx, city_deployableIdx, 7);
             EraseDepolyableIdx(iRandomIdx, village_deployableIdx, 3);
 
             LoadingProgress(0.8f, string.Format("도시 심는 중 ({0})", city_deployableIdx.Count));
@@ -175,7 +175,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
         {
             int iRandomIdx = village_deployableIdx[Random.Range(0, village_deployableIdx.Count)];
             GameObject objIcon = objFac.Create_WorldIcon(grid.GetPosOfIdx(iRandomIdx), (int)WORLDICON_TYPE.VILLAGE);
-            EraseDepolyableIdx(iRandomIdx, village_deployableIdx, 3);
+            EraseDepolyableIdx(iRandomIdx, village_deployableIdx, 5);
 
             LoadingProgress(0.9f, string.Format("마을 심는 중 ({0})", village_deployableIdx.Count));
             yield return null;
@@ -285,7 +285,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
 
 
         WorldMapManager worldMapManager = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>();
-        for (int i = 0; i < worldMapManager.m_iListCity.Count / 3; ++i)
+        for (int i = 0; i < worldMapManager.m_iListCity.Count / 2; ++i)
         {
 
             int iTargetIdx = worldMapManager.m_iListCity[i + worldMapManager.m_iListCity.Count / 2];
@@ -625,6 +625,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
             {
                 GameObject newOne = ObjectFactory.getInstance.Create_WorldIcon(grid.GetPosOfIdx(iGridIdx), (int)WORLDICON_TYPE.FARM);
                 SetWorldPropertyAndPopulation(iGridIdx, newOne.GetComponent<WorldIcon>(), WORLDICON_TYPE.FARM);
+                Destroy(worldIcon.m_objWall.gameObject);
                 Destroy(worldIcon.gameObject);
                 return;
             }

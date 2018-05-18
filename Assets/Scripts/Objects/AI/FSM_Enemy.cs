@@ -67,6 +67,10 @@ public class FSM_Enemy : FSM
                 m_CurStateCoroutine = State_Eaten();
                 break;
 
+            case AI_STATE.SIEGE_HOLD:
+                m_CurStateCoroutine = State_SiegeHold();
+                break;
+
             case AI_STATE.GROGGY:
                 m_CurStateCoroutine = State_Groggy();
                 break;
@@ -119,6 +123,22 @@ public class FSM_Enemy : FSM
         if (m_AttackAvailableParts.Count > 0)
             fRange = (float)m_AttackAvailableParts[0].GetComponent<Part>().m_dicStat["Range"] / 100f;
 
+        bool bSiege = false;
+        bool bRangeWeapon = false;
+        Wall wall = null;
+        if (BattleSceneMgr.getInstance.m_bSiege)
+        {
+            bSiege = true;
+            wall = GameObject.Find("Wall").GetComponent<Wall>();
+        }
+
+        WEAPON_TYPE weaponType = m_AttackAvailableParts[0].GetComponent<Part>().m_weaponType;
+        if (bSiege && wall.m_fCurHealth > 0f && (weaponType.Equals(WEAPON_TYPE.BOW) || weaponType.Equals(WEAPON_TYPE.CROSSBOW) || weaponType.Equals(WEAPON_TYPE.JAVELIN)))
+        {
+            fRange += 0.7f;
+            bRangeWeapon = true;
+        }
+
         do
         {
             yield return null;
@@ -133,7 +153,10 @@ public class FSM_Enemy : FSM
                     break;
                 }
 
-                transform.Translate(CoreDirVec * fMoveSpeed * Time.deltaTime);
+                if (bSiege && wall.m_fCurHealth > 0f)
+                    transform.Translate(new Vector3(CoreDirVec.x, 0f) * fMoveSpeed * Time.deltaTime);
+                else
+                    transform.Translate(CoreDirVec * fMoveSpeed * Time.deltaTime);
             }
 
             //			if((!m_bBornAtLeft && transform.position.x < -fBornPosX) || (m_bBornAtLeft && transform.position.x > -fBornPosX)) //Run Away
@@ -143,7 +166,14 @@ public class FSM_Enemy : FSM
             //				Destroy (gameObject);
             //			}
 
-            //// TODO : Attack logic modify
+
+            if (bSiege && wall.m_fCurHealth > 0f)
+            {
+                if (transform.position.x - wall.transform.position.x < 0.3f)
+                {
+                    m_AiState = AI_STATE.SIEGE_HOLD;
+                }
+            }
 
             for (int i = 0; i < PlayerTrans.childCount; ++i)
             {
@@ -235,6 +265,30 @@ public class FSM_Enemy : FSM
         SetState(m_AiState);
     }
 
+    public IEnumerator State_SiegeHold()
+    {
+        bool bSiege = false;
+        Wall wall = null;
+        if (BattleSceneMgr.getInstance.m_bSiege)
+        {
+            bSiege = true;
+            wall = GameObject.Find("Wall").GetComponent<Wall>();
+        }
+
+        do
+        {
+            if (wall.m_fCurHealth <= 0f)
+            {
+                m_AiState = AI_STATE.MOVE;
+            }
+
+            yield return null;
+
+        } while (m_AiState == AI_STATE.SIEGE_HOLD);
+
+        SetState(m_AiState);
+    }
+
     public IEnumerator State_Disabled()
     {
 
@@ -289,6 +343,28 @@ public class FSM_Enemy : FSM
         if (m_AttackAvailableParts.Count > 0)
             fRange = (float)m_AttackAvailableParts[0].GetComponent<Part>().m_dicStat["Range"] / 100f;
 
+        bool bSiege = false;
+        Wall wall = null;
+        if (BattleSceneMgr.getInstance.m_bSiege)
+        {
+            bSiege = true;
+            wall = GameObject.Find("Wall").GetComponent<Wall>();
+        }
+
+        WEAPON_TYPE weaponType = m_AttackAvailableParts[0].GetComponent<Part>().m_weaponType;
+        if (bSiege && wall.m_fCurHealth > 0f && (weaponType.Equals(WEAPON_TYPE.BOW) || weaponType.Equals(WEAPON_TYPE.CROSSBOW) || weaponType.Equals(WEAPON_TYPE.JAVELIN)))
+            fRange += 0.7f;
+
+        float fMoveSpeed = thisUnit.m_fMoveSpeed;
+
+        bool bOnGround = true;
+
+        float fJumpPower = 0.25f;
+        float fJumpResistance = 0.04f;
+        float fCurJumpSpeed = 0f;
+
+        float fOriginYPos = transform.position.y;
+
         do
         {
             yield return null;
@@ -303,6 +379,30 @@ public class FSM_Enemy : FSM
             {
                 m_AiState = AI_STATE.MOVE;
                 break;
+            }
+
+            if (Vector3.Distance(m_target.transform.position, transform.position) < fRange * 0.8f)
+            {
+                if (!thisUnit.m_bFlipped)
+                    transform.Translate(new Vector3(1, 0, 0) * fMoveSpeed / 2f * Time.deltaTime);
+                else
+                    transform.Translate(new Vector3(-1, 0, 0) * fMoveSpeed / 2f * Time.deltaTime);
+
+                if (bOnGround)
+                {
+                    bOnGround = false;
+                    fCurJumpSpeed = fJumpPower;
+                }
+
+                transform.Translate(new Vector3(0, 1) * fCurJumpSpeed / 2f * Time.deltaTime);
+
+                fCurJumpSpeed -= fJumpResistance;
+
+                if (fCurJumpSpeed < -fJumpPower)
+                {
+                    bOnGround = true;
+                }
+
             }
 
             if (Vector3.Distance(m_target.transform.position, transform.position) > fRange)

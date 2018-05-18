@@ -27,6 +27,8 @@ public class Party : MonoBehaviour
 
     protected SpriteRenderer m_sprite_partyStateIndicator;
 
+    IEnumerator tremble;
+
     // Use this for initialization
     protected virtual void Start()
     {
@@ -54,11 +56,125 @@ public class Party : MonoBehaviour
     {
         m_list_enemyType = new List<int>();
 
-        m_list_enemyType = WorldGenerator.getInstance.DeployEnemyList(m_departureLoc.GetComponent<WorldIcon>().m_fPopulation / 2f, (WORLDICON_TYPE)m_departureLoc.GetComponent<WorldIcon>().m_iconType);
-
         if (m_iHero != -1)
         {
             m_list_enemyType.Add((int)ENEMY_TYPE.HERO);
+
+            switch (m_iHero)
+            {
+                case (int)HERO.WALLACE:
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    break;
+
+
+                case (int)HERO.ROBIN:
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    break;
+
+                case (int)HERO.ADAM:
+                    //m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    //m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    //m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    //m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    //m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    break;
+
+                case (int)HERO.HANK:
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    break;
+
+                case (int)HERO.GAWEN:
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    break;
+
+                case (int)HERO.OWIN:
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    break;
+
+                case (int)HERO.GALE:
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    break;
+
+                case (int)HERO.RICHARD:
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    break;
+
+                case (int)HERO.ROLF:
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    break;
+
+                case (int)HERO.OTIS:
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    break;
+
+                case (int)HERO.REYNARD:
+                    m_list_enemyType.Add((int)ENEMY_TYPE.KNIGHT);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.KNIGHT);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.KNIGHT);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.KNIGHT);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.KNIGHT);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.KNIGHT);
+                    break;
+
+                case (int)HERO.DUMP:
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.MERCENARY);
+                    break;
+            }
+        }
+        else
+        {
+            m_list_enemyType = WorldGenerator.getInstance.DeployEnemyList(m_departureLoc.GetComponent<WorldIcon>().m_fPopulation / 2f, (WORLDICON_TYPE)m_departureLoc.GetComponent<WorldIcon>().m_iconType);
         }
     }
 
@@ -74,12 +190,49 @@ public class Party : MonoBehaviour
         StartCoroutine(moveCoroutine);
     }
 
+    IEnumerator Tremble()
+    {
+        yield return new WaitForSeconds(Random.Range(0.1f, 0.4f));
+        bool bOnGround = true;
+
+        float fJumpPower = 0.25f;
+        float fJumpResistance = 0.04f;
+        float fCurJumpSpeed = 0f;
+
+        float fOriginYPos = transform.position.y;
+
+        do
+        {
+            if (bOnGround)
+            {
+                bOnGround = false;
+                fCurJumpSpeed = fJumpPower;
+            }
+
+            transform.Translate(new Vector3(0, 1) * fCurJumpSpeed * Time.deltaTime);
+
+            fCurJumpSpeed -= fJumpResistance;
+
+            if (fCurJumpSpeed < -fJumpPower)
+            {
+                bOnGround = true;
+            }
+
+            yield return null;
+
+        } while (m_state == AI_WORLD_STATE.MOVE);
+    }
+
     IEnumerator moveCoroutine;
     protected IEnumerator Move()
     {
         GridMgr grid = GridMgr.getInstance;
 
+        Transform geoTrans = GameObject.Find("Geo").transform;
+        float fSpeedMultiplier = 0.06f;
         float fSpeed = 0.15f + m_iSpeed * 0.015f;
+        float fSpeedAdjuster = 0f;
+
         Core_World core_World = GameObject.Find("Core").GetComponent<Core_World>();
 
         while (m_listMoveIdx.Count != 0)
@@ -104,6 +257,17 @@ public class Party : MonoBehaviour
             while (Vector3.Distance(destPos, transform.position) > 0.01f)
             {
                 m_iGridIdx = grid.GetGridIdx(transform.position);
+
+                fSpeedAdjuster = 0f;
+                WorldGeo geo = geoTrans.GetChild(m_iGridIdx).GetComponent<WorldGeo>();
+                if (geo.m_geoStatus.Equals(WORLD_GEO.FOREST))
+                    fSpeedAdjuster -= fSpeedMultiplier;
+
+                if (isOnPath())
+                {
+                    fSpeedAdjuster += fSpeedMultiplier;
+                }
+
                 if (m_partyType.Equals(PARTY_TYPE.RAID))
                 {
                     bool bFollowCoreTrigger = false;
@@ -123,7 +287,7 @@ public class Party : MonoBehaviour
                     }
                 }
 
-                transform.Translate(Vector3.Normalize(destPos - transform.position) * fSpeed * Time.deltaTime);
+                transform.Translate(Vector3.Normalize(destPos - transform.position) * (fSpeed + fSpeedAdjuster) * Time.deltaTime);
                 yield return null;
             }
             transform.position = destPos;
@@ -205,9 +369,26 @@ public class Party : MonoBehaviour
         DrawPath();
     }
 
+    bool isOnPath()
+    {
+        RaycastHit2D[] hit = Physics2D.RaycastAll(transform.position + new Vector3(0, 0, 1f), Vector3.forward); //edit in your raycast settings
+        for (int i = 0; i < hit.Length; ++i)
+        {
+            if (hit[i] && hit[i].transform.gameObject.name.Equals("Road(Clone)"))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     GameObject path;
     void DrawPath()
     {
+        if (Application.loadedLevelName != "World")
+            return;
+
         GridMgr grid = GridMgr.getInstance;
 
         Destroy(path);

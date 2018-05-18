@@ -14,6 +14,9 @@ public class WorldIcon : MonoBehaviour
     public int m_iRaided = 0; // 습격 당한 횟수
     public List<int> m_list_enemyType;
 
+    public GameObject m_objWall;
+    public int m_iWallIdx;
+
     public void Init() // Loading 때문에 만듬a
     {
         transform.position = GridMgr.getInstance.GetPosOfIdx(m_iGridIdx);
@@ -34,20 +37,24 @@ public class WorldIcon : MonoBehaviour
             case (int)WORLDICON_TYPE.VILLAGE:
                 GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sheet_worldicon[3];
                 GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iListVillage.Add(m_iGridIdx);
+                ObjectFactory.getInstance.Create_Wall(0, transform.position, gameObject);
                 break;
 
             case (int)WORLDICON_TYPE.CITY:
                 GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sheet_worldicon[4];
                 GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iListCity.Add(m_iGridIdx);
+                ObjectFactory.getInstance.Create_Wall(1, transform.position, gameObject);
                 break;
 
             case (int)WORLDICON_TYPE.CASTLE:
                 GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sheet_worldicon[5];
                 GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iListCastle.Add(m_iGridIdx);
+                ObjectFactory.getInstance.Create_Wall(2, transform.position, gameObject);
                 break;
         }
 
         GameObject.Find("Geo").transform.GetChild(m_iGridIdx).GetComponent<WorldGeo>().m_worldIcon = gameObject;
+
     }
 
 }

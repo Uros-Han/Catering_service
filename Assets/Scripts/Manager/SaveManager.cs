@@ -46,6 +46,7 @@ public class SaveManager : Singleton<SaveManager>
 
         ES3.Save<List<PartSaveForm>>("partSaveForm", listPartSaveForm, "core.txt");
 
+        ES3.Save<float>("health", GameObject.Find("Player").transform.Find("Core").GetComponent<Core>().m_fCurHealth, "core.txt");
         ES3.Save<int>("hunger", GameMgr.getInstance.m_iHunger, "core.txt");
         ES3.Save<int>("reward", GameMgr.getInstance.m_iReward, "core.txt");
     }
@@ -61,6 +62,7 @@ public class SaveManager : Singleton<SaveManager>
             objFac.Create_Part(sf.m_part, sf.m_name, sf.m_fRotation, sf.m_fScaleX).SetActive(false);
         }
 
+        GameObject.Find("Player").transform.Find("Core").GetComponent<Core>().m_fCurHealth = ES3.Load<float>("health", "core.txt");
         GameMgr.getInstance.m_iHunger = ES3.Load<int>("hunger", "core.txt");
         GameMgr.getInstance.m_iReward = ES3.Load<int>("reward", "core.txt");
     }
