@@ -390,7 +390,15 @@ public class FSM_MainScene_Core : FSM
                 break;
 
             case WEAPON_TYPE.CROSSBOW:
-                target.transform.GetChild(0).localPosition = -transform.GetChild(0).GetChild(0).localPosition;
+                target.transform.GetChild(0).localPosition = new Vector3(0.128f, -0.088f);
+                break;
+
+            case WEAPON_TYPE.JAVELIN:
+                target.transform.GetChild(0).localPosition = new Vector3(0.128f, -0.152f);
+                break;
+
+            default:
+                Debug.LogError("Unknown weapon");
                 break;
 
         }

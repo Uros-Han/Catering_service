@@ -14,6 +14,9 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr>
 
     public Transform m_transformGridParent;
 
+    public WorldGeo m_curBattleWorldGeo;
+    public WorldIcon m_curBattleWorldIcon;
+
     // Use this for initialization
     void Start()
     {
@@ -179,9 +182,9 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr>
     }
 
     public List<int> m_iOnFieldMeatCount;
-    public void OnField(GameObject target)
+    public void OnField(GameObject target, Vector3 groundPos = default(Vector3))
     {
-        StartCoroutine(target.GetComponent<Part>().OnField());
+        StartCoroutine(target.GetComponent<Part>().OnField(groundPos));
     }
 
     public bool MorgueFalse = false;
@@ -202,7 +205,8 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr>
             StartCoroutine(morgueTrans.GetComponent<Morgue>().MorgueClickCheck());
             GameObject.Find("Player").BroadcastMessage("Assemble", null, SendMessageOptions.DontRequireReceiver);
 
-            StartCoroutine(GameObject.Find("GEO").GetComponent<Battle_Geo>().ToggleColor(true));
+            //StartCoroutine(GameObject.Find("GEO").GetComponent<Battle_Geo>().ToggleColor(true));
+            GameObject.Find("Backgrounds").BroadcastMessage("ToggleColor", SendMessageOptions.DontRequireReceiver);
 
             m_transformGridParent.gameObject.SetActive(true);
             m_transformGridParent.BroadcastMessage("ToggleGrid", SendMessageOptions.DontRequireReceiver);

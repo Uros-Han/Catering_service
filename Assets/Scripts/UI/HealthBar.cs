@@ -145,17 +145,17 @@ public class HealthBar : MonoBehaviour
 
             yield return null;
 
-            //if (!bWallHealthBar)
-            //{
-            //    if (panel.alpha.Equals(1) && m_slider.value == 1)
-            //    {
-            //        panel.alpha = 0;
-            //    }
-            //    else if (panel.alpha.Equals(0) && m_slider.value != 1)
-            //    {
-            //        panel.alpha = 1;
-            //    }
-            //}
+            if (!bWallHealthBar)
+            {
+                if (panel.alpha.Equals(1) && m_slider.value == 1)
+                {
+                    panel.alpha = 0;
+                }
+                else if (panel.alpha.Equals(0) && m_slider.value != 1)
+                {
+                    panel.alpha = 1;
+                }
+            }
 
         } while (m_Target != null);
     }

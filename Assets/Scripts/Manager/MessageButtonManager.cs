@@ -14,7 +14,8 @@ public class MessageButtonManager : MonoBehaviour
     void HungerCheckerWait()
     {
         GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().Wait();
-        Destroy(GameObject.Find("MessageBox(Clone)").gameObject);
+        if (GameObject.Find("MessageBox(Clone)") != null)
+            Destroy(GameObject.Find("MessageBox(Clone)").gameObject);
     }
 
     void DestroyMessageBox()

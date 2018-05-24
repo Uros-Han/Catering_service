@@ -90,6 +90,15 @@ public class WorldOverView : MonoBehaviour
             case (int)WORLDICON_TYPE.CASTLE:
                 strIconType = "Castle";
                 break;
+            case (int)WORLDICON_TYPE.RUIN:
+                strIconType = "Ruin";
+                break;
+            case (int)WORLDICON_TYPE.ALTAR:
+                strIconType = "Altar";
+                break;
+            case (int)WORLDICON_TYPE.CLINIC:
+                strIconType = "Clinic";
+                break;
 
             default:
                 Debug.LogError("Unknown iconType");

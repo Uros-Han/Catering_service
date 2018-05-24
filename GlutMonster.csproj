@@ -619,6 +619,7 @@
     <Compile Include="Assets\Scripts\Objects\HeroAura.cs" />
     <Compile Include="Assets\Scripts\Objects\Part.cs" />
     <Compile Include="Assets\Scripts\Objects\Party\Caravan.cs" />
+    <Compile Include="Assets\Scripts\Objects\Party\Garrison.cs" />
     <Compile Include="Assets\Scripts\Objects\Party\Party.cs" />
     <Compile Include="Assets\Scripts\Objects\Party\Raider.cs" />
     <Compile Include="Assets\Scripts\Objects\SpriteModifier.cs" />

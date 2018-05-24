@@ -110,6 +110,9 @@ public class Projectile : MonoBehaviour
         //		else
         //			GameObject.Find("Core").GetComponent<FSM>().Weapon_Attack(0f, m_objTarget, m_bHeadingToEnemy);
 
+
+        yield return new WaitForSeconds(5f);
+
         Destroy(gameObject);
 
     }

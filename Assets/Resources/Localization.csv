@@ -143,7 +143,7 @@ EnemyType_Knight_name,Knight,기사
 PARTY,,
 Party_Raider,Raiders,공격대
 Party_Caravan,Caravan,상단
-,,
+Party_Garrison,Garrison,주둔군
 ,,
 WORLD_GEO,,
 WORLD_GEO_NAME,,
@@ -168,10 +168,14 @@ Icon_Ranch_name,Ranch,목장
 Icon_Village_name,Village,마을
 Icon_City_name,City,도시
 Icon_Castle_name,Castle,성
+Icon_Ruin_name,Ruins,폐허
+Icon_Altar_name,Altar,제단
+Icon_Clinic_name,Clinic,치료소
 ,,
 WORLD_ICON_STAT,,
 Prosperity,Prosperity,번영도
 Population,Population,인구
+,,
 ,,
 ICON_DESC_PROSPERITY,,
 Icon_Empty_desc,Empty_desc,텅 빈 공터입니다.
@@ -180,41 +184,41 @@ Icon_Ranch_desc,Ranch_Description,
 Icon_Village_desc,Village_Description,낡은 목재 벽 뒤로 목재 건물들이 옹기종기 모여 있습니다.
 Icon_City_desc,City_Description,도시의 방어를 위해 지어진 오래된 성벽 뒤로 석재와 목재 건물들이 보입니다.
 Icon_Castle_desc,Castle_Description,공성 병기를 막기 위한 해자와 높고 단단한 성벽 뒤로는 본성이 보입니다.
+Icon_Ruin_desc,Ruins_Description,모든 것이 사라진 후 잔해만이 남아있습니다.
+Icon_Altar_desc,Altar_Description,마을의 남은 인간들은 생존을 위해 주기적으로 그들 중 일부를 제물로 바치기로 하였습니다.
+Icon_Clinic_desc,Clinic_Description,도시의 미치광이 성직자들은 그들의 권력을 위해 괴물을 신으로 모시고 치료하기로 하였습니다.
 ,,
-Icon_Empty_desc_prosperity_0,Empty_desc_prosperity_0,텅 빈 공터입니다.
-Icon_Farm_desc_prosperity_0,Farm_Description_prosperity_0,"농지의 울타리는 무너져 있으며, 들판은 황폐합니다."
-Icon_Farm_desc_prosperity_1,Farm_Description_prosperity_1,"농지의 장비들은 평범하며, 들판은 서서히 익어가는 작물들이 여기저기 보입니다."
-Icon_Farm_desc_prosperity_2,Farm_Description_prosperity_2,"농지의 장비들은 새것과 다름없으며, 들판은 풍년을 이루어 먹을 것이 가득합니다."
-Icon_Ranch_desc_prosperity_0,Ranch_Description_prosperity_0,"목장의 울타리는 무너져 있으며, 대부분 비어있습니다."
-Icon_Ranch_desc_prosperity_1,Ranch_Description_prosperity_1,"목장의 장비들은 평범하며, 건초 창고는 적당히 차있습니다."
-Icon_Ranch_desc_prosperity_2,Ranch_Description_prosperity_2,"목장의 장비들은 새것과 다름없으며, 건초 창고는 가득 차있습니다."
-Icon_Village_desc_prosperity_0,Village_Description_prosperity_0,"마을의 울타리는 무너져 있으며, 건물들은 부셔져 있습니다."
-Icon_Village_desc_prosperity_1,Village_Description_prosperity_1,마을의 건물들은 오래되었지만 평범하며 모자람이 없습니다.
-Icon_Village_desc_prosperity_2,Village_Description_prosperity_2,"마을의 건물들은 호화로우며, 마을에 웃음이 끊이질 않습니다."
-Icon_City_desc_prosperity_0,City_Description_prosperity_0,"도시의 벽은 무너져 있으며, 건물들은 부셔져 있습니다."
-Icon_City_desc_prosperity_1,City_Description_prosperity_1,도시의 건물들은 오래되었지만 평범하며 모자람이 없습니다.
-Icon_City_desc_prosperity_2,City_Description_prosperity_2,"도시의 건물들은 호화로우며, 도시에 모두가 행복해 보입니다."
-Icon_Castle_desc_prosperity_0,Castle_Description_prosperity_0,"성의 성벽은 무너져 있으며, 성의 내부는 초라합니다."
-Icon_Castle_desc_prosperity_1,Castle_Description_prosperity_1,"성의 이곳저곳에 흠집들이 있지만 평범하며, 내부는 부족함이 없습니다."
-Icon_Castle_desc_prosperity_2,Castle_Description_prosperity_2,"성벽은 새것과 다름없으며, 성의 내부는 호화롭습니다."
+UI,,
+UI_raid,Raid,습격
+UI_move,Move,이동
+UI_wait,Wait,시간\n보내기
+UI_assemble,Assemble,조립
+UI_pause,Pause,일시정지
 ,,
-ICON_DESC_POPULATION,,
-Icon_Empty_desc_population_0,Empty_desc_population_0,먹을 것이 보이지 않습니다.
-Icon_Farm_desc_population_0,Farm_Description_population_0,일손이 매우 부족하며 이곳에서 일하는 농민은 거의 없습니다.
-Icon_Farm_desc_population_1,Farm_Description_population_1,"적지도, 많지도 않은 농민들이 이 농장에서 분주히 일하고 있습니다."
-Icon_Farm_desc_population_2,Farm_Description_population_2,많은 농민들이 여유롭게 농장을 가꾸고있습니다.
-Icon_Ranch_desc_population_0,Ranch_Description_population_0,"목장 울타리 안은 거의 비어있으며, 일하는 농민또한 없어보입니다."
-Icon_Ranch_desc_population_1,Ranch_Description_population_1,"적지도, 많지도 않은 수의 가축들이 농민들과 함께 있습니다."
-Icon_Ranch_desc_population_2,Ranch_Description_population_2,"목장 울타리 안은 가축들로 가득하며, 일하는 일손또한 많아보입니다."
-Icon_Village_desc_population_0,Village_Description_population_0,마을은 사람을 찾아보기 힘듭니다.
-Icon_Village_desc_population_1,Village_Description_population_1,마을 사람들이 여기저기 보입니다. 많지는 않지만 그렇다고 적다고 할 수도 없습니다.
-Icon_Village_desc_population_2,Village_Description_population_2,마을엔 사람들로 가득하며 시장은 북새통을 이루고 있습니다.
-Icon_City_desc_population_0,City_Description_population_0,도시의 거리는 비어있습니다. 사람 소리는 거의 들리지 않습니다.
-Icon_City_desc_population_1,City_Description_population_1,도시 여기저기에 사람들이 보입니다. 많지는 않지만 그렇다고 적다고 할 수도 없습니다.
-Icon_City_desc_population_2,City_Description_population_2,왁자지껄한 도시엔 사람들 소리로 가득합니다. 많은 사람들이 도시에 머물고 있습니다.
-Icon_Castle_desc_population_0,Castle_Description_population_0,성 안은 사람을 찾아보기 힘듭니다.
-Icon_Castle_desc_population_1,Castle_Description_population_1,"성 안 곳곳 병사들이 보입니다. 그리 큰 규모도, 작은 규모도 아닙니다."
-Icon_Castle_desc_population_2,Castle_Description_population_2,성 안은 훈련하는 많은 병사들과 사람들의 함성으로 가득합니다.
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
 ,,
 ,,
 ,,

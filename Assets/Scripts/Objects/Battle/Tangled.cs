@@ -134,7 +134,7 @@ public class Tangled : MonoBehaviour
 
             for (int i = 0; i < iJointCount; ++i)
             {
-                m_listCurve.Add(BezierCurve(((float)i / (float)(iJointCount - 1)) * (fCurTime / fMaxReachTime), Vector3.zero, m_vecP1, target));
+                m_listCurve.Add(BezierCurve(((float)i / (float)(iJointCount - 1)) * (fCurTime / fMaxReachTime), coreCollider.transform.position, m_vecP1, target));
 
                 if (i == iJointCount - 1)
                 {

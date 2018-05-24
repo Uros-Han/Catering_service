@@ -51,6 +51,18 @@ public class WorldIcon : MonoBehaviour
                 GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iListCastle.Add(m_iGridIdx);
                 ObjectFactory.getInstance.Create_Wall(2, transform.position, gameObject);
                 break;
+
+            case (int)WORLDICON_TYPE.RUIN:
+                GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sheet_worldicon[6];
+                break;
+
+            case (int)WORLDICON_TYPE.ALTAR:
+                GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sheet_worldicon[7];
+                break;
+
+            case (int)WORLDICON_TYPE.CLINIC:
+                GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sheet_worldicon[8];
+                break;
         }
 
         GameObject.Find("Geo").transform.GetChild(m_iGridIdx).GetComponent<WorldGeo>().m_worldIcon = gameObject;

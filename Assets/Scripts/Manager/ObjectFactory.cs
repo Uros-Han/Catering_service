@@ -371,6 +371,13 @@ public class ObjectFactory : Singleton<ObjectFactory>
 
         if (iHeroNum != -1)
         {
+            if (partyType.Equals(PARTY_TYPE.GARRISON))
+            {
+                Destroy(obj.GetComponent<Raider>());
+                obj.AddComponent<Garrison>();
+                obj.GetComponent<Garrison>().m_iHero = iHeroNum;
+            }
+
             obj.GetComponent<Party>().m_iHero = iHeroNum;
         }
 
@@ -433,6 +440,12 @@ public class ObjectFactory : Singleton<ObjectFactory>
                     obj.GetComponent<Party>().m_iSpeed = GameObject.Find("PartStatus").GetComponent<PartStatus>().m_iSpeed + Random.Range(-2, 2);
                     if (obj.GetComponent<Party>().m_iSpeed < 0)
                         obj.GetComponent<Party>().m_iSpeed = 0;
+                    break;
+
+                case PARTY_TYPE.GARRISON:
+                    obj.transform.Find("Wagon").gameObject.SetActive(false);
+                    obj.transform.Find("Flag").GetComponent<SpriteRenderer>().sprite = m_sheet_flag[Random.Range(0, m_sheet_flag.Length)];
+                    obj.AddComponent<Garrison>();
                     break;
             }
         }

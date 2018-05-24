@@ -284,7 +284,7 @@ public class Part : MonoBehaviour
         bStopAssemble = true;
     }
 
-    public IEnumerator OnField()
+    public IEnumerator OnField(Vector3 groundPos = default(Vector3))
     {
         m_bTurnIntoMeat = true;
         Vector2 mousePosition = Vector2.zero;
@@ -293,26 +293,53 @@ public class Part : MonoBehaviour
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Destroy(m_objHealthBar);
 
-        yield return new WaitForSeconds(1f);
+        Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
 
-        Vector3 corePos = GameObject.Find("Core").transform.position;
-        iTween.MoveTo(gameObject, iTween.Hash("x", corePos.x, "y", corePos.y, "time", 0.5f, "easetype", "easeInSine"));
+        if (groundPos != default(Vector3))
+        {
+            rigidbody.gravityScale = 0.5f;
+            //float fGravity = 9.8f;
+            do
+            {
+                //rigidbody.AddForce(Vector3.down * fGravity, ForceMode2D.Force);
+                if (transform.position.y < groundPos.y)
+                {
+                    break;
+                }
+                yield return null;
 
-        yield return new WaitForSeconds(0.55f);
+            } while (true);
+        }
+        rigidbody.gravityScale = 0f;
+        rigidbody.velocity = Vector3.zero;
+        rigidbody.angularVelocity = 0f;
 
-        //		BattleSceneMgr.getInstance.m_iMeat += 1;
-        Part CorePart = GameObject.Find("Core").GetComponent<Part>();
+        yield return new WaitForSeconds(0.5f);
 
-        ObjectFactory.getInstance.Create_DamageUI(GameObject.Find("Core").gameObject, 1f, false);
-
-        CorePart.m_fCurHealth += 3f;
-        if (CorePart.m_fCurHealth > CorePart.m_dicStat["Health"] + CorePart.m_dicStatBuff["Health"])
-            CorePart.m_fCurHealth = CorePart.m_dicStat["Health"] + CorePart.m_dicStatBuff["Health"];
-
-
+        iTween.ColorTo(gameObject, iTween.Hash("a", 0f, "time", 0.5f));
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
 
-        yield return null;
+        //yield return new WaitForSeconds(1f);
+
+        //Vector3 corePos = GameObject.Find("Core").transform.position;
+        //iTween.MoveTo(gameObject, iTween.Hash("x", corePos.x, "y", corePos.y, "time", 0.5f, "easetype", "easeInSine"));
+
+        //yield return new WaitForSeconds(0.55f);
+
+        ////		BattleSceneMgr.getInstance.m_iMeat += 1;
+        //Part CorePart = GameObject.Find("Core").GetComponent<Part>();
+
+        //ObjectFactory.getInstance.Create_DamageUI(GameObject.Find("Core").gameObject, 1f, false);
+
+        //CorePart.m_fCurHealth += 3f;
+        //if (CorePart.m_fCurHealth > CorePart.m_dicStat["Health"] + CorePart.m_dicStatBuff["Health"])
+        //    CorePart.m_fCurHealth = CorePart.m_dicStat["Health"] + CorePart.m_dicStatBuff["Health"];
+
+
+        //Destroy(gameObject);
+
+        //yield return null;
     }
 
     //	Vector3 vecScaleFactor;

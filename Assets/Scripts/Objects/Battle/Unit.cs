@@ -47,9 +47,10 @@ public class Unit : MonoBehaviour
             return;
 
         Transform FieldTrans = GameObject.Find("Field").transform;
-        Vector3 bodyPos = transform.position;
+        Vector3 groundPos = transform.position - new Vector3(0, 0.03f);
+        Vector3 corePos = GameObject.Find("Core").transform.position;
         Vector3 RandomPos = new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f));
-        bodyPos += RandomPos;
+        //bodyPos += RandomPos;
 
         GetComponent<FSM_Enemy>().StopAllCoroutines();
         for (int i = 0; i < transform.childCount; ++i)
@@ -57,14 +58,17 @@ public class Unit : MonoBehaviour
             if (transform.GetChild(i).GetComponent<Animator>() != null)
                 transform.GetChild(i).GetComponent<Animator>().enabled = false;
 
+            //transform.GetChild(i).GetComponent<SpriteRenderer>().color = Color.white;
+            //transform.GetChild(i).GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sprite_meat;
+
+            transform.GetChild(i).GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+            transform.GetChild(i).GetComponent<Rigidbody2D>().AddForce(Vector3.Normalize(new Vector3(transform.GetChild(i).position.x - corePos.x, Random.Range(1f, 1.1f))) * 10f, ForceMode2D.Impulse);
+            if (transform.GetChild(i).GetComponent<Part>().m_partType != PART_TYPE.ARM)
+                transform.GetChild(i).GetComponent<Rigidbody2D>().AddTorque(Random.Range(-220, 220));
             transform.GetChild(i).GetComponent<SpriteRenderer>().color = Color.white;
-            transform.GetChild(i).GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sprite_meat;
+            //transform.GetChild(i).GetComponent<SpriteRenderer>().color = new Color(160 / 255f, 160 / 255f, 160 / 255f);
 
-            transform.GetChild(i).GetComponent<Rigidbody2D>().AddForce((transform.GetChild(i).position - bodyPos) * 10f, ForceMode2D.Impulse);
-            transform.GetChild(i).GetComponent<Rigidbody2D>().AddTorque(Random.Range(0f, 30f));
-            transform.GetChild(i).GetComponent<SpriteRenderer>().color = new Color(160 / 255f, 160 / 255f, 160 / 255f);
-
-            StartCoroutine(ChangeParentToField(transform.GetChild(i).gameObject));
+            StartCoroutine(ChangeParentToField(transform.GetChild(i).gameObject, groundPos));
         }
 
         StartCoroutine(DestroyThis());
@@ -90,11 +94,11 @@ public class Unit : MonoBehaviour
         } while (true);
     }
 
-    IEnumerator ChangeParentToField(GameObject target)
+    IEnumerator ChangeParentToField(GameObject target, Vector3 groundPos)
     {
         yield return null;
         target.transform.parent = GameObject.Find("Field").transform;
-        BattleSceneMgr.getInstance.OnField(target);
+        BattleSceneMgr.getInstance.OnField(target, groundPos);
     }
 
     void Update()

@@ -22,6 +22,11 @@ public class Wall : MonoBehaviour
             gameObject.SetActive(false);
             return;
         }
+        else
+        {
+            GetComponent<SpriteRenderer>().enabled = true;
+            GetComponent<BoxCollider2D>().enabled = true;
+        }
 
         m_iWallIdx = BattleSceneMgr.getInstance.m_iSiegeWallIdx;
 

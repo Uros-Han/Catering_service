@@ -17,7 +17,6 @@ public class WorldMapManager : MonoBehaviour
     public List<int> m_iListCastle;
 
     public List<GameObject> m_encountPartyList;
-    public bool m_bAttackAvailableArea;
 
     void Awake()
     {
@@ -65,9 +64,33 @@ public class WorldMapManager : MonoBehaviour
             { // 지역점령 
                 int iPollutedIdx = GridMgr.getInstance.GetGridIdx(GameObject.Find("Core").transform.position);
                 ObjectFactory.getInstance.Create_Polluted(iPollutedIdx);
+
                 m_iPollutedIdxList.Add(iPollutedIdx);
 
                 WorldIcon pollutedIcon = GameObject.Find("Geo").transform.GetChild(iPollutedIdx).GetComponent<WorldGeo>().m_worldIcon.GetComponent<WorldIcon>();
+
+                switch (pollutedIcon.m_iconType)
+                {
+                    case (int)WORLDICON_TYPE.FARM:
+                        pollutedIcon.m_iconType = (int)WORLDICON_TYPE.RUIN;
+                        pollutedIcon.GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sheet_worldicon[(int)WORLDICON_TYPE.RUIN];
+                        break;
+
+                    case (int)WORLDICON_TYPE.VILLAGE:
+                        pollutedIcon.m_iconType = (int)WORLDICON_TYPE.ALTAR;
+                        pollutedIcon.GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sheet_worldicon[(int)WORLDICON_TYPE.ALTAR];
+                        break;
+
+                    case (int)WORLDICON_TYPE.CITY:
+                        pollutedIcon.m_iconType = (int)WORLDICON_TYPE.CLINIC;
+                        pollutedIcon.GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sheet_worldicon[(int)WORLDICON_TYPE.CLINIC];
+                        break;
+
+                    case (int)WORLDICON_TYPE.CASTLE:
+                        pollutedIcon.m_iconType = (int)WORLDICON_TYPE.RUIN;
+                        pollutedIcon.GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sheet_worldicon[(int)WORLDICON_TYPE.RUIN];
+                        break;
+                }
 
                 GameMgr.getInstance.m_iReward += (int)pollutedIcon.m_fPopulation * 10;
 
@@ -125,6 +148,13 @@ public class WorldMapManager : MonoBehaviour
 
     public void SceneToBattle()
     {
+        Core_World core = GameObject.Find("Core").GetComponent<Core_World>();
+        WorldIcon standingIcon = GameObject.Find("Geo").transform.GetChild(core.m_iGridIdx).GetComponent<WorldGeo>().m_worldIcon.GetComponent<WorldIcon>();
+        BattleSceneMgr battleScene = BattleSceneMgr.getInstance;
+
+        battleScene.m_curBattleWorldGeo = GameObject.Find("Geo").transform.GetChild(core.m_iGridIdx).GetComponent<WorldGeo>();
+        battleScene.m_curBattleWorldIcon = standingIcon;
+
         SceneManager.LoadScene("Battle", LoadSceneMode.Additive);
 
         Transform WorldTrans = GameObject.Find("World").transform;
@@ -168,52 +198,51 @@ public class WorldMapManager : MonoBehaviour
         Application.LoadLevel("Main");
     }
 
-    void WaitCheck()
+
+    void Raid()
     {
-        PartStatus partStatus = GameObject.Find("PartStatus").GetComponent<PartStatus>();
-        if (GameMgr.getInstance.m_iHunger - (20 + (1 * partStatus.m_iPartCount)) <= 0)
+        Core_World core = GameObject.Find("Core").GetComponent<Core_World>();
+
+        if (!core.m_bAttackAvailableArea)
+            return;
+
+        WorldIcon standingIcon = GameObject.Find("Geo").transform.GetChild(core.m_iGridIdx).GetComponent<WorldGeo>().m_worldIcon.GetComponent<WorldIcon>();
+
+        if (standingIcon.m_iconType.Equals((int)WORLDICON_TYPE.VILLAGE) || standingIcon.m_iconType.Equals((int)WORLDICON_TYPE.CITY) || standingIcon.m_iconType.Equals((int)WORLDICON_TYPE.CASTLE))
         {
-            ObjectFactory.getInstance.Create_MessageBox_TwoButton(Localization.Get("Mbox_HungerChecker"), "HungerCheckerWait", "DestroyMessageBox");
+            BattleSceneMgr battleScene = BattleSceneMgr.getInstance;
+
+            battleScene.m_bSiege = true;
+            battleScene.m_iSiegeWallIdx = standingIcon.m_iWallIdx;
         }
-        else
-            Wait();
+
+        core.CheckEnmeyInThisArea();
+        core.EncountEnemy();
+
     }
 
+
+    public bool bPausedGame = true;
     public void Wait()
     {
-        if (m_bAttackAvailableArea)
+        if (bPausedGame)
         {
-            Core_World core = GameObject.Find("Core").GetComponent<Core_World>();
-            WorldIcon standingIcon = GameObject.Find("Geo").transform.GetChild(core.m_iGridIdx).GetComponent<WorldGeo>().m_worldIcon.GetComponent<WorldIcon>();
+            GameObject.Find("Stay").transform.GetChild(1).GetComponent<UILabel>().text = Localization.Get("UI_pause");
+            GameObject.Find("Stay").transform.GetChild(0).GetComponent<UISprite>().color = new Color(233 / 255f, 177 / 255f, 56 / 255f);
+            GameObject.Find("Core").GetComponent<Core_World>().ChangeBlockStatus(true);
+            bPausedGame = false;
 
-            if (standingIcon.m_iconType.Equals((int)WORLDICON_TYPE.VILLAGE) || standingIcon.m_iconType.Equals((int)WORLDICON_TYPE.CITY) || standingIcon.m_iconType.Equals((int)WORLDICON_TYPE.CASTLE))
-            {
-                BattleSceneMgr.getInstance.m_bSiege = true;
-                BattleSceneMgr.getInstance.m_iSiegeWallIdx = standingIcon.m_iWallIdx;
-            }
-
-            core.CheckEnmeyInThisArea();
-            core.EncountEnemy();
+            TimeMgr.getInstance.Play(true);
         }
         else
         {
-            TimeMgr.getInstance.Play();
+            GameObject.Find("Stay").transform.GetChild(1).GetComponent<UILabel>().text = Localization.Get("UI_wait");
+            GameObject.Find("Stay").transform.GetChild(0).GetComponent<UISprite>().color = Color.white;
+            GameObject.Find("Core").GetComponent<Core_World>().ChangeBlockStatus(false);
+            bPausedGame = true;
 
-            Core_World coreWorld = GameObject.Find("Core").GetComponent<Core_World>();
-
-            //      coreWorld.m_listMoveIdx.Clear ();
-
-            PartStatus partStatus = GameObject.Find("PartStatus").GetComponent<PartStatus>();
-            if (GameMgr.getInstance.m_iHunger - (20 + (1 * partStatus.m_iPartCount)) > 0)
-                GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(GameMgr.getInstance.m_iHunger - (20 + (1 * partStatus.m_iPartCount)));
-            else
-            {
-                float fGainHunger = coreWorld.fPartEatHunger + GameMgr.getInstance.m_iHunger - (20 + (1 * partStatus.m_iPartCount));
-                GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(0);
-                StartCoroutine(coreWorld.EatMyPart(fGainHunger));
-            }
+            TimeMgr.getInstance.Stop();
         }
-
 
         //StartCoroutine(EnemyCheck());
     }

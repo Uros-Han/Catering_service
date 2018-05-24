@@ -92,6 +92,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
             m_geoTrans.GetChild(idxList[i]).GetComponent<WorldGeo>().GetComponent<SpriteRenderer>().sprite = objFac.m_sheet_worldGeo[(int)WORLD_GEO.GRASS];
         }
 
+        //noise
         float scale = 0.3f;
         float xOrg = Random.Range(0f, 999f);
         float yOrg = Random.Range(0f, 999f);
@@ -181,6 +182,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
             yield return null;
 
         } while (village_deployableIdx.Count > 0);
+
 
         Transform icons = GameObject.Find("WorldIcons").transform;
 
@@ -379,6 +381,22 @@ public class WorldGenerator : Singleton<WorldGenerator>
 
         int iCenterIdx = (grid.m_iXcount * (grid.m_iYcount / 2)) + (grid.m_iXcount / 2);
 
+        idxList.Add(iCenterIdx - grid.m_iXcount - 1);
+        idxList.Add(iCenterIdx - grid.m_iXcount);
+        idxList.Add(iCenterIdx - grid.m_iXcount + 1);
+        idxList.Add(iCenterIdx - 1);
+        idxList.Add(iCenterIdx);
+        idxList.Add(iCenterIdx + 1);
+        idxList.Add(iCenterIdx + grid.m_iXcount - 1);
+        idxList.Add(iCenterIdx + grid.m_iXcount);
+        idxList.Add(iCenterIdx + grid.m_iXcount + 1);
+
+        for (int i = 0; i < idxList.Count; ++i)
+        {
+            m_geoTrans.GetChild(idxList[i]).GetComponent<WorldGeo>().m_geoStatus = WORLD_GEO.GRASS;
+            m_geoTrans.GetChild(idxList[i]).GetComponent<WorldGeo>().GetComponent<SpriteRenderer>().sprite = objFac.m_sheet_worldGeo[(int)WORLD_GEO.GRASS];
+        }
+
 
         objFac.Create_WorldIcon(grid.GetPosOfIdx(iCenterIdx - grid.m_iXcount - 1), (int)WORLDICON_TYPE.EMPTY);
         objFac.Create_WorldIcon(grid.GetPosOfIdx(iCenterIdx - grid.m_iXcount), (int)WORLDICON_TYPE.EMPTY);
@@ -398,28 +416,29 @@ public class WorldGenerator : Singleton<WorldGenerator>
 
         //      GameObject.Find ("WorldIcons").BroadcastMessage ("CheckAroundAmIAlone");
 
+
         Transform icons = GameObject.Find("WorldIcons").transform;
-        for (int i = 0; i < icons.childCount; ++i)
-        {
-            icons.GetChild(i).SendMessage("CheckAroundAmIAlone");
-            if (i % 10 == 0)
-            {
-                float fProgress = 0.5f + ((float)i / (float)icons.childCount * 0.2f);
-                LoadingProgress(fProgress, string.Format("접근 불가 섬 확인중 ({0}/{1})", i, icons.childCount));
-                yield return null;
-            }
-        }
+        //for (int i = 0; i < icons.childCount; ++i)
+        //{
+        //    icons.GetChild(i).SendMessage("CheckAroundAmIAlone", SendMessageOptions.DontRequireReceiver);
+        //    if (i % 10 == 0)
+        //    {
+        //        float fProgress = 0.5f + ((float)i / (float)icons.childCount * 0.2f);
+        //        LoadingProgress(fProgress, string.Format("접근 불가 섬 확인중 ({0}/{1})", i, icons.childCount));
+        //        yield return null;
+        //    }
+        //}
 
-        LoadingProgress(0.7f, "섬 파괴 중");
-        m_geoTrans.BroadcastMessage("DestroyIfIsland");
-        yield return new WaitForSeconds(0.5f);
+        //LoadingProgress(0.7f, "섬 파괴 중");
+        //m_geoTrans.BroadcastMessage("DestroyIfIsland");
+        //yield return new WaitForSeconds(0.5f);
 
-        LoadingProgress(0.8f, "바닷물 퍼내는 중");
-        FloodFill(0, 0, WORLD_GEO.WATER);
-        FloodFill(grid.m_iXcount - 1, 0, WORLD_GEO.WATER);
-        FloodFill(0, grid.m_iYcount - 1, WORLD_GEO.WATER);
-        FloodFill(grid.m_iXcount - 1, grid.m_iYcount - 1, WORLD_GEO.WATER);
-        yield return new WaitForSeconds(0.5f);
+        //LoadingProgress(0.8f, "바닷물 퍼내는 중");
+        //FloodFill(0, 0, WORLD_GEO.WATER);
+        //FloodFill(grid.m_iXcount - 1, 0, WORLD_GEO.WATER);
+        //FloodFill(0, grid.m_iYcount - 1, WORLD_GEO.WATER);
+        //FloodFill(grid.m_iXcount - 1, grid.m_iYcount - 1, WORLD_GEO.WATER);
+        //yield return new WaitForSeconds(0.5f);
 
         CorePositioning(true);
 

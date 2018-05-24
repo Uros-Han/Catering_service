@@ -31,7 +31,7 @@ public class MainManager : MonoBehaviour
         do
         {
             float fRand = Random.Range(0, 100f);
-            if (fRand < 50f)
+            if (fRand < 70f)
                 objFac.Create_Civilian(100f);
             else
                 objFac.Create_Mercenary(100f);

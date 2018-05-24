@@ -242,8 +242,8 @@ public class FSM_Enemy : FSM
         }
         GetComponent<FSM_Enemy>().m_AiState = AI_STATE.DISABLED;
 
-        float fGroggyTime = 2f;
-        yield return new WaitForSeconds(fGroggyTime);
+        //float fGroggyTime = 2f;
+        //yield return new WaitForSeconds(fGroggyTime);
 
         if (GetComponent<FSM_Enemy>().m_AiState == AI_STATE.EATEN)
             yield break;

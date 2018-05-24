@@ -19,6 +19,7 @@ public class Core_World : MonoBehaviour
 
     [HideInInspector]
     public float fPartEatHunger = 30f;
+    public bool m_bAttackAvailableArea;
 
     // Use this for initialization
     void Start()
@@ -200,6 +201,15 @@ public class Core_World : MonoBehaviour
 
                         //GameObject.Find("Party").BroadcastMessage("SetDestination", SendMessageOptions.DontRequireReceiver);
 
+                        if (m_iDestinationIdx.Equals(m_iGridIdx))
+                        {
+                            GameObject.Find("MoveOrderPanel").transform.GetChild(0).GetComponent<UISprite>().GrayScale(true);
+                        }
+                        else
+                        {
+                            GameObject.Find("MoveOrderPanel").transform.GetChild(0).GetComponent<UISprite>().GrayScale(false);
+                        }
+
                     }
                     else
                     {
@@ -218,6 +228,9 @@ public class Core_World : MonoBehaviour
 
     public void HungerCheck()
     {
+        if (m_iGridIdx == grid.GetGridIdx(GameObject.Find("Destination").transform.position))
+            return;
+
         if (m_iNeedHunger > GameMgr.getInstance.m_iHunger)
         {
             ObjectFactory.getInstance.Create_MessageBox_TwoButton(Localization.Get("Mbox_HungerChecker"), "HungerCheckerEnforcement", "DestroyMessageBox");
@@ -233,10 +246,23 @@ public class Core_World : MonoBehaviour
 
     public void MoveOrder()
     {
+        GameObject Dest = GameObject.Find("Destination").gameObject;
+
+        if (m_iGridIdx == grid.GetGridIdx(Dest.transform.position))
+            return;
+
+        GameObject.Find("Raid").GetComponent<UIPanel>().alpha = 0f;
+        iTween.MoveTo(GameObject.Find("Raid").gameObject, iTween.Hash("x", -96.7f, "y", -113f, "time", 0.5f, "easetype", "easeInOutBack", "isLocal", true));
+
+        GameObject.Find("Stay").transform.GetChild(1).GetComponent<UILabel>().text = Localization.Get("UI_pause");
+        GameObject.Find("MoveOrderPanel").transform.GetChild(0).GetComponent<UISprite>().GrayScale(true);
+        GameObject.Find("Stay").transform.GetChild(0).GetComponent<UISprite>().color = new Color(233 / 255f, 177 / 255f, 56 / 255f);
+        GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().bPausedGame = false;
+
         GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_worldTurnState = WORLDTURN_STATE.MOVE;
 
-        GameObject Dest = GameObject.Find("Destination").gameObject;
         Dest.GetComponent<SpriteRenderer>().enabled = false;
+
 
         iTween.MoveTo(GameObject.Find("WorldOverview").transform.GetChild(0).gameObject, iTween.Hash("x", 152f, "time", 0.5f, "isLocal", true, "easetype", "easeInSine"));
 
@@ -270,9 +296,13 @@ public class Core_World : MonoBehaviour
 
         for (int i = 0; i < m_listMoveIdx.Count; ++i)
         {
+
             Vector3 destPos = grid.GetPosOfIdx(m_listMoveIdx[i]);
 
             TimeMgr.getInstance.Play();
+
+            if (GameObject.Find("PartyManager") != null)
+                GameObject.Find("PartyManager").GetComponent<PartyManager>().CalculateDepolying();
 
             if (GameMgr.getInstance.m_iHunger - (20 + (1 * partStatus.m_iPartCount)) > 0)
             {
@@ -299,8 +329,14 @@ public class Core_World : MonoBehaviour
 
                 transform.Translate(Vector3.Normalize(destPos - transform.position) * (fSpeed + fSpeedAdjuster) * Time.deltaTime);
 
+                if (!world.m_worldTurnState.Equals(WORLDTURN_STATE.MOVE))
+                    break;
+
                 yield return null;
             }
+
+            if (!world.m_worldTurnState.Equals(WORLDTURN_STATE.MOVE))
+                break;
 
             transform.position = destPos;
 
@@ -327,14 +363,22 @@ public class Core_World : MonoBehaviour
 
         if (CheckEnmeyInThisArea(false, true))
         {
-            GameObject.Find("Stay").transform.GetChild(0).GetComponent<UISprite>().color = Color.red;
-            GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_bAttackAvailableArea = true;
+            GameObject.Find("Raid").GetComponent<UIPanel>().alpha = 1f;
+            iTween.MoveTo(GameObject.Find("Raid").gameObject, iTween.Hash("x", -195.1f, "y", -113f, "time", 0.5f, "easetype", "easeInOutBack", "isLocal", true));
+
+            m_bAttackAvailableArea = true;
         }
         else
         {
-            GameObject.Find("Stay").transform.GetChild(0).GetComponent<UISprite>().color = Color.white;
-            GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_bAttackAvailableArea = false;
+            GameObject.Find("Raid").GetComponent<UIPanel>().alpha = 0f;
+            iTween.MoveTo(GameObject.Find("Raid").gameObject, iTween.Hash("x", -96.7f, "y", -113f, "time", 0.5f, "easetype", "easeInOutBack", "isLocal", true));
+
+            m_bAttackAvailableArea = false;
         }
+
+        GameObject.Find("Stay").transform.GetChild(1).GetComponent<UILabel>().text = Localization.Get("UI_wait");
+        GameObject.Find("Stay").transform.GetChild(0).GetComponent<UISprite>().color = Color.white;
+        GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().bPausedGame = true;
 
         world.m_worldTurnState = WORLDTURN_STATE.IDLE;
         StartCoroutine(Idle());

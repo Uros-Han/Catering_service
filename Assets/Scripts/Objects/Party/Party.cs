@@ -50,6 +50,13 @@ public class Party : MonoBehaviour
             SetEnemyList();
 
         m_sprite_partyStateIndicator = transform.Find("PartyStateIndicator").GetComponent<SpriteRenderer>();
+
+        if (TimeMgr.getInstance.m_timeState.Equals(TIME_STATE.PLAY))
+        {
+            Idling();
+            MoveOrder();
+        }
+
     }
 
     protected virtual void SetEnemyList()
@@ -80,11 +87,11 @@ public class Party : MonoBehaviour
                     break;
 
                 case (int)HERO.ADAM:
-                    //m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
-                    //m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
-                    //m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
-                    //m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
-                    //m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+                    m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
                     break;
 
                 case (int)HERO.HANK:
@@ -334,7 +341,7 @@ public class Party : MonoBehaviour
         if (m_fCampingTimer > 0)
             m_fCampingTimer -= Time.deltaTime;
 
-        if (m_fCampingTimer < 0f)
+        if (m_fCampingTimer <= 0f)
         {
             SetDestination();
 
@@ -394,8 +401,9 @@ public class Party : MonoBehaviour
         Destroy(path);
 
         int count = m_listMoveIdx.Count;
+        DeveloperTool devTool = GameObject.Find("DeveloperTools").GetComponent<DeveloperTool>();
 
-        if (!GameMgr.getInstance.m_bDeveloperMode)
+        if (!devTool.m_bFogDisabled)
             count = 1;
         else
         {
@@ -404,7 +412,7 @@ public class Party : MonoBehaviour
         }
 
         int iCurPath = 0;
-        if (!GameMgr.getInstance.m_bDeveloperMode)
+        if (!devTool.m_bFogDisabled)
         {
             for (int i = 0; i < m_listMoveIdx.Count; ++i)
             {
@@ -422,10 +430,10 @@ public class Party : MonoBehaviour
         for (int i = 0; i < count; ++i)
         {
             GameObject myLine = new GameObject();
-            if (!GameMgr.getInstance.m_bDeveloperMode)
+            if (!devTool.m_bFogDisabled)
                 path = myLine;
 
-            if (GameMgr.getInstance.m_bDeveloperMode)
+            if (devTool.m_bFogDisabled)
                 iCurPath = i;
 
             myLine.transform.position = grid.GetPosOfIdx(m_listMoveIdx[iCurPath]);
@@ -447,7 +455,7 @@ public class Party : MonoBehaviour
             lr.sortingLayerName = "Default";
             lr.sortingOrder = -1;
 
-            if (!GameMgr.getInstance.m_bDeveloperMode)
+            if (!devTool.m_bFogDisabled)
                 lr.transform.parent = GameObject.Find("PartyPath").transform;
             else
                 lr.transform.parent = path.transform;
