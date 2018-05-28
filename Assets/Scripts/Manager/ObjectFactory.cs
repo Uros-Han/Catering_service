@@ -71,6 +71,9 @@ public class ObjectFactory : Singleton<ObjectFactory>
     public Sprite[] m_sheet_worldicon;
     public Sprite[] m_sheet_worldGeo;
 
+    public Sprite[] m_sprite_geoFloor;
+    public Sprite[][] m_sprite_geoBuilding;
+
     public Sprite[] m_sheet_flag;
 
     public Sprite[] m_sheet_PartyStateIndicator;
@@ -175,6 +178,13 @@ public class ObjectFactory : Singleton<ObjectFactory>
         m_sheet_Road = Resources.LoadAll<Sprite>("Sprites/Sheets/sheet_world_road");
         m_objWall = Resources.Load("Prefabs/Objects/World/Wall") as GameObject;
         m_sheet_Wall = Resources.LoadAll<Sprite>("Sprites/Sheets/sheet_world_wall");
+
+        m_sprite_geoFloor = Resources.LoadAll<Sprite>("Sprites/Geo/Floor");
+        m_sprite_geoBuilding = new Sprite[(int)WORLDICON_TYPE.END][];
+        for (int i = 0; i < (int)WORLDICON_TYPE.END; ++i)
+        {
+            m_sprite_geoBuilding[i] = Resources.LoadAll<Sprite>(string.Format("Sprites/Geo/Buildings/IconType_{0}", i));
+        }
 
         m_material_diffuse = Resources.Load<Material>("Materials/Diffuse");
         m_material_SpritePaletteLightingMaterial = Resources.Load<Material>("Materials/SpritePaletteLightingMaterial");
@@ -368,6 +378,11 @@ public class ObjectFactory : Singleton<ObjectFactory>
             if ((int)enemyType < enemyList[i])
                 enemyType = (ENEMY_TYPE)enemyList[i];
         }
+
+        ///HAVE TO ERASE THIS! KNIGHT PARTY BLOCKER
+        if (enemyType.Equals(ENEMY_TYPE.KNIGHT))
+            enemyType = ENEMY_TYPE.MERCENARY;
+        /// 
 
         if (iHeroNum != -1)
         {

@@ -78,7 +78,7 @@ public class WorldOverView : MonoBehaviour
             case (int)WORLDICON_TYPE.FARM:
                 strIconType = "Farm";
                 break;
-            case (int)WORLDICON_TYPE.RANCH:
+            case (int)WORLDICON_TYPE.LUMBERMILL:
                 strIconType = "Ranch";
                 break;
             case (int)WORLDICON_TYPE.VILLAGE:
@@ -125,7 +125,7 @@ public class WorldOverView : MonoBehaviour
                 else
                     iPopulation = 2;
                 break;
-            case (int)WORLDICON_TYPE.RANCH:
+            case (int)WORLDICON_TYPE.LUMBERMILL:
                 if (m_selectedWorldIcon.m_fPopulation < WorldGenerator.getInstance.m_fRanchPopulationStandard / 2f)
                     iPopulation = 0;
                 else if (m_selectedWorldIcon.m_fPopulation < WorldGenerator.getInstance.m_fRanchPopulationStandard)

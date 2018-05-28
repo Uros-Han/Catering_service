@@ -189,7 +189,11 @@ public class Core_World : MonoBehaviour
                     if (m_listMoveIdx.Count != 0) // Select WorldIcon
                     {
                         PartStatus partStatus = GameObject.Find("PartStatus").GetComponent<PartStatus>();
-                        m_iNeedHunger = m_listMoveIdx.Count * (20 + (1 * partStatus.m_iPartCount));
+                        if (!m_iDestinationIdx.Equals(m_iGridIdx))
+                            m_iNeedHunger = m_listMoveIdx.Count * (20 + (1 * partStatus.m_iPartCount));
+                        else
+                            m_iNeedHunger = 0;
+
                         GameObject Dest = GameObject.Find("Destination").gameObject;
                         Dest.GetComponent<SpriteRenderer>().enabled = true;
                         Dest.transform.position = grid.GetPosOfIdx(grid.GetGridIdx(vecMouseClickedPos));
@@ -201,7 +205,7 @@ public class Core_World : MonoBehaviour
 
                         //GameObject.Find("Party").BroadcastMessage("SetDestination", SendMessageOptions.DontRequireReceiver);
 
-                        if (m_iDestinationIdx.Equals(m_iGridIdx))
+                        if (m_iDestinationIdx.Equals(m_iGridIdx) && Vector3.Distance(transform.position, GameObject.Find("Destination").gameObject.transform.position) < 0.01f)
                         {
                             GameObject.Find("MoveOrderPanel").transform.GetChild(0).GetComponent<UISprite>().GrayScale(true);
                         }
@@ -228,8 +232,10 @@ public class Core_World : MonoBehaviour
 
     public void HungerCheck()
     {
-        if (m_iGridIdx == grid.GetGridIdx(GameObject.Find("Destination").transform.position))
+        if (m_iGridIdx == grid.GetGridIdx(GameObject.Find("Destination").transform.position) && Vector3.Distance(transform.position, GameObject.Find("Destination").gameObject.transform.position) < 0.01f)
+        {
             return;
+        }
 
         if (m_iNeedHunger > GameMgr.getInstance.m_iHunger)
         {
@@ -247,8 +253,7 @@ public class Core_World : MonoBehaviour
     public void MoveOrder()
     {
         GameObject Dest = GameObject.Find("Destination").gameObject;
-
-        if (m_iGridIdx == grid.GetGridIdx(Dest.transform.position))
+        if (m_iGridIdx == grid.GetGridIdx(Dest.transform.position) && Vector3.Distance(transform.position, Dest.transform.position) < 0.01f)
             return;
 
         GameObject.Find("Raid").GetComponent<UIPanel>().alpha = 0f;
@@ -293,6 +298,7 @@ public class Core_World : MonoBehaviour
         float fSpeedMultiplier = 0.06f;
         float fSpeed = 0.15f + partStatus.m_iSpeed * 0.015f;
         float fSpeedAdjuster = 0f;
+        bool bIsTuto = GameMgr.getInstance.m_bIsTutorial;
 
         for (int i = 0; i < m_listMoveIdx.Count; ++i)
         {
@@ -301,7 +307,7 @@ public class Core_World : MonoBehaviour
 
             TimeMgr.getInstance.Play();
 
-            if (GameObject.Find("PartyManager") != null)
+            if (GameObject.Find("PartyManager") != null && !bIsTuto)
                 GameObject.Find("PartyManager").GetComponent<PartyManager>().CalculateDepolying();
 
             if (GameMgr.getInstance.m_iHunger - (20 + (1 * partStatus.m_iPartCount)) > 0)
@@ -358,7 +364,8 @@ public class Core_World : MonoBehaviour
         }
 
         ProCamera2D.Instance.AdjustCameraTargetInfluence(ProCamera2D.Instance.CameraTargets[0], 0f, 0f);
-        ProCamera2D.Instance.AdjustCameraTargetInfluence(ProCamera2D.Instance.CameraTargets[1], 1f, 1f);
+        if (ProCamera2D.Instance.CameraTargets.Count > 1)
+            ProCamera2D.Instance.AdjustCameraTargetInfluence(ProCamera2D.Instance.CameraTargets[1], 1f, 1f);
         GameObject.Find("PC2DPanTarget").transform.position = gameObject.transform.position;
 
         if (CheckEnmeyInThisArea(false, true))

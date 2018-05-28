@@ -15,6 +15,7 @@ public class WorldMapManager : MonoBehaviour
     public List<int> m_iListVillage;
     public List<int> m_iListCity;
     public List<int> m_iListCastle;
+    public Dictionary<int, int> m_iDicHeroGarrison;// gridIdx, HeroNum
 
     public List<GameObject> m_encountPartyList;
 
@@ -45,6 +46,8 @@ public class WorldMapManager : MonoBehaviour
             GameObject.Find("DeveloperTools").transform.GetChild(1).gameObject.SetActive(false);
 
         GameObject.Find("Player").SendMessage("CameBackFromBattleScene");
+
+
     }
 
     void OnEnable()
@@ -127,6 +130,12 @@ public class WorldMapManager : MonoBehaviour
     public void LoadWorld()
     {
         SaveManager.getInstance.LocalLoad();
+
+        ObjectFactory objectFactory = ObjectFactory.getInstance;
+        foreach (KeyValuePair<int, int> tmp in m_iDicHeroGarrison)
+        {
+            objectFactory.Create_Party(tmp.Key, PARTY_TYPE.GARRISON, tmp.Value);
+        }
     }
 
     public void Assembly()

@@ -99,6 +99,8 @@ public class SaveManager : Singleton<SaveManager>
 
         ES3.Save<List<int>>("pollutedList", GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iPollutedIdxList, "world.txt");
         ES3.Save<int>("day", GameMgr.getInstance.m_iDay, "world.txt");
+
+        ES3.Save<Dictionary<int, int>>("heroGarrison", GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iDicHeroGarrison, "world.txt");
     }
 
     void LoadWorld()
@@ -144,6 +146,8 @@ public class SaveManager : Singleton<SaveManager>
         GameObject.Find("WorldTool").GetComponent<UIPanel>().alpha = 0f;
 
         GameMgr.getInstance.m_iDay = ES3.Load<int>("day", "world.txt");
+
+        GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iDicHeroGarrison = ES3.Load<Dictionary<int, int>>("heroGarrison", "world.txt");
 
         Transform m_geoTrans = GameObject.Find("Geo").transform;
         for (int i = 0; i < worldMapManager.m_iListCity.Count / 3; ++i)

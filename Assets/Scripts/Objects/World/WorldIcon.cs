@@ -30,7 +30,7 @@ public class WorldIcon : MonoBehaviour
                 GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sheet_worldicon[1];
                 break;
 
-            case (int)WORLDICON_TYPE.RANCH:
+            case (int)WORLDICON_TYPE.LUMBERMILL:
                 GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sheet_worldicon[2];
                 break;
 

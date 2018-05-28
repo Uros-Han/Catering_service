@@ -210,80 +210,8 @@ public class WorldGenerator : Singleton<WorldGenerator>
             }
         }
 
-        //for (int i = 0; i < iCastleNum; ++i)
-        //{
-        //    //			int iRandomIdx = idxList[(int)GenerateNormalRandom(idxList.Count/2f, 10f)];
-        //    int iRandomIdx = idxList[Random.Range(0, idxList.Count)];
-
-        //    GameObject objIcon = objFac.Create_WorldIcon(grid.GetPosOfIdx(iRandomIdx), (int)WORLDICON_TYPE.CASTLE);
-        //    //			m_geoTrans.GetChild (iRandomIdx).GetComponent<WorldGeo> ().m_worldIcon = objIcon;
-        //    idxList.Remove(iRandomIdx);
-        //}
-
-        //LoadingProgress(0.3f, "성 초기화 중");
-        //yield return new WaitForSeconds(0.1f);
-
-        //for (int i = 0; i < iCityNum; ++i)
-        //{
-        //    int iRandomIdx = idxList[Random.Range(0, idxList.Count)];
-
-        //    GameObject objIcon = objFac.Create_WorldIcon(grid.GetPosOfIdx(iRandomIdx), (int)WORLDICON_TYPE.CITY);
-        //    //			m_geoTrans.GetChild (iRandomIdx).GetComponent<WorldGeo> ().m_worldIcon = objIcon;
-        //    idxList.Remove(iRandomIdx);
-        //}
-
-        //LoadingProgress(0.4f, "도시 초기화 중");
-        //yield return new WaitForSeconds(0.1f);
-
-        //for (int i = 0; i < idxList.Count; ++i)
-        //{
-        //    int iRandom = Random.Range(0, 100);
-        //    GameObject objIcon = null;
-
-        //    if (iRandom < 20)
-        //    {
-        //    }
-        //    else if (iRandom < 80)
-        //        objIcon = objFac.Create_WorldIcon(grid.GetPosOfIdx(idxList[i]), (int)WORLDICON_TYPE.EMPTY);
-        //    else if (iRandom < 95)
-        //        objIcon = objFac.Create_WorldIcon(grid.GetPosOfIdx(idxList[i]), (int)WORLDICON_TYPE.FARM);
-        //    //			else if (iRandom < 95) {
-        //    //				objIcon = objFac.Create_WorldIcon (grid.GetPosOfIdx (idxList [i]), (int)WORLDICON_TYPE.RANCH);
-        //    //			}
-        //    else
-        //        objIcon = objFac.Create_WorldIcon(grid.GetPosOfIdx(idxList[i]), (int)WORLDICON_TYPE.VILLAGE);
-
-        //    //			m_geoTrans.GetChild (idxList[i]).GetComponent<WorldGeo> ().m_worldIcon = objIcon;
-        //}
-
         LoadingProgress(0.5f, "지역 초기화 중");
         yield return new WaitForSeconds(0.1f);
-
-        //		GameObject.Find ("WorldIcons").BroadcastMessage ("CheckAroundAmIAlone");
-
-
-
-        //LoadingProgress(0.7f, "섬 파괴 중");
-        //m_geoTrans.BroadcastMessage("DestroyIfIsland");
-        //yield return new WaitForSeconds(0.5f);
-
-        //LoadingProgress(0.8f, "바닷물 퍼내는 중");
-        //FloodFill(0, 0, WORLD_GEO.WATER);
-        //FloodFill(grid.m_iXcount - 1, 0, WORLD_GEO.WATER);
-        //FloodFill(0, grid.m_iYcount - 1, WORLD_GEO.WATER);
-        //FloodFill(grid.m_iXcount - 1, grid.m_iYcount - 1, WORLD_GEO.WATER);
-        //yield return new WaitForSeconds(0.5f);
-
-        //LoadingProgress(0.9f, "산맥 생성 중");
-        //for (int i = 0; i < m_geoTrans.childCount; ++i)
-        //{
-        //    WorldGeo targetGeo = m_geoTrans.GetChild(i).GetComponent<WorldGeo>();
-        //    if (targetGeo.m_worldIcon == null && targetGeo.m_geoStatus == WORLD_GEO.GRASS)
-        //    {
-        //        targetGeo.m_geoStatus = WORLD_GEO.CLIFF;
-        //        targetGeo.gameObject.GetComponent<SpriteRenderer>().sprite = objFac.m_sheet_worldGeo[(int)WORLD_GEO.CLIFF];
-        //    }
-        //}
 
 
         WorldMapManager worldMapManager = GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>();
@@ -331,6 +259,37 @@ public class WorldGenerator : Singleton<WorldGenerator>
                 LoadingProgress(fProgress, string.Format("세계 인구수 & 번영도 설정중 ({0}/{1})", i, icons.childCount));
                 yield return null;
             }
+        }
+
+        int iVillageHeroCount = 8;
+        int iHeroGarrisonCount = 12;
+
+        List<int> listRandomHero = new List<int>();
+        for (int i = 0; i < iHeroGarrisonCount; ++i)
+        {
+            listRandomHero.Add(i);
+        }
+
+        worldMapManager.m_iDicHeroGarrison = new Dictionary<int, int>();
+        for (int i = 0; i < iHeroGarrisonCount; ++i)
+        {
+            int iRandom = Random.Range(0, listRandomHero.Count);
+
+            if (i < iVillageHeroCount)
+            {
+                worldMapManager.m_iDicHeroGarrison.Add(worldMapManager.m_iListVillage[i], listRandomHero[iRandom]);
+            }
+            else
+            {
+                worldMapManager.m_iDicHeroGarrison.Add(worldMapManager.m_iListCity[i - iVillageHeroCount], listRandomHero[iRandom]);
+            }
+
+            listRandomHero.RemoveAt(iRandom);
+        }
+
+        foreach (KeyValuePair<int, int> tmp in worldMapManager.m_iDicHeroGarrison)
+        {
+            objFac.Create_Party(tmp.Key, PARTY_TYPE.GARRISON, tmp.Value);
         }
 
         LoadingProgress(1f, "완료!");
@@ -554,7 +513,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
                     list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
                     fPopulation -= m_fTypeCost[(int)ENEMY_TYPE.CIVILIAN];
                     break;
-                case WORLDICON_TYPE.RANCH:
+                case WORLDICON_TYPE.LUMBERMILL:
                     fRandom = Random.Range(0f, 100f);
 
                     if (fRandom < 70)
@@ -642,6 +601,21 @@ public class WorldGenerator : Singleton<WorldGenerator>
 
             if (!worldIcon.m_iconType.Equals((int)WORLDICON_TYPE.FARM) && iCoreIdx != iGridIdx && !bIsTutorial)
             {
+                switch (worldIcon.m_iconType)
+                {
+                    case (int)WORLDICON_TYPE.CASTLE:
+                        GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iListCastle.Remove(iGridIdx);
+                        break;
+
+                    case (int)WORLDICON_TYPE.CITY:
+                        GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iListCity.Remove(iGridIdx);
+                        break;
+
+                    case (int)WORLDICON_TYPE.VILLAGE:
+                        GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iListVillage.Remove(iGridIdx);
+                        break;
+                }
+
                 GameObject newOne = ObjectFactory.getInstance.Create_WorldIcon(grid.GetPosOfIdx(iGridIdx), (int)WORLDICON_TYPE.FARM);
                 SetWorldPropertyAndPopulation(iGridIdx, newOne.GetComponent<WorldIcon>(), WORLDICON_TYPE.FARM);
                 Destroy(worldIcon.m_objWall.gameObject);
@@ -658,7 +632,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
                 case WORLDICON_TYPE.FARM:
                     worldIcon.m_fPopulation = GenerateNormalRandom(m_fFarmPopulationStandard, 10f);
                     break;
-                case WORLDICON_TYPE.RANCH:
+                case WORLDICON_TYPE.LUMBERMILL:
                     worldIcon.m_fPopulation = GenerateNormalRandom(m_fRanchPopulationStandard, 10f);
                     break;
                 case WORLDICON_TYPE.VILLAGE:

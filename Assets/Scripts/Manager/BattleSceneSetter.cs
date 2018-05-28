@@ -67,11 +67,33 @@ public class BattleSceneSetter : MonoBehaviour
                 break;
         }
 
+        switch (m_battleSceneMgr.m_curBattleWorldGeo.m_geoStatus)
+        {
+            case WORLD_GEO.GRASS:
+                GameObject.Find("GEO").GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sprite_geoFloor[0];
+                break;
+
+            case WORLD_GEO.FOREST:
+                GameObject.Find("GEO").GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sprite_geoFloor[1];
+                GameObject.Find("ForestShade").GetComponent<SpriteRenderer>().enabled = true;
+                break;
+
+            default:
+                Debug.LogError("Unknown Geo sprite");
+                break;
+        }
+
         if (bBuildOn)
         {
             for (int i = 0; i < buildTrans.childCount; ++i)
             {
+                if (m_battleSceneMgr.m_bSiege && i > 1)
+                    break;
+
                 buildTrans.GetChild(i).gameObject.SetActive(true);
+
+                Sprite[] buildSprites = ObjectFactory.getInstance.m_sprite_geoBuilding[m_battleSceneMgr.m_curBattleWorldIcon.m_iconType];
+                buildTrans.GetChild(i).GetComponent<SpriteRenderer>().sprite = buildSprites[Random.Range(0, buildSprites.Length)];
             }
         }
 

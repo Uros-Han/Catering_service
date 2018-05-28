@@ -59,9 +59,12 @@ public class TimeMgr : Singleton<TimeMgr>
         if (m_sunLight == null)
             m_sunLight = GameObject.Find("Sun").GetComponent<Light>();
 
-        GameObject.Find("Party").BroadcastMessage("Idling", SendMessageOptions.DontRequireReceiver);
-        GameObject.Find("Party").BroadcastMessage("MoveOrder", SendMessageOptions.DontRequireReceiver);
-        //StartCoroutine(Play_Coroutine());
+        if (!GameMgr.getInstance.m_bIsTutorial)
+        {
+            GameObject.Find("Party").BroadcastMessage("Idling", SendMessageOptions.DontRequireReceiver);
+            GameObject.Find("Party").BroadcastMessage("MoveOrder", SendMessageOptions.DontRequireReceiver);
+            //StartCoroutine(Play_Coroutine());
+        }
 
         m_timeState = TIME_STATE.PLAY;
         bPressPause = false;
