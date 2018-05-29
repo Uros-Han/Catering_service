@@ -53,7 +53,7 @@ public class Party : MonoBehaviour
 
         if (TimeMgr.getInstance.m_timeState.Equals(TIME_STATE.PLAY))
         {
-            Idling();
+            //Idling();
             MoveOrder();
         }
 
@@ -185,16 +185,19 @@ public class Party : MonoBehaviour
         }
     }
 
+    bool m_bHalt;
     protected void MoveOrder()
     {
-        if (m_listMoveIdx.Count != 0)
-        {
-            SetDestination();
-        }
+        if (m_partyType == PARTY_TYPE.GARRISON)
+            return;
 
-        moveCoroutine = Move();
+        SetDestination();
 
-        StartCoroutine(moveCoroutine);
+        m_bHalt = false;
+        if (moveCoroutine == null)
+            moveCoroutine = Move();
+
+        StartCoroutine(Move());
     }
 
     IEnumerator Tremble()
@@ -233,6 +236,7 @@ public class Party : MonoBehaviour
     IEnumerator moveCoroutine;
     protected IEnumerator Move()
     {
+
         GridMgr grid = GridMgr.getInstance;
 
         Transform geoTrans = GameObject.Find("Geo").transform;
@@ -242,15 +246,15 @@ public class Party : MonoBehaviour
 
         Core_World core_World = GameObject.Find("Core").GetComponent<Core_World>();
 
-        while (m_listMoveIdx.Count != 0)
+        while (m_listMoveIdx.Count != 0 && !m_bHalt)
         {
-            while (m_fCampingTimer > 0f)
+            while (m_fCampingTimer > 0f && !m_bHalt)
             {
                 m_fCampingTimer -= Time.deltaTime;
                 yield return null;
             }
 
-            if (m_state == AI_WORLD_STATE.CAMP)
+            if (m_state == AI_WORLD_STATE.CAMP && !m_bHalt)
             {
                 m_fCampingTimer = 0f;
                 m_state = AI_WORLD_STATE.MOVE;
@@ -261,7 +265,7 @@ public class Party : MonoBehaviour
             Vector3 destPos = grid.GetPosOfIdx(m_listMoveIdx[0]);
             bool bAttackCore = false;
 
-            while (Vector3.Distance(destPos, transform.position) > 0.01f)
+            while (Vector3.Distance(destPos, transform.position) > 0.01f && !m_bHalt)
             {
                 m_iGridIdx = grid.GetGridIdx(transform.position);
 
@@ -297,6 +301,10 @@ public class Party : MonoBehaviour
                 transform.Translate(Vector3.Normalize(destPos - transform.position) * (fSpeed + fSpeedAdjuster) * Time.deltaTime);
                 yield return null;
             }
+
+            if (m_bHalt)
+                break;
+
             transform.position = destPos;
 
             if (!bAttackCore)
@@ -313,7 +321,6 @@ public class Party : MonoBehaviour
             if (m_iFatigue <= 0)
             {
                 Camping();
-                yield break;
             }
 
             m_listMoveIdx.RemoveAt(0);
@@ -331,23 +338,27 @@ public class Party : MonoBehaviour
 
     public void Halt()
     {
-        if (moveCoroutine != null)
-            StopCoroutine(moveCoroutine);
+        m_bHalt = true;
+        //if (moveCoroutine != null)
+        //StopCoroutine(moveCoroutine);
         //m_listMoveIdx.Clear();
     }
 
-    protected void Idling()
-    {
-        if (m_fCampingTimer > 0)
-            m_fCampingTimer -= Time.deltaTime;
+    //protected void Idling()
+    //{
+    //    if (m_partyType == PARTY_TYPE.GARRISON)
+    //        return;
 
-        if (m_fCampingTimer <= 0f)
-        {
-            SetDestination();
+    //    if (m_fCampingTimer > 0)
+    //        m_fCampingTimer -= Time.deltaTime;
 
-            m_fCampingTimer = 0f;
-        }
-    }
+    //    if (m_fCampingTimer <= 0f)
+    //    {
+    //        SetDestination();
+
+    //        m_fCampingTimer = 0f;
+    //    }
+    //}
 
     protected void Camping()
     {
@@ -393,7 +404,7 @@ public class Party : MonoBehaviour
     GameObject path;
     void DrawPath()
     {
-        if (Application.loadedLevelName != "World")
+        if (GameObject.Find("DeveloperTools") == null)
             return;
 
         GridMgr grid = GridMgr.getInstance;

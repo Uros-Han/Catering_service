@@ -210,6 +210,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
         obj.transform.parent = GameObject.Find("Projectiles").transform;
 
         Projectile objProjectile = obj.GetComponent<Projectile>();
+
         if (target.transform.parent.name.Equals("Player"))
             objProjectile.m_bHeadingToEnemy = false;
         else
@@ -2354,9 +2355,6 @@ public class ObjectFactory : Singleton<ObjectFactory>
         Part armPart = arm.GetComponent<Part>();
         int iArmRandom = Random.Range(0, m_sheet_mercenary_arm.Length - 1);
 
-        if (bIsTutorial)
-            iArmRandom = 2;
-
         if (BattleSceneMgr.getInstance.m_bSiege && Random.Range(0, 100) > 50) // siege range weapon
         {
             switch (Random.Range(0, 3))
@@ -2372,6 +2370,9 @@ public class ObjectFactory : Singleton<ObjectFactory>
                     break;
             }
         }
+
+        if (bIsTutorial)
+            iArmRandom = 2;
 
         arm.GetComponent<SpriteRenderer>().sprite = m_sheet_mercenary_arm[iArmRandom];
         float fSpeedRandom = 0f;

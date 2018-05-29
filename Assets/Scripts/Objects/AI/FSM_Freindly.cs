@@ -83,6 +83,12 @@ public class FSM_Freindly : FSM
     bool bAttackUnit = false;
     protected override IEnumerator State_Attack()
     {
+        if (BattleSceneMgr.getInstance.m_turnState.Equals(TURN_STATE.NIGHT))
+        {
+            m_AiState = AI_STATE.IDLE;
+            m_target = null;
+        }
+
         Unit targetUnit = null;
         Wall targetWall = null;
 
@@ -136,7 +142,7 @@ public class FSM_Freindly : FSM
             do
             {
                 fTimer += Time.deltaTime * fAttackSpeed * 0.1f;
-                if (m_AiState != AI_STATE.ATTACK || (bAttackUnit && targetUnit.m_fCurHealth <= 0f) || (!bAttackUnit && targetWall.m_fCurHealth <= 0f) || m_target == null || !m_target.activeInHierarchy || (bAttackUnit && Vector3.Distance(m_target.transform.position, transform.position) > fRange))
+                if (m_AiState != AI_STATE.ATTACK || (bAttackUnit && targetUnit.m_bEaten) || (bAttackUnit && targetUnit.m_fCurHealth <= 0f) || (!bAttackUnit && targetWall.m_fCurHealth <= 0f) || m_target == null || !m_target.activeInHierarchy || (bAttackUnit && Vector3.Distance(m_target.transform.position, transform.position) > fRange))
                 {
                     m_AiState = AI_STATE.IDLE;
                     m_target = null;

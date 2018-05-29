@@ -61,7 +61,7 @@ public class TimeMgr : Singleton<TimeMgr>
 
         if (!GameMgr.getInstance.m_bIsTutorial)
         {
-            GameObject.Find("Party").BroadcastMessage("Idling", SendMessageOptions.DontRequireReceiver);
+            //GameObject.Find("Party").BroadcastMessage("Idling", SendMessageOptions.DontRequireReceiver);
             GameObject.Find("Party").BroadcastMessage("MoveOrder", SendMessageOptions.DontRequireReceiver);
             //StartCoroutine(Play_Coroutine());
         }

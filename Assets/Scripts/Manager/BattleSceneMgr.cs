@@ -103,6 +103,11 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr>
         ToggleMorgue(true);
         GameObject.Find("MorgueToggle").GetComponent<UIPanel>().alpha = 1;
         BattleSceneMgr.getInstance.m_turnState = TURN_STATE.NIGHT;
+
+        if (m_bSiege)
+            GameObject.Find("WallHealthBar").gameObject.SetActive(false);
+        //iTween.MoveTo(GameObject.Find("WallHealthBar"), iTween.Hash("y", 75f, "islocal", true, "time", 0.5f, "easetype", "easeOutBack"));
+
         yield return null;
     }
 
@@ -195,8 +200,13 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr>
 
         if (bOn)
         {
-            GameObject.Find("Core").transform.position = new Vector3(0, 0);
-            GameObject.Find("Core").GetComponent<Part>().m_iGridIdx = GridMgr.getInstance.GetGridIdx(new Vector2(0, 0));
+            Transform playerTrans = GameObject.Find("Player").transform;
+            GridMgr grid = GridMgr.getInstance;
+            playerTrans.position = new Vector3(0, 0);
+            for (int i = 0; i < playerTrans.childCount; ++i)
+            {
+                playerTrans.GetChild(i).GetComponent<Part>().m_iGridIdx = grid.GetGridIdx(playerTrans.GetChild(i).position);
+            }
 
             morgueTrans.GetComponent<AudioSource>().Play();
             GameObject.Find("AMB").GetComponent<AudioSource>().volume = 0f;

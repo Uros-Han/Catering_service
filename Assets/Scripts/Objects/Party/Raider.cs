@@ -18,6 +18,9 @@ public class Raider : Party
 
     protected override void SetDestination()
     {
+        if (GameObject.Find("Core") == null)
+            return;
+
         List<int> coreListMoveIdx = GameObject.Find("Core").GetComponent<Core_World>().m_listMoveIdx;
         int coreIdx = GridMgr.getInstance.GetGridIdx(GameObject.Find("Core").transform.position);
 

@@ -132,10 +132,23 @@ public class MouthPanel : MonoBehaviour
         target.layer = 0;
         target.transform.SetChildLayer(0);
         target.GetComponent<FSM_Enemy>().m_AiState = AI_STATE.MOVE;
+        target.GetComponent<Unit>().m_bEaten = false;
+
+        target.GetComponent<CircleCollider2D>().enabled = true;
 
         Material diffuse = ObjectFactory.getInstance.m_material_SpritePaletteLightingMaterial;
         for (int i = 0; i < target.transform.childCount; ++i)
         {
+            if (target.transform.GetChild(i).name.Contains("Hand"))
+            {
+                target.transform.GetChild(i).GetComponent<SpriteRenderer>().enabled = true;
+            }
+            else
+            {
+                target.transform.GetChild(i).GetComponent<DPSpritePalette>().enabled = true;
+                target.transform.GetChild(i).GetComponent<SpriteRenderer>().color = Color.white;
+            }
+
             target.transform.GetChild(i).GetComponent<SpriteRenderer>().material = diffuse;
         }
 

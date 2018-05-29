@@ -55,6 +55,15 @@ public class Wall : MonoBehaviour
         GameObject.Find("HealthBar").transform.GetChild(0).gameObject.SetActive(true);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            m_fCurHealth = 0f;
+            Destroied();
+        }
+    }
+
     public void Destroied()
     {
         GetComponent<SpriteRenderer>().enabled = false;

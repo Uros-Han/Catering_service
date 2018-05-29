@@ -31,6 +31,9 @@ public class TutorialMgr : Singleton<TutorialMgr>
         #region Before Raid
         tutoState = TUTO_STATE.BEFORE_RAID;
 
+        GameObject.Find("Stay").transform.Find("sprite").GetComponent<UISprite>().GrayScale(true);
+        GameObject.Find("Assembly").transform.Find("sprite").GetComponent<UISprite>().GrayScale(true);
+
         Transform tutoPanel_world = GameObject.Find("TutorialPanel").transform;
         Transform tooltipPanel = tutoPanel_world.transform.GetChild(0).Find("Tooltip").transform;
         Transform beforeRaidTrans = tooltipPanel.Find("Before Raid").transform;
@@ -147,7 +150,18 @@ public class TutorialMgr : Singleton<TutorialMgr>
 
         yield return StartCoroutine(WaitUnilSkip());
 
+        //TUTO_8
+        beforeRaidTrans.GetChild(7).GetComponent<UILabel>().enabled = false;
+        beforeRaidTrans.GetChild(8).GetComponent<UILabel>().enabled = true;
+
         highLight_0.alpha = 0f;
+        yield return new WaitForSeconds(0.7f);
+
+        highLight_0.alpha = 1f;
+        highLight_0.gameObject.GetComponent<UIFollowTarget>().enabled = true;
+        highLight_0.gameObject.GetComponent<UIFollowTarget>().gameCamera = UICamera.mainCamera;
+        highLight_0.gameObject.GetComponent<UIFollowTarget>().target = GameObject.Find("Raid").transform;
+        highLight_0.transform.position = GameObject.Find("Raid").transform.position;
         #endregion
 
         yield return StartCoroutine(WaitUntilSceneChged(SceneManager.GetSceneByName("World")));
@@ -161,6 +175,7 @@ public class TutorialMgr : Singleton<TutorialMgr>
         UIPanel skipPanel_battle = tooltipPanel_battle.Find("Skip").GetComponent<UIPanel>();
         UIPanel highLight_0_battle = tutoPanel_battle.transform.GetChild(0).Find("HighLight_0").GetComponent<UIPanel>();
         highLight_1_battle = tutoPanel_battle.transform.GetChild(0).Find("HighLight_1").GetComponent<UIPanel>();
+        GameObject.Find("idx_0").GetComponent<BoxCollider>().enabled = false;
 
         GameObject.Find("Tangled").GetComponent<Tangled>().ChangeEatAvailable(true);
         GameObject.Find("Tangled").GetComponent<Tangled>().ChangeGrabAvailable(true);
@@ -468,6 +483,19 @@ public class TutorialMgr : Singleton<TutorialMgr>
 
         yield return StartCoroutine(WaitUnilSkip());
 
+        //TUTO_8
+        afterRaidTrans.GetChild(5).GetComponent<UILabel>().enabled = false;
+        afterRaidTrans.GetChild(6).GetComponent<UILabel>().enabled = true;
+
+        highLight_0.alpha = 0f;
+        yield return new WaitForSeconds(0.7f);
+
+        highLight_0.alpha = 1f;
+        highLight_0.gameObject.GetComponent<UIFollowTarget>().enabled = true;
+        highLight_0.gameObject.GetComponent<UIFollowTarget>().gameCamera = UICamera.mainCamera;
+        highLight_0.gameObject.GetComponent<UIFollowTarget>().target = GameObject.Find("Raid").transform;
+        highLight_0.transform.position = GameObject.Find("Raid").transform.position;
+
         Camera.main.GetComponent<ProCamera2D>().OffsetX = 0f;
         #endregion
 
@@ -482,6 +510,8 @@ public class TutorialMgr : Singleton<TutorialMgr>
         skipPanel_battle = tooltipPanel_battle.Find("Skip").GetComponent<UIPanel>();
         highLight_0_battle = tutoPanel_battle.transform.GetChild(0).Find("HighLight_0").GetComponent<UIPanel>();
         highLight_1_battle = tutoPanel_battle.transform.GetChild(0).Find("HighLight_1").GetComponent<UIPanel>();
+        GameObject.Find("Wall").GetComponent<Wall>().m_fHealth = 100f;
+        GameObject.Find("Wall").GetComponent<Wall>().m_fCurHealth = 100f;
 
         GameObject.Find("Tangled").GetComponent<Tangled>().ChangeEatAvailable(true);
         GameObject.Find("Tangled").GetComponent<Tangled>().ChangeGrabAvailable(true);

@@ -170,8 +170,8 @@ public class FSM : MonoBehaviour
             float fDefense = targetPart.m_dicStat["Defense"];
             fDamage = fDamage + (Random.Range(-2, 3));
             float fBlockDmg = (fDamage * ((fDefense * fDefenseFactor) / (1 + fDefenseFactor * fDefense)));
-            //float fDealedDmg = fDamage - fBlockDmg;
-            float fDealedDmg = 0f;
+            float fDealedDmg = fDamage - fBlockDmg;
+            //float fDealedDmg = 0f;
             bool bCoreDead = false;
 
             if (Random.Range(0, 100) < (int)fDodgePercent && !GameMgr.getInstance.m_bIsTutorial)

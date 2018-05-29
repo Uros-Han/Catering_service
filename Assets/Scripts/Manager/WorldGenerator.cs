@@ -7,11 +7,11 @@ public class WorldGenerator : Singleton<WorldGenerator>
     GridMgr grid;
     Transform m_geoTrans;
 
-    public float m_fFarmPopulationStandard = 50f;
-    public float m_fRanchPopulationStandard = 50f;
-    public float m_fVillagePopulationStandard = 150f; // 1 man per 10
-    public float m_fCityPopulationStandard = 250f;
-    public float m_fCastlePopulationStandard = 500f;
+    public float m_fFarmPopulationStandard = 30f;
+    public float m_fRanchPopulationStandard = 30f;
+    public float m_fVillagePopulationStandard = 70f; // 1 man per 10
+    public float m_fCityPopulationStandard = 100f;
+    public float m_fCastlePopulationStandard = 150f;
 
 
     float[] m_fTypeCost; // Cost per type
@@ -352,10 +352,20 @@ public class WorldGenerator : Singleton<WorldGenerator>
 
         for (int i = 0; i < idxList.Count; ++i)
         {
-            m_geoTrans.GetChild(idxList[i]).GetComponent<WorldGeo>().m_geoStatus = WORLD_GEO.GRASS;
-            m_geoTrans.GetChild(idxList[i]).GetComponent<WorldGeo>().GetComponent<SpriteRenderer>().sprite = objFac.m_sheet_worldGeo[(int)WORLD_GEO.GRASS];
+            if (i != 0 && i != 3)
+            {
+                m_geoTrans.GetChild(idxList[i]).GetComponent<WorldGeo>().m_geoStatus = WORLD_GEO.GRASS;
+                m_geoTrans.GetChild(idxList[i]).GetComponent<WorldGeo>().GetComponent<SpriteRenderer>().sprite = objFac.m_sheet_worldGeo[(int)WORLD_GEO.GRASS];
+            }
+            else
+            {
+                m_geoTrans.GetChild(idxList[i]).GetComponent<WorldGeo>().m_geoStatus = WORLD_GEO.FOREST;
+                m_geoTrans.GetChild(idxList[i]).GetComponent<WorldGeo>().GetComponent<SpriteRenderer>().sprite = objFac.m_sheet_worldGeo[(int)WORLD_GEO.FOREST];
+            }
         }
 
+        m_geoTrans.GetChild(iCenterIdx).GetComponent<WorldGeo>().CreateRoad(iCenterIdx + 1);
+        m_geoTrans.GetChild(iCenterIdx + 1).GetComponent<WorldGeo>().CreateRoad(iCenterIdx);
 
         objFac.Create_WorldIcon(grid.GetPosOfIdx(iCenterIdx - grid.m_iXcount - 1), (int)WORLDICON_TYPE.EMPTY);
         objFac.Create_WorldIcon(grid.GetPosOfIdx(iCenterIdx - grid.m_iXcount), (int)WORLDICON_TYPE.EMPTY);
@@ -636,7 +646,7 @@ public class WorldGenerator : Singleton<WorldGenerator>
                     worldIcon.m_fPopulation = GenerateNormalRandom(m_fRanchPopulationStandard, 10f);
                     break;
                 case WORLDICON_TYPE.VILLAGE:
-                    worldIcon.m_fPopulation = GenerateNormalRandom(m_fVillagePopulationStandard, 50f);
+                    worldIcon.m_fPopulation = GenerateNormalRandom(m_fVillagePopulationStandard, 30f);
                     break;
                 case WORLDICON_TYPE.CITY:
                     worldIcon.m_fPopulation = GenerateNormalRandom(m_fCityPopulationStandard, 50f);

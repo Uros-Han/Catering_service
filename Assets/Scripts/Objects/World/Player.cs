@@ -17,23 +17,23 @@ public class Player : MonoBehaviour
 
     Coroutine tremble;
 
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.A))
-            Move(DIRECTION.LEFT);
+    //private void Update()
+    //{
+    //    if (Input.GetKey(KeyCode.A))
+    //        Move(DIRECTION.LEFT);
 
-        if (Input.GetKey(KeyCode.D))
-            Move(DIRECTION.RIGHT);
+    //    if (Input.GetKey(KeyCode.D))
+    //        Move(DIRECTION.RIGHT);
 
-        if (m_state.Equals(AI_STATE.IDLE) && (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D)))
-        {
-            m_state = AI_STATE.MOVE;
-        }
-        else if (m_state.Equals(AI_STATE.MOVE) && (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)))
-        {
-            m_state = AI_STATE.IDLE;
-        }
-    }
+    //    if (m_state.Equals(AI_STATE.IDLE) && (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D)))
+    //    {
+    //        m_state = AI_STATE.MOVE;
+    //    }
+    //    else if (m_state.Equals(AI_STATE.MOVE) && (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)))
+    //    {
+    //        m_state = AI_STATE.IDLE;
+    //    }
+    //}
 
     void CameBackFromBattleScene()
     {

@@ -130,12 +130,6 @@ public class WorldMapManager : MonoBehaviour
     public void LoadWorld()
     {
         SaveManager.getInstance.LocalLoad();
-
-        ObjectFactory objectFactory = ObjectFactory.getInstance;
-        foreach (KeyValuePair<int, int> tmp in m_iDicHeroGarrison)
-        {
-            objectFactory.Create_Party(tmp.Key, PARTY_TYPE.GARRISON, tmp.Value);
-        }
     }
 
     public void Assembly()

@@ -120,15 +120,16 @@ public class SoundMgr : Singleton<SoundMgr>
     {
         float fVolume = 1f;
 #if UNITY_STANDALONE
-		fVolume = PlayerPrefs.GetFloat("SoundVolume");
+        //fVolume = PlayerPrefs.GetFloat("SoundVolume");
 #else
+
+#endif
         if (GameMgr.getInstance.m_bSFXMute)
             return;
 
         if (audioSource == default(AudioSource))
             audioSource = m_sfxSource;
 
-#endif
         switch (strSfx)
         {
             case "core":

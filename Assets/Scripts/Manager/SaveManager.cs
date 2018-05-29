@@ -147,7 +147,12 @@ public class SaveManager : Singleton<SaveManager>
 
         GameMgr.getInstance.m_iDay = ES3.Load<int>("day", "world.txt");
 
-        GameObject.Find("WorldMapManager").GetComponent<WorldMapManager>().m_iDicHeroGarrison = ES3.Load<Dictionary<int, int>>("heroGarrison", "world.txt");
+        worldMapManager.m_iDicHeroGarrison = ES3.Load<Dictionary<int, int>>("heroGarrison", "world.txt");
+        ObjectFactory objectFactory = ObjectFactory.getInstance;
+        foreach (KeyValuePair<int, int> tmp in worldMapManager.m_iDicHeroGarrison)
+        {
+            objectFactory.Create_Party(tmp.Key, PARTY_TYPE.GARRISON, tmp.Value);
+        }
 
         Transform m_geoTrans = GameObject.Find("Geo").transform;
         for (int i = 0; i < worldMapManager.m_iListCity.Count / 3; ++i)

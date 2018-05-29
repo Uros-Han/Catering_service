@@ -105,6 +105,9 @@ public class Core_World : MonoBehaviour
         objTargetPart.GetComponent<SpriteRenderer>().sortingLayerName = "FrontObject";
         objTargetPart.transform.parent = UICamera.mainCamera.transform;
         objTargetPart.layer = 5;
+        if (objTargetPart.GetComponent<FSM_Freindly>() != null)
+            objTargetPart.GetComponent<FSM_Freindly>().enabled = false;
+        objTargetPart.GetComponent<Part>().enabled = false;
         objTargetPart.SetActive(true);
         iTween.MoveTo(objTargetPart, iTween.Hash("x", -205f, "y", 175f, "easetype", "easeInCubic", "time", 0.65f, "isLocal", true));
 
@@ -356,12 +359,7 @@ public class Core_World : MonoBehaviour
             //yield break;
         }
 
-        Transform PartyTrans = GameObject.Find("Party").transform;
-        for (int i = 0; i < PartyTrans.childCount; ++i)
-        {
-            Party party = PartyTrans.GetChild(i).GetComponent<Party>();
-            party.Halt();
-        }
+        GameObject.Find("Party").BroadcastMessage("Halt", SendMessageOptions.DontRequireReceiver);
 
         ProCamera2D.Instance.AdjustCameraTargetInfluence(ProCamera2D.Instance.CameraTargets[0], 0f, 0f);
         if (ProCamera2D.Instance.CameraTargets.Count > 1)
@@ -465,6 +463,8 @@ public class Core_World : MonoBehaviour
         }
         else
         {
+            StartCoroutine(CheckEnemyEliminated());
+
             ProCamera2D.Instance.AdjustCameraTargetInfluence(ProCamera2D.Instance.CameraTargets[0], 0f, 0f);
             if (ProCamera2D.Instance.CameraTargets.Count > 1)
                 ProCamera2D.Instance.AdjustCameraTargetInfluence(ProCamera2D.Instance.CameraTargets[1], 1f, 1f);
@@ -476,6 +476,19 @@ public class Core_World : MonoBehaviour
 
         StartCoroutine(PartStatusChecker());
         StartCoroutine(AdjustCamOffset());
+    }
+
+    IEnumerator CheckEnemyEliminated()
+    {
+        yield return null;
+
+        if (!CheckEnmeyInThisArea(false, true))
+        {
+            GameObject.Find("Raid").GetComponent<UIPanel>().alpha = 0f;
+            iTween.MoveTo(GameObject.Find("Raid").gameObject, iTween.Hash("x", -96.7f, "y", -113f, "time", 0.5f, "easetype", "easeInOutBack", "isLocal", true));
+
+            m_bAttackAvailableArea = false;
+        }
     }
 
     IEnumerator AdjustCamOffset()

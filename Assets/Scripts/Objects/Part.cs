@@ -318,7 +318,8 @@ public class Part : MonoBehaviour
 
         iTween.ColorTo(gameObject, iTween.Hash("a", 0f, "time", 0.5f));
         yield return new WaitForSeconds(0.5f);
-        Destroy(gameObject);
+        if (gameObject != null)
+            Destroy(gameObject);
 
         //yield return new WaitForSeconds(1f);
 
@@ -1465,11 +1466,13 @@ public class Part : MonoBehaviour
         {
             if (transform.parent.name.Equals("Player"))
             {
-                ObjectFactory.getInstance.Create_Projectile(transform.position, m_weaponType, GetComponent<FSM_Freindly>().m_target, m_dicStat["Attack"]);
+                if (GetComponent<FSM_Freindly>().m_target != null)
+                    ObjectFactory.getInstance.Create_Projectile(transform.position, m_weaponType, GetComponent<FSM_Freindly>().m_target, m_dicStat["Attack"]);
             }
             else
             {
-                ObjectFactory.getInstance.Create_Projectile(transform.position, m_weaponType, transform.parent.GetComponent<FSM_Enemy>().m_target, m_dicStat["Attack"]);
+                if (transform.parent.GetComponent<FSM_Enemy>().m_target != null)
+                    ObjectFactory.getInstance.Create_Projectile(transform.position, m_weaponType, transform.parent.GetComponent<FSM_Enemy>().m_target, m_dicStat["Attack"]);
             }
         }
         else

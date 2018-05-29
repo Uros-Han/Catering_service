@@ -215,6 +215,7 @@ public class Tangled : MonoBehaviour
                     StartCoroutine(GameObject.Find("Core").GetComponent<Core>().Eat(targetTransform.gameObject));
                     if (GameMgr.getInstance.m_bIsTutorial && TutorialMgr.getInstance.tutoState == TutorialMgr.TUTO_STATE.EAT_BATTLE_2)
                         TutorialMgr.getInstance.SkipTutorial();
+                    bReadyToEat = false;
                 }
 
 

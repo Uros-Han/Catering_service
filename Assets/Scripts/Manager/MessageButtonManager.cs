@@ -25,6 +25,7 @@ public class MessageButtonManager : MonoBehaviour
 
     void GameOver()
     {
+        BattleSceneMgr.getInstance.m_bSiege = false;
         Application.LoadLevel("Main");
         Destroy(GameObject.Find("Player").gameObject);
     }

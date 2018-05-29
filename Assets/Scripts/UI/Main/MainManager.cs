@@ -21,6 +21,7 @@ public class MainManager : MonoBehaviour
         GridMgr.getInstance.ChgGridInfo();
 
         GameMgr.getInstance.m_bIsTutorial = false;
+        BattleSceneMgr.getInstance.m_bSiege = false;
     }
 
 

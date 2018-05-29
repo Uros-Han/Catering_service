@@ -35,7 +35,9 @@ public class BattleSceneSetter : MonoBehaviour
                 strongholdFloor.GetChild(i).gameObject.SetActive(true);
             }
         }
-        SetBuilding();
+
+        if (!GameMgr.getInstance.m_bAssembleOnly)
+            SetBuilding();
         HealthBarSet();
         InitLight();
     }
@@ -139,7 +141,7 @@ public class BattleSceneSetter : MonoBehaviour
                     yield return new WaitForSeconds(0.4f);
             }
         }
-        Debug.Log(morgueTrans.childCount);
+        //Debug.Log(morgueTrans.childCount);
         if (morgueTrans.childCount > 1)
             yield return new WaitForSeconds(1.5f);
 

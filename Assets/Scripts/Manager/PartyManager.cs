@@ -6,6 +6,7 @@ public class PartyManager : MonoBehaviour
 {
 
     Transform transParty;
+    int iRaiderSpawnTimer = 3;
 
     void Start()
     {
@@ -35,8 +36,9 @@ public class PartyManager : MonoBehaviour
     {
         List<GameObject> listObjRaider = ListParty(PARTY_TYPE.RAID);
 
-        if (listObjRaider.Count < GameMgr.getInstance.m_iReward / 500)
+        if (iRaiderSpawnTimer <= 0 && listObjRaider.Count < (GameObject.Find("PartStatus").GetComponent<PartStatus>().m_iPartCount / 10))
         {
+            iRaiderSpawnTimer = 15;
 
             bool bHeroIncluded = false;
             int iHeroIdx = -1;
@@ -56,6 +58,8 @@ public class PartyManager : MonoBehaviour
             else
                 DeployParty(iDepoleyIdx, PARTY_TYPE.RAID);
         }
+        else if (iRaiderSpawnTimer > 0)
+            iRaiderSpawnTimer -= 1;
     }
 
     List<GameObject> ListParty(PARTY_TYPE partyType)
