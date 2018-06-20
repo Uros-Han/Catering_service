@@ -40,6 +40,12 @@ public class BattleSceneSetter : MonoBehaviour
             SetBuilding();
         HealthBarSet();
         InitLight();
+
+        List<int> listAbil = GameObject.Find("Player").GetComponent<CoreAbilityMgr>().m_listAbil;
+        for (int i = 1; i < listAbil.Count; ++i)
+        {
+            ObjectFactory.getInstance.Create_AbilUI(listAbil[i]);
+        }
     }
 
     void SetBuilding()

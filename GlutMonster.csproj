@@ -642,6 +642,7 @@
     <Compile Include="Assets\Scripts\UI\MessageBox.cs" />
     <Compile Include="Assets\Scripts\UI\SpriteText.cs" />
     <Compile Include="Assets\Scripts\UI\WantedReward.cs" />
+    <Compile Include="Assets\Scripts\UI\World\AbilSelect.cs" />
     <Compile Include="Assets\Scripts\UI\World\AleartMsg.cs" />
     <Compile Include="Assets\Scripts\UI\World\PartStatus.cs" />
     <Compile Include="Assets\Scripts\UI\World\PartyStateIndicator.cs" />

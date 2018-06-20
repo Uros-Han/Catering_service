@@ -114,10 +114,39 @@ Hero_PartType_leg,{0}’s legs,{0}의 다리
 ,,
 ,,
 ,,
+ABILITY_Name,,
+abil_0_name,Grab,붙잡기
+abil_1_name,Three eyes,여분의 눈
+abil_2_name,abil_2_name,식별하는 눈
+abil_3_name,abil_3_name,식이요법
+abil_4_name,abil_4_name,코어 단련
+abil_5_name,abil_5_name,빠른 촉수
+abil_6_name,abil_6_name,움켜쥐는 촉수
+abil_7_name,abil_7_name,강철 이빨
+abil_8_name,abil_8_name,부품 식이요법
+abil_9_name,abil_9_name,뚜껑 핥아먹기
+abil_10_name,abil_10_name,두개의 입
+abil_11_name,abil_11_name,세개의 입
+abil_12_name,abil_12_name,고기 방패
+abil_13_name,abil_13_name,정교한 씹기
+abil_14_name,abil_14_name,겨울잠
 ,,
-,,
-,,
-,,
+ABILITY_Desc,,
+abil_0_desc,abil_0_desc,"적을 붙잡을 수 있는 능력입니다. 붙잡힌 적을 원하는 위치로 이동 시킬 수 있으며, 해당 적은 공격할 수 없습니다. 촉수를 회수하는데 {0}초가 걸립니다."
+abil_1_desc,abil_1_desc,괴물 핵에 눈 {0}개를 추가합니다.
+abil_2_desc,abil_2_desc,적의 종류를 식별하는 능력입니다.\n해당 지역의 적 종류를 보다 자세하게 구별할 수 있습니다.
+abil_3_desc,abil_3_desc,괴물 핵이 소모하는 기본 허기 소모량을 {0} 줄여줍니다.
+abil_4_desc,abil_4_desc,괴물 핵의 최대 체력이 {0} 증가합니다.
+abil_5_desc,abil_5_desc,촉수의 회수 속도가{0}% 빨라집니다.
+abil_6_desc,abil_6_desc,촉수로 붙잡은 적이 초당 {0}의 데미지를 받습니다.
+abil_7_desc,abil_7_desc,삼켜진 적이 초당 {0} 추가 데미지를 받습니다.
+abil_8_desc,abil_8_desc,파츠를 붙일때 마다 추가되는 허기 소모량을 {0} 줄여줍니다.
+abil_9_desc,abil_9_desc,파츠를 소화시킬때 얻는 허기를 {0}% 증가시킵니다.
+abil_10_desc,abil_10_desc,괴물 입이 총 두개로 증가합니다. 두 명의 적을 삼킬 수 있습니다.
+abil_11_desc,abil_11_desc,괴물 입이 총 세개로 증가합니다. 세 명의 적을 삼킬 수 있습니다.
+abil_12_desc,abil_12_desc,괴물 핵에 직접 붙은 파츠의 최대 체력을 {0} 증가 시킵니다.
+abil_13_desc,abil_13_desc,삼켜진 적의 파츠 획득 성공률을 {0} 증가 시킵니다.
+abil_14_desc,abil_14_desc,대기 시에 소모되는 허기 소모량을 {0} 줄여줍니다.
 ,,
 ,,
 ,,

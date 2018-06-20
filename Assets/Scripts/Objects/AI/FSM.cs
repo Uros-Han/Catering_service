@@ -270,7 +270,10 @@ public class FSM : MonoBehaviour
 
     public void Weapon_Attack(float fDmg, GameObject target, bool bEnemy)
     {
-        StartCoroutine(Attack(target, fDmg, bEnemy));
+        if (target.name.Equals("Wall"))
+            StartCoroutine(Attack(target, fDmg, bEnemy, true));
+        else
+            StartCoroutine(Attack(target, fDmg, bEnemy));
     }
 
 }

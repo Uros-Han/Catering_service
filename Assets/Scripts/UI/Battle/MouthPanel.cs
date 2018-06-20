@@ -24,9 +24,9 @@ public class MouthPanel : MonoBehaviour
     public int EmptyMouthIdx()
     {
 
-        int iMouthNum = GameObject.Find("Player").GetComponent<CoreAbilityMgr>().m_iMouthNum;
+        //int iMouthNum = GameObject.Find("Player").GetComponent<CoreAbilityMgr>().m_iMouthNum;
 
-        for (int i = 0; i < iMouthNum; ++i)
+        for (int i = 0; i < 1; ++i)
         {
             if (m_arrayEatenObjects[i] == null)
             {
@@ -39,9 +39,9 @@ public class MouthPanel : MonoBehaviour
 
     public bool isMouthFull()
     {
-        int iMouthNum = GameObject.Find("Player").GetComponent<CoreAbilityMgr>().m_iMouthNum;
+        //int iMouthNum = GameObject.Find("Player").GetComponent<CoreAbilityMgr>().m_iMouthNum;
 
-        for (int i = 0; i < iMouthNum; ++i)
+        for (int i = 0; i < 1; ++i)
         {
             if (m_arrayEatenObjects[i] == null)
             {
@@ -54,10 +54,10 @@ public class MouthPanel : MonoBehaviour
 
     public void AddEnemyInMouth(GameObject objEnemy)
     {
-        int iMouthNum = GameObject.Find("Player").GetComponent<CoreAbilityMgr>().m_iMouthNum;
+        //int iMouthNum = GameObject.Find("Player").GetComponent<CoreAbilityMgr>().m_iMouthNum;
         bool bMouthFulled = true;
         int iEmptyIdx = 0;
-        for (int i = 0; i < iMouthNum; ++i)
+        for (int i = 0; i < 1; ++i)
         {
             if (m_arrayEatenObjects[i] == null)
             {

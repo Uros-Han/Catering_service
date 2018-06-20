@@ -49,6 +49,12 @@ public class SaveManager : Singleton<SaveManager>
         ES3.Save<float>("health", GameObject.Find("Player").transform.Find("Core").GetComponent<Core>().m_fCurHealth, "core.txt");
         ES3.Save<int>("hunger", GameMgr.getInstance.m_iHunger, "core.txt");
         ES3.Save<int>("reward", GameMgr.getInstance.m_iReward, "core.txt");
+
+        CoreAbilityMgr coreAbility = GameObject.Find("Player").GetComponent<CoreAbilityMgr>();
+        ES3.Save<int>("level", coreAbility.m_iLevel, "core.txt");
+        ES3.Save<float>("curExp", coreAbility.m_fCurExp, "core.txt");
+        ES3.Save<List<int>>("listAbil", coreAbility.m_listAbil, "core.txt");
+
     }
 
     void LoadCore()
@@ -65,6 +71,15 @@ public class SaveManager : Singleton<SaveManager>
         GameObject.Find("Player").transform.Find("Core").GetComponent<Core>().m_fCurHealth = ES3.Load<float>("health", "core.txt");
         GameMgr.getInstance.m_iHunger = ES3.Load<int>("hunger", "core.txt");
         GameMgr.getInstance.m_iReward = ES3.Load<int>("reward", "core.txt");
+
+        CoreAbilityMgr coreAbility = GameObject.Find("Player").GetComponent<CoreAbilityMgr>();
+        coreAbility.m_iLevel = ES3.Load<int>("level", "core.txt");
+        coreAbility.m_fCurExp = ES3.Load<float>("curExp", "core.txt");
+        coreAbility.m_listAbil = ES3.Load<List<int>>("listAbil", "core.txt");
+        for (int i = 1; i < coreAbility.m_listAbil.Count; ++i)
+        {
+            ObjectFactory.getInstance.Create_AbilUI(coreAbility.m_listAbil[i]);
+        }
     }
 
     void SaveWorld()

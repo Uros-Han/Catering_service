@@ -38,6 +38,8 @@ public class ObjectFactory : Singleton<ObjectFactory>
 
     GameObject m_objHeroAura;
 
+    GameObject m_objAbilUI;
+
     public Sprite m_sprite_meat;
     public Sprite[] m_sheet_core;
 
@@ -199,6 +201,8 @@ public class ObjectFactory : Singleton<ObjectFactory>
 
         m_objHeroAura = Resources.Load("Prefabs/Objects/Enemies/HeroAura") as GameObject;
 
+        m_objAbilUI = Resources.Load("Prefabs/UI/Abil") as GameObject;
+
         m_sprites_Projectile = Resources.LoadAll<Sprite>("Sprites/Projectiles");
 
         SoundMgr.getInstance.AudioPoolSetting();
@@ -265,6 +269,18 @@ public class ObjectFactory : Singleton<ObjectFactory>
         GameObject obj = Instantiate(m_objAleart) as GameObject;
         obj.transform.parent = GameObject.Find("Alearts").transform;
         obj.transform.position = GridMgr.getInstance.GetPosOfIdx(iIdx);
+
+        return obj;
+    }
+
+    public GameObject Create_AbilUI(int iIdx)
+    {
+        GameObject obj = Instantiate(m_objAbilUI) as GameObject;
+        obj.transform.parent = GameObject.Find("AbilityPanel").transform;
+        obj.transform.localPosition = new Vector3((obj.transform.parent.childCount - 1) * 30f, 0f);
+        obj.transform.localScale = Vector3.one;
+        obj.transform.GetChild(0).GetComponent<UISprite>().spriteName = string.Format("ability_{0:00}", iIdx);
+        obj.transform.GetChild(1).GetComponent<UISprite>().spriteName = string.Format("ability_{0:00}", iIdx);
 
         return obj;
     }
@@ -2074,7 +2090,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
         bodyPart.m_dicStat.Add("Health", fRandom);
         bodyPart.m_strNameKey = "PartName_civ_body_0";
 
-        fRandom = Random.Range(0, 30);
+        fRandom = Random.Range(0, 20);
         if (bIsTutorial)
             fRandom = 10f;
         bodyPart.m_dicStat.Add("Defense", fRandom);
@@ -2333,7 +2349,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
             bIsTutorial = true;
 
         if (!bIsTutorial)
-            fRandom = Random.Range(130, 180);
+            fRandom = Random.Range(100, 150);
         else
             fRandom = 50f;
 
@@ -2342,7 +2358,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
         bodyPart.m_fCurHealth = fRandom;
         bodyPart.m_dicStat.Add("Health", fRandom);
 
-        fRandom = Random.Range(30, 60);
+        fRandom = Random.Range(20, 40);
         bodyPart.m_dicStat.Add("Defense", fRandom);
         bodyPart.m_iSaveValue = iBodyRandom;
         bodyPart.m_iEnemyType = (int)ENEMY_TYPE.MERCENARY;
@@ -2383,7 +2399,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
                 armPart.m_strNameKey = "WeaponName_oneHand_05";
                 fRange = Random.Range(30, 40);
-                fRandom = Random.Range(40, 60);
+                fRandom = Random.Range(30, 50);
                 fSpeedRandom = Random.Range(20, 40);
                 armPart.m_bUse32PixelHand = true;
                 break;
@@ -2398,7 +2414,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
                 armPart.m_strNameKey = "WeaponName_oneHand_07";
                 fRange = Random.Range(30, 40);
-                fRandom = Random.Range(30, 60);
+                fRandom = Random.Range(30, 50);
                 fSpeedRandom = Random.Range(40, 70);
                 armPart.m_bUse32PixelHand = true;
 
@@ -2413,7 +2429,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_weaponType = WEAPON_TYPE.POLE;
                 armPart.m_strNameKey = "WeaponName_pole_01";
                 fRange = Random.Range(50, 70);
-                fRandom = Random.Range(40, 80);
+                fRandom = Random.Range(30, 60);
                 fSpeedRandom = Random.Range(10, 30);
                 Destroy(obj.transform.Find("Hand_L").gameObject);
                 armPart.m_bUse32PixelHand = true;
@@ -2422,7 +2438,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_weaponType = WEAPON_TYPE.TWO_HAND;
                 armPart.m_strNameKey = "WeaponName_twoHand_04";
                 fRange = Random.Range(50, 70);
-                fRandom = Random.Range(40, 80);
+                fRandom = Random.Range(30, 60);
                 fSpeedRandom = Random.Range(10, 30);
                 Destroy(obj.transform.Find("Hand_L").gameObject);
                 armPart.m_bUse32PixelHand = true;
@@ -2431,14 +2447,14 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
                 armPart.m_strNameKey = "WeaponName_oneHand_08";
                 fRange = Random.Range(40, 50);
-                fRandom = Random.Range(30, 60);
+                fRandom = Random.Range(30, 50);
                 fSpeedRandom = Random.Range(20, 40);
                 break;
             case 6:
                 armPart.m_weaponType = WEAPON_TYPE.BOW;
                 armPart.m_strNameKey = "WeaponName_bow_00";
                 fRange = Random.Range(90, 100);
-                fRandom = Random.Range(30, 60);
+                fRandom = Random.Range(30, 50);
                 fSpeedRandom = Random.Range(40, 70);
                 Destroy(obj.transform.Find("Hand_L").gameObject);
                 break;
@@ -2446,7 +2462,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_weaponType = WEAPON_TYPE.CROSSBOW;
                 armPart.m_strNameKey = "WeaponName_crossbow_00";
                 fRange = Random.Range(80, 90);
-                fRandom = Random.Range(50, 80);
+                fRandom = Random.Range(40, 60);
                 fSpeedRandom = Random.Range(10, 30);
                 Destroy(obj.transform.Find("Hand_L").gameObject);
                 break;
@@ -2454,7 +2470,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_weaponType = WEAPON_TYPE.TWO_HAND;
                 armPart.m_strNameKey = "WeaponName_twoHand_05";
                 fRange = Random.Range(40, 50);
-                fRandom = Random.Range(50, 80);
+                fRandom = Random.Range(40, 60);
                 fSpeedRandom = Random.Range(10, 20);
                 Destroy(obj.transform.Find("Hand_L").gameObject);
                 armPart.m_bUse32PixelHand = true;
@@ -2463,7 +2479,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_weaponType = WEAPON_TYPE.JAVELIN;
                 armPart.m_strNameKey = "WeaponName_javelin_00";
                 fRange = Random.Range(80, 90);
-                fRandom = Random.Range(30, 60);
+                fRandom = Random.Range(30, 50);
                 fSpeedRandom = Random.Range(40, 70);
                 armPart.m_bUse32PixelHand = true;
                 break;

@@ -71,6 +71,32 @@ public class Unit : MonoBehaviour
             StartCoroutine(ChangeParentToField(transform.GetChild(i).gameObject, groundPos));
         }
 
+        float fExp = 0f;
+        switch (m_enemyType)
+        {
+            case ENEMY_TYPE.CIVILIAN:
+                fExp = 3f;
+                break;
+
+            case ENEMY_TYPE.MERCENARY:
+                fExp = 5f;
+                break;
+
+            case ENEMY_TYPE.KNIGHT:
+                fExp = 7f;
+                break;
+
+            case ENEMY_TYPE.HERO:
+                fExp = 10f;
+                break;
+
+            default:
+                Debug.LogError("Unknown Enemy Type");
+                break;
+        }
+
+        GameObject.Find("Player").GetComponent<CoreAbilityMgr>().m_fCurExp += fExp;
+
         StartCoroutine(DestroyThis());
     }
 

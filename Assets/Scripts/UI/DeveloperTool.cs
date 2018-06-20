@@ -154,4 +154,10 @@ public class DeveloperTool : MonoBehaviour
         strCurDebugLabel = "Create Hero Garrison\n" + (HERO)(System.Convert.ToInt32(GameObject.Find("Dev_CreateHeroGarrisonNum").GetComponent<UILabel>().text));
         MouseDebugOn(true, DEBUG_STATE.CREATE_HERO_GARRISON);
     }
+
+    void LevelUp()
+    {
+        Debug_Escape();
+        GameObject.Find("AbilSelectPanel").GetComponent<AbilSelect>().SetAbilPanel();
+    }
 }
