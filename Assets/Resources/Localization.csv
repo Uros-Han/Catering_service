@@ -158,7 +158,7 @@ CoreBuff,+CoreBuff,+0적을 탭하여 촉수로 붙잡고 먹을 수 있습니�
 HeadBuff_0,+HeadBuff_0,+1해당 범위 공격 파츠의 공격력을 {0}만큼 올려줍니다.
 HeadBuff_1,+HeadBuff_1,+1해당 범위 공격 파츠의 공격 속도를 {0}만큼 올려줍니다.
 HeadBuff_2,+HeadBuff_2,+1해당 범위 공격 파츠의 공격력과 공격 속도를 {0}만큼 올려줍니다.
-,,
+HealthBuff,+HealthBuff,+1해당 범위 몸통 파츠의 체력을 {0}만큼 올려줍니다.
 ,,
 ,,
 ,,

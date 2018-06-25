@@ -986,10 +986,20 @@ public class ObjectFactory : Singleton<ObjectFactory>
         obj.transform.position = GameObject.Find("Core").transform.position;
         SoundMgr.getInstance.PlaySfx("core", Random.Range(1, 4));
 
-        if (GameMgr.getInstance.m_iHunger + 10 <= 100)
-            GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(GameMgr.getInstance.m_iHunger + 30);
+        if (!GameObject.Find("Player").GetComponent<CoreAbilityMgr>().HasAbility(9))
+        {
+            if (GameMgr.getInstance.m_iHunger + 30 <= 100)
+                GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(GameMgr.getInstance.m_iHunger + 30);
+            else
+                GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(100);
+        }
         else
-            GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(100);
+        {
+            if (GameMgr.getInstance.m_iHunger + 45 <= 100)
+                GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(GameMgr.getInstance.m_iHunger + 45);
+            else
+                GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(100);
+        }
 
         return obj;
     }
@@ -1634,7 +1644,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 strDirectoryName = "8.Rolf";
                 fHealth = 40f;
                 fDefense = 5f;
-                bodyPart.m_lstStrBuff.Add("LegBuff");
+                bodyPart.m_lstStrBuff.Add("HealthBuff");
                 bodyPart.m_dicStatBuff["Health"] = 20;
                 #region body_hide
                 //bodyPart.m_fHealth = fHealth;

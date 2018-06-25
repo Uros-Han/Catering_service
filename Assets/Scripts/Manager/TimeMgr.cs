@@ -94,7 +94,11 @@ public class TimeMgr : Singleton<TimeMgr>
         Core core = GameObject.Find("Player").transform.GetChild(0).GetComponent<Core>();
         Core_World coreWorld = GameObject.Find("Core").GetComponent<Core_World>();
 
-        float fTickWasteHunger = 5f;
+        float fTickWasteHunger = 0f;
+        if (!GameObject.Find("Player").GetComponent<CoreAbilityMgr>().HasAbility(14))
+            fTickWasteHunger = 5f;
+        else
+            fTickWasteHunger = 3f;
         float fTickGenHealth = 2.5f;
 
         do
@@ -111,7 +115,12 @@ public class TimeMgr : Singleton<TimeMgr>
                     hungerBar.ChangeValue(gameMgr.m_iHunger - fTickWasteHunger);
                 else
                 {
-                    float fGainHunger = coreWorld.fPartEatHunger + GameMgr.getInstance.m_iHunger - fTickWasteHunger;
+                    float fGainHunger = 0f;
+                    if (!GameObject.Find("Player").GetComponent<CoreAbilityMgr>().HasAbility(9))
+                        fGainHunger = coreWorld.fPartEatHunger + GameMgr.getInstance.m_iHunger - fTickWasteHunger;
+                    else
+                        fGainHunger = coreWorld.fPartEatHunger + 15f + GameMgr.getInstance.m_iHunger - fTickWasteHunger;
+
                     GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(0);
                     StartCoroutine(coreWorld.EatMyPart(fGainHunger));
                 }

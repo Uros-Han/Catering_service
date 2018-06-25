@@ -70,7 +70,71 @@ public class AbilSelect : MonoBehaviour
             abil_trans.GetChild(0).GetComponent<UISprite>().spriteName = string.Format("ability_{0:00}", iThreeAbil[i]);
             abil_trans.GetChild(1).GetComponent<UILabel>().text = Localization.Get(string.Format("abil_{0}_name", iThreeAbil[i]));
             abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format("abil_{0}_desc", iThreeAbil[i]));
+
+            switch (iThreeAbil[i])
+            {
+                case 0:
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), 2));
+                    break;
+
+                case 1:
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), 3));
+                    break;
+
+                case 2:
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format("abil_{0}_desc", iThreeAbil[i]));
+                    break;
+
+                case 3:
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), "50%"));
+                    break;
+
+                case 4:
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), 100));
+                    break;
+
+                case 5:
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), 50));
+                    break;
+
+                case 6:
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), 5));
+                    break;
+
+                case 7:
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), 5));
+                    break;
+
+                case 8:
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), "50%"));
+                    break;
+
+                case 9:
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), "25%"));
+                    break;
+
+                case 10:
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format("abil_{0}_desc", iThreeAbil[i]));
+                    break;
+
+                case 11:
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format("abil_{0}_desc", iThreeAbil[i]));
+                    break;
+
+                case 12:
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), 150));
+                    break;
+
+                case 13:
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), "30%"));
+                    break;
+
+                case 14:
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), "40%"));
+                    break;
+            }
         }
+
 
         GetComponent<UIPanel>().alpha = 1f;
     }
@@ -87,5 +151,14 @@ public class AbilSelect : MonoBehaviour
 
         GetComponent<UIPanel>().alpha = 0f;
         ObjectFactory.getInstance.Create_AbilUI(iThreeAbil[iIdx]);
+
+        if (iIdx.Equals(4))
+            GameObject.Find("Player").transform.GetChild(0).GetComponent<Core>().m_fCurHealth += 100;
+        else if (iIdx.Equals(12))
+        {
+            GameObject.Find("Player").transform.GetChild(0).GetComponent<Core>().m_lstStrBuff.Add("HealthBuff");
+            GameObject.Find("Player").transform.GetChild(0).GetComponent<Core>().m_dicStatBuff["Health"] = 150;
+        }
+
     }
 }

@@ -985,12 +985,32 @@ public class Part : MonoBehaviour
         Transform playerTrans = GameObject.Find("Player").transform;
         for (int i = 0; i < playerTrans.childCount; ++i)
         {
+            Part buffedPart = playerTrans.GetChild(i).GetComponent<Part>();
+
+            for (int j = 0; j < buffedPart.m_lstPartBuffed.Count; ++j)
+            {
+                if (buffedPart.m_lstPartBuffed[j].m_dicStatBuff.ContainsKey("Health"))
+                {
+                    buffedPart.m_fCurHealth -= buffedPart.m_lstPartBuffed[j].m_dicStatBuff["Health"];
+                }
+            }
+
             playerTrans.GetChild(i).GetComponent<Part>().m_lstPartBuffed.Clear();
         }
 
         playerTrans = GameObject.Find("Morgue").transform;
         for (int i = 1; i < playerTrans.childCount; ++i)
         {
+            Part buffedPart = playerTrans.GetChild(i).GetComponent<Part>();
+
+            for (int j = 0; j < buffedPart.m_lstPartBuffed.Count; ++j)
+            {
+                if (buffedPart.m_lstPartBuffed[j].m_dicStatBuff.ContainsKey("Health"))
+                {
+                    buffedPart.m_fCurHealth -= buffedPart.m_lstPartBuffed[j].m_dicStatBuff["Health"];
+                }
+            }
+
             playerTrans.GetChild(i).GetComponent<Part>().m_lstPartBuffed.Clear();
         }
     }
@@ -1080,6 +1100,15 @@ public class Part : MonoBehaviour
                         buffIdx.Add(iParentIdx - GridMgr.getInstance.m_iXcount);
 
                         listBuffIcon = BuffCreateAndStatAdapt(bStatAdapt, buffIdx, true);
+                    }
+                    else if (m_lstStrBuff[i].Equals("HealthBuff"))
+                    {
+                        buffIdx.Add(iParentIdx + 1);
+                        buffIdx.Add(iParentIdx - 1);
+                        buffIdx.Add(iParentIdx + GridMgr.getInstance.m_iXcount);
+                        buffIdx.Add(iParentIdx - GridMgr.getInstance.m_iXcount);
+
+                        listBuffIcon = BuffCreateAndStatAdapt(bStatAdapt, buffIdx, false, true);
                     }
                 }
                 if (BattleSceneMgr.getInstance.m_turnState.Equals(TURN_STATE.NIGHT))
@@ -1411,7 +1440,12 @@ public class Part : MonoBehaviour
                     if (bStatAdapt)
                     {
                         if (!idxPart.m_lstPartBuffed.Contains(this))
+                        {
                             idxPart.m_lstPartBuffed.Add(this);
+
+                            if (m_dicStatBuff.ContainsKey("Health"))
+                                idxPart.m_fCurHealth += m_dicStatBuff["Health"];
+                        }
                     }
                     else
                     {

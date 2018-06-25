@@ -52,7 +52,7 @@ public class SaveManager : Singleton<SaveManager>
 
         CoreAbilityMgr coreAbility = GameObject.Find("Player").GetComponent<CoreAbilityMgr>();
         ES3.Save<int>("level", coreAbility.m_iLevel, "core.txt");
-        ES3.Save<float>("curExp", coreAbility.m_fCurExp, "core.txt");
+        ES3.Save<int>("curExp", coreAbility.m_iCurExp, "core.txt");
         ES3.Save<List<int>>("listAbil", coreAbility.m_listAbil, "core.txt");
 
     }
@@ -74,12 +74,19 @@ public class SaveManager : Singleton<SaveManager>
 
         CoreAbilityMgr coreAbility = GameObject.Find("Player").GetComponent<CoreAbilityMgr>();
         coreAbility.m_iLevel = ES3.Load<int>("level", "core.txt");
-        coreAbility.m_fCurExp = ES3.Load<float>("curExp", "core.txt");
+        coreAbility.m_iCurExp = ES3.Load<int>("curExp", "core.txt");
         coreAbility.m_listAbil = ES3.Load<List<int>>("listAbil", "core.txt");
         for (int i = 1; i < coreAbility.m_listAbil.Count; ++i)
         {
             ObjectFactory.getInstance.Create_AbilUI(coreAbility.m_listAbil[i]);
+
+            if (coreAbility.m_listAbil[i] == 12)
+            {
+                GameObject.Find("Player").transform.GetChild(0).GetComponent<Core>().m_lstStrBuff.Add("HealthBuff");
+                GameObject.Find("Player").transform.GetChild(0).GetComponent<Core>().m_dicStatBuff["Health"] = 150;
+            }
         }
+        coreAbility.SetTargetValue();
     }
 
     void SaveWorld()

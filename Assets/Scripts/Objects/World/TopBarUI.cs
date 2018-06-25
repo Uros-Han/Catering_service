@@ -11,6 +11,9 @@ public class TopBarUI : MonoBehaviour
     bool m_bHealthBar;
     Core core;
 
+    public float m_fMaxValue;
+    CoreAbilityMgr coreAbility;
+
     // Use this for initialization
     void Start()
     {
@@ -23,12 +26,17 @@ public class TopBarUI : MonoBehaviour
         gMgr = GameMgr.getInstance;
         m_bar = transform.Find("bar").GetComponent<UISlider>();
         m_countLabel = transform.Find("count").GetComponent<UILabel>();
+
+        coreAbility = GameObject.Find("Player").GetComponent<CoreAbilityMgr>();
+
+        m_fMaxValue = 100f;
     }
 
     public void ChangeValue(float fTargetValue)
     {
-        if (fTargetValue > 100f)
-            fTargetValue = 100f;
+
+        if (fTargetValue > m_fMaxValue)
+            fTargetValue = m_fMaxValue;
         else if (fTargetValue < 0f)
             fTargetValue = 0f;
 
@@ -49,15 +57,20 @@ public class TopBarUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (m_bHealthBar)
+        {
+            if (coreAbility.HasAbility(4))
+                m_fMaxValue = 200f;
+        }
 
         if (m_bHealthBar)
         {
-            m_bar.value = core.m_fCurHealth / 100f;
+            m_bar.value = core.m_fCurHealth / m_fMaxValue;
             m_countLabel.text = ((int)core.m_fCurHealth).ToString();
         }
         else
         {
-            m_bar.value = (float)gMgr.m_iHunger / 100f;
+            m_bar.value = (float)gMgr.m_iHunger / m_fMaxValue;
             m_countLabel.text = gMgr.m_iHunger.ToString();
         }
     }

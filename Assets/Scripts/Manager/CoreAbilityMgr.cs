@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class CoreAbilityMgr : MonoBehaviour
 {
-    public float m_fCurExp;
-    public float m_fMaxExp;
+    public int m_iCurExp;
+    public int m_iMaxExp;
     public int m_iLevel;
+
+    int m_iGainExp;
+    int m_iTargetExp; // ChangeValue heading exp;
+    int m_iTargetLvl;
 
     public List<int> m_listAbil;
     public bool m_bPopUpAbilSelectPanel = false;
@@ -21,44 +25,86 @@ public class CoreAbilityMgr : MonoBehaviour
         m_listAbil.Add(0);
 
         m_iLevel = 1;
-        m_fMaxExp = 24f;
+        m_iMaxExp = 24;
+    }
+
+    public void SetTargetValue()
+    {
+        m_iTargetLvl = m_iLevel;
+        m_iTargetExp = m_iCurExp;
+    }
+
+    public bool HasAbility(int index)
+    {
+        if (m_listAbil.Contains(index))
+            return true;
+        else
+            return false;
     }
 
     private void Update()
     {
-        if (m_ExpSlider == null)
+        if (m_ExpSlider == null || !m_ExpSlider.gameObject.activeInHierarchy && GameObject.Find("LevelPanel") != null)
         {
             m_ExpSlider = GameObject.Find("LevelPanel").transform.Find("slider").GetComponent<UISlider>();
             m_levelLabel = GameObject.Find("LevelPanel").transform.Find("back").Find("level").GetComponent<UILabel>();
         }
 
-        m_ExpSlider.value = m_fCurExp / m_fMaxExp;
+        if (m_iGainExp > 0)
+        {
+            if (m_iGainExp + m_iTargetExp >= m_iMaxExp)
+            {
+                m_iTargetExp = m_iGainExp + m_iTargetExp;
+                while (m_iTargetLvl * 24 <= m_iTargetExp)
+                {
+                    m_bPopUpAbilSelectPanel = true;
+                    m_iTargetExp = m_iTargetExp - (m_iTargetLvl * 24);
+                    m_iTargetLvl += 1;
+                }
+            }
+            else
+            {
+                m_iTargetExp = m_iTargetExp + m_iGainExp;
+            }
+
+            StopAllCoroutines();
+            StartCoroutine(ChangeValue());
+            m_iGainExp = 0;
+        }
+
+        m_ExpSlider.value = (float)m_iCurExp / (float)m_iMaxExp;
         m_levelLabel.text = m_iLevel.ToString();
     }
 
     public void GainExp(int iGainExp)
     {
-        if (iGainExp + m_fCurExp >= m_fMaxExp)
-        {
-            m_fCurExp = iGainExp + m_fCurExp - m_fMaxExp;
-            LevelUp();
-        }
-        else
-        {
-            m_fCurExp += iGainExp;
-        }
-    }
-
-    public void LevelUp()
-    {
-        m_iLevel += 1;
-        MaxExpSet();
-
-        m_bPopUpAbilSelectPanel = true;
+        m_iGainExp += iGainExp;
     }
 
     public void MaxExpSet()
     {
-        m_fMaxExp = m_iLevel * 24;
+        m_iMaxExp = m_iLevel * 24;
+    }
+
+    IEnumerator chgVal;
+    IEnumerator ChangeValue()
+    {
+        iTween.Stop(gameObject);
+
+        while (m_iTargetLvl != m_iLevel)
+        {
+            iTween.ValueTo(gameObject, iTween.Hash("from", m_iCurExp, "to", m_iMaxExp, "time", 0.5f, "onupdate", "TweenVal", "easetype", "easeInSine"));
+            yield return new WaitForSeconds(0.51f);
+            m_iLevel += 1;
+            m_iCurExp = 0;
+            MaxExpSet();
+        }
+
+        iTween.ValueTo(gameObject, iTween.Hash("from", m_iCurExp, "to", m_iTargetExp, "time", 0.5f, "onupdate", "TweenVal", "easetype", "easeInSine"));
+    }
+
+    void TweenVal(int newVal)
+    {
+        m_iCurExp = newVal;
     }
 }

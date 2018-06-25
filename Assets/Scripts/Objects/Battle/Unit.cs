@@ -71,23 +71,23 @@ public class Unit : MonoBehaviour
             StartCoroutine(ChangeParentToField(transform.GetChild(i).gameObject, groundPos));
         }
 
-        float fExp = 0f;
+        int iExp = 0;
         switch (m_enemyType)
         {
             case ENEMY_TYPE.CIVILIAN:
-                fExp = 3f;
+                iExp = 3;
                 break;
 
             case ENEMY_TYPE.MERCENARY:
-                fExp = 5f;
+                iExp = 5;
                 break;
 
             case ENEMY_TYPE.KNIGHT:
-                fExp = 7f;
+                iExp = 7;
                 break;
 
             case ENEMY_TYPE.HERO:
-                fExp = 10f;
+                iExp = 10;
                 break;
 
             default:
@@ -95,7 +95,7 @@ public class Unit : MonoBehaviour
                 break;
         }
 
-        GameObject.Find("Player").GetComponent<CoreAbilityMgr>().m_fCurExp += fExp;
+        GameObject.Find("Player").GetComponent<CoreAbilityMgr>().GainExp(iExp);
 
         StartCoroutine(DestroyThis());
     }

@@ -166,12 +166,17 @@ public class Core : Part
     public IEnumerator Digest(GameObject target)
     {
         Unit targetUnit = target.GetComponent<Unit>();
+        bool bHasAbil7 = GameObject.Find("Player").GetComponent<CoreAbilityMgr>().HasAbility(7);
+        bool bHasAbil13 = GameObject.Find("Player").GetComponent<CoreAbilityMgr>().HasAbility(13);
         while (targetUnit.m_fCurHealth > 0f)
         {
 
             yield return null;
 
-            targetUnit.m_fCurHealth -= Time.deltaTime * 10f;
+            if (bHasAbil7)
+                targetUnit.m_fCurHealth -= Time.deltaTime * 15f;
+            else
+                targetUnit.m_fCurHealth -= Time.deltaTime * 10f;
 
         }
 
@@ -208,10 +213,14 @@ public class Core : Part
                 Destroy(targetObj);
                 continue;
             }
+
+            float fDestroyChance = 0.7f;
+            if (bHasAbil13)
+                fDestroyChance = 0.7f - (0.7f * 0.3f);
+
             else if (!bIsTuto && target.transform.GetChild(0).GetComponent<Part>().m_partType.Equals(PART_TYPE.LEG))
             {
-
-                if (Random.Range(0.0f, 1.0f) < 0.7f)
+                if (Random.Range(0.0f, 1.0f) < fDestroyChance)
                 {
                     GameObject targetObj = target.transform.GetChild(0).gameObject;
                     targetObj.transform.parent = FieldTrans;
@@ -220,7 +229,12 @@ public class Core : Part
                 }
 
             }
-            else if (!bIsTuto && Random.Range(0.0f, 1.0f) < 0.4f && !target.GetComponent<Unit>().m_enemyType.Equals(ENEMY_TYPE.HERO))
+
+            fDestroyChance = 0.4f;
+            if (bHasAbil13)
+                fDestroyChance = 0.4f - (0.4f * 0.3f);
+
+            else if (!bIsTuto && Random.Range(0.0f, 1.0f) < fDestroyChance && !target.GetComponent<Unit>().m_enemyType.Equals(ENEMY_TYPE.HERO))
             {
                 GameObject targetObj = target.transform.GetChild(0).gameObject;
                 targetObj.transform.parent = FieldTrans;

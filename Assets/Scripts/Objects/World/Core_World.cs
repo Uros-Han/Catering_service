@@ -193,7 +193,7 @@ public class Core_World : MonoBehaviour
                     {
                         PartStatus partStatus = GameObject.Find("PartStatus").GetComponent<PartStatus>();
                         if (!m_iDestinationIdx.Equals(m_iGridIdx))
-                            m_iNeedHunger = m_listMoveIdx.Count * (20 + (1 * partStatus.m_iPartCount));
+                            m_iNeedHunger = m_listMoveIdx.Count * GetNeedHunger();
                         else
                             m_iNeedHunger = 0;
 
@@ -313,13 +313,18 @@ public class Core_World : MonoBehaviour
             if (GameObject.Find("PartyManager") != null && !bIsTuto)
                 GameObject.Find("PartyManager").GetComponent<PartyManager>().CalculateDepolying();
 
-            if (GameMgr.getInstance.m_iHunger - (20 + (1 * partStatus.m_iPartCount)) > 0)
+            if (GameMgr.getInstance.m_iHunger - GetNeedHunger() > 0)
             {
-                GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(GameMgr.getInstance.m_iHunger - (20 + (1 * partStatus.m_iPartCount)));
+                GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(GameMgr.getInstance.m_iHunger - GetNeedHunger());
             }
             else
             {
-                float fGainHunger = fPartEatHunger + GameMgr.getInstance.m_iHunger - (20 + (1 * partStatus.m_iPartCount));
+                float fGainHunger = 0f;
+                if (!GameObject.Find("Player").GetComponent<CoreAbilityMgr>().HasAbility(9))
+                    fGainHunger = fPartEatHunger + GameMgr.getInstance.m_iHunger - GetNeedHunger();
+                else
+                    fGainHunger = fPartEatHunger + 15f + GameMgr.getInstance.m_iHunger - GetNeedHunger();
+
                 GameObject.Find("Hunger").GetComponent<TopBarUI>().ChangeValue(0);
                 yield return StartCoroutine(EatMyPart(fGainHunger));
             }
@@ -387,6 +392,29 @@ public class Core_World : MonoBehaviour
 
         world.m_worldTurnState = WORLDTURN_STATE.IDLE;
         StartCoroutine(Idle());
+    }
+
+    public int GetNeedHunger()
+    {
+        CoreAbilityMgr coreAbility = GameObject.Find("Playaer").GetComponent<CoreAbilityMgr>();
+        PartStatus partStatus = GameObject.Find("PartStatus").GetComponent<PartStatus>();
+
+        int iWasteHunger = 0;
+        if (coreAbility.HasAbility(3))
+        {
+            iWasteHunger -= 10;
+        }
+
+        if (!coreAbility.HasAbility(8))
+        {
+            iWasteHunger += 1 * partStatus.m_iPartCount;
+        }
+        else
+        {
+            iWasteHunger += (int)(0.5f * (float)partStatus.m_iPartCount);
+        }
+
+        return iWasteHunger;
     }
 
     public bool CheckEnmeyInThisArea(bool bBeingAttacked = false, bool bCheckOnlyLocation = false)

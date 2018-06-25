@@ -13,7 +13,6 @@ public class Tangled : MonoBehaviour
     float m_fTangledPointY;
 
 
-    public float m_fTangledDelay;
     public bool m_bTangledReady;
 
     public Vector3 m_vecTangledEdge;
@@ -23,7 +22,6 @@ public class Tangled : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        m_fTangledDelay = 1f;
         m_bTangledReady = true;
 
         m_listCurve = new List<Vector3>();
@@ -59,7 +57,11 @@ public class Tangled : MonoBehaviour
         float fCurTime = 0f;
         float fMaxReachTime = 0.1f;
 
+
         float fTangledDelay = 2f;
+
+        if (GameObject.Find("Player").GetComponent<CoreAbilityMgr>().HasAbility(5))
+            fTangledDelay = 1f;
 
         int iJointCount = 5;
         Vector3 target = Vector3.zero;
@@ -237,12 +239,30 @@ public class Tangled : MonoBehaviour
 
     }
 
+    IEnumerator TangledAbil_(Transform target)
+    {
+        float fTimer = 0f;
+        while (Input.GetMouseButton(0))
+        {
+            if (fTimer > 1f)
+            {
+                fTimer = 0f;
+                target.GetComponent<FSM>().Weapon_Attack(5f, target.gameObject, true, true);
+            }
+
+            fTimer += Time.deltaTime;
+            yield return null;
+        }
+    }
+
     public void TangledDrag(Transform target)
     {
         if (bCantGrab)
             return;
 
         StartCoroutine(TangledDrag_Coroutine(target));
+        if (GameObject.Find("Player").GetComponent<CoreAbilityMgr>().HasAbility(6))
+            StartCoroutine(TangledAbil_6(target));
     }
 
     public void TangledAttack(Transform target)
