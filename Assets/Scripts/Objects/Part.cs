@@ -1025,14 +1025,13 @@ public class Part : MonoBehaviour
     {
         Morgue morgue = GameObject.Find("Morgue").GetComponent<Morgue>();
         Vector2 mousePosition = Vector2.zero;
-        BoxCollider2D collider2D = GetComponent<BoxCollider2D>();
         GameObject beforeParentPart = null;
         Transform PlayerTrans = GameObject.Find("Player").transform;
         List<GameObject> listBuffIcon = new List<GameObject>();
 
         do
         {
-            if ((m_objCurParentPart != null && m_objCurParentPart != beforeParentPart) || bStatAdapt)
+            if (((m_objCurParentPart != null && m_objCurParentPart != beforeParentPart) || bStatAdapt) || gameObject.name.Equals("Core"))
             {
                 //clear buffs
                 if (!bStatAdapt)
@@ -1049,10 +1048,15 @@ public class Part : MonoBehaviour
                 {
                     if (m_objLastParentPart != null)
                         iParentIdx = m_objLastParentPart.GetComponent<Part>().m_iGridIdx;
+                    if (gameObject.name.Equals("Core"))
+                        iParentIdx = GridMgr.getInstance.GetGridIdx(transform.position, GRID_STATE.BATTLE);
                 }
                 else
                 {
-                    iParentIdx = m_objCurParentPart.GetComponent<Part>().m_iGridIdx;
+                    if (gameObject.name.Equals("Core"))
+                        iParentIdx = m_iGridIdx;
+                    else
+                        iParentIdx = m_objCurParentPart.GetComponent<Part>().m_iGridIdx;
                 }
 
                 for (int i = 0; i < m_lstStrBuff.Count; ++i)

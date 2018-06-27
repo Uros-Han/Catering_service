@@ -396,10 +396,10 @@ public class Core_World : MonoBehaviour
 
     public int GetNeedHunger()
     {
-        CoreAbilityMgr coreAbility = GameObject.Find("Playaer").GetComponent<CoreAbilityMgr>();
+        CoreAbilityMgr coreAbility = GameObject.Find("Player").GetComponent<CoreAbilityMgr>();
         PartStatus partStatus = GameObject.Find("PartStatus").GetComponent<PartStatus>();
 
-        int iWasteHunger = 0;
+        int iWasteHunger = 20;
         if (coreAbility.HasAbility(3))
         {
             iWasteHunger -= 10;

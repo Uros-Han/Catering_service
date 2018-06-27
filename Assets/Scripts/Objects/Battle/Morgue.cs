@@ -172,7 +172,10 @@ public class Morgue : MonoBehaviour
                 }
                 else
                 {
-                    int iCurHealth = (int)part.m_fCurHealth;
+                    int iCurHealth = 0;
+                    if ((int)part.m_fCurHealth > 0)
+                        iCurHealth = (int)part.m_fCurHealth;
+
                     if (fBuffedStat > 0)
                     {
                         if ((int)(tmp.Value + fBuffedStat) == iCurHealth)
@@ -216,12 +219,16 @@ public class Morgue : MonoBehaviour
                 {
                     tmpBuff = string.Format(tmpBuff, part.m_dicStatBuff["AttackSpeed"]);
                 }
+                else if (part.m_lstStrBuff[i].Equals("HealthBuff"))
+                {
+                    tmpBuff = string.Format(tmpBuff, part.m_dicStatBuff["Health"]);
+                }
             }
 
             if (tmpBuff.Contains("+"))
-                morguePanel.GetChild(0).Find("PartDesc").GetComponent<UILabel>().text += "[00DA2EFF]" + tmpBuff.Substring(2) + "[-]";
+                morguePanel.GetChild(0).Find("PartDesc").GetComponent<UILabel>().text += "[00DA2EFF]" + tmpBuff.Substring(2) + "[-]\n";
             else if (tmpBuff.Contains("-"))
-                morguePanel.GetChild(0).Find("PartDesc").GetComponent<UILabel>().text += "[EC0E0E15]" + tmpBuff.Substring(2) + "[-]";
+                morguePanel.GetChild(0).Find("PartDesc").GetComponent<UILabel>().text += "[EC0E0E15]" + tmpBuff.Substring(2) + "[-]\n";
         }
     }
 

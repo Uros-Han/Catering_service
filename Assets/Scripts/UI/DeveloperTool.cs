@@ -160,4 +160,10 @@ public class DeveloperTool : MonoBehaviour
         Debug_Escape();
         GameObject.Find("AbilSelectPanel").GetComponent<AbilSelect>().SetAbilPanel();
     }
+
+    void GetAbility()
+    {
+        Debug_Escape();
+        GameObject.Find("AbilSelectPanel").GetComponent<AbilSelect>().GetAbil(System.Convert.ToInt32(GameObject.Find("Dev_GetAbilIdx").GetComponent<UILabel>().text));
+    }
 }

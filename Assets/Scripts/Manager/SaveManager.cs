@@ -79,8 +79,11 @@ public class SaveManager : Singleton<SaveManager>
         for (int i = 1; i < coreAbility.m_listAbil.Count; ++i)
         {
             ObjectFactory.getInstance.Create_AbilUI(coreAbility.m_listAbil[i]);
-
-            if (coreAbility.m_listAbil[i] == 12)
+            if (coreAbility.m_listAbil[i] == 4)
+            {
+                GameObject.Find("Player").transform.GetChild(0).GetComponent<Core>().m_dicStat["Health"] += 100;
+            }
+            else if (coreAbility.m_listAbil[i] == 12)
             {
                 GameObject.Find("Player").transform.GetChild(0).GetComponent<Core>().m_lstStrBuff.Add("HealthBuff");
                 GameObject.Find("Player").transform.GetChild(0).GetComponent<Core>().m_dicStatBuff["Health"] = 150;

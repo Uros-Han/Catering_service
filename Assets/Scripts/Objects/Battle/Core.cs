@@ -42,6 +42,7 @@ public class Core : Part
     void OnEnable()
     {
         transform.localPosition = new Vector3(0.01f, 0f);
+
         iTween.MoveTo(gameObject, iTween.Hash("x", 0.01f, "y", 0f, "time", 1f, "isLocal", true));
     }
 

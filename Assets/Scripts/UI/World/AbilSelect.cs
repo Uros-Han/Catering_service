@@ -143,22 +143,33 @@ public class AbilSelect : MonoBehaviour
     public int iIdx_1 = 1;
     public int iIdx_2 = 2;
 
-    public void SelectAbil(int iIdx)
+    void SelectAbil(int iIdx)
+    {
+        GetComponent<UIPanel>().alpha = 0f;
+
+        GetAbil(iThreeAbil[iIdx]);
+    }
+
+    public void GetAbil(int iAbilIdx)
     {
         CoreAbilityMgr coreAbilMgr = GameObject.Find("Player").GetComponent<CoreAbilityMgr>();
 
-        coreAbilMgr.m_listAbil.Add(iThreeAbil[iIdx]);
+        if (coreAbilMgr.m_listAbil.Contains(iAbilIdx))
+            return;
 
-        GetComponent<UIPanel>().alpha = 0f;
-        ObjectFactory.getInstance.Create_AbilUI(iThreeAbil[iIdx]);
+        coreAbilMgr.m_listAbil.Add(iAbilIdx);
 
-        if (iIdx.Equals(4))
+        ObjectFactory.getInstance.Create_AbilUI(iAbilIdx);
+
+        if (iAbilIdx.Equals(4))
+        {
             GameObject.Find("Player").transform.GetChild(0).GetComponent<Core>().m_fCurHealth += 100;
-        else if (iIdx.Equals(12))
+            GameObject.Find("Player").transform.GetChild(0).GetComponent<Core>().m_dicStat["Health"] += 100;
+        }
+        else if (iAbilIdx.Equals(12))
         {
             GameObject.Find("Player").transform.GetChild(0).GetComponent<Core>().m_lstStrBuff.Add("HealthBuff");
             GameObject.Find("Player").transform.GetChild(0).GetComponent<Core>().m_dicStatBuff["Health"] = 150;
         }
-
     }
 }

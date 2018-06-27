@@ -88,7 +88,7 @@ public class FSM : MonoBehaviour
     }
 
     float fDefenseFactor = 0.06f;
-    protected IEnumerator Attack(GameObject target, float fDamage, bool bEnemy, bool bIgnoreDef = false, bool bWall = false)
+    protected IEnumerator Attack(GameObject target, float fDamage, bool bEnemy, bool bFixDmg = false, bool bWall = false)
     {
         if (target == null)
             yield break;
@@ -115,9 +115,10 @@ public class FSM : MonoBehaviour
         else if (bEnemy)
         { /// Attack Enemy
 			Unit targetUnit = target.GetComponent<Unit>();
-            fDamage = fDamage + (Random.Range(-2, 3));
+            if (!bFixDmg)
+                fDamage = fDamage + (Random.Range(-2, 3));
             float fBlockDmg = (fDamage * ((targetUnit.m_fDefense * fDefenseFactor) / (1 + fDefenseFactor * targetUnit.m_fDefense)));
-            if (bIgnoreDef)
+            if (bFixDmg)
                 fBlockDmg = 0f;
             float fDealedDmg = fDamage - fBlockDmg;
 
@@ -270,18 +271,18 @@ public class FSM : MonoBehaviour
         SetState(m_AiState);
     }
 
-    public void Weapon_Attack(float fDmg, GameObject target, bool bEnemy, bool bIgnoreDef = false)
+    public void Weapon_Attack(float fDmg, GameObject target, bool bEnemy, bool bFixDmg = false)
     {
         if (target.name.Equals("Wall"))
         {
-            if (bIgnoreDef)
+            if (bFixDmg)
                 StartCoroutine(Attack(target, fDmg, bEnemy, true, true));
             else
                 StartCoroutine(Attack(target, fDmg, bEnemy, false, true));
         }
         else
         {
-            if (bIgnoreDef)
+            if (bFixDmg)
                 StartCoroutine(Attack(target, fDmg, bEnemy, true));
             else
                 StartCoroutine(Attack(target, fDmg, bEnemy));
