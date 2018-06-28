@@ -19,14 +19,63 @@ public class MouthPanel : MonoBehaviour
         {
             m_DigestBar[i] = DigestBar(i);
         }
+
+        m_mouthState = new MOUTH_STATE[iMaxMouthNum];
+        for (int i = 0; i < iMaxMouthNum; ++i)
+            ChangeMouthState(i, MOUTH_STATE.IDLE);
+
+        if (GameObject.Find("Player").GetComponent<CoreAbilityMgr>().HasAbility(10))
+        {
+            Transform secondMouth = GameObject.Find("MouthPanel").transform.GetChild(1).transform;
+            for (int i = 0; i < secondMouth.childCount; ++i)
+            {
+                secondMouth.GetChild(i).gameObject.SetActive(true);
+            }
+        }
+
+        if (GameObject.Find("Player").GetComponent<CoreAbilityMgr>().HasAbility(11))
+        {
+            Transform thirdMouth = GameObject.Find("MouthPanel").transform.GetChild(2).transform;
+            for (int i = 0; i < thirdMouth.childCount; ++i)
+            {
+                thirdMouth.GetChild(i).gameObject.SetActive(true);
+            }
+        }
+    }
+
+    public enum MOUTH_STATE { IDLE, CHEW };
+    int iMaxMouthNum = 3;
+    MOUTH_STATE[] m_mouthState;
+
+    public void ChangeMouthState(int iMouthIdx, MOUTH_STATE state)
+    {
+        Transform teethTrans = GameObject.Find("MouthPanel").transform.GetChild(iMouthIdx).Find("Teeth");
+
+        m_mouthState[iMouthIdx] = state;
+
+        switch (m_mouthState[iMouthIdx])
+        {
+            case MOUTH_STATE.IDLE:
+                teethTrans.GetChild(0).GetComponent<Animator>().SetInteger("mouthState", 0);
+                teethTrans.GetChild(1).GetChild(0).GetComponent<Animator>().SetInteger("mouthState", 0);
+                break;
+
+            case MOUTH_STATE.CHEW:
+                teethTrans.GetChild(0).GetComponent<Animator>().SetInteger("mouthState", 1);
+                teethTrans.GetChild(1).GetChild(0).GetComponent<Animator>().SetInteger("mouthState", 1);
+                break;
+        }
     }
 
     public int EmptyMouthIdx()
     {
+        int iCurMouthNum = 1;
+        if (GameObject.Find("Player").GetComponent<CoreAbilityMgr>().HasAbility(10))
+            iCurMouthNum += 1;
+        if (GameObject.Find("Player").GetComponent<CoreAbilityMgr>().HasAbility(11))
+            iCurMouthNum += 1;
 
-        //int iMouthNum = GameObject.Find("Player").GetComponent<CoreAbilityMgr>().m_iMouthNum;
-
-        for (int i = 0; i < 1; ++i)
+        for (int i = 0; i < iCurMouthNum; ++i)
         {
             if (m_arrayEatenObjects[i] == null)
             {
@@ -41,7 +90,13 @@ public class MouthPanel : MonoBehaviour
     {
         //int iMouthNum = GameObject.Find("Player").GetComponent<CoreAbilityMgr>().m_iMouthNum;
 
-        for (int i = 0; i < 1; ++i)
+        int iCurMouthNum = 1;
+        if (GameObject.Find("Player").GetComponent<CoreAbilityMgr>().HasAbility(10))
+            iCurMouthNum += 1;
+        if (GameObject.Find("Player").GetComponent<CoreAbilityMgr>().HasAbility(11))
+            iCurMouthNum += 1;
+
+        for (int i = 0; i < iCurMouthNum; ++i)
         {
             if (m_arrayEatenObjects[i] == null)
             {
@@ -54,10 +109,16 @@ public class MouthPanel : MonoBehaviour
 
     public void AddEnemyInMouth(GameObject objEnemy)
     {
-        //int iMouthNum = GameObject.Find("Player").GetComponent<CoreAbilityMgr>().m_iMouthNum;
         bool bMouthFulled = true;
+
+        int iCurMouthNum = 1;
+        if (GameObject.Find("Player").GetComponent<CoreAbilityMgr>().HasAbility(10))
+            iCurMouthNum += 1;
+        if (GameObject.Find("Player").GetComponent<CoreAbilityMgr>().HasAbility(11))
+            iCurMouthNum += 1;
+
         int iEmptyIdx = 0;
-        for (int i = 0; i < 1; ++i)
+        for (int i = 0; i < iCurMouthNum; ++i)
         {
             if (m_arrayEatenObjects[i] == null)
             {
@@ -70,9 +131,10 @@ public class MouthPanel : MonoBehaviour
         if (bMouthFulled)
             return;
 
+        ChangeMouthState(iEmptyIdx, MOUTH_STATE.CHEW);
         m_arrayEatenObjects[iEmptyIdx] = objEnemy;
 
-        objEnemy.transform.parent = GameObject.Find("MouthList").transform.GetChild(iEmptyIdx);
+        objEnemy.transform.parent = GameObject.Find("MouthPanel").transform.GetChild(iEmptyIdx).GetChild(0).transform;
         objEnemy.transform.parent.GetComponent<SpriteMask>().updateSprites(objEnemy.transform.parent);
 
         for (int i = 0; i < objEnemy.transform.childCount; ++i)
@@ -98,7 +160,7 @@ public class MouthPanel : MonoBehaviour
     IEnumerator DigestBar(int iIdx)
     {
         Unit targetUnit = m_arrayEatenObjects[iIdx].GetComponent<Unit>();
-        UISlider slider = GameObject.Find("MouthList").transform.GetChild(iIdx).GetComponent<UISlider>();
+        UISlider slider = GameObject.Find("MouthPanel").transform.GetChild(iIdx).GetChild(3).GetComponent<UISlider>();
 
         do
         {
@@ -112,17 +174,21 @@ public class MouthPanel : MonoBehaviour
         m_DigestBar[iIdx] = DigestBar(iIdx);
     }
 
-    public void MouthClickIdx_0()
+
+    public int iIdx0 = 0;
+    public int iIdx1 = 1;
+    public int iIdx2 = 2;
+    public void MouthClickIdx(int iIdx)
     {
-        if (m_arrayEatenObjects[0] == null)
+        if (m_arrayEatenObjects[iIdx] == null)
             return;
 
-        StopCoroutine(m_DigestBar[0]);
-        GameObject.Find("Core").GetComponent<Core>().StopDigest(0);
+        StopCoroutine(m_DigestBar[iIdx]);
+        GameObject.Find("Core").GetComponent<Core>().StopDigest(iIdx);
 
-        GameObject.Find("MouthList").transform.GetChild(0).GetComponent<UISlider>().value = 0f;
+        GameObject.Find("MouthPanel").transform.GetChild(iIdx).GetChild(3).GetComponent<UISlider>().value = 0f;
 
-        GameObject target = transform.Find("MouthList").GetChild(0).GetChild(0).gameObject;
+        GameObject target = GameObject.Find("MouthPanel").transform.GetChild(iIdx).GetChild(0).GetChild(0).gameObject;
 
         target.transform.parent = GameObject.Find("Enemies").transform;
         target.GetComponent<FSM_Enemy>().m_objHealthBar.SetActive(true);
@@ -135,6 +201,8 @@ public class MouthPanel : MonoBehaviour
         target.GetComponent<Unit>().m_bEaten = false;
 
         target.GetComponent<CircleCollider2D>().enabled = true;
+
+        ChangeMouthState(iIdx, MOUTH_STATE.IDLE);
 
         Material diffuse = ObjectFactory.getInstance.m_material_SpritePaletteLightingMaterial;
         for (int i = 0; i < target.transform.childCount; ++i)
@@ -154,6 +222,6 @@ public class MouthPanel : MonoBehaviour
 
         SoundMgr.getInstance.PlaySfx("core", 0);
 
-        m_arrayEatenObjects[0] = null;
+        m_arrayEatenObjects[iIdx] = null;
     }
 }

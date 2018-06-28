@@ -149,7 +149,7 @@ public class Core : Part
 
         SoundMgr.getInstance.PlaySfx("core", 0);
 
-        m_Digest[iEmptyMouthIdx] = Digest(target);
+        m_Digest[iEmptyMouthIdx] = Digest(iEmptyMouthIdx, target);
         StartCoroutine(m_Digest[iEmptyMouthIdx]);
 
         iTween.ScaleTo(target, iTween.Hash("x", 380f, "y", 380f, "time", 0.2f));
@@ -164,7 +164,7 @@ public class Core : Part
         StopCoroutine(m_Digest[iIdx]);
     }
 
-    public IEnumerator Digest(GameObject target)
+    public IEnumerator Digest(int iMouthIdx, GameObject target)
     {
         Unit targetUnit = target.GetComponent<Unit>();
         bool bHasAbil7 = GameObject.Find("Player").GetComponent<CoreAbilityMgr>().HasAbility(7);
@@ -264,6 +264,8 @@ public class Core : Part
             yield return new WaitForSeconds(0.1f);
 
         }
+
+        GameObject.Find("MouthPanel").GetComponent<MouthPanel>().ChangeMouthState(iMouthIdx, MouthPanel.MOUTH_STATE.IDLE);
 
         StartCoroutine(target.GetComponent<Unit>().DestroyThis(target.transform.childCount * 0.11f));
         target = null;
