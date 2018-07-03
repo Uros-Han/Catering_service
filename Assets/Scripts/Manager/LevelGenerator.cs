@@ -22,8 +22,7 @@ public class LevelGenerator : Singleton<LevelGenerator>
                 break;
 
             case ENEMY_TYPE.KNIGHT:
-                ObjectFactory.getInstance.Create_Mercenary(100f);
-                //ObjectFactory.getInstance.Create_Knight(100f);
+                ObjectFactory.getInstance.Create_Knight(100f);
                 break;
 
             case ENEMY_TYPE.HERO:

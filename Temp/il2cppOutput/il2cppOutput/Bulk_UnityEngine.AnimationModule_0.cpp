@@ -2417,6 +2417,8 @@ extern "C"  void Animator_SetFloatString_m417479335 (Animator_t434523843 * __thi
 extern "C"  bool Animator_GetBoolString_m4261382084 (Animator_t434523843 * __this, String_t* ___name0, const RuntimeMethod* method) IL2CPP_METHOD_ATTR;
 // System.Void UnityEngine.Animator::SetBoolString(System.String,System.Boolean)
 extern "C"  void Animator_SetBoolString_m1913721706 (Animator_t434523843 * __this, String_t* ___name0, bool ___value1, const RuntimeMethod* method) IL2CPP_METHOD_ATTR;
+// System.Void UnityEngine.Animator::SetIntegerString(System.String,System.Int32)
+extern "C"  void Animator_SetIntegerString_m3069556331 (Animator_t434523843 * __this, String_t* ___name0, int32_t ___value1, const RuntimeMethod* method) IL2CPP_METHOD_ATTR;
 // System.Void UnityEngine.Animator::SetTriggerString(System.String)
 extern "C"  void Animator_SetTriggerString_m2612407758 (Animator_t434523843 * __this, String_t* ___name0, const RuntimeMethod* method) IL2CPP_METHOD_ATTR;
 // System.Void UnityEngine.Animator::ResetTriggerString(System.String)
@@ -3495,6 +3497,16 @@ extern "C"  void Animator_SetBool_m234840832 (Animator_t434523843 * __this, Stri
 		return;
 	}
 }
+// System.Void UnityEngine.Animator::SetInteger(System.String,System.Int32)
+extern "C"  void Animator_SetInteger_m2337695006 (Animator_t434523843 * __this, String_t* ___name0, int32_t ___value1, const RuntimeMethod* method)
+{
+	{
+		String_t* L_0 = ___name0;
+		int32_t L_1 = ___value1;
+		Animator_SetIntegerString_m3069556331(__this, L_0, L_1, /*hidden argument*/NULL);
+		return;
+	}
+}
 // System.Void UnityEngine.Animator::SetTrigger(System.String)
 extern "C"  void Animator_SetTrigger_m2134052629 (Animator_t434523843 * __this, String_t* ___name0, const RuntimeMethod* method)
 {
@@ -3600,6 +3612,15 @@ extern "C"  bool Animator_GetBoolString_m4261382084 (Animator_t434523843 * __thi
 	_il2cpp_icall_func = (Animator_GetBoolString_m4261382084_ftn)il2cpp_codegen_resolve_icall ("UnityEngine.Animator::GetBoolString(System.String)");
 	bool retVal = _il2cpp_icall_func(__this, ___name0);
 	return retVal;
+}
+// System.Void UnityEngine.Animator::SetIntegerString(System.String,System.Int32)
+extern "C"  void Animator_SetIntegerString_m3069556331 (Animator_t434523843 * __this, String_t* ___name0, int32_t ___value1, const RuntimeMethod* method)
+{
+	typedef void (*Animator_SetIntegerString_m3069556331_ftn) (Animator_t434523843 *, String_t*, int32_t);
+	static Animator_SetIntegerString_m3069556331_ftn _il2cpp_icall_func;
+	if (!_il2cpp_icall_func)
+	_il2cpp_icall_func = (Animator_SetIntegerString_m3069556331_ftn)il2cpp_codegen_resolve_icall ("UnityEngine.Animator::SetIntegerString(System.String,System.Int32)");
+	_il2cpp_icall_func(__this, ___name0, ___value1);
 }
 // System.Void UnityEngine.Animator::SetTriggerString(System.String)
 extern "C"  void Animator_SetTriggerString_m2612407758 (Animator_t434523843 * __this, String_t* ___name0, const RuntimeMethod* method)

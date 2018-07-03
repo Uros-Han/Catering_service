@@ -170,6 +170,7 @@ extern const RuntimeMethod* GameObject_GetComponent_TisES3Prefab_t2538519310_m11
 extern String_t* _stringLiteral3130387773;
 extern String_t* _stringLiteral374407920;
 extern String_t* _stringLiteral1114976326;
+extern const uint32_t ES3Type_ES3PrefabInternal_Read_TisParticleSystemInheritVelocityMode_t1008988385_m1799848729_MetadataUsageId;
 extern const uint32_t ES3Type_ES3PrefabInternal_Read_TisParticleSystemMeshShapeType_t1986719567_m1593828720_MetadataUsageId;
 extern const uint32_t ES3Type_ES3PrefabInternal_Read_TisParticleSystemNoiseQuality_t2264279745_m3069825499_MetadataUsageId;
 extern const uint32_t ES3Type_ES3PrefabInternal_Read_TisParticleSystemOverlapAction_t2023522131_m3998682740_MetadataUsageId;
@@ -4840,6 +4841,113 @@ extern "C"  bool ES3Reflection_IsAssignableFrom_m2662213273 (RuntimeObject * __t
 extern "C"  String_t* String_Concat_m2971454694 (RuntimeObject * __this /* static, unused */, ObjectU5BU5D_t2843939325* p0, const RuntimeMethod* method) IL2CPP_METHOD_ATTR;
 // UnityEngine.Transform UnityEngine.GameObject::get_transform()
 extern "C"  Transform_t3600365921 * GameObject_get_transform_m1369836730 (GameObject_t1113636619 * __this, const RuntimeMethod* method) IL2CPP_METHOD_ATTR;
+// System.Object ES3Types.ES3Type_ES3PrefabInternal::Read<UnityEngine.ParticleSystemInheritVelocityMode>(ES3Reader)
+extern "C"  RuntimeObject * ES3Type_ES3PrefabInternal_Read_TisParticleSystemInheritVelocityMode_t1008988385_m1799848729_gshared (ES3Type_ES3PrefabInternal_t3249567190 * __this, ES3Reader_t2568427273 * ___reader0, const RuntimeMethod* method)
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_method (ES3Type_ES3PrefabInternal_Read_TisParticleSystemInheritVelocityMode_t1008988385_m1799848729_MetadataUsageId);
+		s_Il2CppMethodInitialized = true;
+	}
+	int64_t V_0 = 0;
+	Dictionary_2_t504239792 * V_1 = NULL;
+	ES3Prefab_t2538519310 * V_2 = NULL;
+	GameObject_t1113636619 * V_3 = NULL;
+	ES3Prefab_t2538519310 * V_4 = NULL;
+	{
+		ES3Reader_t2568427273 * L_0 = ___reader0;
+		IL2CPP_RUNTIME_CLASS_INIT(ES3Type_long_t959413407_il2cpp_TypeInfo_var);
+		ES3Type_t2986191463 * L_1 = ((ES3Type_long_t959413407_StaticFields*)il2cpp_codegen_static_fields_for(ES3Type_long_t959413407_il2cpp_TypeInfo_var))->get_Instance_9();
+		NullCheck((ES3Reader_t2568427273 *)L_0);
+		int64_t L_2 = ES3Reader_ReadProperty_TisInt64_t3736567304_m177359530((ES3Reader_t2568427273 *)L_0, (ES3Type_t2986191463 *)L_1, /*hidden argument*/ES3Reader_ReadProperty_TisInt64_t3736567304_m177359530_RuntimeMethod_var);
+		V_0 = (int64_t)L_2;
+		ES3Reader_t2568427273 * L_3 = ___reader0;
+		NullCheck((ES3Reader_t2568427273 *)L_3);
+		Dictionary_2_t504239792 * L_4 = ES3Reader_ReadProperty_TisDictionary_2_t504239792_m1847183006((ES3Reader_t2568427273 *)L_3, /*hidden argument*/ES3Reader_ReadProperty_TisDictionary_2_t504239792_m1847183006_RuntimeMethod_var);
+		V_1 = (Dictionary_2_t504239792 *)L_4;
+		IL2CPP_RUNTIME_CLASS_INIT(ES3ReferenceMgrBase_t1429228968_il2cpp_TypeInfo_var);
+		ES3ReferenceMgrBase_t1429228968 * L_5 = ES3ReferenceMgrBase_get_Current_m1550673299(NULL /*static, unused*/, /*hidden argument*/NULL);
+		IL2CPP_RUNTIME_CLASS_INIT(Object_t631007953_il2cpp_TypeInfo_var);
+		bool L_6 = Object_op_Equality_m1810815630(NULL /*static, unused*/, (Object_t631007953 *)L_5, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
+		if (!L_6)
+		{
+			goto IL_0025;
+		}
+	}
+	{
+		return NULL;
+	}
+
+IL_0025:
+	{
+		IL2CPP_RUNTIME_CLASS_INIT(ES3ReferenceMgrBase_t1429228968_il2cpp_TypeInfo_var);
+		ES3ReferenceMgrBase_t1429228968 * L_7 = ES3ReferenceMgrBase_get_Current_m1550673299(NULL /*static, unused*/, /*hidden argument*/NULL);
+		int64_t L_8 = V_0;
+		NullCheck((ES3ReferenceMgrBase_t1429228968 *)L_7);
+		ES3Prefab_t2538519310 * L_9 = ES3ReferenceMgrBase_GetPrefab_m155887227((ES3ReferenceMgrBase_t1429228968 *)L_7, (int64_t)L_8, /*hidden argument*/NULL);
+		V_2 = (ES3Prefab_t2538519310 *)L_9;
+		ES3Prefab_t2538519310 * L_10 = V_2;
+		IL2CPP_RUNTIME_CLASS_INIT(Object_t631007953_il2cpp_TypeInfo_var);
+		bool L_11 = Object_op_Equality_m1810815630(NULL /*static, unused*/, (Object_t631007953 *)L_10, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
+		if (!L_11)
+		{
+			goto IL_0058;
+		}
+	}
+	{
+		int64_t L_12 = V_0;
+		int64_t L_13 = L_12;
+		RuntimeObject * L_14 = Box(Int64_t3736567304_il2cpp_TypeInfo_var, &L_13);
+		IL2CPP_RUNTIME_CLASS_INIT(String_t_il2cpp_TypeInfo_var);
+		String_t* L_15 = String_Concat_m1715369213(NULL /*static, unused*/, (RuntimeObject *)_stringLiteral3130387773, (RuntimeObject *)L_14, (RuntimeObject *)_stringLiteral374407920, /*hidden argument*/NULL);
+		MissingReferenceException_t935689431 * L_16 = (MissingReferenceException_t935689431 *)il2cpp_codegen_object_new(MissingReferenceException_t935689431_il2cpp_TypeInfo_var);
+		MissingReferenceException__ctor_m3251268150(L_16, (String_t*)L_15, /*hidden argument*/NULL);
+		IL2CPP_RAISE_MANAGED_EXCEPTION(L_16);
+	}
+
+IL_0058:
+	{
+		ES3Prefab_t2538519310 * L_17 = V_2;
+		NullCheck((Component_t1923634451 *)L_17);
+		GameObject_t1113636619 * L_18 = Component_get_gameObject_m442555142((Component_t1923634451 *)L_17, /*hidden argument*/NULL);
+		IL2CPP_RUNTIME_CLASS_INIT(Object_t631007953_il2cpp_TypeInfo_var);
+		GameObject_t1113636619 * L_19 = Object_Instantiate_TisGameObject_t1113636619_m4070250708(NULL /*static, unused*/, (GameObject_t1113636619 *)L_18, /*hidden argument*/Object_Instantiate_TisGameObject_t1113636619_m4070250708_RuntimeMethod_var);
+		V_3 = (GameObject_t1113636619 *)L_19;
+		GameObject_t1113636619 * L_20 = V_3;
+		NullCheck((GameObject_t1113636619 *)L_20);
+		ES3Prefab_t2538519310 * L_21 = GameObject_GetComponent_TisES3Prefab_t2538519310_m1119127454((GameObject_t1113636619 *)L_20, /*hidden argument*/GameObject_GetComponent_TisES3Prefab_t2538519310_m1119127454_RuntimeMethod_var);
+		V_4 = (ES3Prefab_t2538519310 *)L_21;
+		ES3Prefab_t2538519310 * L_22 = V_4;
+		bool L_23 = Object_op_Equality_m1810815630(NULL /*static, unused*/, (Object_t631007953 *)L_22, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
+		if (!L_23)
+		{
+			goto IL_0094;
+		}
+	}
+	{
+		int64_t L_24 = V_0;
+		int64_t L_25 = L_24;
+		RuntimeObject * L_26 = Box(Int64_t3736567304_il2cpp_TypeInfo_var, &L_25);
+		IL2CPP_RUNTIME_CLASS_INIT(String_t_il2cpp_TypeInfo_var);
+		String_t* L_27 = String_Concat_m1715369213(NULL /*static, unused*/, (RuntimeObject *)_stringLiteral3130387773, (RuntimeObject *)L_26, (RuntimeObject *)_stringLiteral1114976326, /*hidden argument*/NULL);
+		MissingReferenceException_t935689431 * L_28 = (MissingReferenceException_t935689431 *)il2cpp_codegen_object_new(MissingReferenceException_t935689431_il2cpp_TypeInfo_var);
+		MissingReferenceException__ctor_m3251268150(L_28, (String_t*)L_27, /*hidden argument*/NULL);
+		IL2CPP_RAISE_MANAGED_EXCEPTION(L_28);
+	}
+
+IL_0094:
+	{
+		ES3Prefab_t2538519310 * L_29 = V_4;
+		Dictionary_2_t504239792 * L_30 = V_1;
+		NullCheck((ES3Prefab_t2538519310 *)L_29);
+		ES3Prefab_ApplyReferences_m4294768112((ES3Prefab_t2538519310 *)L_29, (Dictionary_2_t504239792 *)L_30, /*hidden argument*/NULL);
+		ES3Prefab_t2538519310 * L_31 = V_4;
+		NullCheck((Component_t1923634451 *)L_31);
+		GameObject_t1113636619 * L_32 = Component_get_gameObject_m442555142((Component_t1923634451 *)L_31, /*hidden argument*/NULL);
+		return L_32;
+	}
+}
 // System.Object ES3Types.ES3Type_ES3PrefabInternal::Read<UnityEngine.ParticleSystemMeshShapeType>(ES3Reader)
 extern "C"  RuntimeObject * ES3Type_ES3PrefabInternal_Read_TisParticleSystemMeshShapeType_t1986719567_m1593828720_gshared (ES3Type_ES3PrefabInternal_t3249567190 * __this, ES3Reader_t2568427273 * ___reader0, const RuntimeMethod* method)
 {

@@ -142,6 +142,10 @@ struct List_1_t4010594052;
 extern RuntimeClass* ES3Type_float_t2906446454_il2cpp_TypeInfo_var;
 extern RuntimeClass* Color_t2555686324_il2cpp_TypeInfo_var;
 extern const RuntimeMethod* ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500_RuntimeMethod_var;
+extern const uint32_t ES3Type_Color_Read_TisColor_t2555686324_m3263696061_MetadataUsageId;
+extern const uint32_t ES3Type_Color_Read_TisDepthTextureMode_t4161834719_m1919791893_MetadataUsageId;
+extern const uint32_t ES3Type_Color_Read_TisFilterMode_t3761284007_m4159715663_MetadataUsageId;
+extern const uint32_t ES3Type_Color_Read_TisFontStyle_t82229486_m598166349_MetadataUsageId;
 extern const uint32_t ES3Type_Color_Read_TisGradientMode_t16368456_m1058735300_MetadataUsageId;
 extern const uint32_t ES3Type_Color_Read_TisHideFlags_t4250555765_m3047573800_MetadataUsageId;
 extern const uint32_t ES3Type_Color_Read_TisHorizontalWrapMode_t2172737147_m2408940931_MetadataUsageId;
@@ -724,7 +728,6 @@ extern const uint32_t ES3Type_ES3PrefabInternal_Read_TisParticleSystemCollisionQ
 extern const uint32_t ES3Type_ES3PrefabInternal_Read_TisParticleSystemCollisionType_t2820876680_m1946005914_MetadataUsageId;
 extern const uint32_t ES3Type_ES3PrefabInternal_Read_TisParticleSystemCurveMode_t3859704052_m1592067646_MetadataUsageId;
 extern const uint32_t ES3Type_ES3PrefabInternal_Read_TisParticleSystemGradientMode_t862789074_m61175883_MetadataUsageId;
-extern const uint32_t ES3Type_ES3PrefabInternal_Read_TisParticleSystemInheritVelocityMode_t1008988385_m1799848729_MetadataUsageId;
 struct Gradient_t3067099924_marshaled_com;
 struct AnimationCurve_t3046754366_marshaled_com;
 
@@ -5445,6 +5448,146 @@ extern "C"  GameObject_t1113636619 * Component_get_gameObject_m442555142 (Compon
 #define GameObject_GetComponent_TisES3Prefab_t2538519310_m1119127454(__this, method) ((  ES3Prefab_t2538519310 * (*) (GameObject_t1113636619 *, const RuntimeMethod*))GameObject_GetComponent_TisRuntimeObject_m2049753423_gshared)(__this, method)
 // System.Void ES3Internal.ES3Prefab::ApplyReferences(System.Collections.Generic.Dictionary`2<System.Int64,System.Int64>)
 extern "C"  void ES3Prefab_ApplyReferences_m4294768112 (ES3Prefab_t2538519310 * __this, Dictionary_2_t504239792 * ___localToGlobal0, const RuntimeMethod* method) IL2CPP_METHOD_ATTR;
+// System.Object ES3Types.ES3Type_Color::Read<UnityEngine.Color>(ES3Reader)
+extern "C"  RuntimeObject * ES3Type_Color_Read_TisColor_t2555686324_m3263696061_gshared (ES3Type_Color_t664829079 * __this, ES3Reader_t2568427273 * ___reader0, const RuntimeMethod* method)
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_method (ES3Type_Color_Read_TisColor_t2555686324_m3263696061_MetadataUsageId);
+		s_Il2CppMethodInitialized = true;
+	}
+	{
+		ES3Reader_t2568427273 * L_0 = ___reader0;
+		IL2CPP_RUNTIME_CLASS_INIT(ES3Type_float_t2906446454_il2cpp_TypeInfo_var);
+		ES3Type_t2986191463 * L_1 = ((ES3Type_float_t2906446454_StaticFields*)il2cpp_codegen_static_fields_for(ES3Type_float_t2906446454_il2cpp_TypeInfo_var))->get_Instance_9();
+		NullCheck((ES3Reader_t2568427273 *)L_0);
+		float L_2 = ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500((ES3Reader_t2568427273 *)L_0, (ES3Type_t2986191463 *)L_1, /*hidden argument*/ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500_RuntimeMethod_var);
+		ES3Reader_t2568427273 * L_3 = ___reader0;
+		ES3Type_t2986191463 * L_4 = ((ES3Type_float_t2906446454_StaticFields*)il2cpp_codegen_static_fields_for(ES3Type_float_t2906446454_il2cpp_TypeInfo_var))->get_Instance_9();
+		NullCheck((ES3Reader_t2568427273 *)L_3);
+		float L_5 = ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500((ES3Reader_t2568427273 *)L_3, (ES3Type_t2986191463 *)L_4, /*hidden argument*/ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500_RuntimeMethod_var);
+		ES3Reader_t2568427273 * L_6 = ___reader0;
+		ES3Type_t2986191463 * L_7 = ((ES3Type_float_t2906446454_StaticFields*)il2cpp_codegen_static_fields_for(ES3Type_float_t2906446454_il2cpp_TypeInfo_var))->get_Instance_9();
+		NullCheck((ES3Reader_t2568427273 *)L_6);
+		float L_8 = ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500((ES3Reader_t2568427273 *)L_6, (ES3Type_t2986191463 *)L_7, /*hidden argument*/ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500_RuntimeMethod_var);
+		ES3Reader_t2568427273 * L_9 = ___reader0;
+		ES3Type_t2986191463 * L_10 = ((ES3Type_float_t2906446454_StaticFields*)il2cpp_codegen_static_fields_for(ES3Type_float_t2906446454_il2cpp_TypeInfo_var))->get_Instance_9();
+		NullCheck((ES3Reader_t2568427273 *)L_9);
+		float L_11 = ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500((ES3Reader_t2568427273 *)L_9, (ES3Type_t2986191463 *)L_10, /*hidden argument*/ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500_RuntimeMethod_var);
+		Color_t2555686324  L_12;
+		memset(&L_12, 0, sizeof(L_12));
+		Color__ctor_m2943235014((&L_12), (float)L_2, (float)L_5, (float)L_8, (float)L_11, /*hidden argument*/NULL);
+		Color_t2555686324  L_13 = L_12;
+		RuntimeObject * L_14 = Box(Color_t2555686324_il2cpp_TypeInfo_var, &L_13);
+		return L_14;
+	}
+}
+// System.Object ES3Types.ES3Type_Color::Read<UnityEngine.DepthTextureMode>(ES3Reader)
+extern "C"  RuntimeObject * ES3Type_Color_Read_TisDepthTextureMode_t4161834719_m1919791893_gshared (ES3Type_Color_t664829079 * __this, ES3Reader_t2568427273 * ___reader0, const RuntimeMethod* method)
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_method (ES3Type_Color_Read_TisDepthTextureMode_t4161834719_m1919791893_MetadataUsageId);
+		s_Il2CppMethodInitialized = true;
+	}
+	{
+		ES3Reader_t2568427273 * L_0 = ___reader0;
+		IL2CPP_RUNTIME_CLASS_INIT(ES3Type_float_t2906446454_il2cpp_TypeInfo_var);
+		ES3Type_t2986191463 * L_1 = ((ES3Type_float_t2906446454_StaticFields*)il2cpp_codegen_static_fields_for(ES3Type_float_t2906446454_il2cpp_TypeInfo_var))->get_Instance_9();
+		NullCheck((ES3Reader_t2568427273 *)L_0);
+		float L_2 = ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500((ES3Reader_t2568427273 *)L_0, (ES3Type_t2986191463 *)L_1, /*hidden argument*/ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500_RuntimeMethod_var);
+		ES3Reader_t2568427273 * L_3 = ___reader0;
+		ES3Type_t2986191463 * L_4 = ((ES3Type_float_t2906446454_StaticFields*)il2cpp_codegen_static_fields_for(ES3Type_float_t2906446454_il2cpp_TypeInfo_var))->get_Instance_9();
+		NullCheck((ES3Reader_t2568427273 *)L_3);
+		float L_5 = ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500((ES3Reader_t2568427273 *)L_3, (ES3Type_t2986191463 *)L_4, /*hidden argument*/ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500_RuntimeMethod_var);
+		ES3Reader_t2568427273 * L_6 = ___reader0;
+		ES3Type_t2986191463 * L_7 = ((ES3Type_float_t2906446454_StaticFields*)il2cpp_codegen_static_fields_for(ES3Type_float_t2906446454_il2cpp_TypeInfo_var))->get_Instance_9();
+		NullCheck((ES3Reader_t2568427273 *)L_6);
+		float L_8 = ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500((ES3Reader_t2568427273 *)L_6, (ES3Type_t2986191463 *)L_7, /*hidden argument*/ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500_RuntimeMethod_var);
+		ES3Reader_t2568427273 * L_9 = ___reader0;
+		ES3Type_t2986191463 * L_10 = ((ES3Type_float_t2906446454_StaticFields*)il2cpp_codegen_static_fields_for(ES3Type_float_t2906446454_il2cpp_TypeInfo_var))->get_Instance_9();
+		NullCheck((ES3Reader_t2568427273 *)L_9);
+		float L_11 = ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500((ES3Reader_t2568427273 *)L_9, (ES3Type_t2986191463 *)L_10, /*hidden argument*/ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500_RuntimeMethod_var);
+		Color_t2555686324  L_12;
+		memset(&L_12, 0, sizeof(L_12));
+		Color__ctor_m2943235014((&L_12), (float)L_2, (float)L_5, (float)L_8, (float)L_11, /*hidden argument*/NULL);
+		Color_t2555686324  L_13 = L_12;
+		RuntimeObject * L_14 = Box(Color_t2555686324_il2cpp_TypeInfo_var, &L_13);
+		return L_14;
+	}
+}
+// System.Object ES3Types.ES3Type_Color::Read<UnityEngine.FilterMode>(ES3Reader)
+extern "C"  RuntimeObject * ES3Type_Color_Read_TisFilterMode_t3761284007_m4159715663_gshared (ES3Type_Color_t664829079 * __this, ES3Reader_t2568427273 * ___reader0, const RuntimeMethod* method)
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_method (ES3Type_Color_Read_TisFilterMode_t3761284007_m4159715663_MetadataUsageId);
+		s_Il2CppMethodInitialized = true;
+	}
+	{
+		ES3Reader_t2568427273 * L_0 = ___reader0;
+		IL2CPP_RUNTIME_CLASS_INIT(ES3Type_float_t2906446454_il2cpp_TypeInfo_var);
+		ES3Type_t2986191463 * L_1 = ((ES3Type_float_t2906446454_StaticFields*)il2cpp_codegen_static_fields_for(ES3Type_float_t2906446454_il2cpp_TypeInfo_var))->get_Instance_9();
+		NullCheck((ES3Reader_t2568427273 *)L_0);
+		float L_2 = ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500((ES3Reader_t2568427273 *)L_0, (ES3Type_t2986191463 *)L_1, /*hidden argument*/ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500_RuntimeMethod_var);
+		ES3Reader_t2568427273 * L_3 = ___reader0;
+		ES3Type_t2986191463 * L_4 = ((ES3Type_float_t2906446454_StaticFields*)il2cpp_codegen_static_fields_for(ES3Type_float_t2906446454_il2cpp_TypeInfo_var))->get_Instance_9();
+		NullCheck((ES3Reader_t2568427273 *)L_3);
+		float L_5 = ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500((ES3Reader_t2568427273 *)L_3, (ES3Type_t2986191463 *)L_4, /*hidden argument*/ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500_RuntimeMethod_var);
+		ES3Reader_t2568427273 * L_6 = ___reader0;
+		ES3Type_t2986191463 * L_7 = ((ES3Type_float_t2906446454_StaticFields*)il2cpp_codegen_static_fields_for(ES3Type_float_t2906446454_il2cpp_TypeInfo_var))->get_Instance_9();
+		NullCheck((ES3Reader_t2568427273 *)L_6);
+		float L_8 = ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500((ES3Reader_t2568427273 *)L_6, (ES3Type_t2986191463 *)L_7, /*hidden argument*/ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500_RuntimeMethod_var);
+		ES3Reader_t2568427273 * L_9 = ___reader0;
+		ES3Type_t2986191463 * L_10 = ((ES3Type_float_t2906446454_StaticFields*)il2cpp_codegen_static_fields_for(ES3Type_float_t2906446454_il2cpp_TypeInfo_var))->get_Instance_9();
+		NullCheck((ES3Reader_t2568427273 *)L_9);
+		float L_11 = ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500((ES3Reader_t2568427273 *)L_9, (ES3Type_t2986191463 *)L_10, /*hidden argument*/ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500_RuntimeMethod_var);
+		Color_t2555686324  L_12;
+		memset(&L_12, 0, sizeof(L_12));
+		Color__ctor_m2943235014((&L_12), (float)L_2, (float)L_5, (float)L_8, (float)L_11, /*hidden argument*/NULL);
+		Color_t2555686324  L_13 = L_12;
+		RuntimeObject * L_14 = Box(Color_t2555686324_il2cpp_TypeInfo_var, &L_13);
+		return L_14;
+	}
+}
+// System.Object ES3Types.ES3Type_Color::Read<UnityEngine.FontStyle>(ES3Reader)
+extern "C"  RuntimeObject * ES3Type_Color_Read_TisFontStyle_t82229486_m598166349_gshared (ES3Type_Color_t664829079 * __this, ES3Reader_t2568427273 * ___reader0, const RuntimeMethod* method)
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_method (ES3Type_Color_Read_TisFontStyle_t82229486_m598166349_MetadataUsageId);
+		s_Il2CppMethodInitialized = true;
+	}
+	{
+		ES3Reader_t2568427273 * L_0 = ___reader0;
+		IL2CPP_RUNTIME_CLASS_INIT(ES3Type_float_t2906446454_il2cpp_TypeInfo_var);
+		ES3Type_t2986191463 * L_1 = ((ES3Type_float_t2906446454_StaticFields*)il2cpp_codegen_static_fields_for(ES3Type_float_t2906446454_il2cpp_TypeInfo_var))->get_Instance_9();
+		NullCheck((ES3Reader_t2568427273 *)L_0);
+		float L_2 = ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500((ES3Reader_t2568427273 *)L_0, (ES3Type_t2986191463 *)L_1, /*hidden argument*/ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500_RuntimeMethod_var);
+		ES3Reader_t2568427273 * L_3 = ___reader0;
+		ES3Type_t2986191463 * L_4 = ((ES3Type_float_t2906446454_StaticFields*)il2cpp_codegen_static_fields_for(ES3Type_float_t2906446454_il2cpp_TypeInfo_var))->get_Instance_9();
+		NullCheck((ES3Reader_t2568427273 *)L_3);
+		float L_5 = ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500((ES3Reader_t2568427273 *)L_3, (ES3Type_t2986191463 *)L_4, /*hidden argument*/ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500_RuntimeMethod_var);
+		ES3Reader_t2568427273 * L_6 = ___reader0;
+		ES3Type_t2986191463 * L_7 = ((ES3Type_float_t2906446454_StaticFields*)il2cpp_codegen_static_fields_for(ES3Type_float_t2906446454_il2cpp_TypeInfo_var))->get_Instance_9();
+		NullCheck((ES3Reader_t2568427273 *)L_6);
+		float L_8 = ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500((ES3Reader_t2568427273 *)L_6, (ES3Type_t2986191463 *)L_7, /*hidden argument*/ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500_RuntimeMethod_var);
+		ES3Reader_t2568427273 * L_9 = ___reader0;
+		ES3Type_t2986191463 * L_10 = ((ES3Type_float_t2906446454_StaticFields*)il2cpp_codegen_static_fields_for(ES3Type_float_t2906446454_il2cpp_TypeInfo_var))->get_Instance_9();
+		NullCheck((ES3Reader_t2568427273 *)L_9);
+		float L_11 = ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500((ES3Reader_t2568427273 *)L_9, (ES3Type_t2986191463 *)L_10, /*hidden argument*/ES3Reader_ReadProperty_TisSingle_t1397266774_m3389605500_RuntimeMethod_var);
+		Color_t2555686324  L_12;
+		memset(&L_12, 0, sizeof(L_12));
+		Color__ctor_m2943235014((&L_12), (float)L_2, (float)L_5, (float)L_8, (float)L_11, /*hidden argument*/NULL);
+		Color_t2555686324  L_13 = L_12;
+		RuntimeObject * L_14 = Box(Color_t2555686324_il2cpp_TypeInfo_var, &L_13);
+		return L_14;
+	}
+}
 // System.Object ES3Types.ES3Type_Color::Read<UnityEngine.GradientMode>(ES3Reader)
 extern "C"  RuntimeObject * ES3Type_Color_Read_TisGradientMode_t16368456_m1058735300_gshared (ES3Type_Color_t664829079 * __this, ES3Reader_t2568427273 * ___reader0, const RuntimeMethod* method)
 {
@@ -22481,113 +22624,6 @@ extern "C"  RuntimeObject * ES3Type_ES3PrefabInternal_Read_TisParticleSystemGrad
 	if (!s_Il2CppMethodInitialized)
 	{
 		il2cpp_codegen_initialize_method (ES3Type_ES3PrefabInternal_Read_TisParticleSystemGradientMode_t862789074_m61175883_MetadataUsageId);
-		s_Il2CppMethodInitialized = true;
-	}
-	int64_t V_0 = 0;
-	Dictionary_2_t504239792 * V_1 = NULL;
-	ES3Prefab_t2538519310 * V_2 = NULL;
-	GameObject_t1113636619 * V_3 = NULL;
-	ES3Prefab_t2538519310 * V_4 = NULL;
-	{
-		ES3Reader_t2568427273 * L_0 = ___reader0;
-		IL2CPP_RUNTIME_CLASS_INIT(ES3Type_long_t959413407_il2cpp_TypeInfo_var);
-		ES3Type_t2986191463 * L_1 = ((ES3Type_long_t959413407_StaticFields*)il2cpp_codegen_static_fields_for(ES3Type_long_t959413407_il2cpp_TypeInfo_var))->get_Instance_9();
-		NullCheck((ES3Reader_t2568427273 *)L_0);
-		int64_t L_2 = ES3Reader_ReadProperty_TisInt64_t3736567304_m177359530((ES3Reader_t2568427273 *)L_0, (ES3Type_t2986191463 *)L_1, /*hidden argument*/ES3Reader_ReadProperty_TisInt64_t3736567304_m177359530_RuntimeMethod_var);
-		V_0 = (int64_t)L_2;
-		ES3Reader_t2568427273 * L_3 = ___reader0;
-		NullCheck((ES3Reader_t2568427273 *)L_3);
-		Dictionary_2_t504239792 * L_4 = ES3Reader_ReadProperty_TisDictionary_2_t504239792_m1847183006((ES3Reader_t2568427273 *)L_3, /*hidden argument*/ES3Reader_ReadProperty_TisDictionary_2_t504239792_m1847183006_RuntimeMethod_var);
-		V_1 = (Dictionary_2_t504239792 *)L_4;
-		IL2CPP_RUNTIME_CLASS_INIT(ES3ReferenceMgrBase_t1429228968_il2cpp_TypeInfo_var);
-		ES3ReferenceMgrBase_t1429228968 * L_5 = ES3ReferenceMgrBase_get_Current_m1550673299(NULL /*static, unused*/, /*hidden argument*/NULL);
-		IL2CPP_RUNTIME_CLASS_INIT(Object_t631007953_il2cpp_TypeInfo_var);
-		bool L_6 = Object_op_Equality_m1810815630(NULL /*static, unused*/, (Object_t631007953 *)L_5, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
-		if (!L_6)
-		{
-			goto IL_0025;
-		}
-	}
-	{
-		return NULL;
-	}
-
-IL_0025:
-	{
-		IL2CPP_RUNTIME_CLASS_INIT(ES3ReferenceMgrBase_t1429228968_il2cpp_TypeInfo_var);
-		ES3ReferenceMgrBase_t1429228968 * L_7 = ES3ReferenceMgrBase_get_Current_m1550673299(NULL /*static, unused*/, /*hidden argument*/NULL);
-		int64_t L_8 = V_0;
-		NullCheck((ES3ReferenceMgrBase_t1429228968 *)L_7);
-		ES3Prefab_t2538519310 * L_9 = ES3ReferenceMgrBase_GetPrefab_m155887227((ES3ReferenceMgrBase_t1429228968 *)L_7, (int64_t)L_8, /*hidden argument*/NULL);
-		V_2 = (ES3Prefab_t2538519310 *)L_9;
-		ES3Prefab_t2538519310 * L_10 = V_2;
-		IL2CPP_RUNTIME_CLASS_INIT(Object_t631007953_il2cpp_TypeInfo_var);
-		bool L_11 = Object_op_Equality_m1810815630(NULL /*static, unused*/, (Object_t631007953 *)L_10, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
-		if (!L_11)
-		{
-			goto IL_0058;
-		}
-	}
-	{
-		int64_t L_12 = V_0;
-		int64_t L_13 = L_12;
-		RuntimeObject * L_14 = Box(Int64_t3736567304_il2cpp_TypeInfo_var, &L_13);
-		IL2CPP_RUNTIME_CLASS_INIT(String_t_il2cpp_TypeInfo_var);
-		String_t* L_15 = String_Concat_m1715369213(NULL /*static, unused*/, (RuntimeObject *)_stringLiteral3130387773, (RuntimeObject *)L_14, (RuntimeObject *)_stringLiteral374407920, /*hidden argument*/NULL);
-		MissingReferenceException_t935689431 * L_16 = (MissingReferenceException_t935689431 *)il2cpp_codegen_object_new(MissingReferenceException_t935689431_il2cpp_TypeInfo_var);
-		MissingReferenceException__ctor_m3251268150(L_16, (String_t*)L_15, /*hidden argument*/NULL);
-		IL2CPP_RAISE_MANAGED_EXCEPTION(L_16);
-	}
-
-IL_0058:
-	{
-		ES3Prefab_t2538519310 * L_17 = V_2;
-		NullCheck((Component_t1923634451 *)L_17);
-		GameObject_t1113636619 * L_18 = Component_get_gameObject_m442555142((Component_t1923634451 *)L_17, /*hidden argument*/NULL);
-		IL2CPP_RUNTIME_CLASS_INIT(Object_t631007953_il2cpp_TypeInfo_var);
-		GameObject_t1113636619 * L_19 = Object_Instantiate_TisGameObject_t1113636619_m4070250708(NULL /*static, unused*/, (GameObject_t1113636619 *)L_18, /*hidden argument*/Object_Instantiate_TisGameObject_t1113636619_m4070250708_RuntimeMethod_var);
-		V_3 = (GameObject_t1113636619 *)L_19;
-		GameObject_t1113636619 * L_20 = V_3;
-		NullCheck((GameObject_t1113636619 *)L_20);
-		ES3Prefab_t2538519310 * L_21 = GameObject_GetComponent_TisES3Prefab_t2538519310_m1119127454((GameObject_t1113636619 *)L_20, /*hidden argument*/GameObject_GetComponent_TisES3Prefab_t2538519310_m1119127454_RuntimeMethod_var);
-		V_4 = (ES3Prefab_t2538519310 *)L_21;
-		ES3Prefab_t2538519310 * L_22 = V_4;
-		bool L_23 = Object_op_Equality_m1810815630(NULL /*static, unused*/, (Object_t631007953 *)L_22, (Object_t631007953 *)NULL, /*hidden argument*/NULL);
-		if (!L_23)
-		{
-			goto IL_0094;
-		}
-	}
-	{
-		int64_t L_24 = V_0;
-		int64_t L_25 = L_24;
-		RuntimeObject * L_26 = Box(Int64_t3736567304_il2cpp_TypeInfo_var, &L_25);
-		IL2CPP_RUNTIME_CLASS_INIT(String_t_il2cpp_TypeInfo_var);
-		String_t* L_27 = String_Concat_m1715369213(NULL /*static, unused*/, (RuntimeObject *)_stringLiteral3130387773, (RuntimeObject *)L_26, (RuntimeObject *)_stringLiteral1114976326, /*hidden argument*/NULL);
-		MissingReferenceException_t935689431 * L_28 = (MissingReferenceException_t935689431 *)il2cpp_codegen_object_new(MissingReferenceException_t935689431_il2cpp_TypeInfo_var);
-		MissingReferenceException__ctor_m3251268150(L_28, (String_t*)L_27, /*hidden argument*/NULL);
-		IL2CPP_RAISE_MANAGED_EXCEPTION(L_28);
-	}
-
-IL_0094:
-	{
-		ES3Prefab_t2538519310 * L_29 = V_4;
-		Dictionary_2_t504239792 * L_30 = V_1;
-		NullCheck((ES3Prefab_t2538519310 *)L_29);
-		ES3Prefab_ApplyReferences_m4294768112((ES3Prefab_t2538519310 *)L_29, (Dictionary_2_t504239792 *)L_30, /*hidden argument*/NULL);
-		ES3Prefab_t2538519310 * L_31 = V_4;
-		NullCheck((Component_t1923634451 *)L_31);
-		GameObject_t1113636619 * L_32 = Component_get_gameObject_m442555142((Component_t1923634451 *)L_31, /*hidden argument*/NULL);
-		return L_32;
-	}
-}
-// System.Object ES3Types.ES3Type_ES3PrefabInternal::Read<UnityEngine.ParticleSystemInheritVelocityMode>(ES3Reader)
-extern "C"  RuntimeObject * ES3Type_ES3PrefabInternal_Read_TisParticleSystemInheritVelocityMode_t1008988385_m1799848729_gshared (ES3Type_ES3PrefabInternal_t3249567190 * __this, ES3Reader_t2568427273 * ___reader0, const RuntimeMethod* method)
-{
-	static bool s_Il2CppMethodInitialized;
-	if (!s_Il2CppMethodInitialized)
-	{
-		il2cpp_codegen_initialize_method (ES3Type_ES3PrefabInternal_Read_TisParticleSystemInheritVelocityMode_t1008988385_m1799848729_MetadataUsageId);
 		s_Il2CppMethodInitialized = true;
 	}
 	int64_t V_0 = 0;

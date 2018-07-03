@@ -392,10 +392,10 @@ struct ByteU5BU5D_t4116647657;
 struct FieldInfo_t;
 // System.Reflection.PropertyInfo
 struct PropertyInfo_t;
-// System.Boolean[]
-struct BooleanU5BU5D_t2897418192;
 // System.Reflection.MemberInfo
 struct MemberInfo_t;
+// System.Boolean[]
+struct BooleanU5BU5D_t2897418192;
 // System.Void
 struct Void_t1185182177;
 // UnityEngine.Events.UnityAction
@@ -678,6 +678,7 @@ extern const uint32_t InternalEnumerator_1_get_Current_m1311501121_MetadataUsage
 extern const uint32_t InternalEnumerator_1_get_Current_m4245242303_MetadataUsageId;
 extern const uint32_t InternalEnumerator_1_get_Current_m1708547365_MetadataUsageId;
 extern const uint32_t InternalEnumerator_1_get_Current_m784420850_MetadataUsageId;
+extern const uint32_t InternalEnumerator_1_get_Current_m2135524011_MetadataUsageId;
 extern const uint32_t InternalEnumerator_1_get_Current_m3364423906_MetadataUsageId;
 extern const uint32_t InternalEnumerator_1_get_Current_m2235257466_MetadataUsageId;
 extern const uint32_t InternalEnumerator_1_get_Current_m776024380_MetadataUsageId;
@@ -722,7 +723,6 @@ extern const uint32_t InternalEnumerator_1_get_Current_m3515899965_MetadataUsage
 extern const uint32_t InternalEnumerator_1_get_Current_m2316281569_MetadataUsageId;
 extern const uint32_t InternalEnumerator_1_get_Current_m1917995173_MetadataUsageId;
 extern const uint32_t InternalEnumerator_1_get_Current_m356936020_MetadataUsageId;
-extern const uint32_t InternalEnumerator_1_get_Current_m144365666_MetadataUsageId;
 struct ILExceptionBlock_t3961874966_marshaled_pinvoke;
 struct ILExceptionBlock_t3961874966_marshaled_com;
 struct Gradient_t3067099924_marshaled_com;
@@ -2036,418 +2036,6 @@ struct ExternalForcesModule_t1424795933_marshaled_com
 	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
 };
 #endif // EXTERNALFORCESMODULE_T1424795933_H
-#ifndef COLLISIONMODULE_T1950979710_H
-#define COLLISIONMODULE_T1950979710_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.ParticleSystem/CollisionModule
-struct  CollisionModule_t1950979710 
-{
-public:
-	// UnityEngine.ParticleSystem UnityEngine.ParticleSystem/CollisionModule::m_ParticleSystem
-	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
-
-public:
-	inline static int32_t get_offset_of_m_ParticleSystem_0() { return static_cast<int32_t>(offsetof(CollisionModule_t1950979710, ___m_ParticleSystem_0)); }
-	inline ParticleSystem_t1800779281 * get_m_ParticleSystem_0() const { return ___m_ParticleSystem_0; }
-	inline ParticleSystem_t1800779281 ** get_address_of_m_ParticleSystem_0() { return &___m_ParticleSystem_0; }
-	inline void set_m_ParticleSystem_0(ParticleSystem_t1800779281 * value)
-	{
-		___m_ParticleSystem_0 = value;
-		Il2CppCodeGenWriteBarrier((&___m_ParticleSystem_0), value);
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-// Native definition for P/Invoke marshalling of UnityEngine.ParticleSystem/CollisionModule
-struct CollisionModule_t1950979710_marshaled_pinvoke
-{
-	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
-};
-// Native definition for COM marshalling of UnityEngine.ParticleSystem/CollisionModule
-struct CollisionModule_t1950979710_marshaled_com
-{
-	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
-};
-#endif // COLLISIONMODULE_T1950979710_H
-#ifndef DICTIONARYENTRY_T3123975638_H
-#define DICTIONARYENTRY_T3123975638_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Collections.DictionaryEntry
-struct  DictionaryEntry_t3123975638 
-{
-public:
-	// System.Object System.Collections.DictionaryEntry::_key
-	RuntimeObject * ____key_0;
-	// System.Object System.Collections.DictionaryEntry::_value
-	RuntimeObject * ____value_1;
-
-public:
-	inline static int32_t get_offset_of__key_0() { return static_cast<int32_t>(offsetof(DictionaryEntry_t3123975638, ____key_0)); }
-	inline RuntimeObject * get__key_0() const { return ____key_0; }
-	inline RuntimeObject ** get_address_of__key_0() { return &____key_0; }
-	inline void set__key_0(RuntimeObject * value)
-	{
-		____key_0 = value;
-		Il2CppCodeGenWriteBarrier((&____key_0), value);
-	}
-
-	inline static int32_t get_offset_of__value_1() { return static_cast<int32_t>(offsetof(DictionaryEntry_t3123975638, ____value_1)); }
-	inline RuntimeObject * get__value_1() const { return ____value_1; }
-	inline RuntimeObject ** get_address_of__value_1() { return &____value_1; }
-	inline void set__value_1(RuntimeObject * value)
-	{
-		____value_1 = value;
-		Il2CppCodeGenWriteBarrier((&____value_1), value);
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-// Native definition for P/Invoke marshalling of System.Collections.DictionaryEntry
-struct DictionaryEntry_t3123975638_marshaled_pinvoke
-{
-	Il2CppIUnknown* ____key_0;
-	Il2CppIUnknown* ____value_1;
-};
-// Native definition for COM marshalling of System.Collections.DictionaryEntry
-struct DictionaryEntry_t3123975638_marshaled_com
-{
-	Il2CppIUnknown* ____key_0;
-	Il2CppIUnknown* ____value_1;
-};
-#endif // DICTIONARYENTRY_T3123975638_H
-#ifndef INTERNALENUMERATOR_1_T4116331090_H
-#define INTERNALENUMERATOR_1_T4116331090_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Array/InternalEnumerator`1<System.Collections.Generic.HashSet`1/Link<System.Object>>
-struct  InternalEnumerator_1_t4116331090 
-{
-public:
-	// System.Array System.Array/InternalEnumerator`1::array
-	RuntimeArray * ___array_2;
-	// System.Int32 System.Array/InternalEnumerator`1::idx
-	int32_t ___idx_3;
-
-public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t4116331090, ___array_2)); }
-	inline RuntimeArray * get_array_2() const { return ___array_2; }
-	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
-	inline void set_array_2(RuntimeArray * value)
-	{
-		___array_2 = value;
-		Il2CppCodeGenWriteBarrier((&___array_2), value);
-	}
-
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t4116331090, ___idx_3)); }
-	inline int32_t get_idx_3() const { return ___idx_3; }
-	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
-	inline void set_idx_3(int32_t value)
-	{
-		___idx_3 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // INTERNALENUMERATOR_1_T4116331090_H
-#ifndef LINK_T3209266973_H
-#define LINK_T3209266973_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Collections.Generic.HashSet`1/Link<System.Object>
-struct  Link_t3209266973 
-{
-public:
-	// System.Int32 System.Collections.Generic.HashSet`1/Link::HashCode
-	int32_t ___HashCode_0;
-	// System.Int32 System.Collections.Generic.HashSet`1/Link::Next
-	int32_t ___Next_1;
-
-public:
-	inline static int32_t get_offset_of_HashCode_0() { return static_cast<int32_t>(offsetof(Link_t3209266973, ___HashCode_0)); }
-	inline int32_t get_HashCode_0() const { return ___HashCode_0; }
-	inline int32_t* get_address_of_HashCode_0() { return &___HashCode_0; }
-	inline void set_HashCode_0(int32_t value)
-	{
-		___HashCode_0 = value;
-	}
-
-	inline static int32_t get_offset_of_Next_1() { return static_cast<int32_t>(offsetof(Link_t3209266973, ___Next_1)); }
-	inline int32_t get_Next_1() const { return ___Next_1; }
-	inline int32_t* get_address_of_Next_1() { return &___Next_1; }
-	inline void set_Next_1(int32_t value)
-	{
-		___Next_1 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // LINK_T3209266973_H
-#ifndef FORCEOVERLIFETIMEMODULE_T4029962193_H
-#define FORCEOVERLIFETIMEMODULE_T4029962193_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.ParticleSystem/ForceOverLifetimeModule
-struct  ForceOverLifetimeModule_t4029962193 
-{
-public:
-	// UnityEngine.ParticleSystem UnityEngine.ParticleSystem/ForceOverLifetimeModule::m_ParticleSystem
-	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
-
-public:
-	inline static int32_t get_offset_of_m_ParticleSystem_0() { return static_cast<int32_t>(offsetof(ForceOverLifetimeModule_t4029962193, ___m_ParticleSystem_0)); }
-	inline ParticleSystem_t1800779281 * get_m_ParticleSystem_0() const { return ___m_ParticleSystem_0; }
-	inline ParticleSystem_t1800779281 ** get_address_of_m_ParticleSystem_0() { return &___m_ParticleSystem_0; }
-	inline void set_m_ParticleSystem_0(ParticleSystem_t1800779281 * value)
-	{
-		___m_ParticleSystem_0 = value;
-		Il2CppCodeGenWriteBarrier((&___m_ParticleSystem_0), value);
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-// Native definition for P/Invoke marshalling of UnityEngine.ParticleSystem/ForceOverLifetimeModule
-struct ForceOverLifetimeModule_t4029962193_marshaled_pinvoke
-{
-	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
-};
-// Native definition for COM marshalling of UnityEngine.ParticleSystem/ForceOverLifetimeModule
-struct ForceOverLifetimeModule_t4029962193_marshaled_com
-{
-	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
-};
-#endif // FORCEOVERLIFETIMEMODULE_T4029962193_H
-#ifndef INTERNALENUMERATOR_1_T2041360493_H
-#define INTERNALENUMERATOR_1_T2041360493_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Array/InternalEnumerator`1<System.Byte>
-struct  InternalEnumerator_1_t2041360493 
-{
-public:
-	// System.Array System.Array/InternalEnumerator`1::array
-	RuntimeArray * ___array_2;
-	// System.Int32 System.Array/InternalEnumerator`1::idx
-	int32_t ___idx_3;
-
-public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t2041360493, ___array_2)); }
-	inline RuntimeArray * get_array_2() const { return ___array_2; }
-	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
-	inline void set_array_2(RuntimeArray * value)
-	{
-		___array_2 = value;
-		Il2CppCodeGenWriteBarrier((&___array_2), value);
-	}
-
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t2041360493, ___idx_3)); }
-	inline int32_t get_idx_3() const { return ___idx_3; }
-	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
-	inline void set_idx_3(int32_t value)
-	{
-		___idx_3 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // INTERNALENUMERATOR_1_T2041360493_H
-#ifndef EMISSIONMODULE_T311448003_H
-#define EMISSIONMODULE_T311448003_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.ParticleSystem/EmissionModule
-struct  EmissionModule_t311448003 
-{
-public:
-	// UnityEngine.ParticleSystem UnityEngine.ParticleSystem/EmissionModule::m_ParticleSystem
-	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
-
-public:
-	inline static int32_t get_offset_of_m_ParticleSystem_0() { return static_cast<int32_t>(offsetof(EmissionModule_t311448003, ___m_ParticleSystem_0)); }
-	inline ParticleSystem_t1800779281 * get_m_ParticleSystem_0() const { return ___m_ParticleSystem_0; }
-	inline ParticleSystem_t1800779281 ** get_address_of_m_ParticleSystem_0() { return &___m_ParticleSystem_0; }
-	inline void set_m_ParticleSystem_0(ParticleSystem_t1800779281 * value)
-	{
-		___m_ParticleSystem_0 = value;
-		Il2CppCodeGenWriteBarrier((&___m_ParticleSystem_0), value);
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-// Native definition for P/Invoke marshalling of UnityEngine.ParticleSystem/EmissionModule
-struct EmissionModule_t311448003_marshaled_pinvoke
-{
-	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
-};
-// Native definition for COM marshalling of UnityEngine.ParticleSystem/EmissionModule
-struct EmissionModule_t311448003_marshaled_com
-{
-	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
-};
-#endif // EMISSIONMODULE_T311448003_H
-#ifndef INTERNALENUMERATOR_1_T246557291_H
-#define INTERNALENUMERATOR_1_T246557291_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Array/InternalEnumerator`1<System.Char>
-struct  InternalEnumerator_1_t246557291 
-{
-public:
-	// System.Array System.Array/InternalEnumerator`1::array
-	RuntimeArray * ___array_2;
-	// System.Int32 System.Array/InternalEnumerator`1::idx
-	int32_t ___idx_3;
-
-public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t246557291, ___array_2)); }
-	inline RuntimeArray * get_array_2() const { return ___array_2; }
-	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
-	inline void set_array_2(RuntimeArray * value)
-	{
-		___array_2 = value;
-		Il2CppCodeGenWriteBarrier((&___array_2), value);
-	}
-
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t246557291, ___idx_3)); }
-	inline int32_t get_idx_3() const { return ___idx_3; }
-	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
-	inline void set_idx_3(int32_t value)
-	{
-		___idx_3 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // INTERNALENUMERATOR_1_T246557291_H
-#ifndef COLOROVERLIFETIMEMODULE_T3039228654_H
-#define COLOROVERLIFETIMEMODULE_T3039228654_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.ParticleSystem/ColorOverLifetimeModule
-struct  ColorOverLifetimeModule_t3039228654 
-{
-public:
-	// UnityEngine.ParticleSystem UnityEngine.ParticleSystem/ColorOverLifetimeModule::m_ParticleSystem
-	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
-
-public:
-	inline static int32_t get_offset_of_m_ParticleSystem_0() { return static_cast<int32_t>(offsetof(ColorOverLifetimeModule_t3039228654, ___m_ParticleSystem_0)); }
-	inline ParticleSystem_t1800779281 * get_m_ParticleSystem_0() const { return ___m_ParticleSystem_0; }
-	inline ParticleSystem_t1800779281 ** get_address_of_m_ParticleSystem_0() { return &___m_ParticleSystem_0; }
-	inline void set_m_ParticleSystem_0(ParticleSystem_t1800779281 * value)
-	{
-		___m_ParticleSystem_0 = value;
-		Il2CppCodeGenWriteBarrier((&___m_ParticleSystem_0), value);
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-// Native definition for P/Invoke marshalling of UnityEngine.ParticleSystem/ColorOverLifetimeModule
-struct ColorOverLifetimeModule_t3039228654_marshaled_pinvoke
-{
-	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
-};
-// Native definition for COM marshalling of UnityEngine.ParticleSystem/ColorOverLifetimeModule
-struct ColorOverLifetimeModule_t3039228654_marshaled_com
-{
-	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
-};
-#endif // COLOROVERLIFETIMEMODULE_T3039228654_H
-#ifndef INTERNALENUMERATOR_1_T1004352082_H
-#define INTERNALENUMERATOR_1_T1004352082_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Array/InternalEnumerator`1<System.Boolean>
-struct  InternalEnumerator_1_t1004352082 
-{
-public:
-	// System.Array System.Array/InternalEnumerator`1::array
-	RuntimeArray * ___array_2;
-	// System.Int32 System.Array/InternalEnumerator`1::idx
-	int32_t ___idx_3;
-
-public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1004352082, ___array_2)); }
-	inline RuntimeArray * get_array_2() const { return ___array_2; }
-	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
-	inline void set_array_2(RuntimeArray * value)
-	{
-		___array_2 = value;
-		Il2CppCodeGenWriteBarrier((&___array_2), value);
-	}
-
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1004352082, ___idx_3)); }
-	inline int32_t get_idx_3() const { return ___idx_3; }
-	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
-	inline void set_idx_3(int32_t value)
-	{
-		___idx_3 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // INTERNALENUMERATOR_1_T1004352082_H
 #ifndef CHAR_T3634460470_H
 #define CHAR_T3634460470_H
 #ifdef __clang__
@@ -2553,46 +2141,6 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // CHAR_T3634460470_H
-#ifndef COLORBYSPEEDMODULE_T3740209408_H
-#define COLORBYSPEEDMODULE_T3740209408_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.ParticleSystem/ColorBySpeedModule
-struct  ColorBySpeedModule_t3740209408 
-{
-public:
-	// UnityEngine.ParticleSystem UnityEngine.ParticleSystem/ColorBySpeedModule::m_ParticleSystem
-	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
-
-public:
-	inline static int32_t get_offset_of_m_ParticleSystem_0() { return static_cast<int32_t>(offsetof(ColorBySpeedModule_t3740209408, ___m_ParticleSystem_0)); }
-	inline ParticleSystem_t1800779281 * get_m_ParticleSystem_0() const { return ___m_ParticleSystem_0; }
-	inline ParticleSystem_t1800779281 ** get_address_of_m_ParticleSystem_0() { return &___m_ParticleSystem_0; }
-	inline void set_m_ParticleSystem_0(ParticleSystem_t1800779281 * value)
-	{
-		___m_ParticleSystem_0 = value;
-		Il2CppCodeGenWriteBarrier((&___m_ParticleSystem_0), value);
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-// Native definition for P/Invoke marshalling of UnityEngine.ParticleSystem/ColorBySpeedModule
-struct ColorBySpeedModule_t3740209408_marshaled_pinvoke
-{
-	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
-};
-// Native definition for COM marshalling of UnityEngine.ParticleSystem/ColorBySpeedModule
-struct ColorBySpeedModule_t3740209408_marshaled_com
-{
-	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
-};
-#endif // COLORBYSPEEDMODULE_T3740209408_H
 #ifndef INTERNALENUMERATOR_1_T4031039755_H
 #define INTERNALENUMERATOR_1_T4031039755_H
 #ifdef __clang__
@@ -2633,6 +2181,59 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // INTERNALENUMERATOR_1_T4031039755_H
+#ifndef DICTIONARYENTRY_T3123975638_H
+#define DICTIONARYENTRY_T3123975638_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Collections.DictionaryEntry
+struct  DictionaryEntry_t3123975638 
+{
+public:
+	// System.Object System.Collections.DictionaryEntry::_key
+	RuntimeObject * ____key_0;
+	// System.Object System.Collections.DictionaryEntry::_value
+	RuntimeObject * ____value_1;
+
+public:
+	inline static int32_t get_offset_of__key_0() { return static_cast<int32_t>(offsetof(DictionaryEntry_t3123975638, ____key_0)); }
+	inline RuntimeObject * get__key_0() const { return ____key_0; }
+	inline RuntimeObject ** get_address_of__key_0() { return &____key_0; }
+	inline void set__key_0(RuntimeObject * value)
+	{
+		____key_0 = value;
+		Il2CppCodeGenWriteBarrier((&____key_0), value);
+	}
+
+	inline static int32_t get_offset_of__value_1() { return static_cast<int32_t>(offsetof(DictionaryEntry_t3123975638, ____value_1)); }
+	inline RuntimeObject * get__value_1() const { return ____value_1; }
+	inline RuntimeObject ** get_address_of__value_1() { return &____value_1; }
+	inline void set__value_1(RuntimeObject * value)
+	{
+		____value_1 = value;
+		Il2CppCodeGenWriteBarrier((&____value_1), value);
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+// Native definition for P/Invoke marshalling of System.Collections.DictionaryEntry
+struct DictionaryEntry_t3123975638_marshaled_pinvoke
+{
+	Il2CppIUnknown* ____key_0;
+	Il2CppIUnknown* ____value_1;
+};
+// Native definition for COM marshalling of System.Collections.DictionaryEntry
+struct DictionaryEntry_t3123975638_marshaled_com
+{
+	Il2CppIUnknown* ____key_0;
+	Il2CppIUnknown* ____value_1;
+};
+#endif // DICTIONARYENTRY_T3123975638_H
 #ifndef MATRIX4X4_T1817901843_H
 #define MATRIX4X4_T1817901843_H
 #ifdef __clang__
@@ -2838,6 +2439,446 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // MATRIX4X4_T1817901843_H
+#ifndef FORCEOVERLIFETIMEMODULE_T4029962193_H
+#define FORCEOVERLIFETIMEMODULE_T4029962193_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.ParticleSystem/ForceOverLifetimeModule
+struct  ForceOverLifetimeModule_t4029962193 
+{
+public:
+	// UnityEngine.ParticleSystem UnityEngine.ParticleSystem/ForceOverLifetimeModule::m_ParticleSystem
+	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
+
+public:
+	inline static int32_t get_offset_of_m_ParticleSystem_0() { return static_cast<int32_t>(offsetof(ForceOverLifetimeModule_t4029962193, ___m_ParticleSystem_0)); }
+	inline ParticleSystem_t1800779281 * get_m_ParticleSystem_0() const { return ___m_ParticleSystem_0; }
+	inline ParticleSystem_t1800779281 ** get_address_of_m_ParticleSystem_0() { return &___m_ParticleSystem_0; }
+	inline void set_m_ParticleSystem_0(ParticleSystem_t1800779281 * value)
+	{
+		___m_ParticleSystem_0 = value;
+		Il2CppCodeGenWriteBarrier((&___m_ParticleSystem_0), value);
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+// Native definition for P/Invoke marshalling of UnityEngine.ParticleSystem/ForceOverLifetimeModule
+struct ForceOverLifetimeModule_t4029962193_marshaled_pinvoke
+{
+	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
+};
+// Native definition for COM marshalling of UnityEngine.ParticleSystem/ForceOverLifetimeModule
+struct ForceOverLifetimeModule_t4029962193_marshaled_com
+{
+	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
+};
+#endif // FORCEOVERLIFETIMEMODULE_T4029962193_H
+#ifndef EMISSIONMODULE_T311448003_H
+#define EMISSIONMODULE_T311448003_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.ParticleSystem/EmissionModule
+struct  EmissionModule_t311448003 
+{
+public:
+	// UnityEngine.ParticleSystem UnityEngine.ParticleSystem/EmissionModule::m_ParticleSystem
+	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
+
+public:
+	inline static int32_t get_offset_of_m_ParticleSystem_0() { return static_cast<int32_t>(offsetof(EmissionModule_t311448003, ___m_ParticleSystem_0)); }
+	inline ParticleSystem_t1800779281 * get_m_ParticleSystem_0() const { return ___m_ParticleSystem_0; }
+	inline ParticleSystem_t1800779281 ** get_address_of_m_ParticleSystem_0() { return &___m_ParticleSystem_0; }
+	inline void set_m_ParticleSystem_0(ParticleSystem_t1800779281 * value)
+	{
+		___m_ParticleSystem_0 = value;
+		Il2CppCodeGenWriteBarrier((&___m_ParticleSystem_0), value);
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+// Native definition for P/Invoke marshalling of UnityEngine.ParticleSystem/EmissionModule
+struct EmissionModule_t311448003_marshaled_pinvoke
+{
+	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
+};
+// Native definition for COM marshalling of UnityEngine.ParticleSystem/EmissionModule
+struct EmissionModule_t311448003_marshaled_com
+{
+	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
+};
+#endif // EMISSIONMODULE_T311448003_H
+#ifndef INTERNALENUMERATOR_1_T1004352082_H
+#define INTERNALENUMERATOR_1_T1004352082_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Array/InternalEnumerator`1<System.Boolean>
+struct  InternalEnumerator_1_t1004352082 
+{
+public:
+	// System.Array System.Array/InternalEnumerator`1::array
+	RuntimeArray * ___array_2;
+	// System.Int32 System.Array/InternalEnumerator`1::idx
+	int32_t ___idx_3;
+
+public:
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1004352082, ___array_2)); }
+	inline RuntimeArray * get_array_2() const { return ___array_2; }
+	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
+	inline void set_array_2(RuntimeArray * value)
+	{
+		___array_2 = value;
+		Il2CppCodeGenWriteBarrier((&___array_2), value);
+	}
+
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1004352082, ___idx_3)); }
+	inline int32_t get_idx_3() const { return ___idx_3; }
+	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
+	inline void set_idx_3(int32_t value)
+	{
+		___idx_3 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // INTERNALENUMERATOR_1_T1004352082_H
+#ifndef COLOROVERLIFETIMEMODULE_T3039228654_H
+#define COLOROVERLIFETIMEMODULE_T3039228654_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.ParticleSystem/ColorOverLifetimeModule
+struct  ColorOverLifetimeModule_t3039228654 
+{
+public:
+	// UnityEngine.ParticleSystem UnityEngine.ParticleSystem/ColorOverLifetimeModule::m_ParticleSystem
+	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
+
+public:
+	inline static int32_t get_offset_of_m_ParticleSystem_0() { return static_cast<int32_t>(offsetof(ColorOverLifetimeModule_t3039228654, ___m_ParticleSystem_0)); }
+	inline ParticleSystem_t1800779281 * get_m_ParticleSystem_0() const { return ___m_ParticleSystem_0; }
+	inline ParticleSystem_t1800779281 ** get_address_of_m_ParticleSystem_0() { return &___m_ParticleSystem_0; }
+	inline void set_m_ParticleSystem_0(ParticleSystem_t1800779281 * value)
+	{
+		___m_ParticleSystem_0 = value;
+		Il2CppCodeGenWriteBarrier((&___m_ParticleSystem_0), value);
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+// Native definition for P/Invoke marshalling of UnityEngine.ParticleSystem/ColorOverLifetimeModule
+struct ColorOverLifetimeModule_t3039228654_marshaled_pinvoke
+{
+	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
+};
+// Native definition for COM marshalling of UnityEngine.ParticleSystem/ColorOverLifetimeModule
+struct ColorOverLifetimeModule_t3039228654_marshaled_com
+{
+	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
+};
+#endif // COLOROVERLIFETIMEMODULE_T3039228654_H
+#ifndef INTERNALENUMERATOR_1_T2041360493_H
+#define INTERNALENUMERATOR_1_T2041360493_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Array/InternalEnumerator`1<System.Byte>
+struct  InternalEnumerator_1_t2041360493 
+{
+public:
+	// System.Array System.Array/InternalEnumerator`1::array
+	RuntimeArray * ___array_2;
+	// System.Int32 System.Array/InternalEnumerator`1::idx
+	int32_t ___idx_3;
+
+public:
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t2041360493, ___array_2)); }
+	inline RuntimeArray * get_array_2() const { return ___array_2; }
+	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
+	inline void set_array_2(RuntimeArray * value)
+	{
+		___array_2 = value;
+		Il2CppCodeGenWriteBarrier((&___array_2), value);
+	}
+
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t2041360493, ___idx_3)); }
+	inline int32_t get_idx_3() const { return ___idx_3; }
+	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
+	inline void set_idx_3(int32_t value)
+	{
+		___idx_3 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // INTERNALENUMERATOR_1_T2041360493_H
+#ifndef INTERNALENUMERATOR_1_T1553492328_H
+#define INTERNALENUMERATOR_1_T1553492328_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Array/InternalEnumerator`1<SpriteColorFX.SpriteColorRampPalettes>
+struct  InternalEnumerator_1_t1553492328 
+{
+public:
+	// System.Array System.Array/InternalEnumerator`1::array
+	RuntimeArray * ___array_2;
+	// System.Int32 System.Array/InternalEnumerator`1::idx
+	int32_t ___idx_3;
+
+public:
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1553492328, ___array_2)); }
+	inline RuntimeArray * get_array_2() const { return ___array_2; }
+	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
+	inline void set_array_2(RuntimeArray * value)
+	{
+		___array_2 = value;
+		Il2CppCodeGenWriteBarrier((&___array_2), value);
+	}
+
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1553492328, ___idx_3)); }
+	inline int32_t get_idx_3() const { return ___idx_3; }
+	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
+	inline void set_idx_3(int32_t value)
+	{
+		___idx_3 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // INTERNALENUMERATOR_1_T1553492328_H
+#ifndef COLORBYSPEEDMODULE_T3740209408_H
+#define COLORBYSPEEDMODULE_T3740209408_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.ParticleSystem/ColorBySpeedModule
+struct  ColorBySpeedModule_t3740209408 
+{
+public:
+	// UnityEngine.ParticleSystem UnityEngine.ParticleSystem/ColorBySpeedModule::m_ParticleSystem
+	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
+
+public:
+	inline static int32_t get_offset_of_m_ParticleSystem_0() { return static_cast<int32_t>(offsetof(ColorBySpeedModule_t3740209408, ___m_ParticleSystem_0)); }
+	inline ParticleSystem_t1800779281 * get_m_ParticleSystem_0() const { return ___m_ParticleSystem_0; }
+	inline ParticleSystem_t1800779281 ** get_address_of_m_ParticleSystem_0() { return &___m_ParticleSystem_0; }
+	inline void set_m_ParticleSystem_0(ParticleSystem_t1800779281 * value)
+	{
+		___m_ParticleSystem_0 = value;
+		Il2CppCodeGenWriteBarrier((&___m_ParticleSystem_0), value);
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+// Native definition for P/Invoke marshalling of UnityEngine.ParticleSystem/ColorBySpeedModule
+struct ColorBySpeedModule_t3740209408_marshaled_pinvoke
+{
+	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
+};
+// Native definition for COM marshalling of UnityEngine.ParticleSystem/ColorBySpeedModule
+struct ColorBySpeedModule_t3740209408_marshaled_com
+{
+	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
+};
+#endif // COLORBYSPEEDMODULE_T3740209408_H
+#ifndef INTERNALENUMERATOR_1_T246557291_H
+#define INTERNALENUMERATOR_1_T246557291_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Array/InternalEnumerator`1<System.Char>
+struct  InternalEnumerator_1_t246557291 
+{
+public:
+	// System.Array System.Array/InternalEnumerator`1::array
+	RuntimeArray * ___array_2;
+	// System.Int32 System.Array/InternalEnumerator`1::idx
+	int32_t ___idx_3;
+
+public:
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t246557291, ___array_2)); }
+	inline RuntimeArray * get_array_2() const { return ___array_2; }
+	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
+	inline void set_array_2(RuntimeArray * value)
+	{
+		___array_2 = value;
+		Il2CppCodeGenWriteBarrier((&___array_2), value);
+	}
+
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t246557291, ___idx_3)); }
+	inline int32_t get_idx_3() const { return ___idx_3; }
+	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
+	inline void set_idx_3(int32_t value)
+	{
+		___idx_3 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // INTERNALENUMERATOR_1_T246557291_H
+#ifndef COLLISIONMODULE_T1950979710_H
+#define COLLISIONMODULE_T1950979710_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.ParticleSystem/CollisionModule
+struct  CollisionModule_t1950979710 
+{
+public:
+	// UnityEngine.ParticleSystem UnityEngine.ParticleSystem/CollisionModule::m_ParticleSystem
+	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
+
+public:
+	inline static int32_t get_offset_of_m_ParticleSystem_0() { return static_cast<int32_t>(offsetof(CollisionModule_t1950979710, ___m_ParticleSystem_0)); }
+	inline ParticleSystem_t1800779281 * get_m_ParticleSystem_0() const { return ___m_ParticleSystem_0; }
+	inline ParticleSystem_t1800779281 ** get_address_of_m_ParticleSystem_0() { return &___m_ParticleSystem_0; }
+	inline void set_m_ParticleSystem_0(ParticleSystem_t1800779281 * value)
+	{
+		___m_ParticleSystem_0 = value;
+		Il2CppCodeGenWriteBarrier((&___m_ParticleSystem_0), value);
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+// Native definition for P/Invoke marshalling of UnityEngine.ParticleSystem/CollisionModule
+struct CollisionModule_t1950979710_marshaled_pinvoke
+{
+	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
+};
+// Native definition for COM marshalling of UnityEngine.ParticleSystem/CollisionModule
+struct CollisionModule_t1950979710_marshaled_com
+{
+	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
+};
+#endif // COLLISIONMODULE_T1950979710_H
+#ifndef INTERNALENUMERATOR_1_T4116331090_H
+#define INTERNALENUMERATOR_1_T4116331090_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Array/InternalEnumerator`1<System.Collections.Generic.HashSet`1/Link<System.Object>>
+struct  InternalEnumerator_1_t4116331090 
+{
+public:
+	// System.Array System.Array/InternalEnumerator`1::array
+	RuntimeArray * ___array_2;
+	// System.Int32 System.Array/InternalEnumerator`1::idx
+	int32_t ___idx_3;
+
+public:
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t4116331090, ___array_2)); }
+	inline RuntimeArray * get_array_2() const { return ___array_2; }
+	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
+	inline void set_array_2(RuntimeArray * value)
+	{
+		___array_2 = value;
+		Il2CppCodeGenWriteBarrier((&___array_2), value);
+	}
+
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t4116331090, ___idx_3)); }
+	inline int32_t get_idx_3() const { return ___idx_3; }
+	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
+	inline void set_idx_3(int32_t value)
+	{
+		___idx_3 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // INTERNALENUMERATOR_1_T4116331090_H
+#ifndef KEYVALUEPAIR_2_T71524366_H
+#define KEYVALUEPAIR_2_T71524366_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Collections.Generic.KeyValuePair`2<System.Int32,System.Object>
+struct  KeyValuePair_2_t71524366 
+{
+public:
+	// TKey System.Collections.Generic.KeyValuePair`2::key
+	int32_t ___key_0;
+	// TValue System.Collections.Generic.KeyValuePair`2::value
+	RuntimeObject * ___value_1;
+
+public:
+	inline static int32_t get_offset_of_key_0() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t71524366, ___key_0)); }
+	inline int32_t get_key_0() const { return ___key_0; }
+	inline int32_t* get_address_of_key_0() { return &___key_0; }
+	inline void set_key_0(int32_t value)
+	{
+		___key_0 = value;
+	}
+
+	inline static int32_t get_offset_of_value_1() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t71524366, ___value_1)); }
+	inline RuntimeObject * get_value_1() const { return ___value_1; }
+	inline RuntimeObject ** get_address_of_value_1() { return &___value_1; }
+	inline void set_value_1(RuntimeObject * value)
+	{
+		___value_1 = value;
+		Il2CppCodeGenWriteBarrier((&___value_1), value);
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // KEYVALUEPAIR_2_T71524366_H
 #ifndef INTERNALENUMERATOR_1_T3808976076_H
 #define INTERNALENUMERATOR_1_T3808976076_H
 #ifdef __clang__
@@ -2917,6 +2958,35 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // KEYVALUEPAIR_2_T2901911959_H
+#ifndef LAYERMASK_T3493934918_H
+#define LAYERMASK_T3493934918_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.LayerMask
+struct  LayerMask_t3493934918 
+{
+public:
+	// System.Int32 UnityEngine.LayerMask::m_Mask
+	int32_t ___m_Mask_0;
+
+public:
+	inline static int32_t get_offset_of_m_Mask_0() { return static_cast<int32_t>(offsetof(LayerMask_t3493934918, ___m_Mask_0)); }
+	inline int32_t get_m_Mask_0() const { return ___m_Mask_0; }
+	inline int32_t* get_address_of_m_Mask_0() { return &___m_Mask_0; }
+	inline void set_m_Mask_0(int32_t value)
+	{
+		___m_Mask_0 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // LAYERMASK_T3493934918_H
 #ifndef INTERNALENUMERATOR_1_T3152514936_H
 #define INTERNALENUMERATOR_1_T3152514936_H
 #ifdef __clang__
@@ -2997,35 +3067,6 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // INTERNALENUMERATOR_1_T311740871_H
-#ifndef LAYERMASK_T3493934918_H
-#define LAYERMASK_T3493934918_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.LayerMask
-struct  LayerMask_t3493934918 
-{
-public:
-	// System.Int32 UnityEngine.LayerMask::m_Mask
-	int32_t ___m_Mask_0;
-
-public:
-	inline static int32_t get_offset_of_m_Mask_0() { return static_cast<int32_t>(offsetof(LayerMask_t3493934918, ___m_Mask_0)); }
-	inline int32_t get_m_Mask_0() const { return ___m_Mask_0; }
-	inline int32_t* get_address_of_m_Mask_0() { return &___m_Mask_0; }
-	inline void set_m_Mask_0(int32_t value)
-	{
-		___m_Mask_0 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // LAYERMASK_T3493934918_H
 #ifndef INTERNALENUMERATOR_1_T2327511842_H
 #define INTERNALENUMERATOR_1_T2327511842_H
 #ifdef __clang__
@@ -3066,286 +3107,6 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // INTERNALENUMERATOR_1_T2327511842_H
-#ifndef INTERNALENUMERATOR_1_T454463237_H
-#define INTERNALENUMERATOR_1_T454463237_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Array/InternalEnumerator`1<System.Collections.Generic.KeyValuePair`2<System.Object,System.Boolean>>
-struct  InternalEnumerator_1_t454463237 
-{
-public:
-	// System.Array System.Array/InternalEnumerator`1::array
-	RuntimeArray * ___array_2;
-	// System.Int32 System.Array/InternalEnumerator`1::idx
-	int32_t ___idx_3;
-
-public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t454463237, ___array_2)); }
-	inline RuntimeArray * get_array_2() const { return ___array_2; }
-	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
-	inline void set_array_2(RuntimeArray * value)
-	{
-		___array_2 = value;
-		Il2CppCodeGenWriteBarrier((&___array_2), value);
-	}
-
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t454463237, ___idx_3)); }
-	inline int32_t get_idx_3() const { return ___idx_3; }
-	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
-	inline void set_idx_3(int32_t value)
-	{
-		___idx_3 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // INTERNALENUMERATOR_1_T454463237_H
-#ifndef KEYVALUEPAIR_2_T71524366_H
-#define KEYVALUEPAIR_2_T71524366_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Collections.Generic.KeyValuePair`2<System.Int32,System.Object>
-struct  KeyValuePair_2_t71524366 
-{
-public:
-	// TKey System.Collections.Generic.KeyValuePair`2::key
-	int32_t ___key_0;
-	// TValue System.Collections.Generic.KeyValuePair`2::value
-	RuntimeObject * ___value_1;
-
-public:
-	inline static int32_t get_offset_of_key_0() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t71524366, ___key_0)); }
-	inline int32_t get_key_0() const { return ___key_0; }
-	inline int32_t* get_address_of_key_0() { return &___key_0; }
-	inline void set_key_0(int32_t value)
-	{
-		___key_0 = value;
-	}
-
-	inline static int32_t get_offset_of_value_1() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t71524366, ___value_1)); }
-	inline RuntimeObject * get_value_1() const { return ___value_1; }
-	inline RuntimeObject ** get_address_of_value_1() { return &___value_1; }
-	inline void set_value_1(RuntimeObject * value)
-	{
-		___value_1 = value;
-		Il2CppCodeGenWriteBarrier((&___value_1), value);
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // KEYVALUEPAIR_2_T71524366_H
-#ifndef INTERNALENUMERATOR_1_T3437281436_H
-#define INTERNALENUMERATOR_1_T3437281436_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Array/InternalEnumerator`1<System.Collections.Generic.KeyValuePair`2<System.Object,System.Object>>
-struct  InternalEnumerator_1_t3437281436 
-{
-public:
-	// System.Array System.Array/InternalEnumerator`1::array
-	RuntimeArray * ___array_2;
-	// System.Int32 System.Array/InternalEnumerator`1::idx
-	int32_t ___idx_3;
-
-public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t3437281436, ___array_2)); }
-	inline RuntimeArray * get_array_2() const { return ___array_2; }
-	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
-	inline void set_array_2(RuntimeArray * value)
-	{
-		___array_2 = value;
-		Il2CppCodeGenWriteBarrier((&___array_2), value);
-	}
-
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t3437281436, ___idx_3)); }
-	inline int32_t get_idx_3() const { return ___idx_3; }
-	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
-	inline void set_idx_3(int32_t value)
-	{
-		___idx_3 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // INTERNALENUMERATOR_1_T3437281436_H
-#ifndef INTERNALENUMERATOR_1_T4093742576_H
-#define INTERNALENUMERATOR_1_T4093742576_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Array/InternalEnumerator`1<System.Collections.Generic.KeyValuePair`2<System.Object,System.Int64>>
-struct  InternalEnumerator_1_t4093742576 
-{
-public:
-	// System.Array System.Array/InternalEnumerator`1::array
-	RuntimeArray * ___array_2;
-	// System.Int32 System.Array/InternalEnumerator`1::idx
-	int32_t ___idx_3;
-
-public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t4093742576, ___array_2)); }
-	inline RuntimeArray * get_array_2() const { return ___array_2; }
-	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
-	inline void set_array_2(RuntimeArray * value)
-	{
-		___array_2 = value;
-		Il2CppCodeGenWriteBarrier((&___array_2), value);
-	}
-
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t4093742576, ___idx_3)); }
-	inline int32_t get_idx_3() const { return ___idx_3; }
-	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
-	inline void set_idx_3(int32_t value)
-	{
-		___idx_3 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // INTERNALENUMERATOR_1_T4093742576_H
-#ifndef INTERNALENUMERATOR_1_T2690602182_H
-#define INTERNALENUMERATOR_1_T2690602182_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Array/InternalEnumerator`1<System.Collections.Generic.KeyValuePair`2<Com.LuisPedroFonseca.ProCamera2D.IntPoint,System.Boolean>>
-struct  InternalEnumerator_1_t2690602182 
-{
-public:
-	// System.Array System.Array/InternalEnumerator`1::array
-	RuntimeArray * ___array_2;
-	// System.Int32 System.Array/InternalEnumerator`1::idx
-	int32_t ___idx_3;
-
-public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t2690602182, ___array_2)); }
-	inline RuntimeArray * get_array_2() const { return ___array_2; }
-	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
-	inline void set_array_2(RuntimeArray * value)
-	{
-		___array_2 = value;
-		Il2CppCodeGenWriteBarrier((&___array_2), value);
-	}
-
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t2690602182, ___idx_3)); }
-	inline int32_t get_idx_3() const { return ___idx_3; }
-	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
-	inline void set_idx_3(int32_t value)
-	{
-		___idx_3 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // INTERNALENUMERATOR_1_T2690602182_H
-#ifndef KEYVALUEPAIR_2_T2401056908_H
-#define KEYVALUEPAIR_2_T2401056908_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Collections.Generic.KeyValuePair`2<System.Object,System.Int32>
-struct  KeyValuePair_2_t2401056908 
-{
-public:
-	// TKey System.Collections.Generic.KeyValuePair`2::key
-	RuntimeObject * ___key_0;
-	// TValue System.Collections.Generic.KeyValuePair`2::value
-	int32_t ___value_1;
-
-public:
-	inline static int32_t get_offset_of_key_0() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t2401056908, ___key_0)); }
-	inline RuntimeObject * get_key_0() const { return ___key_0; }
-	inline RuntimeObject ** get_address_of_key_0() { return &___key_0; }
-	inline void set_key_0(RuntimeObject * value)
-	{
-		___key_0 = value;
-		Il2CppCodeGenWriteBarrier((&___key_0), value);
-	}
-
-	inline static int32_t get_offset_of_value_1() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t2401056908, ___value_1)); }
-	inline int32_t get_value_1() const { return ___value_1; }
-	inline int32_t* get_address_of_value_1() { return &___value_1; }
-	inline void set_value_1(int32_t value)
-	{
-		___value_1 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // KEYVALUEPAIR_2_T2401056908_H
-#ifndef INTERNALENUMERATOR_1_T849428072_H
-#define INTERNALENUMERATOR_1_T849428072_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Array/InternalEnumerator`1<System.Collections.Generic.KeyValuePair`2<System.Int32,System.Int32>>
-struct  InternalEnumerator_1_t849428072 
-{
-public:
-	// System.Array System.Array/InternalEnumerator`1::array
-	RuntimeArray * ___array_2;
-	// System.Int32 System.Array/InternalEnumerator`1::idx
-	int32_t ___idx_3;
-
-public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t849428072, ___array_2)); }
-	inline RuntimeArray * get_array_2() const { return ___array_2; }
-	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
-	inline void set_array_2(RuntimeArray * value)
-	{
-		___array_2 = value;
-		Il2CppCodeGenWriteBarrier((&___array_2), value);
-	}
-
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t849428072, ___idx_3)); }
-	inline int32_t get_idx_3() const { return ___idx_3; }
-	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
-	inline void set_idx_3(int32_t value)
-	{
-		___idx_3 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // INTERNALENUMERATOR_1_T849428072_H
 #ifndef INTERNALENUMERATOR_1_T978588483_H
 #define INTERNALENUMERATOR_1_T978588483_H
 #ifdef __clang__
@@ -3386,6 +3147,125 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // INTERNALENUMERATOR_1_T978588483_H
+#ifndef INTERNALENUMERATOR_1_T4093742576_H
+#define INTERNALENUMERATOR_1_T4093742576_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Array/InternalEnumerator`1<System.Collections.Generic.KeyValuePair`2<System.Object,System.Int64>>
+struct  InternalEnumerator_1_t4093742576 
+{
+public:
+	// System.Array System.Array/InternalEnumerator`1::array
+	RuntimeArray * ___array_2;
+	// System.Int32 System.Array/InternalEnumerator`1::idx
+	int32_t ___idx_3;
+
+public:
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t4093742576, ___array_2)); }
+	inline RuntimeArray * get_array_2() const { return ___array_2; }
+	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
+	inline void set_array_2(RuntimeArray * value)
+	{
+		___array_2 = value;
+		Il2CppCodeGenWriteBarrier((&___array_2), value);
+	}
+
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t4093742576, ___idx_3)); }
+	inline int32_t get_idx_3() const { return ___idx_3; }
+	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
+	inline void set_idx_3(int32_t value)
+	{
+		___idx_3 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // INTERNALENUMERATOR_1_T4093742576_H
+#ifndef KEYVALUEPAIR_2_T2401056908_H
+#define KEYVALUEPAIR_2_T2401056908_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Collections.Generic.KeyValuePair`2<System.Object,System.Int32>
+struct  KeyValuePair_2_t2401056908 
+{
+public:
+	// TKey System.Collections.Generic.KeyValuePair`2::key
+	RuntimeObject * ___key_0;
+	// TValue System.Collections.Generic.KeyValuePair`2::value
+	int32_t ___value_1;
+
+public:
+	inline static int32_t get_offset_of_key_0() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t2401056908, ___key_0)); }
+	inline RuntimeObject * get_key_0() const { return ___key_0; }
+	inline RuntimeObject ** get_address_of_key_0() { return &___key_0; }
+	inline void set_key_0(RuntimeObject * value)
+	{
+		___key_0 = value;
+		Il2CppCodeGenWriteBarrier((&___key_0), value);
+	}
+
+	inline static int32_t get_offset_of_value_1() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t2401056908, ___value_1)); }
+	inline int32_t get_value_1() const { return ___value_1; }
+	inline int32_t* get_address_of_value_1() { return &___value_1; }
+	inline void set_value_1(int32_t value)
+	{
+		___value_1 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // KEYVALUEPAIR_2_T2401056908_H
+#ifndef LINK_T3209266973_H
+#define LINK_T3209266973_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Collections.Generic.HashSet`1/Link<System.Object>
+struct  Link_t3209266973 
+{
+public:
+	// System.Int32 System.Collections.Generic.HashSet`1/Link::HashCode
+	int32_t ___HashCode_0;
+	// System.Int32 System.Collections.Generic.HashSet`1/Link::Next
+	int32_t ___Next_1;
+
+public:
+	inline static int32_t get_offset_of_HashCode_0() { return static_cast<int32_t>(offsetof(Link_t3209266973, ___HashCode_0)); }
+	inline int32_t get_HashCode_0() const { return ___HashCode_0; }
+	inline int32_t* get_address_of_HashCode_0() { return &___HashCode_0; }
+	inline void set_HashCode_0(int32_t value)
+	{
+		___HashCode_0 = value;
+	}
+
+	inline static int32_t get_offset_of_Next_1() { return static_cast<int32_t>(offsetof(Link_t3209266973, ___Next_1)); }
+	inline int32_t get_Next_1() const { return ___Next_1; }
+	inline int32_t* get_address_of_Next_1() { return &___Next_1; }
+	inline void set_Next_1(int32_t value)
+	{
+		___Next_1 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // LINK_T3209266973_H
 #ifndef INTERNALENUMERATOR_1_T3308121025_H
 #define INTERNALENUMERATOR_1_T3308121025_H
 #ifdef __clang__
@@ -3426,6 +3306,86 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // INTERNALENUMERATOR_1_T3308121025_H
+#ifndef INTERNALENUMERATOR_1_T2690602182_H
+#define INTERNALENUMERATOR_1_T2690602182_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Array/InternalEnumerator`1<System.Collections.Generic.KeyValuePair`2<Com.LuisPedroFonseca.ProCamera2D.IntPoint,System.Boolean>>
+struct  InternalEnumerator_1_t2690602182 
+{
+public:
+	// System.Array System.Array/InternalEnumerator`1::array
+	RuntimeArray * ___array_2;
+	// System.Int32 System.Array/InternalEnumerator`1::idx
+	int32_t ___idx_3;
+
+public:
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t2690602182, ___array_2)); }
+	inline RuntimeArray * get_array_2() const { return ___array_2; }
+	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
+	inline void set_array_2(RuntimeArray * value)
+	{
+		___array_2 = value;
+		Il2CppCodeGenWriteBarrier((&___array_2), value);
+	}
+
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t2690602182, ___idx_3)); }
+	inline int32_t get_idx_3() const { return ___idx_3; }
+	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
+	inline void set_idx_3(int32_t value)
+	{
+		___idx_3 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // INTERNALENUMERATOR_1_T2690602182_H
+#ifndef INTERNALENUMERATOR_1_T849428072_H
+#define INTERNALENUMERATOR_1_T849428072_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Array/InternalEnumerator`1<System.Collections.Generic.KeyValuePair`2<System.Int32,System.Int32>>
+struct  InternalEnumerator_1_t849428072 
+{
+public:
+	// System.Array System.Array/InternalEnumerator`1::array
+	RuntimeArray * ___array_2;
+	// System.Int32 System.Array/InternalEnumerator`1::idx
+	int32_t ___idx_3;
+
+public:
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t849428072, ___array_2)); }
+	inline RuntimeArray * get_array_2() const { return ___array_2; }
+	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
+	inline void set_array_2(RuntimeArray * value)
+	{
+		___array_2 = value;
+		Il2CppCodeGenWriteBarrier((&___array_2), value);
+	}
+
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t849428072, ___idx_3)); }
+	inline int32_t get_idx_3() const { return ___idx_3; }
+	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
+	inline void set_idx_3(int32_t value)
+	{
+		___idx_3 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // INTERNALENUMERATOR_1_T849428072_H
 #ifndef KEYVALUEPAIR_2_T3842366416_H
 #define KEYVALUEPAIR_2_T3842366416_H
 #ifdef __clang__
@@ -3466,6 +3426,46 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // KEYVALUEPAIR_2_T3842366416_H
+#ifndef INTERNALENUMERATOR_1_T454463237_H
+#define INTERNALENUMERATOR_1_T454463237_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Array/InternalEnumerator`1<System.Collections.Generic.KeyValuePair`2<System.Object,System.Boolean>>
+struct  InternalEnumerator_1_t454463237 
+{
+public:
+	// System.Array System.Array/InternalEnumerator`1::array
+	RuntimeArray * ___array_2;
+	// System.Int32 System.Array/InternalEnumerator`1::idx
+	int32_t ___idx_3;
+
+public:
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t454463237, ___array_2)); }
+	inline RuntimeArray * get_array_2() const { return ___array_2; }
+	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
+	inline void set_array_2(RuntimeArray * value)
+	{
+		___array_2 = value;
+		Il2CppCodeGenWriteBarrier((&___array_2), value);
+	}
+
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t454463237, ___idx_3)); }
+	inline int32_t get_idx_3() const { return ___idx_3; }
+	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
+	inline void set_idx_3(int32_t value)
+	{
+		___idx_3 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // INTERNALENUMERATOR_1_T454463237_H
 #ifndef INHERITVELOCITYMODULE_T3940044026_H
 #define INHERITVELOCITYMODULE_T3940044026_H
 #ifdef __clang__
@@ -4558,16 +4558,16 @@ struct UriScheme_t2867806342_marshaled_com
 	int32_t ___defaultPort_2;
 };
 #endif // URISCHEME_T2867806342_H
-#ifndef INTERNALENUMERATOR_1_T186493978_H
-#define INTERNALENUMERATOR_1_T186493978_H
+#ifndef INTERNALENUMERATOR_1_T2410658723_H
+#define INTERNALENUMERATOR_1_T2410658723_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// System.Array/InternalEnumerator`1<SpriteColorFX.PredatorController/PredatorJob>
-struct  InternalEnumerator_1_t186493978 
+// System.Array/InternalEnumerator`1<MouthPanel/MOUTH_STATE>
+struct  InternalEnumerator_1_t2410658723 
 {
 public:
 	// System.Array System.Array/InternalEnumerator`1::array
@@ -4576,7 +4576,7 @@ public:
 	int32_t ___idx_3;
 
 public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t186493978, ___array_2)); }
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t2410658723, ___array_2)); }
 	inline RuntimeArray * get_array_2() const { return ___array_2; }
 	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
 	inline void set_array_2(RuntimeArray * value)
@@ -4585,7 +4585,7 @@ public:
 		Il2CppCodeGenWriteBarrier((&___array_2), value);
 	}
 
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t186493978, ___idx_3)); }
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t2410658723, ___idx_3)); }
 	inline int32_t get_idx_3() const { return ___idx_3; }
 	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
 	inline void set_idx_3(int32_t value)
@@ -4597,7 +4597,7 @@ public:
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // INTERNALENUMERATOR_1_T186493978_H
+#endif // INTERNALENUMERATOR_1_T2410658723_H
 #ifndef MAINMODULE_T2320046318_H
 #define MAINMODULE_T2320046318_H
 #ifdef __clang__
@@ -4638,46 +4638,6 @@ struct MainModule_t2320046318_marshaled_com
 	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
 };
 #endif // MAINMODULE_T2320046318_H
-#ifndef INTERNALENUMERATOR_1_T4273230295_H
-#define INTERNALENUMERATOR_1_T4273230295_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Array/InternalEnumerator`1<SpriteColorFX.SpriteColorHelper/PixelOp>
-struct  InternalEnumerator_1_t4273230295 
-{
-public:
-	// System.Array System.Array/InternalEnumerator`1::array
-	RuntimeArray * ___array_2;
-	// System.Int32 System.Array/InternalEnumerator`1::idx
-	int32_t ___idx_3;
-
-public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t4273230295, ___array_2)); }
-	inline RuntimeArray * get_array_2() const { return ___array_2; }
-	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
-	inline void set_array_2(RuntimeArray * value)
-	{
-		___array_2 = value;
-		Il2CppCodeGenWriteBarrier((&___array_2), value);
-	}
-
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t4273230295, ___idx_3)); }
-	inline int32_t get_idx_3() const { return ___idx_3; }
-	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
-	inline void set_idx_3(int32_t value)
-	{
-		___idx_3 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // INTERNALENUMERATOR_1_T4273230295_H
 #ifndef LIMITVELOCITYOVERLIFETIMEMODULE_T686589569_H
 #define LIMITVELOCITYOVERLIFETIMEMODULE_T686589569_H
 #ifdef __clang__
@@ -4718,6 +4678,46 @@ struct LimitVelocityOverLifetimeModule_t686589569_marshaled_com
 	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
 };
 #endif // LIMITVELOCITYOVERLIFETIMEMODULE_T686589569_H
+#ifndef INTERNALENUMERATOR_1_T186493978_H
+#define INTERNALENUMERATOR_1_T186493978_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Array/InternalEnumerator`1<SpriteColorFX.PredatorController/PredatorJob>
+struct  InternalEnumerator_1_t186493978 
+{
+public:
+	// System.Array System.Array/InternalEnumerator`1::array
+	RuntimeArray * ___array_2;
+	// System.Int32 System.Array/InternalEnumerator`1::idx
+	int32_t ___idx_3;
+
+public:
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t186493978, ___array_2)); }
+	inline RuntimeArray * get_array_2() const { return ___array_2; }
+	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
+	inline void set_array_2(RuntimeArray * value)
+	{
+		___array_2 = value;
+		Il2CppCodeGenWriteBarrier((&___array_2), value);
+	}
+
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t186493978, ___idx_3)); }
+	inline int32_t get_idx_3() const { return ___idx_3; }
+	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
+	inline void set_idx_3(int32_t value)
+	{
+		___idx_3 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // INTERNALENUMERATOR_1_T186493978_H
 #ifndef LIGHTSMODULE_T3616883284_H
 #define LIGHTSMODULE_T3616883284_H
 #ifdef __clang__
@@ -4758,16 +4758,16 @@ struct LightsModule_t3616883284_marshaled_com
 	ParticleSystem_t1800779281 * ___m_ParticleSystem_0;
 };
 #endif // LIGHTSMODULE_T3616883284_H
-#ifndef INTERNALENUMERATOR_1_T1553492328_H
-#define INTERNALENUMERATOR_1_T1553492328_H
+#ifndef INTERNALENUMERATOR_1_T4273230295_H
+#define INTERNALENUMERATOR_1_T4273230295_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// System.Array/InternalEnumerator`1<SpriteColorFX.SpriteColorRampPalettes>
-struct  InternalEnumerator_1_t1553492328 
+// System.Array/InternalEnumerator`1<SpriteColorFX.SpriteColorHelper/PixelOp>
+struct  InternalEnumerator_1_t4273230295 
 {
 public:
 	// System.Array System.Array/InternalEnumerator`1::array
@@ -4776,7 +4776,7 @@ public:
 	int32_t ___idx_3;
 
 public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1553492328, ___array_2)); }
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t4273230295, ___array_2)); }
 	inline RuntimeArray * get_array_2() const { return ___array_2; }
 	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
 	inline void set_array_2(RuntimeArray * value)
@@ -4785,7 +4785,7 @@ public:
 		Il2CppCodeGenWriteBarrier((&___array_2), value);
 	}
 
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1553492328, ___idx_3)); }
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t4273230295, ___idx_3)); }
 	inline int32_t get_idx_3() const { return ___idx_3; }
 	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
 	inline void set_idx_3(int32_t value)
@@ -4797,7 +4797,7 @@ public:
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // INTERNALENUMERATOR_1_T1553492328_H
+#endif // INTERNALENUMERATOR_1_T4273230295_H
 #ifndef INTERNALENUMERATOR_1_T3774870459_H
 #define INTERNALENUMERATOR_1_T3774870459_H
 #ifdef __clang__
@@ -5212,16 +5212,16 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // INTERNALENUMERATOR_1_T1911769025_H
-#ifndef INTERNALENUMERATOR_1_T1754442046_H
-#define INTERNALENUMERATOR_1_T1754442046_H
+#ifndef INTERNALENUMERATOR_1_T3437281436_H
+#define INTERNALENUMERATOR_1_T3437281436_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// System.Array/InternalEnumerator`1<System.Collections.Generic.KeyValuePair`2<System.Object,System.Single>>
-struct  InternalEnumerator_1_t1754442046 
+// System.Array/InternalEnumerator`1<System.Collections.Generic.KeyValuePair`2<System.Object,System.Object>>
+struct  InternalEnumerator_1_t3437281436 
 {
 public:
 	// System.Array System.Array/InternalEnumerator`1::array
@@ -5230,7 +5230,7 @@ public:
 	int32_t ___idx_3;
 
 public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1754442046, ___array_2)); }
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t3437281436, ___array_2)); }
 	inline RuntimeArray * get_array_2() const { return ___array_2; }
 	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
 	inline void set_array_2(RuntimeArray * value)
@@ -5239,7 +5239,7 @@ public:
 		Il2CppCodeGenWriteBarrier((&___array_2), value);
 	}
 
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1754442046, ___idx_3)); }
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t3437281436, ___idx_3)); }
 	inline int32_t get_idx_3() const { return ___idx_3; }
 	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
 	inline void set_idx_3(int32_t value)
@@ -5251,7 +5251,47 @@ public:
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // INTERNALENUMERATOR_1_T1754442046_H
+#endif // INTERNALENUMERATOR_1_T3437281436_H
+#ifndef INTERNALENUMERATOR_1_T715526830_H
+#define INTERNALENUMERATOR_1_T715526830_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Array/InternalEnumerator`1<System.Reflection.Emit.MonoResource>
+struct  InternalEnumerator_1_t715526830 
+{
+public:
+	// System.Array System.Array/InternalEnumerator`1::array
+	RuntimeArray * ___array_2;
+	// System.Int32 System.Array/InternalEnumerator`1::idx
+	int32_t ___idx_3;
+
+public:
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t715526830, ___array_2)); }
+	inline RuntimeArray * get_array_2() const { return ___array_2; }
+	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
+	inline void set_array_2(RuntimeArray * value)
+	{
+		___array_2 = value;
+		Il2CppCodeGenWriteBarrier((&___array_2), value);
+	}
+
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t715526830, ___idx_3)); }
+	inline int32_t get_idx_3() const { return ___idx_3; }
+	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
+	inline void set_idx_3(int32_t value)
+	{
+		___idx_3 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // INTERNALENUMERATOR_1_T715526830_H
 #ifndef INTERNALENUMERATOR_1_T2811293600_H
 #define INTERNALENUMERATOR_1_T2811293600_H
 #ifdef __clang__
@@ -5557,56 +5597,45 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // INTERNALENUMERATOR_1_T2368758583_H
-#ifndef PARAMETERMODIFIER_T1461694466_H
-#define PARAMETERMODIFIER_T1461694466_H
+#ifndef LABEL_T2281661643_H
+#define LABEL_T2281661643_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// System.Reflection.ParameterModifier
-struct  ParameterModifier_t1461694466 
+// System.Reflection.Emit.Label
+struct  Label_t2281661643 
 {
 public:
-	// System.Boolean[] System.Reflection.ParameterModifier::_byref
-	BooleanU5BU5D_t2897418192* ____byref_0;
+	// System.Int32 System.Reflection.Emit.Label::label
+	int32_t ___label_0;
 
 public:
-	inline static int32_t get_offset_of__byref_0() { return static_cast<int32_t>(offsetof(ParameterModifier_t1461694466, ____byref_0)); }
-	inline BooleanU5BU5D_t2897418192* get__byref_0() const { return ____byref_0; }
-	inline BooleanU5BU5D_t2897418192** get_address_of__byref_0() { return &____byref_0; }
-	inline void set__byref_0(BooleanU5BU5D_t2897418192* value)
+	inline static int32_t get_offset_of_label_0() { return static_cast<int32_t>(offsetof(Label_t2281661643, ___label_0)); }
+	inline int32_t get_label_0() const { return ___label_0; }
+	inline int32_t* get_address_of_label_0() { return &___label_0; }
+	inline void set_label_0(int32_t value)
 	{
-		____byref_0 = value;
-		Il2CppCodeGenWriteBarrier((&____byref_0), value);
+		___label_0 = value;
 	}
 };
 
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-// Native definition for P/Invoke marshalling of System.Reflection.ParameterModifier
-struct ParameterModifier_t1461694466_marshaled_pinvoke
-{
-	int32_t* ____byref_0;
-};
-// Native definition for COM marshalling of System.Reflection.ParameterModifier
-struct ParameterModifier_t1461694466_marshaled_com
-{
-	int32_t* ____byref_0;
-};
-#endif // PARAMETERMODIFIER_T1461694466_H
-#ifndef INTERNALENUMERATOR_1_T715526830_H
-#define INTERNALENUMERATOR_1_T715526830_H
+#endif // LABEL_T2281661643_H
+#ifndef INTERNALENUMERATOR_1_T1267231508_H
+#define INTERNALENUMERATOR_1_T1267231508_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// System.Array/InternalEnumerator`1<System.Reflection.Emit.MonoResource>
-struct  InternalEnumerator_1_t715526830 
+// System.Array/InternalEnumerator`1<System.Reflection.Emit.ILGenerator/LabelData>
+struct  InternalEnumerator_1_t1267231508 
 {
 public:
 	// System.Array System.Array/InternalEnumerator`1::array
@@ -5615,7 +5644,7 @@ public:
 	int32_t ___idx_3;
 
 public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t715526830, ___array_2)); }
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1267231508, ___array_2)); }
 	inline RuntimeArray * get_array_2() const { return ___array_2; }
 	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
 	inline void set_array_2(RuntimeArray * value)
@@ -5624,7 +5653,7 @@ public:
 		Il2CppCodeGenWriteBarrier((&___array_2), value);
 	}
 
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t715526830, ___idx_3)); }
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1267231508, ___idx_3)); }
 	inline int32_t get_idx_3() const { return ___idx_3; }
 	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
 	inline void set_idx_3(int32_t value)
@@ -5636,7 +5665,7 @@ public:
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // INTERNALENUMERATOR_1_T715526830_H
+#endif // INTERNALENUMERATOR_1_T1267231508_H
 #ifndef LABELDATA_T360167391_H
 #define LABELDATA_T360167391_H
 #ifdef __clang__
@@ -5897,75 +5926,47 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // INTERNALENUMERATOR_1_T3188725760_H
-#ifndef LABEL_T2281661643_H
-#define LABEL_T2281661643_H
+#ifndef KEYVALUEPAIR_2_T2530217319_H
+#define KEYVALUEPAIR_2_T2530217319_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// System.Reflection.Emit.Label
-struct  Label_t2281661643 
+// System.Collections.Generic.KeyValuePair`2<System.Object,System.Object>
+struct  KeyValuePair_2_t2530217319 
 {
 public:
-	// System.Int32 System.Reflection.Emit.Label::label
-	int32_t ___label_0;
+	// TKey System.Collections.Generic.KeyValuePair`2::key
+	RuntimeObject * ___key_0;
+	// TValue System.Collections.Generic.KeyValuePair`2::value
+	RuntimeObject * ___value_1;
 
 public:
-	inline static int32_t get_offset_of_label_0() { return static_cast<int32_t>(offsetof(Label_t2281661643, ___label_0)); }
-	inline int32_t get_label_0() const { return ___label_0; }
-	inline int32_t* get_address_of_label_0() { return &___label_0; }
-	inline void set_label_0(int32_t value)
+	inline static int32_t get_offset_of_key_0() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t2530217319, ___key_0)); }
+	inline RuntimeObject * get_key_0() const { return ___key_0; }
+	inline RuntimeObject ** get_address_of_key_0() { return &___key_0; }
+	inline void set_key_0(RuntimeObject * value)
 	{
-		___label_0 = value;
+		___key_0 = value;
+		Il2CppCodeGenWriteBarrier((&___key_0), value);
+	}
+
+	inline static int32_t get_offset_of_value_1() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t2530217319, ___value_1)); }
+	inline RuntimeObject * get_value_1() const { return ___value_1; }
+	inline RuntimeObject ** get_address_of_value_1() { return &___value_1; }
+	inline void set_value_1(RuntimeObject * value)
+	{
+		___value_1 = value;
+		Il2CppCodeGenWriteBarrier((&___value_1), value);
 	}
 };
 
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // LABEL_T2281661643_H
-#ifndef INTERNALENUMERATOR_1_T958356908_H
-#define INTERNALENUMERATOR_1_T958356908_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Array/InternalEnumerator`1<System.Resources.ResourceReader/ResourceCacheItem>
-struct  InternalEnumerator_1_t958356908 
-{
-public:
-	// System.Array System.Array/InternalEnumerator`1::array
-	RuntimeArray * ___array_2;
-	// System.Int32 System.Array/InternalEnumerator`1::idx
-	int32_t ___idx_3;
-
-public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t958356908, ___array_2)); }
-	inline RuntimeArray * get_array_2() const { return ___array_2; }
-	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
-	inline void set_array_2(RuntimeArray * value)
-	{
-		___array_2 = value;
-		Il2CppCodeGenWriteBarrier((&___array_2), value);
-	}
-
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t958356908, ___idx_3)); }
-	inline int32_t get_idx_3() const { return ___idx_3; }
-	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
-	inline void set_idx_3(int32_t value)
-	{
-		___idx_3 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // INTERNALENUMERATOR_1_T958356908_H
+#endif // KEYVALUEPAIR_2_T2530217319_H
 #ifndef TIMESPAN_T881159249_H
 #define TIMESPAN_T881159249_H
 #ifdef __clang__
@@ -6318,100 +6319,46 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // COLOR_T2555686324_H
-#ifndef KEYVALUEPAIR_2_T2530217319_H
-#define KEYVALUEPAIR_2_T2530217319_H
+#ifndef PARAMETERMODIFIER_T1461694466_H
+#define PARAMETERMODIFIER_T1461694466_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// System.Collections.Generic.KeyValuePair`2<System.Object,System.Object>
-struct  KeyValuePair_2_t2530217319 
+// System.Reflection.ParameterModifier
+struct  ParameterModifier_t1461694466 
 {
 public:
-	// TKey System.Collections.Generic.KeyValuePair`2::key
-	RuntimeObject * ___key_0;
-	// TValue System.Collections.Generic.KeyValuePair`2::value
-	RuntimeObject * ___value_1;
+	// System.Boolean[] System.Reflection.ParameterModifier::_byref
+	BooleanU5BU5D_t2897418192* ____byref_0;
 
 public:
-	inline static int32_t get_offset_of_key_0() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t2530217319, ___key_0)); }
-	inline RuntimeObject * get_key_0() const { return ___key_0; }
-	inline RuntimeObject ** get_address_of_key_0() { return &___key_0; }
-	inline void set_key_0(RuntimeObject * value)
+	inline static int32_t get_offset_of__byref_0() { return static_cast<int32_t>(offsetof(ParameterModifier_t1461694466, ____byref_0)); }
+	inline BooleanU5BU5D_t2897418192* get__byref_0() const { return ____byref_0; }
+	inline BooleanU5BU5D_t2897418192** get_address_of__byref_0() { return &____byref_0; }
+	inline void set__byref_0(BooleanU5BU5D_t2897418192* value)
 	{
-		___key_0 = value;
-		Il2CppCodeGenWriteBarrier((&___key_0), value);
-	}
-
-	inline static int32_t get_offset_of_value_1() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t2530217319, ___value_1)); }
-	inline RuntimeObject * get_value_1() const { return ___value_1; }
-	inline RuntimeObject ** get_address_of_value_1() { return &___value_1; }
-	inline void set_value_1(RuntimeObject * value)
-	{
-		___value_1 = value;
-		Il2CppCodeGenWriteBarrier((&___value_1), value);
+		____byref_0 = value;
+		Il2CppCodeGenWriteBarrier((&____byref_0), value);
 	}
 };
 
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // KEYVALUEPAIR_2_T2530217319_H
-#ifndef RESOURCECACHEITEM_T51292791_H
-#define RESOURCECACHEITEM_T51292791_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Resources.ResourceReader/ResourceCacheItem
-struct  ResourceCacheItem_t51292791 
+// Native definition for P/Invoke marshalling of System.Reflection.ParameterModifier
+struct ParameterModifier_t1461694466_marshaled_pinvoke
 {
-public:
-	// System.String System.Resources.ResourceReader/ResourceCacheItem::ResourceName
-	String_t* ___ResourceName_0;
-	// System.Object System.Resources.ResourceReader/ResourceCacheItem::ResourceValue
-	RuntimeObject * ___ResourceValue_1;
-
-public:
-	inline static int32_t get_offset_of_ResourceName_0() { return static_cast<int32_t>(offsetof(ResourceCacheItem_t51292791, ___ResourceName_0)); }
-	inline String_t* get_ResourceName_0() const { return ___ResourceName_0; }
-	inline String_t** get_address_of_ResourceName_0() { return &___ResourceName_0; }
-	inline void set_ResourceName_0(String_t* value)
-	{
-		___ResourceName_0 = value;
-		Il2CppCodeGenWriteBarrier((&___ResourceName_0), value);
-	}
-
-	inline static int32_t get_offset_of_ResourceValue_1() { return static_cast<int32_t>(offsetof(ResourceCacheItem_t51292791, ___ResourceValue_1)); }
-	inline RuntimeObject * get_ResourceValue_1() const { return ___ResourceValue_1; }
-	inline RuntimeObject ** get_address_of_ResourceValue_1() { return &___ResourceValue_1; }
-	inline void set_ResourceValue_1(RuntimeObject * value)
-	{
-		___ResourceValue_1 = value;
-		Il2CppCodeGenWriteBarrier((&___ResourceValue_1), value);
-	}
+	int32_t* ____byref_0;
 };
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-// Native definition for P/Invoke marshalling of System.Resources.ResourceReader/ResourceCacheItem
-struct ResourceCacheItem_t51292791_marshaled_pinvoke
+// Native definition for COM marshalling of System.Reflection.ParameterModifier
+struct ParameterModifier_t1461694466_marshaled_com
 {
-	char* ___ResourceName_0;
-	Il2CppIUnknown* ___ResourceValue_1;
+	int32_t* ____byref_0;
 };
-// Native definition for COM marshalling of System.Resources.ResourceReader/ResourceCacheItem
-struct ResourceCacheItem_t51292791_marshaled_com
-{
-	Il2CppChar* ___ResourceName_0;
-	Il2CppIUnknown* ___ResourceValue_1;
-};
-#endif // RESOURCECACHEITEM_T51292791_H
+#endif // PARAMETERMODIFIER_T1461694466_H
 #ifndef KEYVALUEPAIR_2_T3186678459_H
 #define KEYVALUEPAIR_2_T3186678459_H
 #ifdef __clang__
@@ -6631,16 +6578,16 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // INTPTR_T_H
-#ifndef INTERNALENUMERATOR_1_T1267231508_H
-#define INTERNALENUMERATOR_1_T1267231508_H
+#ifndef INTERNALENUMERATOR_1_T1144920127_H
+#define INTERNALENUMERATOR_1_T1144920127_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// System.Array/InternalEnumerator`1<System.Reflection.Emit.ILGenerator/LabelData>
-struct  InternalEnumerator_1_t1267231508 
+// System.Array/InternalEnumerator`1<System.Reflection.Emit.ILExceptionInfo>
+struct  InternalEnumerator_1_t1144920127 
 {
 public:
 	// System.Array System.Array/InternalEnumerator`1::array
@@ -6649,7 +6596,7 @@ public:
 	int32_t ___idx_3;
 
 public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1267231508, ___array_2)); }
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1144920127, ___array_2)); }
 	inline RuntimeArray * get_array_2() const { return ___array_2; }
 	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
 	inline void set_array_2(RuntimeArray * value)
@@ -6658,7 +6605,7 @@ public:
 		Il2CppCodeGenWriteBarrier((&___array_2), value);
 	}
 
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1267231508, ___idx_3)); }
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1144920127, ___idx_3)); }
 	inline int32_t get_idx_3() const { return ___idx_3; }
 	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
 	inline void set_idx_3(int32_t value)
@@ -6670,7 +6617,60 @@ public:
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // INTERNALENUMERATOR_1_T1267231508_H
+#endif // INTERNALENUMERATOR_1_T1144920127_H
+#ifndef SLOT_T384495010_H
+#define SLOT_T384495010_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Collections.SortedList/Slot
+struct  Slot_t384495010 
+{
+public:
+	// System.Object System.Collections.SortedList/Slot::key
+	RuntimeObject * ___key_0;
+	// System.Object System.Collections.SortedList/Slot::value
+	RuntimeObject * ___value_1;
+
+public:
+	inline static int32_t get_offset_of_key_0() { return static_cast<int32_t>(offsetof(Slot_t384495010, ___key_0)); }
+	inline RuntimeObject * get_key_0() const { return ___key_0; }
+	inline RuntimeObject ** get_address_of_key_0() { return &___key_0; }
+	inline void set_key_0(RuntimeObject * value)
+	{
+		___key_0 = value;
+		Il2CppCodeGenWriteBarrier((&___key_0), value);
+	}
+
+	inline static int32_t get_offset_of_value_1() { return static_cast<int32_t>(offsetof(Slot_t384495010, ___value_1)); }
+	inline RuntimeObject * get_value_1() const { return ___value_1; }
+	inline RuntimeObject ** get_address_of_value_1() { return &___value_1; }
+	inline void set_value_1(RuntimeObject * value)
+	{
+		___value_1 = value;
+		Il2CppCodeGenWriteBarrier((&___value_1), value);
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+// Native definition for P/Invoke marshalling of System.Collections.SortedList/Slot
+struct Slot_t384495010_marshaled_pinvoke
+{
+	Il2CppIUnknown* ___key_0;
+	Il2CppIUnknown* ___value_1;
+};
+// Native definition for COM marshalling of System.Collections.SortedList/Slot
+struct Slot_t384495010_marshaled_com
+{
+	Il2CppIUnknown* ___key_0;
+	Il2CppIUnknown* ___value_1;
+};
+#endif // SLOT_T384495010_H
 #ifndef INTERNALENUMERATOR_1_T350626606_H
 #define INTERNALENUMERATOR_1_T350626606_H
 #ifdef __clang__
@@ -6916,75 +6916,6 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // INTERNALENUMERATOR_1_T1501729480_H
-#ifndef DOUBLE_T594665363_H
-#define DOUBLE_T594665363_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Double
-struct  Double_t594665363 
-{
-public:
-	// System.Double System.Double::m_value
-	double ___m_value_13;
-
-public:
-	inline static int32_t get_offset_of_m_value_13() { return static_cast<int32_t>(offsetof(Double_t594665363, ___m_value_13)); }
-	inline double get_m_value_13() const { return ___m_value_13; }
-	inline double* get_address_of_m_value_13() { return &___m_value_13; }
-	inline void set_m_value_13(double value)
-	{
-		___m_value_13 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // DOUBLE_T594665363_H
-#ifndef INTERNALENUMERATOR_1_T3459884504_H
-#define INTERNALENUMERATOR_1_T3459884504_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Array/InternalEnumerator`1<System.Int16>
-struct  InternalEnumerator_1_t3459884504 
-{
-public:
-	// System.Array System.Array/InternalEnumerator`1::array
-	RuntimeArray * ___array_2;
-	// System.Int32 System.Array/InternalEnumerator`1::idx
-	int32_t ___idx_3;
-
-public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t3459884504, ___array_2)); }
-	inline RuntimeArray * get_array_2() const { return ___array_2; }
-	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
-	inline void set_array_2(RuntimeArray * value)
-	{
-		___array_2 = value;
-		Il2CppCodeGenWriteBarrier((&___array_2), value);
-	}
-
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t3459884504, ___idx_3)); }
-	inline int32_t get_idx_3() const { return ___idx_3; }
-	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
-	inline void set_idx_3(int32_t value)
-	{
-		___idx_3 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // INTERNALENUMERATOR_1_T3459884504_H
 #ifndef ORDERBLOCK_T1585977831_H
 #define ORDERBLOCK_T1585977831_H
 #ifdef __clang__
@@ -7037,59 +6968,115 @@ struct OrderBlock_t1585977831_marshaled_com
 	Il2CppMethodPointer ___callback_1;
 };
 #endif // ORDERBLOCK_T1585977831_H
-#ifndef SLOT_T384495010_H
-#define SLOT_T384495010_H
+#ifndef DOUBLE_T594665363_H
+#define DOUBLE_T594665363_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// System.Collections.SortedList/Slot
-struct  Slot_t384495010 
+// System.Double
+struct  Double_t594665363 
 {
 public:
-	// System.Object System.Collections.SortedList/Slot::key
-	RuntimeObject * ___key_0;
-	// System.Object System.Collections.SortedList/Slot::value
-	RuntimeObject * ___value_1;
+	// System.Double System.Double::m_value
+	double ___m_value_13;
 
 public:
-	inline static int32_t get_offset_of_key_0() { return static_cast<int32_t>(offsetof(Slot_t384495010, ___key_0)); }
-	inline RuntimeObject * get_key_0() const { return ___key_0; }
-	inline RuntimeObject ** get_address_of_key_0() { return &___key_0; }
-	inline void set_key_0(RuntimeObject * value)
+	inline static int32_t get_offset_of_m_value_13() { return static_cast<int32_t>(offsetof(Double_t594665363, ___m_value_13)); }
+	inline double get_m_value_13() const { return ___m_value_13; }
+	inline double* get_address_of_m_value_13() { return &___m_value_13; }
+	inline void set_m_value_13(double value)
 	{
-		___key_0 = value;
-		Il2CppCodeGenWriteBarrier((&___key_0), value);
-	}
-
-	inline static int32_t get_offset_of_value_1() { return static_cast<int32_t>(offsetof(Slot_t384495010, ___value_1)); }
-	inline RuntimeObject * get_value_1() const { return ___value_1; }
-	inline RuntimeObject ** get_address_of_value_1() { return &___value_1; }
-	inline void set_value_1(RuntimeObject * value)
-	{
-		___value_1 = value;
-		Il2CppCodeGenWriteBarrier((&___value_1), value);
+		___m_value_13 = value;
 	}
 };
 
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-// Native definition for P/Invoke marshalling of System.Collections.SortedList/Slot
-struct Slot_t384495010_marshaled_pinvoke
+#endif // DOUBLE_T594665363_H
+#ifndef INTERNALENUMERATOR_1_T1291559127_H
+#define INTERNALENUMERATOR_1_T1291559127_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Array/InternalEnumerator`1<System.Collections.SortedList/Slot>
+struct  InternalEnumerator_1_t1291559127 
 {
-	Il2CppIUnknown* ___key_0;
-	Il2CppIUnknown* ___value_1;
+public:
+	// System.Array System.Array/InternalEnumerator`1::array
+	RuntimeArray * ___array_2;
+	// System.Int32 System.Array/InternalEnumerator`1::idx
+	int32_t ___idx_3;
+
+public:
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1291559127, ___array_2)); }
+	inline RuntimeArray * get_array_2() const { return ___array_2; }
+	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
+	inline void set_array_2(RuntimeArray * value)
+	{
+		___array_2 = value;
+		Il2CppCodeGenWriteBarrier((&___array_2), value);
+	}
+
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1291559127, ___idx_3)); }
+	inline int32_t get_idx_3() const { return ___idx_3; }
+	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
+	inline void set_idx_3(int32_t value)
+	{
+		___idx_3 = value;
+	}
 };
-// Native definition for COM marshalling of System.Collections.SortedList/Slot
-struct Slot_t384495010_marshaled_com
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // INTERNALENUMERATOR_1_T1291559127_H
+#ifndef INTERNALENUMERATOR_1_T1754442046_H
+#define INTERNALENUMERATOR_1_T1754442046_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Array/InternalEnumerator`1<System.Collections.Generic.KeyValuePair`2<System.Object,System.Single>>
+struct  InternalEnumerator_1_t1754442046 
 {
-	Il2CppIUnknown* ___key_0;
-	Il2CppIUnknown* ___value_1;
+public:
+	// System.Array System.Array/InternalEnumerator`1::array
+	RuntimeArray * ___array_2;
+	// System.Int32 System.Array/InternalEnumerator`1::idx
+	int32_t ___idx_3;
+
+public:
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1754442046, ___array_2)); }
+	inline RuntimeArray * get_array_2() const { return ___array_2; }
+	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
+	inline void set_array_2(RuntimeArray * value)
+	{
+		___array_2 = value;
+		Il2CppCodeGenWriteBarrier((&___array_2), value);
+	}
+
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1754442046, ___idx_3)); }
+	inline int32_t get_idx_3() const { return ___idx_3; }
+	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
+	inline void set_idx_3(int32_t value)
+	{
+		___idx_3 = value;
+	}
 };
-#endif // SLOT_T384495010_H
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // INTERNALENUMERATOR_1_T1754442046_H
 #ifndef KEYVALUEPAIR_2_T847377929_H
 #define KEYVALUEPAIR_2_T847377929_H
 #ifdef __clang__
@@ -7209,99 +7196,6 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // LINK_T544317964_H
-#ifndef INTERNALENUMERATOR_1_T587985571_H
-#define INTERNALENUMERATOR_1_T587985571_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Array/InternalEnumerator`1<System.Collections.Hashtable/Slot>
-struct  InternalEnumerator_1_t587985571 
-{
-public:
-	// System.Array System.Array/InternalEnumerator`1::array
-	RuntimeArray * ___array_2;
-	// System.Int32 System.Array/InternalEnumerator`1::idx
-	int32_t ___idx_3;
-
-public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t587985571, ___array_2)); }
-	inline RuntimeArray * get_array_2() const { return ___array_2; }
-	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
-	inline void set_array_2(RuntimeArray * value)
-	{
-		___array_2 = value;
-		Il2CppCodeGenWriteBarrier((&___array_2), value);
-	}
-
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t587985571, ___idx_3)); }
-	inline int32_t get_idx_3() const { return ___idx_3; }
-	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
-	inline void set_idx_3(int32_t value)
-	{
-		___idx_3 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // INTERNALENUMERATOR_1_T587985571_H
-#ifndef SLOT_T3975888750_H
-#define SLOT_T3975888750_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Collections.Hashtable/Slot
-struct  Slot_t3975888750 
-{
-public:
-	// System.Object System.Collections.Hashtable/Slot::key
-	RuntimeObject * ___key_0;
-	// System.Object System.Collections.Hashtable/Slot::value
-	RuntimeObject * ___value_1;
-
-public:
-	inline static int32_t get_offset_of_key_0() { return static_cast<int32_t>(offsetof(Slot_t3975888750, ___key_0)); }
-	inline RuntimeObject * get_key_0() const { return ___key_0; }
-	inline RuntimeObject ** get_address_of_key_0() { return &___key_0; }
-	inline void set_key_0(RuntimeObject * value)
-	{
-		___key_0 = value;
-		Il2CppCodeGenWriteBarrier((&___key_0), value);
-	}
-
-	inline static int32_t get_offset_of_value_1() { return static_cast<int32_t>(offsetof(Slot_t3975888750, ___value_1)); }
-	inline RuntimeObject * get_value_1() const { return ___value_1; }
-	inline RuntimeObject ** get_address_of_value_1() { return &___value_1; }
-	inline void set_value_1(RuntimeObject * value)
-	{
-		___value_1 = value;
-		Il2CppCodeGenWriteBarrier((&___value_1), value);
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-// Native definition for P/Invoke marshalling of System.Collections.Hashtable/Slot
-struct Slot_t3975888750_marshaled_pinvoke
-{
-	Il2CppIUnknown* ___key_0;
-	Il2CppIUnknown* ___value_1;
-};
-// Native definition for COM marshalling of System.Collections.Hashtable/Slot
-struct Slot_t3975888750_marshaled_com
-{
-	Il2CppIUnknown* ___key_0;
-	Il2CppIUnknown* ___value_1;
-};
-#endif // SLOT_T3975888750_H
 #ifndef COLOR32_T2600501292_H
 #define COLOR32_T2600501292_H
 #ifdef __clang__
@@ -7425,16 +7319,16 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // COLOR32_T2600501292_H
-#ifndef INTERNALENUMERATOR_1_T1291559127_H
-#define INTERNALENUMERATOR_1_T1291559127_H
+#ifndef INTERNALENUMERATOR_1_T587985571_H
+#define INTERNALENUMERATOR_1_T587985571_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// System.Array/InternalEnumerator`1<System.Collections.SortedList/Slot>
-struct  InternalEnumerator_1_t1291559127 
+// System.Array/InternalEnumerator`1<System.Collections.Hashtable/Slot>
+struct  InternalEnumerator_1_t587985571 
 {
 public:
 	// System.Array System.Array/InternalEnumerator`1::array
@@ -7443,7 +7337,7 @@ public:
 	int32_t ___idx_3;
 
 public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1291559127, ___array_2)); }
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t587985571, ___array_2)); }
 	inline RuntimeArray * get_array_2() const { return ___array_2; }
 	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
 	inline void set_array_2(RuntimeArray * value)
@@ -7452,7 +7346,7 @@ public:
 		Il2CppCodeGenWriteBarrier((&___array_2), value);
 	}
 
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1291559127, ___idx_3)); }
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t587985571, ___idx_3)); }
 	inline int32_t get_idx_3() const { return ___idx_3; }
 	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
 	inline void set_idx_3(int32_t value)
@@ -7464,7 +7358,7 @@ public:
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // INTERNALENUMERATOR_1_T1291559127_H
+#endif // INTERNALENUMERATOR_1_T587985571_H
 #ifndef RECT_T2360479859_H
 #define RECT_T2360479859_H
 #ifdef __clang__
@@ -7524,35 +7418,179 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // RECT_T2360479859_H
-#ifndef INT16_T2552820387_H
-#define INT16_T2552820387_H
+#ifndef SLOT_T3975888750_H
+#define SLOT_T3975888750_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// System.Int16
-struct  Int16_t2552820387 
+// System.Collections.Hashtable/Slot
+struct  Slot_t3975888750 
 {
 public:
-	// System.Int16 System.Int16::m_value
-	int16_t ___m_value_2;
+	// System.Object System.Collections.Hashtable/Slot::key
+	RuntimeObject * ___key_0;
+	// System.Object System.Collections.Hashtable/Slot::value
+	RuntimeObject * ___value_1;
 
 public:
-	inline static int32_t get_offset_of_m_value_2() { return static_cast<int32_t>(offsetof(Int16_t2552820387, ___m_value_2)); }
-	inline int16_t get_m_value_2() const { return ___m_value_2; }
-	inline int16_t* get_address_of_m_value_2() { return &___m_value_2; }
-	inline void set_m_value_2(int16_t value)
+	inline static int32_t get_offset_of_key_0() { return static_cast<int32_t>(offsetof(Slot_t3975888750, ___key_0)); }
+	inline RuntimeObject * get_key_0() const { return ___key_0; }
+	inline RuntimeObject ** get_address_of_key_0() { return &___key_0; }
+	inline void set_key_0(RuntimeObject * value)
 	{
-		___m_value_2 = value;
+		___key_0 = value;
+		Il2CppCodeGenWriteBarrier((&___key_0), value);
+	}
+
+	inline static int32_t get_offset_of_value_1() { return static_cast<int32_t>(offsetof(Slot_t3975888750, ___value_1)); }
+	inline RuntimeObject * get_value_1() const { return ___value_1; }
+	inline RuntimeObject ** get_address_of_value_1() { return &___value_1; }
+	inline void set_value_1(RuntimeObject * value)
+	{
+		___value_1 = value;
+		Il2CppCodeGenWriteBarrier((&___value_1), value);
 	}
 };
 
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // INT16_T2552820387_H
+// Native definition for P/Invoke marshalling of System.Collections.Hashtable/Slot
+struct Slot_t3975888750_marshaled_pinvoke
+{
+	Il2CppIUnknown* ___key_0;
+	Il2CppIUnknown* ___value_1;
+};
+// Native definition for COM marshalling of System.Collections.Hashtable/Slot
+struct Slot_t3975888750_marshaled_com
+{
+	Il2CppIUnknown* ___key_0;
+	Il2CppIUnknown* ___value_1;
+};
+#endif // SLOT_T3975888750_H
+#ifndef INTERNALENUMERATOR_1_T3459884504_H
+#define INTERNALENUMERATOR_1_T3459884504_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Array/InternalEnumerator`1<System.Int16>
+struct  InternalEnumerator_1_t3459884504 
+{
+public:
+	// System.Array System.Array/InternalEnumerator`1::array
+	RuntimeArray * ___array_2;
+	// System.Int32 System.Array/InternalEnumerator`1::idx
+	int32_t ___idx_3;
+
+public:
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t3459884504, ___array_2)); }
+	inline RuntimeArray * get_array_2() const { return ___array_2; }
+	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
+	inline void set_array_2(RuntimeArray * value)
+	{
+		___array_2 = value;
+		Il2CppCodeGenWriteBarrier((&___array_2), value);
+	}
+
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t3459884504, ___idx_3)); }
+	inline int32_t get_idx_3() const { return ___idx_3; }
+	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
+	inline void set_idx_3(int32_t value)
+	{
+		___idx_3 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // INTERNALENUMERATOR_1_T3459884504_H
+#ifndef INTERNALENUMERATOR_1_T3987170281_H
+#define INTERNALENUMERATOR_1_T3987170281_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Array/InternalEnumerator`1<System.Object>
+struct  InternalEnumerator_1_t3987170281 
+{
+public:
+	// System.Array System.Array/InternalEnumerator`1::array
+	RuntimeArray * ___array_2;
+	// System.Int32 System.Array/InternalEnumerator`1::idx
+	int32_t ___idx_3;
+
+public:
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t3987170281, ___array_2)); }
+	inline RuntimeArray * get_array_2() const { return ___array_2; }
+	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
+	inline void set_array_2(RuntimeArray * value)
+	{
+		___array_2 = value;
+		Il2CppCodeGenWriteBarrier((&___array_2), value);
+	}
+
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t3987170281, ___idx_3)); }
+	inline int32_t get_idx_3() const { return ___idx_3; }
+	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
+	inline void set_idx_3(int32_t value)
+	{
+		___idx_3 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // INTERNALENUMERATOR_1_T3987170281_H
+#ifndef INTERNALENUMERATOR_1_T1194929827_H
+#define INTERNALENUMERATOR_1_T1194929827_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Array/InternalEnumerator`1<System.Reflection.CustomAttributeNamedArgument>
+struct  InternalEnumerator_1_t1194929827 
+{
+public:
+	// System.Array System.Array/InternalEnumerator`1::array
+	RuntimeArray * ___array_2;
+	// System.Int32 System.Array/InternalEnumerator`1::idx
+	int32_t ___idx_3;
+
+public:
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1194929827, ___array_2)); }
+	inline RuntimeArray * get_array_2() const { return ___array_2; }
+	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
+	inline void set_array_2(RuntimeArray * value)
+	{
+		___array_2 = value;
+		Il2CppCodeGenWriteBarrier((&___array_2), value);
+	}
+
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1194929827, ___idx_3)); }
+	inline int32_t get_idx_3() const { return ___idx_3; }
+	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
+	inline void set_idx_3(int32_t value)
+	{
+		___idx_3 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // INTERNALENUMERATOR_1_T1194929827_H
 #ifndef INTERNALENUMERATOR_1_T3630214274_H
 #define INTERNALENUMERATOR_1_T3630214274_H
 #ifdef __clang__
@@ -7593,6 +7631,45 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // INTERNALENUMERATOR_1_T3630214274_H
+#ifndef KEYVALUEPAIR_2_T4237331251_H
+#define KEYVALUEPAIR_2_T4237331251_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Collections.Generic.KeyValuePair`2<System.Int32,System.Int32>
+struct  KeyValuePair_2_t4237331251 
+{
+public:
+	// TKey System.Collections.Generic.KeyValuePair`2::key
+	int32_t ___key_0;
+	// TValue System.Collections.Generic.KeyValuePair`2::value
+	int32_t ___value_1;
+
+public:
+	inline static int32_t get_offset_of_key_0() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t4237331251, ___key_0)); }
+	inline int32_t get_key_0() const { return ___key_0; }
+	inline int32_t* get_address_of_key_0() { return &___key_0; }
+	inline void set_key_0(int32_t value)
+	{
+		___key_0 = value;
+	}
+
+	inline static int32_t get_offset_of_value_1() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t4237331251, ___value_1)); }
+	inline int32_t get_value_1() const { return ___value_1; }
+	inline int32_t* get_address_of_value_1() { return &___value_1; }
+	inline void set_value_1(int32_t value)
+	{
+		___value_1 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // KEYVALUEPAIR_2_T4237331251_H
 #ifndef INTERNALENUMERATOR_1_T573971787_H
 #define INTERNALENUMERATOR_1_T573971787_H
 #ifdef __clang__
@@ -7633,6 +7710,197 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // INTERNALENUMERATOR_1_T573971787_H
+#ifndef BYTE_T1134296376_H
+#define BYTE_T1134296376_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Byte
+struct  Byte_t1134296376 
+{
+public:
+	// System.Byte System.Byte::m_value
+	uint8_t ___m_value_2;
+
+public:
+	inline static int32_t get_offset_of_m_value_2() { return static_cast<int32_t>(offsetof(Byte_t1134296376, ___m_value_2)); }
+	inline uint8_t get_m_value_2() const { return ___m_value_2; }
+	inline uint8_t* get_address_of_m_value_2() { return &___m_value_2; }
+	inline void set_m_value_2(uint8_t value)
+	{
+		___m_value_2 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // BYTE_T1134296376_H
+#ifndef INTERNALENUMERATOR_1_T1747214298_H
+#define INTERNALENUMERATOR_1_T1747214298_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Array/InternalEnumerator`1<System.IntPtr>
+struct  InternalEnumerator_1_t1747214298 
+{
+public:
+	// System.Array System.Array/InternalEnumerator`1::array
+	RuntimeArray * ___array_2;
+	// System.Int32 System.Array/InternalEnumerator`1::idx
+	int32_t ___idx_3;
+
+public:
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1747214298, ___array_2)); }
+	inline RuntimeArray * get_array_2() const { return ___array_2; }
+	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
+	inline void set_array_2(RuntimeArray * value)
+	{
+		___array_2 = value;
+		Il2CppCodeGenWriteBarrier((&___array_2), value);
+	}
+
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1747214298, ___idx_3)); }
+	inline int32_t get_idx_3() const { return ___idx_3; }
+	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
+	inline void set_idx_3(int32_t value)
+	{
+		___idx_3 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // INTERNALENUMERATOR_1_T1747214298_H
+#ifndef CUSTOMATTRIBUTETYPEDARGUMENT_T2723150157_H
+#define CUSTOMATTRIBUTETYPEDARGUMENT_T2723150157_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Reflection.CustomAttributeTypedArgument
+struct  CustomAttributeTypedArgument_t2723150157 
+{
+public:
+	// System.Type System.Reflection.CustomAttributeTypedArgument::argumentType
+	Type_t * ___argumentType_0;
+	// System.Object System.Reflection.CustomAttributeTypedArgument::value
+	RuntimeObject * ___value_1;
+
+public:
+	inline static int32_t get_offset_of_argumentType_0() { return static_cast<int32_t>(offsetof(CustomAttributeTypedArgument_t2723150157, ___argumentType_0)); }
+	inline Type_t * get_argumentType_0() const { return ___argumentType_0; }
+	inline Type_t ** get_address_of_argumentType_0() { return &___argumentType_0; }
+	inline void set_argumentType_0(Type_t * value)
+	{
+		___argumentType_0 = value;
+		Il2CppCodeGenWriteBarrier((&___argumentType_0), value);
+	}
+
+	inline static int32_t get_offset_of_value_1() { return static_cast<int32_t>(offsetof(CustomAttributeTypedArgument_t2723150157, ___value_1)); }
+	inline RuntimeObject * get_value_1() const { return ___value_1; }
+	inline RuntimeObject ** get_address_of_value_1() { return &___value_1; }
+	inline void set_value_1(RuntimeObject * value)
+	{
+		___value_1 = value;
+		Il2CppCodeGenWriteBarrier((&___value_1), value);
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+// Native definition for P/Invoke marshalling of System.Reflection.CustomAttributeTypedArgument
+struct CustomAttributeTypedArgument_t2723150157_marshaled_pinvoke
+{
+	Type_t * ___argumentType_0;
+	Il2CppIUnknown* ___value_1;
+};
+// Native definition for COM marshalling of System.Reflection.CustomAttributeTypedArgument
+struct CustomAttributeTypedArgument_t2723150157_marshaled_com
+{
+	Type_t * ___argumentType_0;
+	Il2CppIUnknown* ___value_1;
+};
+#endif // CUSTOMATTRIBUTETYPEDARGUMENT_T2723150157_H
+#ifndef INT16_T2552820387_H
+#define INT16_T2552820387_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Int16
+struct  Int16_t2552820387 
+{
+public:
+	// System.Int16 System.Int16::m_value
+	int16_t ___m_value_2;
+
+public:
+	inline static int32_t get_offset_of_m_value_2() { return static_cast<int32_t>(offsetof(Int16_t2552820387, ___m_value_2)); }
+	inline int16_t get_m_value_2() const { return ___m_value_2; }
+	inline int16_t* get_address_of_m_value_2() { return &___m_value_2; }
+	inline void set_m_value_2(int16_t value)
+	{
+		___m_value_2 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // INT16_T2552820387_H
+#ifndef INTERNALENUMERATOR_1_T3858009870_H
+#define INTERNALENUMERATOR_1_T3858009870_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Array/InternalEnumerator`1<System.Int32>
+struct  InternalEnumerator_1_t3858009870 
+{
+public:
+	// System.Array System.Array/InternalEnumerator`1::array
+	RuntimeArray * ___array_2;
+	// System.Int32 System.Array/InternalEnumerator`1::idx
+	int32_t ___idx_3;
+
+public:
+	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t3858009870, ___array_2)); }
+	inline RuntimeArray * get_array_2() const { return ___array_2; }
+	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
+	inline void set_array_2(RuntimeArray * value)
+	{
+		___array_2 = value;
+		Il2CppCodeGenWriteBarrier((&___array_2), value);
+	}
+
+	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t3858009870, ___idx_3)); }
+	inline int32_t get_idx_3() const { return ___idx_3; }
+	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
+	inline void set_idx_3(int32_t value)
+	{
+		___idx_3 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // INTERNALENUMERATOR_1_T3858009870_H
 #ifndef ILEXCEPTIONBLOCK_T3961874966_H
 #define ILEXCEPTIONBLOCK_T3961874966_H
 #ifdef __clang__
@@ -7721,207 +7989,6 @@ struct ILExceptionBlock_t3961874966_marshaled_com
 	int32_t ___filter_offset_9;
 };
 #endif // ILEXCEPTIONBLOCK_T3961874966_H
-#ifndef KEYVALUEPAIR_2_T4237331251_H
-#define KEYVALUEPAIR_2_T4237331251_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Collections.Generic.KeyValuePair`2<System.Int32,System.Int32>
-struct  KeyValuePair_2_t4237331251 
-{
-public:
-	// TKey System.Collections.Generic.KeyValuePair`2::key
-	int32_t ___key_0;
-	// TValue System.Collections.Generic.KeyValuePair`2::value
-	int32_t ___value_1;
-
-public:
-	inline static int32_t get_offset_of_key_0() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t4237331251, ___key_0)); }
-	inline int32_t get_key_0() const { return ___key_0; }
-	inline int32_t* get_address_of_key_0() { return &___key_0; }
-	inline void set_key_0(int32_t value)
-	{
-		___key_0 = value;
-	}
-
-	inline static int32_t get_offset_of_value_1() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t4237331251, ___value_1)); }
-	inline int32_t get_value_1() const { return ___value_1; }
-	inline int32_t* get_address_of_value_1() { return &___value_1; }
-	inline void set_value_1(int32_t value)
-	{
-		___value_1 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // KEYVALUEPAIR_2_T4237331251_H
-#ifndef INTERNALENUMERATOR_1_T1144920127_H
-#define INTERNALENUMERATOR_1_T1144920127_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Array/InternalEnumerator`1<System.Reflection.Emit.ILExceptionInfo>
-struct  InternalEnumerator_1_t1144920127 
-{
-public:
-	// System.Array System.Array/InternalEnumerator`1::array
-	RuntimeArray * ___array_2;
-	// System.Int32 System.Array/InternalEnumerator`1::idx
-	int32_t ___idx_3;
-
-public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1144920127, ___array_2)); }
-	inline RuntimeArray * get_array_2() const { return ___array_2; }
-	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
-	inline void set_array_2(RuntimeArray * value)
-	{
-		___array_2 = value;
-		Il2CppCodeGenWriteBarrier((&___array_2), value);
-	}
-
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1144920127, ___idx_3)); }
-	inline int32_t get_idx_3() const { return ___idx_3; }
-	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
-	inline void set_idx_3(int32_t value)
-	{
-		___idx_3 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // INTERNALENUMERATOR_1_T1144920127_H
-#ifndef BYTE_T1134296376_H
-#define BYTE_T1134296376_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Byte
-struct  Byte_t1134296376 
-{
-public:
-	// System.Byte System.Byte::m_value
-	uint8_t ___m_value_2;
-
-public:
-	inline static int32_t get_offset_of_m_value_2() { return static_cast<int32_t>(offsetof(Byte_t1134296376, ___m_value_2)); }
-	inline uint8_t get_m_value_2() const { return ___m_value_2; }
-	inline uint8_t* get_address_of_m_value_2() { return &___m_value_2; }
-	inline void set_m_value_2(uint8_t value)
-	{
-		___m_value_2 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // BYTE_T1134296376_H
-#ifndef INTERNALENUMERATOR_1_T1194929827_H
-#define INTERNALENUMERATOR_1_T1194929827_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Array/InternalEnumerator`1<System.Reflection.CustomAttributeNamedArgument>
-struct  InternalEnumerator_1_t1194929827 
-{
-public:
-	// System.Array System.Array/InternalEnumerator`1::array
-	RuntimeArray * ___array_2;
-	// System.Int32 System.Array/InternalEnumerator`1::idx
-	int32_t ___idx_3;
-
-public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1194929827, ___array_2)); }
-	inline RuntimeArray * get_array_2() const { return ___array_2; }
-	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
-	inline void set_array_2(RuntimeArray * value)
-	{
-		___array_2 = value;
-		Il2CppCodeGenWriteBarrier((&___array_2), value);
-	}
-
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1194929827, ___idx_3)); }
-	inline int32_t get_idx_3() const { return ___idx_3; }
-	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
-	inline void set_idx_3(int32_t value)
-	{
-		___idx_3 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // INTERNALENUMERATOR_1_T1194929827_H
-#ifndef CUSTOMATTRIBUTETYPEDARGUMENT_T2723150157_H
-#define CUSTOMATTRIBUTETYPEDARGUMENT_T2723150157_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Reflection.CustomAttributeTypedArgument
-struct  CustomAttributeTypedArgument_t2723150157 
-{
-public:
-	// System.Type System.Reflection.CustomAttributeTypedArgument::argumentType
-	Type_t * ___argumentType_0;
-	// System.Object System.Reflection.CustomAttributeTypedArgument::value
-	RuntimeObject * ___value_1;
-
-public:
-	inline static int32_t get_offset_of_argumentType_0() { return static_cast<int32_t>(offsetof(CustomAttributeTypedArgument_t2723150157, ___argumentType_0)); }
-	inline Type_t * get_argumentType_0() const { return ___argumentType_0; }
-	inline Type_t ** get_address_of_argumentType_0() { return &___argumentType_0; }
-	inline void set_argumentType_0(Type_t * value)
-	{
-		___argumentType_0 = value;
-		Il2CppCodeGenWriteBarrier((&___argumentType_0), value);
-	}
-
-	inline static int32_t get_offset_of_value_1() { return static_cast<int32_t>(offsetof(CustomAttributeTypedArgument_t2723150157, ___value_1)); }
-	inline RuntimeObject * get_value_1() const { return ___value_1; }
-	inline RuntimeObject ** get_address_of_value_1() { return &___value_1; }
-	inline void set_value_1(RuntimeObject * value)
-	{
-		___value_1 = value;
-		Il2CppCodeGenWriteBarrier((&___value_1), value);
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-// Native definition for P/Invoke marshalling of System.Reflection.CustomAttributeTypedArgument
-struct CustomAttributeTypedArgument_t2723150157_marshaled_pinvoke
-{
-	Type_t * ___argumentType_0;
-	Il2CppIUnknown* ___value_1;
-};
-// Native definition for COM marshalling of System.Reflection.CustomAttributeTypedArgument
-struct CustomAttributeTypedArgument_t2723150157_marshaled_com
-{
-	Type_t * ___argumentType_0;
-	Il2CppIUnknown* ___value_1;
-};
-#endif // CUSTOMATTRIBUTETYPEDARGUMENT_T2723150157_H
 #ifndef INTERNALENUMERATOR_1_T348664125_H
 #define INTERNALENUMERATOR_1_T348664125_H
 #ifdef __clang__
@@ -7962,165 +8029,6 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // INTERNALENUMERATOR_1_T348664125_H
-#ifndef INTERNALENUMERATOR_1_T1747214298_H
-#define INTERNALENUMERATOR_1_T1747214298_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Array/InternalEnumerator`1<System.IntPtr>
-struct  InternalEnumerator_1_t1747214298 
-{
-public:
-	// System.Array System.Array/InternalEnumerator`1::array
-	RuntimeArray * ___array_2;
-	// System.Int32 System.Array/InternalEnumerator`1::idx
-	int32_t ___idx_3;
-
-public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1747214298, ___array_2)); }
-	inline RuntimeArray * get_array_2() const { return ___array_2; }
-	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
-	inline void set_array_2(RuntimeArray * value)
-	{
-		___array_2 = value;
-		Il2CppCodeGenWriteBarrier((&___array_2), value);
-	}
-
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t1747214298, ___idx_3)); }
-	inline int32_t get_idx_3() const { return ___idx_3; }
-	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
-	inline void set_idx_3(int32_t value)
-	{
-		___idx_3 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // INTERNALENUMERATOR_1_T1747214298_H
-#ifndef INTERNALENUMERATOR_1_T3858009870_H
-#define INTERNALENUMERATOR_1_T3858009870_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Array/InternalEnumerator`1<System.Int32>
-struct  InternalEnumerator_1_t3858009870 
-{
-public:
-	// System.Array System.Array/InternalEnumerator`1::array
-	RuntimeArray * ___array_2;
-	// System.Int32 System.Array/InternalEnumerator`1::idx
-	int32_t ___idx_3;
-
-public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t3858009870, ___array_2)); }
-	inline RuntimeArray * get_array_2() const { return ___array_2; }
-	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
-	inline void set_array_2(RuntimeArray * value)
-	{
-		___array_2 = value;
-		Il2CppCodeGenWriteBarrier((&___array_2), value);
-	}
-
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t3858009870, ___idx_3)); }
-	inline int32_t get_idx_3() const { return ___idx_3; }
-	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
-	inline void set_idx_3(int32_t value)
-	{
-		___idx_3 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // INTERNALENUMERATOR_1_T3858009870_H
-#ifndef INTERNALENUMERATOR_1_T3987170281_H
-#define INTERNALENUMERATOR_1_T3987170281_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Array/InternalEnumerator`1<System.Object>
-struct  InternalEnumerator_1_t3987170281 
-{
-public:
-	// System.Array System.Array/InternalEnumerator`1::array
-	RuntimeArray * ___array_2;
-	// System.Int32 System.Array/InternalEnumerator`1::idx
-	int32_t ___idx_3;
-
-public:
-	inline static int32_t get_offset_of_array_2() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t3987170281, ___array_2)); }
-	inline RuntimeArray * get_array_2() const { return ___array_2; }
-	inline RuntimeArray ** get_address_of_array_2() { return &___array_2; }
-	inline void set_array_2(RuntimeArray * value)
-	{
-		___array_2 = value;
-		Il2CppCodeGenWriteBarrier((&___array_2), value);
-	}
-
-	inline static int32_t get_offset_of_idx_3() { return static_cast<int32_t>(offsetof(InternalEnumerator_1_t3987170281, ___idx_3)); }
-	inline int32_t get_idx_3() const { return ___idx_3; }
-	inline int32_t* get_address_of_idx_3() { return &___idx_3; }
-	inline void set_idx_3(int32_t value)
-	{
-		___idx_3 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // INTERNALENUMERATOR_1_T3987170281_H
-#ifndef UICHARINFO_T75501106_H
-#define UICHARINFO_T75501106_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.UICharInfo
-struct  UICharInfo_t75501106 
-{
-public:
-	// UnityEngine.Vector2 UnityEngine.UICharInfo::cursorPos
-	Vector2_t2156229523  ___cursorPos_0;
-	// System.Single UnityEngine.UICharInfo::charWidth
-	float ___charWidth_1;
-
-public:
-	inline static int32_t get_offset_of_cursorPos_0() { return static_cast<int32_t>(offsetof(UICharInfo_t75501106, ___cursorPos_0)); }
-	inline Vector2_t2156229523  get_cursorPos_0() const { return ___cursorPos_0; }
-	inline Vector2_t2156229523 * get_address_of_cursorPos_0() { return &___cursorPos_0; }
-	inline void set_cursorPos_0(Vector2_t2156229523  value)
-	{
-		___cursorPos_0 = value;
-	}
-
-	inline static int32_t get_offset_of_charWidth_1() { return static_cast<int32_t>(offsetof(UICharInfo_t75501106, ___charWidth_1)); }
-	inline float get_charWidth_1() const { return ___charWidth_1; }
-	inline float* get_address_of_charWidth_1() { return &___charWidth_1; }
-	inline void set_charWidth_1(float value)
-	{
-		___charWidth_1 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // UICHARINFO_T75501106_H
 #ifndef TEXTANCHOR_T2035777396_H
 #define TEXTANCHOR_T2035777396_H
 #ifdef __clang__
@@ -8208,45 +8116,6 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // TEXTUREWRAPMODE_T584250749_H
-#ifndef KEYVALUEPAIR_2_T1783538065_H
-#define KEYVALUEPAIR_2_T1783538065_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Collections.Generic.KeyValuePair`2<Com.LuisPedroFonseca.ProCamera2D.IntPoint,System.Boolean>
-struct  KeyValuePair_2_t1783538065 
-{
-public:
-	// TKey System.Collections.Generic.KeyValuePair`2::key
-	IntPoint_t1965365063  ___key_0;
-	// TValue System.Collections.Generic.KeyValuePair`2::value
-	bool ___value_1;
-
-public:
-	inline static int32_t get_offset_of_key_0() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t1783538065, ___key_0)); }
-	inline IntPoint_t1965365063  get_key_0() const { return ___key_0; }
-	inline IntPoint_t1965365063 * get_address_of_key_0() { return &___key_0; }
-	inline void set_key_0(IntPoint_t1965365063  value)
-	{
-		___key_0 = value;
-	}
-
-	inline static int32_t get_offset_of_value_1() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t1783538065, ___value_1)); }
-	inline bool get_value_1() const { return ___value_1; }
-	inline bool* get_address_of_value_1() { return &___value_1; }
-	inline void set_value_1(bool value)
-	{
-		___value_1 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // KEYVALUEPAIR_2_T1783538065_H
 #ifndef TRANSPARENCYSORTMODE_T3644896537_H
 #define TRANSPARENCYSORTMODE_T3644896537_H
 #ifdef __clang__
@@ -8276,35 +8145,45 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // TRANSPARENCYSORTMODE_T3644896537_H
-#ifndef STEREOTARGETEYEMASK_T1137745477_H
-#define STEREOTARGETEYEMASK_T1137745477_H
+#ifndef UICHARINFO_T75501106_H
+#define UICHARINFO_T75501106_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// UnityEngine.StereoTargetEyeMask
-struct  StereoTargetEyeMask_t1137745477 
+// UnityEngine.UICharInfo
+struct  UICharInfo_t75501106 
 {
 public:
-	// System.Int32 UnityEngine.StereoTargetEyeMask::value__
-	int32_t ___value___1;
+	// UnityEngine.Vector2 UnityEngine.UICharInfo::cursorPos
+	Vector2_t2156229523  ___cursorPos_0;
+	// System.Single UnityEngine.UICharInfo::charWidth
+	float ___charWidth_1;
 
 public:
-	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(StereoTargetEyeMask_t1137745477, ___value___1)); }
-	inline int32_t get_value___1() const { return ___value___1; }
-	inline int32_t* get_address_of_value___1() { return &___value___1; }
-	inline void set_value___1(int32_t value)
+	inline static int32_t get_offset_of_cursorPos_0() { return static_cast<int32_t>(offsetof(UICharInfo_t75501106, ___cursorPos_0)); }
+	inline Vector2_t2156229523  get_cursorPos_0() const { return ___cursorPos_0; }
+	inline Vector2_t2156229523 * get_address_of_cursorPos_0() { return &___cursorPos_0; }
+	inline void set_cursorPos_0(Vector2_t2156229523  value)
 	{
-		___value___1 = value;
+		___cursorPos_0 = value;
+	}
+
+	inline static int32_t get_offset_of_charWidth_1() { return static_cast<int32_t>(offsetof(UICharInfo_t75501106, ___charWidth_1)); }
+	inline float get_charWidth_1() const { return ___charWidth_1; }
+	inline float* get_address_of_charWidth_1() { return &___charWidth_1; }
+	inline void set_charWidth_1(float value)
+	{
+		___charWidth_1 = value;
 	}
 };
 
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // STEREOTARGETEYEMASK_T1137745477_H
+#endif // UICHARINFO_T75501106_H
 #ifndef ILEXCEPTIONINFO_T237856010_H
 #define ILEXCEPTIONINFO_T237856010_H
 #ifdef __clang__
@@ -8381,238 +8260,6 @@ struct ILExceptionInfo_t237856010_marshaled_com
 	Label_t2281661643  ___end_3;
 };
 #endif // ILEXCEPTIONINFO_T237856010_H
-#ifndef LIGHTPROBEUSAGE_T800497123_H
-#define LIGHTPROBEUSAGE_T800497123_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.Rendering.LightProbeUsage
-struct  LightProbeUsage_t800497123 
-{
-public:
-	// System.Int32 UnityEngine.Rendering.LightProbeUsage::value__
-	int32_t ___value___1;
-
-public:
-	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(LightProbeUsage_t800497123, ___value___1)); }
-	inline int32_t get_value___1() const { return ___value___1; }
-	inline int32_t* get_address_of_value___1() { return &___value___1; }
-	inline void set_value___1(int32_t value)
-	{
-		___value___1 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // LIGHTPROBEUSAGE_T800497123_H
-#ifndef LIGHTSHADOWRESOLUTION_T3029073116_H
-#define LIGHTSHADOWRESOLUTION_T3029073116_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.Rendering.LightShadowResolution
-struct  LightShadowResolution_t3029073116 
-{
-public:
-	// System.Int32 UnityEngine.Rendering.LightShadowResolution::value__
-	int32_t ___value___1;
-
-public:
-	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(LightShadowResolution_t3029073116, ___value___1)); }
-	inline int32_t get_value___1() const { return ___value___1; }
-	inline int32_t* get_address_of_value___1() { return &___value___1; }
-	inline void set_value___1(int32_t value)
-	{
-		___value___1 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // LIGHTSHADOWRESOLUTION_T3029073116_H
-#ifndef OPAQUESORTMODE_T868829811_H
-#define OPAQUESORTMODE_T868829811_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.Rendering.OpaqueSortMode
-struct  OpaqueSortMode_t868829811 
-{
-public:
-	// System.Int32 UnityEngine.Rendering.OpaqueSortMode::value__
-	int32_t ___value___1;
-
-public:
-	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(OpaqueSortMode_t868829811, ___value___1)); }
-	inline int32_t get_value___1() const { return ___value___1; }
-	inline int32_t* get_address_of_value___1() { return &___value___1; }
-	inline void set_value___1(int32_t value)
-	{
-		___value___1 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // OPAQUESORTMODE_T868829811_H
-#ifndef REFLECTIONPROBEUSAGE_T3366161812_H
-#define REFLECTIONPROBEUSAGE_T3366161812_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.Rendering.ReflectionProbeUsage
-struct  ReflectionProbeUsage_t3366161812 
-{
-public:
-	// System.Int32 UnityEngine.Rendering.ReflectionProbeUsage::value__
-	int32_t ___value___1;
-
-public:
-	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(ReflectionProbeUsage_t3366161812, ___value___1)); }
-	inline int32_t get_value___1() const { return ___value___1; }
-	inline int32_t* get_address_of_value___1() { return &___value___1; }
-	inline void set_value___1(int32_t value)
-	{
-		___value___1 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // REFLECTIONPROBEUSAGE_T3366161812_H
-#ifndef SHADOWCASTINGMODE_T2280965600_H
-#define SHADOWCASTINGMODE_T2280965600_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.Rendering.ShadowCastingMode
-struct  ShadowCastingMode_t2280965600 
-{
-public:
-	// System.Int32 UnityEngine.Rendering.ShadowCastingMode::value__
-	int32_t ___value___1;
-
-public:
-	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(ShadowCastingMode_t2280965600, ___value___1)); }
-	inline int32_t get_value___1() const { return ___value___1; }
-	inline int32_t* get_address_of_value___1() { return &___value___1; }
-	inline void set_value___1(int32_t value)
-	{
-		___value___1 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // SHADOWCASTINGMODE_T2280965600_H
-#ifndef UVCHANNELFLAGS_T2414221641_H
-#define UVCHANNELFLAGS_T2414221641_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.Rendering.UVChannelFlags
-struct  UVChannelFlags_t2414221641 
-{
-public:
-	// System.Int32 UnityEngine.Rendering.UVChannelFlags::value__
-	int32_t ___value___1;
-
-public:
-	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(UVChannelFlags_t2414221641, ___value___1)); }
-	inline int32_t get_value___1() const { return ___value___1; }
-	inline int32_t* get_address_of_value___1() { return &___value___1; }
-	inline void set_value___1(int32_t value)
-	{
-		___value___1 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // UVCHANNELFLAGS_T2414221641_H
-#ifndef RENDERINGPATH_T883966888_H
-#define RENDERINGPATH_T883966888_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.RenderingPath
-struct  RenderingPath_t883966888 
-{
-public:
-	// System.Int32 UnityEngine.RenderingPath::value__
-	int32_t ___value___1;
-
-public:
-	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(RenderingPath_t883966888, ___value___1)); }
-	inline int32_t get_value___1() const { return ___value___1; }
-	inline int32_t* get_address_of_value___1() { return &___value___1; }
-	inline void set_value___1(int32_t value)
-	{
-		___value___1 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // RENDERINGPATH_T883966888_H
-#ifndef SKINQUALITY_T4231844520_H
-#define SKINQUALITY_T4231844520_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.SkinQuality
-struct  SkinQuality_t4231844520 
-{
-public:
-	// System.Int32 UnityEngine.SkinQuality::value__
-	int32_t ___value___1;
-
-public:
-	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(SkinQuality_t4231844520, ___value___1)); }
-	inline int32_t get_value___1() const { return ___value___1; }
-	inline int32_t* get_address_of_value___1() { return &___value___1; }
-	inline void set_value___1(int32_t value)
-	{
-		___value___1 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // SKINQUALITY_T4231844520_H
 #ifndef UIVERTEX_T4057497605_H
 #define UIVERTEX_T4057497605_H
 #ifdef __clang__
@@ -8748,23 +8395,23 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // UIVERTEX_T4057497605_H
-#ifndef PIXELOP_T3366166178_H
-#define PIXELOP_T3366166178_H
+#ifndef REFLECTIONPROBEUSAGE_T3366161812_H
+#define REFLECTIONPROBEUSAGE_T3366161812_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// SpriteColorFX.SpriteColorHelper/PixelOp
-struct  PixelOp_t3366166178 
+// UnityEngine.Rendering.ReflectionProbeUsage
+struct  ReflectionProbeUsage_t3366161812 
 {
 public:
-	// System.Int32 SpriteColorFX.SpriteColorHelper/PixelOp::value__
+	// System.Int32 UnityEngine.Rendering.ReflectionProbeUsage::value__
 	int32_t ___value___1;
 
 public:
-	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(PixelOp_t3366166178, ___value___1)); }
+	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(ReflectionProbeUsage_t3366161812, ___value___1)); }
 	inline int32_t get_value___1() const { return ___value___1; }
 	inline int32_t* get_address_of_value___1() { return &___value___1; }
 	inline void set_value___1(int32_t value)
@@ -8776,7 +8423,268 @@ public:
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // PIXELOP_T3366166178_H
+#endif // REFLECTIONPROBEUSAGE_T3366161812_H
+#ifndef OPAQUESORTMODE_T868829811_H
+#define OPAQUESORTMODE_T868829811_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.Rendering.OpaqueSortMode
+struct  OpaqueSortMode_t868829811 
+{
+public:
+	// System.Int32 UnityEngine.Rendering.OpaqueSortMode::value__
+	int32_t ___value___1;
+
+public:
+	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(OpaqueSortMode_t868829811, ___value___1)); }
+	inline int32_t get_value___1() const { return ___value___1; }
+	inline int32_t* get_address_of_value___1() { return &___value___1; }
+	inline void set_value___1(int32_t value)
+	{
+		___value___1 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // OPAQUESORTMODE_T868829811_H
+#ifndef SHADOWCASTINGMODE_T2280965600_H
+#define SHADOWCASTINGMODE_T2280965600_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.Rendering.ShadowCastingMode
+struct  ShadowCastingMode_t2280965600 
+{
+public:
+	// System.Int32 UnityEngine.Rendering.ShadowCastingMode::value__
+	int32_t ___value___1;
+
+public:
+	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(ShadowCastingMode_t2280965600, ___value___1)); }
+	inline int32_t get_value___1() const { return ___value___1; }
+	inline int32_t* get_address_of_value___1() { return &___value___1; }
+	inline void set_value___1(int32_t value)
+	{
+		___value___1 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // SHADOWCASTINGMODE_T2280965600_H
+#ifndef LIGHTPROBEUSAGE_T800497123_H
+#define LIGHTPROBEUSAGE_T800497123_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.Rendering.LightProbeUsage
+struct  LightProbeUsage_t800497123 
+{
+public:
+	// System.Int32 UnityEngine.Rendering.LightProbeUsage::value__
+	int32_t ___value___1;
+
+public:
+	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(LightProbeUsage_t800497123, ___value___1)); }
+	inline int32_t get_value___1() const { return ___value___1; }
+	inline int32_t* get_address_of_value___1() { return &___value___1; }
+	inline void set_value___1(int32_t value)
+	{
+		___value___1 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // LIGHTPROBEUSAGE_T800497123_H
+#ifndef SPRITECOLORRAMPPALETTES_T646428211_H
+#define SPRITECOLORRAMPPALETTES_T646428211_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// SpriteColorFX.SpriteColorRampPalettes
+struct  SpriteColorRampPalettes_t646428211 
+{
+public:
+	// System.Int32 SpriteColorFX.SpriteColorRampPalettes::value__
+	int32_t ___value___1;
+
+public:
+	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(SpriteColorRampPalettes_t646428211, ___value___1)); }
+	inline int32_t get_value___1() const { return ___value___1; }
+	inline int32_t* get_address_of_value___1() { return &___value___1; }
+	inline void set_value___1(int32_t value)
+	{
+		___value___1 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // SPRITECOLORRAMPPALETTES_T646428211_H
+#ifndef UVCHANNELFLAGS_T2414221641_H
+#define UVCHANNELFLAGS_T2414221641_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.Rendering.UVChannelFlags
+struct  UVChannelFlags_t2414221641 
+{
+public:
+	// System.Int32 UnityEngine.Rendering.UVChannelFlags::value__
+	int32_t ___value___1;
+
+public:
+	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(UVChannelFlags_t2414221641, ___value___1)); }
+	inline int32_t get_value___1() const { return ___value___1; }
+	inline int32_t* get_address_of_value___1() { return &___value___1; }
+	inline void set_value___1(int32_t value)
+	{
+		___value___1 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // UVCHANNELFLAGS_T2414221641_H
+#ifndef RENDERINGPATH_T883966888_H
+#define RENDERINGPATH_T883966888_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.RenderingPath
+struct  RenderingPath_t883966888 
+{
+public:
+	// System.Int32 UnityEngine.RenderingPath::value__
+	int32_t ___value___1;
+
+public:
+	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(RenderingPath_t883966888, ___value___1)); }
+	inline int32_t get_value___1() const { return ___value___1; }
+	inline int32_t* get_address_of_value___1() { return &___value___1; }
+	inline void set_value___1(int32_t value)
+	{
+		___value___1 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // RENDERINGPATH_T883966888_H
+#ifndef LIGHTSHADOWRESOLUTION_T3029073116_H
+#define LIGHTSHADOWRESOLUTION_T3029073116_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.Rendering.LightShadowResolution
+struct  LightShadowResolution_t3029073116 
+{
+public:
+	// System.Int32 UnityEngine.Rendering.LightShadowResolution::value__
+	int32_t ___value___1;
+
+public:
+	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(LightShadowResolution_t3029073116, ___value___1)); }
+	inline int32_t get_value___1() const { return ___value___1; }
+	inline int32_t* get_address_of_value___1() { return &___value___1; }
+	inline void set_value___1(int32_t value)
+	{
+		___value___1 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // LIGHTSHADOWRESOLUTION_T3029073116_H
+#ifndef SKINQUALITY_T4231844520_H
+#define SKINQUALITY_T4231844520_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.SkinQuality
+struct  SkinQuality_t4231844520 
+{
+public:
+	// System.Int32 UnityEngine.SkinQuality::value__
+	int32_t ___value___1;
+
+public:
+	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(SkinQuality_t4231844520, ___value___1)); }
+	inline int32_t get_value___1() const { return ___value___1; }
+	inline int32_t* get_address_of_value___1() { return &___value___1; }
+	inline void set_value___1(int32_t value)
+	{
+		___value___1 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // SKINQUALITY_T4231844520_H
+#ifndef STEREOTARGETEYEMASK_T1137745477_H
+#define STEREOTARGETEYEMASK_T1137745477_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.StereoTargetEyeMask
+struct  StereoTargetEyeMask_t1137745477 
+{
+public:
+	// System.Int32 UnityEngine.StereoTargetEyeMask::value__
+	int32_t ___value___1;
+
+public:
+	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(StereoTargetEyeMask_t1137745477, ___value___1)); }
+	inline int32_t get_value___1() const { return ___value___1; }
+	inline int32_t* get_address_of_value___1() { return &___value___1; }
+	inline void set_value___1(int32_t value)
+	{
+		___value___1 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // STEREOTARGETEYEMASK_T1137745477_H
 #ifndef INVALIDOPERATIONEXCEPTION_T56020091_H
 #define INVALIDOPERATIONEXCEPTION_T56020091_H
 #ifdef __clang__
@@ -8797,85 +8705,6 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // INVALIDOPERATIONEXCEPTION_T56020091_H
-#ifndef KEYVALUEPAIR_2_T1420447725_H
-#define KEYVALUEPAIR_2_T1420447725_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Collections.Generic.KeyValuePair`2<System.Object,ES3Internal.ES3Data>
-struct  KeyValuePair_2_t1420447725 
-{
-public:
-	// TKey System.Collections.Generic.KeyValuePair`2::key
-	RuntimeObject * ___key_0;
-	// TValue System.Collections.Generic.KeyValuePair`2::value
-	ES3Data_t1970336570  ___value_1;
-
-public:
-	inline static int32_t get_offset_of_key_0() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t1420447725, ___key_0)); }
-	inline RuntimeObject * get_key_0() const { return ___key_0; }
-	inline RuntimeObject ** get_address_of_key_0() { return &___key_0; }
-	inline void set_key_0(RuntimeObject * value)
-	{
-		___key_0 = value;
-		Il2CppCodeGenWriteBarrier((&___key_0), value);
-	}
-
-	inline static int32_t get_offset_of_value_1() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t1420447725, ___value_1)); }
-	inline ES3Data_t1970336570  get_value_1() const { return ___value_1; }
-	inline ES3Data_t1970336570 * get_address_of_value_1() { return &___value_1; }
-	inline void set_value_1(ES3Data_t1970336570  value)
-	{
-		___value_1 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // KEYVALUEPAIR_2_T1420447725_H
-#ifndef ANIMATIONCURVE_T3046754366_H
-#define ANIMATIONCURVE_T3046754366_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.AnimationCurve
-struct  AnimationCurve_t3046754366  : public RuntimeObject
-{
-public:
-	// System.IntPtr UnityEngine.AnimationCurve::m_Ptr
-	intptr_t ___m_Ptr_0;
-
-public:
-	inline static int32_t get_offset_of_m_Ptr_0() { return static_cast<int32_t>(offsetof(AnimationCurve_t3046754366, ___m_Ptr_0)); }
-	inline intptr_t get_m_Ptr_0() const { return ___m_Ptr_0; }
-	inline intptr_t* get_address_of_m_Ptr_0() { return &___m_Ptr_0; }
-	inline void set_m_Ptr_0(intptr_t value)
-	{
-		___m_Ptr_0 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-// Native definition for P/Invoke marshalling of UnityEngine.AnimationCurve
-struct AnimationCurve_t3046754366_marshaled_pinvoke
-{
-	intptr_t ___m_Ptr_0;
-};
-// Native definition for COM marshalling of UnityEngine.AnimationCurve
-struct AnimationCurve_t3046754366_marshaled_com
-{
-	intptr_t ___m_Ptr_0;
-};
-#endif // ANIMATIONCURVE_T3046754366_H
 #ifndef KEYVALUEPAIR_2_T3699644050_H
 #define KEYVALUEPAIR_2_T3699644050_H
 #ifdef __clang__
@@ -8916,6 +8745,45 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // KEYVALUEPAIR_2_T3699644050_H
+#ifndef ANIMATIONCURVE_T3046754366_H
+#define ANIMATIONCURVE_T3046754366_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.AnimationCurve
+struct  AnimationCurve_t3046754366  : public RuntimeObject
+{
+public:
+	// System.IntPtr UnityEngine.AnimationCurve::m_Ptr
+	intptr_t ___m_Ptr_0;
+
+public:
+	inline static int32_t get_offset_of_m_Ptr_0() { return static_cast<int32_t>(offsetof(AnimationCurve_t3046754366, ___m_Ptr_0)); }
+	inline intptr_t get_m_Ptr_0() const { return ___m_Ptr_0; }
+	inline intptr_t* get_address_of_m_Ptr_0() { return &___m_Ptr_0; }
+	inline void set_m_Ptr_0(intptr_t value)
+	{
+		___m_Ptr_0 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+// Native definition for P/Invoke marshalling of UnityEngine.AnimationCurve
+struct AnimationCurve_t3046754366_marshaled_pinvoke
+{
+	intptr_t ___m_Ptr_0;
+};
+// Native definition for COM marshalling of UnityEngine.AnimationCurve
+struct AnimationCurve_t3046754366_marshaled_com
+{
+	intptr_t ___m_Ptr_0;
+};
+#endif // ANIMATIONCURVE_T3046754366_H
 #ifndef BINDINGFLAGS_T2721792723_H
 #define BINDINGFLAGS_T2721792723_H
 #ifdef __clang__
@@ -9045,6 +8913,103 @@ struct RaycastHit_t1056001966_marshaled_com
 	Collider_t1773347010 * ___m_Collider_5;
 };
 #endif // RAYCASTHIT_T1056001966_H
+#ifndef MOUTH_STATE_T1503594606_H
+#define MOUTH_STATE_T1503594606_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// MouthPanel/MOUTH_STATE
+struct  MOUTH_STATE_t1503594606 
+{
+public:
+	// System.Int32 MouthPanel/MOUTH_STATE::value__
+	int32_t ___value___1;
+
+public:
+	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(MOUTH_STATE_t1503594606, ___value___1)); }
+	inline int32_t get_value___1() const { return ___value___1; }
+	inline int32_t* get_address_of_value___1() { return &___value___1; }
+	inline void set_value___1(int32_t value)
+	{
+		___value___1 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // MOUTH_STATE_T1503594606_H
+#ifndef CLIENTCERTIFICATETYPE_T1004704908_H
+#define CLIENTCERTIFICATETYPE_T1004704908_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// Mono.Security.Protocol.Tls.Handshake.ClientCertificateType
+struct  ClientCertificateType_t1004704908 
+{
+public:
+	// System.Int32 Mono.Security.Protocol.Tls.Handshake.ClientCertificateType::value__
+	int32_t ___value___1;
+
+public:
+	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(ClientCertificateType_t1004704908, ___value___1)); }
+	inline int32_t get_value___1() const { return ___value___1; }
+	inline int32_t* get_address_of_value___1() { return &___value___1; }
+	inline void set_value___1(int32_t value)
+	{
+		___value___1 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // CLIENTCERTIFICATETYPE_T1004704908_H
+#ifndef KEYVALUEPAIR_2_T1783538065_H
+#define KEYVALUEPAIR_2_T1783538065_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Collections.Generic.KeyValuePair`2<Com.LuisPedroFonseca.ProCamera2D.IntPoint,System.Boolean>
+struct  KeyValuePair_2_t1783538065 
+{
+public:
+	// TKey System.Collections.Generic.KeyValuePair`2::key
+	IntPoint_t1965365063  ___key_0;
+	// TValue System.Collections.Generic.KeyValuePair`2::value
+	bool ___value_1;
+
+public:
+	inline static int32_t get_offset_of_key_0() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t1783538065, ___key_0)); }
+	inline IntPoint_t1965365063  get_key_0() const { return ___key_0; }
+	inline IntPoint_t1965365063 * get_address_of_key_0() { return &___key_0; }
+	inline void set_key_0(IntPoint_t1965365063  value)
+	{
+		___key_0 = value;
+	}
+
+	inline static int32_t get_offset_of_value_1() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t1783538065, ___value_1)); }
+	inline bool get_value_1() const { return ___value_1; }
+	inline bool* get_address_of_value_1() { return &___value_1; }
+	inline void set_value_1(bool value)
+	{
+		___value_1 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // KEYVALUEPAIR_2_T1783538065_H
 #ifndef DATETIMEKIND_T3468814247_H
 #define DATETIMEKIND_T3468814247_H
 #ifdef __clang__
@@ -9074,23 +9039,23 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // DATETIMEKIND_T3468814247_H
-#ifndef SPRITECOLORRAMPPALETTES_T646428211_H
-#define SPRITECOLORRAMPPALETTES_T646428211_H
+#ifndef PIXELOP_T3366166178_H
+#define PIXELOP_T3366166178_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// SpriteColorFX.SpriteColorRampPalettes
-struct  SpriteColorRampPalettes_t646428211 
+// SpriteColorFX.SpriteColorHelper/PixelOp
+struct  PixelOp_t3366166178 
 {
 public:
-	// System.Int32 SpriteColorFX.SpriteColorRampPalettes::value__
+	// System.Int32 SpriteColorFX.SpriteColorHelper/PixelOp::value__
 	int32_t ___value___1;
 
 public:
-	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(SpriteColorRampPalettes_t646428211, ___value___1)); }
+	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(PixelOp_t3366166178, ___value___1)); }
 	inline int32_t get_value___1() const { return ___value___1; }
 	inline int32_t* get_address_of_value___1() { return &___value___1; }
 	inline void set_value___1(int32_t value)
@@ -9102,7 +9067,7 @@ public:
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // SPRITECOLORRAMPPALETTES_T646428211_H
+#endif // PIXELOP_T3366166178_H
 #ifndef DELEGATE_T1188392813_H
 #define DELEGATE_T1188392813_H
 #ifdef __clang__
@@ -9303,35 +9268,46 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // SECURITYACTION_T569814076_H
-#ifndef CLIENTCERTIFICATETYPE_T1004704908_H
-#define CLIENTCERTIFICATETYPE_T1004704908_H
+#ifndef KEYVALUEPAIR_2_T1420447725_H
+#define KEYVALUEPAIR_2_T1420447725_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// Mono.Security.Protocol.Tls.Handshake.ClientCertificateType
-struct  ClientCertificateType_t1004704908 
+// System.Collections.Generic.KeyValuePair`2<System.Object,ES3Internal.ES3Data>
+struct  KeyValuePair_2_t1420447725 
 {
 public:
-	// System.Int32 Mono.Security.Protocol.Tls.Handshake.ClientCertificateType::value__
-	int32_t ___value___1;
+	// TKey System.Collections.Generic.KeyValuePair`2::key
+	RuntimeObject * ___key_0;
+	// TValue System.Collections.Generic.KeyValuePair`2::value
+	ES3Data_t1970336570  ___value_1;
 
 public:
-	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(ClientCertificateType_t1004704908, ___value___1)); }
-	inline int32_t get_value___1() const { return ___value___1; }
-	inline int32_t* get_address_of_value___1() { return &___value___1; }
-	inline void set_value___1(int32_t value)
+	inline static int32_t get_offset_of_key_0() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t1420447725, ___key_0)); }
+	inline RuntimeObject * get_key_0() const { return ___key_0; }
+	inline RuntimeObject ** get_address_of_key_0() { return &___key_0; }
+	inline void set_key_0(RuntimeObject * value)
 	{
-		___value___1 = value;
+		___key_0 = value;
+		Il2CppCodeGenWriteBarrier((&___key_0), value);
+	}
+
+	inline static int32_t get_offset_of_value_1() { return static_cast<int32_t>(offsetof(KeyValuePair_2_t1420447725, ___value_1)); }
+	inline ES3Data_t1970336570  get_value_1() const { return ___value_1; }
+	inline ES3Data_t1970336570 * get_address_of_value_1() { return &___value_1; }
+	inline void set_value_1(ES3Data_t1970336570  value)
+	{
+		___value_1 = value;
 	}
 };
 
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // CLIENTCERTIFICATETYPE_T1004704908_H
+#endif // KEYVALUEPAIR_2_T1420447725_H
 #ifndef U3CGETENUMERATORU3EC__ITERATOR0_T3750793324_H
 #define U3CGETENUMERATORU3EC__ITERATOR0_T3750793324_H
 #ifdef __clang__
@@ -10843,35 +10819,6 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // PARTICLESYSTEMSCALINGMODE_T2278533876_H
-#ifndef ENEMY_TYPE_T3017899397_H
-#define ENEMY_TYPE_T3017899397_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// ENEMY_TYPE
-struct  ENEMY_TYPE_t3017899397 
-{
-public:
-	// System.Int32 ENEMY_TYPE::value__
-	int32_t ___value___1;
-
-public:
-	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(ENEMY_TYPE_t3017899397, ___value___1)); }
-	inline int32_t get_value___1() const { return ___value___1; }
-	inline int32_t* get_address_of_value___1() { return &___value___1; }
-	inline void set_value___1(int32_t value)
-	{
-		___value___1 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // ENEMY_TYPE_T3017899397_H
 #ifndef OBJECT_T631007953_H
 #define OBJECT_T631007953_H
 #ifdef __clang__
@@ -10927,6 +10874,35 @@ struct Object_t631007953_marshaled_com
 	intptr_t ___m_CachedPtr_0;
 };
 #endif // OBJECT_T631007953_H
+#ifndef RUNTIMETYPEHANDLE_T3027515415_H
+#define RUNTIMETYPEHANDLE_T3027515415_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.RuntimeTypeHandle
+struct  RuntimeTypeHandle_t3027515415 
+{
+public:
+	// System.IntPtr System.RuntimeTypeHandle::value
+	intptr_t ___value_0;
+
+public:
+	inline static int32_t get_offset_of_value_0() { return static_cast<int32_t>(offsetof(RuntimeTypeHandle_t3027515415, ___value_0)); }
+	inline intptr_t get_value_0() const { return ___value_0; }
+	inline intptr_t* get_address_of_value_0() { return &___value_0; }
+	inline void set_value_0(intptr_t value)
+	{
+		___value_0 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // RUNTIMETYPEHANDLE_T3027515415_H
 #ifndef PARTICLESYSTEMOVERLAPACTION_T2023522131_H
 #define PARTICLESYSTEMOVERLAPACTION_T2023522131_H
 #ifdef __clang__
@@ -10956,6 +10932,64 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // PARTICLESYSTEMOVERLAPACTION_T2023522131_H
+#ifndef ENEMY_TYPE_T3017899397_H
+#define ENEMY_TYPE_T3017899397_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// ENEMY_TYPE
+struct  ENEMY_TYPE_t3017899397 
+{
+public:
+	// System.Int32 ENEMY_TYPE::value__
+	int32_t ___value___1;
+
+public:
+	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(ENEMY_TYPE_t3017899397, ___value___1)); }
+	inline int32_t get_value___1() const { return ___value___1; }
+	inline int32_t* get_address_of_value___1() { return &___value___1; }
+	inline void set_value___1(int32_t value)
+	{
+		___value___1 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // ENEMY_TYPE_T3017899397_H
+#ifndef PARTICLESYSTEMSHAPETYPE_T4289797000_H
+#define PARTICLESYSTEMSHAPETYPE_T4289797000_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UnityEngine.ParticleSystemShapeType
+struct  ParticleSystemShapeType_t4289797000 
+{
+public:
+	// System.Int32 UnityEngine.ParticleSystemShapeType::value__
+	int32_t ___value___1;
+
+public:
+	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(ParticleSystemShapeType_t4289797000, ___value___1)); }
+	inline int32_t get_value___1() const { return ___value___1; }
+	inline int32_t* get_address_of_value___1() { return &___value___1; }
+	inline void set_value___1(int32_t value)
+	{
+		___value___1 = value;
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // PARTICLESYSTEMSHAPETYPE_T4289797000_H
 #ifndef CONSTANTSHAKELAYER_T1896703246_H
 #define CONSTANTSHAKELAYER_T1896703246_H
 #ifdef __clang__
@@ -11015,64 +11049,6 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // CONSTANTSHAKELAYER_T1896703246_H
-#ifndef RUNTIMETYPEHANDLE_T3027515415_H
-#define RUNTIMETYPEHANDLE_T3027515415_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.RuntimeTypeHandle
-struct  RuntimeTypeHandle_t3027515415 
-{
-public:
-	// System.IntPtr System.RuntimeTypeHandle::value
-	intptr_t ___value_0;
-
-public:
-	inline static int32_t get_offset_of_value_0() { return static_cast<int32_t>(offsetof(RuntimeTypeHandle_t3027515415, ___value_0)); }
-	inline intptr_t get_value_0() const { return ___value_0; }
-	inline intptr_t* get_address_of_value_0() { return &___value_0; }
-	inline void set_value_0(intptr_t value)
-	{
-		___value_0 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // RUNTIMETYPEHANDLE_T3027515415_H
-#ifndef PARTICLESYSTEMSHAPETYPE_T4289797000_H
-#define PARTICLESYSTEMSHAPETYPE_T4289797000_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UnityEngine.ParticleSystemShapeType
-struct  ParticleSystemShapeType_t4289797000 
-{
-public:
-	// System.Int32 UnityEngine.ParticleSystemShapeType::value__
-	int32_t ___value___1;
-
-public:
-	inline static int32_t get_offset_of_value___1() { return static_cast<int32_t>(offsetof(ParticleSystemShapeType_t4289797000, ___value___1)); }
-	inline int32_t get_value___1() const { return ___value___1; }
-	inline int32_t* get_address_of_value___1() { return &___value___1; }
-	inline void set_value___1(int32_t value)
-	{
-		___value___1 = value;
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // PARTICLESYSTEMSHAPETYPE_T4289797000_H
 #ifndef MINMAXGRADIENT_T3677460847_H
 #define MINMAXGRADIENT_T3677460847_H
 #ifdef __clang__
@@ -11162,6 +11138,82 @@ struct MinMaxGradient_t3677460847_marshaled_com
 	Color_t2555686324  ___m_ColorMax_4;
 };
 #endif // MINMAXGRADIENT_T3677460847_H
+#ifndef DEPTHENTRY_T628749918_H
+#define DEPTHENTRY_T628749918_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// UICamera/DepthEntry
+struct  DepthEntry_t628749918 
+{
+public:
+	// System.Int32 UICamera/DepthEntry::depth
+	int32_t ___depth_0;
+	// UnityEngine.RaycastHit UICamera/DepthEntry::hit
+	RaycastHit_t1056001966  ___hit_1;
+	// UnityEngine.Vector3 UICamera/DepthEntry::point
+	Vector3_t3722313464  ___point_2;
+	// UnityEngine.GameObject UICamera/DepthEntry::go
+	GameObject_t1113636619 * ___go_3;
+
+public:
+	inline static int32_t get_offset_of_depth_0() { return static_cast<int32_t>(offsetof(DepthEntry_t628749918, ___depth_0)); }
+	inline int32_t get_depth_0() const { return ___depth_0; }
+	inline int32_t* get_address_of_depth_0() { return &___depth_0; }
+	inline void set_depth_0(int32_t value)
+	{
+		___depth_0 = value;
+	}
+
+	inline static int32_t get_offset_of_hit_1() { return static_cast<int32_t>(offsetof(DepthEntry_t628749918, ___hit_1)); }
+	inline RaycastHit_t1056001966  get_hit_1() const { return ___hit_1; }
+	inline RaycastHit_t1056001966 * get_address_of_hit_1() { return &___hit_1; }
+	inline void set_hit_1(RaycastHit_t1056001966  value)
+	{
+		___hit_1 = value;
+	}
+
+	inline static int32_t get_offset_of_point_2() { return static_cast<int32_t>(offsetof(DepthEntry_t628749918, ___point_2)); }
+	inline Vector3_t3722313464  get_point_2() const { return ___point_2; }
+	inline Vector3_t3722313464 * get_address_of_point_2() { return &___point_2; }
+	inline void set_point_2(Vector3_t3722313464  value)
+	{
+		___point_2 = value;
+	}
+
+	inline static int32_t get_offset_of_go_3() { return static_cast<int32_t>(offsetof(DepthEntry_t628749918, ___go_3)); }
+	inline GameObject_t1113636619 * get_go_3() const { return ___go_3; }
+	inline GameObject_t1113636619 ** get_address_of_go_3() { return &___go_3; }
+	inline void set_go_3(GameObject_t1113636619 * value)
+	{
+		___go_3 = value;
+		Il2CppCodeGenWriteBarrier((&___go_3), value);
+	}
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+// Native definition for P/Invoke marshalling of UICamera/DepthEntry
+struct DepthEntry_t628749918_marshaled_pinvoke
+{
+	int32_t ___depth_0;
+	RaycastHit_t1056001966_marshaled_pinvoke ___hit_1;
+	Vector3_t3722313464  ___point_2;
+	GameObject_t1113636619 * ___go_3;
+};
+// Native definition for COM marshalling of UICamera/DepthEntry
+struct DepthEntry_t628749918_marshaled_com
+{
+	int32_t ___depth_0;
+	RaycastHit_t1056001966_marshaled_com ___hit_1;
+	Vector3_t3722313464  ___point_2;
+	GameObject_t1113636619 * ___go_3;
+};
+#endif // DEPTHENTRY_T628749918_H
 #ifndef MINMAXCURVE_T1067599125_H
 #define MINMAXCURVE_T1067599125_H
 #ifdef __clang__
@@ -11283,82 +11335,6 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // COMPONENT_T1923634451_H
-#ifndef DEPTHENTRY_T628749918_H
-#define DEPTHENTRY_T628749918_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// UICamera/DepthEntry
-struct  DepthEntry_t628749918 
-{
-public:
-	// System.Int32 UICamera/DepthEntry::depth
-	int32_t ___depth_0;
-	// UnityEngine.RaycastHit UICamera/DepthEntry::hit
-	RaycastHit_t1056001966  ___hit_1;
-	// UnityEngine.Vector3 UICamera/DepthEntry::point
-	Vector3_t3722313464  ___point_2;
-	// UnityEngine.GameObject UICamera/DepthEntry::go
-	GameObject_t1113636619 * ___go_3;
-
-public:
-	inline static int32_t get_offset_of_depth_0() { return static_cast<int32_t>(offsetof(DepthEntry_t628749918, ___depth_0)); }
-	inline int32_t get_depth_0() const { return ___depth_0; }
-	inline int32_t* get_address_of_depth_0() { return &___depth_0; }
-	inline void set_depth_0(int32_t value)
-	{
-		___depth_0 = value;
-	}
-
-	inline static int32_t get_offset_of_hit_1() { return static_cast<int32_t>(offsetof(DepthEntry_t628749918, ___hit_1)); }
-	inline RaycastHit_t1056001966  get_hit_1() const { return ___hit_1; }
-	inline RaycastHit_t1056001966 * get_address_of_hit_1() { return &___hit_1; }
-	inline void set_hit_1(RaycastHit_t1056001966  value)
-	{
-		___hit_1 = value;
-	}
-
-	inline static int32_t get_offset_of_point_2() { return static_cast<int32_t>(offsetof(DepthEntry_t628749918, ___point_2)); }
-	inline Vector3_t3722313464  get_point_2() const { return ___point_2; }
-	inline Vector3_t3722313464 * get_address_of_point_2() { return &___point_2; }
-	inline void set_point_2(Vector3_t3722313464  value)
-	{
-		___point_2 = value;
-	}
-
-	inline static int32_t get_offset_of_go_3() { return static_cast<int32_t>(offsetof(DepthEntry_t628749918, ___go_3)); }
-	inline GameObject_t1113636619 * get_go_3() const { return ___go_3; }
-	inline GameObject_t1113636619 ** get_address_of_go_3() { return &___go_3; }
-	inline void set_go_3(GameObject_t1113636619 * value)
-	{
-		___go_3 = value;
-		Il2CppCodeGenWriteBarrier((&___go_3), value);
-	}
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-// Native definition for P/Invoke marshalling of UICamera/DepthEntry
-struct DepthEntry_t628749918_marshaled_pinvoke
-{
-	int32_t ___depth_0;
-	RaycastHit_t1056001966_marshaled_pinvoke ___hit_1;
-	Vector3_t3722313464  ___point_2;
-	GameObject_t1113636619 * ___go_3;
-};
-// Native definition for COM marshalling of UICamera/DepthEntry
-struct DepthEntry_t628749918_marshaled_com
-{
-	int32_t ___depth_0;
-	RaycastHit_t1056001966_marshaled_com ___hit_1;
-	Vector3_t3722313464  ___point_2;
-	GameObject_t1113636619 * ___go_3;
-};
-#endif // DEPTHENTRY_T628749918_H
 #ifndef ARGUMENTNULLEXCEPTION_T1615371798_H
 #define ARGUMENTNULLEXCEPTION_T1615371798_H
 #ifdef __clang__
@@ -12270,26 +12246,6 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // ACTION_1_T72767109_H
-#ifndef ACTION_1_T3032323450_H
-#define ACTION_1_T3032323450_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Action`1<UnityEngine.CameraType>
-struct  Action_1_t3032323450  : public MulticastDelegate_t
-{
-public:
-
-public:
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // ACTION_1_T3032323450_H
 #ifndef ACTION_1_T2436747340_H
 #define ACTION_1_T2436747340_H
 #ifdef __clang__
@@ -12310,6 +12266,26 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // ACTION_1_T2436747340_H
+#ifndef ACTION_1_T3032323450_H
+#define ACTION_1_T3032323450_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Action`1<UnityEngine.CameraType>
+struct  Action_1_t3032323450  : public MulticastDelegate_t
+{
+public:
+
+public:
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // ACTION_1_T3032323450_H
 #ifndef ACTION_1_T4229965200_H
 #define ACTION_1_T4229965200_H
 #ifdef __clang__
@@ -12880,26 +12856,6 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // ACTION_1_T109344819_H
-#ifndef ACTION_1_T3141968203_H
-#define ACTION_1_T3141968203_H
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-
-// System.Action`1<UnityEngine.ParticleSystemSimulationSpace>
-struct  Action_1_t3141968203  : public MulticastDelegate_t
-{
-public:
-
-public:
-};
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#endif // ACTION_1_T3141968203_H
 #ifndef ONINITFUNC_1_T1390371314_H
 #define ONINITFUNC_1_T1390371314_H
 #ifdef __clang__
@@ -12920,6 +12876,26 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // ONINITFUNC_1_T1390371314_H
+#ifndef ACTION_1_T3141968203_H
+#define ACTION_1_T3141968203_H
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+
+// System.Action`1<UnityEngine.ParticleSystemSimulationSpace>
+struct  Action_1_t3141968203  : public MulticastDelegate_t
+{
+public:
+
+public:
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#endif // ACTION_1_T3141968203_H
 #ifndef ACTION_1_T420134549_H
 #define ACTION_1_T420134549_H
 #ifdef __clang__
@@ -13960,16 +13936,16 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // ACTION_1_T1666580311_H
-#ifndef ACTION_1_T2123447305_H
-#define ACTION_1_T2123447305_H
+#ifndef ACTION_2_T2523487705_H
+#define ACTION_2_T2523487705_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// System.Action`1<UnityEngine.ParticleSystem/CollisionModule>
-struct  Action_1_t2123447305  : public MulticastDelegate_t
+// System.Action`2<System.Boolean,System.Object>
+struct  Action_2_t2523487705  : public MulticastDelegate_t
 {
 public:
 
@@ -13979,7 +13955,7 @@ public:
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // ACTION_1_T2123447305_H
+#endif // ACTION_2_T2523487705_H
 #ifndef ACTION_1_T902918297_H
 #define ACTION_1_T902918297_H
 #ifdef __clang__
@@ -14080,16 +14056,16 @@ public:
 #pragma clang diagnostic pop
 #endif
 #endif // ACTION_1_T1261951795_H
-#ifndef ACTION_2_T2523487705_H
-#define ACTION_2_T2523487705_H
+#ifndef ACTION_1_T2123447305_H
+#define ACTION_1_T2123447305_H
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
 
-// System.Action`2<System.Boolean,System.Object>
-struct  Action_2_t2523487705  : public MulticastDelegate_t
+// System.Action`1<UnityEngine.ParticleSystem/CollisionModule>
+struct  Action_1_t2123447305  : public MulticastDelegate_t
 {
 public:
 
@@ -14099,7 +14075,7 @@ public:
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-#endif // ACTION_2_T2523487705_H
+#endif // ACTION_1_T2123447305_H
 #ifndef MONOBEHAVIOUR_T3962482529_H
 #define MONOBEHAVIOUR_T3962482529_H
 #ifdef __clang__
@@ -14841,6 +14817,18 @@ extern "C"  RuntimeObject * InternalEnumerator_1_System_Collections_IEnumerator_
 extern "C"  void InternalEnumerator_1_Dispose_m2564631340_gshared (InternalEnumerator_1_t3774870459 * __this, const RuntimeMethod* method);
 // System.Boolean System.Array/InternalEnumerator`1<Mono.Security.Uri/UriScheme>::MoveNext()
 extern "C"  bool InternalEnumerator_1_MoveNext_m2153095634_gshared (InternalEnumerator_1_t3774870459 * __this, const RuntimeMethod* method);
+// System.Void System.Array/InternalEnumerator`1<MouthPanel/MOUTH_STATE>::.ctor(System.Array)
+extern "C"  void InternalEnumerator_1__ctor_m34278245_gshared (InternalEnumerator_1_t2410658723 * __this, RuntimeArray * ___array0, const RuntimeMethod* method);
+// System.Void System.Array/InternalEnumerator`1<MouthPanel/MOUTH_STATE>::System.Collections.IEnumerator.Reset()
+extern "C"  void InternalEnumerator_1_System_Collections_IEnumerator_Reset_m528577411_gshared (InternalEnumerator_1_t2410658723 * __this, const RuntimeMethod* method);
+// T System.Array/InternalEnumerator`1<MouthPanel/MOUTH_STATE>::get_Current()
+extern "C"  int32_t InternalEnumerator_1_get_Current_m2135524011_gshared (InternalEnumerator_1_t2410658723 * __this, const RuntimeMethod* method);
+// System.Object System.Array/InternalEnumerator`1<MouthPanel/MOUTH_STATE>::System.Collections.IEnumerator.get_Current()
+extern "C"  RuntimeObject * InternalEnumerator_1_System_Collections_IEnumerator_get_Current_m650135078_gshared (InternalEnumerator_1_t2410658723 * __this, const RuntimeMethod* method);
+// System.Void System.Array/InternalEnumerator`1<MouthPanel/MOUTH_STATE>::Dispose()
+extern "C"  void InternalEnumerator_1_Dispose_m2768136093_gshared (InternalEnumerator_1_t2410658723 * __this, const RuntimeMethod* method);
+// System.Boolean System.Array/InternalEnumerator`1<MouthPanel/MOUTH_STATE>::MoveNext()
+extern "C"  bool InternalEnumerator_1_MoveNext_m3154153527_gshared (InternalEnumerator_1_t2410658723 * __this, const RuntimeMethod* method);
 // System.Void System.Array/InternalEnumerator`1<SpriteColorFX.PredatorController/PredatorJob>::.ctor(System.Array)
 extern "C"  void InternalEnumerator_1__ctor_m1264284523_gshared (InternalEnumerator_1_t186493978 * __this, RuntimeArray * ___array0, const RuntimeMethod* method);
 // System.Void System.Array/InternalEnumerator`1<SpriteColorFX.PredatorController/PredatorJob>::System.Collections.IEnumerator.Reset()
@@ -15369,18 +15357,6 @@ extern "C"  RuntimeObject * InternalEnumerator_1_System_Collections_IEnumerator_
 extern "C"  void InternalEnumerator_1_Dispose_m2840529825_gshared (InternalEnumerator_1_t2368758583 * __this, const RuntimeMethod* method);
 // System.Boolean System.Array/InternalEnumerator`1<System.Reflection.ParameterModifier>::MoveNext()
 extern "C"  bool InternalEnumerator_1_MoveNext_m3664960764_gshared (InternalEnumerator_1_t2368758583 * __this, const RuntimeMethod* method);
-// System.Void System.Array/InternalEnumerator`1<System.Resources.ResourceReader/ResourceCacheItem>::.ctor(System.Array)
-extern "C"  void InternalEnumerator_1__ctor_m1999141680_gshared (InternalEnumerator_1_t958356908 * __this, RuntimeArray * ___array0, const RuntimeMethod* method);
-// System.Void System.Array/InternalEnumerator`1<System.Resources.ResourceReader/ResourceCacheItem>::System.Collections.IEnumerator.Reset()
-extern "C"  void InternalEnumerator_1_System_Collections_IEnumerator_Reset_m1259718730_gshared (InternalEnumerator_1_t958356908 * __this, const RuntimeMethod* method);
-// T System.Array/InternalEnumerator`1<System.Resources.ResourceReader/ResourceCacheItem>::get_Current()
-extern "C"  ResourceCacheItem_t51292791  InternalEnumerator_1_get_Current_m144365666_gshared (InternalEnumerator_1_t958356908 * __this, const RuntimeMethod* method);
-// System.Object System.Array/InternalEnumerator`1<System.Resources.ResourceReader/ResourceCacheItem>::System.Collections.IEnumerator.get_Current()
-extern "C"  RuntimeObject * InternalEnumerator_1_System_Collections_IEnumerator_get_Current_m2141016822_gshared (InternalEnumerator_1_t958356908 * __this, const RuntimeMethod* method);
-// System.Void System.Array/InternalEnumerator`1<System.Resources.ResourceReader/ResourceCacheItem>::Dispose()
-extern "C"  void InternalEnumerator_1_Dispose_m887344916_gshared (InternalEnumerator_1_t958356908 * __this, const RuntimeMethod* method);
-// System.Boolean System.Array/InternalEnumerator`1<System.Resources.ResourceReader/ResourceCacheItem>::MoveNext()
-extern "C"  bool InternalEnumerator_1_MoveNext_m2960571514_gshared (InternalEnumerator_1_t958356908 * __this, const RuntimeMethod* method);
 
 // System.Void System.Object::.ctor()
 extern "C"  void Object__ctor_m297566312 (RuntimeObject * __this, const RuntimeMethod* method) IL2CPP_METHOD_ATTR;
@@ -15780,6 +15756,18 @@ extern "C"  void InvalidOperationException__ctor_m237278729 (InvalidOperationExc
 #define InternalEnumerator_1_Dispose_m2564631340(__this, method) ((  void (*) (InternalEnumerator_1_t3774870459 *, const RuntimeMethod*))InternalEnumerator_1_Dispose_m2564631340_gshared)(__this, method)
 // System.Boolean System.Array/InternalEnumerator`1<Mono.Security.Uri/UriScheme>::MoveNext()
 #define InternalEnumerator_1_MoveNext_m2153095634(__this, method) ((  bool (*) (InternalEnumerator_1_t3774870459 *, const RuntimeMethod*))InternalEnumerator_1_MoveNext_m2153095634_gshared)(__this, method)
+// System.Void System.Array/InternalEnumerator`1<MouthPanel/MOUTH_STATE>::.ctor(System.Array)
+#define InternalEnumerator_1__ctor_m34278245(__this, ___array0, method) ((  void (*) (InternalEnumerator_1_t2410658723 *, RuntimeArray *, const RuntimeMethod*))InternalEnumerator_1__ctor_m34278245_gshared)(__this, ___array0, method)
+// System.Void System.Array/InternalEnumerator`1<MouthPanel/MOUTH_STATE>::System.Collections.IEnumerator.Reset()
+#define InternalEnumerator_1_System_Collections_IEnumerator_Reset_m528577411(__this, method) ((  void (*) (InternalEnumerator_1_t2410658723 *, const RuntimeMethod*))InternalEnumerator_1_System_Collections_IEnumerator_Reset_m528577411_gshared)(__this, method)
+// T System.Array/InternalEnumerator`1<MouthPanel/MOUTH_STATE>::get_Current()
+#define InternalEnumerator_1_get_Current_m2135524011(__this, method) ((  int32_t (*) (InternalEnumerator_1_t2410658723 *, const RuntimeMethod*))InternalEnumerator_1_get_Current_m2135524011_gshared)(__this, method)
+// System.Object System.Array/InternalEnumerator`1<MouthPanel/MOUTH_STATE>::System.Collections.IEnumerator.get_Current()
+#define InternalEnumerator_1_System_Collections_IEnumerator_get_Current_m650135078(__this, method) ((  RuntimeObject * (*) (InternalEnumerator_1_t2410658723 *, const RuntimeMethod*))InternalEnumerator_1_System_Collections_IEnumerator_get_Current_m650135078_gshared)(__this, method)
+// System.Void System.Array/InternalEnumerator`1<MouthPanel/MOUTH_STATE>::Dispose()
+#define InternalEnumerator_1_Dispose_m2768136093(__this, method) ((  void (*) (InternalEnumerator_1_t2410658723 *, const RuntimeMethod*))InternalEnumerator_1_Dispose_m2768136093_gshared)(__this, method)
+// System.Boolean System.Array/InternalEnumerator`1<MouthPanel/MOUTH_STATE>::MoveNext()
+#define InternalEnumerator_1_MoveNext_m3154153527(__this, method) ((  bool (*) (InternalEnumerator_1_t2410658723 *, const RuntimeMethod*))InternalEnumerator_1_MoveNext_m3154153527_gshared)(__this, method)
 // System.Void System.Array/InternalEnumerator`1<SpriteColorFX.PredatorController/PredatorJob>::.ctor(System.Array)
 #define InternalEnumerator_1__ctor_m1264284523(__this, ___array0, method) ((  void (*) (InternalEnumerator_1_t186493978 *, RuntimeArray *, const RuntimeMethod*))InternalEnumerator_1__ctor_m1264284523_gshared)(__this, ___array0, method)
 // System.Void System.Array/InternalEnumerator`1<SpriteColorFX.PredatorController/PredatorJob>::System.Collections.IEnumerator.Reset()
@@ -16308,18 +16296,6 @@ extern "C"  void InvalidOperationException__ctor_m237278729 (InvalidOperationExc
 #define InternalEnumerator_1_Dispose_m2840529825(__this, method) ((  void (*) (InternalEnumerator_1_t2368758583 *, const RuntimeMethod*))InternalEnumerator_1_Dispose_m2840529825_gshared)(__this, method)
 // System.Boolean System.Array/InternalEnumerator`1<System.Reflection.ParameterModifier>::MoveNext()
 #define InternalEnumerator_1_MoveNext_m3664960764(__this, method) ((  bool (*) (InternalEnumerator_1_t2368758583 *, const RuntimeMethod*))InternalEnumerator_1_MoveNext_m3664960764_gshared)(__this, method)
-// System.Void System.Array/InternalEnumerator`1<System.Resources.ResourceReader/ResourceCacheItem>::.ctor(System.Array)
-#define InternalEnumerator_1__ctor_m1999141680(__this, ___array0, method) ((  void (*) (InternalEnumerator_1_t958356908 *, RuntimeArray *, const RuntimeMethod*))InternalEnumerator_1__ctor_m1999141680_gshared)(__this, ___array0, method)
-// System.Void System.Array/InternalEnumerator`1<System.Resources.ResourceReader/ResourceCacheItem>::System.Collections.IEnumerator.Reset()
-#define InternalEnumerator_1_System_Collections_IEnumerator_Reset_m1259718730(__this, method) ((  void (*) (InternalEnumerator_1_t958356908 *, const RuntimeMethod*))InternalEnumerator_1_System_Collections_IEnumerator_Reset_m1259718730_gshared)(__this, method)
-// T System.Array/InternalEnumerator`1<System.Resources.ResourceReader/ResourceCacheItem>::get_Current()
-#define InternalEnumerator_1_get_Current_m144365666(__this, method) ((  ResourceCacheItem_t51292791  (*) (InternalEnumerator_1_t958356908 *, const RuntimeMethod*))InternalEnumerator_1_get_Current_m144365666_gshared)(__this, method)
-// System.Object System.Array/InternalEnumerator`1<System.Resources.ResourceReader/ResourceCacheItem>::System.Collections.IEnumerator.get_Current()
-#define InternalEnumerator_1_System_Collections_IEnumerator_get_Current_m2141016822(__this, method) ((  RuntimeObject * (*) (InternalEnumerator_1_t958356908 *, const RuntimeMethod*))InternalEnumerator_1_System_Collections_IEnumerator_get_Current_m2141016822_gshared)(__this, method)
-// System.Void System.Array/InternalEnumerator`1<System.Resources.ResourceReader/ResourceCacheItem>::Dispose()
-#define InternalEnumerator_1_Dispose_m887344916(__this, method) ((  void (*) (InternalEnumerator_1_t958356908 *, const RuntimeMethod*))InternalEnumerator_1_Dispose_m887344916_gshared)(__this, method)
-// System.Boolean System.Array/InternalEnumerator`1<System.Resources.ResourceReader/ResourceCacheItem>::MoveNext()
-#define InternalEnumerator_1_MoveNext_m2960571514(__this, method) ((  bool (*) (InternalEnumerator_1_t958356908 *, const RuntimeMethod*))InternalEnumerator_1_MoveNext_m2960571514_gshared)(__this, method)
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
@@ -33334,6 +33310,175 @@ extern "C"  UriScheme_t2867806342  InternalEnumerator_1_get_Current_m784420850_A
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
+// System.Void System.Array/InternalEnumerator`1<MouthPanel/MOUTH_STATE>::.ctor(System.Array)
+extern "C"  void InternalEnumerator_1__ctor_m34278245_gshared (InternalEnumerator_1_t2410658723 * __this, RuntimeArray * ___array0, const RuntimeMethod* method)
+{
+	{
+		RuntimeArray * L_0 = ___array0;
+		__this->set_array_2(L_0);
+		__this->set_idx_3(((int32_t)-2));
+		return;
+	}
+}
+extern "C"  void InternalEnumerator_1__ctor_m34278245_AdjustorThunk (RuntimeObject * __this, RuntimeArray * ___array0, const RuntimeMethod* method)
+{
+	InternalEnumerator_1_t2410658723 * _thisAdjusted = reinterpret_cast<InternalEnumerator_1_t2410658723 *>(__this + 1);
+	InternalEnumerator_1__ctor_m34278245(_thisAdjusted, ___array0, method);
+}
+// System.Void System.Array/InternalEnumerator`1<MouthPanel/MOUTH_STATE>::System.Collections.IEnumerator.Reset()
+extern "C"  void InternalEnumerator_1_System_Collections_IEnumerator_Reset_m528577411_gshared (InternalEnumerator_1_t2410658723 * __this, const RuntimeMethod* method)
+{
+	{
+		__this->set_idx_3(((int32_t)-2));
+		return;
+	}
+}
+extern "C"  void InternalEnumerator_1_System_Collections_IEnumerator_Reset_m528577411_AdjustorThunk (RuntimeObject * __this, const RuntimeMethod* method)
+{
+	InternalEnumerator_1_t2410658723 * _thisAdjusted = reinterpret_cast<InternalEnumerator_1_t2410658723 *>(__this + 1);
+	InternalEnumerator_1_System_Collections_IEnumerator_Reset_m528577411(_thisAdjusted, method);
+}
+// System.Object System.Array/InternalEnumerator`1<MouthPanel/MOUTH_STATE>::System.Collections.IEnumerator.get_Current()
+extern "C"  RuntimeObject * InternalEnumerator_1_System_Collections_IEnumerator_get_Current_m650135078_gshared (InternalEnumerator_1_t2410658723 * __this, const RuntimeMethod* method)
+{
+	{
+		int32_t L_0 = InternalEnumerator_1_get_Current_m2135524011((InternalEnumerator_1_t2410658723 *)__this, /*hidden argument*/IL2CPP_RGCTX_METHOD_INFO(InitializedTypeInfo(method->declaring_type)->rgctx_data, 0));
+		int32_t L_1 = L_0;
+		RuntimeObject * L_2 = Box(IL2CPP_RGCTX_DATA(InitializedTypeInfo(method->declaring_type)->rgctx_data, 1), &L_1);
+		return L_2;
+	}
+}
+extern "C"  RuntimeObject * InternalEnumerator_1_System_Collections_IEnumerator_get_Current_m650135078_AdjustorThunk (RuntimeObject * __this, const RuntimeMethod* method)
+{
+	InternalEnumerator_1_t2410658723 * _thisAdjusted = reinterpret_cast<InternalEnumerator_1_t2410658723 *>(__this + 1);
+	return InternalEnumerator_1_System_Collections_IEnumerator_get_Current_m650135078(_thisAdjusted, method);
+}
+// System.Void System.Array/InternalEnumerator`1<MouthPanel/MOUTH_STATE>::Dispose()
+extern "C"  void InternalEnumerator_1_Dispose_m2768136093_gshared (InternalEnumerator_1_t2410658723 * __this, const RuntimeMethod* method)
+{
+	{
+		__this->set_idx_3(((int32_t)-2));
+		return;
+	}
+}
+extern "C"  void InternalEnumerator_1_Dispose_m2768136093_AdjustorThunk (RuntimeObject * __this, const RuntimeMethod* method)
+{
+	InternalEnumerator_1_t2410658723 * _thisAdjusted = reinterpret_cast<InternalEnumerator_1_t2410658723 *>(__this + 1);
+	InternalEnumerator_1_Dispose_m2768136093(_thisAdjusted, method);
+}
+// System.Boolean System.Array/InternalEnumerator`1<MouthPanel/MOUTH_STATE>::MoveNext()
+extern "C"  bool InternalEnumerator_1_MoveNext_m3154153527_gshared (InternalEnumerator_1_t2410658723 * __this, const RuntimeMethod* method)
+{
+	int32_t V_0 = 0;
+	int32_t G_B5_0 = 0;
+	{
+		int32_t L_0 = (int32_t)__this->get_idx_3();
+		if ((!(((uint32_t)L_0) == ((uint32_t)((int32_t)-2)))))
+		{
+			goto IL_001e;
+		}
+	}
+	{
+		RuntimeArray * L_1 = (RuntimeArray *)__this->get_array_2();
+		NullCheck((RuntimeArray *)L_1);
+		int32_t L_2 = Array_get_Length_m21610649((RuntimeArray *)L_1, /*hidden argument*/NULL);
+		__this->set_idx_3(L_2);
+	}
+
+IL_001e:
+	{
+		int32_t L_3 = (int32_t)__this->get_idx_3();
+		if ((((int32_t)L_3) == ((int32_t)(-1))))
+		{
+			goto IL_0043;
+		}
+	}
+	{
+		int32_t L_4 = (int32_t)__this->get_idx_3();
+		int32_t L_5 = (int32_t)((int32_t)il2cpp_codegen_subtract((int32_t)L_4, (int32_t)1));
+		V_0 = (int32_t)L_5;
+		__this->set_idx_3(L_5);
+		int32_t L_6 = V_0;
+		G_B5_0 = ((((int32_t)((((int32_t)L_6) == ((int32_t)(-1)))? 1 : 0)) == ((int32_t)0))? 1 : 0);
+		goto IL_0044;
+	}
+
+IL_0043:
+	{
+		G_B5_0 = 0;
+	}
+
+IL_0044:
+	{
+		return (bool)G_B5_0;
+	}
+}
+extern "C"  bool InternalEnumerator_1_MoveNext_m3154153527_AdjustorThunk (RuntimeObject * __this, const RuntimeMethod* method)
+{
+	InternalEnumerator_1_t2410658723 * _thisAdjusted = reinterpret_cast<InternalEnumerator_1_t2410658723 *>(__this + 1);
+	return InternalEnumerator_1_MoveNext_m3154153527(_thisAdjusted, method);
+}
+// T System.Array/InternalEnumerator`1<MouthPanel/MOUTH_STATE>::get_Current()
+extern "C"  int32_t InternalEnumerator_1_get_Current_m2135524011_gshared (InternalEnumerator_1_t2410658723 * __this, const RuntimeMethod* method)
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_method (InternalEnumerator_1_get_Current_m2135524011_MetadataUsageId);
+		s_Il2CppMethodInitialized = true;
+	}
+	{
+		int32_t L_0 = (int32_t)__this->get_idx_3();
+		if ((!(((uint32_t)L_0) == ((uint32_t)((int32_t)-2)))))
+		{
+			goto IL_0018;
+		}
+	}
+	{
+		InvalidOperationException_t56020091 * L_1 = (InvalidOperationException_t56020091 *)il2cpp_codegen_object_new(InvalidOperationException_t56020091_il2cpp_TypeInfo_var);
+		InvalidOperationException__ctor_m237278729(L_1, (String_t*)_stringLiteral2287514662, /*hidden argument*/NULL);
+		IL2CPP_RAISE_MANAGED_EXCEPTION(L_1);
+	}
+
+IL_0018:
+	{
+		int32_t L_2 = (int32_t)__this->get_idx_3();
+		if ((!(((uint32_t)L_2) == ((uint32_t)(-1)))))
+		{
+			goto IL_002f;
+		}
+	}
+	{
+		InvalidOperationException_t56020091 * L_3 = (InvalidOperationException_t56020091 *)il2cpp_codegen_object_new(InvalidOperationException_t56020091_il2cpp_TypeInfo_var);
+		InvalidOperationException__ctor_m237278729(L_3, (String_t*)_stringLiteral3056411131, /*hidden argument*/NULL);
+		IL2CPP_RAISE_MANAGED_EXCEPTION(L_3);
+	}
+
+IL_002f:
+	{
+		RuntimeArray * L_4 = (RuntimeArray *)__this->get_array_2();
+		RuntimeArray * L_5 = (RuntimeArray *)__this->get_array_2();
+		NullCheck((RuntimeArray *)L_5);
+		int32_t L_6 = Array_get_Length_m21610649((RuntimeArray *)L_5, /*hidden argument*/NULL);
+		int32_t L_7 = (int32_t)__this->get_idx_3();
+		NullCheck((RuntimeArray *)L_4);
+		int32_t L_8 = ((  int32_t (*) (RuntimeArray *, int32_t, const RuntimeMethod*))IL2CPP_RGCTX_METHOD_INFO(InitializedTypeInfo(method->declaring_type)->rgctx_data, 2)->methodPointer)((RuntimeArray *)L_4, (int32_t)((int32_t)il2cpp_codegen_subtract((int32_t)((int32_t)il2cpp_codegen_subtract((int32_t)L_6, (int32_t)1)), (int32_t)L_7)), /*hidden argument*/IL2CPP_RGCTX_METHOD_INFO(InitializedTypeInfo(method->declaring_type)->rgctx_data, 2));
+		return L_8;
+	}
+}
+extern "C"  int32_t InternalEnumerator_1_get_Current_m2135524011_AdjustorThunk (RuntimeObject * __this, const RuntimeMethod* method)
+{
+	InternalEnumerator_1_t2410658723 * _thisAdjusted = reinterpret_cast<InternalEnumerator_1_t2410658723 *>(__this + 1);
+	return InternalEnumerator_1_get_Current_m2135524011(_thisAdjusted, method);
+}
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
 // System.Void System.Array/InternalEnumerator`1<SpriteColorFX.PredatorController/PredatorJob>::.ctor(System.Array)
 extern "C"  void InternalEnumerator_1__ctor_m1264284523_gshared (InternalEnumerator_1_t186493978 * __this, RuntimeArray * ___array0, const RuntimeMethod* method)
 {
@@ -40759,175 +40904,6 @@ extern "C"  ParameterModifier_t1461694466  InternalEnumerator_1_get_Current_m356
 {
 	InternalEnumerator_1_t2368758583 * _thisAdjusted = reinterpret_cast<InternalEnumerator_1_t2368758583 *>(__this + 1);
 	return InternalEnumerator_1_get_Current_m356936020(_thisAdjusted, method);
-}
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-// System.Void System.Array/InternalEnumerator`1<System.Resources.ResourceReader/ResourceCacheItem>::.ctor(System.Array)
-extern "C"  void InternalEnumerator_1__ctor_m1999141680_gshared (InternalEnumerator_1_t958356908 * __this, RuntimeArray * ___array0, const RuntimeMethod* method)
-{
-	{
-		RuntimeArray * L_0 = ___array0;
-		__this->set_array_2(L_0);
-		__this->set_idx_3(((int32_t)-2));
-		return;
-	}
-}
-extern "C"  void InternalEnumerator_1__ctor_m1999141680_AdjustorThunk (RuntimeObject * __this, RuntimeArray * ___array0, const RuntimeMethod* method)
-{
-	InternalEnumerator_1_t958356908 * _thisAdjusted = reinterpret_cast<InternalEnumerator_1_t958356908 *>(__this + 1);
-	InternalEnumerator_1__ctor_m1999141680(_thisAdjusted, ___array0, method);
-}
-// System.Void System.Array/InternalEnumerator`1<System.Resources.ResourceReader/ResourceCacheItem>::System.Collections.IEnumerator.Reset()
-extern "C"  void InternalEnumerator_1_System_Collections_IEnumerator_Reset_m1259718730_gshared (InternalEnumerator_1_t958356908 * __this, const RuntimeMethod* method)
-{
-	{
-		__this->set_idx_3(((int32_t)-2));
-		return;
-	}
-}
-extern "C"  void InternalEnumerator_1_System_Collections_IEnumerator_Reset_m1259718730_AdjustorThunk (RuntimeObject * __this, const RuntimeMethod* method)
-{
-	InternalEnumerator_1_t958356908 * _thisAdjusted = reinterpret_cast<InternalEnumerator_1_t958356908 *>(__this + 1);
-	InternalEnumerator_1_System_Collections_IEnumerator_Reset_m1259718730(_thisAdjusted, method);
-}
-// System.Object System.Array/InternalEnumerator`1<System.Resources.ResourceReader/ResourceCacheItem>::System.Collections.IEnumerator.get_Current()
-extern "C"  RuntimeObject * InternalEnumerator_1_System_Collections_IEnumerator_get_Current_m2141016822_gshared (InternalEnumerator_1_t958356908 * __this, const RuntimeMethod* method)
-{
-	{
-		ResourceCacheItem_t51292791  L_0 = InternalEnumerator_1_get_Current_m144365666((InternalEnumerator_1_t958356908 *)__this, /*hidden argument*/IL2CPP_RGCTX_METHOD_INFO(InitializedTypeInfo(method->declaring_type)->rgctx_data, 0));
-		ResourceCacheItem_t51292791  L_1 = L_0;
-		RuntimeObject * L_2 = Box(IL2CPP_RGCTX_DATA(InitializedTypeInfo(method->declaring_type)->rgctx_data, 1), &L_1);
-		return L_2;
-	}
-}
-extern "C"  RuntimeObject * InternalEnumerator_1_System_Collections_IEnumerator_get_Current_m2141016822_AdjustorThunk (RuntimeObject * __this, const RuntimeMethod* method)
-{
-	InternalEnumerator_1_t958356908 * _thisAdjusted = reinterpret_cast<InternalEnumerator_1_t958356908 *>(__this + 1);
-	return InternalEnumerator_1_System_Collections_IEnumerator_get_Current_m2141016822(_thisAdjusted, method);
-}
-// System.Void System.Array/InternalEnumerator`1<System.Resources.ResourceReader/ResourceCacheItem>::Dispose()
-extern "C"  void InternalEnumerator_1_Dispose_m887344916_gshared (InternalEnumerator_1_t958356908 * __this, const RuntimeMethod* method)
-{
-	{
-		__this->set_idx_3(((int32_t)-2));
-		return;
-	}
-}
-extern "C"  void InternalEnumerator_1_Dispose_m887344916_AdjustorThunk (RuntimeObject * __this, const RuntimeMethod* method)
-{
-	InternalEnumerator_1_t958356908 * _thisAdjusted = reinterpret_cast<InternalEnumerator_1_t958356908 *>(__this + 1);
-	InternalEnumerator_1_Dispose_m887344916(_thisAdjusted, method);
-}
-// System.Boolean System.Array/InternalEnumerator`1<System.Resources.ResourceReader/ResourceCacheItem>::MoveNext()
-extern "C"  bool InternalEnumerator_1_MoveNext_m2960571514_gshared (InternalEnumerator_1_t958356908 * __this, const RuntimeMethod* method)
-{
-	int32_t V_0 = 0;
-	int32_t G_B5_0 = 0;
-	{
-		int32_t L_0 = (int32_t)__this->get_idx_3();
-		if ((!(((uint32_t)L_0) == ((uint32_t)((int32_t)-2)))))
-		{
-			goto IL_001e;
-		}
-	}
-	{
-		RuntimeArray * L_1 = (RuntimeArray *)__this->get_array_2();
-		NullCheck((RuntimeArray *)L_1);
-		int32_t L_2 = Array_get_Length_m21610649((RuntimeArray *)L_1, /*hidden argument*/NULL);
-		__this->set_idx_3(L_2);
-	}
-
-IL_001e:
-	{
-		int32_t L_3 = (int32_t)__this->get_idx_3();
-		if ((((int32_t)L_3) == ((int32_t)(-1))))
-		{
-			goto IL_0043;
-		}
-	}
-	{
-		int32_t L_4 = (int32_t)__this->get_idx_3();
-		int32_t L_5 = (int32_t)((int32_t)il2cpp_codegen_subtract((int32_t)L_4, (int32_t)1));
-		V_0 = (int32_t)L_5;
-		__this->set_idx_3(L_5);
-		int32_t L_6 = V_0;
-		G_B5_0 = ((((int32_t)((((int32_t)L_6) == ((int32_t)(-1)))? 1 : 0)) == ((int32_t)0))? 1 : 0);
-		goto IL_0044;
-	}
-
-IL_0043:
-	{
-		G_B5_0 = 0;
-	}
-
-IL_0044:
-	{
-		return (bool)G_B5_0;
-	}
-}
-extern "C"  bool InternalEnumerator_1_MoveNext_m2960571514_AdjustorThunk (RuntimeObject * __this, const RuntimeMethod* method)
-{
-	InternalEnumerator_1_t958356908 * _thisAdjusted = reinterpret_cast<InternalEnumerator_1_t958356908 *>(__this + 1);
-	return InternalEnumerator_1_MoveNext_m2960571514(_thisAdjusted, method);
-}
-// T System.Array/InternalEnumerator`1<System.Resources.ResourceReader/ResourceCacheItem>::get_Current()
-extern "C"  ResourceCacheItem_t51292791  InternalEnumerator_1_get_Current_m144365666_gshared (InternalEnumerator_1_t958356908 * __this, const RuntimeMethod* method)
-{
-	static bool s_Il2CppMethodInitialized;
-	if (!s_Il2CppMethodInitialized)
-	{
-		il2cpp_codegen_initialize_method (InternalEnumerator_1_get_Current_m144365666_MetadataUsageId);
-		s_Il2CppMethodInitialized = true;
-	}
-	{
-		int32_t L_0 = (int32_t)__this->get_idx_3();
-		if ((!(((uint32_t)L_0) == ((uint32_t)((int32_t)-2)))))
-		{
-			goto IL_0018;
-		}
-	}
-	{
-		InvalidOperationException_t56020091 * L_1 = (InvalidOperationException_t56020091 *)il2cpp_codegen_object_new(InvalidOperationException_t56020091_il2cpp_TypeInfo_var);
-		InvalidOperationException__ctor_m237278729(L_1, (String_t*)_stringLiteral2287514662, /*hidden argument*/NULL);
-		IL2CPP_RAISE_MANAGED_EXCEPTION(L_1);
-	}
-
-IL_0018:
-	{
-		int32_t L_2 = (int32_t)__this->get_idx_3();
-		if ((!(((uint32_t)L_2) == ((uint32_t)(-1)))))
-		{
-			goto IL_002f;
-		}
-	}
-	{
-		InvalidOperationException_t56020091 * L_3 = (InvalidOperationException_t56020091 *)il2cpp_codegen_object_new(InvalidOperationException_t56020091_il2cpp_TypeInfo_var);
-		InvalidOperationException__ctor_m237278729(L_3, (String_t*)_stringLiteral3056411131, /*hidden argument*/NULL);
-		IL2CPP_RAISE_MANAGED_EXCEPTION(L_3);
-	}
-
-IL_002f:
-	{
-		RuntimeArray * L_4 = (RuntimeArray *)__this->get_array_2();
-		RuntimeArray * L_5 = (RuntimeArray *)__this->get_array_2();
-		NullCheck((RuntimeArray *)L_5);
-		int32_t L_6 = Array_get_Length_m21610649((RuntimeArray *)L_5, /*hidden argument*/NULL);
-		int32_t L_7 = (int32_t)__this->get_idx_3();
-		NullCheck((RuntimeArray *)L_4);
-		ResourceCacheItem_t51292791  L_8 = ((  ResourceCacheItem_t51292791  (*) (RuntimeArray *, int32_t, const RuntimeMethod*))IL2CPP_RGCTX_METHOD_INFO(InitializedTypeInfo(method->declaring_type)->rgctx_data, 2)->methodPointer)((RuntimeArray *)L_4, (int32_t)((int32_t)il2cpp_codegen_subtract((int32_t)((int32_t)il2cpp_codegen_subtract((int32_t)L_6, (int32_t)1)), (int32_t)L_7)), /*hidden argument*/IL2CPP_RGCTX_METHOD_INFO(InitializedTypeInfo(method->declaring_type)->rgctx_data, 2));
-		return L_8;
-	}
-}
-extern "C"  ResourceCacheItem_t51292791  InternalEnumerator_1_get_Current_m144365666_AdjustorThunk (RuntimeObject * __this, const RuntimeMethod* method)
-{
-	InternalEnumerator_1_t958356908 * _thisAdjusted = reinterpret_cast<InternalEnumerator_1_t958356908 *>(__this + 1);
-	return InternalEnumerator_1_get_Current_m144365666(_thisAdjusted, method);
 }
 #ifdef __clang__
 #pragma clang diagnostic pop

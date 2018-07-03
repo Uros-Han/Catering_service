@@ -77,7 +77,7 @@ public class FSM_Freindly : FSM
     {
         float fDamage = attackPart.m_dicStat["Attack"];
 
-        StartCoroutine(Attack(m_target, fDamage, true, !bAttackUnit));
+        StartCoroutine(Attack(m_target, fDamage, true, false, !bAttackUnit));
     }
 
     bool bAttackUnit = false;

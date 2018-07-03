@@ -74,11 +74,11 @@ public class AbilSelect : MonoBehaviour
             switch (iThreeAbil[i])
             {
                 case 0:
-                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), 2));
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = string.Format(Localization.Get(string.Format("abil_{0}_desc", iThreeAbil[i])), 2);
                     break;
 
                 case 1:
-                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), 3));
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = string.Format(Localization.Get(string.Format("abil_{0}_desc", iThreeAbil[i])), 3);
                     break;
 
                 case 2:
@@ -86,31 +86,31 @@ public class AbilSelect : MonoBehaviour
                     break;
 
                 case 3:
-                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), "50%"));
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = string.Format(Localization.Get(string.Format("abil_{0}_desc", iThreeAbil[i])), "50%");
                     break;
 
                 case 4:
-                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), 100));
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = string.Format(Localization.Get(string.Format("abil_{0}_desc", iThreeAbil[i])), 100);
                     break;
 
                 case 5:
-                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), 50));
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = string.Format(Localization.Get(string.Format("abil_{0}_desc", iThreeAbil[i])), 50);
                     break;
 
                 case 6:
-                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), 5));
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = string.Format(Localization.Get(string.Format("abil_{0}_desc", iThreeAbil[i])), 5);
                     break;
 
                 case 7:
-                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), 5));
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = string.Format(Localization.Get(string.Format("abil_{0}_desc", iThreeAbil[i])), 5);
                     break;
 
                 case 8:
-                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), "50%"));
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = string.Format(Localization.Get(string.Format("abil_{0}_desc", iThreeAbil[i])), "50%");
                     break;
 
                 case 9:
-                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), "25%"));
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = string.Format(Localization.Get(string.Format("abil_{0}_desc", iThreeAbil[i])), "25%");
                     break;
 
                 case 10:
@@ -122,15 +122,15 @@ public class AbilSelect : MonoBehaviour
                     break;
 
                 case 12:
-                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), 150));
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = string.Format(Localization.Get(string.Format("abil_{0}_desc", iThreeAbil[i])), 150);
                     break;
 
                 case 13:
-                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), "30%"));
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = string.Format(Localization.Get(string.Format("abil_{0}_desc", iThreeAbil[i])), "30%");
                     break;
 
                 case 14:
-                    abil_trans.GetChild(2).GetComponent<UILabel>().text = Localization.Get(string.Format(string.Format("abil_{0}_desc", iThreeAbil[i]), "40%"));
+                    abil_trans.GetChild(2).GetComponent<UILabel>().text = string.Format(Localization.Get(string.Format("abil_{0}_desc", iThreeAbil[i])), "40%");
                     break;
             }
         }

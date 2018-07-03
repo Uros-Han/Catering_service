@@ -1,4 +1,4 @@
-Android
+iOS
 SceneListBegin?
 Assets/Scenes/Main.unity
 Assets/Scenes/Battle.unity
@@ -304,7 +304,7 @@ ed4a130f6df30922c73bc2da9119c7d7 Assembly-CSharp.dll:.Player
 0ea70f437b58d92cf4f15c8746110639 Assembly-CSharp.dll:SpriteToParticlesAsset.UIParticleRenderer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PartyManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:UnityStandardAssets.ImageEffects.PostEffectsHelper
-bd24d023a6958c7b2bc12ed5b2e2d3cf Assembly-CSharp.dll:.MouthPanel
+d3ff743e54188aeffe03c244ca82a645 Assembly-CSharp.dll:.MouthPanel
 fc0cd7a3b68de86c8c311ccd01f4d949 Assembly-CSharp.dll:.SpriteModifier
 65c528ed04e962b902ad563a1854d1d7 Assembly-CSharp.dll:Com.LuisPedroFonseca.ProCamera2D.TopDownShooter.ObjectRotate
 d416213fcbdab9c579b1328ce6f00d1a Assembly-CSharp.dll:.UIInput
@@ -343,7 +343,7 @@ b895b461ca9e97b68b1dddd14d286bd9 Assembly-CSharp.dll:.TutorialMgr
 da9f29ffd5c4f0ac8282bf265db79688 Assembly-CSharp.dll:.TypewriterEffect
 a162086d6e3ad65384c7e618da944ad8 Assembly-CSharp.dll:.FSM_MainScene_Core
 8d6598392e3c4b6fd32aa274c5f5cd60 Assembly-CSharp.dll:.SpriteMaskExample07BloodController
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TopBarUI
+740d90c7a042dc4adca3193d8a41a0f7 Assembly-CSharp.dll:.TopBarUI
 87850b8e331cb17df6147150299d2208 Assembly-CSharp.dll:.UIColorPicker
 c9e54b768fbd45773cde3ed90fb9bd49 Assembly-CSharp.dll:Com.LuisPedroFonseca.ProCamera2D.ShakePreset
 833f369b616e7c95b3a7e556d6126a3e Assembly-CSharp.dll:SpriteParticleEmitter.DynamicEmitter
@@ -468,7 +468,7 @@ d5e0ea223a615cb8bb02a68374f429a7 Assembly-CSharp.dll:Com.LuisPedroFonseca.ProCam
 af3c0485a6cfbede261a88cc1b5f8384 Assembly-CSharp.dll:.UI2DSprite
 9921a9f88a3288e106af12d6e3200e55 Assembly-CSharp.dll:.InvDatabase
 4d842d6ecef7e004ad5b7d83ab4b42c1 Assembly-CSharp.dll:Com.LuisPedroFonseca.ProCamera2D.TopDownShooter.EnemyAttack
-b29ff382b4595061baa58d28b878b933 Assembly-CSharp.dll:.Tangled
+ea3aef676b843a5dd7489ad600ff5430 Assembly-CSharp.dll:.Tangled
 a0eede1b5b36a25e94c81bef0c6bc660 Assembly-CSharp.dll:.UIImageButton
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Battle_Geo
 f85b4c9bdc87e6d5ccda288c36338104 Assembly-CSharp.dll:.Part
@@ -486,7 +486,7 @@ f47dbc899e458e84d5f505141bba6a9f Assembly-CSharp.dll:.SpriteMaskExample06Transla
 f449ae6019dcabd2c14fe35870f7a170 Assembly-CSharp.dll:.RadialFillCursor
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.AimController
 301e71a3676f9b45d4dd42aa016bf8bc Assembly-CSharp-firstpass.dll:.ES3ReferenceMgr
-dfd78d000f4a366511f19f57d8d80c76 Assembly-CSharp.dll:.CoreAbilityMgr
+758a86e2b660913512928128beda2b87 Assembly-CSharp.dll:.CoreAbilityMgr
 fcffe9bbf1b7b7e4593e31031f78987b Assembly-CSharp.dll:.UISliderColors
 7cfdc1ec603e0fd5090ecc802f230df2 Assembly-CSharp.dll:.GridMgr
 eee89b3429db0942bfca88f85de80682 Assembly-CSharp.dll:SpriteParticleEmitter.StaticEmitterContinuous
@@ -495,3 +495,4 @@ b5cfa8bf295fd7e3976dec31449318a2 Assembly-CSharp.dll:.MessageBox
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.RealTime
 0ea7e3a1b65cd933d7a007e6774c4eaa Assembly-CSharp.dll:.SpriteMaskExample06Scaller
 18248c02757d2f02d46a3cce4166dbbf Assembly-CSharp.dll:SpriteParticleEmitter.DynamicEmitterUI
+17a7070a89170743cb1531c0112f026b Assembly-CSharp.dll:.AbilSelect

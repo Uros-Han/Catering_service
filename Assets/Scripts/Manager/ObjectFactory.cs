@@ -396,11 +396,6 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 enemyType = (ENEMY_TYPE)enemyList[i];
         }
 
-        ///HAVE TO ERASE THIS! KNIGHT PARTY BLOCKER
-        if (enemyType.Equals(ENEMY_TYPE.KNIGHT))
-            enemyType = ENEMY_TYPE.MERCENARY;
-        /// 
-
         if (iHeroNum != -1)
         {
             if (partyType.Equals(PARTY_TYPE.GARRISON))
@@ -2487,7 +2482,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 break;
             case 9:
                 armPart.m_weaponType = WEAPON_TYPE.JAVELIN;
-                armPart.m_strNameKey = "WeaponName_javelin_00";
+                armPart.m_strNameKey = "WeaponName_javelin_01";
                 fRange = Random.Range(80, 90);
                 fRandom = Random.Range(30, 50);
                 fSpeedRandom = Random.Range(40, 70);
@@ -2521,7 +2516,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
                 armPart.m_strNameKey = "WeaponName_shield_00";
                 fRandom = Random.Range(30, 50);
                 fSpeedRandom = Random.Range(70, 100);
-                iArmRandom = 1;
+                iArmRandom = Random.Range(1, 6);
             }
             else
             {
@@ -2595,7 +2590,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
     {
         GameObject obj;
         float fRandom = 0f;
-
+        float fRange = 0f;
 
         obj = Instantiate(m_objHuman) as GameObject;
 
@@ -2609,7 +2604,7 @@ public class ObjectFactory : Singleton<ObjectFactory>
         int iHeadRandom = Random.Range(0, m_sheet_knight_head.Length);
         head.GetComponent<SpriteRenderer>().sprite = m_sheet_knight_head[iHeadRandom];
         headPart.m_strNameKey = "PartName_kni_head_0";
-        fRandom = Random.Range(10, 13);
+        fRandom = Random.Range(90, 110);
         fRandomIQ = Random.Range(90, 110);
 
         //headPart.m_fHealth = fRandom;
@@ -2647,13 +2642,13 @@ public class ObjectFactory : Singleton<ObjectFactory>
 
         //		body.GetComponent<Part> ().m_dicStat = new Dictionary<string, float>();
 
-        fRandom = Random.Range(18, 23);
+        fRandom = Random.Range(100, 150);
         Part bodyPart = body.GetComponent<Part>();
         //bodyPart.m_fHealth = fRandom;
         bodyPart.m_fCurHealth = fRandom;
         bodyPart.m_dicStat.Add("Health", fRandom);
 
-        fRandom = Random.Range(6, 9);
+        fRandom = Random.Range(40, 60);
         bodyPart.m_dicStat.Add("Defense", fRandom);
         bodyPart.m_iSaveValue = iBodyRandom;
         bodyPart.m_iEnemyType = (int)ENEMY_TYPE.KNIGHT;
@@ -2663,22 +2658,110 @@ public class ObjectFactory : Singleton<ObjectFactory>
         GameObject arm = obj.transform.Find("Hand_R").gameObject;
         Part armPart = arm.GetComponent<Part>();
         int iArmRandom = Random.Range(0, m_sheet_knight_arm.Length - 1);
+
+        if (BattleSceneMgr.getInstance.m_bSiege && Random.Range(0, 100) > 50) // siege range weapon
+        {
+            switch (Random.Range(0, 2))
+            {
+                case 0:
+                    iArmRandom = 2;
+                    break;
+                case 1:
+                    iArmRandom = 3;
+                    break;
+            }
+        }
+
         arm.GetComponent<SpriteRenderer>().sprite = m_sheet_knight_arm[iArmRandom];
         float fSpeedRandom = 0f;
+
+        iArmRandom = 2;
         switch (iArmRandom)
         {
             case 0:
                 armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
-                armPart.m_strNameKey = "WeaponName_oneHand_09";
-                fRandom = Random.Range(6, 9);
-                fSpeedRandom = Random.Range(4, 6);
+                armPart.m_strNameKey = "WeaponName_oneHand_07";
+                fRange = Random.Range(30, 40);
+                fRandom = Random.Range(45, 65);
+                fSpeedRandom = Random.Range(40, 70);
                 armPart.m_bUse32PixelHand = true;
                 break;
             case 1:
                 armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
-                armPart.m_strNameKey = "WeaponName_oneHand_10";
-                fRandom = Random.Range(6, 9);
-                fSpeedRandom = Random.Range(4, 6);
+                armPart.m_strNameKey = "WeaponName_oneHand_08";
+                fRange = Random.Range(40, 50);
+                fRandom = Random.Range(50, 70);
+                fSpeedRandom = Random.Range(30, 50);
+                break;
+            case 2:
+                armPart.m_weaponType = WEAPON_TYPE.BOW;
+                armPart.m_strNameKey = "WeaponName_bow_00";
+                fRange = Random.Range(90, 100);
+                fRandom = Random.Range(45, 65);
+                fSpeedRandom = Random.Range(40, 70);
+                Destroy(obj.transform.Find("Hand_L").gameObject);
+
+                armPart.GetComponent<DPSpritePalette>().paletteTexture = m_texture_bow_palette;
+                armPart.GetComponent<DPSpritePalette>().PaletteIndex = 2;
+
+                break;
+            case 3:
+                armPart.m_weaponType = WEAPON_TYPE.CROSSBOW;
+                armPart.m_strNameKey = "WeaponName_crossbow_00";
+                fRange = Random.Range(80, 90);
+                fRandom = Random.Range(60, 80);
+                fSpeedRandom = Random.Range(15, 30);
+                Destroy(obj.transform.Find("Hand_L").gameObject);
+                break;
+            case 4:
+                armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
+                armPart.m_strNameKey = "WeaponName_oneHand_06";
+                fRange = Random.Range(20, 30);
+                fRandom = Random.Range(30, 45);
+                fSpeedRandom = Random.Range(70, 100);
+                break;
+            case 5:
+                armPart.m_weaponType = WEAPON_TYPE.ONE_HAND;
+                armPart.m_strNameKey = "WeaponName_oneHand_05";
+                fRange = Random.Range(30, 40);
+                fRandom = Random.Range(45, 65);
+                fSpeedRandom = Random.Range(40, 70);
+                armPart.m_bUse32PixelHand = true;
+                break;
+            case 6:
+                armPart.m_weaponType = WEAPON_TYPE.POLE;
+                armPart.m_strNameKey = "WeaponName_pole_01";
+                fRange = Random.Range(50, 70);
+                fRandom = Random.Range(40, 65);
+                fSpeedRandom = Random.Range(15, 30);
+                Destroy(obj.transform.Find("Hand_L").gameObject);
+                armPart.m_bUse32PixelHand = true;
+                break;
+            case 7:
+                armPart.m_weaponType = WEAPON_TYPE.TWO_HAND;
+                armPart.m_strNameKey = "WeaponName_twoHand_04";
+                fRange = Random.Range(50, 70);
+                fRandom = Random.Range(40, 65);
+                fSpeedRandom = Random.Range(15, 30);
+                Destroy(obj.transform.Find("Hand_L").gameObject);
+                armPart.m_bUse32PixelHand = true;
+                break;
+            case 8:
+                armPart.m_weaponType = WEAPON_TYPE.TWO_HAND;
+                armPart.m_strNameKey = "WeaponName_twoHand_05";
+                fRange = Random.Range(40, 50);
+                fRandom = Random.Range(50, 70);
+                fSpeedRandom = Random.Range(15, 20);
+                Destroy(obj.transform.Find("Hand_L").gameObject);
+                armPart.m_bUse32PixelHand = true;
+                break;
+            case 9:
+                armPart.m_weaponType = WEAPON_TYPE.POLE;
+                armPart.m_strNameKey = "WeaponName_pole_02";
+                fRange = Random.Range(30, 40);
+                fRandom = Random.Range(45, 65);
+                fSpeedRandom = Random.Range(40, 70);
+                armPart.m_bUse32PixelHand = true;
                 break;
         }
 
@@ -2687,8 +2770,9 @@ public class ObjectFactory : Singleton<ObjectFactory>
         anim.runtimeAnimatorController = m_weapon_anim_controller[(int)armPart.m_weaponType];
         armPart.m_dicStat.Add("Attack", fRandom);
         armPart.m_dicStat.Add("AttackSpeed", fSpeedRandom);
+        armPart.m_dicStat.Add("Range", fRange);
 
-        fRandom = Random.Range(7, 10);
+        fRandom = Random.Range(50, 80);
         //armPart.m_fHealth = fRandom;
         armPart.m_fCurHealth = fRandom;
         armPart.m_dicStat.Add("Health", fRandom);
@@ -2702,19 +2786,46 @@ public class ObjectFactory : Singleton<ObjectFactory>
             arm.transform.localRotation = Quaternion.AngleAxis(-35f, Vector3.forward);
             arm.GetComponent<SpriteRenderer>().sortingOrder = 1;
             armPart = arm.GetComponent<Part>();
-            if (Random.Range(0, 100) < 50)
+            switch (Random.Range(0, 4))
             {
-                armPart.m_strNameKey = "WeaponName_shield_00";
-                fRandom = Random.Range(7, 10);
-                fSpeedRandom = Random.Range(10, 15);
-                iArmRandom = 1;
-            }
-            else
-            {
-                armPart.m_strNameKey = "WeaponName_shield_01";
-                fRandom = Random.Range(7, 10);
-                fSpeedRandom = Random.Range(12, 17);
-                iArmRandom = 2;
+                case 0:
+                    arm.transform.localPosition = new Vector3(0.09f, 0.06f);
+                    arm.transform.localRotation = Quaternion.AngleAxis(-35f, Vector3.forward);
+                    arm.GetComponent<SpriteRenderer>().sortingOrder = 1;
+                    armPart.m_strNameKey = "WeaponName_shield_01";
+                    fRandom = Random.Range(40, 60);
+                    fSpeedRandom = Random.Range(90, 110);
+                    iArmRandom = 0;
+                    break;
+
+                case 1:
+                    arm.transform.localPosition = new Vector3(0.09f, 0.06f);
+                    arm.transform.localRotation = Quaternion.AngleAxis(-35f, Vector3.forward);
+                    arm.GetComponent<SpriteRenderer>().sortingOrder = 1;
+                    armPart.m_strNameKey = "WeaponName_shield_01";
+                    fRandom = Random.Range(40, 60);
+                    fSpeedRandom = Random.Range(90, 110);
+                    iArmRandom = 1;
+                    break;
+
+                case 2:
+                    arm.transform.localPosition = new Vector3(0.09f, 0.06f);
+                    arm.transform.localRotation = Quaternion.AngleAxis(-35f, Vector3.forward);
+                    arm.GetComponent<SpriteRenderer>().sortingOrder = 1;
+                    armPart.m_strNameKey = "WeaponName_shield_02";
+                    fRandom = Random.Range(40, 60);
+                    fSpeedRandom = Random.Range(90, 110);
+                    iArmRandom = 2;
+                    break;
+                case 3:
+                    arm.transform.localPosition = new Vector3(0.09f, 0.06f);
+                    arm.transform.localRotation = Quaternion.AngleAxis(-35f, Vector3.forward);
+                    arm.GetComponent<SpriteRenderer>().sortingOrder = 1;
+                    armPart.m_strNameKey = "WeaponName_shield_03";
+                    fRandom = Random.Range(40, 60);
+                    fSpeedRandom = Random.Range(90, 110);
+                    iArmRandom = 3;
+                    break;
             }
             arm.GetComponent<SpriteRenderer>().sprite = m_sheet_knight_arm_left[iArmRandom];
             //armPart.m_fHealth = fRandom;
@@ -2733,8 +2844,8 @@ public class ObjectFactory : Singleton<ObjectFactory>
         int iLegRandom = Random.Range(0, m_sheet_knight_leg.Length);
         leg.GetComponent<SpriteRenderer>().sprite = m_sheet_knight_leg[iLegRandom];
         legPart.m_strNameKey = "PartName_kni_legs_0";
-        fRandom = Random.Range(10, 13);
-        fRandomDodge = Random.Range(7, 9);
+        fRandom = Random.Range(80, 110);
+        fRandomDodge = Random.Range(55, 75);
 
         //		leg.GetComponent<Part> ().m_dicStat = new Dictionary<string, float>();
 

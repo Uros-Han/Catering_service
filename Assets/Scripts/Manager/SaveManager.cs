@@ -76,6 +76,7 @@ public class SaveManager : Singleton<SaveManager>
         coreAbility.m_iLevel = ES3.Load<int>("level", "core.txt");
         coreAbility.m_iCurExp = ES3.Load<int>("curExp", "core.txt");
         coreAbility.m_listAbil = ES3.Load<List<int>>("listAbil", "core.txt");
+        coreAbility.MaxExpSet();
         for (int i = 1; i < coreAbility.m_listAbil.Count; ++i)
         {
             ObjectFactory.getInstance.Create_AbilUI(coreAbility.m_listAbil[i]);

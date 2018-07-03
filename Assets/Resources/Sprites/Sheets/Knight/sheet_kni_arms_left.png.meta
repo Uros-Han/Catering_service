@@ -1,12 +1,13 @@
 fileFormatVersion: 2
 guid: d58cdd03947fc4ee9a31f10cb2b7cf74
-timeCreated: 1516702843
+timeCreated: 1530608489
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: sheet_kni_arms_left_0
     21300002: sheet_kni_arms_left_1
     21300004: sheet_kni_arms_left_2
+    21300006: sheet_kni_arms_left_3
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -115,7 +116,7 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
     - serializedVersion: 2
       name: sheet_kni_arms_left_1
       rect:
@@ -129,7 +130,7 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
     - serializedVersion: 2
       name: sheet_kni_arms_left_2
       rect:
@@ -143,7 +144,21 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: sheet_kni_arms_left_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
     outline: []
     physicsShape: []
   spritePackingTag: 

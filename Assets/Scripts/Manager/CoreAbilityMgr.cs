@@ -25,7 +25,7 @@ public class CoreAbilityMgr : MonoBehaviour
         m_listAbil.Add(0);
 
         m_iLevel = 1;
-        m_iMaxExp = 24;
+        MaxExpSet();
     }
 
     public void SetTargetValue()
@@ -55,10 +55,10 @@ public class CoreAbilityMgr : MonoBehaviour
             if (m_iGainExp + m_iTargetExp >= m_iMaxExp)
             {
                 m_iTargetExp = m_iGainExp + m_iTargetExp;
-                while (m_iTargetLvl * 24 <= m_iTargetExp)
+                while (24 + ((m_iTargetLvl - 1) * 12) <= m_iTargetExp)
                 {
                     m_bPopUpAbilSelectPanel = true;
-                    m_iTargetExp = m_iTargetExp - (m_iTargetLvl * 24);
+                    m_iTargetExp = m_iTargetExp - (24 + ((m_iTargetLvl - 1) * 12));
                     m_iTargetLvl += 1;
                 }
             }
@@ -83,7 +83,7 @@ public class CoreAbilityMgr : MonoBehaviour
 
     public void MaxExpSet()
     {
-        m_iMaxExp = m_iLevel * 24;
+        m_iMaxExp = 24 + ((m_iLevel - 1) * 12);
     }
 
     IEnumerator chgVal;
