@@ -143,7 +143,10 @@ public class FSM_MainScene_Core : FSM
                 targetObj.GetComponent<Animator>().enabled = false;
                 targetObj.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
                 targetObj.transform.GetChild(0).GetChild(0).GetComponent<Animator>().enabled = true;
-                targetObj.transform.GetChild(0).GetChild(0).GetComponent<DPSpritePalette>().PaletteIndex = 1;
+                if (targetPart.m_weaponType != WEAPON_TYPE.BOW)
+                    targetObj.transform.GetChild(0).GetChild(0).GetComponent<DPSpritePalette>().PaletteIndex = 1;
+                else
+                    targetObj.transform.GetChild(0).GetChild(0).GetComponent<DPSpritePalette>().PaletteIndex = targetPart.m_iPaletteSkin;
                 AnimatorPosSet(targetObj, targetPart.m_weaponType);
             }
 

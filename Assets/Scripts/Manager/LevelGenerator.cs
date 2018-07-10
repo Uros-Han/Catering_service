@@ -7,74 +7,40 @@ public class LevelGenerator : Singleton<LevelGenerator>
 
     void Generate(ENEMY_TYPE enemyType, int iHeroIdx = 0) //적 타입에 맞게 적을 생성해준다.
     {
+        GameObject objEnemy = null;
+
         switch (enemyType)
         {
             case ENEMY_TYPE.LIVESTOCK:
-                ObjectFactory.getInstance.Create_LiveStock();
+                objEnemy = ObjectFactory.getInstance.Create_LiveStock();
                 break;
 
             case ENEMY_TYPE.CIVILIAN:
-                ObjectFactory.getInstance.Create_Civilian(100f);
+                objEnemy = ObjectFactory.getInstance.Create_Civilian(100f);
                 break;
 
             case ENEMY_TYPE.MERCENARY:
-                ObjectFactory.getInstance.Create_Mercenary(100f);
+                objEnemy = ObjectFactory.getInstance.Create_Mercenary(100f);
                 break;
 
             case ENEMY_TYPE.KNIGHT:
-                ObjectFactory.getInstance.Create_Knight(100f);
+                objEnemy = ObjectFactory.getInstance.Create_Knight(100f);
                 break;
 
             case ENEMY_TYPE.HERO:
-                ObjectFactory.getInstance.Create_Hero(iHeroIdx);
+                objEnemy = ObjectFactory.getInstance.Create_Hero(iHeroIdx);
                 break;
+        }
+
+        if (BattleSceneMgr.getInstance.m_curBattleWorldIcon.m_iconType.Equals((int)WORLDICON_TYPE.ALTAR) && objEnemy != null)
+        {
+            Destroy(objEnemy.GetComponent<FSM_Enemy>().m_objHealthBar);
+            Destroy(objEnemy.GetComponent<FSM_Enemy>());
+            objEnemy.transform.position = GameObject.Find("Altar").transform.position;
+            objEnemy.transform.position = new Vector3(objEnemy.transform.position.x, -0.03f);
         }
     }
 
-    //	public void Encount(int iCost, int iDay) //코스트와 날짜에 맞는 적타입을 리스트로 뽑아준다.
-    //	{
-    //		List<ENEMY_TYPE> list_enemyType = new List<ENEMY_TYPE> ();
-    //
-    //		float fAdjustProbabilty = 0f;
-    //		bool bDidntChoiced = true;
-    //		bool bHeroContained = false;
-    //
-    //		while(iCost > 0)
-    //		{
-    //			bDidntChoiced = true;
-    //
-    //			if(iCost >= m_iTypeCost[(int)ENEMY_TYPE.LIVESTOCK] && Random.Range(0f, 1f) < CalculateProbablity(ENEMY_TYPE.LIVESTOCK, iDay) + fAdjustProbabilty){
-    //				bDidntChoiced = false;
-    //				list_enemyType.Add(ENEMY_TYPE.LIVESTOCK);
-    //				iCost -= m_iTypeCost[(int)ENEMY_TYPE.LIVESTOCK];
-    //			}else if(iCost >= m_iTypeCost[(int)ENEMY_TYPE.CIVILIAN] && Random.Range(0f, 1f) < CalculateProbablity(ENEMY_TYPE.CIVILIAN, iDay) + fAdjustProbabilty){
-    //				bDidntChoiced = false;
-    //				list_enemyType.Add(ENEMY_TYPE.CIVILIAN);
-    //				iCost -= m_iTypeCost[(int)ENEMY_TYPE.CIVILIAN];
-    //			}else if(iCost >= m_iTypeCost[(int)ENEMY_TYPE.MERCENARY] && Random.Range(0f, 1f) < CalculateProbablity(ENEMY_TYPE.MERCENARY, iDay) + fAdjustProbabilty){
-    //				bDidntChoiced = false;
-    //				list_enemyType.Add(ENEMY_TYPE.MERCENARY);
-    //				iCost -= m_iTypeCost[(int)ENEMY_TYPE.MERCENARY];
-    //			}else if(iCost >= m_iTypeCost[(int)ENEMY_TYPE.KNIGHT]){
-    //				bDidntChoiced = false;
-    //				list_enemyType.Add(ENEMY_TYPE.KNIGHT);
-    //				iCost -= m_iTypeCost[(int)ENEMY_TYPE.KNIGHT];
-    //			}
-    //
-    //			if(bDidntChoiced)
-    //			{
-    //				fAdjustProbabilty += 0.02f;
-    //			}
-    //		}
-    //
-    //		if (iDay % 10 == 0) {
-    //			list_enemyType.Add(ENEMY_TYPE.HERO);
-    //			bHeroContained = true;
-    //		}
-    //
-    //		StartCoroutine (GenerateQueue (list_enemyType, iDay));
-    //
-    //	}
 
     public void Encount()
     {

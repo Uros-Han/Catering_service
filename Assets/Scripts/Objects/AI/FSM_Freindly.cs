@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class FSM_Freindly : FSM
 {
-
+    bool m_bDontAttack = false;
 
     // Use this for initialization
     void OnEnable()
     {
         SetState(AI_STATE.IDLE);
+
+        if (BattleSceneMgr.getInstance.m_curBattleWorldIcon.m_iconType.Equals((int)WORLDICON_TYPE.ALTAR))
+        {
+            m_bDontAttack = true;
+        }
     }
 
     public void HitEffect()
@@ -21,6 +26,9 @@ public class FSM_Freindly : FSM
     {
         Transform EnemyTrans = GameObject.Find("Enemies").transform;
         bool bAttackAble = GetComponent<Part>().m_bAttackAvailable;
+
+        if (m_bDontAttack)
+            bAttackAble = false;
 
         float fRange = 0f;
         if (bAttackAble)
@@ -83,7 +91,7 @@ public class FSM_Freindly : FSM
     bool bAttackUnit = false;
     protected override IEnumerator State_Attack()
     {
-        if (BattleSceneMgr.getInstance.m_turnState.Equals(TURN_STATE.NIGHT))
+        if (BattleSceneMgr.getInstance.m_turnState.Equals(TURN_STATE.NIGHT) || m_bDontAttack)
         {
             m_AiState = AI_STATE.IDLE;
             m_target = null;
@@ -92,121 +100,81 @@ public class FSM_Freindly : FSM
         Unit targetUnit = null;
         Wall targetWall = null;
 
-        if (m_target.GetComponent<Unit>() != null)
+        if (m_target != null)
         {
-            bAttackUnit = true;
-            targetUnit = m_target.GetComponent<Unit>();
-        }
-        else
-        {
-            bAttackUnit = false;
-            targetWall = m_target.GetComponent<Wall>();
-        }
-
-        Part attackPart = GetComponent<Part>();
-
-
-        float fDmg = attackPart.m_dicStat["Attack"];
-        for (int i = 0; i < attackPart.m_lstPartBuffed.Count; ++i)
-        {
-            fDmg += attackPart.m_lstPartBuffed[i].m_dicStatBuff["Attack"];
-        }
-
-        float fAttackSpeed = attackPart.m_dicStat["AttackSpeed"];
-        for (int i = 0; i < attackPart.m_lstPartBuffed.Count; ++i)
-        {
-            fAttackSpeed += attackPart.m_lstPartBuffed[i].m_dicStatBuff["AttackSpeed"];
-        }
-
-        fAttackSpeed /= 10f;
-
-        Animator anim = transform.GetChild(0).GetChild(0).GetComponent<Animator>();
-        anim.SetFloat("AttackSpeed", fAttackSpeed);
-
-        float fRange = (float)attackPart.m_dicStat["Range"];
-        for (int i = 0; i < attackPart.m_lstPartBuffed.Count; ++i)
-        {
-            fRange += attackPart.m_lstPartBuffed[i].m_dicStatBuff["Range"];
-        }
-        fRange /= 100f;
-
-        while (m_AiState == AI_STATE.ATTACK)
-        {
-
-            anim.SetBool("Hit", false);
-            anim.SetBool("Ready_Weapon", true);
-            anim.SetBool("Cancel_Attack", false);
-
-            float fTimer = 0f;
-
-            do
+            if (m_target.GetComponent<Unit>() != null)
             {
-                fTimer += Time.deltaTime * fAttackSpeed * 0.1f;
-                if (m_AiState != AI_STATE.ATTACK || (bAttackUnit && targetUnit.m_bEaten) || (bAttackUnit && targetUnit.m_fCurHealth <= 0f) || (!bAttackUnit && targetWall.m_fCurHealth <= 0f) || m_target == null || !m_target.activeInHierarchy || (bAttackUnit && Vector3.Distance(m_target.transform.position, transform.position) > fRange))
-                {
-                    m_AiState = AI_STATE.IDLE;
-                    m_target = null;
-                    anim.SetBool("Cancel_Attack", true);
-                    break;
-                }
-                yield return null;
-
-            } while (fTimer < 1f);
-
-            if (anim.GetBool("Cancel_Attack"))
+                bAttackUnit = true;
+                targetUnit = m_target.GetComponent<Unit>();
+            }
+            else
             {
-                anim.SetBool("Hit", false);
-                anim.SetBool("Ready_Weapon", false);
-                break;
+                bAttackUnit = false;
+                targetWall = m_target.GetComponent<Wall>();
             }
 
-            anim.SetBool("Hit", true);
-            yield return null;
+            Part attackPart = GetComponent<Part>();
 
-            //		do{
-            //			yield return null;
-            //
-            //			if(m_target == null || !m_target.activeInHierarchy)
-            //			{
-            //				m_AiState = AI_STATE.IDLE;
-            //				m_target = null;
-            //				break;
-            //			}
-            //			
-            //			iTween.RotateTo(gameObject, iTween.Hash("z",-100f,"time", fAttackSpeed * 0.2f));
-            //			yield return new WaitForSeconds((fAttackSpeed * 0.2f) + (fAttackSpeed * 0.1f));
-            //			iTween.RotateTo(gameObject, iTween.Hash("z",0f,"time", fAttackSpeed * 0.02f));
-            //
-            //			SoundMgr.getInstance.PlaySfx ("weapon_twohand");
-            //
-            //			yield return new WaitForSeconds(fAttackSpeed * 0.02f);
-            //			StartCoroutine(Attack(m_target, fDmg, true));
-            //			yield return new WaitForSeconds(fAttackSpeed * 0.1f); //Delay
-            //
-            //			if(targetUnit.m_fCurHealth <= 0)
-            //			{
-            //				m_AiState = AI_STATE.IDLE;
-            //				m_target = null;
-            //				break;
-            //			}
-            //
-            //			if(m_target == null || !m_target.activeInHierarchy)
-            //			{
-            //				m_AiState = AI_STATE.IDLE;
-            //				m_target = null;
-            //				break;
-            //			}
-            //
-            //			if(Vector3.Distance(m_target.transform.position, transform.position) > 0.5f)
-            //			{
-            //				m_AiState = AI_STATE.IDLE;
-            //				m_target = null;
-            //			}
-            //			
-            //		}while(m_AiState == AI_STATE.ATTACK);
-        };
 
-        anim.SetBool("Ready_Weapon", false);
+            float fDmg = attackPart.m_dicStat["Attack"];
+            for (int i = 0; i < attackPart.m_lstPartBuffed.Count; ++i)
+            {
+                fDmg += attackPart.m_lstPartBuffed[i].m_dicStatBuff["Attack"];
+            }
+
+            float fAttackSpeed = attackPart.m_dicStat["AttackSpeed"];
+            for (int i = 0; i < attackPart.m_lstPartBuffed.Count; ++i)
+            {
+                fAttackSpeed += attackPart.m_lstPartBuffed[i].m_dicStatBuff["AttackSpeed"];
+            }
+
+            fAttackSpeed /= 10f;
+
+            Animator anim = transform.GetChild(0).GetChild(0).GetComponent<Animator>();
+            anim.SetFloat("AttackSpeed", fAttackSpeed);
+
+            float fRange = (float)attackPart.m_dicStat["Range"];
+            for (int i = 0; i < attackPart.m_lstPartBuffed.Count; ++i)
+            {
+                fRange += attackPart.m_lstPartBuffed[i].m_dicStatBuff["Range"];
+            }
+            fRange /= 100f;
+
+            while (m_AiState == AI_STATE.ATTACK)
+            {
+                anim.SetBool("Hit", false);
+                anim.SetBool("Ready_Weapon", true);
+                anim.SetBool("Cancel_Attack", false);
+
+                float fTimer = 0f;
+
+                do
+                {
+                    fTimer += Time.deltaTime * fAttackSpeed * 0.1f;
+                    if (m_AiState != AI_STATE.ATTACK || (bAttackUnit && targetUnit.m_bEaten) || (bAttackUnit && targetUnit.m_fCurHealth <= 0f) || (!bAttackUnit && targetWall.m_fCurHealth <= 0f) || m_target == null || !m_target.activeInHierarchy || (bAttackUnit && Vector3.Distance(m_target.transform.position, transform.position) > fRange))
+                    {
+                        m_AiState = AI_STATE.IDLE;
+                        m_target = null;
+                        anim.SetBool("Cancel_Attack", true);
+                        break;
+                    }
+                    yield return null;
+
+                } while (fTimer < 1f);
+
+                if (anim.GetBool("Cancel_Attack"))
+                {
+                    anim.SetBool("Hit", false);
+                    anim.SetBool("Ready_Weapon", false);
+                    break;
+                }
+
+                anim.SetBool("Hit", true);
+                yield return null;
+            };
+
+            anim.SetBool("Ready_Weapon", false);
+        }
 
         SetState(m_AiState);
     }

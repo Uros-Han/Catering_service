@@ -242,7 +242,8 @@ public class Unit : MonoBehaviour
     public IEnumerator DestroyThis(float fDelay = 0.01f)
     {
         transform.parent = GameObject.Find("Field").transform;
-        Destroy(GetComponent<FSM_Enemy>().m_objHealthBar);
+        if (GetComponent<FSM_Enemy>() != null)
+            Destroy(GetComponent<FSM_Enemy>().m_objHealthBar);
 
         yield return new WaitForSeconds(fDelay);
 

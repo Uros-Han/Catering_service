@@ -46,6 +46,19 @@ public class BattleSceneSetter : MonoBehaviour
         {
             ObjectFactory.getInstance.Create_AbilUI(listAbil[i]);
         }
+
+
+        if (m_battleSceneMgr.m_curBattleWorldIcon.m_iconType.Equals((int)WORLDICON_TYPE.ALTAR))
+        {
+            GameObject.Find("Player").transform.position = new Vector3(-0.64f, 0f, 0f);
+            GameObject.Find("InsideBase").transform.GetChild(0).gameObject.SetActive(true);
+            GameObject.Find("Altar").GetComponent<SpriteRenderer>().enabled = true;
+        }
+        else if (m_battleSceneMgr.m_curBattleWorldIcon.m_iconType.Equals(WORLDICON_TYPE.CLINIC))
+        {
+            GameObject.Find("Player").transform.position = new Vector3(-0.64f, 0f, 0f);
+            GameObject.Find("InsideBase").transform.GetChild(0).gameObject.SetActive(true);
+        }
     }
 
     void SetBuilding()
@@ -121,7 +134,7 @@ public class BattleSceneSetter : MonoBehaviour
             }
         }
 
-        if (m_battleSceneMgr.m_bSiege)
+        if (m_battleSceneMgr.m_bSiege || m_battleSceneMgr.m_curBattleWorldIcon.m_iconType.Equals((int)WORLDICON_TYPE.ALTAR) || m_battleSceneMgr.m_curBattleWorldIcon.m_iconType.Equals(WORLDICON_TYPE.CLINIC))
         {
             m_battleSceneMgr.m_bSiege = false;
 

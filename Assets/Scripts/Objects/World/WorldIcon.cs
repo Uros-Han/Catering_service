@@ -58,6 +58,8 @@ public class WorldIcon : MonoBehaviour
 
             case (int)WORLDICON_TYPE.ALTAR:
                 GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sheet_worldicon[7];
+                if (!m_bReadySacrifice)
+                    GetComponent<SpriteRenderer>().color = Color.gray;
                 break;
 
             case (int)WORLDICON_TYPE.CLINIC:
@@ -69,4 +71,34 @@ public class WorldIcon : MonoBehaviour
 
     }
 
+    public float m_fCoolTime;
+    public float m_fCurCoolTime;
+    public bool m_bReadySacrifice;
+    void ActivateTimer()
+    {
+        if (m_fCoolTime == 0)
+            return;
+
+        if (!m_bReadySacrifice)
+            StartCoroutine(CoolTimer());
+    }
+
+    IEnumerator CoolTimer()
+    {
+        TimeMgr timeMgr = TimeMgr.getInstance;
+        do
+        {
+            m_fCurCoolTime += Time.deltaTime;
+
+            if (m_fCoolTime < m_fCurCoolTime)
+            {
+                m_fCurCoolTime = 0f;
+                m_bReadySacrifice = true;
+                GetComponent<SpriteRenderer>().color = Color.white;
+                m_list_enemyType.Add((int)ENEMY_TYPE.CIVILIAN);
+            }
+
+            yield return null;
+        } while (timeMgr.m_timeState.Equals(TIME_STATE.PLAY) && !m_bReadySacrifice);
+    }
 }

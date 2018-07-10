@@ -132,11 +132,13 @@ public class Core : Part
         int iEmptyMouthIdx = mouthPanel.EmptyMouthIdx();
 
         Tangled tangled = GameObject.Find("Tangled").GetComponent<Tangled>();
-
-        if (target.GetComponent<FSM_Enemy>().m_objHealthBar == null)
-            yield break;
-        target.GetComponent<FSM_Enemy>().m_objHealthBar.SetActive(false);
-        target.GetComponent<FSM_Enemy>().m_AiState = AI_STATE.DISABLED;
+        if (target.GetComponent<FSM_Enemy>() != null)
+        {
+            if (target.GetComponent<FSM_Enemy>().m_objHealthBar == null)
+                yield break;
+            target.GetComponent<FSM_Enemy>().m_objHealthBar.SetActive(false);
+            target.GetComponent<FSM_Enemy>().m_AiState = AI_STATE.DISABLED;
+        }
         target.GetComponent<CircleCollider2D>().enabled = false;
         target.GetComponent<Unit>().m_bEaten = true;
 

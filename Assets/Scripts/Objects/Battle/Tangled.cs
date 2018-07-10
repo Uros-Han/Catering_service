@@ -199,7 +199,7 @@ public class Tangled : MonoBehaviour
                     m_DragingObject = null;
                     Camera.main.GetComponent<ProCamera2DPanAndZoom>().enabled = true;
                     targetUnit.m_bCatched = false;
-                    if (targetTransform.GetComponent<FSM_Enemy>().m_AiState == AI_STATE.PANIC)
+                    if (targetTransform.GetComponent<FSM_Enemy>() != null && targetTransform.GetComponent<FSM_Enemy>().m_AiState == AI_STATE.PANIC)
                         targetTransform.GetComponent<FSM_Enemy>().m_AiState = AI_STATE.MOVE;
 
                     for (int i = 0; i < targetTransform.childCount; ++i)

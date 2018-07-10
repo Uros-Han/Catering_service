@@ -303,12 +303,11 @@ public class Core_World : MonoBehaviour
         float fSpeedAdjuster = 0f;
         bool bIsTuto = GameMgr.getInstance.m_bIsTutorial;
 
+        TimeMgr.getInstance.Play();
         for (int i = 0; i < m_listMoveIdx.Count; ++i)
         {
 
             Vector3 destPos = grid.GetPosOfIdx(m_listMoveIdx[i]);
-
-            TimeMgr.getInstance.Play();
 
             if (GameObject.Find("PartyManager") != null && !bIsTuto)
                 GameObject.Find("PartyManager").GetComponent<PartyManager>().CalculateDepolying();
@@ -364,7 +363,7 @@ public class Core_World : MonoBehaviour
             //yield break;
         }
 
-        GameObject.Find("Party").BroadcastMessage("Halt", SendMessageOptions.DontRequireReceiver);
+        TimeMgr.getInstance.Stop();
 
         ProCamera2D.Instance.AdjustCameraTargetInfluence(ProCamera2D.Instance.CameraTargets[0], 0f, 0f);
         if (ProCamera2D.Instance.CameraTargets.Count > 1)

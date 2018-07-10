@@ -495,11 +495,10 @@ public class ObjectFactory : Singleton<ObjectFactory>
         if (parent.GetComponent<Part>().m_weaponType == WEAPON_TYPE.BOW)
         {
             obj.transform.GetChild(0).GetComponent<DPSpritePalette>().paletteTexture = m_texture_bow_palette;
-            obj.transform.GetChild(0).GetComponent<DPSpritePalette>().PaletteIndex = parent.GetComponent<DPSpritePalette>().PaletteIndex;
+            obj.transform.GetChild(0).GetComponent<DPSpritePalette>().SetPaletteIndex(parent.GetComponent<Part>().m_iPaletteSkin);
         }
         else
             obj.transform.GetChild(0).GetComponent<DPSpritePalette>().paletteTexture = m_texture_skin_palette;
-        //		parent.GetComponent<SpriteRenderer> ().enabled = false;
 
         return obj;
     }
@@ -963,6 +962,13 @@ public class ObjectFactory : Singleton<ObjectFactory>
             obj.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
             obj.transform.GetChild(0).GetChild(0).GetComponent<Animator>().enabled = true;
             obj.transform.GetChild(0).GetChild(0).GetComponent<DPSpritePalette>().PaletteIndex = 1;
+
+            if (cpart.m_weaponType == WEAPON_TYPE.BOW)
+            {
+                obj.GetComponent<DPSpritePalette>().paletteTexture = m_texture_bow_palette;
+                obj.GetComponent<DPSpritePalette>().PaletteIndex = cpart.m_iPaletteSkin;
+                obj.transform.GetChild(0).GetChild(0).GetComponent<DPSpritePalette>().PaletteIndex = cpart.m_iPaletteSkin;
+            }
         }
 
         if (obj.GetComponent<DPSpritePalette>().paletteTexture == null)

@@ -63,6 +63,7 @@ public class TimeMgr : Singleton<TimeMgr>
         {
             //GameObject.Find("Party").BroadcastMessage("Idling", SendMessageOptions.DontRequireReceiver);
             GameObject.Find("Party").BroadcastMessage("MoveOrder", SendMessageOptions.DontRequireReceiver);
+            GameObject.Find("WorldIcons").BroadcastMessage("ActivateTimer", SendMessageOptions.DontRequireReceiver);
             //StartCoroutine(Play_Coroutine());
         }
 
