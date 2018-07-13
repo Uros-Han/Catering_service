@@ -608,6 +608,7 @@
     <Compile Include="Assets\Scripts\Objects\AI\FSM_MainScene_Enemy.cs" />
     <Compile Include="Assets\Scripts\Objects\Battle\Battle_Geo.cs" />
     <Compile Include="Assets\Scripts\Objects\Battle\Core.cs" />
+    <Compile Include="Assets\Scripts\Objects\Battle\Crowd.cs" />
     <Compile Include="Assets\Scripts\Objects\Battle\Morgue.cs" />
     <Compile Include="Assets\Scripts\Objects\Battle\PartAnimator.cs" />
     <Compile Include="Assets\Scripts\Objects\Battle\Poop.cs" />

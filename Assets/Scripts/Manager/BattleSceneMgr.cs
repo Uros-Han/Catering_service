@@ -200,6 +200,9 @@ public class BattleSceneMgr : Singleton<BattleSceneMgr>
 
         if (bOn)
         {
+            BattleSceneMgr.getInstance.m_mouseState = MOUSE_STATE.NORMAL;
+
+
             Transform playerTrans = GameObject.Find("Player").transform;
             GridMgr grid = GridMgr.getInstance;
             playerTrans.position = new Vector3(0, 0);

@@ -48,7 +48,7 @@ public class Tangled : MonoBehaviour
 
     bool bCantEat = false;
     bool bCantGrab = false;
-    IEnumerator TangledDrag_Coroutine(Transform targetTransform)
+    IEnumerator TangledDrag_Coroutine(Transform targetTransform, bool bHealGrab = false)
     {
         m_bTangledReady = false;
         bool bDoneDrag = false;
@@ -111,22 +111,34 @@ public class Tangled : MonoBehaviour
                 break;
             }
 
-
-            if (!bDoneDrag)
+            if (!bHealGrab)
             {
-
-                target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                targetTransform.position = new Vector3(target.x, target.y);
-
-                if (coreCollider.OverlapPoint(target) && !mouthPanel.isMouthFull() && !bCantEat)
+                if (!bDoneDrag)
                 {
-                    targetTransform.localScale = new Vector3(1.25f, 1.25f, 1f);
-                    bReadyToEat = true;
+
+                    target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    targetTransform.position = new Vector3(target.x, target.y);
+
+                    if (coreCollider.OverlapPoint(target) && !mouthPanel.isMouthFull() && !bCantEat)
+                    {
+                        targetTransform.localScale = new Vector3(1.25f, 1.25f, 1f);
+                        bReadyToEat = true;
+                    }
+                    else if (bReadyToEat && !coreCollider.OverlapPoint(target))
+                    {
+                        targetTransform.localScale = Vector3.one;
+                        bReadyToEat = false;
+                    }
                 }
-                else if (bReadyToEat && !coreCollider.OverlapPoint(target))
+            }
+            else
+            {
+                target = targetTransform.position;
+
+                if (targetUnit.m_fCurHealth <= 0f)
                 {
-                    targetTransform.localScale = Vector3.one;
-                    bReadyToEat = false;
+                    bGrabForceExit = true;
+                    targetUnit.Death();
                 }
             }
 
@@ -189,10 +201,8 @@ public class Tangled : MonoBehaviour
                 }
             }
 
-
-            if (!Input.GetMouseButton(0) || bGrabForceExit)
+            if ((!bHealGrab && !Input.GetMouseButton(0)) || bGrabForceExit)
             {
-
                 if (!bDoneDrag)
                 {
                     bDoneDrag = true;
@@ -219,8 +229,6 @@ public class Tangled : MonoBehaviour
                         TutorialMgr.getInstance.SkipTutorial();
                     bReadyToEat = false;
                 }
-
-
             }
 
             yield return null;
@@ -263,6 +271,11 @@ public class Tangled : MonoBehaviour
         StartCoroutine(TangledDrag_Coroutine(target));
         if (GameObject.Find("Player").GetComponent<CoreAbilityMgr>().HasAbility(6))
             StartCoroutine(TangledAbil_6(target));
+    }
+
+    public void TangledHeal(Transform target)
+    {
+        StartCoroutine(TangledDrag_Coroutine(target, true));
     }
 
     public void TangledAttack(Transform target)

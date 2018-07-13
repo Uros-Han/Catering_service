@@ -90,6 +90,9 @@ public class WorldMapManager : MonoBehaviour
                     case (int)WORLDICON_TYPE.CITY:
                         pollutedIcon.m_iconType = (int)WORLDICON_TYPE.CLINIC;
                         pollutedIcon.GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sheet_worldicon[(int)WORLDICON_TYPE.CLINIC];
+                        pollutedIcon.m_fCoolTime = 5f;
+                        pollutedIcon.m_bReadySacrifice = false;
+                        pollutedIcon.gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
                         break;
 
                     case (int)WORLDICON_TYPE.CASTLE:
@@ -98,6 +101,12 @@ public class WorldMapManager : MonoBehaviour
                         break;
 
                     case (int)WORLDICON_TYPE.ALTAR:
+                        pollutedIcon.m_fCoolTime = 5f;
+                        pollutedIcon.m_bReadySacrifice = false;
+                        pollutedIcon.gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
+                        break;
+
+                    case (int)WORLDICON_TYPE.CLINIC:
                         pollutedIcon.m_fCoolTime = 5f;
                         pollutedIcon.m_bReadySacrifice = false;
                         pollutedIcon.gameObject.GetComponent<SpriteRenderer>().color = Color.gray;

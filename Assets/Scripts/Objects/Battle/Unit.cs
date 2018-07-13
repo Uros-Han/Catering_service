@@ -43,7 +43,7 @@ public class Unit : MonoBehaviour
 
     public void Death()
     {
-        if (GetComponent<FSM_Enemy>().m_AiState == AI_STATE.EATEN)
+        if (GetComponent<FSM_Enemy>() != null && GetComponent<FSM_Enemy>().m_AiState == AI_STATE.EATEN)
             return;
 
         Transform FieldTrans = GameObject.Find("Field").transform;
@@ -52,7 +52,8 @@ public class Unit : MonoBehaviour
         Vector3 RandomPos = new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f));
         //bodyPos += RandomPos;
 
-        GetComponent<FSM_Enemy>().StopAllCoroutines();
+        if (GetComponent<FSM_Enemy>() != null)
+            GetComponent<FSM_Enemy>().StopAllCoroutines();
         for (int i = 0; i < transform.childCount; ++i)
         {
             if (transform.GetChild(i).GetComponent<Animator>() != null)

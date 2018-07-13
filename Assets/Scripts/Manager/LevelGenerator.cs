@@ -32,9 +32,10 @@ public class LevelGenerator : Singleton<LevelGenerator>
                 break;
         }
 
-        if (BattleSceneMgr.getInstance.m_curBattleWorldIcon.m_iconType.Equals((int)WORLDICON_TYPE.ALTAR) && objEnemy != null)
+        if ((BattleSceneMgr.getInstance.m_curBattleWorldIcon.m_iconType.Equals((int)WORLDICON_TYPE.ALTAR) || BattleSceneMgr.getInstance.m_curBattleWorldIcon.m_iconType.Equals((int)WORLDICON_TYPE.CLINIC)) && objEnemy != null)
         {
-            Destroy(objEnemy.GetComponent<FSM_Enemy>().m_objHealthBar);
+            if (BattleSceneMgr.getInstance.m_curBattleWorldIcon.m_iconType.Equals((int)WORLDICON_TYPE.ALTAR))
+                Destroy(objEnemy.GetComponent<FSM_Enemy>().m_objHealthBar);
             Destroy(objEnemy.GetComponent<FSM_Enemy>());
             objEnemy.transform.position = GameObject.Find("Altar").transform.position;
             objEnemy.transform.position = new Vector3(objEnemy.transform.position.x, -0.03f);

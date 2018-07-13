@@ -979,9 +979,9 @@ public class Part : MonoBehaviour
         } while (transform.parent.name.Equals("Player"));
     }
 
-    public void HealCheck()
+    public void HealCheck(Unit targetUnit)
     {
-        StartCoroutine(Heal());
+        StartCoroutine(Heal(targetUnit));
     }
 
     void ClearBuffBeforeCheck()
@@ -1152,16 +1152,12 @@ public class Part : MonoBehaviour
         }
     }
 
-    protected IEnumerator Heal()
+    protected IEnumerator Heal(Unit TargetUnit)
     {
-        if (gameObject.name.Equals("Core"))
-            yield break;
-
         Vector3 mousePosition;
         BoxCollider2D collider2D = GetComponent<BoxCollider2D>();
         BattleSceneMgr battleSceneMgr = BattleSceneMgr.getInstance;
         bool bHighlighted = false;
-        Part CorePart = GameObject.Find("Core").GetComponent<Part>();
 
         do
         {
@@ -1180,14 +1176,25 @@ public class Part : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0) && collider2D.OverlapPoint(mousePosition))
             {
-                if (m_fCurHealth < m_dicStat["Health"] && CorePart.m_fCurHealth > 1)
+                if (m_fCurHealth < m_dicStat["Health"])
                 {
-                    CorePart.m_fCurHealth -= 1;
-                    m_fCurHealth += 1;
-                    AdjustEmissionRate();
+                    if (TargetUnit.m_fCurHealth > 5)
+                    {
+                        TargetUnit.m_fCurHealth -= 5;
+                        m_fCurHealth += 5;
 
-                    ObjectFactory.getInstance.Create_DamageUI(GameObject.Find("Core").gameObject, 1, true);
-                    ObjectFactory.getInstance.Create_DamageUI(gameObject, 1, false);
+                        ObjectFactory.getInstance.Create_DamageUI(TargetUnit.gameObject, 5, true);
+                        ObjectFactory.getInstance.Create_DamageUI(gameObject, 5, false);
+                    }
+                    else if (TargetUnit.m_fCurHealth > 0)
+                    {
+                        float fDmg = TargetUnit.m_fCurHealth;
+                        m_fCurHealth += fDmg;
+                        TargetUnit.m_fCurHealth = 0;
+
+                        ObjectFactory.getInstance.Create_DamageUI(TargetUnit.gameObject, (int)fDmg, true);
+                        ObjectFactory.getInstance.Create_DamageUI(gameObject, (int)fDmg, false);
+                    }
                 }
             }
 

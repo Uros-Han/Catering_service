@@ -64,6 +64,8 @@ public class WorldIcon : MonoBehaviour
 
             case (int)WORLDICON_TYPE.CLINIC:
                 GetComponent<SpriteRenderer>().sprite = ObjectFactory.getInstance.m_sheet_worldicon[8];
+                if (!m_bReadySacrifice)
+                    GetComponent<SpriteRenderer>().color = Color.gray;
                 break;
         }
 

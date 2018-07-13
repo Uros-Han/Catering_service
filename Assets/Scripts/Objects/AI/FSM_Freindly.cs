@@ -11,7 +11,7 @@ public class FSM_Freindly : FSM
     {
         SetState(AI_STATE.IDLE);
 
-        if (BattleSceneMgr.getInstance.m_curBattleWorldIcon.m_iconType.Equals((int)WORLDICON_TYPE.ALTAR))
+        if (BattleSceneMgr.getInstance.m_curBattleWorldIcon.m_iconType.Equals((int)WORLDICON_TYPE.ALTAR) || BattleSceneMgr.getInstance.m_curBattleWorldIcon.m_iconType.Equals((int)WORLDICON_TYPE.CLINIC))
         {
             m_bDontAttack = true;
         }

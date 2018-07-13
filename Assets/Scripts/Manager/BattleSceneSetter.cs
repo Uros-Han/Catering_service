@@ -54,10 +54,12 @@ public class BattleSceneSetter : MonoBehaviour
             GameObject.Find("InsideBase").transform.GetChild(0).gameObject.SetActive(true);
             GameObject.Find("Altar").GetComponent<SpriteRenderer>().enabled = true;
         }
-        else if (m_battleSceneMgr.m_curBattleWorldIcon.m_iconType.Equals(WORLDICON_TYPE.CLINIC))
+        else if (m_battleSceneMgr.m_curBattleWorldIcon.m_iconType.Equals((int)WORLDICON_TYPE.CLINIC))
         {
             GameObject.Find("Player").transform.position = new Vector3(-0.64f, 0f, 0f);
             GameObject.Find("InsideBase").transform.GetChild(0).gameObject.SetActive(true);
+            GameObject.Find("Altar").GetComponent<SpriteRenderer>().enabled = true;
+            StartCoroutine(BloodSuck());
         }
     }
 
@@ -120,8 +122,29 @@ public class BattleSceneSetter : MonoBehaviour
 
     }
 
+    IEnumerator BloodSuck()
+    {
+        Transform EnemyTrans = GameObject.Find("Enemies").transform;
+
+        for (int i = 0; i < EnemyTrans.childCount; ++i)
+        {
+            EnemyTrans.GetChild(i).GetComponent<CircleCollider2D>().enabled = false;
+        }
+
+        GameObject.Find("MorgueToggle").transform.GetChild(1).GetComponent<UILabel>().text = "회복\n그만하기";
+        GameObject.Find("MorgueToggle").GetComponent<UIPanel>().alpha = 1f;
+
+        BattleSceneMgr.getInstance.m_mouseState = MOUSE_STATE.HEAL;
+        GameObject.Find("Player").BroadcastMessage("HealCheck", EnemyTrans.GetChild(0).GetComponent<Unit>());
+
+        yield return new WaitForSeconds(0.5f);
+
+        GameObject.Find("Tangled").GetComponent<Tangled>().TangledHeal(EnemyTrans.GetChild(0).transform);
+    }
+
     public void ToWorldMap()
     {
+        BattleSceneMgr.getInstance.m_mouseState = MOUSE_STATE.NORMAL;
         GameObject.Find("MorgueToggle").GetComponent<BoxCollider>().enabled = false;
         Transform PlayerTrans = GameObject.Find("Player").transform;
 
@@ -134,7 +157,7 @@ public class BattleSceneSetter : MonoBehaviour
             }
         }
 
-        if (m_battleSceneMgr.m_bSiege || m_battleSceneMgr.m_curBattleWorldIcon.m_iconType.Equals((int)WORLDICON_TYPE.ALTAR) || m_battleSceneMgr.m_curBattleWorldIcon.m_iconType.Equals(WORLDICON_TYPE.CLINIC))
+        if (m_battleSceneMgr.m_bSiege || m_battleSceneMgr.m_curBattleWorldIcon.m_iconType.Equals((int)WORLDICON_TYPE.ALTAR) || m_battleSceneMgr.m_curBattleWorldIcon.m_iconType.Equals((int)WORLDICON_TYPE.CLINIC))
         {
             m_battleSceneMgr.m_bSiege = false;
 
